@@ -13,6 +13,7 @@ namespace OnlineLawServiceApp
     {
         public static void Main(string[] args)
         {
+            //test
             CreateHostBuilder(args).Build().Run();
         }
 
