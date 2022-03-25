@@ -13,6 +13,7 @@ namespace OnlineShopWebApp
     {
         public static void Main(string[] args)
         {
+            //test
             CreateHostBuilder(args).Build().Run();
         }
 
