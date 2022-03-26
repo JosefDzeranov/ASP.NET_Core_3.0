@@ -10,7 +10,7 @@ namespace OnlineShopWebApp.Controllers
     {
         public string Index(double a, double b, string c)
         {
-            if (c != "+" && c != "*" && c != "-" && c != null)
+            if (c != "+" && c != "*" && c != "-" && c != null && c != "/")
             {
                 return "Введите в конце один из знаков '-','+' или '*'";
             }
@@ -25,6 +25,10 @@ namespace OnlineShopWebApp.Controllers
             if (c == "*")
             {
                 return $"{a} * {b} = {a * b}";
+            }
+            if (c == "/")
+            {
+                return $"{a} / {b} = {a / b}";
             }
             return "";
         }
