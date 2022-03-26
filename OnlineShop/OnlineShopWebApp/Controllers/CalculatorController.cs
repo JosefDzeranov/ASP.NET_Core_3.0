@@ -29,6 +29,10 @@ namespace OnlineShopWebApp.Controllers
             {
                 return $"{a} * {b} = {a * b}";
             }
+            if (c == "/")
+            {
+                return $"{a} / {b} = {a / b}";
+            }
         
 
             if ((c != "+" && c != null) || (c != "-" && c != null) || (c != "*" && c != null))
