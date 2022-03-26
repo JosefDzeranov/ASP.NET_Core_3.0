@@ -13,9 +13,31 @@ namespace OnlineShopWebApp.Controllers
     {
        
 
-        public string Index(double a, double b)
+        public string Index(double a, double b, string c)
         {
+            if (c == "+" )
+            {
+                return $"{a} + {b} = {a + b}";
+            }
+
+            if (c == "-")
+            {
+                return $"{a} - {b} = {a - b}";
+            }
+
+            if (c == "*")
+            {
+                return $"{a} * {b} = {a * b}";
+            }
+        
+
+            if ((c != "+" && c != null) || (c != "-" && c != null) || (c != "*" && c != null))
+            {
+                return "Используйте операторы +, -, *";
+            }
+
             return $"{a} + {b} = {a + b}";
+
         }
 
        
