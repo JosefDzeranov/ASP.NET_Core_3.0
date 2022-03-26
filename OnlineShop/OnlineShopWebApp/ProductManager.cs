@@ -21,5 +21,20 @@ namespace OnlineShopWebApp
             }
             return output;
         }
+
+        public static string FindProduct(int id)
+        {
+            string foundProduct = string.Empty;
+
+            foreach (var product in productList)
+            {
+                if (product.Id == id)
+                {
+                    foundProduct += $"{product.Id}\n{product.Cost}\n{product.Description}";
+                }
+            }
+
+            return foundProduct;
+        }
     }
 }

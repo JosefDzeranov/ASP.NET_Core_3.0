@@ -9,15 +9,16 @@ using OnlineShopWebApp.Models;
 
 namespace OnlineShopWebApp.Controllers
 {
-    public class HomeController : Controller
+    public class ProductController : Controller
     {
        
-        public string Index()
+
+        public string Index(int id)
         {
-            return ProductManager.ShowProducts();
+            return ProductManager.FindProduct(id);
         }
 
-      
+       
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
