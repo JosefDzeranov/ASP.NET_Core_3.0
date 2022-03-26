@@ -18,9 +18,9 @@ namespace OnlineShopWebApp.Controllers
             _logger = logger;
         }
 
-        public IActionResult Index()
+        public string Index()
         {
-            return View();
+            return ProductManager.ShowProducts();
         }
 
         public IActionResult Privacy()
