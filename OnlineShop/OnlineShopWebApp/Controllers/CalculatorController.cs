@@ -18,21 +18,29 @@ namespace OnlineShopWebApp.Controllers
             _logger = logger;
         }
 
-        public double Index(double a, double b)
+        public string Index(double a, double b, char c = '+')
         {
-            double sum = a + b;
-            return sum;
+            if (c == '+') return $"{a} + {b} = {a + b}";
+            else
+            {
+                switch (c)
+                {
+                    case '-': return $"{a} - {b} = {a - b}";
+                    case '*': return $"{a} * {b} = {a * b}";
+                }
+            }
+            return "";
         }
 
-        public IActionResult Privacy()
-        {
-            return View();
-        }
+            public IActionResult Privacy()
+            {
+                return View();
+            }
 
-        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-        public IActionResult Error()
-        {
-            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+            [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
+            public IActionResult Error()
+            {
+                return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+            }
         }
     }
-}
