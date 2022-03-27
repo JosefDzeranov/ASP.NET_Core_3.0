@@ -6,8 +6,8 @@ namespace OnlineShopWebApp.Controllers
     {
         public IActionResult Index (double a, double b)
         {
-           var res = a+ b;
-           return Ok(res); 
+           
+            return Ok($"{a} + {b} = {a + b}"); 
           
         }
     }
