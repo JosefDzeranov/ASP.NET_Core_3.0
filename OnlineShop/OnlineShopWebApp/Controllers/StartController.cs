@@ -9,18 +9,17 @@ using System.Threading.Tasks;
 
 namespace OnlineShopWebApp.Controllers
 {
-    public class HomeController : Controller
+    public class StartController : Controller
     {
-        private readonly ILogger<HomeController> _logger;
 
-        public HomeController(ILogger<HomeController> logger)
+        public string Hello()
         {
-            _logger = logger;
-        }
-
-        public IActionResult Index()
-        {
-            return View();
+            int hourRightNow = DateTime.Now.Hour;
+            if (0 <= hourRightNow && hourRightNow < 6) return "Доброй ночи";
+            if (6 <= hourRightNow && hourRightNow < 12) return "Доброе утро";
+            if (12 <= hourRightNow && hourRightNow < 18) return "Добрый день";
+            if (18 <= hourRightNow && hourRightNow < 24) return "Добрый вечер";
+            else return "";
         }
 
         public IActionResult Privacy()
