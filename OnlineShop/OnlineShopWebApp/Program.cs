@@ -16,7 +16,6 @@ namespace OnlineShopWebApp
             CreateHostBuilder(args).Build().Run();
         }
 
-        //test 1
         public static IHostBuilder CreateHostBuilder(string[] args) =>
             Host.CreateDefaultBuilder(args)
                 .ConfigureWebHostDefaults(webBuilder =>
