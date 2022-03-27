@@ -18,15 +18,35 @@ namespace OnlineShopWebApp.Controllers
             _logger = logger;
         }
 
-        public string Index()
+        public string Index(int id)
         {
             string s = null;
-            foreach(Product p in ProdcutBase.Products)
+            if (id == 0)
             {
-               s += $"{p.Id}\n{p.Name}\n{p.Cost}\n\n";
+                
+                foreach (Product p in ProdcutBase.Products)
+                {
+                    s += $"Id{p.Id}\nName{p.Name}\nCost{p.Cost}\n\n";
+                }
+                return s;
             }
-            return s;
+            else
+            {
+                foreach (Product p in ProdcutBase.Products)
+                {
+                    if (p.Id == id)
+                    {
+                        return $"Id{p.Id}\nName{p.Name}\nCost{p.Cost}\nDescription{p.Description}";
+                    }
+                }
+                return s;
+            }
+
+          
         }
+
+
+        
 
         public IActionResult Privacy()
         {

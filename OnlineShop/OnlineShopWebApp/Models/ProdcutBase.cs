@@ -9,9 +9,9 @@ namespace OnlineShopWebApp.Models
         static ProdcutBase()
         {
             Products = new List<Product>();
-            Products.Add(new Product("Id1", "Name1", "Cost1"));
-            Products.Add(new Product("Id2", "Name2", "Cost2"));
-            Products.Add(new Product("Id3", "Name3", "Cost3"));
+            Products.Add(new Product(1, "1", 1));
+            Products.Add(new Product(2, "2", 2));
+            Products.Add(new Product(3, "3", 3));
            
         }
 

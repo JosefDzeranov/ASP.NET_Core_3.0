@@ -3,17 +3,17 @@
     public class Product
     {
 
-        public string Id { get;}
+        public int Id { get;}
         public string Name { get;}
-        public string Cost { get;}
+        public decimal Cost { get;}
         public string Description { get; set; }
 
-        public Product(string id, string name, string cost)
+        public Product(int id, string name, decimal cost)
         {
             this.Id = id;
             this.Name = name;
             this.Cost = cost;
-           
+            Description = "";
         }
         
     }
