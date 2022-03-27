@@ -9,11 +9,11 @@ using System.Threading.Tasks;
 
 namespace OnlineShopWebApp.Controllers
 {
-    public class CalculatorController : Controller
+    public class CalcController : Controller
     {
-        private readonly ILogger<CalculatorController> _logger;
+        private readonly ILogger<CalcController> _logger;
 
-        public CalculatorController(ILogger<CalculatorController> logger)
+        public CalcController(ILogger<CalcController> logger)
         {
             _logger = logger;
         }
@@ -27,6 +27,8 @@ namespace OnlineShopWebApp.Controllers
                 {
                     case '-': return $"{a} - {b} = {a - b}";
                     case '*': return $"{a} * {b} = {a * b}";
+                    case '/': return $"{a} / {b} = {a / b}";
+
                 }
             }
             return "";
