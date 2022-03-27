@@ -9,18 +9,18 @@ using System.Threading.Tasks;
 
 namespace OnlineShopWebApp.Controllers
 {
-    public class HomeController : Controller
+    public class CalculatorController : Controller
     {
-        private readonly ILogger<HomeController> _logger;
+        private readonly ILogger<CalculatorController> _logger;
 
-        public HomeController(ILogger<HomeController> logger)
+        public CalculatorController(ILogger<CalculatorController> logger)
         {
             _logger = logger;
         }
 
-        public IActionResult Index()
+        public string Index(double a, double b)
         {
-            return View();
+            return $"{a} + {b} = {a + b}";
         }
 
         public IActionResult Privacy()
