@@ -59,7 +59,7 @@ namespace OnlineDesignBureauWebApp
             {
                 endpoints.MapControllerRoute(
                     name: "default",
-                    pattern: "{controller=Home}/{action=Index}/{id?}"); // вид запроса. Запрос по умолчанию - "{controller=Home}/{action=Index}/{id?}"
+                    pattern: "{controller=Start}/{action=Hello}/{id?}"); // вид запроса. Запрос по умолчанию - "{controller=Home}/{action=Index}/{id?}"
                 // введеные в паттерне Home и Index - данные по умолчанию, если ничего не будет введено, то водятся эти значения
                 /*
                  * если паттерн будет вида
