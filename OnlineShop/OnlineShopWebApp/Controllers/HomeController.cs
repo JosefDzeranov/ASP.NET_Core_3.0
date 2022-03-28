@@ -18,11 +18,9 @@ namespace OnlineShopWebApp.Controllers
             _logger = logger;
         }
 
-        public string Index()
+        public IActionResult Index()
         {
-            return "Id1\n100 рублей(Обслуживание)\nДебетовая карта №1\n\n" +
-                "Id2\n150 рублей(Обслуживание)\nДебетовая карта №2\n\n" +
-                "Id3\n200 рублей(Обслуживание)\nКредитная карта №1\n\n";
+            return View();
         }
 
         public IActionResult Privacy()
