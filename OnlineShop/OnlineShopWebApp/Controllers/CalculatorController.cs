@@ -4,6 +4,7 @@ using OnlineShopWebApp.Models;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Globalization;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -13,14 +14,18 @@ namespace OnlineShopWebApp.Controllers
     {
         private readonly ILogger<CalculatorController> _logger;
 
+        
         public CalculatorController(ILogger<CalculatorController> logger)
         {
             _logger = logger;
+            
         }
 
-        public string Index(double a, double b)
+        public string Index(string a = "0", string b = "0")
         {
-            return $"{a} + {b} = {a + b}";
+            double dA = Converter(a);
+            double dB = Converter(b);
+            return $"{a} + {b} = {dA + dB}";
         }
 
         public IActionResult Privacy()
@@ -32,6 +37,12 @@ namespace OnlineShopWebApp.Controllers
         public IActionResult Error()
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+        }
+
+        public double Converter(string value)
+        {
+            value = value.Replace(".", ",");
+            return double.Parse(value);
         }
     }
 }
