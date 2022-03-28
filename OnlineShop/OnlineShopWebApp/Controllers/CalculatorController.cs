@@ -4,9 +4,19 @@ namespace OnlineShopWebApp.Controllers
 {
     public class CalculatorController : Controller
     {
-        public string Index(double a, double b)
+        public string Index(string a, string b)
         {
-            return $"{a} + {b} = {a + b}";
+            var convertA = Converter(a);
+            var convertB = Converter(b);
+            return $"{convertA} + {convertB} = {convertA + convertB}";
+        }
+
+        public static double Converter(string a)
+        {
+            
+            a = a.Replace(".", ",");
+
+            return double.Parse(a);
         }
     }
 }
