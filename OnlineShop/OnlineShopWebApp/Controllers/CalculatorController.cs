@@ -8,9 +8,11 @@ namespace OnlineShopWebApp.Controllers
 {
     public class CalculatorController : Controller
     {
-        public string Index(double a, double b)
+        public string Index(string a, string b)
         {
-            return $"{a} + {b} = {a + b}";
+            var correctA = double.Parse(a.Replace(".", ","));
+            var correctB = double.Parse(b.Replace(".", ","));
+            return $"{correctA} + {correctB} = {correctA + correctB}";
         }
     }
 }
