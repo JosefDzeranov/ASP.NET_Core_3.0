@@ -5,4 +5,25 @@
 <div class="text-center">
     <h1 class="display-4">Welcome</h1>
     <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+
+
+    <table class="table table-bordered table-striped" style="width:100%">
+  <tr>
+    <tr>
+    <th>Id</th>
+    <th>Наименование товара</th>
+    <th>Стоимость, руб.</th>
+    <th>Описание</th>
+  </tr>
+                @foreach (var product in Model)
+                {
+                    <tr>
+                        <td>@product.Id</td> 
+                        <td>@product.Name</td>
+                        <td>@product.Cost</td>
+                         <td>@product.Description</td>
+                    </tr>
+                }
+            
+        </table>
 </div>

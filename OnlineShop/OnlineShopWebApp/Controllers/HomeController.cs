@@ -18,14 +18,11 @@ namespace OnlineShopWebApp.Controllers
             _logger = logger;
         }
 
-        public string Index()
+        public IActionResult Index()
         {
-            string s = null;
-            foreach(Product p in ProdcutBase.Products)
-            {
-               s += $"{p.Id}\n{p.Name}\n{p.Cost}\n\n";
-            }
-            return s;
+            var Products = ProdcutBase.Products;
+            
+            return View(Products);
         }
 
         public IActionResult Privacy()
