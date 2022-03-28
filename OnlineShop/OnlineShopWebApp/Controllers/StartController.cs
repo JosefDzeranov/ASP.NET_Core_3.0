@@ -11,9 +11,7 @@ namespace OnlineShopWebApp.Controllers
         public string Hello()
         {
             string [] hoursAndMinutes = DateTime.Now.ToShortTimeString().Split(':');
-            double hours = double.Parse(hoursAndMinutes[0]);
-            double minutes = double.Parse(hoursAndMinutes[1]);
-            double time = hours + minutes / 100;
+            double time = double.Parse(hoursAndMinutes[0]);
 
             if(time > 0 && time <= 6)
             {
