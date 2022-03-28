@@ -3,16 +3,31 @@
 	<product id ="1">
 		<name>Натюрморт</name>
 		<cost>1500</cost>
-		<description>Фотография, монохром, скан с пленки, формат 3:2.</description>
+		<description>
+			Фотография,
+			3452x4591px
+			(29.2cm x 38.9cm 300dpi),
+			3.9 MB | jpg
+		</description>
 	</product>
 	<product id ="2">
 		<name>Портрет</name>
 		<cost>3000</cost>
-		<description>Живопись, холст/масло, 90x60 см. </description>
+		<description>
+			Иллюстрация,
+			3757x2129px
+			(31.8cm x 18cm 300dpi),
+			1.4MB | jpg
+		</description>
 	</product>
 	<product id ="3">
 		<name>Пейзаж</name>
 		<cost>2000</cost>
-		<description>Иллюстрация, цифровое изображение, формат 1:1.</description>
+		<description>
+			Фотография,
+			3247x2463px
+			(27.5cm x 20.9cm 300dpi),
+			745kB | jpg
+		</description>
 	</product>
 </products>
