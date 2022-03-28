@@ -1,23 +1,28 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using System;
 
 namespace OnlineShopWebApp.Controllers
 {
     public class CalculatorController : Controller
     {
-        public string Index(double a, double b, string c)
+        public string Index(string a, string b, string c)
         {
-            if(c!= null)
+            var convertA = Converter(a);
+            var convertB = Converter(b);
+            if (c!= null)
             {
+                
                 switch (c)
                 {
                     case "+":
-                        return $"{a} {c} {b} = {a + b}";
+                        return $"{convertA} {c} {convertB} = {convertA + convertB}";
 
                     case "-":
-                        return $"{a} {c} {b} = {a - b}";
+                        return $"{convertA} {c} {convertB} = {convertA - convertB}";
                     case "*":
-                        return $"{a} {c} {b} = {a * b}";
+                        return $"{convertA} {c} {convertB} = {Math.Round((convertA * convertB), 2)}";
                     default:
+                        //защита от "дурака"
                         return "Неверный оператор! \n" +
                        "допускаются следующие значения:\n" +
                        "сложение: +\n" +
@@ -25,8 +30,16 @@ namespace OnlineShopWebApp.Controllers
                        "умножение: *";
                 }
             }
-            return $"{a} + {b} = {a + b}";
+            return $"{convertA} + {convertB} = {convertA + convertB}";
             
         }
+        public static double Converter(string a)
+        {
+
+            a = a.Replace(".", ",");
+
+            return double.Parse(a);
+        }
+
     }
 }
