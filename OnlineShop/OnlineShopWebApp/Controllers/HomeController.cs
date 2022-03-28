@@ -11,7 +11,13 @@ using System.Threading.Tasks;
 namespace OnlineShopWebApp.Controllers
 {
     public class HomeController : Controller
-    { 
+    {
+        private readonly ILogger<HomeController> _logger;
+
+        public HomeController(ILogger<HomeController> logger)
+        {
+            _logger = logger;
+        }
         public IActionResult Index()
         {
             XDocument xDoc = XDocument.Load("Models/products.xml");
