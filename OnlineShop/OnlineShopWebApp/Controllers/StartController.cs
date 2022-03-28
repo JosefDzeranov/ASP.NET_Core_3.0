@@ -18,8 +18,7 @@ namespace OnlineShopWebApp.Controllers
             if (0 <= hourRightNow && hourRightNow < 6) return "Доброй ночи";
             if (6 <= hourRightNow && hourRightNow < 12) return "Доброе утро";
             if (12 <= hourRightNow && hourRightNow < 18) return "Добрый день";
-            if (18 <= hourRightNow && hourRightNow < 24) return "Добрый вечер";
-            else return "";
+            else return "Добрый вечер";
         }
 
         public IActionResult Privacy()
