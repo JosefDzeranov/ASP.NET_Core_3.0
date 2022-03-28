@@ -1,0 +1,18 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<products>
+	<product id ="1">
+		<name>Натюрморт</name>
+		<cost>1500</cost>
+		<description>Фотография, монохром, скан с пленки, формат 3:2.</description>
+	</product>
+	<product id ="2">
+		<name>Портрет</name>
+		<cost>3000</cost>
+		<description>Живопись, холст/масло, 90x60 см. </description>
+	</product>
+	<product id ="3">
+		<name>Пейзаж</name>
+		<cost>2000</cost>
+		<description>Иллюстрация, цифровое изображение, формат 1:1.</description>
+	</product>
+</products>
