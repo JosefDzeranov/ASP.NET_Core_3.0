@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Globalization;
 using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
@@ -11,11 +13,27 @@ namespace OnlineShopWebApp.Controllers
 {
     public class CalculatorController : Controller
     {
-       
+        
 
-        public string Index(double a, double b)
+        public string Index(string a, string b)
         {
-            return $"{a} + {b} = {a + b}";
+           
+            if (a == null)
+            {
+                a = "0";
+            }
+            if (b == null)
+            {
+                b = "0";
+            }
+
+             if (a.Contains('.') || b.Contains('.'))
+            {
+               a = a.Replace('.', ',');
+               b = b.Replace('.', ',');
+            }
+
+            return $"{a} + {b} = {Convert.ToDouble(a) + Double.Parse(b)}";
         }
 
        
