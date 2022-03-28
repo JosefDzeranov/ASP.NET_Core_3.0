@@ -13,14 +13,19 @@ namespace OnlineDesignBureauWebApp
     {
         public static void Main(string[] args)
         {
-            CreateHostBuilder(args).Build().Run();
+            // в данном месте находится конфигурация веб приложения, которая както конфигурируется, строится и запускается
+            CreateHostBuilder(args).Build().Run(); // Из того, что вернул CreateHostBuilder мы вызываем Build(),
+                                                   // который возвращает сам хост, и потом мы этот хост запускаем.
         }
 
-        public static IHostBuilder CreateHostBuilder(string[] args) =>
-            Host.CreateDefaultBuilder(args)
-                .ConfigureWebHostDefaults(webBuilder =>
-                {
-                    webBuilder.UseStartup<Startup>();
-                });
+        public static IHostBuilder CreateHostBuilder(string[] args) // метод, который возвращает IHostBuilder. Абстракция, которая умеет строить хост,
+                                                                    // который слушает какие-то запросы в по сети интернет
+            {                                                                     
+                return Host.CreateDefaultBuilder(args) // конфигурируются стандартные настройки
+                    .ConfigureWebHostDefaults(webBuilder =>
+                    {
+                        webBuilder.UseStartup<Startup>(); // происходит вторичная или стартовая настройка запросов, которые находятся в классе Startup
+                    });
+            }
     }
 }

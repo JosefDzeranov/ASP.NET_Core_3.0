@@ -1,4 +1,4 @@
-﻿{
+﻿{ //когда мы запускаем браузер, выбирая способ OnlineDesignBerauWebApp, по правилам "OnlineDesignBureauWebApp" из этого файла
   "iisSettings": {
     "windowsAuthentication": false,
     "anonymousAuthentication": true,
@@ -17,10 +17,12 @@
     },
     "OnlineDesignBureauWebApp": {
       "commandName": "Project",
-      "launchBrowser": true,
-      "applicationUrl": "https://localhost:5001;http://localhost:5000",
+      "launchBrowser": true, // запустить браузер
+      "applicationUrl": "https://localhost:5001;http://localhost:5000", //правила url для https и http
       "environmentVariables": {
-        "ASPNETCORE_ENVIRONMENT": "Development"
+        "ASPNETCORE_ENVIRONMENT": "Development"  // это наше окружение, чтобы мы могли кодом посмотреть на окружение 
+        //и понять что сейчас мы находимся в разработке и сделать какое-то действие, например вывести промежуточную информацию.
+        // А во время production такого уже нельзя делать.
       }
     }
   }
