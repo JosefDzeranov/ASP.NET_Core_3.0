@@ -18,5 +18,12 @@ namespace OnlineShopWebApp.Models
             Name = name;
             Cost = cost;
         }
+        public Product(int id, string name, decimal cost, string description)
+        {
+            Id = id;
+            Name = name;
+            Cost = cost;
+            Description = description;
+        }
     }
 }

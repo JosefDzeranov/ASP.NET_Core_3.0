@@ -8,5 +8,5 @@
 
 @foreach(Product p in Model)
 {
-    <p>@p.Id<br/>@p.Name<br/>@p.Cost</p>
+    <p><a href=product/index/@p.Id>@p.Id<br />@p.Name<br />@p.Cost</a></p>
 }
