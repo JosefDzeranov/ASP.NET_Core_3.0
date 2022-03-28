@@ -13,15 +13,13 @@
     <th>Id</th>
     <th>Наименование товара</th>
     <th>Стоимость, руб.</th>
-    <th>Описание</th>
   </tr>
                 @foreach (var product in Model)
                 {
                     <tr>
                         <td>@product.Id</td> 
                         <td>@product.Name</td>
-                        <td>@product.Cost</td>
-                         <td>@product.Description</td>
+                        <td>@product.Cost</td> 
                     </tr>
                 }
             

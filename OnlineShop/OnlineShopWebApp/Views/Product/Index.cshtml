@@ -1,0 +1,32 @@
+﻿
+@{
+    ViewData["Title"] = "Prodcut";
+}
+@{
+    if (@Model != null)
+    {
+         <table class="table table-bordered table-striped" style="width:100%">
+  <tr>
+    <tr>
+    <th>Id</th>
+    <th>Наименование товара</th>
+    <th>Стоимость, руб.</th>
+    <th>Описание</th>
+  </tr>
+               
+                    <tr>
+                        <td>@Model.Id</td> 
+                        <td>@Model.Name</td>
+                        <td>@Model.Cost</td>
+                         <td>@Model.Description</td>
+                    </tr>
+               
+            
+        </table>
+    }
+  <div class="text-center">
+  <h2>Товар не найден!</h2>
+  </div>
+    
+}
+ 
