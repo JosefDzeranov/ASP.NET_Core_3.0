@@ -14,10 +14,10 @@ namespace OnlineShopWebApp
 
         public static string ShowProducts()
         {
-            string output = string.Empty;
+            var output = string.Empty;
             foreach (var product in productList)
             {
-                output += $"{product.Id}\n{product.Cost}\n{product.Description}\n\n";
+                output += $"{product.Id}\n{product.Name}\n{product.Cost}\n\n";
             }
             return output;
         }
