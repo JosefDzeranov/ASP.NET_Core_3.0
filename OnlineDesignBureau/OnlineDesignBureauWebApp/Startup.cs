@@ -32,7 +32,6 @@ namespace OnlineDesignBureauWebApp
             services.AddControllersWithViews(); // добавляем контроллеры и представления, чтобы в конце сделать routingMiddleware
         }
 
-
         // = Этот метод вызывается средой выполнения. Используйте этот метод для настройки конвейера HTTP-запросов.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env) //здесь определяем, в каком порядке создавать пункты остановки
         {
@@ -55,26 +54,11 @@ namespace OnlineDesignBureauWebApp
 
             // app.UseAuthorization(); // проверяет авторизацию пользователя, делающего запрос
 
-            app.UseEndpoints(endpoints => // это правило шаблона Routing
+            app.UseEndpoints(endpoints => 
             {
                 endpoints.MapControllerRoute(
                     name: "default",
-                    pattern: "{controller=Start}/{action=Hello}/{id?}"); // вид запроса. Запрос по умолчанию - "{controller=Home}/{action=Index}/{id?}"
-                // введеные в паттерне Home и Index - данные по умолчанию, если ничего не будет введено, то водятся эти значения
-                /*
-                 * если паттерн будет вида
-                 * pattern: "{controller=Home}/{action=Index}");
-                 * то запрос: http://localhost:5001/hello/start воспримется как controller=hello, action=start
-                 * и будет искать в папке controllers файл с названием hello и внутри с метод, который называется start, но такого файла в папке нет, поэтому выведет ошибку
-                 * Все контроллеры должны заканчиваться словом Controllers
-                 * Поэтому запрос https://localhost:5001/home/index покажет страницу
-                 * 
-                 * Другой пример. pattern: "{controller=Home}/{action=Index}/{a}/{b}" здесь есть ещё 2 сегмента a, b их может воспринять метод, 
-                 * который мы активируем. Например https://localhost:5001/home/index/1/1 для этого в методе можно добавить 2 вводимых параметра 
-                 * "public IActionResult Index(int a, int b)" очень важно чтобы названия параметров совпвдвли с названиями сегментов
-                 * Можно сегменты сделать опциональными (необязательными) для этого после сегмента надо поставить "?" пример: "{controller=Home}/{action=Index}/{a?}/{b?}"
-                 * в этом случае, если сегмента не будет, то параметр будет получать значение по умолчанию
-                 */
+                    pattern: "{controller=calculator}/{action=index}/{a?}/{b?}"); 
             });
         }
     }
