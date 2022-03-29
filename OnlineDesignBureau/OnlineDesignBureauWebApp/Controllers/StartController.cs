@@ -9,7 +9,7 @@ namespace OnlineDesignBureauWebApp.Controllers
     {
         public string hello() 
         {
-            int hour = Convert.ToInt32(DateTime.Now.Hour);
+            var hour = DateTime.Now.Hour;
             if (hour < 6) return "Доброй ночи";
             else if (hour >= 18) return "Добрый вечер";
             else if (hour >= 6 && hour < 12) return "Доброе утро";
