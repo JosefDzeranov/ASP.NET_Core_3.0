@@ -20,7 +20,9 @@ namespace OnlineShopWebApp.Controllers
 
         public IActionResult Index()
         {
-            return View();
+            var Products = ProdcutBase.Products;
+            
+            return View(Products);
         }
 
         public IActionResult Privacy()
