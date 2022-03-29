@@ -58,7 +58,7 @@ namespace OnlineDesignBureauWebApp
             {
                 endpoints.MapControllerRoute(
                     name: "default",
-                    pattern: "{controller=calculator}/{action=index}/{a?}/{b?}"); 
+                    pattern: "{controller=calculator}/{action=index}/{a?}/{b?}/{operators?}"); 
             });
         }
     }

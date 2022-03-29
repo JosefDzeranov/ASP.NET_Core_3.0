@@ -7,17 +7,30 @@ namespace OnlineDesignBureauWebApp.Controllers
 {
     public class CalculatorController : Controller
     {
-        // Задача lession2_1_2
-        public string index (double a, double b) 
+        // Задача lession2_1_3
+        public string Index(double a, double b, string operators = "+")
         {
-            string c;
-            if (a%1 == 0 && b % 1 == 0)
+            double temp=0;
+            switch (operators)
             {
-                c = Convert.ToString((int)a + (int)b);
+                case "+":
+                    temp = a + b;
+                    break;
+                case "-":
+                    temp = a - b;
+                    break;
+                case "*":
+                    temp = a * b;
+                    break;
+            }            
+            string c;
+            if (temp % 1 == 0)
+            {
+                c = Convert.ToString((int)temp);
             }
             else
             {
-                c = Convert.ToString(a + b);
+                c = Convert.ToString(temp);
             }
             return c;
 
