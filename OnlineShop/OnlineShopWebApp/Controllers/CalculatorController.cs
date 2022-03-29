@@ -6,11 +6,13 @@ using OnlineShopWebApp.Models;
 
 namespace OnlineShopWebApp.Controllers
 {
-    public class CalculatorController : Controller
+    public class CalcController : Controller
     {
         public IActionResult Index(double a, double b, string c)
         {
-            if ((string.IsNullOrEmpty(c) || c == "" || c == "+" || c == "-" || c == "*") || (b != 0 && c !="/"))
+            if (b == 0 && c == "/")
+                return Content("\r На ноль делить нельзя! \r\n Пример запроса https://localhost:5001/calculator/index/1/3/+ \r\n Приниматься могут только операции +, -, *.");
+            else if (string.IsNullOrEmpty(c) || c == "" || c == "+" || c == "-" || c == "*" || c == "/")
             {
                 switch (c)
                 {
@@ -21,13 +23,11 @@ namespace OnlineShopWebApp.Controllers
                     case "*":
                         return Ok($"{a} * {b} = {a * b}");
                     case "/":
-                        return Ok($"{a} + {b} = {a / b}");
+                        return Ok($"{a} / {b} = {a / b}");
                     default:
                         return Ok($"{a} + {b} = {a + b}");
                 }
             }
-            else if (b != 0 && c != "/")
-                return Content("\r\n На ноль делить нельзя");
             else 
                 return Content("\r\n Пример запроса https://localhost:5001/calculator/index/1/3/+ \r\n Приниматься могут только операции +, -, *.");
         }
