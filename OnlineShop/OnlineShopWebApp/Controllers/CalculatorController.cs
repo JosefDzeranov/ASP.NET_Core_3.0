@@ -38,7 +38,16 @@ namespace OnlineShopWebApp.Controllers
                 case "+": return $"{aConv} + {bConv} = {aConv + bConv}";
                 case "-": return $"{aConv} - {bConv} = {aConv - bConv}";
                 case "*": return $"{aConv} * {bConv} = {aConv * bConv}";
-                case "/": return $"{aConv} / {bConv} = {aConv / bConv}";
+                case "/":
+                    if (bConv == 0)
+                    {
+                        return "Попытка деления на ноль:( ";
+                    }
+                    else
+                    {
+                        return $"{aConv} / {bConv} = {aConv / bConv}";
+                    }
+
                 default:
                     break;
             }
