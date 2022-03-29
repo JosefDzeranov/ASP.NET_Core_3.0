@@ -34,9 +34,9 @@ namespace OnlineShopWebApp.Controllers
         {
             var list = new List<Product>();
 
-            var product1 = new Product() { Id = 1, Name = "1", Cost = 1};
-            var product2 = new Product() { Id = 2, Name = "2", Cost = 2};
-            var product3 = new Product() { Id = 3, Name = "3", Cost = 3};
+            var product1 = new Product() { Id = 1, Name = "Тур в Турцию", Cost = 50000};
+            var product2 = new Product() { Id = 2, Name = "Тур в Грецию", Cost = 60000};
+            var product3 = new Product() { Id = 3, Name = "Тур в Болгарию", Cost = 45000};
           
             list.Add(product1);
             list.Add(product2);
@@ -46,7 +46,7 @@ namespace OnlineShopWebApp.Controllers
 
             foreach (var item in list)
             {
-                s += $"Id{item.Id}\nName{item.Name}\nCost{item.Cost}\n\n";
+                s += $"Id {item.Id}\nName {item.Name}\nCost {item.Cost}\n\n";
             }
           
             return Ok(s);
