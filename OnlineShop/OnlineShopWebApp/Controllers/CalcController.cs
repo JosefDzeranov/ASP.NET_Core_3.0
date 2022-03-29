@@ -22,8 +22,16 @@ namespace OnlineShopWebApp.Controllers
                         return $"{convertA} {c} {convertB} = {convertA - convertB}";
                     case "*":
                         return $"{convertA} {c} {convertB} = {Math.Round((convertA * convertB), 2)}";
-                    case "/":  
-                        return $"{convertA} {c} {convertB} = {Math.Round((convertA / convertB), 2)}";
+                    case "/":
+                        if(convertB != 0)
+                        {
+                            return $"{convertA} {c} {convertB} = {Math.Round((convertA / convertB), 2)}";
+                        }
+                       else
+                        {
+                           return "Ошибка! деление на ноль!";
+                        }   
+                        
 
                     default:
                         //защита от "дурака"
