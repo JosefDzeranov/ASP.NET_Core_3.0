@@ -6,9 +6,16 @@ namespace OnlineShopWebApp.Controllers
 {
     public class CalculatorController : Controller
     {
-        public IActionResult Index(double a, double b)
+        public IActionResult Index(double a, double b, char c)
         {
-            return Ok($"{a} + {b} = {a + b}");
+            return c switch
+            {
+                '+' => Ok($"{a} + {b} = {a + b}"),
+                '-' => Ok($"{a} - {b} = {a - b}"),
+                '*' => Ok($"{a} * {b} = {a * b}"),
+                //'/' => Ok($"{a} / {b} = {a / b}"),
+                _ => Ok($"{a} + {b} = {a + b}"),
+            };
         }
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
