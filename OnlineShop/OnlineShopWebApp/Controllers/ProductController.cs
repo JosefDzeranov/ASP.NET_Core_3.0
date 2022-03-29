@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using OnlineShopWebApp.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,25 +9,28 @@ namespace OnlineShopWebApp.Controllers
 {
     public class ProductController : Controller
     {
+        List<ProductList> productLists;
+        public ProductController()
+        {
+            productLists = new List<ProductList>
+             {
+                new ProductList { Id = 1, Name= "Дебетовая карта №1", Cost=100, Description = "Молодежная карта. Для тех, кому от 14 лет до 21 года" },
+                new ProductList { Id = 2, Name= "Дебетовая карта №2", Cost=150, Description = "Золотая карта. Бесплатное обслуживание с подпиской, также по подписке процент на остаток" },
+                new ProductList { Id = 3, Name= "Кредитная карта №1", Cost=200, Description = "Процетная ставка голодых 20% на покупки, платежи, снятие наличных и переводы" },
+            };
+        }
         public string Index(int id)
         {
-            if (id != 1 && id != 2 && id != 3)
+            var s = string.Empty;
+            foreach (var product in productLists)
             {
-                return "Такого товара не существует, выберите номер товара от 1 до 3 включительно";
+                if (id == product.Id)
+                {
+                    s = $"{product.Id}\n{product.Name}\n{product.Cost}\n{product.Description}\n\n";
+                    break;
+                }
             }
-            if (id == 1)
-            {
-                return "Id1\n100 рублей(Обслуживание)\nДебетовая карта №1\nМолодежная карта. Для тех, кому от 14 лет до 21 года";
-            }
-            if (id == 2)
-            {
-                return "Id2\n150 рублей(Обслуживание)\nДебетовая карта №2\nЗолотая карта. Бесплатное обслуживание с подпиской, также по подписке процент на остаток";
-            }
-            if (id == 3)
-            {
-                return "Id3\n200 рублей(Обслуживание)\nКредитная карта №1\nПроцетная ставка голодых 20% на покупки, платежи, снятие наличных и переводы";
-            }
-            return "";
+            return s;
         }
     }
 }
