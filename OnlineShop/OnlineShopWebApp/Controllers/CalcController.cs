@@ -26,11 +26,14 @@ namespace OnlineShopWebApp.Controllers
             {
                 return $"{a} * {b} = {a * b}";
             }
-            if (c == "/")
+            if (c == "/" && b != 0)
             {
                 return $"{a} / {b} = {a / b}";
             }
-            return "";
+            else
+            {
+                return "На ноль делить нельзя, но в пределах, конечно же можно, но мы не в пределах";
+            }
         }
     }
 }
