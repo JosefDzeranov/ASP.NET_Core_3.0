@@ -18,23 +18,22 @@ namespace OnlineShopWebApp.Controllers
             _logger = logger;
         }
 
-        public string Index(double a, double b, char c = '+')
+        public string Index(string a = "0", string b = "0", char c = '+')
         {
-            if (c == '+') return $"{a} + {b} = {a + b}";
-            else
+            double dA = Converter(a);
+            double dB = Converter(b);
+            switch (c)
             {
-                switch (c)
-                {
-                    case '-': return $"{a} - {b} = {a - b}";
-                    case '*': return $"{a} * {b} = {a * b}";
-                    case '/': return $"{a} / {b} = {a / b}";
+                case '+': return $"{dA} + {dB} = {dA + dB}";
+                case '-': return $"{dA} - {dB} = {dA - dB}";
+                case '*': return $"{dA} * {dB} = {dA * dB}";
+                case '/': return $"{dA} / {dB} = {dA / dB}";
 
-                }
             }
             return "";
         }
 
-            public IActionResult Privacy()
+        public IActionResult Privacy()
         {
             return View();
         }
@@ -43,6 +42,12 @@ namespace OnlineShopWebApp.Controllers
         public IActionResult Error()
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+        }
+
+        public double Converter(string value)
+        {
+            value = value.Replace(".", ",");
+            return double.Parse(value);
         }
     }
 }
