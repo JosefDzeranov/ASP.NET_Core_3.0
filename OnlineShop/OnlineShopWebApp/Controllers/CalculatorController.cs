@@ -13,34 +13,43 @@ namespace OnlineShopWebApp.Controllers
     {
        
 
-        public string Index(double a, double b, string c)
+        public string Index(string a, string b, string c)
         {
-            if (c == "+" )
+            if (a == null)
             {
-                return $"{a} + {b} = {a + b}";
+                a = "0";
+            }
+            if (b == null)
+            {
+                b = "0";
             }
 
-            if (c == "-")
+            if (a.Contains('.') || b.Contains('.'))
             {
-                return $"{a} - {b} = {a - b}";
+                a = a.Replace('.', ',');
+                b = b.Replace('.', ',');
             }
 
-            if (c == "*")
+            var aConv = Convert.ToDouble(a);
+            var bConv = Convert.ToDouble(b);
+
+            switch (c)
             {
-                return $"{a} * {b} = {a * b}";
+                case "+": return $"{aConv} + {bConv} = {aConv + bConv}";
+                case "-": return $"{aConv} - {bConv} = {aConv - bConv}";
+                case "*": return $"{aConv} * {bConv} = {aConv * bConv}";
+                case "/": return $"{aConv} / {bConv} = {aConv / bConv}";
+                default:
+                    break;
             }
-            if (c == "/")
-            {
-                return $"{a} / {b} = {a / b}";
-            }
-        
+
 
             if ((c != "+" && c != null) || (c != "-" && c != null) || (c != "*" && c != null))
             {
                 return "Используйте операторы +, -, *";
             }
 
-            return $"{a} + {b} = {a + b}";
+            return $"{aConv} + {bConv} = {aConv + bConv}";
 
         }
 
