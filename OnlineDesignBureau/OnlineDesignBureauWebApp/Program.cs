@@ -7,14 +7,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace OnlineShopWebApp
+namespace OnlineDesignBureauWebApp
 {
     public class Program
     {
         public static void Main(string[] args)
         {
             CreateHostBuilder(args).Build().Run();
-            // test
         }
 
         public static IHostBuilder CreateHostBuilder(string[] args) =>
