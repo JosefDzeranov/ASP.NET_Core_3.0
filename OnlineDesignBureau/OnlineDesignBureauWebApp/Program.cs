@@ -11,6 +11,7 @@ namespace OnlineDesignBureauWebApp
 {
     public class Program
     {
+        // ссылка на карту сайта и макеты страниц https://drive.google.com/file/d/1-n8R3iTqIGo75zp9-VqaKUVcxneKSALK/view?usp=sharing
         public static void Main(string[] args)
         {
             // в данном месте находится конфигурация веб приложения, которая както конфигурируется, строится и запускается

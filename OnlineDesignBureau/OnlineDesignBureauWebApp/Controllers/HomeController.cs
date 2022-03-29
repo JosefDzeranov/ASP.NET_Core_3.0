@@ -11,22 +11,16 @@ namespace OnlineDesignBureauWebApp.Controllers
 {
     public class HomeController : Controller
     {
-
-        /*private readonly ILogger<HomeController> _logger; 
-
-        public HomeController(ILogger<HomeController> logger)
-        {
-            _logger = logger;
-        }*/ // пока не нужно
-
-        public IActionResult Index(string name, int age) //параметры запроса обычно указываются через Qery параметр,
-                                                         //для этого после сегментов ставится ? и пишется запрос
-                                                         // возвращать можно не только IActionResult, но и любой другой тип переменной,
-                                                         // если возвращать string то окно браузера будет играть роль консоли
+        public IActionResult Index(string name, int age)
         {
             return View();
         }
-
+        /*
+        * параметры запроса обычно указываются через Qery параметр,
+        * для этого после сегментов ставится ? и пишется запрос
+        * возвращать можно не только IActionResult, но и любой другой тип переменной,
+        * если возвращать string то окно браузера будет играть роль консоли
+        */
         public IActionResult Privacy()
         {
             return View();
