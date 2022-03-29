@@ -10,7 +10,7 @@ namespace OnlineShopWebApp.Controllers
     {
         public IActionResult Index(double a, double b, string c)
         {
-            if (string.IsNullOrEmpty(c) || c == "" || c == "+" || c == "-" || c == "*")
+            if ((string.IsNullOrEmpty(c) || c == "" || c == "+" || c == "-" || c == "*") || (b != 0 && c !="/"))
             {
                 switch (c)
                 {
@@ -20,13 +20,15 @@ namespace OnlineShopWebApp.Controllers
                         return Ok($"{a} - {b} = {a - b}");
                     case "*":
                         return Ok($"{a} * {b} = {a * b}");
-                    //case null:
-                    //return Ok($"{a} + {b} = {a + b}");
+                    case "/":
+                        return Ok($"{a} + {b} = {a / b}");
                     default:
                         return Ok($"{a} + {b} = {a + b}");
                 }
             }
-            else
+            else if (b != 0 && c != "/")
+                return Content("\r\n На ноль делить нельзя");
+            else 
                 return Content("\r\n Пример запроса https://localhost:5001/calculator/index/1/3/+ \r\n Приниматься могут только операции +, -, *.");
         }
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
