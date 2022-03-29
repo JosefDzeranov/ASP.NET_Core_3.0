@@ -13,7 +13,7 @@ namespace OnlineShopWebApp.Controllers
     {
        
 
-        public string Index(double a, double b, string c)
+        public string Index(string a, string b, string c)
         {
             if (c == "+" )
             {
