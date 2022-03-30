@@ -1,4 +1,9 @@
-﻿@{
+﻿@using OnlineShopWebApp.Models
+@model IEnumerable<Product>
+
+
+
+@{
     ViewData["Title"] = "Home Page";
 }
 
@@ -6,3 +11,10 @@
     <h1 class="display-4">Welcome</h1>
     <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
 </div>
+
+<table class="table">
+    @foreach (Product p in Model)
+    {
+        <tr><td>@p.Id</td><td>@p.Name</td><td>@p.Cost</td></tr>
+    }
+</table>
