@@ -9,12 +9,12 @@ using System.Threading.Tasks;
 
 namespace OnlineDesignBureauWebApp.Controllers
 {
-    public class HomeController : Controller
+    public class ProductController : Controller
     {
 
         public string Index()
         {
-            return "!";
+            return "тест 1";
         }
 
         public IActionResult Privacy()
