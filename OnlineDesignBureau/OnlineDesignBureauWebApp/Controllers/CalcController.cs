@@ -43,15 +43,10 @@ namespace OnlineDesignBureauWebApp.Controllers
                 }
             }
 
-            if (result == null) result = Convert.ToString(temp);
-            return result;
+            if (result == null) result = Convert.ToString($"{a} {c} {b} = {temp}");
+            return (result);
 
         }
 
-        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-        public IActionResult Error()
-        {
-            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
-        }
     }
 }
