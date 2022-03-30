@@ -10,20 +10,21 @@ using System.Threading.Tasks;
 
 namespace OnlineShopWebApp.Controllers
 {
-    public class HomeController : Controller
+    public class ProductController : Controller
     {
-        private readonly ILogger<HomeController> _logger;
+        private readonly ILogger<ProductController> _logger;
 
-        public HomeController(ILogger<HomeController> logger)
+        public ProductController(ILogger<ProductController> logger)
         {
             _logger = logger;
         }
 
-        public IActionResult Index()
+        public IActionResult Index(int id = 1)
         {
             var xDoc = XDocument.Load("Models/products.xml");
             var products = xDoc.Element("products")
                                .Elements("product")
+                               .Where(p => int.Parse(p.Element("id").Value) == id)
                                .Select(p => new Product(
                                        int.Parse(p.Element("id").Value),
                                        p.Element("name").Value,
