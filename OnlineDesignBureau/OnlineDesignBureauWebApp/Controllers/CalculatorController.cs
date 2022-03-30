@@ -10,7 +10,7 @@ namespace OnlineDesignBureauWebApp.Controllers
         // Задача lession2_1_2
         public string index (double a, double b) 
         {
-            return Convert.ToString(a + b);
+            return Convert.ToString($"{a} + {b} = {a + b}");
         }
 
     }
