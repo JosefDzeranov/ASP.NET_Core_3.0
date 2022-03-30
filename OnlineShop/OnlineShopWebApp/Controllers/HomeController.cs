@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
+using System.Xml.Linq;
 using System.Threading.Tasks;
 
 namespace OnlineShopWebApp.Controllers
@@ -20,7 +21,14 @@ namespace OnlineShopWebApp.Controllers
 
         public IActionResult Index()
         {
-            return View();
+            var xDoc = XDocument.Load("Models/products.xml");
+            var products = xDoc.Element("products")
+                               .Elements("product")
+                               .Select(p => new Product(
+                                       int.Parse(p.Element("id").Value),
+                                       p.Element("name").Value,
+                                       decimal.Parse(p.Element("cost").Value)));
+            return View(products);
         }
 
         public IActionResult Privacy()

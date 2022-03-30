@@ -1,0 +1,21 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<products>
+	<product>
+		<id>1</id>
+		<name>Лён однотонный, голубой</name>
+		<cost>610</cost>
+		<description>Ширина 135 см, Плотность от 239 г/м2, Состав: вискоза - 60%, лён - 30%, хлопок - 10%, Производитель - Китай</description>
+	</product>
+	<product>
+		<id>2</id>
+		<name>Кашемировый трикотаж, фиолетовый</name>
+		<cost>4200</cost>
+		<description>Ширина 120 см, Состав: эластан, кашемир, Производитель - Италия</description>
+	</product>
+	<product>
+		<id>3</id>
+		<name>Шёлк, бильярдный цвет</name>
+		<cost>2700</cost>
+		<description>Ширина 135 см, Состав: шёлк - 100%, Производитель - Италия</description>
+	</product>
+</products>
