@@ -18,7 +18,7 @@ namespace OnlineShopWebApp.Controllers
             _logger = logger;
         }
 
-        public void Index()
+        public List<string> Index()
         {
             var items = new List<Item>();
             var item1 = new Item();
@@ -29,13 +29,27 @@ namespace OnlineShopWebApp.Controllers
             items.Add(item2);
             items.Add(item3);
 
+            //foreach (var item in items)
+            //{
+            //    Console.WriteLine(item.Id);
+            //    Console.WriteLine(item.Name);
+            //    Console.WriteLine(item.Cost);
+            //    Console.WriteLine();
+            //}
+
+            var itemsInfo = new List<string>();
+
             foreach (var item in items)
             {
-                Console.WriteLine(item.Id);
-                Console.WriteLine(item.Name);
-                Console.WriteLine(item.Cost);
-                Console.WriteLine();
+                var itemInfo = item.ToString().Split(',');
+
+                for (int i = 0; i < itemInfo.Length; i++)
+                {
+                    itemsInfo.Add(itemInfo[i]);
+                }
             }
+
+            return itemsInfo;
         }
 
         public class Item
