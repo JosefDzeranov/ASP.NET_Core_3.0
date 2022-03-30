@@ -22,15 +22,21 @@ namespace OnlineShopWebApp.Controllers
         {
             double dA = Converter(a);
             double dB = Converter(b);
-            switch (c)
+            string result = string.Empty;
+            if (dB == 0 && c == '/')
+                return result = "Делить на 0 нельзя";
+            else
             {
-                case '+': return $"{dA} + {dB} = {dA + dB}";
-                case '-': return $"{dA} - {dB} = {dA - dB}";
-                case '*': return $"{dA} * {dB} = {dA * dB}";
-                case '/': return $"{dA} / {dB} = {dA / dB}";
+                switch (c)
+                {
+                    case '+': return result = $"{dA} + {dB} = {dA + dB}";
+                    case '-': return result = $"{dA} - {dB} = {dA - dB}";
+                    case '*': return result = $"{dA} * {dB} = {dA * dB}";
+                    case '/': return result = $"{dA} / {dB} = {dA / dB}";
+                }
 
             }
-            return "";
+            return result;
         }
 
         public IActionResult Privacy()
