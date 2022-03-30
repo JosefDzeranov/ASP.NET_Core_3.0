@@ -23,7 +23,7 @@ namespace OnlineDesignBureauWebApp.Controllers
                     temp = a * b;
                     break;
             }          
-            return Convert.ToString(temp);
+            return Convert.ToString($"{a} {operators} {b} = {temp}");
         }
     }
 }
