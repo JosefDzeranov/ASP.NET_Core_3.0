@@ -8,20 +8,28 @@ namespace WebOnlineShop.Controllers
     {
         public string Index(double a, double b, string c)
         {
-            if(c == "+")
+            if(a / b == 0 || b / a == 0)
             {
-                return $"{a}+{b} = {a + b}";
+                return $"На 0 делить нельзя";
             }
-            else if(c == "-")
+            else
             {
-                return $"{a}-{b} = {a - b}";
-            }
-            else if (c == "*")
-            {
+                if (c == "+")
+                {
+                    return $"{a}+{b} = {a + b}";
+                }
+                else if (c == "-")
+                {
+                    return $"{a}-{b} = {a - b}";
+                }
+                else if (c == "*")
+                {
+                    return $"{a}/{b} = {a / b}";
+                }
+
                 return $"{a}/{b} = {a / b}";
             }
-
-            return $"{a}/{b} = {a / b}";
+            
         }
         public IActionResult Error()
         {
