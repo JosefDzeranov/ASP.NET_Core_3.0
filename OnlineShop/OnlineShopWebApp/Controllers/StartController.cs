@@ -5,7 +5,6 @@ namespace OnlineShopWebApp.Controllers
 {
     public class StartController : Controller
     {
-
         /*
         test on
         https://localhost:5001/start/hello
@@ -13,7 +12,6 @@ namespace OnlineShopWebApp.Controllers
 
         public enum DayParts
         {
-            Dawn = 0,
             Morning = 6,
             Noon = 12,
             Evening = 18,
@@ -22,28 +20,22 @@ namespace OnlineShopWebApp.Controllers
 
         public string Hello()
         {
-            var currentDateTime = DateTime.Now;
-            var hour = Convert.ToInt32(currentDateTime.ToString("H:mm").Substring(0, 2));
+            var currentHour = DateTime.Now.Hour;
 
-            if (hour >= (int)DayParts.Dawn && hour <= (int)DayParts.Morning)
+            if (currentHour < (int)DayParts.Morning)
             {
                 return "Доброе утро";
             }
-            if (hour > (int)DayParts.Morning && hour <= (int)DayParts.Noon)
+            if (currentHour < (int)DayParts.Noon)
             {
                 return "Добрый день";
             }
-            if (hour > (int)DayParts.Noon && hour <= (int)DayParts.Evening)
+            if (currentHour < (int)DayParts.Evening)
             {
                 return "Добрый вечер";
             }
-            if (hour > (int)DayParts.Evening && hour <= (int)DayParts.Night)
-            {
-                return "Доброй ночи";
-            }
-
-            return hour.ToString() ?? "Ну удалось определить время.";
+            
+            return "Доброй ночи";
         }
-       
     }
 }
