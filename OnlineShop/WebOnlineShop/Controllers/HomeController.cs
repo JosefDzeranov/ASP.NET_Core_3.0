@@ -1,13 +1,13 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
-using OnlineShopWebApp.Models;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
+using WebOnlineShop.Models;
 
-namespace OnlineShopWebApp.Controllers
+namespace WebOnlineShop.Controllers
 {
     public class HomeController : Controller
     {
@@ -20,6 +20,7 @@ namespace OnlineShopWebApp.Controllers
 
         public IActionResult Index()
         {
+            
             return View();
         }
 
