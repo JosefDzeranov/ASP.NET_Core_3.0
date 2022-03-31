@@ -10,8 +10,7 @@ namespace OnlineShopWebApp.Controllers
     {
         public string Hello()
         {
-            string [] hoursAndMinutes = DateTime.Now.ToShortTimeString().Split(':');
-            double time = double.Parse(hoursAndMinutes[0]);
+            var time = DateTime.Now.Hour;
 
             if(time > 0 && time <= 6)
             {
