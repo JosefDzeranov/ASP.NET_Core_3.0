@@ -19,16 +19,20 @@ namespace OnlineShopWebApp.Controllers
             _logger = logger;
         }
 
-        public IActionResult Index(int id = 1)
+        public IActionResult Index(int id = 0)
         {
             var xDoc = XDocument.Load("Models/products.xml");
-            var products = xDoc.Element("products")
-                               .Elements("product")
-                               .Where(p => int.Parse(p.Element("id").Value) == id)
-                               .Select(p => new Product(
+            var validData = xDoc.Element("products")
+                               .Elements("product");
+            if (id != 0)
+            {
+                validData = validData.Where(p =>int.Parse(p.Element("id").Value) == id);
+            }
+            
+            var products = validData.Select(p => new Product(
                                        int.Parse(p.Element("id").Value),
                                        p.Element("name").Value,
-                                       decimal.Parse(p.Element("cost").Value)));
+                                       decimal.Parse(p.Element("cost").Value))).ToList();
             return View(products);
         }
 
