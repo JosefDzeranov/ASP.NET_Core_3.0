@@ -12,7 +12,6 @@ namespace OnlineShopWebApp.Controllers
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
-        List<ProductList> productLists;
         public HomeController(ILogger<HomeController> logger)
         {
             _logger = logger;
@@ -25,12 +24,7 @@ namespace OnlineShopWebApp.Controllers
         }
         public string Index()
         {
-            var s = string.Empty;
-            foreach (var product in productLists)
-            {
-                s += $"{product.Id}\n{product.Cost}\n{product.Name}\n\n";
-            }
-            return s;
+            return ProductList.Print();
         }
         public IActionResult Privacy()
         {
