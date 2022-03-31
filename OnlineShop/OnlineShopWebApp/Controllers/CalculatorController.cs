@@ -10,8 +10,17 @@ namespace OnlineShopWebApp.Controllers
     {
         public string Index(string a, string b)
         {
-            var correctA = double.Parse(a.Replace(".", ","));
-            var correctB = double.Parse(b.Replace(".", ","));
+            double correctA, correctB;
+            if (a != null)
+                correctA = double.Parse(a.Replace(".", ","));
+            else
+                correctA = 0;
+
+            if (b != null)
+                correctB = double.Parse(b.Replace(".", ","));
+            else
+                correctB = 0;
+
             return $"{correctA} + {correctB} = {correctA + correctB}";
         }
     }
