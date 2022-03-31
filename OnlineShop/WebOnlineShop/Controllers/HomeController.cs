@@ -20,6 +20,7 @@ namespace WebOnlineShop.Controllers
 
         public IActionResult Index()
         {
+            
             return View();
         }
 
