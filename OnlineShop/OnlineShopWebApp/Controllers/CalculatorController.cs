@@ -5,9 +5,9 @@ namespace OnlineShopWebApp.Controllers
 {
     public class CalculatorController : Controller
     {
-        public string Index(int a, int b)
+        public string Index(double a, double b)
         {
-            return Convert.ToString(a+b) ?? "0";
+            return $"{a}+{b}={a+b}" ?? "0";
         }
     }
 }
