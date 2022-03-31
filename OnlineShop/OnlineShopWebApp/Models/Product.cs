@@ -12,12 +12,6 @@ namespace OnlineShopWebApp.Models
         public decimal Cost { get; set; }
         public string Description { get; set; }
 
-        public Product(int id, string name, decimal cost)
-        {
-            Id = id;
-            Name = name;
-            Cost = cost;
-        }
         public Product(int id, string name, decimal cost, string description)
         {
             Id = id;

@@ -12,7 +12,7 @@ namespace OnlineShopWebApp
 {
     public class Data
     {
-        public IEnumerable<Product> GetDataFromXML()
+        public IEnumerable<Product> GetProductDataFromXML()
         {
             var xDoc = XDocument.Load("Models/products.xml");
             var products = xDoc.Element("products")

@@ -12,10 +12,14 @@ namespace OnlineShopWebApp.Controllers
 {
     public class ProductController : Controller
     {
+        private readonly Data productData;
+        public ProductController()
+        {
+            productData = new Data();
+        }
         public IActionResult Index(int id)
         {
-            var data = new Data();
-            var products = data.GetDataFromXML();
+            var products = productData.GetProductDataFromXML();
             var product = products.Where(p => p.Id == id);
 
             return View(product);

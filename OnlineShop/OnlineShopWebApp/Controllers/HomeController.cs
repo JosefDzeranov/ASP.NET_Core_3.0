@@ -12,16 +12,15 @@ namespace OnlineShopWebApp.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly ILogger<HomeController> _logger;
+        private readonly Data productData;
 
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController()
         {
-            _logger = logger;
+            productData = new Data();
         }
         public IActionResult Index()
         {
-            var data = new Data();
-            var products = data.GetDataFromXML();
+            var products = productData.GetProductDataFromXML();
             return View(products);
         }
 
