@@ -20,7 +20,7 @@ namespace WebOnlineShop.Controllers
 
         public string Index(double a, double b)
         {
-            return $"{a}+{b} = {a + b}";
+            return $"{a}+{b} = {a + b}"; 
         }
 
         //public IActionResult Index()
