@@ -20,13 +20,8 @@ namespace OnlineShopWebApp.Controllers
         }
         public IActionResult Index()
         {
-            XDocument xDoc = XDocument.Load("Models/products.xml");
-            var products = xDoc.Element("products")
-                               .Elements("product")
-                               .Select(p => new Product (
-                                       int.Parse(p.Attribute("id").Value),
-                                       p.Element("name").Value,
-                                       decimal.Parse(p.Element("cost").Value)));
+            var data = new Data();
+            var products = data.GetDataFromXML();
             return View(products);
         }
 
