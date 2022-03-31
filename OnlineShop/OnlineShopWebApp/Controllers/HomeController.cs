@@ -12,11 +12,11 @@ namespace OnlineShopWebApp.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly Data productData;
+        private readonly DataStorage productData;
 
         public HomeController()
         {
-            productData = new Data();
+            productData = new DataStorage();
         }
         public IActionResult Index()
         {

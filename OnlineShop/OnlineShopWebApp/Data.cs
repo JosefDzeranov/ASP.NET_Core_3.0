@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace OnlineShopWebApp
 {
-    public class Data
+    public class DataStorage
     {
         public IEnumerable<Product> GetProductDataFromXML()
         {
