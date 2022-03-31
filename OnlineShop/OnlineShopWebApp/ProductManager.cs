@@ -1,5 +1,6 @@
 ﻿using Newtonsoft.Json;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace OnlineShopWebApp
 {
@@ -19,6 +20,16 @@ namespace OnlineShopWebApp
             {
                 output += $"{product.Id}\n{product.Name}\n{product.Cost}\n\n";
             }
+            return output;
+        }
+
+        public static string FindProduct(int id)
+        {
+            var output = string.Empty;
+            var foundProduct = productList.Find(product => product.Id == id);
+            output += $"{foundProduct.Id}\n{foundProduct.Name}\n{foundProduct.Cost}\n{foundProduct.Description}";
+
+            
             return output;
         }
     }
