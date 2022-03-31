@@ -22,5 +22,18 @@ namespace OnlineShopWebApp.Models
             }
             return s;
         }
+        public static string PrintId(int id)
+        {
+            var IdResult = productLists.FirstOrDefault(x => x.Id == id);
+            var s = string.Empty;
+            if (IdResult == null)
+            {
+                return "Такого товара нет в списке, введите товар с номером от 1 до 3 включительно";
+            }
+            else
+            {
+                return s = $"{IdResult.Id}\n{IdResult.Name}\n{IdResult.Cost}\n{IdResult.Description}\n\n";
+            }
+        }
     }
 }
