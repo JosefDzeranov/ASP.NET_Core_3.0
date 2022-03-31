@@ -18,10 +18,15 @@ namespace WebOnlineShop.Controllers
             _logger = logger;
         }
 
-        public IActionResult Index()
+        public string Index(double a, double b)
         {
-            return View();
+            return $"{a}+{b} = {a + b}";
         }
+
+        //public IActionResult Index()
+        //{
+        //    return View();
+        //}
 
         public IActionResult Privacy()
         {
