@@ -11,20 +11,10 @@
     <h1 class="display-4">Welcome</h1>
     <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
 </div>
-@if (Model.Any())
-{
-        @foreach (Product p in Model)
-        {
 
-                <p>@p.Id</p>
-                <p>@p.Name</p>
-                <p>@p.Cost</p>
-                <p>@p.Description</p>
-        }
-}
-else
-{
-    <p>Продукт не найден</p>
-}
-
-
+<table class="table">
+    @foreach (Product p in Model)
+    {
+        <tr><td>@p.Id</td><td>@p.Name</td><td>@p.Cost</td></tr>
+    }
+</table>
