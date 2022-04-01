@@ -4,9 +4,9 @@
 		<name>Натюрморт</name>
 		<cost>1500</cost>
 		<description>
-			Фотография,
-			3452x4591px
-			(29.2cm x 38.9cm 300dpi),
+			Фотография,  
+			3452x4591px 
+			(29.2cm x 38.9cm 300dpi), 
 			3.9 MB | jpg
 		</description>
 	</product>
@@ -14,9 +14,9 @@
 		<name>Портрет</name>
 		<cost>3000</cost>
 		<description>
-			Иллюстрация,
+			Иллюстрация, 
 			3757x2129px
-			(31.8cm x 18cm 300dpi),
+			(31.8cm x 18cm 300dpi), 
 			1.4MB | jpg
 		</description>
 	</product>
@@ -24,7 +24,7 @@
 		<name>Пейзаж</name>
 		<cost>2000</cost>
 		<description>
-			Фотография,
+			Фотография, 
 			3247x2463px
 			(27.5cm x 20.9cm 300dpi),
 			745kB | jpg
