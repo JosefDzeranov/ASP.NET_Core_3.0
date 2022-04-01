@@ -1,12 +1,7 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
-using OnlineShopWebApp.Models;
-using System;
+﻿using OnlineShopWebApp.Models;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Linq;
 using System.Xml.Linq;
-using System.Threading.Tasks;
 
 namespace OnlineShopWebApp
 {
@@ -14,7 +9,7 @@ namespace OnlineShopWebApp
     {
         public IEnumerable<Product> GetProductDataFromXML()
         {
-            var xDoc = XDocument.Load("Models/products.xml");
+            var xDoc = XDocument.Load("Data/products.xml");
             var products = xDoc.Element("products")
                                .Elements("product")
                                .Select(p => new Product(
