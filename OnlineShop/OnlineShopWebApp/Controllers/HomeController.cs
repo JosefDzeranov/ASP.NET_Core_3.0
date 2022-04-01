@@ -12,15 +12,9 @@ namespace OnlineShopWebApp.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly DataStorage productData;
-
-        public HomeController()
-        {
-            productData = new DataStorage();
-        }
         public IActionResult Index()
-        {
-            var products = productData.GetProductDataFromXML();
+        {           
+            var products = new DataStorage().GetProductDataFromXML();
             return View(products);
         }
 

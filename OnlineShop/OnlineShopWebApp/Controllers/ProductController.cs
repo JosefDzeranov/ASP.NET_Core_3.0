@@ -12,15 +12,10 @@ namespace OnlineShopWebApp.Controllers
 {
     public class ProductController : Controller
     {
-        private readonly DataStorage productData;
-        public ProductController()
-        {
-            productData = new DataStorage();
-        }
         public IActionResult Index(int id)
         {
-            var products = productData.GetProductDataFromXML();
-            var product = products.Where(p => p.Id == id);      
+            var product = new DataStorage().GetProductDataFromXML()
+                                           .Where(p => p.Id == id);    
           
             return View(product);
         }
