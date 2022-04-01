@@ -15,12 +15,12 @@ namespace OnlineShopWebApp.Models
             };
         public static string Print()
         {
-            var s = string.Empty;
+            var output = string.Empty;
             foreach (var product in productLists)
             {
-                s += $"{product.Id}\n{product.Cost}\n{product.Name}\n\n";
+                output += $"{product.Id}\n{product.Cost}\n{product.Name}\n\n";
             }
-            return s;
+            return output;
         }
     }
 }
