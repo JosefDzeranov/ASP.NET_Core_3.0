@@ -1,5 +1,4 @@
 ﻿using OnlineDesignBureauWebApp.Models;
-using System;
 using System.Collections.Generic;
 using System.IO;
 using Newtonsoft.Json;
@@ -12,7 +11,6 @@ namespace OnlineDesignBureauWebApp
         public static List<int> IdProducts = new List<int>();
         public void CreateNewProduct(string name, decimal cost, string description)
         {
-            // товар для примера
             Products.Add(new Product(IdProduct.GiveMeId(), name, cost, description));
             IdProducts.Add(Products[Products.Count-1].Id);
         }
@@ -34,10 +32,7 @@ namespace OnlineDesignBureauWebApp
             reader.SupportMultipleContent = true; //для поддержки чтения нескольких фрагментов содержимого JSON
             while (true)
             {
-                if (!reader.Read())
-                {
-                    break;
-                }
+                if (!reader.Read()) break;
                 JsonSerializer serializer = new JsonSerializer();
                 Product temp_point = serializer.Deserialize<Product>(reader);
                 Products.Add(temp_point);
@@ -50,10 +45,8 @@ namespace OnlineDesignBureauWebApp
         {
             foreach (var product in Products)
             {
-                if (product.Id == id)
-                {
+                if (product.Id == id) 
                     return $"{product.Id}\n{product.Name}\n{product.Cost}\n";
-                }
             }
             return $"Продукт с данным id={id} отсутствует";
         }

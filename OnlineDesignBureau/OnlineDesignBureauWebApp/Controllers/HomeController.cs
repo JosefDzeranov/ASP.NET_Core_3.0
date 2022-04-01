@@ -1,27 +1,20 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
-using OnlineDesignBureauWebApp.Models;
-using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace OnlineDesignBureauWebApp.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly ProductCatalog productCatalog;
+        private readonly ProductCatalog _productCatalog;
         public HomeController()
         {
-            productCatalog = new ProductCatalog();
+            _productCatalog = new ProductCatalog();
         }
         public string Index()
         {
-            if (productCatalog.GetProducts().Count==0)
-                productCatalog.ReadToJson("projects_for_sale");
+            if (_productCatalog.GetProducts().Count==0)
+                _productCatalog.ReadToJson("projects_for_sale");
             var result = "";
-            foreach (var product in productCatalog.GetProducts())
+            foreach (var product in _productCatalog.GetProducts())
             {
                 result += product + "\n\n";
             }

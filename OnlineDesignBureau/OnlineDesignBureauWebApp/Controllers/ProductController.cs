@@ -1,11 +1,4 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
-using OnlineDesignBureauWebApp.Models;
-using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace OnlineDesignBureauWebApp.Controllers
 {
@@ -18,10 +11,9 @@ namespace OnlineDesignBureauWebApp.Controllers
         }
         public string Index(string id)
         {
-            if (int.TryParse(id, out int idToInt))
-            {
+            if (int.TryParse(id, out int idToInt)) 
                 return productCatalog.GetId(idToInt);
-            }
+
             return "Введенный id не является натуральным числом";
         }
         public string Save()
