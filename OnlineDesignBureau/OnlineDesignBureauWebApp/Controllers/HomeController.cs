@@ -11,21 +11,21 @@ namespace OnlineDesignBureauWebApp.Controllers
 {
     public class HomeController : Controller
     {
-
+        private readonly ProductCatalog productCatalog;
+        public HomeController()
+        {
+            productCatalog = new ProductCatalog();
+        }
         public string Index()
         {
-            return "!";
-        }
-
-        public IActionResult Privacy()
-        {
-            return View();
-        }
-
-        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-        public IActionResult Error()
-        {
-            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+            if (productCatalog.GetProducts().Count==0)
+                productCatalog.ReadToJson("projects_for_sale");
+            var result = "";
+            foreach (var product in productCatalog.GetProducts())
+            {
+                result += product + "\n\n";
+            }
+            return result;
         }
     }
 }

@@ -11,21 +11,40 @@ namespace OnlineDesignBureauWebApp.Controllers
 {
     public class ProductController : Controller
     {
-
-        public string Index()
+        private readonly ProductCatalog productCatalog;
+        public ProductController()
         {
-            return "тест 1";
+            productCatalog = new ProductCatalog();
+        }
+        public string Index(string id)
+        {
+            if (int.TryParse(id, out int idToInt))
+            {
+                return productCatalog.GetId(idToInt);
+            }
+            return "Введенный id не является натуральным числом";
+        }
+        public string Save()
+        {
+            productCatalog.WriteToJson(productCatalog.GetProducts(), "projects_for_sale");
+            return "Данные продуктов сохранены";
+        }
+        public string ReadFile()
+        {
+            productCatalog.ReadToJson("projects_for_sale");
+            var result = "";
+            foreach (var product in productCatalog.GetProducts())
+            {
+                result += product + "\n\n";
+            }
+            return result;
+        }
+        public string AddProduct(string name, decimal cost, string description)
+        {
+            productCatalog.CreateNewProduct(name, cost, description = $"Описание {name}");
+            var result = productCatalog.GetProducts()[productCatalog.GetProducts().Count-1];
+            return $"Добавленны новые продукты\n\n {result}";
         }
 
-        public IActionResult Privacy()
-        {
-            return View();
-        }
-
-        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-        public IActionResult Error()
-        {
-            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
-        }
     }
 }
