@@ -13,7 +13,7 @@ namespace OnlineDesignBureauWebApp
         public void CreateNewProduct(string name, decimal cost, string description)
         {
             // товар для примера
-            Products.Add(new Product(IdProduct.GiveMeId(),"59-70", 32000, "Проект одноэтажного дома из газобетона"));
+            Products.Add(new Product(IdProduct.GiveMeId(), name, cost, description));
             IdProducts.Add(Products[Products.Count-1].Id);
         }
 
