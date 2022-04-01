@@ -11,7 +11,7 @@ namespace OnlineShopWebApp.Controllers
     {
         public string Index(int id)
         {
-            return ProductList.PrintId(id);
+            return ProductList.GetProducts(id);
         }
     }
 }

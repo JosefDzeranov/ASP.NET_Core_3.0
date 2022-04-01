@@ -15,24 +15,23 @@ namespace OnlineShopWebApp.Models
             };
         public static string Print()
         {
-            var s = string.Empty;
+            var output = string.Empty;
             foreach (var product in productLists)
             {
-                s += $"{product.Id}\n{product.Cost}\n{product.Name}\n\n";
+                output += $"{product.Id}\n{product.Cost}\n{product.Name}\n\n";
             }
-            return s;
+            return output;
         }
-        public static string PrintId(int id)
+        public static string GetProducts(int id)
         {
             var IdResult = productLists.FirstOrDefault(x => x.Id == id);
-            var s = string.Empty;
             if (IdResult == null)
             {
                 return "Такого товара нет в списке, введите товар с номером от 1 до 3 включительно";
             }
             else
             {
-                return s = $"{IdResult.Id}\n{IdResult.Name}\n{IdResult.Cost}\n{IdResult.Description}\n\n";
+                return $"{IdResult.Id}\n{IdResult.Name}\n{IdResult.Cost}\n{IdResult.Description}\n\n";
             }
         }
     }
