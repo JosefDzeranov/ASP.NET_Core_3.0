@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using OnlineShopWebApp.DataSources;
 using OnlineShopWebApp.Models;
 using System;
 using System.Collections.Generic;
@@ -32,25 +33,12 @@ namespace OnlineShopWebApp.Controllers
 
         public IActionResult Index ()
         {
-            var list = new List<Product>();
+            var productSource = new ProductDataSource();
+            var products = productSource.GetAllProducts();
 
-            var product1 = new Product() { Id = 1, Name = "Тур в Турцию", Cost = 50000};
-            var product2 = new Product() { Id = 2, Name = "Тур в Грецию", Cost = 60000};
-            var product3 = new Product() { Id = 3, Name = "Тур в Болгарию", Cost = 45000};
-          
-            list.Add(product1);
-            list.Add(product2);
-            list.Add(product3);
-
-            var s = string.Empty;
-
-            foreach (var item in list)
-            {
-                s += $"Id {item.Id}\nName {item.Name}\nCost {item.Cost}\n\n";
-            }
-          
-            return Ok(s);
+            var result = string.Join("\r\n", products);
+         
+            return Ok(result);
         }
-
     }
 }
