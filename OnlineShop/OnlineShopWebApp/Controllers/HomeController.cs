@@ -8,7 +8,10 @@ namespace OnlineShopWebApp.Controllers
     {
         public string Index()
         {
-            return StorageProducts.ShowProducts();
+            if (StorageProducts.ShowProducts() == null)
+                return "Такой услуги нет в списке, введите корректное значение 1-5";
+            else
+                return StorageProducts.ShowProducts().ToString();
         }
     }
 }

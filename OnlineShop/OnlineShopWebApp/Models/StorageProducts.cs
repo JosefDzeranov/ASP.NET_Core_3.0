@@ -1,11 +1,18 @@
-﻿using System.Collections.Generic;
+﻿using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
+using System;
+using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Text.Json;
 
 namespace OnlineShopWebApp.Models
 {
     public class StorageProducts
     {
-        //нужно как минимум три метода: сформировать json если его нет, получить список, получить товар, 
+        /// <summary>
+        /// Список услуг
+        /// </summary>
         private static readonly List<Product> products = new List<Product>()
         {
             new Product(1, "Составление документов, исков в суд", 5000, "Услуга позволяет сформировать документы для подачи в суд"),
@@ -15,21 +22,80 @@ namespace OnlineShopWebApp.Models
             new Product(5, "Анализ документов и договоров", 3000, "Услуга позволяет провести правовую экспертизу документов и договоров"),
         };
 
-        //получить описание товара
-        public static string ShowProducts()
+        /// <summary>
+        /// получить описание товара
+        /// </summary>
+        /// <returns></returns>
+        public static Product ShowProducts()
         {
-            string output = string.Empty;
-            foreach (var product in products)
+            string currentFile = @"Models\Products.json";
+            if (!File.Exists(currentFile))
             {
-                output += $"{product.Id}\r\n{product.Name}\r\n{product.Cost}\r\n{product.Description}";
+                //string json2 = JsonSerializer.Serialize(products); -- данная библиотека не очень красиво форматирует
+                string json3 = JsonConvert.SerializeObject(products, Formatting.Indented);
+                File.WriteAllText(@"Models\Products.json", json3);
             }
-            return output;
+            return DeserializeJsonProducts();
+        }
+        /// <summary>
+        /// получить товар
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public static Product TryGetProduct(int id)
+        {
+            return DeserializeJsonProducts();
+        }
+        /// <summary>
+        /// Валидация JSON файла
+        /// </summary>
+        /// <param name="strInput"></param>
+        /// <returns></returns>
+        private static bool IsValidJson(string strInput)
+        {
+            if (string.IsNullOrWhiteSpace(strInput)) 
+            { 
+                return false; 
+            }
+            strInput = strInput.Trim();
+            
+            if ((strInput.StartsWith("{") && strInput.EndsWith("}")) /*For object */ || (strInput.StartsWith("[") && strInput.EndsWith("]"))) /*For array*/
+            {
+                try
+                {
+                    var obj = JToken.Parse(strInput);
+                    return true;
+                }
+                catch (JsonReaderException)
+                {
+                    return false;
+                }
+                catch (Exception)
+                {
+                    return false;
+                }
+            }
+            else
+            {
+                return false;
+            }
         }
 
-        //получить товар
-        public static Product TryGetProduct (int id)
+        public static Product DeserializeJsonProducts()
         {
-            return products.FirstOrDefault(x => x.Id == id);
+            string currentFile = @"Models\Products.json";
+
+            var strFromReq = new StreamReader(currentFile).ReadToEnd();
+            var obj = JsonConvert.DeserializeObject(strFromReq).ToString();
+
+            List<Product> productsJson = JsonConvert.DeserializeObject<List<Product>>(obj);
+
+            if (IsValidJson(obj))
+            {
+                return null;//productsJson;
+            }
+            else
+                return null;
         }
     }
 }
