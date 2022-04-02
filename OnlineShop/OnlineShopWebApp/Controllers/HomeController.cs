@@ -7,7 +7,7 @@ namespace OnlineShopWebApp.Controllers
     {
         public string Index()
         {
-            return ProductList.Print();
+            return ProductsStorage.PrintCatalog();
         }
     }
 }
