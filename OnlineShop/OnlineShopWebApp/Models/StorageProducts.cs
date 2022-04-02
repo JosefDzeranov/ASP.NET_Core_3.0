@@ -1,9 +1,5 @@
-﻿using Newtonsoft.Json;
-using System.Collections.Generic;
-using System.IO;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Text.Json;
-using System.Web.Helpers;
 
 namespace OnlineShopWebApp.Models
 {
