@@ -21,7 +21,7 @@ namespace OnlineShopWebApp.Models
             string output = string.Empty;
             foreach (var product in products)
             {
-                output += $"{product.Id}\n{product.Cost}\n{product.Description}\n\n";
+                output += $"{product.Id}\r\n{product.Name}\r\n{product.Cost}\r\n{product.Description}";
             }
             return output;
         }
@@ -30,12 +30,6 @@ namespace OnlineShopWebApp.Models
         public static Product TryGetProduct (int id)
         {
             return products.FirstOrDefault(x => x.Id == id);
-        }
-
-        //получить список товаров
-        public List<Product> TryGetListProduct(int id)
-        {
-            return products;
         }
     }
 }
