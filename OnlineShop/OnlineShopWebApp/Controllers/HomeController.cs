@@ -5,9 +5,13 @@ namespace OnlineShopWebApp.Controllers
     public class HomeController : Controller
     {
 
-        public string Index()
+        public IActionResult Index()
         {
-            return ProductManager.ShowProducts();
+           // return ProductManager.ShowProducts();
+
+            var products = ProductManager.GetAllProducts();
+
+            return View(products);
         }
 
     }

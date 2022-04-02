@@ -1,6 +1,16 @@
-﻿@{
+﻿@model List<Product>
+
+@{
     ViewData["Title"] = "Home Page";
 }
+
+
+@foreach (var product in Model)
+{
+    @product.ToString()
+}
+
+
 
 <div class="text-center">
     <h1 class="display-4">Welcome</h1>

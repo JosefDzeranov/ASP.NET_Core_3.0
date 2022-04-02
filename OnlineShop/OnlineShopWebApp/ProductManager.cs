@@ -21,6 +21,11 @@ namespace OnlineShopWebApp
             return output;
         }
 
+        public static List<Product> GetAllProducts()
+        {
+            return productList;
+        }
+
         public static Product FindProduct(int id)
         {
            // var output = string.Empty;
