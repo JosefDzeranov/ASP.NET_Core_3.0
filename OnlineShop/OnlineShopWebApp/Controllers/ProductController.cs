@@ -11,7 +11,12 @@ namespace OnlineShopWebApp.Controllers
     {
         public string Index(int id)
         {
-            return ProductList.GetProducts(id);
+            var requestedProduct = ProductsStorage.TryGetProduct(id);
+            if (requestedProduct == null)
+            {
+                return "Такого товара нет в списке, введите товар с номером от 1 до 3 включительно";
+            }
+            return requestedProduct + $"\n{requestedProduct.Description}";
         }
     }
 }

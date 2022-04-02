@@ -22,5 +22,9 @@ namespace OnlineShopWebApp.Models
             }
             return output;
         }
+        public static Product TryGetProduct(int id)
+        {
+            return products.FirstOrDefault(x => x.Id == id);
+        }
     }
 }
