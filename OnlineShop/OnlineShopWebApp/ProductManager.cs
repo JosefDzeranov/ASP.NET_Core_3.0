@@ -21,14 +21,14 @@ namespace OnlineShopWebApp
             return output;
         }
 
-        public static string FindProduct(int id)
+        public static Product FindProduct(int id)
         {
-            var output = string.Empty;
-            var foundProduct = productList.Find(product => product.Id == id);
-            output += $"{foundProduct.Id}\n{foundProduct.Name}\n{foundProduct.Cost}\n{foundProduct.Description}";
+           // var output = string.Empty;
+            return productList.Find(product => product.Id == id);
+            //output += $"{foundProduct.Id}\n{foundProduct.Name}\n{foundProduct.Cost}\n{foundProduct.Description}";
 
             
-            return output;
+            //return output;
         }
     }
 }
