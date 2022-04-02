@@ -11,7 +11,7 @@ namespace OnlineDesignBureauWebApp.Controllers
         }
         public string Index()
         {
-            if (_productCatalog.GetProducts().Count==0)
+            if (_productCatalog.GetProducts().Count == 0)
                 _productCatalog.ReadToJson("projects_for_sale");
             var result = "";
             foreach (var product in _productCatalog.GetProducts())
