@@ -5,15 +5,10 @@ namespace OnlineShopWebApp.Controllers
 {
     public class HomeController : Controller
     {
-        public string Index()
+        public IActionResult Index()
         {
             var products = ProductsStorage.PrintCatalog();
-            var output = string.Empty;
-            foreach (var product in products)
-            {
-                output += product + "\n\n";
-            }
-            return output;
+            return View(products);
         }
     }
 }
