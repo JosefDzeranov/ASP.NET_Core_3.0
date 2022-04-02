@@ -7,7 +7,7 @@ namespace OnlineShopWebApp.Models
 {
     public class Product
     {
-        private int counter = 1;
+        private static int counter = 1;
         public int Id { get;}
         public string Name { get;}
         public decimal Cost { get;}
@@ -18,7 +18,7 @@ namespace OnlineShopWebApp.Models
             Name = name;
             Cost = cost;
             Description = description;
-            counter++;
+            counter += 1;
         }
 
         public override string ToString()
