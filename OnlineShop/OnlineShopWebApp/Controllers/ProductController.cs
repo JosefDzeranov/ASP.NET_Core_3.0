@@ -9,9 +9,9 @@ namespace OnlineShopWebApp.Controllers
         {
             var requestedProduct = StorageProducts.TryGetProduct(id);
             if (requestedProduct != null)
-                return "Такой услуги нет в списке, введите корректное значение 1-4";
+                return "Такой услуги нет в списке, введите корректное значение 1-5";
             else
-                return @"{requestedProduct.id}\n{requestedProduct.name}\n{requestedProduct.Cost}\r\n{requestedProduct.Description}";
+                return @"{requestedProduct.id}\r\n{requestedProduct.name}\r\n{requestedProduct.Cost}\r\n{requestedProduct.Description}";
         }
     }
 }

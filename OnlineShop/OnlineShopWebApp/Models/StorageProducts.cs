@@ -1,7 +1,9 @@
 ﻿using Newtonsoft.Json;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text.Json;
+using System.Web.Helpers;
 
 namespace OnlineShopWebApp.Models
 {
@@ -16,12 +18,6 @@ namespace OnlineShopWebApp.Models
             new Product(4, "Консультация по вопросам", 3000, "Консультация по вопросам"),
             new Product(5, "Анализ документов и договоров", 3000, "Правовая экспертиза документов и договоров"),
         };
-        
-        //string json = Newtonsoft.Json.JsonConvert.SerializeObject(products);
-        //string json2 = JsonSerializer.Serialize(products);
-        //string json3 = JsonConvert.SerializeObject(products, Formatting.Indented);
-        //File.WriteAllText(@"D:\myJson.json", json);
-
 
         //получить описание товара
         public static string ShowProducts()
