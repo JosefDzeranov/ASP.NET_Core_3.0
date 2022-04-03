@@ -4,16 +4,24 @@
     ViewData["Title"] = "Home Page";
 }
 
-@*@ViewBag.Product;
-    @ViewData["Products"]
-    @TempData["Products"]*@
+<div class="row">
+    @foreach (var product in Model)
+    {
+    <div class="col-3 card shadow">
+        <img class="card-img-top" src="https://media.istockphoto.com/photos/funny-cat-going-on-vacation-picture-id526832110?s=612x612">
 
-@foreach (var product in Model)
-{
-    @product
-}
-
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+        <div class="card-body">
+            <a style="color:black" href="/product/index/@product.Id">
+                <h5>@product.Name</h5>
+            </a>
+            <h5>@product.Cost rub</h5>
+            <a class="btn btn-dark" href="#" role="button">Add to Basket</a>
+        </div>
+    </div>
+    }
 </div>
+
+    <div class="text-center">
+        <h1 class="display-4">Welcome</h1>
+        <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+    </div>
