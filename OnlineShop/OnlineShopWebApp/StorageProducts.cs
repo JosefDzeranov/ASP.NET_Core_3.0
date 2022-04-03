@@ -15,7 +15,7 @@ namespace OnlineShopWebApp.Models
             new Product("Анализ документов и договоров", 3000, "Правовая экспертиза документов и договоров"),
         };
 
-        public List<Product> GetAll() 
+        public List<Product> ShowProducts() 
         { 
             return products; 
         }

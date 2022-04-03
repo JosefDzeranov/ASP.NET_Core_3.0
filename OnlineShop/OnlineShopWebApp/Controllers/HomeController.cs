@@ -13,14 +13,14 @@ namespace OnlineShopWebApp.Controllers
         }
         public string Index()
         {
-            var products = storageProducts.GetAll();
+            var products = StorageProducts.ShowProducts();
             var result = string.Empty;
 
             foreach (var product in products)
             {
                 result += product + "\n\n";
             }
-            return result; // StorageProducts.ShowProducts();
+            return result;
         }
 
         public IActionResult Privacy() 
