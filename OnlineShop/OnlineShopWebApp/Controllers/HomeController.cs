@@ -18,16 +18,17 @@ namespace OnlineShopWebApp.Controllers
             productReposititory = new ProductReposititory();
         }
 
-        public string Index()
+        public IActionResult Index()
         {
             var products = productReposititory.GetAll();
-            var result = String.Empty;
-            foreach (var product in products)
-            {
-                result += product + "\n\n";
-            }
+            return View(products);
+            /// <summary>
+            /// Use them to pass only constants and small data.
+            /// ViewBag.Product = result;
+            /// ViewData["Products"] = result;
+            /// TempData["Products"] = result;
+            /// </summary>
 
-            return result;
         }
 
        

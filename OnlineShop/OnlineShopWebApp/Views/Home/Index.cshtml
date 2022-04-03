@@ -1,5 +1,16 @@
-﻿@{
+﻿@model List<Product>
+
+@{
     ViewData["Title"] = "Home Page";
+}
+
+@*@ViewBag.Product;
+    @ViewData["Products"]
+    @TempData["Products"]*@
+
+@foreach (var product in Model)
+{
+    @product
 }
 
 <div class="text-center">
