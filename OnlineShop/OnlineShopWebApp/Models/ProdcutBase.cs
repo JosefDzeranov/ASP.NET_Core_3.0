@@ -1,18 +1,27 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 
 namespace OnlineShopWebApp.Models
 {
-    public static class ProdcutBase
+    public class ProdcutBase
     {
-        public static List <Product> Products { get; set; }
-
-        static ProdcutBase()
+        public static List<Product> products = new List<Product>()
         {
-            Products = new List<Product>();
-            Products.Add(new Product(1, "Незнайка на луне", 345.6m));
-            Products.Add(new Product(2, "Что делать?", 556.50m));
-            Products.Add(new Product(3, "Остров сокровищ", 999.0m));
-           
+           new Product(1, "Незнайка на луне", 345.6m),
+           new Product(2, "Что делать?", 556.50m),
+           new Product(3, "Остров сокровищ", 999.0m)
+
+        };
+
+
+        public List<Product> GetAll()
+        {
+            return products;
+        }
+
+        public Product TryGetById(int id)
+        {
+            return products.FirstOrDefault(product => product.Id == id);
         }
 
     }

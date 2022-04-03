@@ -1,10 +1,9 @@
-﻿
+﻿@model Product
 @{
     ViewData["Title"] = "Prodcut";
 }
-@{
-    if (@Model != null)
-    {
+
+    
          <table class="table table-bordered table-striped" style="width:100%">
   <tr>
     <tr>
@@ -23,12 +22,7 @@
                
             
         </table>
-    }
-    else
-    {
-        <div class="text-center">
-        <h2>Товар не найден!</h2>
-        </div> 
-    }
+    
+  
    
-}
+

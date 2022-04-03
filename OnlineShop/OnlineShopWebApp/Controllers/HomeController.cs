@@ -11,18 +11,18 @@ namespace OnlineShopWebApp.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly ILogger<HomeController> _logger;
 
-        public HomeController(ILogger<HomeController> logger)
+        private readonly ProdcutBase prodcutBase;
+
+        public HomeController()
         {
-            _logger = logger;
+            prodcutBase = new ProdcutBase();
         }
-
         public IActionResult Index()
         {
-            var Products = ProdcutBase.Products;
+            var products = prodcutBase.GetAll();
             
-            return View(Products);
+            return View(products);
         }
 
         public IActionResult Privacy()
@@ -30,10 +30,6 @@ namespace OnlineShopWebApp.Controllers
             return View();
         }
 
-        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-        public IActionResult Error()
-        {
-            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
-        }
+
     }
 }
