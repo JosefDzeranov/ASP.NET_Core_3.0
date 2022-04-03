@@ -2,17 +2,25 @@
 {
     public class Product
     {
-        public int Id { get; set; }
-        public string Name { get; set; }
-        public decimal Cost { get; set; }
-        public string Description { get; set; }
+        private static int instanceCounter = 0;
+        public int Id { get; }
+        public string Name { get; }
+        public decimal Cost { get; }
+        public string Description { get; }
 
-        public Product(int id, string name, decimal cost, string description)
+        public Product(string name, decimal cost, string description)
         {
-            Id = id;
+            Id = instanceCounter;
             Name = name;
             Cost = cost;
             Description = description;
+
+            instanceCounter += 1;
+        }
+
+        public override string ToString()
+        {
+            return $"{Id}\r\n{Name}\r\n{Cost}\r\n{Description}";
         }
     }
 }
