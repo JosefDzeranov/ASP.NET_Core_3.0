@@ -10,7 +10,7 @@ namespace OnlineShopWebApp.Models
     public class StorageProducts
     {
 
-        private static List<Product> products = new List<Product>()
+        private static readonly List<Product> products = new List<Product>()
         {
             new Product("Составление документов, исков в суд", 5000, "Составление и оформление документов для подачи в суд"),
             new Product("Составление документов для регистрации/банкротства ЮЛ", 4000, "Составление документов для регистрации/банкротства ЮЛ"),
@@ -19,23 +19,26 @@ namespace OnlineShopWebApp.Models
             new Product("Анализ документов и договоров", 3000, "Правовая экспертиза документов и договоров"),
         };
 
-        public static string ShowProducts()
+        public static List<ProductJson> GetAll()
         {
             string currentFile = @"Models\Products.json";
+            if (File.Exists(currentFile))
+                File.Delete(currentFile);
+
             if (!File.Exists(currentFile))
             {
                 string json3 = JsonConvert.SerializeObject(products, Formatting.Indented);
                 File.WriteAllText(@"Models\Products.json", json3);
             }
 
-            List<Product> productsJson = DeserializeJsonProducts();
+            List<ProductJson> productsJson = DeserializeJsonProducts();
 
-            string output = string.Empty;
-            foreach (var product in productsJson)
-            {
-                output += $"{product.Id}\n{product.Cost}\n{product.Description}\n\n";
-            }
-            return output;
+            //string output = string.Empty;
+            //foreach (var product in productsJson)
+            //{
+            //    output += $"{product.Id}\n{product.Cost}\n{product.Description}\n\n";
+            //}
+            return productsJson;
         }
 
         /// <summary>
@@ -43,9 +46,9 @@ namespace OnlineShopWebApp.Models
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        public static Product TryGetProduct (int id)
+        public static ProductJson TryGetProduct (int id)
         {
-            List<Product> productsJson = DeserializeJsonProducts();
+            List<ProductJson> productsJson = DeserializeJsonProducts();
 
             return productsJson.FirstOrDefault(x => x.Id == id);
         }
@@ -89,14 +92,14 @@ namespace OnlineShopWebApp.Models
         /// Десериализация из Json
         /// </summary>
         /// <returns></returns>
-        public static List<Product> DeserializeJsonProducts()
+        public static List<ProductJson> DeserializeJsonProducts()
         {
             string currentFile = @"Models\Products.json";
 
             var strFromReq = new StreamReader(currentFile).ReadToEnd();
             var obj = JsonConvert.DeserializeObject(strFromReq).ToString();
 
-            List<Product> productsJson = JsonConvert.DeserializeObject<List<Product>>(obj);
+            List<ProductJson> productsJson = JsonConvert.DeserializeObject<List<ProductJson>>(obj);
 
             if (IsValidJson(obj))
             {

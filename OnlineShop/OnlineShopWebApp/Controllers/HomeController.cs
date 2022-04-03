@@ -11,16 +11,19 @@ namespace OnlineShopWebApp.Controllers
         {
             storageProducts = new StorageProducts();
         }
-        public string Index()
+        public IActionResult Index()
         {
-            var products = StorageProducts.ShowProducts();
-            var result = string.Empty;
+            var products = StorageProducts.GetAll();
+            //var result = string.Empty;
 
-            foreach (var product in products)
-            {
-                result += product + "\n\n";
-            }
-            return result;
+            //foreach (var product in products)
+            //{
+            //    result += product;
+            //}
+            //ViewBag.Products = result; //записать в свойстве
+            //ViewData["Products"] = result; //по ключу
+            //TempData["Products"] = result; //по ключу
+            return View((object)products);
         }
 
         public IActionResult Privacy() 

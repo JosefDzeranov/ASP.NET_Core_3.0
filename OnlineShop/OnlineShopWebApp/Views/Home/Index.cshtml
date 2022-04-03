@@ -1,5 +1,36 @@
-﻿@{
+﻿@model List<ProductJson>
+
+@{
     ViewData["Title"] = "Home Page";
+}
+
+@if (Model == null)
+{
+    <div class="404">
+        <h2 align="center">Страница не найдена</h2>
+        <img class="card-img-top" src="/images/404.jpg" />
+        <h2 align="center">Такой услуги нет в списке, введите корректное значение 1-5</h2>
+    </div>
+}
+else
+{
+    <div class="row">
+        @foreach (var product in Model)
+        {
+            <div class="col-4 card-body shadow">
+                <img class="card-img-top" src="/images/justice-2060093.jpg" />
+                <div class="card-body">
+                    <a style="color:black" href="/product/index/@product.Id">
+                    <h4>@product.Name</h4>
+                    </a>
+                    <h5>Цена: @product.Cost рублей</h5>
+                    <p>@product.Description</p>
+                    <a class="btn btn-light" href="https://localhost:5001/home/index" width="20px" role="button">Продолжить покупки</a>
+                    <a class="btn btn-light" href="#" width="20px" role="button">Добавить в корзину</a>
+                </div>
+            </div>
+        }
+    </div>
 }
 
 <div class="text-center">

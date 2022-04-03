@@ -1,21 +1,18 @@
 ﻿namespace OnlineShopWebApp.Models
 {
-    public class Product
+    public class ProductJson
     {
-        private static int instanceCounter = 0;
         public int Id { get; }
         public string Name { get; }
         public decimal Cost { get; }
         public string Description { get; }
 
-        public Product(string name, decimal cost, string description)
+        public ProductJson(int id, string name, decimal cost, string description)
         {
-            Id = instanceCounter;
+            Id = id;
             Name = name;
             Cost = cost;
             Description = description;
-
-            instanceCounter += 1;
         }
 
         public override string ToString()
