@@ -1,11 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
 using OnlineShopWebApp.Models;
-using System;
-using System.Collections.Generic;
 using System.Diagnostics;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace OnlineShopWebApp.Controllers
 {
@@ -18,7 +13,7 @@ namespace OnlineShopWebApp.Controllers
             productReposititory = new ProductReposititory();
         }
 
-        public IActionResult Index()
+        public IActionResult HomeProducts()
         {
             var products = productReposititory.GetAll();
             return View(products);
