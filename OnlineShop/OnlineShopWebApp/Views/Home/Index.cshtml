@@ -5,14 +5,41 @@
 }
 
 
-@foreach (var product in Model)
-{
-    @product.ToString()
-}
 
 
 
-<div class="text-center">
+<div class="row">
+    @foreach (var product in Model)
+    {
+
+        <div class="col card shadow">
+            <img class="card-img-top" src="https://cdnn1.img.sputniknews-uz.com/img/07e5/0a/13/20963736_0:100:1921:1180_1920x0_80_0_0_929d0b965b3dabf775b39cd28895d319.jpg">
+         
+            <div class="card-body">
+                <a style="color:black" href="/product/index/@product.Id">
+                    <h5>@product.Name</h5>
+                </a>
+                <h5>@product.Cost rub.</h5>
+                <a class="btn btn-dark" href="#" role="button">добавить в корзину</a>
+            </div>
+
+        </div>
+
+    }
+
+</div>
+
+
+
+
+
+
+
+<!--
+    <div class="text-center">
     <h1 class="display-4">Welcome</h1>
     <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
 </div>
+-->
+
+
