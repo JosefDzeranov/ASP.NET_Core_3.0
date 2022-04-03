@@ -26,7 +26,7 @@ namespace OnlineShopWebApp.Models
         /// получить описание товара
         /// </summary>
         /// <returns></returns>
-        public static Product ShowProducts()
+        public static string ShowProducts()
         {
             string currentFile = @"Models\Products.json";
             if (!File.Exists(currentFile))
@@ -35,7 +35,15 @@ namespace OnlineShopWebApp.Models
                 string json3 = JsonConvert.SerializeObject(products, Formatting.Indented);
                 File.WriteAllText(@"Models\Products.json", json3);
             }
-            return DeserializeJsonProducts();
+
+            List<Product> productsJson = DeserializeJsonProducts();
+
+            string output = string.Empty;
+            foreach (var product in productsJson)
+            {
+                output += $"{product.Id}\n{product.Cost}\n{product.Description}\n\n";
+            }
+            return output;
         }
         /// <summary>
         /// получить товар
@@ -44,7 +52,8 @@ namespace OnlineShopWebApp.Models
         /// <returns></returns>
         public static Product TryGetProduct(int id)
         {
-            return DeserializeJsonProducts();
+            List<Product> productsJson = DeserializeJsonProducts();
+            return productsJson.FirstOrDefault(x => x.Id == id);
         }
         /// <summary>
         /// Валидация JSON файла
@@ -81,7 +90,7 @@ namespace OnlineShopWebApp.Models
             }
         }
 
-        public static Product DeserializeJsonProducts()
+        public static List<Product> DeserializeJsonProducts()
         {
             string currentFile = @"Models\Products.json";
 
@@ -92,7 +101,7 @@ namespace OnlineShopWebApp.Models
 
             if (IsValidJson(obj))
             {
-                return null;//productsJson;
+                return productsJson;
             }
             else
                 return null;

@@ -11,7 +11,7 @@ namespace OnlineShopWebApp.Controllers
             if (StorageProducts.ShowProducts() == null)
                 return "Такой услуги нет в списке, введите корректное значение 1-5";
             else
-                return StorageProducts.ShowProducts().ToString();
+                return StorageProducts.ShowProducts();
         }
     }
 }
