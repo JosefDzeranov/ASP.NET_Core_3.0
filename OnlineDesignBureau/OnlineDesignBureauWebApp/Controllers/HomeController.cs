@@ -4,14 +4,14 @@ namespace OnlineDesignBureauWebApp.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly ProductCatalog _productCatalog;
+        private readonly ProductCatalog productCatalog;
         public HomeController()
         {
-            _productCatalog = new ProductCatalog();
+            productCatalog = new ProductCatalog();
         }
         public string Index()
         {
-            return _productCatalog.ReadDataProducts();
+            return productCatalog.ReadDataProducts();
         }
     }
 }

@@ -5,17 +5,17 @@ using Newtonsoft.Json;
 
 namespace OnlineDesignBureauWebApp
 {
-    internal class ProductCatalog
+    public class ProductCatalog
     {
-        private static List<Product> Products = new List<Product>();
-        private static List<int> IdProducts = new List<int>();
+        private static List<Product> products = new List<Product>();
+        private static List<int> productsId = new List<int>();
         public List<Product> GetProducts()
         {
-            return Products;
+            return products;
         }
         public void ReadToJson(string nameFile)
         {
-            Products.Clear();
+            products.Clear();
             JsonTextReader reader = new JsonTextReader(new StreamReader($"{nameFile}.json"));
             reader.SupportMultipleContent = true; //для поддержки чтения нескольких фрагментов содержимого JSON
             while (true)
@@ -23,10 +23,10 @@ namespace OnlineDesignBureauWebApp
                 if (!reader.Read()) break;
                 JsonSerializer serializer = new JsonSerializer();
                 Product temp_point = serializer.Deserialize<Product>(reader);
-                Products.Add(temp_point);
+                products.Add(temp_point);
             }
             reader.Close();
-            ReadIdInCatalog(Products); // считываем все id в сохранении
+            ReadIdInCatalog(products); // считываем все id в сохранении
         }
 
         public string ReadDataProducts()
@@ -42,7 +42,7 @@ namespace OnlineDesignBureauWebApp
         }
         public string GetProduct(int id)
         {
-            foreach (var product in Products)
+            foreach (var product in products)
             {
                 if (product.Id == id)
                     return $"{product.Id}\n{product.Name}\n{product.Cost}\n";
@@ -53,7 +53,7 @@ namespace OnlineDesignBureauWebApp
         {
             foreach (var product in catalogProducts)
             {
-                IdProducts.Add(product.Id);
+                productsId.Add(product.Id);
             }
         }
     }
