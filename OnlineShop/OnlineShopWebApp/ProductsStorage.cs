@@ -19,18 +19,16 @@ namespace OnlineShopWebApp.Models
             new Product("Анализ документов и договоров", 3000, "Правовая экспертиза документов и договоров"),
         };
 
-        public static List<ProductJson> GetAll()
+        public static List<Product> GetAll()
         {
             string currentFile = @"Models\Products.json";
-            if (File.Exists(currentFile))
-                File.Delete(currentFile);
 
             if (!File.Exists(currentFile))
             {
                 string json3 = JsonConvert.SerializeObject(products, Formatting.Indented);
                 File.WriteAllText(@"Models\Products.json", json3);
             }
-            List<ProductJson> productsJson;
+            List<Product> productsJson;
 
             try
             {
@@ -44,9 +42,9 @@ namespace OnlineShopWebApp.Models
             return productsJson;
         }
 
-        public static ProductJson TryGetProduct (int id)
+        public static Product TryGetProduct (int id)
         {
-            List<ProductJson> productsJson;
+            List<Product> productsJson;
 
             try
             {
@@ -60,13 +58,13 @@ namespace OnlineShopWebApp.Models
             return productsJson.FirstOrDefault(x => x.Id == id);
         }
 
-        public static List<ProductJson> DeserializeJsonProducts()
+        public static List<Product> DeserializeJsonProducts()
         {
             string currentFile = @"Models\Products.json";
 
             var strFromReq = new StreamReader(currentFile).ReadToEnd();
 
-            List<ProductJson> productsJson = JsonConvert.DeserializeObject<List<ProductJson>>(strFromReq);
+            List<Product> productsJson = JsonConvert.DeserializeObject<List<Product>>(strFromReq);
 
             return productsJson;
         }
