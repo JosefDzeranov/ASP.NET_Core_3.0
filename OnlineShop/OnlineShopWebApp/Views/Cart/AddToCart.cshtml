@@ -1,0 +1,15 @@
+﻿@model List<Product>
+@if(Model == null)
+{
+  <p>"Корзина пуста!!!"</p>
+    
+}
+else
+{
+    
+        @foreach(var product in Model)
+        {
+          <h1>@product.Name</h1>
+        }
+    
+}

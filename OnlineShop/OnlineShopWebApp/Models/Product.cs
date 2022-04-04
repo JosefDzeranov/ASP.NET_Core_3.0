@@ -6,6 +6,7 @@
         public string Name { get; set; }
         public int Cost { get; set; }
         public string Description { get; set; }
+        public int Number { get; set; }
 
         public Product(int id, string name, int cost, string description)
         {

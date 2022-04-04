@@ -1,9 +1,11 @@
 ﻿@model List<Product>
 
+ 
+
 @{
     ViewData["Title"] = "Home Page";
+    
 }
-
 
 
 
@@ -20,7 +22,7 @@
                     <h5>@product.Name</h5>
                 </a>
                 <h5>@product.Cost rub.</h5>
-                <a class="btn btn-dark" href="#" role="button">добавить в корзину</a>
+                <a class="btn btn-dark" href="/cart/addtocart/@product.Id/" role="button">добавить в корзину</a>
             </div>
 
         </div>
@@ -30,16 +32,5 @@
 </div>
 
 
-
-
-
-
-
-<!--
-    <div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
-</div>
--->
 
 

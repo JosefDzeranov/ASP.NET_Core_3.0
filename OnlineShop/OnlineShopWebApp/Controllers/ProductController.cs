@@ -10,15 +10,8 @@ namespace OnlineShopWebApp.Controllers
         {
             var foundProduct = ProductManager.FindProduct(id);
             return View(foundProduct);
-            
-            //if (foundProduct != null)
-            //{
-            //    return $"{foundProduct.Id}\n{foundProduct.Name}\n{foundProduct.Cost}\n{foundProduct.Description}";
-            //}
-            //else
-            //{
-            //    return $"Продукта с Id {id} не существует";
-            //}
+
+
         }
 
 
