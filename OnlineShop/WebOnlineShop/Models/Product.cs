@@ -2,10 +2,21 @@
 {
     public class Product
     {
-        public int Id { get; set; }
-        public string Name { get; set; }
-        public decimal Cost { get; set; }
-        public string Description { get; set; }
+        private int instanceCounter = 1;
+        public int Id { get; }
+        public string Name { get; }
+        public decimal Cost { get; }
+        public string Description { get; }
+
+        public Product(string name, decimal cost, string descripton)
+        {
+            Id = instanceCounter;
+            Name = name;
+            Cost = cost;
+            Description = descripton;
+
+            instanceCounter += 1;
+        }
 
     }
 }
