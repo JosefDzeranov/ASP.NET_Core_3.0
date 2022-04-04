@@ -9,7 +9,7 @@ namespace OnlineShopWebApp.Controllers
         public string Index()
         {
             if (StorageProducts.ShowProducts() == null)
-                return "Такой услуги нет в списке, введите корректное значение 1-5";
+                return "Возникла проблема в списке не оказалось услуг.";
             else
                 return StorageProducts.ShowProducts();
         }

@@ -22,10 +22,7 @@ namespace OnlineShopWebApp.Models
             new Product(5, "Анализ документов и договоров", 3000, "Услуга позволяет провести правовую экспертизу документов и договоров"),
         };
 
-        /// <summary>
-        /// получить описание товара
-        /// </summary>
-        /// <returns></returns>
+
         public static string ShowProducts()
         {
             string currentFile = @"Models\Products.json";
@@ -36,7 +33,7 @@ namespace OnlineShopWebApp.Models
                 File.WriteAllText(@"Models\Products.json", json3);
             }
 
-            List<Product> productsJson = DeserializeJsonProducts();
+            List<Product> productsJson = DeserializeProducts();
 
             string output = string.Empty;
             foreach (var product in productsJson)
@@ -45,66 +42,33 @@ namespace OnlineShopWebApp.Models
             }
             return output;
         }
-        /// <summary>
-        /// получить товар
-        /// </summary>
-        /// <param name="id"></param>
-        /// <returns></returns>
+
         public static Product TryGetProduct(int id)
         {
-            List<Product> productsJson = DeserializeJsonProducts();
+            List<Product> productsJson;
+
+            try
+            {
+                productsJson = DeserializeProducts();
+            }
+            catch (Exception)
+            {
+                return null;
+            }
+
             return productsJson.FirstOrDefault(x => x.Id == id);
         }
-        /// <summary>
-        /// Валидация JSON файла
-        /// </summary>
-        /// <param name="strInput"></param>
-        /// <returns></returns>
-        private static bool IsValidJson(string strInput)
-        {
-            if (string.IsNullOrWhiteSpace(strInput)) 
-            { 
-                return false; 
-            }
-            strInput = strInput.Trim();
-            
-            if ((strInput.StartsWith("{") && strInput.EndsWith("}")) /*For object */ || (strInput.StartsWith("[") && strInput.EndsWith("]"))) /*For array*/
-            {
-                try
-                {
-                    var obj = JToken.Parse(strInput);
-                    return true;
-                }
-                catch (JsonReaderException)
-                {
-                    return false;
-                }
-                catch (Exception)
-                {
-                    return false;
-                }
-            }
-            else
-            {
-                return false;
-            }
-        }
 
-        public static List<Product> DeserializeJsonProducts()
+        public static List<Product> DeserializeProducts()
         {
             string currentFile = @"Models\Products.json";
 
             var strFromReq = new StreamReader(currentFile).ReadToEnd();
-            var obj = JsonConvert.DeserializeObject(strFromReq).ToString();
+            var obj = JsonConvert.DeserializeObject(strFromReq);
 
-            List<Product> productsJson = JsonConvert.DeserializeObject<List<Product>>(obj);
+            List<Product> productsJson = JsonConvert.DeserializeObject<List<Product>>((string)obj);
 
-            if (IsValidJson(obj))
-            {
-                return productsJson;
-            }
-            else
-                return null;
+            return productsJson;
         }
     }
 }
