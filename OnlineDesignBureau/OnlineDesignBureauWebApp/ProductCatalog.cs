@@ -28,6 +28,18 @@ namespace OnlineDesignBureauWebApp
             reader.Close();
             ReadIdInCatalog(Products); // считываем все id в сохранении
         }
+
+        public string ReadDataProducts()
+        {
+            if (GetProducts().Count == 0)
+                ReadToJson("projects_for_sale");
+            var result = "";
+            foreach (var product in GetProducts())
+            {
+                result += product + "\n\n";
+            }
+            return result;
+        }
         public string GetProduct(int id)
         {
             foreach (var product in Products)

@@ -13,15 +13,6 @@ namespace OnlineDesignBureauWebApp.Controllers
         {
             return productCatalog.GetProduct(id);
         }
-        public string ReadFile()
-        {
-            productCatalog.ReadToJson("projects_for_sale");
-            var result = "";
-            foreach (var product in productCatalog.GetProducts())
-            {
-                result += product + "\n\n";
-            }
-            return result;
-        }
+
     }
 }
