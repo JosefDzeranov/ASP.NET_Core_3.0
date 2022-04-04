@@ -5,7 +5,24 @@
     ViewData["Title"] = "Product Page";
 }
 
-@foreach (Product p in Model)
-{
-    <p>@p.Id<br />@p.Name<br />@p.Cost руб.<br />@p.Description</p> 
-}
+<div class="row">
+    @foreach (var product in Model)
+    {
+        <div class="col-9">
+            <img class="card-img-top" src="/img/Teide-001.jpg">
+            <div class="card body">
+                <a style="color: black" href="/product/index/@product.Id"><h5>@product.Name</h5></a>
+                <h5>@product.Cost руб.</h5>
+                <p>@product.Description</p>
+                <div class="row">
+                    <div class="col-3">
+                    <a class="btn btn-dark" href="#" role="button">Добавить в корзину</a>
+                        </div>
+                        <div class="col-3">
+                    <a class="btn btn-dark" href="/" role="button">Назад</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+</div>
