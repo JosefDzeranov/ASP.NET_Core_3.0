@@ -13,7 +13,7 @@ namespace OnlineShopWebApp.Controllers
         public IActionResult AddToCart(int id)
         {
             var foundProduct = ProductManager.FindProduct(id);
-            foundProduct.Number++;
+            
             Cart.AddProductToCart(foundProduct);
 
             return View("Index", Cart.addedProducts);

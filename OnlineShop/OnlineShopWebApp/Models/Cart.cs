@@ -8,8 +8,20 @@ namespace OnlineShopWebApp.Models
 
         public static void AddProductToCart(Product product)
         {
-            if (product != null)
+            if (addedProducts.Contains(product))
             {
+              
+                foreach (var item in addedProducts)
+                {
+                    if (item == product)
+                    {
+                        item.Number++;
+                    }
+                }
+            }
+            else
+            {
+                product.Number++;
                 addedProducts.Add(product);
             }
            
