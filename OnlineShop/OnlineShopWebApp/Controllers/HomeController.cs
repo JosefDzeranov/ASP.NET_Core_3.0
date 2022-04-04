@@ -38,7 +38,9 @@ namespace OnlineShopWebApp.Controllers
 
             var result = string.Join("\r\n", products);
          
-            return Ok(result);
+           // return Ok(result);
+           
+           return View(products);
         }
     }
 }
