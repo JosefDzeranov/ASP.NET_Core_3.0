@@ -13,5 +13,5 @@ namespace OnlineShopWebApp.Controllers
             else
                 return StorageProducts.ShowProducts();
         }
-    }
+    } 
 }
