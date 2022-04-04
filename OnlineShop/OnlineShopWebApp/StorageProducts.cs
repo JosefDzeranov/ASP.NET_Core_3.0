@@ -28,7 +28,6 @@ namespace OnlineShopWebApp.Models
             string currentFile = @"Models\Products.json";
             if (!File.Exists(currentFile))
             {
-                //string json2 = JsonSerializer.Serialize(products); -- данная библиотека не очень красиво форматирует
                 string json3 = JsonConvert.SerializeObject(products, Formatting.Indented);
                 File.WriteAllText(@"Models\Products.json", json3);
             }
@@ -73,7 +72,6 @@ namespace OnlineShopWebApp.Models
             string currentFile = @"Models\Products.json";
 
             var strFromReq = new StreamReader(currentFile).ReadToEnd();
-            //var obj = JsonConvert.DeserializeObject(strFromReq);
 
             List<Product> productsJson = JsonConvert.DeserializeObject<List<Product>>(strFromReq);
 
