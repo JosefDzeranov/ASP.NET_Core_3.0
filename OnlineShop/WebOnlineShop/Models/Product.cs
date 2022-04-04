@@ -2,7 +2,7 @@
 {
     public class Product
     {
-        private int instanceCounter = 1;
+        private static int instanceCounter = 1;
         public int Id { get; }
         public string Name { get; }
         public decimal Cost { get; }
@@ -18,5 +18,9 @@
             instanceCounter += 1;
         }
 
+        public override string ToString()
+        {
+            return $"{Id}\n{Name}\n{Cost}";
+        }
     }
 }
