@@ -33,8 +33,17 @@ namespace OnlineShopWebApp.Models
                 File.WriteAllText(@"Models\Products.json", json3);
             }
 
-            List<Product> productsJson = DeserializeProducts();
+            List<Product> productsJson;
 
+            try
+            {
+                productsJson = DeserializeProducts();
+            }
+            catch (Exception)
+            {
+                return null;
+            }
+            
             string output = string.Empty;
             foreach (var product in productsJson)
             {
@@ -64,9 +73,9 @@ namespace OnlineShopWebApp.Models
             string currentFile = @"Models\Products.json";
 
             var strFromReq = new StreamReader(currentFile).ReadToEnd();
-            var obj = JsonConvert.DeserializeObject(strFromReq);
+            //var obj = JsonConvert.DeserializeObject(strFromReq);
 
-            List<Product> productsJson = JsonConvert.DeserializeObject<List<Product>>((string)obj);
+            List<Product> productsJson = JsonConvert.DeserializeObject<List<Product>>(strFromReq);
 
             return productsJson;
         }
