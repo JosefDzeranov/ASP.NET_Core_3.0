@@ -1,7 +1,7 @@
 ﻿namespace OnlineShopWebApp.Models
 {
     public class ProductJson
-    {
+    { 
         public int Id { get; }
         public string Name { get; }
         public decimal Cost { get; }
