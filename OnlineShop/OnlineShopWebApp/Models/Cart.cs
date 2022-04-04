@@ -8,6 +8,8 @@ namespace OnlineShopWebApp.Models
 
         public static void AddProductToCart(Product product)
         {
+           
+
             if (addedProducts.Contains(product))
             {
               
@@ -16,8 +18,11 @@ namespace OnlineShopWebApp.Models
                     if (item == product)
                     {
                         item.Number++;
+                        item.TotalCost += item.Cost;
+                        
                     }
                 }
+                
             }
             else
             {
