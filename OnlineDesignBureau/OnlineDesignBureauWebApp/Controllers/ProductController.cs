@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using System;
 
 namespace OnlineDesignBureauWebApp.Controllers
 {
@@ -11,13 +12,13 @@ namespace OnlineDesignBureauWebApp.Controllers
         }
         public string Index(int id)
         {
-            return productCatalog.GetProduct(id);
+            var product = Convert.ToString(ProductCatalog.products[id]);
+            return product;
         }
         public string Save(string name)
         {
             
             return productCatalog.WriteToJson(name);
         }
-
     }
 }
