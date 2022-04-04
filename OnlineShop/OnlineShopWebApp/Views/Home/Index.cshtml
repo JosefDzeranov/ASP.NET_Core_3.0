@@ -4,26 +4,27 @@
     ViewData["Title"] = "Home Page";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+
+<div class="row">
+
+    @foreach (var product in Model)
+    {
+        <div class="col-3 card shadow">
+            <div class="card-body">
+                <div class="row">
+                    <div class="col">@product.Id</div>
+                </div>
+                <div class="row">
+                    <div class="col">@product.Name</div>
+                </div>
+                <div class="row">
+                    <div class="col">@product.Cost</div>
+                </div>
+            </div>
+        </div>
+    }
 
 
-    <table class="table table-bordered table-striped" style="width:100%">
-  <tr>
-    <tr>
-    <th>Id</th>
-    <th>Наименование товара</th>
-    <th>Стоимость, руб.</th>
-  </tr>
-                @foreach (var product in Model)
-                {
-                    <tr>
-                        <td>@product.Id</td> 
-                        <td>@product.Name</td>
-                        <td>@product.Cost</td> 
-                    </tr>
-                }
-            
-        </table>
 </div>
+
+
