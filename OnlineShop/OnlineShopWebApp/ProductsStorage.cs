@@ -7,7 +7,7 @@ using Newtonsoft.Json.Linq;
 
 namespace OnlineShopWebApp.Models
 {
-    public class StorageProducts
+    public class ProductsStorage
     {
 
         private static readonly List<Product> products = new List<Product>()
@@ -30,83 +30,45 @@ namespace OnlineShopWebApp.Models
                 string json3 = JsonConvert.SerializeObject(products, Formatting.Indented);
                 File.WriteAllText(@"Models\Products.json", json3);
             }
+            List<ProductJson> productsJson;
 
-            List<ProductJson> productsJson = DeserializeJsonProducts();
+            try
+            {
+                productsJson = DeserializeJsonProducts();
+            }
+            catch (Exception)
+            {
+                return null;
+            }
 
-            //string output = string.Empty;
-            //foreach (var product in productsJson)
-            //{
-            //    output += $"{product.Id}\n{product.Cost}\n{product.Description}\n\n";
-            //}
             return productsJson;
         }
 
-        /// <summary>
-        /// получить товар
-        /// </summary>
-        /// <param name="id"></param>
-        /// <returns></returns>
         public static ProductJson TryGetProduct (int id)
         {
-            List<ProductJson> productsJson = DeserializeJsonProducts();
+            List<ProductJson> productsJson;
+
+            try
+            {
+                productsJson = DeserializeJsonProducts();
+            }
+            catch (Exception) 
+            { 
+                return null; 
+            }
 
             return productsJson.FirstOrDefault(x => x.Id == id);
         }
 
-        /// <summary>
-        /// Валидация JSON файла
-        /// </summary>
-        /// <param name="strInput"></param>
-        /// <returns></returns>
-        private static bool IsValidJson(string strInput)
-        {
-            if (string.IsNullOrWhiteSpace(strInput))
-            {
-                return false;
-            }
-            strInput = strInput.Trim();
-
-            if ((strInput.StartsWith("{") && strInput.EndsWith("}")) /*For object */ || (strInput.StartsWith("[") && strInput.EndsWith("]"))) /*For array*/
-            {
-                try
-                {
-                    var obj = JToken.Parse(strInput);
-                    return true;
-                }
-                catch (JsonReaderException)
-                {
-                    return false;
-                }
-                catch (Exception)
-                {
-                    return false;
-                }
-            }
-            else
-            {
-                return false;
-            }
-        }
-
-        /// <summary>
-        /// Десериализация из Json
-        /// </summary>
-        /// <returns></returns>
         public static List<ProductJson> DeserializeJsonProducts()
         {
             string currentFile = @"Models\Products.json";
 
             var strFromReq = new StreamReader(currentFile).ReadToEnd();
-            var obj = JsonConvert.DeserializeObject(strFromReq).ToString();
 
-            List<ProductJson> productsJson = JsonConvert.DeserializeObject<List<ProductJson>>(obj);
+            List<ProductJson> productsJson = JsonConvert.DeserializeObject<List<ProductJson>>(strFromReq);
 
-            if (IsValidJson(obj))
-            {
-                return productsJson;
-            }
-            else
-                return null;
+            return productsJson;
         }
 
     }
