@@ -3,26 +3,62 @@
     ViewData["Title"] = "Prodcut";
 }
 
-    <img src="@Model.ImgPath" alt = "изображение книги" />
-         <table class="table table-bordered table-striped" style="width:100%">
-  <tr>
+@*<img src="@Model.ImgPath" alt="изображение книги" />
+    <table class="table table-bordered table-striped" style="width:100%">
+    <tr>
     <tr>
     <th>Id</th>
     <th>Наименование товара</th>
     <th>Стоимость, руб.</th>
     <th>Описание</th>
-  </tr>
-               
-                    <tr>
-                        <td>@Model.Id</td> 
-                        <td>@Model.Name</td>
-                        <td>@Model.Cost</td>
-                         <td>@Model.Description</td>
-                    </tr>
-               
-            
-        </table>
-    
-  
-   
+    </tr>
+
+    <tr>
+    <td>@Model.Id</td>
+    <td>@Model.Name</td>
+    <td>@Model.Cost</td>
+    <td>@Model.Description</td>
+    </tr>
+
+
+    </table>*@
+
+
+<div class="card shadow">
+    <div class="card-body">
+        <div class="row">
+            <div class="col">
+                <img src="@Model.ImgPath" width="200" height="200" alt="изображение книги" />
+            </div>
+            <div class="col">
+                <div class="row">
+                    @Model.Id
+                </div>
+                <div class="row">
+                    @Model.Name
+                </div>
+                <div class="row">
+                    @Model.Cost
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col">
+            @Model.Description
+        </div>
+    </div>
+    <div class="row">
+        <div class="col">
+            <a href="#" class="btn btn-dark">Добавить в корзину</a>
+        </div>
+        <div class="col">
+            <a href="/" class="btn btn-dark">Продолжить покупки</a>
+        </div>
+
+    </div>
+</div>
+
+
 
