@@ -8,7 +8,7 @@ namespace OnlineDesignBureauWebApp
     public class ProductCatalog
     {
         private static List<Product> products = new List<Product>();
-        private static List<int> productsId = new List<int>();
+        private static List<int> productsIds = new List<int>();
         public List<Product> GetProducts()
         {
             return products;
@@ -53,7 +53,7 @@ namespace OnlineDesignBureauWebApp
         {
             foreach (var product in catalogProducts)
             {
-                productsId.Add(product.Id);
+                productsIds.Add(product.Id);
             }
         }
     }
