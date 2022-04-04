@@ -7,12 +7,13 @@
         public string Name { get; set; }
         public decimal Cost { get; set; }
         public string Description { get; set; }
-
-        public Product(int id, string name, decimal cost)
+        public string ImgPath { get; set; }
+        public Product(int id, string name, decimal cost, string imgPath)
         {
             this.Id = id;
             this.Name = name;
             this.Cost = cost;
+            this.ImgPath = imgPath;
            
         }
         
