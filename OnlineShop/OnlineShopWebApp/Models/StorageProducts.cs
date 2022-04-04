@@ -17,7 +17,7 @@ namespace OnlineShopWebApp.Models
 
         //получить описание товара
         public static string ShowProducts()
-        {
+        { 
             string output = string.Empty;
             foreach (var product in products)
             {
