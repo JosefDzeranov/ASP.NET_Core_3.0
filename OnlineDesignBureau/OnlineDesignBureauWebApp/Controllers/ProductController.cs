@@ -13,6 +13,11 @@ namespace OnlineDesignBureauWebApp.Controllers
         {
             return productCatalog.GetProduct(id);
         }
+        public string Save(string name)
+        {
+            
+            return productCatalog.WriteToJson(name);
+        }
 
     }
 }

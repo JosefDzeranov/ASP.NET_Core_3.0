@@ -13,20 +13,18 @@ namespace OnlineDesignBureauWebApp
         {
             return products;
         }
+        public string WriteToJson(string nameFile)
+        {
+            string json = JsonConvert.SerializeObject(products, Formatting.Indented);
+            File.WriteAllText($"{nameFile}.json", json);
+            return json;
+        }
         public void ReadToJson(string nameFile)
         {
             products.Clear();
-            JsonTextReader reader = new JsonTextReader(new StreamReader($"{nameFile}.json"));
-            reader.SupportMultipleContent = true; //для поддержки чтения нескольких фрагментов содержимого JSON
-            while (true)
-            {
-                if (!reader.Read()) break;
-                JsonSerializer serializer = new JsonSerializer();
-                Product temp_point = serializer.Deserialize<Product>(reader);
-                products.Add(temp_point);
-            }
-            reader.Close();
-            ReadIdInCatalog(products); // считываем все id в сохранении
+            string json = File.ReadAllText($"{nameFile}.json");
+            products = JsonConvert.DeserializeObject<List<Product>>(json);
+            ReadIdInCatalog(products); 
         }
 
         public string ReadDataProducts()
