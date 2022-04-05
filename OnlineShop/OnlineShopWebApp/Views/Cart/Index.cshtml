@@ -15,7 +15,6 @@ else
         </tr>
 
 
-
         @foreach (var product in Model)
         {
             <tr>
@@ -24,10 +23,14 @@ else
                 <td>@product.TotalCost</td>
 
             </tr>
-            <tr>
-                <td>Сумма корзины:</td>
-                <td>@Cart.GetCartCost()</td>
-            </tr>
+
         }
+        <tr>
+            <td>Сумма корзины:</td>
+            <td>@Cart.GetCartCost()</td>
+        </tr>
     </table>
+    <p>
+        <a class="btn btn-dark" href="#" role="button">Оформить заказ</a>
+    </p>
 }
