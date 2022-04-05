@@ -1,5 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using OnlineShopWebApp.Models;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace OnlineShopWebApp.Controllers
 {
@@ -14,8 +16,12 @@ namespace OnlineShopWebApp.Controllers
         }
         public IActionResult Index(int id)
         {
-            var product = prodcutBase.TryGetById(id);
-            cart.AddToCart(product);
+            if (id != 0)
+            {
+                var product = prodcutBase.TryGetById(id);
+                cart.AddToCart(product);
+            }
+
             return View(cart.TryGetAll());
         }
     }

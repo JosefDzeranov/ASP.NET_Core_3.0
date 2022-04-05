@@ -8,7 +8,30 @@
 
 <h2>Корзина</h2>
 
-@if(Model!= null){
 
-    <div></div>
+    @if (Model != null){
+
+    <table class="table">
+       
+            <tr>
+                <th>Название</th>
+                <th>Цена</th>
+                <th>Количество</th>
+            </tr>
+       
+        @foreach( var product in Model)
+        {
+            <tr>
+                <td>@product.Name</td>
+                <td>@product.Cost</td>
+                <td></td>
+                
+            </tr>
+        }
+
+            
+            
+        
+    </table>
 }
+

@@ -4,12 +4,8 @@ namespace OnlineShopWebApp.Models
 {
     public class Cart
     {
-        public static List<Product> Products { get; set; }
+        public static List<Product> Products { get; set; } = new List<Product>();
 
-        public Cart()
-        {
-            Products = new List<Product>();
-        }
         public void AddToCart(Product product)
         {
             Products.Add(product);
