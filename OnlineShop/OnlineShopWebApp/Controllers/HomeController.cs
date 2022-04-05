@@ -1,11 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
 using OnlineShopWebApp.Models;
-using System;
-using System.Collections.Generic;
 using System.Diagnostics;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace OnlineShopWebApp.Controllers
 {
@@ -18,16 +13,17 @@ namespace OnlineShopWebApp.Controllers
             productReposititory = new ProductReposititory();
         }
 
-        public string Index()
+        public IActionResult Products()
         {
             var products = productReposititory.GetAll();
-            var result = String.Empty;
-            foreach (var product in products)
-            {
-                result += product + "\n\n";
-            }
+            return View(products);
+            /// <summary>
+            /// Use them to pass only constants and small data.
+            /// ViewBag.Product = result;
+            /// ViewData["Products"] = result;
+            /// TempData["Products"] = result;
+            /// </summary>
 
-            return result;
         }
 
        
