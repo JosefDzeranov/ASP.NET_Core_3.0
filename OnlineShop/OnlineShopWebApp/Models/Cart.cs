@@ -36,5 +36,17 @@ namespace OnlineShopWebApp.Models
         {
             return addedProducts;
         }
+
+        public static decimal GetCartCost()
+        {
+            decimal cartCost = 0;
+
+            foreach (var product in addedProducts)
+            {
+                cartCost += product.TotalCost;
+            }
+
+            return cartCost;
+        }
     }
 }

@@ -22,12 +22,12 @@ else
                 <td>@product.Name</td>
                 <td>@product.Number</td>
                 <td>@product.TotalCost</td>
+
             </tr>
-
-
-
+            <tr>
+                <td>Сумма корзины:</td>
+                <td>@Cart.GetCartCost()</td>
+            </tr>
         }
-
-
     </table>
 }
