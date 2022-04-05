@@ -14,19 +14,8 @@
             Name = name;
             Cost = cost;
             Description = description;
-
-            //instanceCounter += 1;
         }
 
-        //public Product(string name, decimal cost, string description, bool type)
-        //{
-        //        Id = instanceCounter;
-        //        Name = name;
-        //        Cost = cost;
-        //        Description = description;
-
-        //        instanceCounter += 1;
-        //}
 
         public override string ToString()
         {

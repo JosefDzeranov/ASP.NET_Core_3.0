@@ -25,8 +25,8 @@ namespace OnlineShopWebApp.Models
 
             if (!File.Exists(currentFile))
             {
-                string json3 = JsonConvert.SerializeObject(products, Formatting.Indented);
-                File.WriteAllText(@"Models\Products.json", json3);
+                string obj = JsonConvert.SerializeObject(products, Formatting.Indented);
+                File.WriteAllText(@"Models\Products.json", obj);
             }
             List<Product> productsJson;
 
@@ -64,8 +64,6 @@ namespace OnlineShopWebApp.Models
 
             var strFromReq = new StreamReader(currentFile).ReadToEnd();
 
-            int id = 0;
-            _ = new List<Product>(id);
             List<Product> productsJson = JsonConvert.DeserializeObject<List<Product>>(strFromReq);
 
             return productsJson;
