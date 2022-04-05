@@ -3,20 +3,30 @@
     public class Product
     {
         private static int instanceCounter = 0;
-        public int Id { get; }
+        public int Id { get; set; }
         public string Name { get; }
         public decimal Cost { get; }
         public string Description { get; }
 
-        public Product(string name, decimal cost, string description)
+        public Product(int id,string name, decimal cost, string description)
         {
-            Id = instanceCounter;
+            Id = id;
             Name = name;
             Cost = cost;
             Description = description;
 
-            instanceCounter += 1;
+            //instanceCounter += 1;
         }
+
+        //public Product(string name, decimal cost, string description, bool type)
+        //{
+        //        Id = instanceCounter;
+        //        Name = name;
+        //        Cost = cost;
+        //        Description = description;
+
+        //        instanceCounter += 1;
+        //}
 
         public override string ToString()
         {
