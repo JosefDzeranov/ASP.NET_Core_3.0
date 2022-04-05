@@ -1,5 +1,5 @@
 ﻿@using OnlineShopWebApp.Models
-@model IEnumerable<Product>
+@model Product
 
 
 
@@ -11,16 +11,21 @@
     <h1 class="display-4">Welcome</h1>
     <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
 </div>
-@if (Model.Any())
+@if (Model != null)
 {
-        @foreach (Product p in Model)
-        {
+    <div class="col-6 card shadow-sm">
+            <img class="card-img-bottom" src="https://poshvu.ru/img/b/170418/paltovaya-tkan-zelenogo-cveta-2-69015.jpg.c.jpg">
 
-                <p>@p.Id</p>
-                <p>@p.Name</p>
-                <p>@p.Cost</p>
-                <p>@p.Description</p>
-        }
+            <div class="card-body">
+                <a style="color:green">
+                    <h5>@Model.Name</h5>
+                </a>
+                <h6>Цена за 1 м.п. @Model.Cost руб.</h6>
+                <h6>@Model.Description</h6>
+                <a class="btn btn-danger" href="#" role="button">Добавить в корзину</a>
+                <a class="btn btn-dark" href="https://localhost:5001/Home/index" role="button">Вернуться на главную страницу</a>
+            </div>
+        </div>
 }
 else
 {

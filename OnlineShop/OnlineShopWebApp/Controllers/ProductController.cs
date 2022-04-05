@@ -22,7 +22,7 @@ namespace OnlineShopWebApp.Controllers
 
         public IActionResult Index(int id)
         {
-            var products = ProductBase.AllProducts().Where(p => p.Id == id);
+            var products = ProductBase.AllProducts().FirstOrDefault(p => p.Id == id);
             return View(products);
         }
 
