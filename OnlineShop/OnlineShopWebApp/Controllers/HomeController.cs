@@ -11,17 +11,26 @@ namespace OnlineShopWebApp.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly ILogger<HomeController> _logger;
+        private readonly ProductReposititory productReposititory;
 
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController()
         {
-            _logger = logger;
+            productReposititory = new ProductReposititory();
         }
 
-        public IActionResult Index()
+        public string Index()
         {
-            return View();
+            var products = productReposititory.GetAll();
+            var result = String.Empty;
+            foreach (var product in products)
+            {
+                result += product + "\n\n";
+            }
+
+            return result;
         }
+
+       
 
         public IActionResult Privacy()
         {
