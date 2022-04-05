@@ -4,7 +4,7 @@ namespace OnlineShopWebApp.Models
 {
     public class Cart
     {
-        public List<Product> Products { get; set; }
+        public static List<Product> Products { get; set; }
 
         public Cart()
         {
