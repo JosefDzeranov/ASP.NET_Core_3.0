@@ -1,5 +1,12 @@
 ﻿@model List<Product>
 
+    <style>
+        table, th, td{
+            border: 1px solid black;
+        }
+        table {border-collapse:collapse;}
+    </style>
+
 @if (Model.Count == 0)
 {
     <h1>"Корзина пуста"</h1>
@@ -7,11 +14,12 @@
 }
 else
 {
+    <p><b>ВАША КОРЗИНА:</b></p>
     <table>
         <tr>
-        <thead> Наименование</thead>
-        <thead>Количество</thead>
-        <thead>Стоимость</thead>
+        <th> Наименование</th>
+        <th>Количество</th>
+        <th>Стоимость</th>
         </tr>
 
 
@@ -26,10 +34,13 @@ else
 
         }
         <tr>
-            <td>Сумма корзины:</td>
-            <td>@Cart.GetCartCost()</td>
+           
+            <td colspan="2"><b>Сумма корзины:</b></td>
+            <td><b>@Cart.GetCartCost()</b></td>
         </tr>
     </table>
+
+    <p></p>
     <p>
         <a class="btn btn-dark" href="#" role="button">Оформить заказ</a>
     </p>
