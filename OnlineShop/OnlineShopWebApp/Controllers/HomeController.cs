@@ -13,7 +13,7 @@ namespace OnlineShopWebApp.Controllers
             productReposititory = new ProductReposititory();
         }
 
-        public IActionResult HomeProducts()
+        public IActionResult Products()
         {
             var products = productReposititory.GetAll();
             return View(products);
