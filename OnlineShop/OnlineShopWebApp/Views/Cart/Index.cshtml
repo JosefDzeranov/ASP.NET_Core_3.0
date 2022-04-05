@@ -8,30 +8,39 @@
 
 <h2>Корзина</h2>
 
-
-    @if (Model != null){
+@if (Model.Count != 0)
+{
 
     <table class="table">
-       
-            <tr>
-                <th>Название</th>
-                <th>Цена</th>
-                <th>Количество</th>
-            </tr>
-       
-        @foreach( var product in Model)
+
+        <tr>
+            <th>Название</th>
+            <th>Цена</th>
+            <th>Количество</th>
+        </tr>
+
+        @foreach (var product in Model)
         {
             <tr>
                 <td>@product.Name</td>
                 <td>@product.Cost</td>
                 <td></td>
-                
+
             </tr>
         }
 
-            
-            
-        
     </table>
+
+    <div class="col">
+        <a href="#" class="btn btn-dark">Оформить заказ</a>
+    </div>
+
 }
 
+else
+{
+    <figure class="text-center">
+        <h3>В корзине нет товоров</h3>
+    </figure>
+
+}
