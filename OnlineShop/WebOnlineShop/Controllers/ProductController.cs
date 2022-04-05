@@ -12,7 +12,7 @@ namespace WebOnlineShop.Controllers
         }
         public string Index(int id)
         {
-            var product = productRepository.GetById(id);
+            var product = productRepository.TryGetById(id);
         }
     }
 }
