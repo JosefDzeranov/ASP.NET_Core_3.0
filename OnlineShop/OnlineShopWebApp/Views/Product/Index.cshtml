@@ -8,19 +8,19 @@
 <div class="row">
     @foreach (var product in Model)
     {
-        <div class="col-9">
-            <img class="card-img-top" src="/img/Teide-001.jpg">
-            <div class="card body">
-                <a style="color: black" href="/product/index/@product.Id"><h5>@product.Name</h5></a>
-                <h5>@product.Cost руб.</h5>
-                <p>@product.Description</p>
-                <div class="row">
-                    <div class="col-3">
-                    <a class="btn btn-dark" href="#" role="button">Добавить в корзину</a>
-                        </div>
-                        <div class="col-3">
-                    <a class="btn btn-dark" href="/" role="button">Назад</a>
-                    </div>
+        <div class="col col-md-7">
+            <img class="img-thumbnail" src="/img/teide.jpg" alt="Teide">
+        </div>
+        <div class="col-md-5 align-self-end">
+            <a style="color: black" href="/product/index/@product.Id"><h5>@product.Name</h5></a>
+            <h6>@product.Cost руб.</h6>
+            <p>@product.Description</p>
+            <div class="row justify-content-between">
+                <div class="col-auto mr-auto">
+                    <a class="btn btn-outline-dark btn-sm text-nowrap" href="#" role="button">Add to cart</a>
+                </div>
+                <div class="col-auto">
+                    <a class="btn btn-outline-dark btn-sm text-nowrap" href="/" role="button">Back</a>
                 </div>
             </div>
         </div>
