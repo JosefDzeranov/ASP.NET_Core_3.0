@@ -1,6 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
-using OnlineShopWebApp.DataSources;
 using OnlineShopWebApp.Models;
 using System;
 using System.Collections.Generic;
@@ -19,7 +18,11 @@ namespace OnlineShopWebApp.Controllers
             _logger = logger;
         }
 
-        
+        public IActionResult Index()
+        {
+            return View();
+        }
+
         public IActionResult Privacy()
         {
             return View();
@@ -29,16 +32,6 @@ namespace OnlineShopWebApp.Controllers
         public IActionResult Error()
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
-        }
-
-        public IActionResult Index ()
-        {
-            var productSource = new ProductDataSource();
-            var products = productSource.GetAllProducts();
-
-            var result = string.Join("\r\n", products);
-         
-            return Ok(result);
         }
     }
 }
