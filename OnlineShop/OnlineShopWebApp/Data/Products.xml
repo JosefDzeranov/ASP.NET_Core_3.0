@@ -1,30 +1,44 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <products>
 	<product id ="1">
-		<name>Натюрморт</name>
+		<img>/img/teide.jpg</img>
+		<name>Still life</name>
 		<cost>1500</cost>
 		<description>
-			Фотография,  
+			Photography,  
 			3452x4591px 
 			(29.2cm x 38.9cm 300dpi), 
 			3.9 MB | jpg
 		</description>
 	</product>
 	<product id ="2">
-		<name>Портрет</name>
+		<img>/img/teide.jpg</img>
+		<name>Portret</name>
 		<cost>3000</cost>
 		<description>
-			Иллюстрация, 
+			Illustration, 
 			3757x2129px
 			(31.8cm x 18cm 300dpi), 
 			1.4MB | jpg
 		</description>
 	</product>
 	<product id ="3">
-		<name>Пейзаж</name>
+		<img>/img/teide.jpg</img>
+		<name>Landscape</name>
 		<cost>2000</cost>
 		<description>
-			Фотография, 
+			Photography,
+			3247x2463px
+			(27.5cm x 20.9cm 300dpi),
+			745kB | jpg
+		</description>
+	</product>
+	<product id ="4">
+		<img>/img/teide.jpg</img>
+		<name>Abstraction</name>
+		<cost>2000</cost>
+		<description>
+			Digital drawing,
 			3247x2463px
 			(27.5cm x 20.9cm 300dpi),
 			745kB | jpg

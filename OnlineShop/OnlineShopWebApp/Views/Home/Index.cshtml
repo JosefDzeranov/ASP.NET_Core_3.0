@@ -10,13 +10,13 @@
     {
         <div class="col-12 col-sm-6 col-md-4 col-lg-3 mb-3">
             <div class="card shadow">
-                <img class="card-img-top" src="/img/teide.jpg" alt="Teide">
+                <img class="card-img-top" src="@product.Image" alt="Teide">
                 <div class="card body p-3">
                     <a style="color: black" href="/product/index/@product.Id"><h5>@product.Name</h5></a>
-                    <h6>@product.Cost руб.</h6>
+                    <h6>$@product.Cost</h6>
                     <div class="row justify-content-end">
                         <div class="col-auto">
-                            <a class="btn btn-outline-dark btn-sm text-nowrap" href="/basket/index/@product.Id" role="button">Добавить в корзину</a>
+                            <a class="btn btn-outline-dark btn-sm text-nowrap" href="/basket/index/@product.Id" role="button">Add to basket</a>
                         </div>
                     </div>
                 </div>

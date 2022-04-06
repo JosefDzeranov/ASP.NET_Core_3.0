@@ -14,6 +14,7 @@ namespace OnlineShopWebApp
                                .Elements("product")
                                .Select(p => new Product(
                                        int.Parse(p.Attribute("id").Value),
+                                       p.Element("img").Value,
                                        p.Element("name").Value,
                                        decimal.Parse(p.Element("cost").Value),
                                        p.Element("description").Value));
