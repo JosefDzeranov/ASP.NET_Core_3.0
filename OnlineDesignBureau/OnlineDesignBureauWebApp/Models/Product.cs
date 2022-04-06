@@ -26,5 +26,4 @@ namespace OnlineDesignBureauWebApp.Models
             return $"Id={Id}\nName={Name}\nCost={Cost}\nSquare={Square}м2\nDimensions={Math.Round(Width, 0)}x{Math.Round(Length, 0)}\n{Description}";
         }
     }
-    }
 }

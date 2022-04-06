@@ -1,14 +1,14 @@
-﻿<!DOCTYPE html>
-<html lang="en">
+﻿<!DOCTYPE html> 
+<html lang="en"> <!--Данная страница называется костяк/скелет/шаблон страниц--><!---->
 <head>
-    <meta charset="utf-8" />
+    <meta charset="utf-8" /> <!--Место, где подключается доп информация по странице-->
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] - OnlineDesignBureauWebApp</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" />
 </head>
-<body>
-    <header>
+<body> <!--описание страницы-->
+    <header> <!--голова страницы-->
         <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
             <div class="container">
                 <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">OnlineDesignBureauWebApp</a>
@@ -31,11 +31,12 @@
     </header>
     <div class="container">
         <main role="main" class="pb-3">
-            @RenderBody()
+            @RenderBody() <!--если хочешь прописать какой-то c# метод, то нужно начинать с знака собачки. На этом месте подставляются все наши представления-->
+            <!--генерируется от конкретного запроса-->
         </main>
     </div>
 
-    <footer class="border-top footer text-muted">
+    <footer class="border-top footer text-muted"> <!--или подвал-->
         <div class="container">
             &copy; 2022 - OnlineDesignBureauWebApp - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
         </div>

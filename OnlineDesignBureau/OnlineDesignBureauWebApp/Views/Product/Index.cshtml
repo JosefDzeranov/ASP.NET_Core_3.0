@@ -1,0 +1,22 @@
+﻿<!--прередаем тип данных, параметр которых мы сейчас укажем в model, у представления бывает только 1 прараметр-->
+@model Product
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="text-center">
+    <h1 class="display-4">@Model.Name - @Model.Description</h1>
+</div>
+
+<div class="row">
+    <div class="col">
+        <img class="card-img-top" src="/image/defoult_image.jpg">
+        <div class="card-body">
+            <h5>Общая площадь: @Model.Square м.кв.</h5>
+            <h5>Габариты: @Model.Length х @Model.Width м</h5>
+            <h5>Стоймость проекта: @Model.Cost руб</h5>
+            <a class="btn btn-dark" href="#" role="button">В корзину</a>
+            <a class="btn btn-dark" href="#" role="button">В cравнение</a>
+        </div>
+    </div>
+</div>

@@ -10,14 +10,13 @@ namespace OnlineDesignBureauWebApp.Controllers
         {
             productCatalog = new ProductCatalog();
         }
-        public string Index(int id)
+        public IActionResult Index(int id)
         {
-            var product = Convert.ToString(ProductCatalog.products[id]);
-            return product;
+            var product = ProductCatalog.products[id];
+            return View (product);
         }
         public string Save(string name)
         {
-            
             return productCatalog.WriteToJson(name);
         }
     }

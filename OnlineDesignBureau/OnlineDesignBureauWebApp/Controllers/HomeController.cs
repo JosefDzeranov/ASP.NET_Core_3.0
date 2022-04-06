@@ -9,9 +9,11 @@ namespace OnlineDesignBureauWebApp.Controllers
         {
             productCatalog = new ProductCatalog();
         }
-        public string Index()
+        public IActionResult Index()
         {
-            return productCatalog.ReadDataProducts();
+            if (ProductCatalog.products.Count == 0)
+                productCatalog.ReadToJson("projects_for_sale");
+            return View(ProductCatalog.products);
         }
     }
 }
