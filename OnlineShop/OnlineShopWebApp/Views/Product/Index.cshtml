@@ -1,0 +1,30 @@
+﻿@model Product
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+@if (Model == null)
+{
+    <h5>Такого товара нет в списке, введите товар с номером от 1 до 3 включительно</h5>
+}
+else
+{
+    <div class="row">
+        <div class="col-6 card-body shadow">
+            <img class="card-img-top" src="https://sun9-35.userapi.com/impg/_yyZ1hJ-s82puXLCV5Un9lzOZfK9OQBIVSeg6w/j2bUeZcwdxk.jpg?size=1600x900&quality=96&sign=ec68938f3ef1b00f51d71b167f1b3492&type=album" />
+            <div class="card-body">
+                <h5>@Model.Name</h5>
+                <h5>Цена: @Model.Cost рублей</h5>
+                <p>Доп. информация: @Model.Description</p>
+                <a class="btn btn-dark" href="https://localhost:5001/home/index" role="button">Продолжить покупки</a>
+                <a class="btn btn-dark" href="#" role="button">Добавить в корзину</a>
+            </div>
+        </div>
+    </div>
+}
+
+
+<div class="text-center">
+    <h1 class="display-4">Welcome</h1>
+    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+</div>

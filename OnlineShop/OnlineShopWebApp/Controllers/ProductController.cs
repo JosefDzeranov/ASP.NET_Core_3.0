@@ -9,14 +9,10 @@ namespace OnlineShopWebApp.Controllers
 {
     public class ProductController : Controller
     {
-        public string Index(int id)
+        public IActionResult Index(int id)
         {
             var requestedProduct = ProductsStorage.TryGetProduct(id);
-            if (requestedProduct == null)
-            {
-                return "Такого товара нет в списке, введите товар с номером от 1 до 3 включительно";
-            }
-            return requestedProduct + $"\n{requestedProduct.Description}";
+            return View(requestedProduct);
         }
     }
 }
