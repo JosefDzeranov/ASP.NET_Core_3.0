@@ -13,7 +13,7 @@
     @foreach (var product in Model)
     {
         <div class="col-3 card shadow">
-        <img class="card-img-top" src="image/defoult_image.jpg">
+        <img class="card-img-top" src="image/@product.Images[0]">
             <div class="card-body">
                 <a stile="color:black" href="/product/index/@product.Id">
                     <h5>№@product.Name</h5>
