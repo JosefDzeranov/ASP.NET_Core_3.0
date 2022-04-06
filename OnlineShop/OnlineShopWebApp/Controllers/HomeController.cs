@@ -7,7 +7,7 @@ namespace OnlineShopWebApp.Controllers
     {
         public string Index()
         {
-            var products = ProductsStorage.PrintCatalog();
+            var products = ProductsStorage.GetAllProducts();
             var output = string.Empty;
             foreach (var product in products)
             {
