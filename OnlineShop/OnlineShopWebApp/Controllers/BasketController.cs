@@ -19,7 +19,11 @@ namespace OnlineShopWebApp.Controllers
                                           .FirstOrDefault();            
                       
             if (product == null)
-            {               
+            {           
+                if(Basket.ProductCollection.Count() == 0)
+                {
+                    return View("Empty");
+                }
                 return View(Basket);
             }
 
