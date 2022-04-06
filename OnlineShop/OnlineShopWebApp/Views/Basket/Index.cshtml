@@ -2,7 +2,7 @@
 @model Basket
 
 @{
-    ViewData["Title"] = "Basket Page";  
+    ViewData["Title"] = "Basket Page";
 }
 
 <div class="container">
@@ -10,31 +10,30 @@
         <div class="col justify-content-center">
             <table class="table border-left border-right border-top border-bottom">
                 <caption>Список покупок</caption>
-                <thead>
+                <thead align="center">
                     <tr>
                         <th scope="col">Название</th>
                         <th scope="col">Количество</th>
                         <th scope="col">Стоимость</th>
                     </tr>
-                </thead>             
+                </thead>
                 @foreach (var product in Model.ProductCollection)
-                    {
-                        <tbody>
-                            <tr>
-                                <td>@product.Product.Name</td>
-                                <td>@product.Quantity</td>
-                                <td>@product.Product.Cost руб.</td>
-                            </tr>
-
-                        </tbody>
-                    }
-                    <tfoot>
+                {
+                    <tbody align="center">
                         <tr>
-                            <td></td>
-                            <td></td>
-                            <td colspan="3" class="align-content-end"><b>Итого: @Model.GetTotalSum() руб.</b></td>
+                            <td>@product.Product.Name</td>
+                            <td>@product.Quantity</td>
+                            <td>@product.Product.Cost руб.</td>
                         </tr>
-                    </tfoot>
+                    </tbody>
+                }
+                <tfoot align="center">
+                    <tr>
+                        <td></td>
+                        <td></td>
+                        <td colspan="3" class="align-content-end"><b>Итого: @Model.GetTotalSum() руб.</b></td>
+                    </tr>
+                </tfoot>
             </table>
             <div class="row justify-content-end">
                 <div class="col-2">
