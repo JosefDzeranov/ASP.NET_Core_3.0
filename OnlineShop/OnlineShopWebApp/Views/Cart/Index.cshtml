@@ -1,4 +1,4 @@
-﻿@model List<Product>
+﻿@model List<CartItem>
 
 @{
     ViewData["Title"] = "Корзина";
@@ -19,12 +19,12 @@
             <th>Количество</th>
         </tr>
 
-        @foreach (var product in Model)
+        @foreach (var cartItem in Model)
         {
             <tr>
-                <td>@product.Name</td>
-                <td>@product.Cost</td>
-                <td></td>
+                <td>@cartItem.Product.Name</td>
+                <td>@cartItem.Product.Cost</td>
+                <td>@cartItem.Quantinity</td>
 
             </tr>
         }

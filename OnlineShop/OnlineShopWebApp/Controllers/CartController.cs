@@ -18,8 +18,11 @@ namespace OnlineShopWebApp.Controllers
         {
             if (id != 0)
             {
-                var product = prodcutBase.TryGetById(id);
-                cart.AddToCart(product);
+                if(prodcutBase.TryGetById(id)!= null)
+                {
+                    cart.AddToCart(id);
+                }
+                
             }
 
             return View(cart.TryGetAll());
