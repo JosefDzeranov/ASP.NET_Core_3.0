@@ -4,13 +4,14 @@
 @{
     ViewData["Title"] = "Basket Page";
 }
-<h2>Basket</h2>
+
 <div class="container">
+    <h2>Basket</h2>
     <div class="row">
-        <div class="col justify-content-center">
-            <table class="table border-left border-right border-top border-bottom">
+        <div class="col">
+            <table class="table border-left border-right border-top border-bottom mt-2">
                 <caption>Shopping list</caption>
-                <thead align="center">
+                <thead class="table-light" align="center">
                     <tr>
                         <th scope="col">Name</th>
                         <th scope="col">Quantity</th>
@@ -19,7 +20,7 @@
                 </thead>
                 @foreach (var product in Model.ProductCollection)
                 {
-                    <tbody align="center">
+                    <tbody class="border-top-0" align="center">
                         <tr>
                             <td>@product.Product.Name</td>
                             <td>@product.Quantity</td>

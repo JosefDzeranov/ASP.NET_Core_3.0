@@ -3,11 +3,11 @@
 @{
     ViewData["Title"] = "Basket Page";  
 }
-<h2>Basket</h2>
 <div class="container">
+    <h2>Basket</h2>
     <div class="row">
         <div class="col justify-content-center">
-            <table class="table border-left border-right border-top border-bottom">
+            <table class="table border-left border-right border-top border-bottom mt-2">
                 <caption>Shopping list</caption>
                 <thead align="center">
                     <tr>
@@ -15,12 +15,12 @@
                         <th scope="col">Quantity</th>
                         <th scope="col">Cost</th>
                     </tr>
-                </thead>                            
-                        <tbody align="center">
-                            <tr >
-                                <td colspan="3">There are no products in the basket yet.</td>   
-                            </tr>
-                        </tbody>
+                </thead>
+                <tbody class="border-top-0" align="center">
+                    <tr>
+                        <td colspan="3">There are no items in the basket yet.</td>
+                    </tr>
+                </tbody>
             </table>
             <div class="row justify-content-end">
                 <div class="col-2">
