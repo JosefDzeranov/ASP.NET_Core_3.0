@@ -13,6 +13,11 @@ namespace WebOnlineShop.Controllers
         public string Index(int id)
         {
             var product = productRepository.TryGetById(id);
+            if (product == null)
+            {
+                return $"Продукта с таким id={id} не существует";
+            }
+            return $"{product}\n{product}";
         }
     }
 }
