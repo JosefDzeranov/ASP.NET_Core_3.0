@@ -1,0 +1,22 @@
+﻿@model Order
+
+@{
+    ViewData["Title"] = "basket";
+}
+
+
+<h1>Your order: </h1>
+<p>
+    @Model.Name <br>
+    @Model.Cost
+</p>
+
+<p>
+    Here will be a proper <br>
+    item description.
+</p>
+
+<div class="col-3 card shadow">
+    <a class="btn btn-light" href="/home/" role="button">Back to catalog</a>
+    <a class="btn btn-dark" href="#" role="button">Add to Basket</a>
+</div>
