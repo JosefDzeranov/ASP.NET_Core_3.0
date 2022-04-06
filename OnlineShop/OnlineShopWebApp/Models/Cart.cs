@@ -6,47 +6,22 @@ namespace OnlineShopWebApp.Models
     {
         public static List<Product> addedProducts = new List<Product>();
 
-        public static void AddProductToCart(Product product)
+        public static decimal CartCost
         {
-           
-
-            if (addedProducts.Contains(product))
+            get
             {
-              
-                foreach (var item in addedProducts)
+
+                decimal cartCost = 0;
+
+                foreach (var product in addedProducts)
                 {
-                    if (item == product)
-                    {
-                        item.Number++;
-                        item.TotalCost += item.Cost;
-                        
-                    }
+                    cartCost += product.TotalCost;
                 }
-                
+
+                return cartCost;
             }
-            else
-            {
-                product.Number++;
-                addedProducts.Add(product);
-            }
-           
         }
+             
 
-        public static List<Product> GetAllCartProducts()
-        {
-            return addedProducts;
-        }
-
-        public static decimal GetCartCost()
-        {
-            decimal cartCost = 0;
-
-            foreach (var product in addedProducts)
-            {
-                cartCost += product.TotalCost;
-            }
-
-            return cartCost;
-        }
     }
 }
