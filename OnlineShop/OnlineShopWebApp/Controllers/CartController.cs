@@ -25,7 +25,7 @@ namespace OnlineShopWebApp.Controllers
                 
             }
 
-            return View(cart.TryGetAll());
+            return View(cart);
         }
     }
 }
