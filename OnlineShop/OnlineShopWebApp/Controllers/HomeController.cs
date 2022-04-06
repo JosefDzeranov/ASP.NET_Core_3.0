@@ -19,7 +19,7 @@ namespace OnlineShopWebApp.Controllers
             _logger = logger;
         }
 
-        
+
         public IActionResult Privacy()
         {
             return View();
@@ -31,16 +31,14 @@ namespace OnlineShopWebApp.Controllers
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
 
-        public IActionResult Index ()
+        public IActionResult Index()
         {
             var productSource = new ProductDataSource();
             var products = productSource.GetAllProducts();
 
-            var result = string.Join("\r\n", products);
-         
-           // return Ok(result);
-           
-           return View(products);
+            //var result = string.Join("\r\n", products);
+
+            return View(products);
         }
     }
 }

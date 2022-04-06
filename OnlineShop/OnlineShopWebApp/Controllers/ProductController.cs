@@ -17,10 +17,10 @@ namespace OnlineShopWebApp.Controllers
         {
             var productSource = new ProductDataSource();
 
-            var s = productSource.GetProductById(id)?.ToString();
+            var product = productSource.GetProductById(id);
 
-            if (s!=null)
-                return Ok(s);
+            if (product != null)
+                return View(product);
 
             return BadRequest($"Продукт c ID № {id} не существует");
         }
