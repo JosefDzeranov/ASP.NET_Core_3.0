@@ -1,8 +1,59 @@
 ﻿@using OnlineShopWebApp.Models
-@model IEnumerable<Product>
+@model Basket
 
 @{
     ViewData["Title"] = "Basket Page";
 }
 
-<p>Basket Page</p>
+<div class="container">
+    <div class="row">
+        <div class="col justify-content-center">
+            <table class="table border-left border-right border-top border-bottom">
+                <caption>Список покупок</caption>
+                <thead class="table-light">
+                    <tr>
+                        <th scope="col">Название</th>
+                        <th scope="col">Количество</th>
+                        <th scope="col">Стоимость</th>
+                    </tr>
+                </thead>
+                @if (Model.ProductCollection == null)
+                {
+                    <p>В корзине пока нет товаров.</p>
+                }
+                else
+                {
+                    @foreach (var product in Model.ProductCollection)
+                    {
+                        <tbody class="justify-content-center">
+                            <tr>
+                                <td>@product.Product.Name</td>
+                                <td>@product.Quantity</td>
+                                <td>@product.Product.Cost руб.</td>
+                            </tr>
+
+                        </tbody>
+                    }
+                    <tfoot>
+                        <tr>
+                            <td></td>
+                            <td></td>
+                            <td colspan="3" class="align-content-end"><b>Итого: @Model.GetTotalSum() руб.</b></td>
+                        </tr>
+                    </tfoot>
+                }
+            </table>
+            <div class="row justify-content-end">
+                <div class="col-2">
+                    <a class="btn btn-outline-dark btn-sm text-nowrap" href="/" role="button">Продолжить покупки</a>
+                </div>
+                <div class="col-2">
+                    <a class="btn btn-outline-dark btn-sm text-nowrap" href="#" role="button">Оформить заказ</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+

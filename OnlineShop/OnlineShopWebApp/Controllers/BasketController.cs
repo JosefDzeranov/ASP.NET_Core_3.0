@@ -1,12 +1,19 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using OnlineShopWebApp.Models;
+using System.Linq;
 
 namespace OnlineShopWebApp.Controllers
 {
     public class BasketController : Controller
     {
-        public IActionResult Index()
+        public IActionResult Index(int id)
         {
-            return View();
+            var product = new DataStorage().GetProductDataFromXML()
+                                           .Where(p => p.Id == id)
+                                           .FirstOrDefault();
+            var basket = new Basket();
+            basket.AddToBasket(product, 1);
+            return View(basket);
         }
     }
 }
