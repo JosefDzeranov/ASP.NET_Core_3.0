@@ -13,7 +13,7 @@ namespace OnlineShopWebApp.Models
                 new Product ("Дебетовая карта №2", 150, "Золотая карта. Бесплатное обслуживание с подпиской, также по подписке процент на остаток" ),
                 new Product ("Кредитная карта №1", 200, "Процетная ставка годовых 20% на покупки, платежи, снятие наличных и переводы" )
             };
-        public static List<Product> PrintCatalog()
+        public static List<Product> GetAllProducts()
         {
             return products;
         }
