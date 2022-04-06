@@ -1,5 +1,4 @@
 ﻿@using OnlineShopWebApp.Models
-@model Basket
 
 @{
     ViewData["Title"] = "Basket Page";  
@@ -16,36 +15,18 @@
                         <th scope="col">Количество</th>
                         <th scope="col">Стоимость</th>
                     </tr>
-                </thead>             
-                @foreach (var product in Model.ProductCollection)
-                    {
+                </thead>                            
                         <tbody>
-                            <tr>
-                                <td>@product.Product.Name</td>
-                                <td>@product.Quantity</td>
-                                <td>@product.Product.Cost руб.</td>
+                            <tr >
+                                <td colspan="3" align="center">Пока в корзине нет ни одного товара.</td>   
                             </tr>
-
                         </tbody>
-                    }
-                    <tfoot>
-                        <tr>
-                            <td></td>
-                            <td></td>
-                            <td colspan="3" class="align-content-end"><b>Итого: @Model.GetTotalSum() руб.</b></td>
-                        </tr>
-                    </tfoot>
             </table>
             <div class="row justify-content-end">
                 <div class="col-2">
                     <a class="btn btn-outline-dark btn-sm text-nowrap" href="/" role="button">Продолжить покупки</a>
                 </div>
-                <div class="col-2">
-                    <a class="btn btn-outline-dark btn-sm text-nowrap" href="#" role="button">Оформить заказ</a>
-                </div>
             </div>
         </div>
     </div>
 </div>
-
-

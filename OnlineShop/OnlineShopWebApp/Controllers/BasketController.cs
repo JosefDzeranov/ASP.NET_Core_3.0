@@ -6,14 +6,25 @@ namespace OnlineShopWebApp.Controllers
 {
     public class BasketController : Controller
     {
-        public IActionResult Index(int id)
+        private static Basket Basket { get; set; }
+
+        public BasketController()
         {
-            var product = new DataStorage().GetProductDataFromXML()
+            Basket = new Basket();
+        }
+        public IActionResult Index(int id)
+        {           
+           var product = new DataStorage().GetProductDataFromXML()
                                            .Where(p => p.Id == id)
-                                           .FirstOrDefault();
-            var basket = new Basket();
-            basket.AddToBasket(product, 1);
-            return View(basket);
+                                          .FirstOrDefault();            
+                      
+            if (product == null)
+            {               
+                return View(Basket);
+            }
+
+            Basket.AddToBasket(product, 1);
+            return View(Basket);
         }
     }
 }

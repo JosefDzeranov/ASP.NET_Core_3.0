@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using OnlineShopWebApp.Models;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace OnlineShopWebApp.Models
@@ -17,9 +18,9 @@ namespace OnlineShopWebApp.Models
 
         public void AddToBasket(Product product, int quantity)
         {
-            BasketContent content = productCollection.Where(p => p.Product.Id == product.Id)
+            BasketContent productInBasket = productCollection.Where(p => p.Product.Id == product.Id)
                                                      .FirstOrDefault();
-            if(content == null)
+            if(productInBasket == null)
             {
                 productCollection.Add(new BasketContent
                 {
@@ -29,7 +30,7 @@ namespace OnlineShopWebApp.Models
             }
             else 
             {
-                content.Quantity += quantity;
+                productInBasket.Quantity += quantity;
             }
         }
 
