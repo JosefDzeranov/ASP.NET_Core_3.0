@@ -10,10 +10,12 @@ namespace OnlineShopWebApp
     {
         private static List<Product> products = new List<Product>()
         {
-            new Product("Name1", 10, "Discription"),
-            new Product("Name2", 20, "Discription"),
-            new Product("Name3", 30, "Discription"),
-            new Product("Name4", 40, "Discription"),
+            new Product("Name1", 10, "Discription", "/images/item1.png"),
+            new Product("Name2", 20, "Discription", "/images/item2.png"),
+            new Product("Name3", 30, "Discription", "/images/item3.png"),
+            new Product("Name4", 40, "Discription", "/images/item4.png"),
+            new Product("Name5", 40, "Discription", "/images/item5.png"),
+            new Product("Name6", 40, "Discription", "/images/item6.png"),
         };
 
         public List<Product> GetAll()
