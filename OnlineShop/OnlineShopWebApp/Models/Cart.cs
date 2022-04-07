@@ -2,11 +2,12 @@
 
 namespace OnlineShopWebApp.Models
 {
-    public static class Cart
+    public  class Cart
     {
-        public static List<Product> addedProducts = new List<Product>();
+        public  List<Product> addedProducts = new List<Product>();
 
-        public static decimal CartCost
+
+        public  decimal CartCost
         {
             get
             {
@@ -22,6 +23,12 @@ namespace OnlineShopWebApp.Models
             }
         }
              
+        public int Id { get; }
+
+        public Cart()
+        {
+            Id++;
+        }
 
     }
 }
