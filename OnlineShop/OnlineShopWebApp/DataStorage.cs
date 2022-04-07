@@ -7,7 +7,7 @@ namespace OnlineShopWebApp
 {
     public class DataStorage
     {
-        public IEnumerable<Product> GetProductId(int id)
+        public Product GetProductId(int id)
         {
             List<Product> productsJson;
 
@@ -20,10 +20,10 @@ namespace OnlineShopWebApp
             {
                 return null;
             }
-            
-            var result = productsJson.FirstOrDefault(x => x.Id == id);
 
-            return (IEnumerable<Product>)result;
+            Product result = productsJson.FirstOrDefault(x => x.Id == id);
+
+            return result;
         }
     }
 }

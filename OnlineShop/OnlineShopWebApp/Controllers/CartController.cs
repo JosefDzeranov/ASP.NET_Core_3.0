@@ -19,7 +19,8 @@ namespace OnlineShopWebApp.Controllers
 
         public IActionResult Index(int id)
         {
-            var product = new DataStorage().GetProductId(id).Where(p => p.Id == id).FirstOrDefault();
+            var product = new DataStorage();
+            var r = product.GetProductId(id).Where(p => p.Id == id).FirstOrDefault();
 
             if (product == null)
             {
