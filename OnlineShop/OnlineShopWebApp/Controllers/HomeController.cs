@@ -11,5 +11,7 @@ namespace OnlineShopWebApp.Controllers
 
             return View(products);
         }
+
+
     }
 }

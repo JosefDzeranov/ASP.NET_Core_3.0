@@ -2,7 +2,6 @@
 {
     public class Product
     {
-        private static int instanceCounter = 0;
         public int Id { get; set; }
         public string Name { get; }
         public decimal Cost { get; }
@@ -11,8 +10,11 @@
         public Product(int id,string name, decimal cost, string description)
         {
             Id = id;
+
             Name = name;
+
             Cost = cost;
+
             Description = description;
         }
 

@@ -1,0 +1,48 @@
+﻿@using OnlineShopWebApp.Models
+@model CartStorage
+
+@{
+    ViewData["Title"] = "Cart";
+}
+
+<div class="container">
+    <h2>Basket</h2>
+    <div class="row">
+        <div class="col">
+            <table class="table border-left border-right border-top border-bottom mt-2">
+                <caption>Shopping list</caption>
+                <thead class="table-light" align="center">
+                    <tr>
+                        <th scope="col">Name</th>
+                        <th scope="col">Quantity</th>
+                        <th scope="col">Cost</th>
+                    </tr>
+                </thead>
+                @foreach (var product in Model.Products)
+                {
+                    <tbody class="border-top-0" align="center">
+                        <tr>
+                            <td><a style="color: darkblue" href="/product/index/@product.Product.Id">@product.Product.Name</a></td>
+                            <td>@product.Product.Cost</td>
+                        </tr>
+                    </tbody>
+                }
+                <tfoot align="center">
+                    <tr>
+                        <td></td>
+                        <td></td>
+                        <td colspan="3" class="align-content-end"><b>Total: $@Model.TryGetTotalSum()</b></td>
+                    </tr>
+                </tfoot>
+            </table>
+            <div class="row justify-content-end">
+                <div class="col-2">
+                    <a class="btn btn-outline-dark btn-sm text-nowrap" href="/" role="button">Продолжить покупки</a>
+                </div>
+                <div class="col-2">
+                    <a class="btn btn-outline-dark btn-sm text-nowrap" href="#" role="button">Оформить заказ</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
