@@ -1,42 +1,18 @@
-﻿using OnlineShopWebApp.Models;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System;
 
 namespace OnlineShopWebApp.Models
 {
     public class Basket
     {
-        private static List<BasketContent> productCollection = new List<BasketContent>();
+        public Guid Id;
+        public Product Product { get; set; }
+        public int Quantity { get; set; }
 
-        public IEnumerable<BasketContent> ProductCollection
+        public Basket (Product product, int quantity)
         {
-            get
-            {
-                return productCollection;
-            }
-        }
-
-        public void AddToBasket(Product product, int quantity)
-        {
-            BasketContent productInBasket = productCollection.Where(p => p.Product.Id == product.Id)
-                                                     .FirstOrDefault();
-            if(productInBasket == null)
-            {
-                productCollection.Add(new BasketContent
-                {
-                    Product = product,
-                    Quantity = quantity
-                });
-            }
-            else 
-            {
-                productInBasket.Quantity += quantity;
-            }
-        }
-
-        public decimal GetTotalSum()
-        {
-            return productCollection.Sum(p => p.Product.Cost * p.Quantity);
+            Id = new Guid();
+            Product = product;
+            Quantity = quantity;
         }
     }
 }

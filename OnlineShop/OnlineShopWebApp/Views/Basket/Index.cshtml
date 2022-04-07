@@ -1,5 +1,5 @@
 ﻿@using OnlineShopWebApp.Models
-@model Basket
+@model BasketContent
 
 @{
     ViewData["Title"] = "Basket Page";
@@ -18,11 +18,11 @@
                         <th scope="col">Cost</th>
                     </tr>
                 </thead>
-                @foreach (var product in Model.ProductCollection)
+                @foreach (var product in Model.Products)
                 {
                     <tbody class="border-top-0" align="center">
                         <tr>
-                            <td>@product.Product.Name</td>
+                            <td><a style="color: darkblue" href="/product/index/@product.Product.Id">@product.Product.Name</a></td>
                             <td>@product.Quantity</td>
                             <td>$@product.Product.Cost</td>
                         </tr>

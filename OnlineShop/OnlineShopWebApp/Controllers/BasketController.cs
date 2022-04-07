@@ -1,16 +1,15 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using OnlineShopWebApp.Models;
 using System.Linq;
 
 namespace OnlineShopWebApp.Controllers
 {
     public class BasketController : Controller
     {
-        private static Basket Basket { get; set; }
+        private static BasketContent Basket { get; set; }
 
         public BasketController()
         {
-            Basket = new Basket();
+            Basket = new BasketContent();
         }
         public IActionResult Index(int id)
         {           
@@ -20,7 +19,7 @@ namespace OnlineShopWebApp.Controllers
                       
             if (product == null)
             {           
-                if(Basket.ProductCollection.Count() == 0)
+                if(Basket.Products.Count() == 0)
                 {
                     return View("Empty");
                 }
