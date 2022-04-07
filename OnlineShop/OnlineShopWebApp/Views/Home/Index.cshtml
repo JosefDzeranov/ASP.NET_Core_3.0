@@ -6,14 +6,15 @@
 
 
 <div class="text-center">
-    <h1 class="display-4 text_Buyan">Каталог готовых проектов</h1>
+    <h1 class="display-4 Title_sile" >Каталог готовых проектов</h1>
     <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
 </div>
 <div class="row">
     @foreach (var product in Model)
     {
         <div class="col-3 card shadow">
-        <img class="card-img-top" src="image/@product.Images[0]">
+            <h5></h5>
+            <img class="card-img-top" src="image/@product.Images[0]">
             <div class="card-body">
                 <a stile="color:black" href="/product/index/@product.Id">
                     <h5>№@product.Name</h5>
