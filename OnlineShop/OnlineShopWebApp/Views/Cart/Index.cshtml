@@ -8,7 +8,7 @@
 
 <h2>Корзина</h2>
 
-@if (Model.TryGetAll().Count != 0)
+@if (Model != null)
 {
 
     <table class="table">
@@ -19,7 +19,7 @@
             <th>Количество</th>
         </tr>
 
-        @foreach (var cartItem in Model.TryGetAll())
+        @foreach (var cartItem in Model.Items)
         {
             <tr>
                 <td>@cartItem.Product.Name</td>
@@ -33,7 +33,7 @@
 
     
     <div>
-        <h3>Итоговая сумма: @Model.GetTotalCost() руб.</h3>
+        <h3>Итоговая сумма: @Model.TotalCost руб.</h3>
     </div>
 
     <div class="col">
