@@ -5,12 +5,14 @@
 }
 
 <div class="text-center">
-    <h1 class="display-4">@Model.Name - @Model.Description</h1>
+    <h1 class="display-6">@Model.Name - @Model.Description</h1>
 </div>
 
 <div class="row">
-    <div class="col">
+    <div class="col-9">
         <img class="card-img-top" src="/image/@Model.Images[0]">
+    </div>
+    <div class="col">
         <div class="card-body">
             <h5>Общая площадь: @Model.Square м.кв.</h5>
             <h5>Габариты: @Model.Length х @Model.Width м</h5>
@@ -20,3 +22,4 @@
         </div>
     </div>
 </div>
+
