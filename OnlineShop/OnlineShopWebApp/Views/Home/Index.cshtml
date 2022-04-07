@@ -10,13 +10,13 @@
     @foreach (var product in Model)
     {
         <div class="col-3">
-            <div class="card h-100 shadow">
+            <div class="card-deck">
                 <img src="@product.ImgPath" class="card-img-top" alt="изображение книги" />
                 <div class="card-body">
                     <h5 class="card-title">@product.Name</h5>
                     <h4>@product.Cost руб.</h4>
                     <a href="/cart/add?productId=@product.Id" class="btn btn-dark btn-sm">Добавить в корзину</a>
-                    <a href="/product/index/@product.Id" class="btn btn-dark btn-sm stretched-link">Подробнее</a>
+                    <a href="/product/index/@product.Id" class="btn btn-dark btn-sm">Подробнее</a>
                 </div>
             </div>
         </div>
