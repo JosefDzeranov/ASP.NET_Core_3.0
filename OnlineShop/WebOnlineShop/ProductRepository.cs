@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using System.Collections.Generic;
 using WebOnlineShop.Models;
 
@@ -21,7 +22,7 @@ namespace WebOnlineShop
 
         internal object TryGetById(int id)
         {
-            throw new NotImplementedException();
+            return products.FirstOrDefault(product => product.Id == id);
         }
     }
 }
