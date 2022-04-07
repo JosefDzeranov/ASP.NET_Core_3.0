@@ -23,11 +23,6 @@ namespace OnlineShopWebApp
 
         public Product TryGetById(int id)
         {
-            /*
-            Linq
-            return products.FirstOrDefault(product => product.Id == id);
-            */
-
             foreach (var product in products)
             {
                 if (product.Id==id)

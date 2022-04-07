@@ -15,7 +15,6 @@ namespace OnlineShopWebApp.Controllers
         {
             var product = productReposititory.TryGetById(id);
             return View(product);
-           
         }
     }
 }

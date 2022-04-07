@@ -10,19 +10,19 @@ namespace OnlineShopWebApp.Controllers
 {
     public class BasketController : Controller
     {
-        private readonly OrderReposititory orderReposititory;
+        private readonly CardRepository cardReposititory;
 
-        public BasketController()
-        {
-            orderReposititory = new OrderReposititory();
-        }
+        //public BasketController()
+        //{
+        //    cardReposititory = new CardRepository();
+        //}
 
-        public IActionResult Order(int id)
-        {
-            var order = orderReposititory.TryGetById(id);
-            return View(order);
+        //public IActionResult Order(int id)
+        //{
+        //    var order = cardReposititory;
+        //    return View(order);
 
-        }
+        //}
 
     }
 }
