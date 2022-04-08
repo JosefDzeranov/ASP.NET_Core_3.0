@@ -1,4 +1,5 @@
-﻿@using OnlineShopWebApp.Models
+﻿@using OnlineShopWebApp
+@using OnlineShopWebApp.Models
 @model DataStorage
 
 @{
@@ -18,13 +19,13 @@
                         <th scope="col">Cost</th>
                     </tr>
                 </thead>
-                @foreach (var product in Model.Products)
+                @foreach (var basket in Model.ProductBaskets)
                 {
                     <tbody class="border-top-0" align="center">
                         <tr>
-                            <td><a style="color: darkblue" href="/product/index/@product.Product.Id">@product.Product.Name</a></td>
-                            <td>@product.Quantity</td>
-                            <td>$@product.Product.Cost</td>
+                            <td><a style="color: darkblue" href="/product/index/@basket.Product.Id">@basket.Product.Name</a></td>
+                            <td>@basket.Quantity</td>
+                            <td>$@basket.Product.Cost</td>
                         </tr>
                     </tbody>
                 }

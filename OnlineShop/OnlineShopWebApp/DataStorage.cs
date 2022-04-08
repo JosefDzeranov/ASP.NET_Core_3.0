@@ -7,33 +7,33 @@ namespace OnlineShopWebApp
 {
     public class DataStorage
     {
-        private static List<Basket> products = new List<Basket>();
+        private static List<Basket> productBaskets = new List<Basket>();
 
-        public IEnumerable<Basket> Products
+        public IEnumerable<Basket> ProductBaskets
         {
             get
             {
-                return products;
+                return productBaskets;
             }
         }
 
-        public void AddToBasket(Product product, int quantity)
+        public void AddProductBasket(Product product)
         {
-            Basket productInBasket = products.Where(p => p.Product.Id == product.Id)
-                                                      .FirstOrDefault();
-            if (productInBasket == null)
+            var productBasket = productBaskets.Where(p => p.Product.Id == product.Id)
+                                                           .FirstOrDefault();
+            if (productBasket == null)
             {
-                products.Add(new Basket(product, 1));
+                productBaskets.Add(new Basket(product));
             }
             else
             {
-                productInBasket.Quantity += quantity;
+                productBasket.Quantity++;
             }
         }
 
         public decimal GetTotalSum()
         {
-            return products.Sum(p => p.Product.Cost * p.Quantity);
+            return productBaskets.Sum(b => b.Product.Cost * b.Quantity);
         }
 
         public IEnumerable<Product> GetProductDataFromXML()
