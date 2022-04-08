@@ -1,5 +1,5 @@
 ﻿<!DOCTYPE html> 
-<html lang="en" > <!--Данная страница называется костяк/скелет/шаблон страниц--><!---->
+<html lang="en"> <!--Данная страница называется костяк/скелет/шаблон страниц--><!---->
 <head>
     <meta charset="utf-8" /> <!--Место, где подключается доп информация по странице-->
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -7,9 +7,9 @@
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" />
 </head>
-<body > <!--описание страницы-->
-    <header > <!--голова страницы-->
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3 ">
+<body> <!--описание страницы-->
+    <header> <!--голова страницы-->
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
             <div class="container">
                 <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">OnlineDesignBureauWebApp</a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
@@ -28,7 +28,7 @@
                             <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Проекты</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Каталог готовых проектов</a>
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Каталог проектов</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Утилиты</a>
@@ -41,8 +41,8 @@
             </div>
         </nav>
     </header>
-    <div class="container" >
-        <main role="main" class="pb-3" >
+    <div class="container">
+        <main role="main" class="pb-3">
             @RenderBody() <!--если хочешь прописать какой-то c# метод, то нужно начинать с знака собачки. На этом месте подставляются все наши представления-->
             <!--генерируется от конкретного запроса-->
         </main>
