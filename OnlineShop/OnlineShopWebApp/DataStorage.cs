@@ -20,5 +20,13 @@ namespace OnlineShopWebApp
                                        p.Element("description").Value));
             return products;
         }
+
+        public Product GetProduct(int id)
+        {
+            var product = new DataStorage().GetProductDataFromXML()
+                                           .Where(p => p.Id == id)
+                                           .FirstOrDefault();
+            return product;
+        }
     }
 }

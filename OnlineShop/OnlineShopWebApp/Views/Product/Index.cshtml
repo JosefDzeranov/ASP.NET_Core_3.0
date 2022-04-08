@@ -1,28 +1,25 @@
 ﻿@using OnlineShopWebApp.Models
-@model IEnumerable<Product>
+@model Product
 
 @{
     ViewData["Title"] = "Product Page";
 }
 
 <div class="row">
-    @foreach (var product in Model)
-    {
         <div class="col col-md-7">
-            <img class="img-thumbnail" src="@product.Image" alt="Teide">
+            <img class="img-thumbnail" src="@Model.Image" alt="Teide">
         </div>
         <div class="col-md-5 align-self-end">
-            <a style="color: darkblue" href="/product/index/@product.Id"><h5>@product.Name</h5></a>
-            <h6>$@product.Cost</h6>
-            <p>@product.Description</p>
+            <a style="color: darkblue" href="/product/index/@Model.Id"><h5>@Model.Name</h5></a>
+            <h6>$@Model.Cost</h6>
+            <p>@Model.Description</p>
             <div class="row justify-content-between">
                 <div class="col-auto mr-auto">
-                    <a class="btn btn-outline-dark btn-sm text-nowrap" href="/basket/index/@product.Id" role="button">Add to basket</a>
+                    <a class="btn btn-outline-dark btn-sm text-nowrap" href="/basket/index/@Model.Id" role="button">Add to basket</a>
                 </div>
                 <div class="col-auto">
                     <a class="btn btn-outline-dark btn-sm text-nowrap" href="/" role="button">Continue shopping</a>
                 </div>
             </div>
         </div>
-    }
 </div>

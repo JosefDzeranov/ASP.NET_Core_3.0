@@ -12,11 +12,9 @@ namespace OnlineShopWebApp.Controllers
             Basket = new BasketContent();
         }
         public IActionResult Index(int id)
-        {           
-           var product = new DataStorage().GetProductDataFromXML()
-                                          .Where(p => p.Id == id)
-                                          .FirstOrDefault();            
-                      
+        {
+            var product = new DataStorage().GetProduct(id);
+
             if (product == null)
             {           
                 if(Basket.Products.Count() == 0)
