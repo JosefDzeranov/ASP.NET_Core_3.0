@@ -12,17 +12,17 @@ namespace OnlineShopWebApp.Controllers
 {
     public class ProductController : Controller
     {
-      
+        private readonly ProductDataSource productDataSource;
+      public ProductController()
+		{
+            productDataSource = new ProductDataSource();
+		}
         public IActionResult Index(int id)
         {
-            var productSource = new ProductDataSource();
-
-            var product = productSource.GetProductById(id);
-
-            if (product != null)
+      
+            var product = productDataSource.GetProductById(id);
                 return View(product);
 
-            return BadRequest($"Продукт c ID № {id} не существует");
         }
     }
 }
