@@ -12,7 +12,7 @@ namespace OnlineShopWebApp.Controllers
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
-
+        // branch 1
         public HomeController(ILogger<HomeController> logger)
         {
             _logger = logger;
