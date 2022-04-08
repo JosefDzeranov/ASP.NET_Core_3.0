@@ -1,5 +1,4 @@
-﻿<!--прередаем тип данных, параметр которых мы сейчас укажем в model, у представления бывает только 1 прараметр-->
-@model Product
+﻿@model Product
 @{
     ViewData["Title"] = "Home Page";
 }
@@ -9,12 +8,12 @@
 </div>
 
 <div class="row">
-    <div class="col-9">
+    <div class="col-8">
         <img class="card-img-top" src="/image/@Model.Images[0]">
     </div>
     <div class="col">
         <div class="card-body">
-            <h5>Общая площадь: @Model.Square м.кв.</h5>
+            <h5 class="japari_sans">Общая площадь:@Model.Square м.кв.</h5>
             <h5>Габариты: @Model.Length х @Model.Width м</h5>
             <h5>Стоймость проекта: @Model.Cost руб</h5>
             <a class="btn btn-dark" href="#" role="button">В корзину</a>
