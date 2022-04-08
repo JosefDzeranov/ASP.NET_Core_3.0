@@ -7,7 +7,7 @@ namespace OnlineShopWebApp.Controllers
     {
         public IActionResult Index(int id)
         {
-            var product = new DataStorage().GetProduct(id);              
+            var product = new DataStorage().TryGetProduct(id);              
             return View(product);
         }
     }
