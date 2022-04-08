@@ -6,30 +6,23 @@
 
 
 
-    <div class="row">
-         @foreach (var product in Model)
+<div class="row">
+    @foreach (var product in Model)
     {
-        
-            <div class="col-3 card shadow">
-                <img src="@product.ImgPath" class="card-img-top" width="200" height="200" alt="изображение книги" />
+        <div class="col-3">
+            <div class="card-deck">
+                <img src="@product.ImgPath" class="card-img-top" alt="изображение книги" />
                 <div class="card-body">
                     <h5 class="card-title">@product.Name</h5>
                     <h4>@product.Cost руб.</h4>
-                    <div class="row">
-                        <div class="col">
-                            <a href="#" class="btn btn-dark">Добавить в корзину</a>
-                        </div>
-                        <div class="col">
-                            <a href="/product/index/@product.Id" class="btn btn-dark">Подробнее</a>
-                        </div>
-                    </div>
-                    <h6>ID:@product.Id</h6>
+                    <a href="/cart/add?productId=@product.Id" class="btn btn-dark btn-sm">Добавить в корзину</a>
+                    <a href="/product/index/@product.Id" class="btn btn-dark btn-sm">Подробнее</a>
                 </div>
             </div>
-        
+        </div>
     }
-    </div>
-   
+</div>
+
 
 
 

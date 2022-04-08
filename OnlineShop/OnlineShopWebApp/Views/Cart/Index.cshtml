@@ -1,0 +1,64 @@
+﻿@model Cart
+
+@{
+    ViewData["Title"] = "Корзина";
+}
+
+
+
+<h2>Корзина</h2>
+
+@if (Model != null)
+{
+    <div class="row">
+        
+            <table class="table">
+
+                <tr>
+                    <th>Название</th>
+                    <th>Цена руб.</th>
+                    <th>Количество</th>
+                    <th>Стоимость руб.</th>
+                </tr>
+
+                @foreach (var cartItem in Model.Items)
+                {
+                    <tr>
+                        <td>@cartItem.Product.Name</td>
+                        <td>@cartItem.Product.Cost</td>
+                        <td>@cartItem.Quantinity</td>
+                        <td>@cartItem.Cost</td>
+
+                    </tr>
+                }
+
+            </table>
+       
+    </div>
+
+
+
+    <div class="text-right">
+        <h3>Итоговая сумма: @Model.TotalCost руб.</h3>
+    </div>
+
+    <div class="row">
+        <div class="col-6">
+            <a href="#" class="btn btn-dark">Оформить заказ</a>
+        </div>
+        <div class="col-6">
+            <a href="/home/index" class="btn btn-dark">Продолжить покупки</a>
+        </div>
+    </div>
+
+
+
+}
+
+else
+{
+    <figure class="text-center">
+        <h3>В корзине нет товаров</h3>
+    </figure>
+
+}
