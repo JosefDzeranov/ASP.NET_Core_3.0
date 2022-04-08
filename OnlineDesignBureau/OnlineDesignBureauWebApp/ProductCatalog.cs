@@ -11,14 +11,14 @@ namespace OnlineDesignBureauWebApp
 
         public string WriteToJson(string nameFile)
         {
-            string json = JsonConvert.SerializeObject(products, Formatting.Indented);
+            var json = JsonConvert.SerializeObject(products, Formatting.Indented);
             File.WriteAllText($"{nameFile}.json", json);
             return json;
         }
         public void ReadToJson(string nameFile)
         {
             products.Clear();
-            string json = File.ReadAllText($"{nameFile}.json");
+            var json = File.ReadAllText($"{nameFile}.json");
             products = JsonConvert.DeserializeObject<List<Product>>(json);
         }
 
@@ -33,6 +33,5 @@ namespace OnlineDesignBureauWebApp
             }
             return result;
         }
-
     }
 }

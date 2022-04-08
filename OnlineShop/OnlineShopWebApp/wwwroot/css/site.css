@@ -14,21 +14,6 @@ a {
     color: #B2AB81;
 }
 
-@font-face {
-    font-family: "BuyanRegular";
-    src: url('BuyanRegular.ttf') format('Buyan');
-    font-style: normal;
-    font-weight: normal;
-}
-
-.Title_sile {
-    color: red;
-    font-family: "BuyanRegular";
-}
-
-
-
-
 
 .btn-primary {
   color: #fff;
@@ -88,4 +73,14 @@ body {
   line-height: 60px; /* Vertically center the text there */
 }
 
+/*-----------------------------*/
+
+
+
+.MyStile1 {
+    font-weight: bold;
+    font-size: large;
+    color: lime;
+    font-family: Verdana, Arial, Sans-Serif;
+}
 
