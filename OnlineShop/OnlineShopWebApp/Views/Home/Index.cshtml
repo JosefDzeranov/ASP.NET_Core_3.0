@@ -7,7 +7,7 @@
     @foreach(var product in Model)
     {
         <div class="col-3 card shadow">
-            <img class="card-img-top" src=@product.ImagePath,  alt = "Изображение товара" height ="200px" width = "200px"/>
+            <img class="card-img-top" src=@product.ImagePath alt = "Изображение товара"/>
 
             <div class= "card-body">
                 <a style="color:black" href ="/product/index/@product.Id">
@@ -27,5 +27,3 @@
     <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
 </div>
 
-
-<img src="@Url.Action("GetImage", new { productImageID = Model.ProductImages.First().ProductImageID, width = 125, height = 125 })" />
