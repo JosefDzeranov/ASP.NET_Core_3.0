@@ -20,7 +20,7 @@ namespace WebOnlineShop
             return products;
         }
 
-        internal object TryGetById(int id)
+        public object TryGetById(int id)
         {
             return products.FirstOrDefault(product => product.Id == id);
         }

@@ -17,7 +17,7 @@ namespace WebOnlineShop.Controllers
             {
                 return $"Продукта с таким id={id} не существует";
             }
-            return $"{product}\n{product}";
+            return $"{product}";
         }
     }
 }
