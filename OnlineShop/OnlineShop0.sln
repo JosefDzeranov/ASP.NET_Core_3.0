@@ -1,9 +1,9 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 16
-VisualStudioVersion = 16.0.32228.343
+# Visual Studio Version 17
+VisualStudioVersion = 17.1.32319.34
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OnlineDesignBureauWebApp", "OnlineDesignBureauWebApp\OnlineDesignBureauWebApp.csproj", "{C114F17B-18FD-4FA9-A9C1-C366F5308611}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OnlineDesignBureauWebApp", "..\OnlineDesignBureau\OnlineDesignBureauWebApp\OnlineDesignBureauWebApp.csproj", "{C114F17B-18FD-4FA9-A9C1-C366F5308611}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
