@@ -7,7 +7,7 @@
     <div class="row">
         @foreach (var product in Model)
         {
-        <div class="col-3 card">
+        <div class="col-4 card">
             <img class="card-img-top" src=@product.ImagePath>
 
             <div class="card-body">
@@ -15,7 +15,7 @@
                     <h5>@product.Name</h5>
                 </a>
                 <h5>@product.Cost rub</h5>
-                <a class="btn btn-dark" href="#" role="button">Add to Basket</a>
+                <a class="btn btn-dark" href="/cart/add?productId=@product.Id" role="button">Add to Basket</a>
             </div>
         </div>
         }

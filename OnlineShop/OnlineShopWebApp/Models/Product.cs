@@ -11,9 +11,6 @@ namespace OnlineShopWebApp.Models
         public string Description { get; }
         public string ImagePath { get; }
 
-
-
-
         public Product(string name, decimal cost, string description, string imagePath)
         {
             Id = inctanceCounter;

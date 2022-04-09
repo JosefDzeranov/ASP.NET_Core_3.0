@@ -1,0 +1,48 @@
+﻿@model Cart
+
+@{
+    ViewData["Title"] = "Cart";
+}
+
+@if(Model == null)
+{
+    <h3>Empty Cart</h3>
+}
+else
+{
+    <div class="row">
+        <div class="col">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Cost, rub</th>
+                        <th>Amount</th>
+                        <th>Sum, rub</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model.Items)
+                    {
+                    <tr>
+                        <td>@item.Product.Name</td>
+                        <td>@item.Product.Cost</td>
+                        <td>@item.Amount</td>
+                        <td>@item.Cost</td>
+                    </tr>
+                    }
+                </tbody>
+            </table>
+            <div class="text-right">
+                <h3>Total cost</h3>
+                <h3>@Model.Cost</h3>
+            </div>
+            <div class="text-center">
+                <a class="btn btn-success" href="home/products" role="button">Continue explore</a>
+                <a class="btn btn-success" href="#" role="button">Сomplete the purchase</a>
+            </div>
+        </div>
+
+    </div>
+}
+
