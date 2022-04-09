@@ -11,9 +11,10 @@
 
 
 <div class="row">
+    
     @foreach (var product in Model)
     {
-
+        
         <div class="col card shadow">
             <img class="card-img-top" src="https://cdnn1.img.sputniknews-uz.com/img/07e5/0a/13/20963736_0:100:1921:1180_1920x0_80_0_0_929d0b965b3dabf775b39cd28895d319.jpg">
          
@@ -22,7 +23,7 @@
                     <h5>@product.Name</h5>
                 </a>
                 <h5>@product.Cost rub.</h5>
-                <a class="btn btn-dark" href="/cart/addtocart/@product.Id/" role="button">добавить в корзину</a>
+                <a class="btn btn-dark" href="/cart/addtocart/@product.Id" role="button">добавить в корзину</a>
             </div>
 
         </div>

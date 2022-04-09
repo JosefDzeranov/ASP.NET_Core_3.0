@@ -1,33 +1,33 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 
 namespace OnlineShopWebApp.Models
 {
-    public  class Cart
+    public class Cart
     {
-        public  List<Product> addedProducts = new List<Product>();
+        public List<Product> AddedProducts = new List<Product>();
+        public int Id { get; }
+        public static int IdCounter = 0;
+        public string UserId = "UserId";
 
-
-        public  decimal CartCost
+        public decimal CartCost
         {
             get
             {
 
-                decimal cartCost = 0;
+                decimal Cost = 0;
 
-                foreach (var product in addedProducts)
-                {
-                    cartCost += product.TotalCost;
-                }
-
-                return cartCost;
+                Cost = AddedProducts.Sum(x => x.TotalCost);
+                return Cost;
             }
         }
-             
-        public int Id { get; }
+
+
 
         public Cart()
         {
-            Id++;
+            IdCounter++;
+            Id = IdCounter;
         }
 
     }

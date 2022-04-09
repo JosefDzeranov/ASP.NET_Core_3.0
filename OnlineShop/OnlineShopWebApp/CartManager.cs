@@ -1,5 +1,7 @@
 ﻿using OnlineShopWebApp.Models;
+using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace OnlineShopWebApp
 {
@@ -7,39 +9,57 @@ namespace OnlineShopWebApp
     {
         static List<Cart> cartList = new List<Cart>();
 
-        static Cart currentCart { get; set; }
 
-        public static void AddCart(Cart cart)
+
+        public static Cart CreateCart()
         {
-            foreach (var item in cartList)
+            Cart cart = new Cart();
+
+            if (!cartList.Contains(cart))
             {
-                if (cart.Id != item.Id)
-                {
-                    cartList.Add(cart);
-                }
+                cartList.Add(cart);
+                cart = cartList.FirstOrDefault(x => x.UserId == cart.UserId);
             }
-        }
-
-        public static void AddProductToCart(Cart cart)
-        {
-
-            foreach (var item in cartList)
+            else
             {
-
-                if (cart.Id == item.Id)
-                {
-
-
-
-                }
-
+                cart = cartList.FirstOrDefault(x => x.UserId == cart.UserId);
             }
 
+            return cart;
         }
+
+        public static List<Cart> GetCarts()
+        {
+            return cartList;
+        }
+
+        public static void  AddProductToCart(Cart cart, Product product)
+        {
+            if (cart.AddedProducts.Contains(product))
+            {
+
+                foreach (var item in cart.AddedProducts)
+                {
+                    if (item == product)
+                    {
+                        item.Number++;
+                        item.TotalCost += item.Cost;
+
+                    }
+                }
+
+            }
+            else
+            {
+                product.Number++;
+                cart.AddedProducts.Add(product);
+            }
+        }
+       
 
 
 
     }
 
-    
+
 }
