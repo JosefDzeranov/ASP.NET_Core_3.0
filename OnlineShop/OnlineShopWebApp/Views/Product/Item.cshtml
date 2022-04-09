@@ -4,16 +4,6 @@
     ViewData["Title"] = @Model.Name;
 }
 
-@*if (Model == null)
-    {
-        return <h1>($"Продукта с id:{id} не существует.")</h1>
-    }
-    else
-    {
-        <h1>($"{product}\n{product.Description}")</h1>
-    <a href="C:\Users\Arten\source\repos\ASP.NET_Core_3.0\OnlineShop\OnlineShopWebApp\Views\Product\Item.cshtml">C:\Users\Arten\source\repos\ASP.NET_Core_3.0\OnlineShop\OnlineShopWebApp\Views\Product\Item.cshtml</a>
-    }*@
-
 <h1>@Model.Name</h1>
 <h3>@Model.Cost rub </h3>
 <h5>@Model.Description </h5>
@@ -24,5 +14,7 @@
 
 <div class="col-3 card">
     <a class="btn btn-light" href="/home/" role="button">Back to catalog</a>
-    <a class="btn btn-dark" href="/cart/add?productId=@Model.Id" role="button">Add to Basket</a>
+    <a class="btn btn-dark" href="/cart/add?productId=@Model.Id" role="button">Add to Cart</a>
 </div>
+
+

@@ -23,10 +23,7 @@ namespace OnlineShopWebApp.Controllers
             /// ViewData["Products"] = result;
             /// TempData["Products"] = result;
             /// </summary>
-
         }
-
-       
 
         public IActionResult Privacy()
         {

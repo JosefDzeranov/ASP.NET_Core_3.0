@@ -17,18 +17,17 @@ namespace OnlineShopWebApp.Controllers
             productRepository = new ProductsReposititory();
         }
 
-        public IActionResult Index(int prodictId)
+        public IActionResult Index()
         {
             var cart = CartRepository.TryGetByUserId(Constants.UserId);
             return View(cart);
-
         }
-        public IActionResult Add(int prodictId)
+
+        public IActionResult Add(int productId)
         {
-            var product = productRepository.TryGetById(prodictId);
+            var product = productRepository.TryGetById(productId);
             CartRepository.Add(product, Constants.UserId);
             return RedirectToAction("Index");
-
         }
 
     }
