@@ -3,7 +3,7 @@ using System.Linq;
 
 namespace OnlineShopWebApp.Services
 {
-    public class ProdcutBase
+    public class ProductBase
     {
         public static List<Product> products = new List<Product>()
         {

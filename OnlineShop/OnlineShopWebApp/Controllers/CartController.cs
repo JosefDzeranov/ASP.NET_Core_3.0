@@ -5,11 +5,11 @@ namespace OnlineShopWebApp.Controllers
 {
     public class CartController : Controller
     {
-        private readonly ProdcutBase prodcutBase;
+        private readonly ProductBase prodcutBase;
 
-        public CartController()
+        public CartController(ProductBase productBase)
         {
-            prodcutBase = new ProdcutBase();
+            this.prodcutBase = productBase;
 
         }
         public IActionResult Index()

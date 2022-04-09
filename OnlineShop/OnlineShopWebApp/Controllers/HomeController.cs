@@ -6,15 +6,15 @@ namespace OnlineShopWebApp.Controllers
     public class HomeController : Controller
     {
 
-        private readonly ProdcutBase prodcutBase;
+        private readonly ProductBase productBase;
 
-        public HomeController()
+        public HomeController(ProductBase productBase)
         {
-            prodcutBase = new ProdcutBase();
+            this.productBase = productBase;
         }
         public IActionResult Index()
         {
-            var products = prodcutBase.GetAll();
+            var products = productBase.GetAll();
             
             return View(products);
         }

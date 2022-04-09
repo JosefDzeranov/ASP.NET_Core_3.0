@@ -5,9 +5,9 @@ namespace OnlineShopWebApp.Controllers
 {
     public class ProductController : Controller
     {
-        private readonly ProdcutBase productBase;
+        private readonly ProductBase productBase;
 
-        public ProductController(ProdcutBase productBase)
+        public ProductController(ProductBase productBase)
         {
             this.productBase = productBase;
         }
