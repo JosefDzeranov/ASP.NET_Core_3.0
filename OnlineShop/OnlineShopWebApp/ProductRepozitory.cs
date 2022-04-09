@@ -19,5 +19,15 @@ namespace OnlineShopWebApp
         {
             return products;
         }
+
+        public Product TryGetById(int id)
+        {
+            foreach (var product in products)
+            {
+                if (product.Id == id)
+                    return product; 
+            }
+            return null;
+        }
     }
 }
