@@ -17,7 +17,7 @@ else
                 <h5>Цена: @Model.Cost рублей</h5>
                 <p>Доп. информация: @Model.Description</p>
                 <a class="btn btn-dark" href="https://localhost:5001/home/index" role="button">Продолжить покупки</a>
-                <a class="btn btn-dark" href="#" role="button">Добавить в корзину</a>
+                <a class="btn btn-dark" href="/cart/add?productId=@Model.Id" role="button">Добавить в корзину</a>
             </div>
         </div>
     </div>
