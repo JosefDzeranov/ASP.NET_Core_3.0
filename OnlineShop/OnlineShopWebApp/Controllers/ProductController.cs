@@ -1,6 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using OnlineShopWebApp.Models;
-using System.Linq;
+using OnlineShopWebApp.Services;
 
 namespace OnlineShopWebApp.Controllers
 {

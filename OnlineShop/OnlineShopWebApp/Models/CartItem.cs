@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace OnlineShopWebApp.Models
+namespace OnlineShopWebApp.Services
 {
     public class CartItem
     {

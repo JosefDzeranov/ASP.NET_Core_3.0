@@ -1,4 +1,4 @@
-﻿namespace OnlineShopWebApp.Models
+﻿namespace OnlineShopWebApp.Services
 {
     public class Product
     {
