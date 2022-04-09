@@ -7,9 +7,9 @@ namespace OnlineShopWebApp.Controllers
     {
         private readonly ProdcutBase productBase;
 
-        public ProductController()
+        public ProductController(ProdcutBase productBase)
         {
-            productBase = new ProdcutBase();
+            this.productBase = productBase;
         }
         public IActionResult Index(int id)
         {
