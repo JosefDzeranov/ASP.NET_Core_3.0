@@ -18,15 +18,11 @@ namespace OnlineShopWebApp.Controllers
             productRepozitory = new ProductRepozitory();
         }
 
-        public string Index()
+        public IActionResult Index()
         {
             var products = productRepozitory.GetAll();
-            var result = "";
-            foreach (var product in products)
-            {
-                result += product + "\n\n";
-            }
-            return result;
+           
+            return View(products);
         }
 
         public IActionResult Privacy()

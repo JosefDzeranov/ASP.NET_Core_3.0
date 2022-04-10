@@ -15,14 +15,18 @@ namespace OnlineShopWebApp.Controllers
         {
             productRepozitory = new ProductRepozitory();
         }
-        public string Index(int id)
+        public IActionResult Index(int id)
         {
            var product = productRepozitory.TryGetById(id);
-           if (product == null)
-            {
-                return "Продукта с таким id не существует";
-            }
-            return $"{product}\n{product.Description}";
+           return View(product);
+           //if (product == null)
+           // {
+               // return "Продукта с таким id не существует";
+           // }
+            //$"{product}\n{product.Description}";
+            
+                
+                
         }
     }
 }
