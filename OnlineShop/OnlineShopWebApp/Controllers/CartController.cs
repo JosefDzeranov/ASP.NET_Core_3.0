@@ -1,10 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
 using OnlineShopWebApp.DataSources;
 using OnlineShopWebApp.Models;
-using System;
-using System.Linq;
-using System.Threading.Tasks;
+using OnlineShopWebApp.Services;
 
 namespace OnlineShopWebApp.Controllers
 {
@@ -18,14 +15,14 @@ namespace OnlineShopWebApp.Controllers
 		}
 		public IActionResult Index()
 		{
-			var cart = CartRepository.TryGetByUserId(Constans.UserId);
-			return View(cart);	
+		
+			return View((Cart.CartItems, Cart.Cost));	
 		}
 
 		public IActionResult Add(int productId)
 		{
 			var product = productDataSource.GetProductById(productId);
-			CartRepository.Add(product, Constans.UserId);
+			CartRepository.Add(product);
 			return RedirectToAction("Index");
 		}
 	}

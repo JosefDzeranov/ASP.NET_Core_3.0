@@ -1,25 +1,18 @@
-﻿using OnlineShopWebApp.Models;
-using System.Collections.Generic;
-using OnlineShopWebApp.DataSources;
-using System;
+﻿using System.Collections.Generic;
 using System.Linq;
 
 namespace OnlineShopWebApp.Models
 {
-	public class Cart
+	public static class Cart
 	{
-		public Guid Id { get; set; }
-		public string UserId { get; set; }
-		public List<CartItem> Items { get; set; }
+		public static Dictionary<Product, int> CartItems { get; set; } = new Dictionary<Product, int>();
 
-		public decimal Cost
+		public static decimal Cost
 		{
 			get
 			{
-				return Items.Sum(x => x.Cost);
+				return CartItems.Sum(item => item.Key.Cost * item.Value);
 			}
 		}
-
-
 	}
 }
