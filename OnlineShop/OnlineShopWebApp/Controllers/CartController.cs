@@ -5,15 +5,15 @@ namespace OnlineShopWebApp.Controllers
 {
     public class CartController : Controller
     {
-
-
-        Cart cart = CartManager.CreateCart();
+        private CartManager cartManager;
+       // private Cart cart;
+       
 
         public IActionResult Index()
         {
 
 
-            return View(cart);
+            return View(cartManager.cart);
         }
 
 
@@ -21,13 +21,19 @@ namespace OnlineShopWebApp.Controllers
         {
             var foundProduct = ProductManager.FindProduct(id);
 
-            CartManager.AddProductToCart(IdStorage.UserId, foundProduct);
-            return View("Index", cart);
+            cartManager.AddProductToCart(IdStorage.UserId, foundProduct);
+            return View("Index", cartManager.cart);
         }
 
-
+        public CartController(CartManager cartManager)
+        {
+            this.cartManager = cartManager;
+           
+        }
 
     }
+
+    
 
 }
 

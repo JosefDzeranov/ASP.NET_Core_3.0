@@ -5,35 +5,35 @@ using System.Linq;
 
 namespace OnlineShopWebApp
 {
-    public static class CartManager
+    public  class CartManager
     {
         static List<Cart> cartList = new List<Cart>();
+        public  Cart cart = new Cart(IdStorage.UserId);
+        private  CartLine cartLine;
 
+        //public  Cart CreateCart()
+        //{
+        //  //  Cart cart = new Cart(IdStorage.UserId);
 
+        //    if (!cartList.Contains(cart))
+        //    {
+        //        cartList.Add(cart);
+        //        cart = cartList.FirstOrDefault(x => x.UserId == cart.UserId);
+        //    }
+        //    else
+        //    {
+        //        cart = cartList.FirstOrDefault(x => x.UserId == cart.UserId);
+        //    }
 
-        public static Cart CreateCart()
-        {
-            Cart cart = new Cart(IdStorage.UserId);
+        //    return cart;
+        //}
 
-            if (!cartList.Contains(cart))
-            {
-                cartList.Add(cart);
-                cart = cartList.FirstOrDefault(x => x.UserId == cart.UserId);
-            }
-            else
-            {
-                cart = cartList.FirstOrDefault(x => x.UserId == cart.UserId);
-            }
-
-            return cart;
-        }
-
-        public static List<Cart> GetCarts()
+        public  List<Cart> GetCarts()
         {
             return cartList;
         }
 
-        public static void AddProductToCart(string userId, Product product)
+        public  void AddProductToCart(string userId, Product product)
         {
 
             if (cartList.FirstOrDefault(x => x.UserId == userId) != null)
@@ -47,7 +47,7 @@ namespace OnlineShopWebApp
                 }
                 else
                 {
-                    var cartLine = new CartLine(product);
+                    cartLine.Product = product;
                     cartLine.Amount++;
                     cart.CartLines.Add(cartLine);
                 }
@@ -55,10 +55,10 @@ namespace OnlineShopWebApp
             }
             else
             {
-                var cart = CreateCart();
+               // var cart = CreateCart();
 
                 cart.CartLines.Add(new CartLine(product));
-                var cartLine = cart.CartLines.FirstOrDefault(x => x.Product.Id == product.Id);
+                cartLine = cart.CartLines.FirstOrDefault(x => x.Product.Id == product.Id);
                 cartLine.Amount++;
 
 
@@ -69,7 +69,11 @@ namespace OnlineShopWebApp
 
         }
 
-
+        //public CartManager(Cart cart, CartLine cartLine)
+        //{
+        //    this.cart = cart;
+        //    this.cartLine = cartLine;
+        //}
 
 
     }
