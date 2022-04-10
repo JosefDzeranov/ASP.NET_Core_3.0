@@ -4,7 +4,7 @@
     ViewData["Title"] = @Model.Name;
 }
 
-<h1>@Model.Name</h1>
+<h3>@Model.Name</h3>
 <h3>@Model.Cost rub </h3>
 <h5>@Model.Description </h5>
 <p>
@@ -12,10 +12,10 @@
     item description.
 </p>
 
-<div class="col-3 card">
-    <img class="card-img-top" src="@Model.ImagePath"/>
-    <a class="btn btn-light" href="/home/" role="button">Back to catalog</a>
-    <a class="btn btn-dark" href="/cart/add?productId=@Model.Id" role="button">Add to Cart</a>
+<div class="col-4 card">
+    <img class="card-img-top" src="@Model.ImagePath" />
+    <a class="btn btn-outline-light btn-sm" href="/home/" role="button">Back to catalog</a>
+    <a class="btn btn-outline-warning btn-sm" href="/cart/add?productId=@Model.Id" role="button">Add to Cart</a>
 </div>
 
 

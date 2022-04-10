@@ -8,7 +8,7 @@ namespace OnlineShopWebApp
 {
     public class CartsRepository : ICartsRepository
     {
-        public static List<Cart> Carts { get; set; } = new List<Cart>();
+        public List<Cart> Carts { get; set; } = new List<Cart>();
 
         public Cart TryGetByUserId(string userId)
         {
