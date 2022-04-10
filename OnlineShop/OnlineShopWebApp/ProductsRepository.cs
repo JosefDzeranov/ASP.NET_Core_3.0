@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace OnlineShopWebApp
 {
-    public class ProductsReposititory
+    public class ProductsRepository
     {
         private static List<Product> products = new List<Product>()
         {

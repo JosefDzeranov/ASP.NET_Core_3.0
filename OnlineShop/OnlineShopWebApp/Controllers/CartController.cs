@@ -10,11 +10,11 @@ namespace OnlineShopWebApp.Controllers
 {
     public class CartController : Controller
     {
-        private readonly ProductsReposititory productRepository;
+        private readonly ProductsRepository productRepository;
 
-        public CartController()
+        public CartController(ProductsRepository productsRepository)
         {
-            productRepository = new ProductsReposititory();
+            this.productRepository = productsRepository;
         }
 
         public IActionResult Index()
