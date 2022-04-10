@@ -55,7 +55,8 @@ namespace OnlineShopWebApp
             }
             else
             {
-                var cart = new Cart(IdStorage.UserId);
+                var cart = CreateCart();
+
                 cart.CartLines.Add(new CartLine(product));
                 var cartLine = cart.CartLines.FirstOrDefault(x => x.Product.Id == product.Id);
                 cartLine.Amount++;
