@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace OnlineShopWebApp
 {
-    public class ProductsRepository
+    public class ProductsRepository: IProductsRepository
     {
         private static List<Product> products = new List<Product>()
         {
@@ -34,5 +34,12 @@ namespace OnlineShopWebApp
 
             return null;
         }
+    }
+
+    public interface IProductsRepository
+    {
+        private static List<Product> products;
+        public List<Product> GetAll();
+        public Product TryGetById() { return null; }
     }
 }

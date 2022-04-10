@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace OnlineShopWebApp
 {
-    public class CartRepository
+    public class CartRepository : ICartRepository
     {
         private static List<Cart> carts = new List<Cart>();
 
@@ -56,5 +56,12 @@ namespace OnlineShopWebApp
                 }
             }
         }
+    }
+
+    public interface ICartRepository
+    {
+        private static List<Cart> carts { get; set; }
+        public static Cart TryGetByUserId() { return carts.FirstOrDefault(); }
+        public static void Add() { }
     }
 }
