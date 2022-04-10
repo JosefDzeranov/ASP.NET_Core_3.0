@@ -4,7 +4,7 @@ namespace OnlineShopWebApp
 {
     public static class ProductManager
     {
-       private static List<Product> productList = new List<Product>()
+        private static List<Product> productList = new List<Product>()
         {
             new Product(1, "Cheeseburger", 150, "бургер с говяжьей котлетой и сыром"),
             new Product(2, "Hamburger", 120, "бургер с говяжьей котлетой"),
@@ -28,14 +28,11 @@ namespace OnlineShopWebApp
 
         public static Product FindProduct(int id)
         {
-           // var output = string.Empty;
-            return productList.Find(product => product.Id == id);
-            //output += $"{foundProduct.Id}\n{foundProduct.Name}\n{foundProduct.Cost}\n{foundProduct.Description}";
 
-            
-            //return output;
+            return productList.Find(product => product.Id == id);
+
         }
 
-        
+
     }
 }

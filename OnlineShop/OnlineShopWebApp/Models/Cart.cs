@@ -5,10 +5,11 @@ namespace OnlineShopWebApp.Models
 {
     public class Cart
     {
-        public List<Product> AddedProducts = new List<Product>();
+
+        public List<CartLine> CartLines = new List<CartLine>();
         public int Id { get; }
         public static int IdCounter = 0;
-        public string UserId = "UserId";
+        public string UserId { get; }
 
         public decimal CartCost
         {
@@ -17,18 +18,21 @@ namespace OnlineShopWebApp.Models
 
                 decimal Cost = 0;
 
-                Cost = AddedProducts.Sum(x => x.TotalCost);
+                Cost = CartLines.Sum(x => x.Cost);
                 return Cost;
             }
         }
 
 
 
-        public Cart()
+        public Cart(string userId)
         {
             IdCounter++;
             Id = IdCounter;
-        }
+            UserId = userId;
+            CartLines = new List<CartLine>();
 
+        }
     }
 }
+

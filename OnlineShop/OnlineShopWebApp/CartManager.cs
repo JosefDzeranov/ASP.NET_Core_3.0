@@ -13,7 +13,7 @@ namespace OnlineShopWebApp
 
         public static Cart CreateCart()
         {
-            Cart cart = new Cart();
+            Cart cart = new Cart(IdStorage.UserId);
 
             if (!cartList.Contains(cart))
             {
@@ -33,29 +33,41 @@ namespace OnlineShopWebApp
             return cartList;
         }
 
-        public static void  AddProductToCart(Cart cart, Product product)
+        public static void AddProductToCart(string userId, Product product)
         {
-            if (cart.AddedProducts.Contains(product))
+
+            if (cartList.FirstOrDefault(x => x.UserId == userId) != null)
             {
+                var cart = cartList.FirstOrDefault(x => x.UserId == userId);
 
-                foreach (var item in cart.AddedProducts)
+                if (cart.CartLines.FirstOrDefault(x => x.Product.Id == product.Id) != null)
                 {
-                    if (item == product)
-                    {
-                        item.Number++;
-                        item.TotalCost += item.Cost;
-
-                    }
+                    var cartLine = cart.CartLines.FirstOrDefault(x => x.Product.Id == product.Id);
+                    cartLine.Amount++;
+                }
+                else
+                {
+                    var cartLine = new CartLine(product);
+                    cartLine.Amount++;
+                    cart.CartLines.Add(cartLine);
                 }
 
             }
             else
             {
-                product.Number++;
-                cart.AddedProducts.Add(product);
+                var cart = new Cart(IdStorage.UserId);
+                cart.CartLines.Add(new CartLine(product));
+                var cartLine = cart.CartLines.FirstOrDefault(x => x.Product.Id == product.Id);
+                cartLine.Amount++;
+
+
+
             }
+
+
+
         }
-       
+
 
 
 

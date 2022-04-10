@@ -1,15 +1,17 @@
-﻿
-@model Cart
+﻿@model Cart
 
 
-    <style>
-        table, th, td{
-            border: 1px solid black;
-        }
-        table {border-collapse:collapse;}
-    </style>
+<style>
+    table, th, td {
+        border: 1px solid black;
+    }
 
-@if (Model.AddedProducts.Count == 0)
+    table {
+        border-collapse: collapse;
+    }
+</style>
+
+@if (Model.CartLines.Count == 0)
 {
     <h1>"Корзина пуста"</h1>
     <p>@Model.Id</p>
@@ -20,24 +22,24 @@ else
     <p><b>ВАША КОРЗИНА:</b></p>
     <table>
         <tr>
-        <th> Наименование</th>
-        <th>Количество</th>
-        <th>Стоимость</th>
+            <th> Наименование</th>
+            <th>Количество</th>
+            <th>Стоимость</th>
         </tr>
 
 
-        @foreach (var product in Model.AddedProducts)
+        @foreach (var cartLine in Model.CartLines)
         {
             <tr>
-                <td>@product.Name</td>
-                <td>@product.Number</td>
-                <td>@product.TotalCost</td>
+                <td>@cartLine.Product.Name</td>
+                <td>@cartLine.Amount</td>
+                <td>@cartLine.Cost</td>
 
             </tr>
 
         }
         <tr>
-           
+
             <td colspan="2"><b>Сумма корзины:</b></td>
             <td><b>@Model.CartCost</b></td>
         </tr>

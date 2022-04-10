@@ -15,12 +15,9 @@
             Name = name;
             Cost = cost;
             Description = description;
-            TotalCost += cost;
+           
         }
 
-        public override string ToString()
-        {
-            return $"{Id}\n{Name}\n{Cost}\n\n";
-        }
+        
     }
 }
