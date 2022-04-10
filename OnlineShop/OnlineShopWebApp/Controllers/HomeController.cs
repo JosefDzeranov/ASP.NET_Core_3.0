@@ -6,16 +6,16 @@ namespace OnlineShopWebApp.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly ProductsReposititory productReposititory;
+        private readonly ProductsRepository productsRepository;
 
-        public HomeController()
+        public HomeController(ProductsRepository productsRepository)
         {
-            productReposititory = new ProductsReposititory();
+            this.productsRepository = productsRepository;
         }
 
         public IActionResult Products()
         {
-            var products = productReposititory.GetAll();
+            var products = productsRepository.GetAll();
             return View(products);
             /// <summary>
             /// Use them to pass only constants and small data.

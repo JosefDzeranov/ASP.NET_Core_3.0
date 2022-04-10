@@ -10,11 +10,11 @@ namespace OnlineShopWebApp.Controllers
 {
     public class CartController : Controller
     {
-        private readonly ProductsRepository productRepository;
+        private readonly ProductsRepository productsRepository;
 
         public CartController(ProductsRepository productsRepository)
         {
-            this.productRepository = productsRepository;
+            this.productsRepository = productsRepository;
         }
 
         public IActionResult Index()
@@ -25,7 +25,7 @@ namespace OnlineShopWebApp.Controllers
 
         public IActionResult Add(int productId)
         {
-            var product = productRepository.TryGetById(productId);
+            var product = productsRepository.TryGetById(productId);
             CartRepository.Add(product, Constants.UserId);
             return RedirectToAction("Index");
         }
