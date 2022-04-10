@@ -25,6 +25,14 @@ namespace OnlineShopWebApp.Controllers
             return View(products);
         }
 
+        public IActionResult Basket()
+        {
+            var products = productRepozitory.GetAll();
+
+            return View(products);
+        }
+
+
         public IActionResult Privacy()
         {
             return View();
