@@ -6,16 +6,16 @@ using System.Threading.Tasks;
 
 namespace OnlineShopWebApp
 {
-    public class CartRepository : ICartRepository
+    public class CartsRepository : ICartsRepository
     {
-        private static List<Cart> carts = new List<Cart>();
+        public static List<Cart> Carts { get; set; } = new List<Cart>();
 
-        public static Cart TryGetByUserId(string userId)
+        public Cart TryGetByUserId(string userId)
         {
-            return carts.FirstOrDefault(x => x.UserId == userId);
+            return Carts.FirstOrDefault(x => x.UserId == userId);
         }
 
-        public static void Add(Product product, string userId)
+        public void Add(Product product, string userId)
         {
             var existingCart = TryGetByUserId(userId);
             if (existingCart==null)
@@ -35,7 +35,7 @@ namespace OnlineShopWebApp
                     }
                 };
 
-                carts.Add(newCart);
+                Carts.Add(newCart);
             }
             else
             {
@@ -58,10 +58,10 @@ namespace OnlineShopWebApp
         }
     }
 
-    public interface ICartRepository
+    public interface ICartsRepository
     {
         private static List<Cart> carts { get; set; }
-        public static Cart TryGetByUserId() { return carts.FirstOrDefault(); }
+        public Cart TryGetByUserId() { return carts.FirstOrDefault(); }
         public static void Add() { }
     }
 }

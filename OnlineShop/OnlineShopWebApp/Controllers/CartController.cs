@@ -1,9 +1,4 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using OnlineShopWebApp.Models;
 
 
 namespace OnlineShopWebApp.Controllers
@@ -11,25 +6,27 @@ namespace OnlineShopWebApp.Controllers
     public class CartController : Controller
     {
         private readonly ProductsRepository productsRepository;
+        private readonly CartsRepository cartsRepository;
         private readonly Constants constants;
 
 
-        public CartController(ProductsRepository productsRepository, Constants constants)
+        public CartController(ProductsRepository productsRepository, CartsRepository cartsRepository, Constants constants)
         {
             this.productsRepository = productsRepository;
+            this.cartsRepository = cartsRepository;
             this.constants = constants;
         }
 
         public IActionResult Index()
         {
-            var cart = CartRepository.TryGetByUserId(constants.UserId);
+            var cart = cartsRepository.TryGetByUserId(constants.UserId);
             return View(cart);
         }
 
         public IActionResult Add(int productId)
         {
             var product = productsRepository.TryGetById(productId);
-            CartRepository.Add(product, constants.UserId);
+            cartsRepository.Add(product, constants.UserId);
             return RedirectToAction("Index");
         }
 
