@@ -20,7 +20,7 @@ namespace OnlineShopWebApp
             var existingCart = TryGetByUserId(userId);
             if (existingCart==null)
             {
-                var newCart = new Cart()
+                var newCart = new Cart
                 {
                     Id = Guid.NewGuid(),
                     UserId = userId,
@@ -30,7 +30,7 @@ namespace OnlineShopWebApp
                         {
                             Id=Guid.NewGuid(),
                             Amount=1,
-                            Product=product,
+                            Product=product
                         }
                     }
                 };
@@ -40,7 +40,8 @@ namespace OnlineShopWebApp
             else
             {
                 var existingCartItem = existingCart.Items.FirstOrDefault(x => x.Product.Id == product.Id);
-                if (existingCart != null)
+                
+                if (existingCartItem != null)
                 {
                     existingCartItem.Amount += 1;
                 }
@@ -50,7 +51,7 @@ namespace OnlineShopWebApp
                     {
                         Id=Guid.NewGuid(),
                         Amount =1,
-                        Product = product,
+                        Product = product
                     });
                 }
             }
