@@ -1,43 +1,56 @@
 ﻿@using OnlineShopWebApp.Models
-@model CartStorage
 
-@{
-    ViewData["Title"] = "Cart";
+@model Cart
+
+<h2 align="center">Корзина</h2>
+@if (Model == null)
+{
+    <div class="404">
+        <h3 align="center">Корзина пустая</h3>
+        <img class="card-img-top" src="/images/404.jpg" />
+    </div>
 }
-
-<div class="container">
-    <h2>Basket</h2>
+else
+{
     <div class="row">
         <div class="col">
-            <div class="col-6 card-body shadow">
-                <caption>Список</caption>
+            <table class="table table-striped">
                 <thead class="table-light" align="center">
                     <tr>
-                        <th scope="col">Name</th>
-                        <th scope="col">Count</th>
-                        <th scope="col">Cost</th>
+                        <th scope="col">Фото</th>
+                        <th scope="col">Название</th>
+                        <th scope="col">Цена (руб.)</th>
+                        <th scope="col">Количество</th>
+                        <th scope="col">Стоимость (руб.)</th>
+                        <th scope="col">Удалить</th>
                     </tr>
                 </thead>
-                @foreach (var product in Model.Products)
-                {
+                <tbody>
+                    @foreach (var product in Model.Items)
+                    {
+                        <tr>
+                            <td><img src=@product.Product.ImagePath style="width: 80px; height: 80px;" /></td>
                             <td><a href="/product/index/@product.Product.Id">@product.Product.Name</a></td>
                             <td>@product.Product.Cost</td>
-                }
-                    <tr>
-                        <td></td>
-                        <td></td>
-                        <td colspan="3" class="align-content-end"><b>Итого: $@Model.TryGetTotalSum()</b></td>
-                    </tr>
-                <div class="row">
-                    <div class="col-6 card-body shadow">
-                        <img class="card-img-top" src="/images/justice-2060093.jpg" />
-                        <div class="card-body">
-                            <a class="btn btn-dark" href="/home/index" role="button">Продолжить покупки</a>
-                            <a class="btn btn-dark" href="" role="button">Добавить в корзину</a>
-                        </div>
-                    </div>
-                </div>
+                            <td>@product.Count</td>
+                            <td>@product.Cost</td>
+                            <td><a href="#" type="button" class="btn btn-danger">Удалить</a></td>
+                        </tr>
+                    }
+                </tbody>
+                <tr class="text-right">
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td><h3>Итого</h3></td>
+                    <td><h3>@Model.Cost</h3></td>
+                </tr>
+            </table>
+            <div class="text-center">
+                <a type="button" class="btn btn-dark" href="/home/index" role="button">Продолжить покупки</a>
+                <a type="button" class="btn btn-dark" href="#" role="button">Оформить заказ</a>
             </div>
         </div>
     </div>
-</div>
+}

@@ -18,15 +18,15 @@ else
         @foreach (var product in Model)
         {
             <div class="col-4 card-body shadow">
-                <img class="card-img-top" src="/images/justice-2060093.jpg" />
+                <img class="card-img-top" src=@product.ImagePath alt="Изображение товара"/>
                 <div class="card-body">
                     <a style="color:black" href="/product/index/@product.Id">
                     <h4>@product.Name</h4>
                     </a>
-                    <h5>Цена: @product.Cost рублей</h5>
+                    <h5>Стоимость: @product.Cost рублей</h5>
                     <p>@product.Description</p>
                     <a class="btn btn-light" href="/home/index" width="20px" role="button">Продолжить покупки</a>
-                    <a class="btn btn-light" href="/cart/index/@product.Id" width="20px" role="button">Добавить в корзину</a>
+                    <a class="btn btn-light" href="/cart/add/?productId=@product.Id" width="20px" role="button">Добавить в корзину</a>
                 </div>
             </div>
         }

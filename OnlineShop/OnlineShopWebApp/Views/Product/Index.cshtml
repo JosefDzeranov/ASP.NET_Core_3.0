@@ -16,13 +16,13 @@ else
 {
     <div class="row">
         <div class="col-6 card-body shadow">
-            <img class="card-img-top" src="/images/justice-2060093.jpg" />
+            <img class="card-img-top" src=@Model.ImagePath alt="Изображение услуги"/>
             <div class="card-body">
                 <h4>@Model.Name</h4>
                 <h4>Цена: @Model.Cost рублей</h4>
                 <p>Описание услуги: @Model.Description</p>
                 <a class="btn btn-dark" href="/home/index" role="button">Продолжить покупки</a>
-                <a class="btn btn-dark" href="" role="button">Добавить в корзину</a>
+                <a class="btn btn-dark" href="/cart/add/?productId=@Model.Id" role="button">Добавить в корзину</a>
             </div>
         </div>
     </div>
