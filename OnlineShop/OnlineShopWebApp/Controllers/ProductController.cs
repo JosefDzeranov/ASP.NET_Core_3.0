@@ -3,19 +3,18 @@ using OnlineShopWebApp.DataSources;
 
 namespace OnlineShopWebApp.Controllers
 {
-	public class ProductController : Controller
+    public class ProductController : Controller
     {
         private readonly ProductDataSource productDataSource;
-      public ProductController()
-		{
+        public ProductController()
+       {
             productDataSource = new ProductDataSource();
-		}
-        public IActionResult Index(int id)
-        {
-      
+       }
+       
+       public IActionResult Index(int id)
+       {
             var product = productDataSource.GetProductById(id);
-                return View(product);
-
+            return View(product);
         }
     }
 }

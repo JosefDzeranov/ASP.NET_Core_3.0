@@ -19,7 +19,6 @@ namespace OnlineShopWebApp.Controllers
             _logger = logger;
         }
 
-
         public IActionResult Privacy()
         {
             return View();
