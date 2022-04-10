@@ -9,7 +9,7 @@ namespace OnlineShopWebApp.Models
         public List<CartLine> CartLines = new List<CartLine>();
         public int Id { get; }
         public static int IdCounter = 0;
-        public string UserId { get; }
+        public string UserId { get; set; }
 
         public decimal CartCost
         {
@@ -30,7 +30,7 @@ namespace OnlineShopWebApp.Models
             IdCounter++;
             Id = IdCounter;
             UserId = userId;
-            CartLines = new List<CartLine>();
+            
 
         }
     }

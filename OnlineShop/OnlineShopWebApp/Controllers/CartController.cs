@@ -6,23 +6,25 @@ namespace OnlineShopWebApp.Controllers
     public class CartController : Controller
     {
         private CartManager cartManager;
-       // private Cart cart;
+        
        
 
         public IActionResult Index()
         {
+            var cart = cartManager.CreateCart();
 
-
-            return View(cartManager.cart);
+            return View(cart);
         }
 
 
         public IActionResult AddToCart(int id)
         {
             var foundProduct = ProductManager.FindProduct(id);
+            
 
             cartManager.AddProductToCart(IdStorage.UserId, foundProduct);
-            return View("Index", cartManager.cart);
+            var cart = cartManager.TryGetCartByUserID(IdStorage.UserId);
+            return View("Index", cart);
         }
 
         public CartController(CartManager cartManager)

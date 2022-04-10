@@ -8,27 +8,28 @@ namespace OnlineShopWebApp
     public  class CartManager
     {
         static List<Cart> cartList = new List<Cart>();
-        public  Cart cart = new Cart(IdStorage.UserId);
-        private  CartLine cartLine;
 
-        //public  Cart CreateCart()
-        //{
-        //  //  Cart cart = new Cart(IdStorage.UserId);
 
-        //    if (!cartList.Contains(cart))
-        //    {
-        //        cartList.Add(cart);
-        //        cart = cartList.FirstOrDefault(x => x.UserId == cart.UserId);
-        //    }
-        //    else
-        //    {
-        //        cart = cartList.FirstOrDefault(x => x.UserId == cart.UserId);
-        //    }
 
-        //    return cart;
-        //}
+        public Cart CreateCart()
+        {
+              Cart cart = new Cart(IdStorage.UserId);
 
-        public  List<Cart> GetCarts()
+            if (!cartList.Contains(cart))
+            {
+                cartList.Add(cart);
+                cart = cartList.FirstOrDefault(x => x.UserId == cart.UserId);
+                
+            }
+            else
+            {
+                cart = cartList.FirstOrDefault(x => x.UserId == cart.UserId);
+            }
+
+            return cart;
+        }
+
+        public List<Cart> GetCarts()
         {
             return cartList;
         }
@@ -38,16 +39,16 @@ namespace OnlineShopWebApp
 
             if (cartList.FirstOrDefault(x => x.UserId == userId) != null)
             {
-                var cart = cartList.FirstOrDefault(x => x.UserId == userId);
+               var cart = cartList.FirstOrDefault(x => x.UserId == userId);
 
                 if (cart.CartLines.FirstOrDefault(x => x.Product.Id == product.Id) != null)
                 {
-                    var cartLine = cart.CartLines.FirstOrDefault(x => x.Product.Id == product.Id);
-                    cartLine.Amount++;
+                  var  cartLine = cart.CartLines.FirstOrDefault(x => x.Product.Id == product.Id);
+                  cartLine.Amount++;
                 }
                 else
                 {
-                    cartLine.Product = product;
+                    var cartLine = new CartLine(product);
                     cartLine.Amount++;
                     cart.CartLines.Add(cartLine);
                 }
@@ -55,12 +56,12 @@ namespace OnlineShopWebApp
             }
             else
             {
-               // var cart = CreateCart();
-
-                cart.CartLines.Add(new CartLine(product));
-                cartLine = cart.CartLines.FirstOrDefault(x => x.Product.Id == product.Id);
+                var cart = CreateCart();
+                cartList.Add(cart);
+                var cartLine = new CartLine(product);
+                
                 cartLine.Amount++;
-
+                cart.CartLines.Add(cartLine);
 
 
             }
@@ -69,11 +70,19 @@ namespace OnlineShopWebApp
 
         }
 
-        //public CartManager(Cart cart, CartLine cartLine)
-        //{
-        //    this.cart = cart;
-        //    this.cartLine = cartLine;
-        //}
+        public Cart TryGetCartByUserID(string userId)
+        {
+            if (cartList.FirstOrDefault(x => x.UserId == userId) != null)
+            {
+                return cartList.FirstOrDefault(x => x.UserId == userId);
+            }
+            else
+            {
+                return null;
+            }
+        }
+
+       
 
 
     }
