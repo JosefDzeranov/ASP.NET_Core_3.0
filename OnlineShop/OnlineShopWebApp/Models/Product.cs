@@ -4,20 +4,20 @@
     {
         public int Id { get;}
         public string Name { get; set; }
-        public int Cost { get; set; }
+        public decimal Cost { get; set; }
+        public decimal TotalCost { get; set; }
         public string Description { get; set; }
+        public int Number { get; set; }
 
-        public Product(int id, string name, int cost, string description)
+        public Product(int id, string name, decimal cost, string description)
         {
             Id = id;
             Name = name;
             Cost = cost;
             Description = description;
+           
         }
 
-        public override string ToString()
-        {
-            return $"{Id}\n{Name}\n{Cost}\n\n";
-        }
+        
     }
 }
