@@ -20,6 +20,7 @@
                     <th>Цена руб.</th>
                     <th>Количество</th>
                     <th>Стоимость руб.</th>
+                    <th></th>
                 </tr>
 
                 @foreach (var cartItem in Model.Items)
@@ -29,7 +30,10 @@
                         <td>@cartItem.Product.Cost</td>
                         <td>@cartItem.Quantinity</td>
                         <td>@cartItem.Cost</td>
-
+                        <td>
+                            <a href="/cart/add?productId=@cartItem.Product.Id" class="btn btn-dark btn-sm">+</a>
+                            <a href="/cart/remove?productId=@cartItem.Product.Id" class="btn btn-dark btn-sm">-</a>
+                        </td>
                     </tr>
                 }
 
