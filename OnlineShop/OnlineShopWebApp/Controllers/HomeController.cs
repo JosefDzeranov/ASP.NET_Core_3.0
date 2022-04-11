@@ -6,9 +6,15 @@ namespace OnlineShopWebApp.Controllers
 {
     public class HomeController : Controller
     {
+        private DataStorage Data { get; }
+        public HomeController(DataStorage dataStorage)
+        {
+            Data = dataStorage;
+        }
+
         public IActionResult Index()
         {           
-            var products = new DataStorage().GetProductDataFromXML();
+            var products = Data.GetProductDataFromXML();
             return View(products);
         }
 

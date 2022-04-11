@@ -6,36 +6,7 @@ using System.Xml.Linq;
 namespace OnlineShopWebApp
 {
     public class DataStorage
-    {
-        private static List<Basket> productBaskets = new List<Basket>();
-
-        public IEnumerable<Basket> ProductBaskets
-        {
-            get
-            {
-                return productBaskets;
-            }
-        }
-
-        public void AddProductBasket(Product product)
-        {
-            var productBasket = productBaskets.Where(p => p.Product.Id == product.Id)
-                                                           .FirstOrDefault();
-            if (productBasket == null)
-            {
-                productBaskets.Add(new Basket(product));
-            }
-            else
-            {
-                productBasket.Quantity++;
-            }
-        }
-
-        public decimal GetTotalSum()
-        {
-            return productBaskets.Sum(b => b.Product.Cost * b.Quantity);
-        }
-
+    {  
         public IEnumerable<Product> GetProductDataFromXML()
         {
             var xDoc = XDocument.Load("Data/products.xml");
@@ -52,9 +23,8 @@ namespace OnlineShopWebApp
 
         public Product TryGetProduct(int id)
         {
-            var product = new DataStorage().GetProductDataFromXML()
-                                           .Where(p => p.Id == id)
-                                           .FirstOrDefault();
+            var product = GetProductDataFromXML().Where(p => p.Id == id)
+                                                 .FirstOrDefault();
             return product;
         }
     }
