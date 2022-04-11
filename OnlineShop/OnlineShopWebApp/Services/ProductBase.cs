@@ -1,9 +1,9 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 
-namespace OnlineShopWebApp.Models
+namespace OnlineShopWebApp.Services
 {
-    public class ProdcutBase
+    public class ProductBase
     {
         public static List<Product> products = new List<Product>()
         {

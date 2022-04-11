@@ -1,22 +1,22 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using OnlineShopWebApp.Models;
-using System.Collections.Generic;
-using System.Linq;
+using OnlineShopWebApp.Services;
 
 namespace OnlineShopWebApp.Controllers
 {
     public class CartController : Controller
     {
-        private readonly ProdcutBase prodcutBase;
+        private readonly ProductBase prodcutBase;
+        private readonly CartBase cartBase;
 
-        public CartController()
+        public CartController(ProductBase productBase, CartBase cartBase)
         {
-            prodcutBase = new ProdcutBase();
+            this.prodcutBase = productBase;
+            this.cartBase = cartBase;
 
         }
         public IActionResult Index()
         {
-            var cart = CartBase.TryGetByUserId(Const.UserId);
+            var cart = cartBase.TryGetByUserId(Const.UserId);
 
             return View(cart);
         }
@@ -25,7 +25,7 @@ namespace OnlineShopWebApp.Controllers
         {
 
             var product = prodcutBase.TryGetById(productId);
-            CartBase.Add(product, Const.UserId);
+            cartBase.Add(product, Const.UserId);
 
             return RedirectToAction("Index");
         }

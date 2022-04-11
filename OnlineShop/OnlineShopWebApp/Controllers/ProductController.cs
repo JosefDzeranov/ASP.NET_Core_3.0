@@ -1,16 +1,15 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using OnlineShopWebApp.Models;
-using System.Linq;
+using OnlineShopWebApp.Services;
 
 namespace OnlineShopWebApp.Controllers
 {
     public class ProductController : Controller
     {
-        private readonly ProdcutBase productBase;
+        private readonly ProductBase productBase;
 
-        public ProductController()
+        public ProductController(ProductBase productBase)
         {
-            productBase = new ProdcutBase();
+            this.productBase = productBase;
         }
         public IActionResult Index(int id)
         {
