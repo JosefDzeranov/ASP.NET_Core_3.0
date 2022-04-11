@@ -13,7 +13,7 @@ namespace OnlineShopWebApp.Models
             return carts.FirstOrDefault(x => x.UserId == userId);
         }
 
-        internal static void Add(Product product, string userId)
+        public static void Add(Product product, string userId)
         {
             var existingCart = TryGetByUserId(userId);
             if (existingCart == null)
