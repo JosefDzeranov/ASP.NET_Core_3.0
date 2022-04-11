@@ -1,6 +1,6 @@
 ﻿@model (Dictionary<Product, int> products, decimal total)
 
-@if (Model.products == null)
+@if (Model.products == null || Model.products.Count == 0)
 {
 	<h3>Пустая корзина</h3>
 }
