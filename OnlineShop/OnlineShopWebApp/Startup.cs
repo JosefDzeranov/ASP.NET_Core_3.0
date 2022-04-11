@@ -20,7 +20,7 @@ namespace OnlineShopWebApp
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllersWithViews();
-            services.AddTransient<DataStorage>();
+            services.AddSingleton<ProductStorage>();
             services.AddSingleton<BasketStorage>();
         }
 

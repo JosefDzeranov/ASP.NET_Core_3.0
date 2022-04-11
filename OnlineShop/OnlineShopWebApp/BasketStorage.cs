@@ -6,33 +6,33 @@ namespace OnlineShopWebApp
 {
     public class BasketStorage
     {
-        private List<Basket> productBaskets = new List<Basket>();
+        private List<Basket> baskets = new List<Basket>();
 
-        public IEnumerable<Basket> ProductBaskets
+        public IEnumerable<Basket> Baskets
         {
             get
             {
-                return productBaskets;
+                return baskets;
             }
         }
 
-        public void AddProductBasket(Product product)
+        public void AddProduct(Product product)
         {
-            var productBasket = productBaskets.Where(basket => basket.Product.Id == product.Id)
+            var basket = baskets.Where(basket => basket.Product.Id == product.Id)
                                               .FirstOrDefault();
-            if (productBasket == null)
+            if (basket == null)
             {
-                productBaskets.Add(new Basket(product));
+                baskets.Add(new Basket(product));
             }
             else
             {
-                productBasket.Quantity++;
+                basket.Quantity++;
             }
         }
 
         public decimal GetTotalSum()
         {
-            return productBaskets.Sum(basket => basket.Product.Cost * basket.Quantity);
+            return baskets.Sum(basket => basket.Product.Cost * basket.Quantity);
         }
     }
 }

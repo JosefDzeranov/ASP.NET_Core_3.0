@@ -5,7 +5,7 @@ using System.Xml.Linq;
 
 namespace OnlineShopWebApp
 {
-    public class DataStorage
+    public class ProductStorage
     {  
         public IEnumerable<Product> GetProductDataFromXML()
         {

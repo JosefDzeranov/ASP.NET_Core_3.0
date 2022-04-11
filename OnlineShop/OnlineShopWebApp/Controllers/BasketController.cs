@@ -5,28 +5,28 @@ namespace OnlineShopWebApp.Controllers
 {
     public class BasketController : Controller
     {
-        private DataStorage Data { get; }
+        private ProductStorage ProductStorage { get; }
         private BasketStorage Basket { get; }
 
-        public BasketController (DataStorage dataStorage, BasketStorage basketStorage)
+        public BasketController (ProductStorage productStorage, BasketStorage basketStorage)
         {
-            Data = dataStorage;
+            ProductStorage = productStorage;
             Basket = basketStorage;
         }
         public IActionResult Index(int id)
         {
-            var product = Data.TryGetProduct(id);           
+            var product = ProductStorage.TryGetProduct(id);           
 
             if (product == null)
             {           
-                if(Basket.ProductBaskets.Count() == 0)
+                if(Basket.Baskets.Count() == 0)
                 {
                     return View("Empty");
                 }
                 return View(Basket);
             }
 
-            Basket.AddProductBasket(product);
+            Basket.AddProduct(product);
             return View(Basket);
         }
     }
