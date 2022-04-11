@@ -6,6 +6,16 @@ namespace OnlineShopWebApp.Models
 {
     public class CartsStorage
     {
+        public CartsStorage cartsStorage
+        {
+            get;
+        }
+
+        public CartsStorage(CartsStorage cartsStorage)
+        {
+            this.cartsStorage = cartsStorage;
+        }
+
         private List<Cart> carts = new List<Cart>();
 
         public Cart TryGetByUserId(string userId)
@@ -13,7 +23,7 @@ namespace OnlineShopWebApp.Models
             return carts.FirstOrDefault(x => x.UserId == userId);
         }
 
-        internal void Add(Product product, string userId)
+        public void Add(Product product, string userId)
         {
             var existingCart = TryGetByUserId(userId);
             if (existingCart == null)

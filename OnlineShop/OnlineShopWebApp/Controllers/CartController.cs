@@ -1,31 +1,33 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using OnlineShopWebApp.Models;
-using System.Linq;
-using Microsoft.AspNetCore.Mvc;
-
 
 namespace OnlineShopWebApp.Controllers
 {
     public class CartController : Controller
     {
-        private readonly ProductsStorage productStorage;
-        public CartController()
-        {
-            productStorage = new ProductsStorage();
-        }
+        private readonly CartsStorage cartsStorage;
+        
+        private readonly ProductsStorage productsStorage;
 
+        private readonly Constants constants;
+
+        public CartController(CartsStorage cartsStorage)
+        {
+            this.cartsStorage = cartsStorage;
+        }
+        
         public IActionResult Index()
         {
-            var cart = CartsStorage.TryGetByUserId(Constants.UserId);
+            var cart = cartsStorage.TryGetByUserId(constants.UserId);
 
             return View(cart);
         }
 
         public IActionResult Add(int productId)
         {
-            var product = ProductsStorage.TryGetProduct(productId);
+            var product = productsStorage.TryGetProduct(productId);
 
-            CartsStorage.Add(product, Constants.UserId);
+            cartsStorage.Add(product, constants.UserId);
             return RedirectToAction("Index");
         }
     }

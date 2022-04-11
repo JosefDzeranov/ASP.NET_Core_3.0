@@ -20,9 +20,10 @@ namespace OnlineShopWebApp
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllersWithViews();
-
+            //services.AddMvc();
             services.AddSingleton<ProductsStorage>(); //список товаров формировать один раз на программу
-            services.AddTransient<CartsStorage>(); //корзину формировать каждый раз при обращении
+            services.AddSingleton<CartsStorage>(); //корзину формировать каждый раз при обращении
+            //services.AddSingleton<Constants>(); //не до конца понял зачем для Constants регистрировать
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
