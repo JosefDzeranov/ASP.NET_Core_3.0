@@ -1,8 +1,20 @@
-﻿@{
+﻿@model List<Product>
+@{
     ViewData["Title"] = "Home Page";
 }
+
+ <a href = "/">
+    <h5>Продолжить покупки</h5>
+ </a>
+<div class = "row">
+    @foreach(var product in Model)
+    {
+        <partial name = "Product", model = "product"/>
+    }
+    </div>
 
 <div class="text-center">
     <h1 class="display-4">Welcome</h1>
     <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
 </div>
+
