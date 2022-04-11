@@ -1,6 +1,6 @@
 ﻿namespace OnlineShopWebApp
 {
-    public class IdStorage
+    public class Constants
     {
 
         public static string UserId = "UserId";

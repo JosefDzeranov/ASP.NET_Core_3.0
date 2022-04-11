@@ -13,7 +13,7 @@ namespace OnlineShopWebApp
 
         public Cart CreateCart()
         {
-              Cart cart = new Cart(IdStorage.UserId);
+              Cart cart = new Cart(Constants.UserId);
 
             if (!cartList.Contains(cart))
             {

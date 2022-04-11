@@ -2,7 +2,7 @@
 
 namespace OnlineShopWebApp
 {
-    public static class ProductManager
+    public  class ProductManager
     {
         private static List<Product> productList = new List<Product>()
         {
@@ -26,7 +26,7 @@ namespace OnlineShopWebApp
             return productList;
         }
 
-        public static Product FindProduct(int id)
+        public  Product FindProduct(int id)
         {
 
             return productList.Find(product => product.Id == id);
