@@ -22,7 +22,7 @@ namespace OnlineShopWebApp
         {
             services.AddControllersWithViews();
             services.AddSingleton<IProductBase,ProductBase>();
-            services.AddSingleton<CartBase>();
+            services.AddSingleton<ICartBase,CartBase>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
