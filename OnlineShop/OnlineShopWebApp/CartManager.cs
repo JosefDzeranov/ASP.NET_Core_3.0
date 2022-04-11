@@ -72,14 +72,9 @@ namespace OnlineShopWebApp
 
         public Cart TryGetCartByUserID(string userId)
         {
-            if (cartList.FirstOrDefault(x => x.UserId == userId) != null)
-            {
-                return cartList.FirstOrDefault(x => x.UserId == userId);
-            }
-            else
-            {
-                return null;
-            }
+            return cartList.FirstOrDefault(x => x.UserId == userId);
+
+           
         }
 
        
