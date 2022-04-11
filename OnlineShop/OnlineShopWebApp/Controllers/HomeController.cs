@@ -13,11 +13,11 @@ namespace OnlineShopWebApp.Controllers
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
-        private readonly ProductDataSource productDataSource;
+        private readonly IProductDataSource productDataSource;
 
         public HomeController(
             ILogger<HomeController> logger,
-            ProductDataSource productDataSource)
+            IProductDataSource productDataSource)
         {
             _logger = logger;
             this.productDataSource = productDataSource;

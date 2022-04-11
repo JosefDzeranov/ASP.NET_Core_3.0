@@ -6,11 +6,11 @@ namespace OnlineShopWebApp.Controllers
 {
 	public class CartController : Controller
 	{
-		private readonly ProductDataSource productDataSource;
+		private readonly IProductDataSource productDataSource;
 
-		private readonly CartRepository cartRepository;
+		private readonly ICartRepository cartRepository;
 
-		public CartController(CartRepository cartRepository, ProductDataSource productDataSource)
+		public CartController(ICartRepository cartRepository, IProductDataSource productDataSource)
 		{
 			this.cartRepository = cartRepository;
 			this.productDataSource = productDataSource;
