@@ -1,11 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using OnlineShopWebApp.Models;
+using System.Diagnostics;
 
 namespace OnlineShopWebApp.Controllers
 {
@@ -13,24 +9,20 @@ namespace OnlineShopWebApp.Controllers
     {
         private readonly ILogger<HomeController> _logger;
 
-        public HomeController(ILogger<HomeController> logger)
-        {
-            _logger = logger;
-        }
-
         private readonly ProductRepository productRepository;
 
-        public HomeController()
+        public HomeController(ILogger<HomeController> logger)
         {
             productRepository = new ProductRepository();
+            _logger = logger;
         }
 
         public string Index()
         {
-            var products = productRepository.GetProducts();
+            var products = productRepository.GetAllProducts();
             var result = "";
 
-            foreach(var product in products)
+            foreach (var product in products)
             {
                 result += product + "\n\n";
             }

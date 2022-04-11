@@ -18,7 +18,7 @@ namespace OnlineShopWebApp
                 ),
         };
 
-        public List<Product> GetProducts()
+        public List<Product> GetAllProducts()
         {
             return products;
         }
