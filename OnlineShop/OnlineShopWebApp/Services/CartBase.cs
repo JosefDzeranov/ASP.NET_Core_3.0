@@ -1,8 +1,10 @@
-﻿using System;
+﻿using OnlineShopWebApp.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
 namespace OnlineShopWebApp.Services
+
 {
     public class CartBase
     {

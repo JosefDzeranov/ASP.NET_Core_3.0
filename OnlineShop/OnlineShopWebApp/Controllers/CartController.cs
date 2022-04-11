@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using OnlineShopWebApp.Services;
-
+using OnlineShopWebApp.Models;
 namespace OnlineShopWebApp.Controllers
 {
     public class CartController : Controller

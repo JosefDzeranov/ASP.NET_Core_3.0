@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using OnlineShopWebApp.Models;
+using Microsoft.AspNetCore.Mvc;
 using OnlineShopWebApp.Services;
 
 namespace OnlineShopWebApp.Controllers
