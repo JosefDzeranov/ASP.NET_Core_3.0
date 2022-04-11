@@ -6,12 +6,12 @@ namespace OnlineShopWebApp.Controllers
     public class BasketController : Controller
     {
         private ProductStorage ProductStorage { get; }
-        private BasketStorage Basket { get; }
+        private BasketStorage BasketStorage { get; }
 
         public BasketController (ProductStorage productStorage, BasketStorage basketStorage)
         {
             ProductStorage = productStorage;
-            Basket = basketStorage;
+            BasketStorage = basketStorage;
         }
         public IActionResult Index(int id)
         {
@@ -19,15 +19,15 @@ namespace OnlineShopWebApp.Controllers
 
             if (product == null)
             {           
-                if(Basket.Baskets.Count() == 0)
+                if(BasketStorage.Baskets.Count() == 0)
                 {
                     return View("Empty");
                 }
-                return View(Basket);
+                return View(BasketStorage);
             }
 
-            Basket.AddProduct(product);
-            return View(Basket);
+            BasketStorage.AddProduct(product);
+            return View(BasketStorage);
         }
     }
 }
