@@ -1,19 +1,20 @@
 ﻿using OnlineShopWebApp.Models;
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
 namespace OnlineShopWebApp
 {
-    public class ProductReposititory
+    public class ProductsReposititory
     {
         private static List<Product> products = new List<Product>()
         {
-            new Product("Name1", 10, "Discription"),
-            new Product("Name2", 20, "Discription"),
-            new Product("Name3", 30, "Discription"),
-            new Product("Name4", 40, "Discription"),
+            new Product("Teapot", 10, "Discription", "/images/item1.png"),
+            new Product("Tea mug", 20, "Discription", "/images/item2.png"),
+            new Product("Dish", 30, "Discription", "/images/item3.png"),
+            new Product("Mug", 40, "Discription", "/images/item4.png"),
+            new Product("Coffee mug", 50, "Discription", "/images/item5.png"),
+            new Product("Bowl", 60, "Discription", "/images/item6.png"),
         };
 
         public List<Product> GetAll()
@@ -23,11 +24,6 @@ namespace OnlineShopWebApp
 
         public Product TryGetById(int id)
         {
-            /*
-            Linq
-            return products.FirstOrDefault(product => product.Id == id);
-            */
-
             foreach (var product in products)
             {
                 if (product.Id==id)
