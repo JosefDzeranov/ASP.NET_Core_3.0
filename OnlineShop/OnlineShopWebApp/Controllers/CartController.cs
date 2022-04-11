@@ -6,9 +6,9 @@ namespace OnlineShopWebApp.Controllers
     public class CartController : Controller
     {
         private readonly IProductBase prodcutBase;
-        private readonly CartBase cartBase;
+        private readonly ICartBase cartBase;
 
-        public CartController(IProductBase productBase, CartBase cartBase)
+        public CartController(IProductBase productBase, ICartBase cartBase)
         {
             this.prodcutBase = productBase;
             this.cartBase = cartBase;
