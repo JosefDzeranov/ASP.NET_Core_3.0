@@ -18,7 +18,7 @@ namespace OnlineShopWebApp.Controllers
             _logger = logger;
         }
 
-        private List<Product> products = new List<Product>()
+        private static List<Product> products = new List<Product>()
         {
             new Product (
                 "RTX 3080", 130000, "Видеокарта из серии RTX-3"
