@@ -6,14 +6,14 @@ namespace OnlineShopWebApp.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly ProductReposititory productReposititory;
+        private readonly ProductsReposititory productReposititory;
 
         public HomeController()
         {
-            productReposititory = new ProductReposititory();
+            productReposititory = new ProductsReposititory();
         }
 
-        public IActionResult HomeProducts()
+        public IActionResult Products()
         {
             var products = productReposititory.GetAll();
             return View(products);
@@ -23,10 +23,7 @@ namespace OnlineShopWebApp.Controllers
             /// ViewData["Products"] = result;
             /// TempData["Products"] = result;
             /// </summary>
-
         }
-
-       
 
         public IActionResult Privacy()
         {
