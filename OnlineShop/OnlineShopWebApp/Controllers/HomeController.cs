@@ -18,21 +18,16 @@ namespace OnlineShopWebApp.Controllers
             _logger = logger;
         }
 
-        private static List<Product> products = new List<Product>()
+        private readonly ProductRepository productRepository;
+
+        public HomeController()
         {
-            new Product (
-                "RTX 3080", 130000, "Видеокарта из серии RTX-3"
-                ),
-            new Product (
-                "Iphone 13 PRO", 115000, "Новый Iphone 13 PRO"
-                ),
-            new Product (
-                "Sony PS 5", 900000, "Новинка Sony"
-                ),
-        };
+            productRepository = new ProductRepository();
+        }
 
         public string Index()
         {
+            var products = productRepository.GetProducts();
             var result = "";
 
             foreach(var product in products)
