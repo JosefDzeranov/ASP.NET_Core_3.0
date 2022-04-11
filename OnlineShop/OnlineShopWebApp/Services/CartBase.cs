@@ -62,7 +62,7 @@ namespace OnlineShopWebApp.Services
             var existingCart = TryGetByUserId(userId);
             if (existingCart != null)
             {
-                existingCart.Items.Clear();
+                Сarts.Remove(existingCart);
             }
 
         }
@@ -81,6 +81,10 @@ namespace OnlineShopWebApp.Services
                         existingCart.Items.Remove(existingCartItem);
                     }
                 }
+            }
+            if(existingCart.Items.Count == 0)
+            {
+                Сarts.Remove(existingCart);
             }
         }
 

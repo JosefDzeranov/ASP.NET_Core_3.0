@@ -38,5 +38,13 @@ namespace OnlineShopWebApp.Controllers
 
             return RedirectToAction("Index");
         }
+        public IActionResult RemoveAll()
+        {
+
+           
+            cartBase.RemoveAll(Const.UserId);
+
+            return RedirectToAction("Index");
+        }
     }
 }
