@@ -20,11 +20,5 @@
             
             ImagePath = imagePath;
         }
-
-
-        public override string ToString()
-        {
-            return $"{Id}\n{Name}\n{Cost}\n{Description}\n{ImagePath}";
-        }
     }
 }
