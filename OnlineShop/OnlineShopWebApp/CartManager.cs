@@ -36,19 +36,21 @@ namespace OnlineShopWebApp
 
         public  void AddProductToCart(string userId, Product product)
         {
+            var cart = cartList.FirstOrDefault(x => x.UserId == userId);
+            var cartLine = cart.CartLines.FirstOrDefault(x => x.Product.Id == product.Id);
 
-            if (cartList.FirstOrDefault(x => x.UserId == userId) != null)
+            if (cart != null)
             {
-               var cart = cartList.FirstOrDefault(x => x.UserId == userId);
+             
 
-                if (cart.CartLines.FirstOrDefault(x => x.Product.Id == product.Id) != null)
+                if (cartLine != null)
                 {
-                  var  cartLine = cart.CartLines.FirstOrDefault(x => x.Product.Id == product.Id);
+                 
                   cartLine.Amount++;
                 }
                 else
                 {
-                    var cartLine = new CartLine(product);
+                    cartLine = new CartLine(product);
                     cartLine.Amount++;
                     cart.CartLines.Add(cartLine);
                 }
@@ -56,9 +58,9 @@ namespace OnlineShopWebApp
             }
             else
             {
-                var cart = CreateCart();
+                cart = CreateCart();
                 cartList.Add(cart);
-                var cartLine = new CartLine(product);
+                cartLine = new CartLine(product);
                 
                 cartLine.Amount++;
                 cart.CartLines.Add(cartLine);
