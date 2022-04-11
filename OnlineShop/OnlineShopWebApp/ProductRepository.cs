@@ -24,7 +24,7 @@ namespace OnlineShopWebApp
             return products;
         }
 
-        internal object TryGetByid(int id)
+        public object TryGetByid(int id)
         {
             foreach (var product in products)
             {
