@@ -1,10 +1,11 @@
-﻿using System;
+﻿using OnlineShopWebApp.Interface;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
 namespace OnlineShopWebApp.Models
 {
-    public class CartsStorage
+    public class CartsStorage : ICartsStorage
     {
         public CartsStorage cartsStorage
         {
@@ -62,6 +63,26 @@ namespace OnlineShopWebApp.Models
                     });
                 }
             }
+        }
+
+        Product ICartsStorage.TryGetByUserId(string userId)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Product GetByUserId(string userId)
+        {
+            throw new NotImplementedException();
+        }
+
+        public List<Product> GetAll()
+        {
+            throw new NotImplementedException();
+        }
+
+        public Product TryGetProduct(int productId)
+        {
+            throw new NotImplementedException();
         }
     }
 }

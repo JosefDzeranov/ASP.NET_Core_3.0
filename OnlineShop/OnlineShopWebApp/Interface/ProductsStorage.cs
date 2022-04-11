@@ -3,12 +3,13 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using Newtonsoft.Json;
+using OnlineShopWebApp.Interface;
 
 namespace OnlineShopWebApp.Models
 {
-    public class ProductsStorage
+    public class ProductsStorage : IProductsStorage
     {
-        public ProductsStorage productsStorage
+        public IProductsStorage productsStorage
         { 
             get;  
         }
@@ -76,6 +77,5 @@ namespace OnlineShopWebApp.Models
 
             return productsJson;
         }
-
     }
 }
