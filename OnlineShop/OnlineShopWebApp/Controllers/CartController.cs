@@ -1,5 +1,4 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using OnlineShopWebApp.DataSources;
 using OnlineShopWebApp.Models;
 using OnlineShopWebApp.Services;
 
@@ -9,20 +8,23 @@ namespace OnlineShopWebApp.Controllers
 	{
 		private readonly ProductDataSource productDataSource;
 
-		public CartController()
+		private readonly CartRepository cartRepository;
+
+		public CartController(CartRepository cartRepository, ProductDataSource productDataSource)
 		{
-			productDataSource = new ProductDataSource();
+			this.cartRepository = cartRepository;
+			this.productDataSource = productDataSource;
 		}
 		public IActionResult Index()
 		{
 		
-			return View((Cart.CartItems, Cart.Cost));	
+			return View((cartRepository.CartItems, cartRepository.Cost));	
 		}
 
 		public IActionResult Add(int productId)
 		{
 			var product = productDataSource.GetProductById(productId);
-			CartRepository.Add(product);
+			cartRepository.Add(product);
 			return RedirectToAction("Index");
 		}
 	}

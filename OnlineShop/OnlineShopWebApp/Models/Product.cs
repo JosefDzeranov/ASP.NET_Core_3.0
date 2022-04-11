@@ -3,6 +3,7 @@
     public class Product
     {
         private static int instanceCounter =0;
+
         public int Id { get; }
 
         public string Name { get; }

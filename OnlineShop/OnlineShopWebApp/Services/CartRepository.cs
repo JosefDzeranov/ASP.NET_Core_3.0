@@ -1,21 +1,32 @@
 ﻿using OnlineShopWebApp.Models;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace OnlineShopWebApp.Services
 {
     public class CartRepository
     {
 
-        public static void Add(Product product)
+        public void Add(Product product)
         {
-            if (Cart.CartItems.ContainsKey(product))
+            if (CartItems.ContainsKey(product))
             {
-                Cart.CartItems[product] += 1;
+                CartItems[product] += 1;
             }
             else
             {
-                Cart.CartItems.Add(product, 1);
+                CartItems.Add(product, 1);
             }
 
+        }
+        public Dictionary<Product, int> CartItems { get; set; } = new Dictionary<Product, int>();
+
+        public decimal Cost
+        {
+            get
+            {
+                return CartItems.Sum(item => item.Key.Cost * item.Value);
+            }
         }
 
     }

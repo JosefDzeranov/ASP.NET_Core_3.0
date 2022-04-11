@@ -1,9 +1,9 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using OnlineShopWebApp.DataSources;
+using OnlineShopWebApp.Services;
 
 namespace OnlineShopWebApp.Controllers
 {
-    public class ProductController : Controller
+	public class ProductController : Controller
     {
         private readonly ProductDataSource productDataSource;
         public ProductController()
