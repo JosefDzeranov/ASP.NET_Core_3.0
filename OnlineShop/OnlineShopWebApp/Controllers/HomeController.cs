@@ -17,7 +17,7 @@ namespace OnlineShopWebApp.Controllers
             _logger = logger;
         }
 
-        public IActionResult Index()
+        public string Index()
         {
             var products = productRepository.GetAllProducts();
             var result = "";
@@ -26,7 +26,7 @@ namespace OnlineShopWebApp.Controllers
             {
                 result += product + "\n\n";
             }
-            return View((object)result);
+            return result;
         }
 
         public IActionResult Privacy()
