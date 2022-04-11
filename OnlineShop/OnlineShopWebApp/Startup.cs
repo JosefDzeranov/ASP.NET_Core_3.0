@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using OnlineShopWebApp.Models;
 
 namespace OnlineShopWebApp
 {
@@ -19,6 +20,9 @@ namespace OnlineShopWebApp
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllersWithViews();
+
+            services.AddSingleton<ProductsStorage>(); //список товаров формировать один раз на программу
+            services.AddTransient<CartsStorage>(); //корзину формировать каждый раз при обращении
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
