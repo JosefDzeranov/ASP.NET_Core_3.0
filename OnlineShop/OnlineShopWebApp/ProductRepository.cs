@@ -1,4 +1,5 @@
 ﻿using OnlineShopWebApp.Models;
+using System;
 using System.Collections.Generic;
 
 namespace OnlineShopWebApp
@@ -17,10 +18,20 @@ namespace OnlineShopWebApp
                 "Sony PS 5", 900000, "Новинка Sony"
                 ),
         };
-
+               
         public List<Product> GetAllProducts()
         {
             return products;
+        }
+
+        internal object TryGetByid(int id)
+        {
+            foreach (var product in products)
+            {
+                if(product.Id == id)
+                    return product;
+            }
+            return null;
         }
     }
 }
