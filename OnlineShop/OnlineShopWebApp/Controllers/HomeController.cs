@@ -19,7 +19,7 @@ namespace OnlineShopWebApp.Controllers
             _logger = logger;
         }
 
-
+        
         public IActionResult Privacy()
         {
             return View();
@@ -35,8 +35,6 @@ namespace OnlineShopWebApp.Controllers
         {
             var productSource = new ProductDataSource();
             var products = productSource.GetAllProducts();
-
-            //var result = string.Join("\r\n", products);
 
             return View(products);
         }
