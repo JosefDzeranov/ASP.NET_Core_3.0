@@ -21,7 +21,7 @@ namespace OnlineShopWebApp.Controllers
         {
             var foundProduct = ProductManager.FindProduct(id);
 
-            CartManager.AddProductToCart(IdStorage.UserId, foundProduct);
+            CartManager.AddProductToCart(Constants.UserId, foundProduct);
             return View("Index", cart);
         }
 
