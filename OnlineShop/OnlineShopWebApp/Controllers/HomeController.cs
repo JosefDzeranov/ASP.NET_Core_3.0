@@ -7,14 +7,11 @@ namespace OnlineShopWebApp.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly ILogger<HomeController> _logger;
-
         private readonly ProductRepository productRepository;
 
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController()
         {
             productRepository = new ProductRepository();
-            _logger = logger;
         }
 
         public string Index()
