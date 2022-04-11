@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
-using OnlineShopWebApp.DataSources;
+using OnlineShopWebApp.Services;
 using OnlineShopWebApp.Models;
 using System;
 using System.Collections.Generic;
@@ -13,10 +13,14 @@ namespace OnlineShopWebApp.Controllers
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
+        private readonly ProductDataSource productDataSource;
 
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController(
+            ILogger<HomeController> logger,
+            ProductDataSource productDataSource)
         {
             _logger = logger;
+            this.productDataSource = productDataSource;
         }
 
         public IActionResult Privacy()
@@ -32,8 +36,8 @@ namespace OnlineShopWebApp.Controllers
 
         public IActionResult Index()
         {
-            var productSource = new ProductDataSource();
-            var products = productSource.GetAllProducts();
+           
+            var products = productDataSource.GetAllProducts();
 
             return View(products);
         }
