@@ -21,7 +21,7 @@ namespace OnlineShopWebApp
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllersWithViews();
-            services.AddSingleton<ProductBase>();
+            services.AddSingleton<IProductBase,ProductBase>();
             services.AddSingleton<CartBase>();
         }
 

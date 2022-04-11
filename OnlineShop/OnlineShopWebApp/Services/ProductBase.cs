@@ -4,7 +4,7 @@ using System.Linq;
 
 namespace OnlineShopWebApp.Services
 {
-    public class ProductBase
+    public class ProductBase : IProductBase
     {
         public static List<Product> products = new List<Product>()
         {
