@@ -5,11 +5,11 @@ namespace OnlineShopWebApp.Interface
 {
     public interface IProductsStorage
     {
-        public List<Product> GetAll();
+        List<Product> GetAll();
         
         Product TryGetProduct(int id);
         
-        public List<Product> DeserializeJsonProducts();
+        List<Product> DeserializeJsonProducts();
 
 
     }

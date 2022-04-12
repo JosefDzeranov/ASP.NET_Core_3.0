@@ -8,17 +8,15 @@ namespace OnlineShopWebApp.Controllers
     {
         private readonly ICartsStorage cartsStorage;
 
+        private readonly IProductsStorage productsStorage;
+
         private readonly Constants constants;
 
-        public ICartsStorage CartsStorage { get; }
-
-        public IProductsStorage ProductsStorage { get; }
-
-        public CartController(ICartsStorage cartsStorage, IProductsStorage productsStorage)
+        public CartController(IProductsStorage productsStorage, ICartsStorage cartsStorage)
         {
-            this.CartsStorage = cartsStorage;
+            this.cartsStorage = cartsStorage;
 
-            this.ProductsStorage = productsStorage;
+            this.productsStorage = productsStorage;
 
             constants = new Constants();
         }
@@ -32,7 +30,7 @@ namespace OnlineShopWebApp.Controllers
 
         public IActionResult Add(int productId)
         {
-            var product = cartsStorage.TryGetProduct(productId);
+            var product = productsStorage.TryGetProduct(productId);
 
             cartsStorage.Add(product, constants.UserId);
             return RedirectToAction("Index");

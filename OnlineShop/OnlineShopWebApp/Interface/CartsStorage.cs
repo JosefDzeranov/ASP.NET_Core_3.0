@@ -7,9 +7,7 @@ namespace OnlineShopWebApp.Models
 {
     public class CartsStorage : ICartsStorage
     {
-        private List<Cart> carts = new List<Cart>();
-
-        public CartsStorage cartsStorage => throw new NotImplementedException();
+        private List<Cart> carts { get; set; } = new List<Cart>();
 
         public Cart TryGetByUserId(string userId)
         {
@@ -55,26 +53,6 @@ namespace OnlineShopWebApp.Models
                     });
                 }
             }
-        }
-
-        Product ICartsStorage.TryGetByUserId(string userId)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Product GetByUserId(string userId)
-        {
-            throw new NotImplementedException();
-        }
-
-        public List<Product> GetAll()
-        {
-            throw new NotImplementedException();
-        }
-
-        public Product TryGetProduct(int productId)
-        {
-            throw new NotImplementedException();
         }
     }
 }
