@@ -1,8 +1,8 @@
 ﻿
 namespace OnlineShopWebApp
 {
-    public class Constants
+    public static class Constants
     {
-        public string UserId = "UserId";
+        public static string UserId = "UserId";
     }
 }

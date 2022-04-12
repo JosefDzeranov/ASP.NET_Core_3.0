@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace OnlineShopWebApp
 {
-    public partial class CartsRepository : ICartsRepository
+    public partial class InMemoryCartsRepository : ICartsRepository
     {
         public List<Cart> Carts { get; set; } = new List<Cart>();
 
