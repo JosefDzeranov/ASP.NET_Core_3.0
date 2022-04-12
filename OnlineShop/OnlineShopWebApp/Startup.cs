@@ -20,9 +20,9 @@ namespace OnlineShopWebApp
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddSingleton<IProductsStorage, ProductsStorage>(); //список товаров формировать один раз на программу
+            services.AddSingleton<IProductsStorage, ProductsStorage>(); 
 
-            services.AddSingleton<ICartsStorage, CartsStorage>(); //корзину формировать каждый раз при обращении
+            services.AddSingleton<ICartsStorage, CartsStorage>(); 
 
             services.AddControllersWithViews();
         }
