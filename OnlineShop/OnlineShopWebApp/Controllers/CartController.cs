@@ -19,6 +19,8 @@ namespace OnlineShopWebApp.Controllers
             this.CartsStorage = cartsStorage;
 
             this.ProductsStorage = productsStorage;
+
+            constants = new Constants();
         }
         
         public IActionResult Index()
