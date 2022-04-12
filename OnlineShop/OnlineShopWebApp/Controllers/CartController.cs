@@ -8,6 +8,12 @@ namespace OnlineShopWebApp.Controllers
         private CartManager cartManager;
         private readonly ProductManager productManager;
 
+        public CartController(CartManager cartManager, ProductManager productManager)
+        {
+            this.cartManager = cartManager;
+            this.productManager = productManager;
+        }
+
         public IActionResult Index()
         {
             var cart = cartManager.CreateCart();
@@ -19,22 +25,18 @@ namespace OnlineShopWebApp.Controllers
         public IActionResult AddToCart(int id)
         {
             var foundProduct = productManager.FindProduct(id);
-            
+
 
             cartManager.AddProductToCart(Constants.UserId, foundProduct);
             var cart = cartManager.TryGetCartByUserID(Constants.UserId);
             return View("Index", cart);
         }
 
-        public CartController(CartManager cartManager, ProductManager productManager)
-        {
-            this.cartManager = cartManager;
-            this.productManager = productManager;
-        }
+
 
     }
 
-    
+
 
 }
 

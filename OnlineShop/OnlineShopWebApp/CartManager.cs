@@ -5,7 +5,7 @@ using System.Linq;
 
 namespace OnlineShopWebApp
 {
-    public  class CartManager
+    public class CartManager
     {
         static List<Cart> cartList = new List<Cart>();
 
@@ -13,13 +13,13 @@ namespace OnlineShopWebApp
 
         public Cart CreateCart()
         {
-              Cart cart = new Cart(Constants.UserId);
+            var cart = new Cart(Constants.UserId);
 
-            if (!cartList.Contains(cart))
+            if (cartList.Count == 0)
             {
                 cartList.Add(cart);
                 cart = cartList.FirstOrDefault(x => x.UserId == cart.UserId);
-                
+
             }
             else
             {
@@ -34,23 +34,24 @@ namespace OnlineShopWebApp
             return cartList;
         }
 
-        public  void AddProductToCart(string userId, Product product)
+        public void AddProductToCart(string userId, Product product)
         {
             var cart = cartList.FirstOrDefault(x => x.UserId == userId);
-            var cartLine = cart.CartLines.FirstOrDefault(x => x.Product.Id == product.Id);
+
 
             if (cart != null)
             {
-             
 
-                if (cartLine != null)
+
+
+                if (cart.CartLines.FirstOrDefault(x => x.Product.Id == product.Id) != null)
                 {
-                 
-                  cartLine.Amount++;
+                    var cartLine = cart.CartLines.FirstOrDefault(x => x.Product.Id == product.Id);
+                    cartLine.Amount++;
                 }
                 else
                 {
-                    cartLine = new CartLine(product);
+                    var cartLine = new CartLine(product);
                     cartLine.Amount++;
                     cart.CartLines.Add(cartLine);
                 }
@@ -58,10 +59,11 @@ namespace OnlineShopWebApp
             }
             else
             {
+
                 cart = CreateCart();
                 cartList.Add(cart);
-                cartLine = new CartLine(product);
-                
+                var cartLine = new CartLine(product);
+
                 cartLine.Amount++;
                 cart.CartLines.Add(cartLine);
 
@@ -76,10 +78,10 @@ namespace OnlineShopWebApp
         {
             return cartList.FirstOrDefault(x => x.UserId == userId);
 
-           
+
         }
 
-       
+
 
 
     }
