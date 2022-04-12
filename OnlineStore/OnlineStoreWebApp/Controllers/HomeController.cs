@@ -1,32 +1,26 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
-using OnlineShopWebApp.Models;
+using OnlineStoreWebApp.Models;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace OnlineShopWebApp.Controllers
+namespace OnlineStoreWebApp.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly ProductRepozitory productRepozitory;
+        private readonly ILogger<HomeController> _logger;
 
-        public HomeController()
+        public HomeController(ILogger<HomeController> logger)
         {
-            productRepozitory = new ProductRepozitory();
+            _logger = logger;
         }
 
-        public string Index()
+        public IActionResult Index()
         {
-            var products = productRepozitory.GetAll();
-            var result = "";
-            foreach (var product in products)
-            {
-                result += product + "\n\n";
-            }
-            return result;
+            return View();
         }
 
         public IActionResult Privacy()
