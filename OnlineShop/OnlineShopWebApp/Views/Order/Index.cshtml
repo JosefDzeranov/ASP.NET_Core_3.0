@@ -1,0 +1,57 @@
+﻿@using OnlineShopWebApp.Models
+
+@model Order
+
+<h2 align="center">Заказы</h2>
+@if (Model == null)
+{
+    <div class="404">
+        <h3 align="center">Заказов нет</h3>
+        <img class="card-img-top" src="/images/no_order.jpg" />
+    </div>
+}
+else
+{
+    <div class="row">
+        <div class="col">
+            <div>
+                @foreach (var order in Model.Items)
+                {
+                    <br />
+                    <a href="/order/index/@order.Id">@Model.OrderNumber</a>
+                    <a href="/order/index/@order.Id">@Model.OrderDate</a>
+                    <a href="/order/index/@order.Id">@Model.CostOrder</a>
+                    <a href="/order/index/@order.Id">@order.</a>
+                }
+                <table class="table table-striped">
+                    <thead class="table-light" align="center">
+                        <tr>
+                            <th scope="col">Номер</th>
+                            <th scope="col">Дата</th>
+                            <th scope="col">Стоимость (руб.)</th>
+                            <th scope="col">Количество</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var order in Model.Items)
+                        {
+                            <tr>
+                            <td><a href="/product/index/@order.Product.Id">@order.Product.Name</a></td>
+                            <td>@order.Product.Cost</td>
+                            <td>@order.Cost</td>
+                            <td>@order.Count</td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+            <div class="text-center">
+                <a type="button" class="btn btn-dark" href="/home/index" role="button">Продолжить покупки</a>
+                <a type="button" class="btn btn-dark" href="/order/add/?orderId=@Model.UserId" role="button">Оформить заказ</a>
+            </div>
+        </div>
+    </div>
+    <div class="text-right">
+        <a type="button" class="btn btn-outline-danger" href="/cart/removeall" role="button">Очистить корзину</a>
+    </div>
+}

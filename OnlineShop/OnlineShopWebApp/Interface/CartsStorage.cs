@@ -8,7 +8,6 @@ namespace OnlineShopWebApp.Models
     public class CartsStorage : ICartsStorage
     {
         private List<Cart> carts { get; set; } = new List<Cart>();
-        private List<CartItem> cartUser { get; set; } = new List<CartItem>();
 
         public Cart TryGetByUserId(string userId)
         {
