@@ -11,11 +11,13 @@ namespace OnlineShopWebApp.Controllers
 
         private readonly Constants constants;
 
-        public CartController(CartsStorage cartsStorage)
+        public CartController(CartsStorage cartsStorage, ProductsStorage productsStorage)
         {
             this.cartsStorage = cartsStorage;
+
+            this.productsStorage = productsStorage;
         }
-        
+
         public IActionResult Index()
         {
             var cart = cartsStorage.TryGetByUserId(constants.UserId);

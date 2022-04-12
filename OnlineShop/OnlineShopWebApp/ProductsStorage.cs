@@ -8,16 +8,6 @@ namespace OnlineShopWebApp.Models
 {
     public class ProductsStorage
     {
-        public ProductsStorage productsStorage
-        { 
-            get;  
-        }
-
-        public ProductsStorage(ProductsStorage productsStorage)
-        {
-            this.productsStorage = productsStorage;
-        }
-
         private readonly List<Product> products = new List<Product>()
         {
             new Product(0,"Составление документов, исков в суд", 5000, "Составление и оформление документов для подачи в суд", "/images/court.jpg"),

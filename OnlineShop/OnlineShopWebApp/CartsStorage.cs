@@ -6,16 +6,6 @@ namespace OnlineShopWebApp.Models
 {
     public class CartsStorage
     {
-        public CartsStorage cartsStorage
-        {
-            get;
-        }
-
-        public CartsStorage(CartsStorage cartsStorage)
-        {
-            this.cartsStorage = cartsStorage;
-        }
-
         private List<Cart> carts = new List<Cart>();
 
         public Cart TryGetByUserId(string userId)
