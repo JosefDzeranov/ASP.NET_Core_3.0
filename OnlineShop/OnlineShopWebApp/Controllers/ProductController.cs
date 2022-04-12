@@ -1,28 +1,20 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
-using OnlineShopWebApp.DataSources;
-using OnlineShopWebApp.Models;
-using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Threading.Tasks;
+using OnlineShopWebApp.Services;
 
 namespace OnlineShopWebApp.Controllers
 {
-    public class ProductController : Controller
+	public class ProductController : Controller
     {
-      
-        public IActionResult Index(int id)
-        {
-            var productSource = new ProductDataSource();
-
-            var product = productSource.GetProductById(id);
-
-            if (product != null)
-                return View(product);
-
-            return BadRequest($"Продукт c ID № {id} не существует");
+        private readonly ProductDataSource productDataSource;
+        public ProductController()
+       {
+            productDataSource = new ProductDataSource();
+       }
+       
+       public IActionResult Index(int id)
+       {
+            var product = productDataSource.GetProductById(id);
+            return View(product);
         }
     }
 }

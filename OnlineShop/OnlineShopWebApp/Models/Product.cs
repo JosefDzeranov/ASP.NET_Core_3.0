@@ -3,6 +3,7 @@
     public class Product
     {
         private static int instanceCounter =0;
+
         public int Id { get; }
 
         public string Name { get; }
@@ -11,17 +12,20 @@
         
         public string Description { get; }
 
-        public Product(string name, decimal cost, string description)
-        {
-            Id = instanceCounter;
-            Name = name;
-            Cost = cost;
-            Description = description;
+        public string ImagePath { get; }
 
-            instanceCounter+=1;
-        }
+		public Product(string name, decimal cost, string description, string imagePath)
+		{
+			Id = instanceCounter;
+			Name = name;
+			Cost = cost;
+			Description = description;
 
-        public override string ToString()
+			instanceCounter += 1;
+			ImagePath = imagePath;
+		}
+
+		public override string ToString()
         {
             return $"Id {this.Id}\nName {this.Name}\nCost {this.Cost}\nDescription {this.Description}\n\n";
         }

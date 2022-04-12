@@ -5,6 +5,17 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Views\cart.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="Views\cart.png">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="3.1.5" />
   </ItemGroup>
 
