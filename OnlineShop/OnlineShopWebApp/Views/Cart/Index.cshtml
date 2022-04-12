@@ -29,16 +29,17 @@ else
                         <td>@item.Product.Cost</td>
                         <td>@item.Amount</td>
                         <td>@item.Cost</td>
+                        <td><a class="btn btn-dark btn-sm" href="#" role="button">-</a></td>
+                        <td><a class="btn btn-dark btn-sm" href="#" role="button">+</a></td>
                     </tr>
                     }
                 </tbody>
             </table>
             <div class="text-right">
-                <h3>Total cost</h3>
-                <h3>@Model.Cost</h3>
+                <h2>Total cost</h2>
+                <h2>@Model.Cost</h2>
             </div>
             <div class="text-center">
-                @*<button type="button" class="" href="/home/products">Continue explore</button>*@
                 <a class="btn btn-outline-warning btn-sm" href="/home/products" role="button">Continue explore</a>
                 <a class="btn btn-outline-success btn-sm" href="#" role="button">Сomplete the purchase</a>
             </div>
