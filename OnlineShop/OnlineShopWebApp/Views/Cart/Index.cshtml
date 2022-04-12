@@ -1,0 +1,49 @@
+﻿@using OnlineShopWebApp.Models
+@model Cart
+
+
+
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+
+@if (Model != null)
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Название</th>
+                <th>Цена</th>
+                <th>Количество</th>
+                <th>Стоимость</th>
+            </tr>
+        </thead>
+        @foreach (CartItem p in Model.Items)
+        {
+
+            <tbody>
+                <tr>
+                    <td>@p.Product.Name</td>
+                    <td>@p.Product.Cost руб.</td>
+                    <td>@p.Amount</td>
+                    <td>@p.Cost руб.</td>
+                </tr>
+            </tbody>
+
+        }
+    </table>
+    <div class="text-right">
+        <h5>@Model.Cost руб.</h5>
+    </div>
+    
+
+    <a class="btn btn-primary" href="https://localhost:5001/Home/Index" role="button">Продолжить покупки</a>
+    <a class="btn btn-success" href="#" role="button">Оформить заказ</a>
+}
+else
+{
+    <p>Корзина пустая</p>
+}
+
+
