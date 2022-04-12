@@ -29,15 +29,15 @@ else
                         <td>@item.Product.Cost</td>
                         <td>@item.Amount</td>
                         <td>@item.Cost</td>
-                        <td><a class="btn btn-dark btn-sm" href="#" role="button">-</a></td>
-                        <td><a class="btn btn-dark btn-sm" href="#" role="button">+</a></td>
+                        <td><a class="btn btn-dark btn-sm" href="/cart/Add" role="button" action="@item.Amount-1">-</a></td>
+                        <td><a class="btn btn-dark btn-sm" href="/cart/Add" role="button" action="@item.Amount+1">+</a></td>
                     </tr>
                     }
                 </tbody>
             </table>
             <div class="text-right">
-                <h2>Total cost</h2>
-                <h2>@Model.Cost</h2>
+                <p>Total cost</p>
+                <p>@Model.Cost</p>
             </div>
             <div class="text-center">
                 <a class="btn btn-outline-warning btn-sm" href="/home/products" role="button">Continue explore</a>
