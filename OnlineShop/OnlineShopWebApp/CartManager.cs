@@ -5,7 +5,7 @@ using System.Linq;
 
 namespace OnlineShopWebApp
 {
-    public class CartManager
+    public class CartManager : ICartManager
     {
         static List<Cart> cartList = new List<Cart>();
 
@@ -81,9 +81,7 @@ namespace OnlineShopWebApp
 
         }
 
-
-
-
+      
     }
 
 

@@ -5,10 +5,10 @@ namespace OnlineShopWebApp.Controllers
 {
     public class CartController : Controller
     {
-        private CartManager cartManager;
-        private readonly ProductManager productManager;
+        private ICartManager cartManager;
+        private readonly IProductManager productManager;
 
-        public CartController(CartManager cartManager, ProductManager productManager)
+        public CartController(ICartManager cartManager, IProductManager productManager)
         {
             this.cartManager = cartManager;
             this.productManager = productManager;

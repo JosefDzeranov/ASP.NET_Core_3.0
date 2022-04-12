@@ -4,7 +4,7 @@ namespace OnlineShopWebApp.Controllers
 {
     public class ProductController : Controller
     {
-        private readonly ProductManager productManager;
+        private readonly IProductManager productManager;
 
         public IActionResult Index(int id)
         {
@@ -14,7 +14,7 @@ namespace OnlineShopWebApp.Controllers
 
         }
 
-        public ProductController(ProductManager productManager)
+        public ProductController(IProductManager productManager)
         {
             this.productManager = productManager;
         }
