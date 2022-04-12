@@ -20,9 +20,9 @@ else
                         <th scope="col">Фото</th>
                         <th scope="col">Название</th>
                         <th scope="col">Цена (руб.)</th>
-                        <th scope="col">Количество</th>
                         <th scope="col">Стоимость (руб.)</th>
-                        <th scope="col">Удалить</th>
+                        <th scope="col">Количество</th>
+                        <th scope="col">Изменить</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -32,9 +32,10 @@ else
                             <td><img src=@product.Product.ImagePath style="width: 80px; height: 80px;" /></td>
                             <td><a href="/product/index/@product.Product.Id">@product.Product.Name</a></td>
                             <td>@product.Product.Cost</td>
-                            <td>@product.Count</td>
                             <td>@product.Cost</td>
-                            <td><a href="#" type="button" class="btn btn-danger">Удалить</a></td>
+                            <td>@product.Count</td>
+                            <td><a href="/cart/RemoveCountProductCart/?productId=@product.Product.Id" type="button" class="btn btn-danger">-</a><a href="/cart/add/?productId=@product.Product.Id" type="button" class="btn btn-danger">+</a></td>
+                            @*<td><a href="#" type="button" class="btn btn-warning">+</a></td>*@
                         </tr>
                     }
                 </tbody>
@@ -52,5 +53,8 @@ else
                 <a type="button" class="btn btn-dark" href="#" role="button">Оформить заказ</a>
             </div>
         </div>
+    </div>
+    <div class="text-right">
+        <a type="button" class="btn btn-outline-danger" href="/cart/removeall" role="button">Очистить корзину</a>
     </div>
 }

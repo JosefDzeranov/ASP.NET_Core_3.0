@@ -35,5 +35,30 @@ namespace OnlineShopWebApp.Controllers
             cartsStorage.Add(product, constants.UserId);
             return RedirectToAction("Index");
         }
+
+        public IActionResult RemoveProduct(int productId)
+        {
+            var product = productsStorage.TryGetProduct(productId);
+
+            cartsStorage.RemoveProduct(product, constants.UserId);
+
+            return RedirectToAction("Index");
+        }
+
+        public IActionResult RemoveCountProductCart(int productId)
+        {
+            var product = productsStorage.TryGetProduct(productId);
+
+            cartsStorage.RemoveCountProductCart(product, constants.UserId);
+
+            return RedirectToAction("Index");
+        }
+
+        public IActionResult RemoveAll()
+        {
+            cartsStorage.RemoveAll();
+
+            return RedirectToAction("Index");
+        }
     }
 }
