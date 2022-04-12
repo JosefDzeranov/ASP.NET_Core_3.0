@@ -10,7 +10,7 @@ namespace OnlineShopWebApp.Models
 
         public Basket (Product product)
         {
-            Id = new Guid();
+            Id = Guid.NewGuid();
             Product = product;
             Quantity++;
         }

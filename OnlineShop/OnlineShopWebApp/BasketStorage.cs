@@ -4,11 +4,11 @@ using System.Linq;
 
 namespace OnlineShopWebApp
 {
-    public class BasketStorage
+    public class BasketStorage: IBasketStorage
     {
         private List<Basket> baskets = new List<Basket>();
 
-        public IEnumerable<Basket> Baskets
+        public List<Basket> Baskets
         {
             get
             {
@@ -18,7 +18,7 @@ namespace OnlineShopWebApp
 
         public void AddProduct(Product product)
         {
-            var basket = baskets.Where(basket => basket.Product.Id == product.Id)
+            var basket = Baskets.Where(basket => basket.Product.Id == product.Id)
                                               .FirstOrDefault();
             if (basket == null)
             {
@@ -32,7 +32,7 @@ namespace OnlineShopWebApp
 
         public decimal GetTotalSum()
         {
-            return baskets.Sum(basket => basket.Product.Cost * basket.Quantity);
+            return Baskets.Sum(basket => basket.Product.Cost * basket.Quantity);
         }
     }
 }

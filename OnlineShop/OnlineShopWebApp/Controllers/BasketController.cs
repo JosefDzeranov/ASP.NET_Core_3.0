@@ -5,10 +5,10 @@ namespace OnlineShopWebApp.Controllers
 {
     public class BasketController : Controller
     {
-        private ProductStorage ProductStorage { get; }
-        private BasketStorage BasketStorage { get; }
+        private IProductStorage ProductStorage { get; }
+        private IBasketStorage BasketStorage { get; }
 
-        public BasketController (ProductStorage productStorage, BasketStorage basketStorage)
+        public BasketController (IProductStorage productStorage, IBasketStorage basketStorage)
         {
             ProductStorage = productStorage;
             BasketStorage = basketStorage;

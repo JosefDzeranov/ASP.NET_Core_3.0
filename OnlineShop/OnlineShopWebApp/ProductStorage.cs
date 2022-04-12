@@ -5,9 +5,9 @@ using System.Xml.Linq;
 
 namespace OnlineShopWebApp
 {
-    public class ProductStorage
+    public class ProductStorage: IProductStorage
     {  
-        public IEnumerable<Product> GetProductDataFromXML()
+        public IEnumerable<Product> GetProductData()
         {
             var xDoc = XDocument.Load("Data/products.xml");
             var products = xDoc.Element("products")
@@ -23,7 +23,7 @@ namespace OnlineShopWebApp
 
         public Product TryGetProduct(int id)
         {
-            var product = GetProductDataFromXML().Where(p => p.Id == id)
+            var product = GetProductData().Where(p => p.Id == id)
                                                  .FirstOrDefault();
             return product;
         }
