@@ -8,7 +8,6 @@ namespace OnlineShopWebApp.Controllers
     public class HomeController : Controller
     {
         private readonly ProductRepository productRepository;
-
         public HomeController()
         {
             productRepository = new ProductRepository();
