@@ -8,19 +8,17 @@ namespace OnlineShopWebApp.Controllers
         private IProductStorage ProductStorage { get; }
         private IBasketStorage BasketStorage { get; }
 
-        public BasketController (IProductStorage productStorage, IBasketStorage basketStorage)
+        public BasketController(IProductStorage productStorage, IBasketStorage basketStorage)
         {
             ProductStorage = productStorage;
             BasketStorage = basketStorage;
         }
         public IActionResult Index(int id)
         {
-            var product = ProductStorage.TryGetProduct(id);           
-         
-                if(BasketStorage.Baskets.Count() == 0)
-                {
-                    return View("Empty");
-                }
+            if (BasketStorage.Baskets.Count() == 0)
+            {
+                return View("Empty");
+            }
 
             return View(BasketStorage);
         }

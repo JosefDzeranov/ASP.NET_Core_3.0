@@ -18,8 +18,8 @@ namespace OnlineShopWebApp
 
         public void AddProduct(Product product)
         {
-            var basket = Baskets.Where(basket => basket.Product.Id == product.Id)
-                                              .FirstOrDefault();
+            var basket = Baskets.FirstOrDefault(basket => basket.Product.Id == product.Id);
+                                             
             if (basket == null)
             {
                 baskets.Add(new Basket(product));
