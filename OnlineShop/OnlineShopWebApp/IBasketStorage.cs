@@ -8,7 +8,7 @@ namespace OnlineShopWebApp
         List<Basket> Baskets { get; }
         void AddProduct(Product product);
         void RemoveProduct(Product product);
-        public void ClearBasket();
+        void ClearBasket();
         decimal GetTotalSum();
     }
 }
