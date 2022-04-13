@@ -1,18 +1,33 @@
-﻿<!--прередаем тип данных, параметр которых мы сейчас укажем в model, у представления бывает только 1 прараметр-->
-
+﻿@model OnlineShopWebApp.Models.Person;
 @{
     ViewData["Title"] = "Home Page";
 }
 
-
-<div class="text-center">
+<div class="container text-center">
     <div class="row">
-        <img src="image/Users_photo.svg" class="col-2"/>
-        <h5 class="col-1"></h5>
-        <h5 class="display-4 Title_sile">Личный кабинет</h5>
+        <h5 class="display-5 Title_sile">Личный кабинет</h5>
+    </div>
+</div >
+<div class="container">
+    <div class="row">
+        <img src="image/all-foto.jpg" class="col-2 card-img-top"/> 
+        <div class="col">
+            <p>Id: @Model.Id</p>
+            <p>Имя: @Model.FistName</p>
+            <p>Фамилия: @Model.Surname</p>
+            <p>Возраст: @Model.Age</p>
+            <p>Email: @Model.Email</p>
+        </div>
     </div>
 
 </div>
-<div class="row">
 
+<p></p>
+<div class="container g-10">
+    <a class="btn btn-outline-secondary col-sm-3" asp-area="" asp-controller="Person" asp-action="Comparison" role="button">Сравнительная таблица</a>
+    <a class="btn btn-outline-secondary col-sm-3" asp-area="" asp-controller="Person" asp-action="Basket" role="button">Корзина</a>
+    <a class="btn btn-outline-secondary col-sm-3" asp-area="" asp-controller="Person" asp-action="Orders" role="button">Купленные проекты</a>
 </div>
+
+
+

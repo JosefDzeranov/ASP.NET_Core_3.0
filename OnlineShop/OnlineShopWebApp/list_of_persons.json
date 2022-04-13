@@ -1,0 +1,25 @@
+[
+  {
+    "Id": 0,
+    "FistName": "Александр",
+    "Surname": "Молостов",
+    "Age": 30,
+    "Email": "email",
+    "ComparisonList": [],
+    "BasketList": [
+      {
+        "Id": 1,
+        "Name": "63-42",
+        "Cost": 32000.0,
+        "Square": 109.0,
+        "Width": 8.36,
+        "Length": 14.06,
+        "Description": "Проект двухэтажного дома из газабетона с терассой",
+        "Images": [
+          "1-1.jpg"
+        ]
+      }
+    ],
+    "OrdersList": []
+  }
+]

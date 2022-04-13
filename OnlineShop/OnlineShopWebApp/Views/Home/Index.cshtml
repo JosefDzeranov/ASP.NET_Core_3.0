@@ -9,7 +9,7 @@
     <h1 class="display-4 Title_sile" >Каталог готовых проектов</h1>
     <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
 </div>
-<div class="row">
+<div class="row g-10">
     @foreach (var product in Model)
     {
         <div class="col-3 card shadow">
@@ -20,7 +20,7 @@
                     <h5>№@product.Name</h5>
                 </a>
                 <h5>@product.Cost руб</h5>
-                <a class="btn btn-outline-dark" href="#" role="button">В сравнение</a>
+                <a class="btn btn-outline-secondary" href="#" role="button">В сравнение</a>
             </div>
         </div>
     }
