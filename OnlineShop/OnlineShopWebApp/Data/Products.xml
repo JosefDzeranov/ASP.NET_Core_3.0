@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <products>
 	<product id ="1">
-		<img>/img/teide.jpg</img>
+		<img>/img/stilllife.jpg</img>
 		<name>Still life</name>
 		<cost>1500</cost>
 		<description>
@@ -12,7 +12,7 @@
 		</description>
 	</product>
 	<product id ="2">
-		<img>/img/teide.jpg</img>
+		<img>/img/portret.jpg</img>
 		<name>Portret</name>
 		<cost>3000</cost>
 		<description>
@@ -23,7 +23,7 @@
 		</description>
 	</product>
 	<product id ="3">
-		<img>/img/teide.jpg</img>
+		<img>/img/landscape.jpg</img>
 		<name>Landscape</name>
 		<cost>2000</cost>
 		<description>
@@ -34,7 +34,7 @@
 		</description>
 	</product>
 	<product id ="4">
-		<img>/img/teide.jpg</img>
+		<img>/img/abstraction.jpg</img>
 		<name>Abstraction</name>
 		<cost>1000</cost>
 		<description>
