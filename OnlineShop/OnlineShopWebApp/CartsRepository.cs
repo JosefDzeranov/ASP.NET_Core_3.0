@@ -23,7 +23,7 @@ namespace OnlineShopWebApp
                 {
                     Id = Guid.NewGuid(),
                     UserId = userId,
-                    Items = new List<CartItem>()
+                    Items = new List<CartItem>
                     {
                         new CartItem
                         {
@@ -49,7 +49,7 @@ namespace OnlineShopWebApp
                     {
                         Id = Guid.NewGuid(),
                         Amout= 1,
-                        Product= product,
+                        Product = product,
                     });
                 }
             }

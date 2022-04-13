@@ -21,7 +21,7 @@ namespace OnlineShopWebApp.Controllers
         {
             var product = productRepository.TryGetByid(productId);
             CartsRepository.Add(product, Constants.UserId);
-            return RedirectToAction("Index");
+            return RedirectToAction("Index"); 
         }
     }
 }

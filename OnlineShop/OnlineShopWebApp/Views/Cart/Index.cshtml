@@ -2,9 +2,43 @@
 
 @if (Model == null)
 {
-    <h3>Корзина пуста</h3>
+    <div class="text-center">
+        <h5>В корзине еще нет товаров, перейдите на <a href="/home/index">главную страницу</a> для добавления товаров</h5>
+    </div>
 }
 else
 {
-    <h3>Корзина не пуста</h3>
+    <div class="row">
+        <div class="col">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Название</th>
+                        <th>Цена</th>
+                        <th>Количество</th>
+                        <th>Стоимость</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model.Items)
+                    {
+                        <tr>
+                            <td>@item.Product.Name</td>
+                            <td>@item.Product.Price</td>
+                            <td>@item.Amout</td>
+                            <td>@item.Average</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+            <div class="text-left">
+                <h4>Итого:</h4>
+                <h4>@Model.Average</h4>
+            </div>
+            <div class="text-left">
+                <a class="btn btn-outline-success" href="/home/index" role="button">Продолжить покупки</a>
+                <a class="btn btn-success" href="/cart/add?productId=@Model.Id" role="button">Перейти к оплате</a>
+            </div>
+        </div>
+    </div>
 }
