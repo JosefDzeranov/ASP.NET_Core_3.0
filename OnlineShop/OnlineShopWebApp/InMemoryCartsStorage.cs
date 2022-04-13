@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace OnlineShopWebApp.Models
 {
-    public class CartsStorage : ICartsStorage
+    public class InMemoryCartsStorage : ICartsStorage
     {
         private List<Cart> carts = new List<Cart>();
 

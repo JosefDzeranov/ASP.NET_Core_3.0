@@ -3,7 +3,7 @@ using System.Linq;
 
 namespace OnlineShopWebApp.Models
 {
-    public class ProductsStorage : IProductsStorage
+    public class InMemoryProductsStorage : IProductsStorage
     {
         private List<Product> products = new List<Product>
              {
