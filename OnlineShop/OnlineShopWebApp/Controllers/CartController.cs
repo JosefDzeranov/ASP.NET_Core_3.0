@@ -2,18 +2,24 @@
 
 namespace OnlineShopWebApp.Controllers
 {
-    public class ProductController : Controller
+    public class CartController : Controller
     {
         private readonly ProductRepository productRepository;
 
-        public ProductController()
+        public CartController()
         {
             productRepository = new ProductRepository();
         }
 
-        public IActionResult Index(int id)
+        public IActionResult Index()
         {
-            var product = productRepository.TryGetByid(id);
+
+             return View();
+        }
+
+        public IActionResult Add(int productId)
+        {
+            var product = productRepository.TryGetByid(productId);
             return View(product);
         }
     }
