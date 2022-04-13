@@ -5,10 +5,10 @@ namespace OnlineShopWebApp.Controllers
 {
 	public class ProductController : Controller
     {
-        private readonly ProductDataSource productDataSource;
-        public ProductController()
+        private readonly IProductDataSource productDataSource;
+        public ProductController(IProductDataSource productDataSource)
        {
-            productDataSource = new ProductDataSource();
+            this.productDataSource = productDataSource;
        }
        
        public IActionResult Index(int id)
