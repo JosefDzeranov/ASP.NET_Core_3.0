@@ -2,14 +2,14 @@
 
 <div class="row">
     <div class="col-6">
-        <img width="1200px" height="600px" class="card-img-top" src="https://edelws.ru/upload/iblock/63f/63fee475a1845dd0211410736fdf79b1.png">
+        <img class="card-img-top" src=@Model.ImagesPath alt="Изображение товара" />
     </div>
 
     <div class="col-6">
         <h5>@Model.Name</h5></a>
         <h5>@Model.Price руб</h5>
         <h5>@Model.Description</h5>
-        <a class="btn btn-dark" href="home/index" role="button">Продолжить покупки</a>
+        <a class="btn btn-dark" href="/home/index" role="button">Продолжить покупки</a>
         <a class="btn btn-dark" href="#" role="button">Добавить в корзину</a>
     </div>
 </div>

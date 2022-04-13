@@ -9,13 +9,13 @@ namespace OnlineShopWebApp
         private static List<Product> products = new List<Product>()
         {
             new Product (
-                "RTX 3080", 130000, "Видеокарта из серии RTX-3000", "/images/geforce_rtx_3080_fe"
+                "RTX 3080", 130000, "Видеокарта из серии RTX-3000", "/images/geforce_rtx_3080_fe.png"
                 ),
             new Product (
-                "Iphone 13 PRO", 115000, "Новый Iphone 13 PRO", "/images/Iphone13"
+                "Iphone 13 PRO", 115000, "Новый Iphone 13 PRO", "/images/Iphone13Pro.png"
                 ),
             new Product (
-                "Sony PS 5", 900000, "Новинка Sony", "/images/SonyPs5"
+                "Sony PS 5", 900000, "Новинка Sony", "/images/PS5.png"
                 ),
         };
                
