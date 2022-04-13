@@ -8,6 +8,13 @@ namespace OnlineShopWebApp.Services
 		Dictionary<Product, int> CartItems { get; set; }
 		decimal Cost { get; }
 
+		void Add(int id);
+
+		void Remove(int id);
+
 		void Add(Product product);
+
+		void Remove(Product product);
+		void RemoveAll();
 	}
 }

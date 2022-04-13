@@ -1,6 +1,6 @@
 ﻿@model (Dictionary<Product, int> products, decimal total)
 
-@if (Model.products == null)
+@if (Model.products == null|| Model.products.Count==0)
 {
 	<h3>Пустая корзина</h3>
 }
@@ -15,7 +15,9 @@ else
 	                <th>Цена руб</th>
 					<th>Количество</th>
 	                <th>Стоимость руб</th>
-				</tr>
+					<th>Добавить позиицию</th>
+					<th>Удалить позицию</th>
+					</tr>
 			</thead>
 			<tbody>
 			@foreach(var item in Model.products)
@@ -25,7 +27,9 @@ else
 					<td>@item.Key.Cost</td>
 					<td>@item.Value</td>
 					<td>@(item.Key.Cost * item.Value)</td>
-				 </tr>
+					<td><a class ="btn btn-outline-success" href="/cart/add?productId=@item.Key.Id" role="button">+</a></td>
+					<td><a class ="btn btn-outline-success" href="/cart/removeProduct?productId=@item.Key.Id" role="button">-</a></td>
+			    </tr>
 			}
 		</tbody>
 		</table>
@@ -34,8 +38,9 @@ else
 	<h3>@Model.total</h3>
 </div>
 <div class ="text-center">
-	<a class ="btn btn-outline-success" href="home/index" role="button">Продолжить покукпки</a>
-	<a class ="btn btn-outline-success" href="#" role = "button">Оформить заказ</a>
+	<a class ="btn btn-outline-success" href="home/index" role="button">Продолжить покупки</a>
+	<a class ="btn btn-outline-success" href="#" role="button">Оформить заказ</a>
+	<a class="btn btn-outline-danger" href="/cart/removeAll" role="button">Очистить корзину</a>
 		</div>
 	</div>
 </div>

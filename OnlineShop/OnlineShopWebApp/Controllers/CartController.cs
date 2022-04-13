@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using OnlineShopWebApp.Models;
 using OnlineShopWebApp.Services;
+using System.Linq;
 
 namespace OnlineShopWebApp.Controllers
 {
@@ -23,11 +24,22 @@ namespace OnlineShopWebApp.Controllers
 
 		public IActionResult Add(int productId)
 		{
-			var product = productDataSource.GetProductById(productId);
-			cartRepository.Add(product);
+			cartRepository.Add(productId);
 			return RedirectToAction("Index");
 		}
-	}
+
+        public IActionResult RemoveProduct(int productId)
+        {
+            cartRepository.Remove(productId);
+            return RedirectToAction("Index");
+        }
+      
+		public IActionResult RemoveAll()
+        {
+			cartRepository.RemoveAll();
+			return RedirectToAction("Index");
+        }
+    }
 }
 
 
