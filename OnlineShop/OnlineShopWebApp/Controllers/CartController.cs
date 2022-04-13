@@ -5,12 +5,12 @@ namespace OnlineShopWebApp.Controllers
 {
     public class CartController : Controller
     {
-        private readonly ProductBase prodcutBase;
-        private readonly CartBase cartBase;
+        private readonly IProductBase productBase;
+        private readonly ICartBase cartBase;
 
-        public CartController(ProductBase productBase, CartBase cartBase)
+        public CartController(IProductBase productBase, ICartBase cartBase)
         {
-            this.prodcutBase = productBase;
+            this.productBase = productBase;
             this.cartBase = cartBase;
 
         }
@@ -24,8 +24,25 @@ namespace OnlineShopWebApp.Controllers
         public IActionResult Add(int productId)
         {
 
-            var product = prodcutBase.TryGetById(productId);
+            var product = productBase.TryGetById(productId);
             cartBase.Add(product, Const.UserId);
+
+            return RedirectToAction("Index");
+        }
+
+        public IActionResult Remove(int productId)
+        {
+
+            var product = prodcutBase.TryGetById(productId);
+            cartBase.Remove(product, Const.UserId);
+
+            return RedirectToAction("Index");
+        }
+        public IActionResult RemoveAll()
+        {
+
+           
+            cartBase.RemoveAll(Const.UserId);
 
             return RedirectToAction("Index");
         }
