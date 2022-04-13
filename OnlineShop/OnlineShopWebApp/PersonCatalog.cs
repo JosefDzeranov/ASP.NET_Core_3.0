@@ -2,7 +2,6 @@
 using Newtonsoft.Json;
 using System.IO;
 using OnlineDesignBureauWebApp;
-using OnlineDesignBureauWebApp.Models;
 using OnlineShopWebApp.Models;
 
 namespace OnlineShopWebApp
@@ -27,7 +26,7 @@ namespace OnlineShopWebApp
         public static void AddProductInBaset(int id_product, int id_person)
         {
             FindPerson(id_person).BasketList.Add(ProductCatalog.FindProduct(id_product));
-        }  
+        }
         public static void DeleteProductInBaset(int id_product, int id_person)
         {
             FindPerson(id_person).BasketList.RemoveAt(id_product);

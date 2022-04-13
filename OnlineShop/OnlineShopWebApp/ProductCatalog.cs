@@ -42,5 +42,16 @@ namespace OnlineDesignBureauWebApp
             return result;
         }
 
+        public static decimal SumCoast(List<Product> listProducts)
+        {
+            decimal sum = 0;
+            foreach(var product in listProducts)
+            {
+                sum += product.Cost;
+            }
+            return sum;
+        }
+
+
     }
 }

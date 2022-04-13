@@ -6,7 +6,7 @@
 
 <div class="text-center">
     <h1 class="display-5 Title_sile">Корзина покупок</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+    <p></p>
 </div>
 <div class="container">
     <div class="table-responsive">
@@ -30,11 +30,11 @@
                 {
                     <tr>
                         <th scope="row">@(i+1)</th>
-                        <td>№ @Model.BasketList[0].Name @Model.BasketList[0].Description</td>
-                        <td> <img class="card-img-top " src="/image/@Model.BasketList[0].Images[0]" width="200"/></td>
-                        <td>@Model.BasketList[0].Length х @Model.BasketList[0].Width</td>
-                        <td>@Model.BasketList[0].Square</td>
-                        <td>@Model.BasketList[0].Cost</td>
+                        <td>№ @Model.BasketList[i].Name @Model.BasketList[i].Description</td>
+                        <td> <img class="card-img-top " src="/image/@Model.BasketList[i].Images[0]" width="200"/></td>
+                        <td>@Model.BasketList[i].Length х @Model.BasketList[i].Width</td>
+                        <td>@Model.BasketList[i].Square</td>
+                        <td>@Model.BasketList[i].Cost</td>
                         <td>
                             <a class="btn btn-outline-secondary" 
                                asp-area="" asp-controller="Person" 
@@ -44,6 +44,13 @@
                         </td>
                     </tr>
                 }
+                <th scope="row"></th>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td>Итого:</td>
+                <td>  @ProductCatalog.SumCoast(@Model.BasketList) руб.</td>
+                <td></td>
                 </tbody>
             }
             else
@@ -53,4 +60,5 @@
 
         </table>
     </div>
+    <a class="btn btn-outline-secondary col-sm-3" asp-area="" asp-controller="Person" asp-action="Orders" role="button">Оформить заказ</a>
 </div>

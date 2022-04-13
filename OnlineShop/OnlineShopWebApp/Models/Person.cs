@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using OnlineDesignBureauWebApp.Models;
 
 
@@ -8,10 +7,10 @@ namespace OnlineShopWebApp.Models
     public class Person
     {
         public int Id { get; }
-        public string FistName { get;}
-        public string Surname { get;}
-        public int Age { get;}
-        public string Email { get;}
+        public string FistName { get; }
+        public string Surname { get; }
+        public int Age { get; }
+        public string Email { get; }
         public List<Product> ComparisonList { get; set; }
         public List<Product> BasketList { get; set; }
         public List<Product> OrdersList { get; set; }
