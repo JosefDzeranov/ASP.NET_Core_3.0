@@ -26,18 +26,18 @@ else
                             <td>@item.Product.Name</td>
                             <td>@item.Product.Price</td>
                             <td>@item.Amout</td>
-                            <td>@item.Average</td>
+                            <td>@item.Cost</td>
                         </tr>
                     }
                 </tbody>
             </table>
             <div class="text-left">
                 <h4>Итого:</h4>
-                <h4>@Model.Average</h4>
+                <h4>@Model.Cost</h4>
             </div>
-            <div class="text-left">
+            <div class="text-left">  
                 <a class="btn btn-outline-success" href="/home/index" role="button">Продолжить покупки</a>
-                <a class="btn btn-success" href="/cart/add?productId=@Model.Id" role="button">Перейти к оплате</a>
+                <a class="btn btn-success" href="#" role="button">Перейти к оплате</a>
             </div>
         </div>
     </div>

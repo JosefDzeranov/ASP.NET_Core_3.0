@@ -10,11 +10,11 @@ namespace OnlineShopWebApp
         public string UserId { get; set; }
         public List<CartItem> Items { get; set; }
 
-        public decimal Average
+        public decimal Cost
         {
             get
             {
-                return Items.Sum(x => x.Average);
+                return Items.Sum(x => x.Cost);
             }
         }
     }

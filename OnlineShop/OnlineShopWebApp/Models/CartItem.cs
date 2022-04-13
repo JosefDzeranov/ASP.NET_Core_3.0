@@ -8,12 +8,12 @@ namespace OnlineShopWebApp
         public Guid Id { get; set; }
         public Product Product { get; set; }
         public int Amout { get; set; }
-        public decimal Average
+        public decimal Cost
         {
             get
             {
                 return Product.Price * Amout;
             }
         }
-    }
-}
+    } 
+} 
