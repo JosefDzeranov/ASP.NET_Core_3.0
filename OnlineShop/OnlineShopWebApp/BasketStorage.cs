@@ -30,6 +30,23 @@ namespace OnlineShopWebApp
             }
         }
 
+        public void RemoveProduct(Product product)
+        {
+            var basket = Baskets.Where(basket => basket.Product.Id == product.Id)
+                                .FirstOrDefault();
+            if (basket != null)           
+            {
+                basket.Quantity--;
+                if(basket.Quantity == 0)
+                {
+                    Baskets.Remove(basket);
+                }
+            }
+        }
+        public void ClearBasket()
+        {
+            Baskets.Clear();
+        }
         public decimal GetTotalSum()
         {
             return Baskets.Sum(basket => basket.Product.Cost * basket.Quantity);

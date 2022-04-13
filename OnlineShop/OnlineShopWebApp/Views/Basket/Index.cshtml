@@ -24,7 +24,13 @@
                     <tbody class="border-top-0" align="center">
                         <tr>
                             <td><a style="color: darkblue" href="/product/index/@basket.Product.Id">@basket.Product.Name</a></td>
-                            <td>@basket.Quantity</td>
+                            <td>
+                                @basket.Quantity&nbsp;&nbsp;&nbsp;
+                                <div class="btn-group" role="group" aria-label="Add/Remove buttons">
+                                    <a class="btn btn-outline-dark btn-sm" role="button" href="/basket/remove/@basket.Product.Id">&ndash;</a>   
+                                    <a class="btn btn-outline-dark btn-sm" role="button" href="/basket/add/@basket.Product.Id">+</a>          
+                                </div>
+                            </td>
                             <td>$@basket.Product.Cost</td>
                         </tr>
                     </tbody>
@@ -32,7 +38,7 @@
                 <tfoot align="center">
                     <tr>
                         <td></td>
-                        <td></td>
+                        <td><a class="btn btn-outline-dark btn-sm text-nowrap" href="/basket/clear" role="button">Clear basket</a></td>
                         <td colspan="3" class="align-content-end"><b>Total: $@Model.GetTotalSum()</b></td>
                     </tr>
                 </tfoot>
