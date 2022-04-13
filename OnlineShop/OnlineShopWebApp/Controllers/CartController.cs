@@ -29,5 +29,22 @@ namespace OnlineShopWebApp.Controllers
 
             return RedirectToAction("Index");
         }
+
+        public IActionResult Remove(int productId)
+        {
+
+            var product = prodcutBase.TryGetById(productId);
+            cartBase.Remove(product, Const.UserId);
+
+            return RedirectToAction("Index");
+        }
+        public IActionResult RemoveAll()
+        {
+
+           
+            cartBase.RemoveAll(Const.UserId);
+
+            return RedirectToAction("Index");
+        }
     }
 }
