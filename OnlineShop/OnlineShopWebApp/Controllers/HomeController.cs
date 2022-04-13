@@ -7,15 +7,16 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using OnlineShopWebApp.Models;
 
+
 namespace OnlineShopWebApp.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly ProductRepozitory productRepozitory;
+        private readonly ProductsRepozitory productRepozitory;
 
         public HomeController()
         {
-            productRepozitory = new ProductRepozitory();
+            productRepozitory = new ProductsRepozitory();
         }
 
         public IActionResult Index()
@@ -25,12 +26,6 @@ namespace OnlineShopWebApp.Controllers
             return View(products);
         }
 
-        public IActionResult Basket()
-        {
-            var products = productRepozitory.GetAll();
-
-            return View(products);
-        }
 
 
         public IActionResult Privacy()

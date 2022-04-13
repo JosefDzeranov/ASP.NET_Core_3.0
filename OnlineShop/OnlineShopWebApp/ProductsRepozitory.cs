@@ -6,7 +6,7 @@ using OnlineShopWebApp.Models;
 
 namespace OnlineShopWebApp
 {
-    public class ProductRepozitory
+    public class ProductsRepozitory
     {
         private static List<Product> products = new List<Product>()
         {

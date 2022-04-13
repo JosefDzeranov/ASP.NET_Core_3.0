@@ -9,15 +9,15 @@ namespace OnlineShopWebApp.Controllers
 {
     public class ProductController : Controller
     {
-        private readonly ProductRepozitory productRepozitory;
+        private readonly ProductsRepozitory productsRepozitory;
 
         public ProductController()
         {
-            productRepozitory = new ProductRepozitory();
+            productsRepozitory = new ProductsRepozitory();
         }
         public IActionResult Index(int id)
         {
-           var product = productRepozitory.TryGetById(id);
+           var product = productsRepozitory.TryGetById(id);
            return View(product);
            //if (product == null)
            // {
