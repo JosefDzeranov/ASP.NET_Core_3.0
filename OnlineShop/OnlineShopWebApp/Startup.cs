@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using OnlineShopWebApp.Interface;
 using OnlineShopWebApp.Models;
 
 namespace OnlineShopWebApp
@@ -19,8 +20,9 @@ namespace OnlineShopWebApp
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddSingleton<ProductsStorage>(); //список товаров формировать один раз на программу
-            services.AddSingleton<CartsStorage>(); //корзину формировать каждый раз при обращении
+            services.AddSingleton<IProductsStorage, ProductsStorage>(); 
+
+            services.AddSingleton<ICartsStorage, CartsStorage>(); 
 
             services.AddControllersWithViews();
         }

@@ -3,10 +3,11 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using Newtonsoft.Json;
+using OnlineShopWebApp.Interface;
 
 namespace OnlineShopWebApp.Models
 {
-    public class ProductsStorage
+    public class ProductsStorage : IProductsStorage
     {
         private readonly List<Product> products = new List<Product>()
         {
@@ -66,6 +67,5 @@ namespace OnlineShopWebApp.Models
 
             return productsJson;
         }
-
     }
 }

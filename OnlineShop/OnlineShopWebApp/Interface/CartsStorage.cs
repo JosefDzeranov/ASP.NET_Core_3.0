@@ -1,12 +1,13 @@
-﻿using System;
+﻿using OnlineShopWebApp.Interface;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
 namespace OnlineShopWebApp.Models
 {
-    public class CartsStorage
+    public class CartsStorage : ICartsStorage
     {
-        private List<Cart> carts = new List<Cart>();
+        private List<Cart> carts { get; set; } = new List<Cart>();
 
         public Cart TryGetByUserId(string userId)
         {
