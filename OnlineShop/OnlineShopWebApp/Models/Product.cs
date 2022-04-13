@@ -4,8 +4,6 @@ namespace OnlineShopWebApp.Models
     public class Product
     {
         private static int inctanceCounter = 0;
-
-
         public int Id { get; }
         public string Name { get;}
         public decimal Cost { get;}

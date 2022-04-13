@@ -4,11 +4,11 @@ namespace OnlineShopWebApp.Controllers
 {
     public class ProductController : Controller
     {
-        private readonly ProductsReposititory productReposititory;
+        private readonly ProductsRepository productReposititory;
 
-        public ProductController()
+        public ProductController(ProductsRepository productsRepository)
         {
-            productReposititory = new ProductsReposititory();
+            this.productReposititory = productsRepository;
         }
          
         public IActionResult Item(int id)

@@ -8,14 +8,12 @@
         @foreach (var product in Model)
         {
         <div class="col-4 card">
-            <img class="card-img-top" src=@product.ImagePath>
-
             <div class="card-body">
                 <a style="color:black" href="/product/item/@product.Id">
-                    <h5>@product.Name</h5>
+                    <h3>@product.Name, @product.Cost rub</h3>
                 </a>
-                <h5>@product.Cost rub</h5>
-                <a class="btn btn-light" href="/cart/add?productId=@product.Id" role="button">Add to Cart</a>
+                <img class="card-img-top" src=@product.ImagePath>
+                <a class="btn btn-outline-warning btn-sm" href="/cart/add?productId=@product.Id" role="button">Add to Cart</a>
             </div>
         </div>
         }

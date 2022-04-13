@@ -1,13 +1,12 @@
 ﻿using OnlineShopWebApp.Models;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 
 namespace OnlineShopWebApp
 {
-    public class ProductsReposititory
+    public class ProductsRepository
     {
-        private static List<Product> products = new List<Product>()
+        public List<Product> products = new List<Product>()
         {
             new Product("Teapot", 10, "Discription", "/images/item1.png"),
             new Product("Tea mug", 20, "Discription", "/images/item2.png"),
