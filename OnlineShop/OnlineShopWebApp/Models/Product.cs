@@ -9,8 +9,9 @@ namespace OnlineShopWebApp.Models
         public string Name { get; }
         public decimal Price { get; }
         public string Description { get; }
+        public string Images { get; }
 
-        public Product(string name, decimal price, string description)
+        public Product(string name, decimal price, string description, string images = null)
         {
             Id = uniId;
             Name = name;
@@ -18,6 +19,7 @@ namespace OnlineShopWebApp.Models
             Description = description;
 
             uniId += 1;
+            Images = images;
         }
 
         public override string ToString()
