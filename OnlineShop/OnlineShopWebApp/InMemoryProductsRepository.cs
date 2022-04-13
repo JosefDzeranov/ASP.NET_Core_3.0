@@ -4,7 +4,7 @@ using System.Linq;
 
 namespace OnlineShopWebApp
 {
-    public partial class InMemoryProductsRepository: IProductsRepository
+    public class InMemoryProductsRepository: IProductsRepository
     {
         public List<Product> products = new List<Product>()
         {
