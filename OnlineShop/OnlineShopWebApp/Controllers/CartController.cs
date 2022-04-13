@@ -13,14 +13,15 @@ namespace OnlineShopWebApp.Controllers
 
         public IActionResult Index()
         {
-
-             return View();
+            var cart = CartsRepository.TryGetByUserId(Constants.UserId);
+            return View(cart);
         }
 
         public IActionResult Add(int productId)
         {
             var product = productRepository.TryGetByid(productId);
-            return View(product);
+            CartsRepository.Add(product, Constants.UserId);
+            return RedirectToAction("Index");
         }
     }
 }
