@@ -3,39 +3,70 @@
 @model Order
 
 @{
-    ViewBag.Title = "Edit";
+    ViewBag.Title = "Страница оформления заказа";
 }
-<h2>Edit</h2>
+<h2 align="center">Оформление заказа</h2>
 @using (Html.BeginForm())
-{
-    @Html.AntiForgeryToken()    
-    <div class="form-horizontal">
-        <h4>Movie</h4>
+    @Html.DisplayForModel()
+
+
+    @Html.ValidationSummary(true)
+    @Html.AntiForgeryToken()
+    <div class="form-horizontal" align="center">
+        <h5>Введите контактные сведения для оформления заказа</h5>
         <hr />
         @Html.ValidationSummary(true)
-
+@*
         <div class="form-group">
-            @Html.LabelFor(model => model.Mail, new { @class = "control-label col-md-2" })
+            @Html.Label("Номер заказа")
             <div class="col-md-10">
-                @Html.EditorFor(model => model.PhoneMobile)
-                @Html.ValidationMessageFor(model => model.UserId)
+                @Html.EditorFor(model => model.OrderNumber)
+                @Html.ValidationMessageFor(model => model.OrderNumber)
             </div>
         </div>
         <div class="form-group">
-            @Html.LabelFor(model => model.Address, new { @class = "control-label col-md-2" })
+            @Html.Label("Дата заказа")
             <div class="col-md-10">
-                @Html.EditorFor(model => model.CostOrder)
+                @Html.EditorFor(model => model.OrderDate)
+                @Html.ValidationMessageFor(model => model.OrderDate)
+            </div>
+        </div>
+*@
+        <div class="form-group">
+            @Html.Label("Фамилия")
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.LastName)
                 @Html.ValidationMessageFor(model => model.LastName)
+
+            </div>
+            @Html.Label("Имя")
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Name)
+                @Html.ValidationMessageFor(model => model.Name)
             </div>
         </div>
-        @*Genre and Price removed for brevity.*@        
         <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Save" class="btn btn-default" />
+            @Html.Label("Эл.почта")
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Mail)
+                @Html.ValidationMessageFor(model => model.Mail)
             </div>
+        </div>
+        <div class="form-group">
+            @Html.Label("Адрес")
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Address)
+                @Html.ValidationMessageFor(model => model.Address)
+            </div>
+        </div>
+        @*Genre and Price removed for brevity.*@
+    </div>
+    <div class="form-group">
+            @*@Html.Action("Index","Order")*@
+        <div class="col-md-offset-2 col-md-10">
+            <input class="btn btn-dark" href="#" @*href="/order/add/?userId=@Model.UserId"*@ value="Оформить заказ" type="button" align="center" />
         </div>
     </div>
-}
-<div>
-    @Html.ActionLink("Back to List", "Index")
-</div>
+    <div>
+        @Html.ActionLink("Назад в корзину", "Index")
+    </div>

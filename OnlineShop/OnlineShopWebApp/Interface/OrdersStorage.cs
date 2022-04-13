@@ -8,7 +8,7 @@ namespace OnlineShopWebApp.Models
     public class OrdersStorage : IOrdersStorage
     {
         private List<Order> orders { get; set; } = new List<Order>();
-        //private List<OrderItem> order { get; set; } = new List<OrderItem>();
+        private List<Cart> carts = new List<Cart>();
 
         public Order TryGetOrderByUserId(string userId)
         {
@@ -38,6 +38,7 @@ namespace OnlineShopWebApp.Models
                     }
                 };
                 orders.Add(newOrder);
+                RemoveAll();
             //}
             //else
             //{
@@ -57,6 +58,11 @@ namespace OnlineShopWebApp.Models
             //        });
             //    }
             //}
+        }
+
+        public void RemoveAll()
+        {
+            carts.Clear();
         }
 
         //public void RemoveProduct(Product product, string userId)
@@ -83,10 +89,5 @@ namespace OnlineShopWebApp.Models
 
         //    }
         //} 
-
-        //public void RemoveAll()
-        //{
-        //    carts.Clear();
-        //}
     }
 }

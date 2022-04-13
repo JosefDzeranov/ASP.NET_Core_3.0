@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.ComponentModel.DataAnnotations;
 
 namespace OnlineShopWebApp.Models
 {
@@ -8,7 +9,9 @@ namespace OnlineShopWebApp.Models
     {
         public Guid Id { get; set; }
 
+        //[Display(OrderDate = "Название")]
         public int OrderNumber { get; set; }
+        
 
         public DateTime OrderDate { get; set; }
 

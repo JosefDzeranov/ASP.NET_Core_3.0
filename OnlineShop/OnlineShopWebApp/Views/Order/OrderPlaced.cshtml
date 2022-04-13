@@ -1,0 +1,65 @@
+﻿@using OnlineShopWebApp.Models
+
+@model Order
+
+<h2 align="center">Заказы</h2>
+@if (Model == null)
+{
+    <div class="404">
+        <h3 align="center">Заказов нет</h3>
+        <img class="card-img-top" src="/images/no_order.jpg" />
+    </div>
+}
+else
+{
+    <div>
+        <h3 align="center">Ваш заказ оформлен</h3>
+        <h5>Номер заказа</h5>
+        <a href="/order/index/?orderId">@Model.OrderNumber</a>
+        <h5>Дата заказа</h5>
+        <a href="/order/index/?orderId">@Model.OrderDate</a>
+        <h5>Стоимость заказа</h5>
+        <a href="/order/index/?orderId">@Model.CostOrder</a>
+        <h5>Кол-во товаров в заказе</h5>
+        <a href="/order/index/?orderId">@Model.CountItems</a>
+        <h5>Состав заказа следующий</h5>
+        <div class="row">
+            <div class="col">
+                <div>
+                    <table class="table table-striped">
+                        <thead class="table-light" align="center">
+                            <tr>
+                                <th scope="col">Номер</th>
+                                <th scope="col">Дата</th>
+                                <th scope="col">Стоимость (руб.)</th>
+                                <th scope="col">Количество</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var order in Model.Items)
+                            {
+                                <tr>
+                                    <td>
+                                        <a href="/order/index/@order.Id">@Model.OrderNumber</a>
+                                        <a href="/order/index/@order.Id">@Model.OrderDate</a>
+                                        <a href="/order/index/@order.Id">@Model.CostOrder</a>
+                                        <a href="/order/index/@order.Id">@order.Count</a>
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+                <div class="text-center">
+                    <a type="button" class="btn btn-dark" href="/home/index" role="button">Продолжить покупки</a>
+                    @* <a type="button" class="btn btn-dark" href="/order/add/?userId=@Model.UserId" role="button">Оформить заказ</a> *@
+                </div>
+            </div>
+        </div>
+    </div>
+    @*
+        <div class="text-right">
+        <a type="button" class="btn btn-outline-danger" href="/cart/removeall" role="button">Очистить корзину</a>
+        </div>
+    *@
+}

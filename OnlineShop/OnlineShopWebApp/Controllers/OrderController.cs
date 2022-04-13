@@ -17,10 +17,10 @@ namespace OnlineShopWebApp.Controllers
             this.cartsStorage = cartsStorage;
 
             this.ordersStorage = ordersStorage;
-;
+            ;
             constants = new Constants();
         }
-        
+
         public IActionResult Index()
         {
             var order = ordersStorage.TryGetOrderByUserId(constants.UserId);
@@ -34,19 +34,21 @@ namespace OnlineShopWebApp.Controllers
 
             ordersStorage.Add(userId);
 
-            return RedirectToAction("Index");
+            return View("OrderPlaced");
         }
 
-        public ActionResult Edit(string userId)
+        public IActionResult OrderMaking(string userId)
         {
-            var order = ordersStorage.TryGetOrderByUserId(userId);
-            if (userId == null)
-            {
-                return RedirectToAction("Index");
-            }
-            else
-                return View(order);
-        }
+            return View("OrderMaking");
+            //var order = ordersStorage.TryGetOrderByUserId(userId);
+            //if (userId == null)
+            //{
+            //    return View("OrderMaking");
+            //}
+            //else
 
+            //return RedirectToAction("OrderMaking", "Order", new { a = userId });
+            //return View(order);
+        }
     }
 }
