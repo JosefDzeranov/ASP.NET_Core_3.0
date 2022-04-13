@@ -10,11 +10,21 @@ namespace OnlineDesignBureauWebApp.Controllers
         {
             return View(PersonCatalog.FindPerson(id));
         }
-        public IActionResult Basket(int id_product, int id_person = 0)
+        public IActionResult Basket(int id)
         {
-            PersonCatalog.FindPerson(id_person).BasketList.Add(ProductCatalog.FindProduct(id_product));
+            return View(PersonCatalog.FindPerson(id));
+        }
+        public IActionResult AddProductInBasket(int id_product, int id_person)
+        {
+            PersonCatalog.AddProductInBaset(id_product, id_person);
             PersonCatalog.WriteToJson();
-            return View(PersonCatalog.FindPerson(id_person));
+            return View ("Basket", PersonCatalog.FindPerson(id_person));
+        }
+        public IActionResult DeleteProductInBasket(int id_product, int id_person)
+        {
+            PersonCatalog.DeleteProductInBaset(id_product, id_person);
+            PersonCatalog.WriteToJson();
+            return View ("Basket", PersonCatalog.FindPerson(id_person));
         }
         public IActionResult Comparison(int id)
         {

@@ -1,6 +1,6 @@
 ﻿@model OnlineShopWebApp.Models.Person;
 @{
-    ViewData["Title"] = "Basket";
+    ViewData["Title"] = "AddProductInBasket";
 }
 
 
@@ -11,19 +11,20 @@
 <div class="container">
     <div class="table-responsive">
         <table class="table table-bordered caption-top">
-            <caption>Список покупок</caption>
             <thead>
-                <tr>
-                    <th scope="col">#</th>
-                    <th scope="col">Название проекта</th>
-                    <th scope="col">Изображение</th>
-                    <th scope="col">Габариты (м)</th>
-                    <th scope="col">Площадь (м2)</th>
-                    <th scope="col">Стоймость (руб)</th>
-                    <th scope="col"> </th>
-                </tr>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Название проекта</th>
+                <th scope="col">Изображение</th>
+                <th scope="col">Габариты (м)</th>
+                <th scope="col">Площадь (м2)</th>
+                <th scope="col">Стоймость (руб)</th>
+                <th scope="col"> </th>
+            </tr>
             </thead>
-            <tbody>
+            @if (Model.BasketList.Count != 0)
+            {
+                <tbody>
 
                 @for (int i = 0; i < Model.BasketList.Count; i++)
                 {
@@ -34,10 +35,22 @@
                         <td>@Model.BasketList[0].Length х @Model.BasketList[0].Width</td>
                         <td>@Model.BasketList[0].Square</td>
                         <td>@Model.BasketList[0].Cost</td>
-                        <td class="btn btn-outline-secondary" href="/person/SaveListPerson"  role="button">Удалить из списка</td>
+                        <td>
+                            <a class="btn btn-outline-secondary" 
+                               asp-area="" asp-controller="Person" 
+                               asp-action="DeleteProductInBasket" 
+                               asp-route-id_product="@i" 
+                               role="button">Удалить из списка</a>
+                        </td>
                     </tr>
                 }
-            </tbody>
+                </tbody>
+            }
+            else
+            {
+                <td colspan="7">Проекты отсутствуют</td>
+            }
+
         </table>
     </div>
 </div>

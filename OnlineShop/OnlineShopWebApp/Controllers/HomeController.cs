@@ -17,10 +17,7 @@ namespace OnlineDesignBureauWebApp.Controllers
             if (ProductCatalog.products.Count == 0)
                 productCatalog.ReadToJson();
             if (PersonCatalog.persons.Count == 0)
-            {
-                Person person = new Person(0, "Александр", "Молостов", 30, "email", "111111");
-                PersonCatalog.persons.Add(person);
-            }
+                PersonCatalog.ReadToJson();
             return View(ProductCatalog.products);
         }
     }
