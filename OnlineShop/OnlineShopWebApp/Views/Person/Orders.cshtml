@@ -1,0 +1,27 @@
+﻿<!--прередаем тип данных, параметр которых мы сейчас укажем в model, у представления бывает только 1 прараметр-->
+@model List<Product>
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+
+<div class="text-center">
+    <h1 class="display-4 Title_sile" >Каталог готовых проектов</h1>
+    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+</div>
+<div class="row">
+    @foreach (var product in Model)
+    {
+        <div class="col-3 card shadow">
+            <h5></h5>
+            <img class="card-img-top" src="image/@product.Images[0]">
+            <div class="card-body">
+                <a stile="color:black" href="/product/index/@product.Id">
+                    <h5>№@product.Name</h5>
+                </a>
+                <h5>@product.Cost руб</h5>
+                <a class="btn btn-outline-dark" href="#" role="button">В сравнение</a>
+            </div>
+        </div>
+    }
+</div>
