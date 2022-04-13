@@ -8,8 +8,7 @@ namespace OnlineShopWebApp.Models
 {
     public class ProductsStorage
     {
-
-        private static readonly List<Product> products = new List<Product>()
+        private readonly List<Product> products = new List<Product>()
         {
             new Product(0,"Составление документов, исков в суд", 5000, "Составление и оформление документов для подачи в суд", "/images/court.jpg"),
             new Product(1,"Составление документов для регистрации/банкротства ЮЛ", 4000, "Составление документов для регистрации/банкротства ЮЛ","/images/bankruptcy.jpg"),
@@ -18,7 +17,7 @@ namespace OnlineShopWebApp.Models
             new Product(4,"Анализ документов и договоров", 3000, "Правовая экспертиза документов и договоров","/images/examination_documents.jpg"),
         };
 
-        public static List<Product> GetAll()
+        public List<Product> GetAll()
         {
             string currentFile = @"Models\Products.json";
 
@@ -41,7 +40,7 @@ namespace OnlineShopWebApp.Models
             return productsJson;
         }
 
-        public static Product TryGetProduct (int id)
+        public Product TryGetProduct (int id)
         {
             List<Product> productsJson;
 
@@ -57,7 +56,7 @@ namespace OnlineShopWebApp.Models
             return productsJson.FirstOrDefault(x => x.Id == id);
         }
 
-        public static List<Product> DeserializeJsonProducts()
+        public List<Product> DeserializeJsonProducts()
         {
             string currentFile = @"Models\Products.json";
 
