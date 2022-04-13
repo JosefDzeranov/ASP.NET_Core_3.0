@@ -25,6 +25,7 @@ namespace OnlineShopWebApp
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddSingleton<IProductsStorage, ProductsStorage>();
+            services.AddSingleton<ICartsStorage, CartsStorage>();
             services.AddControllersWithViews();
         }
 
