@@ -6,23 +6,23 @@ namespace OnlineShopWebApp.Models
     {
         public int Id { get; }
         public string FistName { get;}
-        public string SecondName { get;}
-        public string DateOfBirth { get;}
+        public string Surname { get;}
+        public int Age { get;}
         public string Email { get;}
 
         private string password;
-        public Person(int id, string fistName, string secondName, string dateOfBirth, string email, string password_input)
+        public Person(int id, string fistName, string surname, int age, string email, string password_input)
         {
             Id = id;
             FistName = fistName;
-            SecondName = secondName;
-            DateOfBirth = dateOfBirth;
+            Surname = surname;
+            Age = age;
             Email = email;
             password = password_input;
         }
         public override string ToString()
         {
-            return $"Id={Id}\nFistName={FistName}\nSecondName={SecondName}\nDateOfBirth={DateOfBirth}\nEmail={Email}\npassword={password}";
+            return $"Id: {Id};\nИмя: {FistName};\nФамилия: {Surname};\nВозраст: {Age};\nEmail: {Email};";
         }
     }
 }
