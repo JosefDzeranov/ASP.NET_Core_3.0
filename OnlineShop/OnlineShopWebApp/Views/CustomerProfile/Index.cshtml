@@ -1,0 +1,33 @@
+﻿@model Customer
+<body>
+	<form action="#">
+		<fieldset>
+			<legend>
+				Контакты пользователя
+			</legend>
+			<label for="user-name">Введите имя</label>
+			<input id="user-name" type="text" placeholder="Например, Иван" autofocus><br>
+			
+			<label for="user-name">Введите фамилию</label>
+			<input id="user-name" type="text" placeholder="Например, Иванов"><br>
+			<label for="#">Введите номер телефона</label>
+			<input type="tel" placeholder="+79031234567"><br>
+			<label for="#">Введите email</label>
+			<input type="email" placeholder="mail@mail.ru"><br>
+			<label for="adress">Введите адрес</label>
+			<input type="text"> <br>
+			<input type="submit" value="Отправить">
+		</fieldset>
+	</form>
+</body>
+
+					<tr>@Model?.Name</tr>>
+					<td>@Model?.Surname</td>
+					<td>@Model?.Phone</td>
+					<td>@Model?.Email</td>
+					<td>@Model?.Adress</td>
+									
+@*                	<td><a class ="btn btn-outline-success" href="/cart/add?productId=@.Key.Id" role="button">+</a></td>
+					<td><a class ="btn btn-outline-success" href="/cart/removeProduct?productId=@item.Key.Id" role="button">-</a></td>*@
+								
+					
