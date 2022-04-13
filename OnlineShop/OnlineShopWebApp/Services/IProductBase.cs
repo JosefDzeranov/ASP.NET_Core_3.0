@@ -6,7 +6,7 @@ namespace OnlineShopWebApp.Services
     public interface IProductBase
     {
         Product TryGetById(int id);
-        public List<Product> GetAll();
+        List<Product> GetAll();
         
     }
 }
