@@ -15,20 +15,21 @@ namespace OnlineShopWebApp.Models
             return orders.FirstOrDefault(x => x.UserId == userId);
         }
 
-        public void Add(string userId)
+        public void Add(string userId, string lastname, string name, string mail, string adress)
         {
-            //var existingOrder = TryGetByUserId(userId);
-            //if (existingOrder == null)
-            //{
-                var newOrder = new Order
-                {
-                    Id = Guid.NewGuid(),
-                    OrderNumber = 1,
-                    OrderDate = DateTime.Now,
-                    UserId = userId,
-                    LastName = "",
-                    Name = "",
-                    Items = new List<OrderItem>
+            var LastOrderNumber = orders.FindLast(x => x.UserId == userId).OrderNumber;
+
+            var newOrder = new Order
+            {
+                Id = Guid.NewGuid(),
+                OrderNumber = LastOrderNumber++,
+                OrderDate = DateTime.Now,
+                UserId = userId,
+                LastName = lastname,
+                Name = name,
+                Mail = mail,
+                Address = adress,
+                Items = new List<OrderItem>
                     {
                         new OrderItem
                         {
@@ -36,28 +37,9 @@ namespace OnlineShopWebApp.Models
                             Count = 1,
                         }
                     }
-                };
-                orders.Add(newOrder);
-                RemoveAll();
-            //}
-            //else
-            //{
-            //    var existingOrderItem = existingOrder.Items.FirstOrDefault(x => x.Order.Id == product.Id);
-
-            //    if (existingCartItem != null)
-            //    {
-            //        existingCartItem.Count += 1; ;
-            //    }
-            //    else
-            //    {
-            //        existingCart.Items.Add(new CartItem
-            //        {
-            //            ItemId = Guid.NewGuid(),
-            //            Count = 1,
-            //            Product = product
-            //        });
-            //    }
-            //}
+            };
+            orders.Add(newOrder);
+            RemoveAll();
         }
 
         public void RemoveAll()

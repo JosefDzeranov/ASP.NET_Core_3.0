@@ -28,11 +28,11 @@ namespace OnlineShopWebApp.Controllers
             return View(order);
         }
 
-        public IActionResult Add(string userId)
+        public IActionResult Add(string userId, string lastname, string name, string mail, string adress)
         {
             //var order = ordersStorage.TryGetProduct(productId);
 
-            ordersStorage.Add(userId);
+            ordersStorage.Add(userId, lastname, name, mail, adress);
 
             return View("OrderPlaced");
         }
