@@ -5,6 +5,12 @@ namespace OnlineShopWebApp.Controllers
 {
     public class CartController : Controller
     {
+        private readonly IProductsStorage productsStorage;
+
+        public CartController(IProductsStorage productsStorage)
+        {
+            this.productsStorage = productsStorage;
+        }
         public IActionResult Index()
         {
             var cart = CartsStorage.TryGetByUserId(Constants.UserId);
@@ -12,7 +18,7 @@ namespace OnlineShopWebApp.Controllers
         }
         public IActionResult Add(int productId)
         {
-            var product = ProductsStorage.TryGetProduct(productId);
+            var product = productsStorage.TryGetProduct(productId);
             CartsStorage.Add(product, Constants.UserId);
             return RedirectToAction("Index");
         }

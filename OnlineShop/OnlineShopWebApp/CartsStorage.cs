@@ -9,12 +9,12 @@ namespace OnlineShopWebApp.Models
     {
         private static List<Cart> carts = new List<Cart>();
 
-        internal static Cart TryGetByUserId(string userId)
+        public static Cart TryGetByUserId(string userId)
         {
             return carts.FirstOrDefault(x => x.UserId == userId);
         }
 
-        internal static void Add(Product product, string userId)
+        public static void Add(Product product, string userId)
         {
             var existingCart = TryGetByUserId(userId);
             if (existingCart == null)
