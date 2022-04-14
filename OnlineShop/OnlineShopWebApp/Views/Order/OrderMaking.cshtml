@@ -50,47 +50,6 @@
 </div>
 </form>
 
-@*
-@using (Html.BeginForm())
-{
-    <div class="form-horizontal" align="center">
-        <form method="post" asp-action="Add">
-        <h5>Введите контактные сведения для оформления заказа</h5>
-        <hr />
-        <div class="form-group" asp-for="model.LastName">
-            @Html.Label("Фамилия")
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.LastName)
-                @Html.ValidationMessageFor(model => model.LastName)
-
-            </div>
-            @Html.Label("Имя")
-            <div class="col-md-10" asp-for="model.Name">
-                @Html.EditorFor(model => model.Name)
-                @Html.ValidationMessageFor(model => model.Name)
-            </div>
-        </div>
-        <div class="form-group" asp-for="model.Mail">
-            @Html.Label("Эл.почта")
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Mail)
-                @Html.ValidationMessageFor(model => model.Mail)
-            </div>
-        </div>
-        <div class="form-group">
-            @Html.Label("Адрес")
-            <div class="col-md-10" asp-for="model.Address">
-                @Html.EditorFor(model => model.Address)
-                @Html.ValidationMessageFor(model => model.Address)
-            </div>
-        </div>
-                <div>
-        <input role="button" align="center" class="btn btn-dark" href="/order/add/?userId=model.userId&?lastname=model.LastName&?name=model.Name&?mail=model.Mail&?adress=model.Address" value="Оформить"/>
-        </div>      
-        </form>
-</div>
-}
-*@
 <div>
     @Html.ActionLink("Назад в корзину", "Index")
 </div>
