@@ -14,7 +14,11 @@
                 <img src="@product.ImgPath" class="card-img-top" alt="изображение книги" />
                 <div class="card-body">
                     <h5 class="card-title">@product.Name</h5>
-                    <h4>@product.Cost руб.</h4>
+                    <div>
+                        <h4>@product.Cost руб.</h4>
+                        <a href="/favorites/add?productId=@product.Id" class="btn btn-primary btn-sm">в избранное</a>
+                    </div>
+
                     <a href="/cart/add?productId=@product.Id" class="btn btn-dark btn-sm">Добавить в корзину</a>
                     <a href="/product/index/@product.Id" class="btn btn-dark btn-sm">Подробнее</a>
                 </div>

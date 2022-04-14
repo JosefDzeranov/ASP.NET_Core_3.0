@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace OnlineShopWebApp.Services
 {
-    public class Favorites : IProductBase
+    public class Favorites : IFavorites
     {
         private static List<Product> products = new List<Product>();
 
@@ -23,3 +23,5 @@ namespace OnlineShopWebApp.Services
         }
     }
 }
+
+   
