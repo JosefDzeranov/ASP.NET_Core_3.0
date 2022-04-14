@@ -24,6 +24,8 @@ namespace OnlineShopWebApp
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllersWithViews();
+            services.AddSingleton<RandomCounter>();
+            services.AddSingleton<CounterService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
