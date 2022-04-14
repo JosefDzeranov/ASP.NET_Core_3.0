@@ -6,11 +6,55 @@
     ViewBag.Title = "Страница оформления заказа";
 }
 <h2 align="center">Оформление заказа</h2>
+
+<form method="post" asp-action="Add">
+    <div class="row">
+    <div class="col text-center">
+        <div>
+            <label>Имя</label>
+            <div>
+                <input type="text" name="name" />
+            </div>
+
+        </div>
+        <div>
+            <label>Фамилия</label>
+            <div>
+                <input type="text" name="lastname" />
+            </div>
+        </div>
+        <div>
+            <label>E-mail</label>
+            <div>
+                <input type="email" name="mail" />
+            </div>
+        </div>
+        <div>
+            <label>Телефон</label>
+            <div>
+                <input type="tel" name="phone"/>
+            </div>
+        </div>
+        <div>
+            <label>Адрес</label>
+            <div>
+                <input type="text" name="adress" />
+            </div>
+        </div>
+
+    </div>
+
+</div>
+<div>
+    <input type="submit" class="btn btn-dark" value="Оформить заказ"/>
+</div>
+</form>
+
+@*
 @using (Html.BeginForm())
-    @Html.DisplayForModel()
-    @Html.AntiForgeryToken()
+{
     <div class="form-horizontal" align="center">
-        <form method="post" asp-action="Create">
+        <form method="post" asp-action="Add">
         <h5>Введите контактные сведения для оформления заказа</h5>
         <hr />
         <div class="form-group" asp-for="model.LastName">
@@ -40,13 +84,13 @@
                 @Html.ValidationMessageFor(model => model.Address)
             </div>
         </div>
+                <div>
+        <input role="button" align="center" class="btn btn-dark" href="/order/add/?userId=model.userId&?lastname=model.LastName&?name=model.Name&?mail=model.Mail&?adress=model.Address" value="Оформить"/>
+        </div>      
         </form>
-    </div>
-    <div class="form-group">
-        <div class="col-md-offset-2 col-md-10">
-            <input class="btn btn-dark" href="/order/add/?lastname=model.LastName&?name=model.Name&?mail=model.Mail&?adress=model.Address"*@ value="Оформить заказ" type="button" align="center" />
-        </div>
-    </div>
-    <div>
-        @Html.ActionLink("Назад в корзину", "Index")
-    </div>
+</div>
+}
+*@
+<div>
+    @Html.ActionLink("Назад в корзину", "Index")
+</div>

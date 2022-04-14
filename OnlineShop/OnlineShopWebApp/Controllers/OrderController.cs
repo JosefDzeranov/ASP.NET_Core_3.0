@@ -1,6 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using OnlineShopWebApp.Interface;
-using OnlineShopWebApp.Models;
 
 namespace OnlineShopWebApp.Controllers
 {
@@ -8,17 +7,11 @@ namespace OnlineShopWebApp.Controllers
     {
         private readonly IOrdersStorage ordersStorage;
 
-        //private readonly ICartsStorage cartsStorage;
-
         private readonly static Constants constants;
 
-        public OrderController(ICartsStorage cartsStorage, IOrdersStorage ordersStorage)
+        public OrderController(IOrdersStorage ordersStorage)
         {
-           // this.cartsStorage = cartsStorage;
-
             this.ordersStorage = ordersStorage;
-
-            //constants = new Constants();
         }
 
         public IActionResult Index()
@@ -28,18 +21,23 @@ namespace OnlineShopWebApp.Controllers
             return View(order);
         }
 
-        public IActionResult Add(string userId, string lastname, string name, string mail, string adress)
+        public IActionResult Add(string userId, string lastname, string name, string mail, string adress, string phone)
         {
-            //var order = ordersStorage.TryGetProduct(productId);
+            ordersStorage.Add(userId, lastname, name, mail, adress, phone);
 
-            ordersStorage.Add(userId, lastname, name, mail, adress);
+            var order = ordersStorage.TryGetOrderByUserId(constants.UserId);
 
-            return View("OrderPlaced");
+            return View(order);
         }
 
-        public IActionResult OrderMaking(string userId)
+        public IActionResult OrderMaking()
         {
-            return View("OrderMaking");
+            return View();
+        }
+
+        public IActionResult OrderComplete()
+        {
+            return View();
         }
     }
 }

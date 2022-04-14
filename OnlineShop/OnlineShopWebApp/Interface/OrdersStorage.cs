@@ -15,20 +15,25 @@ namespace OnlineShopWebApp.Models
             return orders.FirstOrDefault(x => x.UserId == userId);
         }
 
-        public void Add(string userId, string lastname, string name, string mail, string adress)
+        public void Add(string userId, string lastname, string name, string mail, string adress, string phone)
         {
-            var LastOrderNumber = orders.FindLast(x => x.UserId == userId).OrderNumber;
+            int LastOrderNumber = 0;
+            if (orders.Count > 0)
+                LastOrderNumber = orders.FindLast(x => x.UserId == userId).OrderNumber;
+            else
+                LastOrderNumber++;
 
             var newOrder = new Order
             {
                 Id = Guid.NewGuid(),
-                OrderNumber = LastOrderNumber++,
+                OrderNumber = LastOrderNumber,
                 OrderDate = DateTime.Now,
-                UserId = userId,
                 LastName = lastname,
                 Name = name,
                 Mail = mail,
                 Address = adress,
+                Phone = phone,
+                UserId = userId,
                 Items = new List<OrderItem>
                     {
                         new OrderItem

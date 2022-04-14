@@ -9,7 +9,6 @@ namespace OnlineShopWebApp.Models
     {
         public Guid Id { get; set; }
 
-        //[Display(OrderDate = "Название")]
         public int OrderNumber { get; set; }
         
 
@@ -21,7 +20,7 @@ namespace OnlineShopWebApp.Models
 
         public string Name { get; set; }
 
-        public string PhoneMobile { get; set; }
+        public string Phone { get; set; }
 
         public string Mail { get; set; }
 
