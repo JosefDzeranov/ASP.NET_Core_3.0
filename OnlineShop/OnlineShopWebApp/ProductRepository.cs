@@ -6,7 +6,7 @@ namespace OnlineShopWebApp
 {
     public class ProductRepository
     {
-        private static List<Product> products = new List<Product>()
+        private List<Product> products = new List<Product>()
         {
             new Product (
                 "RTX 3080", 130000, "Видеокарта из серии RTX-3000", "/images/geforce_rtx_3080_fe.png"
