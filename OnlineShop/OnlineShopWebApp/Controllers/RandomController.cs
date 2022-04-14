@@ -4,10 +4,10 @@ namespace OnlineShopWebApp.Controllers
 {
     public class RandomController
     {
-        private readonly RandomCounter randomCounter;
+        private readonly ICounter randomCounter;
         private readonly CounterService counterService;
 
-        public RandomController(RandomCounter randomCounter, CounterService counterService)
+        public RandomController(ICounter randomCounter, CounterService counterService)
         {
             this.randomCounter = randomCounter;
             this.counterService = counterService;

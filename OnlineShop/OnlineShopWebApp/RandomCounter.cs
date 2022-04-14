@@ -2,7 +2,7 @@
 
 namespace OnlineShopWebApp
 {
-    public class RandomCounter
+    public class RandomCounter : ICounter
     {
         static Random rnd = new Random();
 

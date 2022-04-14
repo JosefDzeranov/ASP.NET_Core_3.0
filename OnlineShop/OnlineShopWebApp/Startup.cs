@@ -24,7 +24,7 @@ namespace OnlineShopWebApp
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllersWithViews();
-            services.AddSingleton<RandomCounter>();
+            services.AddSingleton<ICounter, RandomCounter>();
             services.AddSingleton<CounterService>();
         }
 

@@ -2,8 +2,8 @@
 {
     public class CounterService
     {
-        public RandomCounter Counter { get; }
-        public CounterService(RandomCounter counter)
+        public ICounter Counter { get; }
+        public CounterService(ICounter counter)
         {
             Counter = counter;
         }
