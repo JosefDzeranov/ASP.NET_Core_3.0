@@ -8,17 +8,17 @@ namespace OnlineShopWebApp.Controllers
     {
         private readonly IOrdersStorage ordersStorage;
 
-        private readonly ICartsStorage cartsStorage;
+        //private readonly ICartsStorage cartsStorage;
 
-        private readonly Constants constants;
+        private readonly static Constants constants;
 
         public OrderController(ICartsStorage cartsStorage, IOrdersStorage ordersStorage)
         {
-            this.cartsStorage = cartsStorage;
+           // this.cartsStorage = cartsStorage;
 
             this.ordersStorage = ordersStorage;
-            ;
-            constants = new Constants();
+
+            //constants = new Constants();
         }
 
         public IActionResult Index()
@@ -40,15 +40,6 @@ namespace OnlineShopWebApp.Controllers
         public IActionResult OrderMaking(string userId)
         {
             return View("OrderMaking");
-            //var order = ordersStorage.TryGetOrderByUserId(userId);
-            //if (userId == null)
-            //{
-            //    return View("OrderMaking");
-            //}
-            //else
-
-            //return RedirectToAction("OrderMaking", "Order", new { a = userId });
-            //return View(order);
         }
     }
 }

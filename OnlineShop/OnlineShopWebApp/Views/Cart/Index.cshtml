@@ -35,7 +35,6 @@ else
                             <td>@product.Cost</td>
                             <td>@product.Count</td>
                             <td><a href="/cart/RemoveCountProductCart/?productId=@product.Product.Id&cartid=@product.ItemId" type="button" class="btn btn-danger">-</a><a href="/cart/add/?productId=@product.Product.Id" type="button" class="btn btn-danger">+</a></td>
-                            @*<td><a href="#" type="button" class="btn btn-warning">+</a></td>*@
                         </tr>
                     }
                 </tbody>
@@ -53,7 +52,7 @@ else
             </div>
             <div class="text-center">
                 <a type="button" class="btn btn-dark" href="/home/index" role="button">Продолжить покупки</a>
-                <a type="button" class="btn btn-dark" href="/order/OrderMaking" role="button">Оформить заказ</a> @*@Html.ActionLink("Войти", "Index", "OrderMaking")*@
+                <a type="button" class="btn btn-dark" href="/order/OrderMaking" role="button">Оформить заказ</a>
             </div>
         </div>
     </div>

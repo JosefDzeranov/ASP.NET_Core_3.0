@@ -46,30 +46,5 @@ namespace OnlineShopWebApp.Models
         {
             carts.Clear();
         }
-
-        //public void RemoveProduct(Product product, string userId)
-        //{
-        //    var existingCart = TryGetByUserId(userId);
-        //    var existingCartItem = existingCart.Items.FirstOrDefault(x => x.Product.Id == product.Id);
-        //    if (existingCartItem != null)
-        //    {
-        //        existingCart.Items.Remove(existingCartItem);
-        //    }
-        //}
-
-        //public void RemoveCountProductCart(Product product, string userId)
-        //{
-        //    var existingCart = TryGetByUserId(userId);
-        //    var existingCartItem = existingCart.Items.FirstOrDefault(x => x.Product.Id == product.Id);
-
-        //    if (existingCartItem != null && existingCartItem.Count > 0)
-        //    {
-        //        if (existingCartItem.Count == 1)
-        //            RemoveProduct(product, userId);
-        //        else
-        //            existingCartItem.Count -= 1;
-
-        //    }
-        //} 
     }
 }
