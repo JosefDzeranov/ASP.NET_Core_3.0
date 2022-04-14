@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using OnlineShopWebApp.Models;
 using OnlineShopWebApp.Services;
+using System;
 
 namespace OnlineShopWebApp.Controllers
 {
@@ -21,12 +22,31 @@ namespace OnlineShopWebApp.Controllers
             return View(existingCart);
         }
 
-        public IActionResult Create()
+        public IActionResult Create(string firstname, string lastname, string email, string phone, string address)
         {
             var existingCart = cartBase.TryGetByUserId(Const.UserId);
-            orderBase.Add(existingCart);
+            var order = new Order()
+            {
+                Id = Guid.NewGuid(),
+                UserId = Const.UserId,
+                Cart = existingCart,
+                FirstName = firstname,
+                LastName = lastname,
+                Email = email,
+                Phone = phone,
+                Address = address,
+
+            };
+            orderBase.Add(order);
             cartBase.RemoveAll(Const.UserId);
             return View();
+        }
+
+        public IActionResult Orders()
+        {
+            var existingOrders = orderBase.TryGetAll();
+
+            return View(existingCart);
         }
     }
 }

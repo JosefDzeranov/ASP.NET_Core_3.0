@@ -1,11 +1,12 @@
 ﻿using OnlineShopWebApp.Models;
+using System.Collections.Generic;
 
 namespace OnlineShopWebApp.Services
 {
     public interface IOrderBase
     {
-        Cart TryGetByUserId(string userId);
-
-        void Add(Cart cart);
+        Order TryGetByUserId(string userId);
+        List<Order> TryGetAll ();
+        void Add(Order order);
     }
 }

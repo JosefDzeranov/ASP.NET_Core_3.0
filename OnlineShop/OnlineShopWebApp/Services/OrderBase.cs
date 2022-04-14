@@ -6,16 +6,21 @@ namespace OnlineShopWebApp.Services
 {
     public class OrderBase : IOrderBase
     {
-        private static List<Cart> Сarts { get; set; } = new List<Cart>();
+        private static List<Order> Orders { get; set; } = new List<Order>();
 
-        public void Add(Cart cart)
+        public void Add(Order order)
         {
-            Сarts.Add(cart);
+           Orders.Add(order);
         }
 
-        public Cart TryGetByUserId(string userId)
+        public List<Order> TryGetAll()
         {
-            return Сarts.FirstOrDefault(x => x.UserId == userId);
+            throw new System.NotImplementedException();
+        }
+
+        public Order TryGetByUserId(string userId)
+        {
+            return Orders.FirstOrDefault(x => x.UserId == userId);
         }
     }
 }

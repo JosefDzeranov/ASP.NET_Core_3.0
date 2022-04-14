@@ -3,44 +3,46 @@
     ViewData["Title"] = "Оформление заказа";
 }
 
-
-<div class="row">
+<form method="post" asp-action="Create">
+    <div class="row">
     <div class="col text-center">
         <div>
             <label>Имя</label>
             <div>
-                <input type="text" />
+                <input type="text" name="firstname" />
             </div>
 
         </div>
         <div>
             <label>Фамилия</label>
             <div>
-                <input type="text" />
+                <input type="text" name="lastname" />
             </div>
         </div>
         <div>
             <label>E-mail</label>
             <div>
-                <input type="email" />
+                <input type="email" name="email" />
             </div>
         </div>
         <div>
             <label>Телефон</label>
             <div>
-                <input type="tel" />
+                <input type="tel" name="phone"/>
             </div>
         </div>
         <div>
             <label>Адрес</label>
             <div>
-                <input type="text" />
+                <input type="text" name="address" />
             </div>
         </div>
 
     </div>
 
 </div>
+
+
 
 <div class="row">
 
@@ -72,5 +74,8 @@
 </div>
 
 <div>
-    <a href="/order/create" class="btn btn-success">подтвердить</a>
+    <input type="submit" class="btn btn-success" value="Подтевердить"/>
+
 </div>
+
+</form>
