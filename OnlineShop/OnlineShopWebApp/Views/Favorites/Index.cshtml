@@ -1,0 +1,29 @@
+﻿
+@model List<Product>
+
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+
+
+<div class="row">
+    @foreach (var product in Model)
+    {
+        <div class="col-3">
+            <div class="card-deck">
+                <img src="@product.ImgPath" class="card-img-top" alt="изображение книги" />
+                <div class="card-body">
+                    <h5 class="card-title">@product.Name</h5>
+                    <div>
+                        <h4>@product.Cost руб.</h4>
+                        <a href="/favorites/Remove?productId=@product.Id" class="btn btn-danger btn-sm">удалить из избранного</a>
+                    </div>
+
+                    <a href="/cart/add?productId=@product.Id" class="btn btn-dark btn-sm">Добавить в корзину</a>
+                    <a href="/product/index/@product.Id" class="btn btn-dark btn-sm">Подробнее</a>
+                </div>
+            </div>
+        </div>
+    }
+</div>

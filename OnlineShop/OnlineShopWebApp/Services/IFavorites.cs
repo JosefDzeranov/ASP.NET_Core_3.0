@@ -5,8 +5,8 @@ namespace OnlineShopWebApp.Services
 {
     public interface IFavorites
     {
-        List<Product> GetAll();
+        Favorite TryGetByUserId(string userId);
 
-        void Add(Product product);
+        void Add(Product product, string userId);
     }
 }

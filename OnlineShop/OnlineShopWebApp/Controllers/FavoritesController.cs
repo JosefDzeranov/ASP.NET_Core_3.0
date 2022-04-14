@@ -16,16 +16,17 @@ namespace OnlineShopWebApp.Controllers
 
         public IActionResult Index()
         {
-            return View();
+            var favorite = favorites.TryGetByUserId(Const.UserId);
+            return View(favorite.Products);
         }
 
 
         public IActionResult Add(int productId)
         {
             var product = productBase.TryGetById(productId);
-            favorites.Add(product);
+            favorites.Add(product, Const.UserId);
 
-            return RedirectToAction("Index","Home");
+            return RedirectToAction("Index", "Home");
         }
     }
 }
