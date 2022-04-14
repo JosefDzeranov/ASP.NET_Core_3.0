@@ -17,16 +17,16 @@ namespace OnlineShopWebApp.Controllers
         }
         public IActionResult Index(int id)
         {
-           var product = productsRepozitory.TryGetById(id);
-           return View(product);
-           //if (product == null)
-           // {
-               // return "Продукта с таким id не существует";
-           // }
+            var product = productsRepozitory.TryGetById(id);
+            return View(product);
+            //if (product == null)
+            // {
+            // return "Продукта с таким id не существует";
+            // }
             //$"{product}\n{product.Description}";
-            
-                
-                
+
+
+
         }
     }
 }

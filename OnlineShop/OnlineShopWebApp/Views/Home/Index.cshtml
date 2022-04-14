@@ -5,22 +5,22 @@
 }
 
 <div class="row">
-        @foreach (var product in Model)
-        {
-          <div class="col-3 card shadow">
+    @foreach (var product in Model)
+    {
+        <div class="col-3 card shadow">
 
-                    <img class="card-img-top" src="https://static4.depositphotos.com/1015530/309/i/600/depositphotos_3098299-stock-photo-single-green-book.jpg" />
-                    
-                    <div class="card-body">
-                        <a style="color:grey" href="product/index/@product.Id">
-                            <h5>@product.Name</h5>
-                        </a>
+            <img class="card-img-top" src="https://static4.depositphotos.com/1015530/309/i/600/depositphotos_3098299-stock-photo-single-green-book.jpg" />
 
-                        <h4>@product.Cost</h4>
+            <div class="card-body">
+                <a style="color:grey" href="product/index/@product.Id">
+                    <h5>@product.Name</h5>
+                </a>
 
-                        <a class="btn btn-dark" href="/cart/add?productId=@product.Id" role="button">Добавить в корзину</a>
+                <h4>@product.Cost</h4>
 
-                    </div>
-           </div>
-        }
+                <a class="btn btn-dark" href="/cart/add?productId=@product.Id" role="button">Добавить в корзину</a>
+
+            </div>
+        </div>
+    }
 </div>

@@ -12,9 +12,9 @@ namespace OnlineShopWebApp.Models
         public string Name { get; }
         public decimal Cost { get; }
         public string Description { get; }
- 
 
-        public Product (string name, decimal cost, string description)
+
+        public Product(string name, decimal cost, string description)
         {
             Id = constantCounter;
             Name = name;

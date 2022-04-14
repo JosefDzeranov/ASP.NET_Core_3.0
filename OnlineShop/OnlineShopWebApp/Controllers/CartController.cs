@@ -20,7 +20,7 @@ namespace OnlineShopWebApp.Controllers
         {
             var cart = CartsRepozitory.TryGetByUserId(Constants.UserId);
             return View(cart);
-        }   
+        }
         public IActionResult Add(int productId)
         {
             var product = productRepozitory.TryGetById(productId);

@@ -11,12 +11,12 @@ namespace OnlineShopWebApp.Models
         public string UserId { get; set; }
         public List<CartItem> Items { get; set; }
         public decimal FullCost
-        { 
+        {
             get
-            { 
-                return Items.Sum(x => x.Cost); 
+            {
+                return Items.Sum(x => x.Cost);
             }
         }
-        
+
     }
 }

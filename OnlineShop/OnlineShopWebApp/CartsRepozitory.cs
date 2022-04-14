@@ -12,13 +12,13 @@ namespace OnlineShopWebApp
 
         internal static Cart TryGetByUserId(string userId)
         {
-            return carts.FirstOrDefault(x=>x.UserId==userId);
+            return carts.FirstOrDefault(x => x.UserId == userId);
         }
 
         internal static void Add(Product product, string userId)
         {
             var existingCart = TryGetByUserId(userId);
-            if (existingCart==null)
+            if (existingCart == null)
             {
                 var newCart = new Cart
                 {
@@ -41,7 +41,7 @@ namespace OnlineShopWebApp
             else
             {
                 var existingCartItem = existingCart.Items.FirstOrDefault(x => x.Product.Id == product.Id);
-                if(existingCartItem!=null)
+                if (existingCartItem != null)
                 {
                     existingCartItem.Amount += 1;
                 }
@@ -54,7 +54,6 @@ namespace OnlineShopWebApp
                         Product = product
                     });
                 }
-
             }
         }
     }

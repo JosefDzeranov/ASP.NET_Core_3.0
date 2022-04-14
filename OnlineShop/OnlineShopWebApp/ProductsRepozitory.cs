@@ -25,7 +25,7 @@ namespace OnlineShopWebApp
             foreach (var product in products)
             {
                 if (product.Id == id)
-                    return product; 
+                    return product;
             }
             return null;
         }

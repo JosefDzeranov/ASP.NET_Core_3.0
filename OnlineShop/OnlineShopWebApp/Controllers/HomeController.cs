@@ -22,7 +22,7 @@ namespace OnlineShopWebApp.Controllers
         public IActionResult Index()
         {
             var products = productRepozitory.GetAll();
-           
+
             return View(products);
         }
 
