@@ -7,27 +7,26 @@ using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 
+
 namespace OnlineShopWebApp.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly ProductRepozitory productRepozitory;
+        private readonly ProductsRepozitory productRepozitory;
 
         public HomeController()
         {
-            productRepozitory = new ProductRepozitory();
+            productRepozitory = new ProductsRepozitory();
         }
 
-        public string Index()
+        public IActionResult Index()
         {
             var products = productRepozitory.GetAll();
-            var result = "";
-            foreach (var product in products)
-            {
-                result += product + "\n\n";
-            }
-            return result;
+
+            return View(products);
         }
+
+
 
         public IActionResult Privacy()
         {
