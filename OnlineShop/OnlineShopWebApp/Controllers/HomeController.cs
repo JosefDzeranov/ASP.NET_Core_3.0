@@ -12,16 +12,16 @@ namespace OnlineShopWebApp.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly ProductsRepozitory productRepozitory;
+        private readonly ProductsRepozitory productsRepozitory;
 
-        public HomeController()
+        public HomeController(ProductsRepozitory productsRepozitory)
         {
-            productRepozitory = new ProductsRepozitory();
+            this.productsRepozitory = productsRepozitory;
         }
 
         public IActionResult Index()
         {
-            var products = productRepozitory.GetAll();
+            var products = productsRepozitory.GetAll();
 
             return View(products);
         }

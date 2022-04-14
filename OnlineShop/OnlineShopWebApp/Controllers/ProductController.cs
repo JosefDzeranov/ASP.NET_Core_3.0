@@ -11,19 +11,14 @@ namespace OnlineShopWebApp.Controllers
     {
         private readonly ProductsRepozitory productsRepozitory;
 
-        public ProductController()
+        public ProductController(ProductsRepozitory productsRepozitory)
         {
-            productsRepozitory = new ProductsRepozitory();
+            this.productsRepozitory = productsRepozitory;
         }
         public IActionResult Index(int id)
         {
             var product = productsRepozitory.TryGetById(id);
             return View(product);
-            //if (product == null)
-            // {
-            // return "Продукта с таким id не существует";
-            // }
-            //$"{product}\n{product.Description}";
 
 
 

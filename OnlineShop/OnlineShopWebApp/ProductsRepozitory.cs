@@ -8,7 +8,7 @@ namespace OnlineShopWebApp
 {
     public class ProductsRepozitory
     {
-        private static List<Product> products = new List<Product>()
+        private List<Product> products = new List<Product>()
         {
             new Product("Оно", 450, "Автор: Стивен Кинг Жанр: мистика, ужасы"),
             new Product("Мрачный жнец", 350, "Автор: Терри Пратчетт Жанр: фэнтези"),
