@@ -33,7 +33,7 @@ namespace OnlineShopWebApp.Controllers
         {
             var product = productBase.TryGetById(productId);
             favorites.Remove(product, Const.UserId);
-
+            
             return RedirectToAction("Index");
         }
     }
