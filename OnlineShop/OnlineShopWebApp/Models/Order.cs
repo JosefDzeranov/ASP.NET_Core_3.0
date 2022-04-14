@@ -14,5 +14,6 @@ namespace OnlineShopWebApp.Models
         public string Phone { get; set; }
         public string Address { get; set; }
 
+        public decimal TotalCost { get; set; }
     }
 }

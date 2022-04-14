@@ -15,7 +15,7 @@ namespace OnlineShopWebApp.Services
 
         public List<Order> TryGetAll()
         {
-            throw new System.NotImplementedException();
+            return Orders;
         }
 
         public Order TryGetByUserId(string userId)

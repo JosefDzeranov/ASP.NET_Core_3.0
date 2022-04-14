@@ -35,6 +35,8 @@ namespace OnlineShopWebApp.Controllers
                 Email = email,
                 Phone = phone,
                 Address = address,
+                Created = DateTime.Now,
+                TotalCost = existingCart.TotalCost,
 
             };
             orderBase.Add(order);
@@ -46,7 +48,7 @@ namespace OnlineShopWebApp.Controllers
         {
             var existingOrders = orderBase.TryGetAll();
 
-            return View(existingCart);
+            return View(existingOrders);
         }
     }
 }
