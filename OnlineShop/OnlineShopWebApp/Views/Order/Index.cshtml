@@ -1,0 +1,76 @@
+﻿@model Cart
+@{
+    ViewData["Title"] = "Оформление заказа";
+}
+
+
+<div class="row">
+    <div class="col text-center">
+        <div>
+            <label>Имя</label>
+            <div>
+                <input type="text" />
+            </div>
+
+        </div>
+        <div>
+            <label>Фамилия</label>
+            <div>
+                <input type="text" />
+            </div>
+        </div>
+        <div>
+            <label>E-mail</label>
+            <div>
+                <input type="email" />
+            </div>
+        </div>
+        <div>
+            <label>Телефон</label>
+            <div>
+                <input type="tel" />
+            </div>
+        </div>
+        <div>
+            <label>Адрес</label>
+            <div>
+                <input type="text" />
+            </div>
+        </div>
+
+    </div>
+
+</div>
+
+<div class="row">
+
+    <table class="table">
+
+        <tr>
+            <th>Название</th>
+            <th>Цена руб.</th>
+            <th>Количество</th>
+            <th>Стоимость руб.</th>
+        </tr>
+
+        @foreach (var cartItem in Model.Items)
+        {
+            <tr>
+                <td>@cartItem.Product.Name</td>
+                <td>@cartItem.Product.Cost</td>
+                <td>@cartItem.Quantinity</td>
+                <td>@cartItem.Cost</td>
+            </tr>
+        }
+
+    </table>
+
+</div>
+
+<div class="text-right">
+    <h3>Итоговая сумма: @Model.TotalCost руб.</h3>
+</div>
+
+<div>
+    <a href="/order/create" class="btn btn-success">подтвердить</a>
+</div>
