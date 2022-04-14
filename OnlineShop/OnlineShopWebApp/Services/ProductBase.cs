@@ -16,6 +16,11 @@ namespace OnlineShopWebApp.Services
 
         };
 
+        //пока не нужен
+        public void Add(Product product)
+        {
+            throw new System.NotImplementedException();
+        }
 
         public List<Product> GetAll()
         {
