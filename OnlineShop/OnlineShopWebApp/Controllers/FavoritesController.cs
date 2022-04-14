@@ -28,5 +28,13 @@ namespace OnlineShopWebApp.Controllers
 
             return RedirectToAction("Index", "Home");
         }
+
+        public IActionResult Remove(int productId)
+        {
+            var product = productBase.TryGetById(productId);
+            favorites.Remove(product, Const.UserId);
+
+            return RedirectToAction("Index");
+        }
     }
 }

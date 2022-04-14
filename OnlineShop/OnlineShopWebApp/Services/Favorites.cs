@@ -39,7 +39,15 @@ namespace OnlineShopWebApp.Services
 
         }
 
+        public void Remove(Product product, string userId)
+        {
+            var existingFavorite = TryGetByUserId(userId);
+            if(existingFavorite != null)
+            {
+                existingFavorite.Products.Remove(product);
+            }
 
+        }
 
         public Favorite TryGetByUserId(string userId)
         {
