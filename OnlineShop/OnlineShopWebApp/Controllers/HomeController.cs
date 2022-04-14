@@ -6,7 +6,6 @@ namespace OnlineDesignBureauWebApp.Controllers
     public class HomeController : Controller
     {
         private readonly ProductCatalog productCatalog;
-        //private readonly PersonCatalog personCatalog;
         public HomeController()
         {
             productCatalog = new ProductCatalog();

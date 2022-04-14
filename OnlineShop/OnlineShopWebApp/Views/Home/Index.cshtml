@@ -19,7 +19,19 @@
                     <h5>№@product.Name</h5>
                 </a>
                 <h5>@product.Cost руб</h5>
-                <a class="btn btn-outline-secondary" href="#" role="button">В сравнение</a>
+                <div class="row">
+                    <a class="btn btn-outline-secondary mx-1 my-1" href="#" role="button">В сравнение</a>
+                    <p >   </p>
+                    <a class="btn btn-outline-secondary mx-1 my-1"
+                       asp-area="" 
+                       asp-controller="Basket" 
+                       asp-action="AddProductInBasket" 
+                       asp-route-productId="@product.Id"
+                       role="button">
+                        В корзину
+                    </a>
+                </div>
+
             </div>
         </div>
     }

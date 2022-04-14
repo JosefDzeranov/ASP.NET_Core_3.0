@@ -24,9 +24,9 @@ namespace OnlineDesignBureauWebApp
             products = JsonConvert.DeserializeObject<List<Product>>(json);
         }
 
-        public static Product FindProduct(int id)
+        public static Product FindProduct(int productId)
         {
-            Product product = products.Find(x => x.Id == id);
+            Product product = products.Find(x => x.Id == productId);
             return product;
         }
 
@@ -42,7 +42,7 @@ namespace OnlineDesignBureauWebApp
             return result;
         }
 
-        public static decimal SumCoast(List<Product> listProducts)
+        public static decimal SumCost(List<Product> listProducts)
         {
             decimal sum = 0;
             foreach(var product in listProducts)

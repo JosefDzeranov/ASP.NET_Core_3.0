@@ -23,17 +23,17 @@ namespace OnlineShopWebApp
             persons = JsonConvert.DeserializeObject<List<Person>>(json);
         }
 
-        public static void AddProductInBaset(int id_product, int id_person)
+        public static void AddProductInBaset(int productId, int personId)
         {
-            FindPerson(id_person).BasketList.Add(ProductCatalog.FindProduct(id_product));
+            FindPerson(personId).BasketList.Add(ProductCatalog.FindProduct(productId));
         }
-        public static void DeleteProductInBaset(int id_product, int id_person)
+        public static void DeleteProductInBaset(int productId, int personId)
         {
-            FindPerson(id_person).BasketList.RemoveAt(id_product);
+            FindPerson(personId).BasketList.RemoveAt(productId);
         }
-        public static Person FindPerson(int id)
+        public static Person FindPerson(int personId)
         {
-            Person person = persons.Find(x => x.Id == id);
+            Person person = persons.Find(x => x.Id == personId);
             return person;
         }
     }

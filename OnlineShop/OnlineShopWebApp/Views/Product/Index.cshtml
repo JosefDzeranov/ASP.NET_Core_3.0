@@ -16,7 +16,7 @@
             <h6>Общая площадь: @Model.Square м.кв.</h6>
             <h6>Габариты: @Model.Length х @Model.Width м</h6>
             <h6>Стоймость проекта: @Model.Cost руб</h6>
-            <a class="btn btn-outline-secondary" asp-area="" asp-controller="Person" asp-action="AddProductInBasket" asp-route-id_product="@Model.Id" role="button">В корзину</a>
+            <a class="btn btn-outline-secondary" asp-area="" asp-controller="Basket" asp-action="AddProductInBasket" asp-route-productId="@Model.Id" role="button">В корзину</a>
             <h6></h6>
             <a class="btn btn-outline-secondary" href="#" role="button">В cравнение</a>
         </div>
