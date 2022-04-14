@@ -36,7 +36,7 @@
                         <td>@Model.BasketList[i].Square</td>
                         <td>@Model.BasketList[i].Cost</td>
                         <td>
-                            <a class="btn btn-outline-secondary" 
+                            <a class="btn btn-outline-dark text-nowrap btn-sm mx-1 my-1" 
                                asp-area="" asp-controller="Basket" 
                                asp-action="DeleteProductInBasket" 
                                asp-route-productId="@i" 
@@ -60,5 +60,5 @@
 
         </table>
     </div>
-    <a class="btn btn-outline-secondary col-sm-3" href="#" role="button">Оформить заказ</a>
+    <a class="btn btn-outline-dark text-nowrap btn-sm mx-1 my-1" href="#" role="button">Оформить заказ</a>
 </div>
