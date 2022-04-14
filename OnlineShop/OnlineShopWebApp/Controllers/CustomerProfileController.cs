@@ -15,5 +15,11 @@ namespace OnlineShopWebApp.Controllers
         {
             return View();
         }
+
+        public IActionResult Purchase()
+        {
+            return View();
+        }
+
     }
 }
