@@ -8,48 +8,52 @@ namespace OnlineShopWebApp
     {
         private List<Basket> baskets = new List<Basket>();
 
-        public List<Basket> Baskets
+        public Basket TryGetByUserId(string userId)
         {
-            get
-            {
-                return baskets;
-            }
+            return baskets.FirstOrDefault(b => b.UserId == userId);
         }
 
-        public void AddProduct(Product product)
+        public void AddProduct(Product product, string userId)
         {
-            var basket = Baskets.FirstOrDefault(basket => basket.Product.Id == product.Id);
-                                             
-            if (basket == null)
+            var basket = TryGetByUserId(userId);
+
+            if(basket == null)
             {
-                baskets.Add(new Basket(product));
+                var newBasket = new Basket(userId);
+
+            }
+            var basket = baskets.FirstOrDefault(b => b.Product.Id == product.Id);
+                                             
+            if (basketItem == null)
+            {
+                basket.Add(new BasketItem(product));
             }
             else
             {
-                basket.Quantity++;
+                basketItem.Quantity++;
             }
         }
 
-        public void RemoveProduct(Product product)
+        public void RemoveProduct(Product product, string userId)
         {
-            var basket = Baskets.Where(basket => basket.Product.Id == product.Id)
-                                .FirstOrDefault();
-            if (basket != null)           
+            var basketItem = Basket.FirstOrDefault(b => b.Product.Id == product.Id);
+
+            if (basketItem != null)           
             {
-                basket.Quantity--;
-                if(basket.Quantity == 0)
+                basketItem.Quantity--;
+                if(basketItem.Quantity == 0)
                 {
-                    Baskets.Remove(basket);
+                    Basket.Remove(basketItem);
                 }
             }
         }
-        public void ClearBasket()
+        public void ClearBasket(string userId)
         {
-            Baskets.Clear();
+            Basket.Clear();
         }
         public decimal GetTotalSum()
         {
-            return Baskets.Sum(basket => basket.Product.Cost * basket.Quantity);
+            return Basket.Sum(b => b.Product.Cost * b.Quantity);
         }
     }
 }

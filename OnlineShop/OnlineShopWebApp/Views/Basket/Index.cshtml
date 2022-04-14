@@ -19,19 +19,19 @@
                         <th scope="col">Cost</th>
                     </tr>
                 </thead>
-                @foreach (var basket in Model.Baskets)
+                @foreach (var b in Model.Basket)
                 {
                     <tbody class="border-top-0" align="center">
                         <tr>
-                            <td><a style="color: darkblue" href="/product/index/@basket.Product.Id">@basket.Product.Name</a></td>
+                            <td><a style="color: darkblue" href="/product/index/@b.Product.Id">@b.Product.Name</a></td>
                             <td>
-                                @basket.Quantity&nbsp;&nbsp;&nbsp;
+                                @b.Quantity&nbsp;&nbsp;&nbsp;
                                 <div class="btn-group" role="group" aria-label="Add/Remove buttons">
-                                    <a class="btn btn-outline-dark btn-sm" role="button" href="/basket/remove/@basket.Product.Id">&ndash;</a>   
-                                    <a class="btn btn-outline-dark btn-sm" role="button" href="/basket/add/@basket.Product.Id">+</a>          
+                                    <a class="btn btn-outline-dark btn-sm" role="button" href="/basket/remove/@b.Product.Id">&ndash;</a>   
+                                    <a class="btn btn-outline-dark btn-sm" role="button" href="/basket/add/@b.Product.Id">+</a>          
                                 </div>
                             </td>
-                            <td>$@basket.Product.Cost</td>
+                            <td>$@b.Product.Cost</td>
                         </tr>
                     </tbody>
                 }

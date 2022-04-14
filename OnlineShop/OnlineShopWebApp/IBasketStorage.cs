@@ -1,11 +1,10 @@
 ﻿using OnlineShopWebApp.Models;
-using System.Collections.Generic;
 
 namespace OnlineShopWebApp
 {
     public interface IBasketStorage
     {
-        List<Basket> Baskets { get; }
+        Basket TryGetByUserId(string userId);
         void AddProduct(Product product);
         void RemoveProduct(Product product);
         void ClearBasket();

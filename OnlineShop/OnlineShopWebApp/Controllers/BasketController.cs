@@ -13,33 +13,35 @@ namespace OnlineShopWebApp.Controllers
             ProductStorage = productStorage;
             BasketStorage = basketStorage;
         }
-        public IActionResult Index(int id)
+        public IActionResult Index()
         {
-            if (BasketStorage.Baskets.Count() == 0)
+            var basket = BasketStorage.TryGetByUserId(Constants.UserId);
+
+            if (basket == null)
             {
                 return View("Empty");
             }
 
-            return View(BasketStorage);
+            return View(basket);
         }
 
         public IActionResult Add(int id)
         {
             var product = ProductStorage.TryGetProduct(id);
-            BasketStorage.AddProduct(product);
+            BasketStorage.AddProduct(product, Constants.UserId);
             return RedirectToAction("Index");
         }
 
         public IActionResult Remove(int id)
         {
             var product = ProductStorage.TryGetProduct(id);
-            BasketStorage.RemoveProduct(product);
+            BasketStorage.RemoveProduct(product, Constants.UserId);
             return RedirectToAction("Index");
         }
 
         public IActionResult Clear()
         {
-            BasketStorage.ClearBasket();
+            BasketStorage.ClearBasket(Constants.UserId);
             return RedirectToAction("Index");
         }
     }
