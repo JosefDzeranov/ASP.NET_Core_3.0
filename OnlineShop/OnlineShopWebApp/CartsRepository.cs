@@ -5,7 +5,7 @@ using System.Linq;
 
 namespace OnlineShopWebApp
 {
-    public class CartsRepository
+    public class CartsInMemoryRepository : ICartsRepository
     {
         private List<Cart> carts = new List<Cart>();
 
@@ -48,7 +48,7 @@ namespace OnlineShopWebApp
                     existingCart.Items.Add(new CartItem
                     {
                         Id = Guid.NewGuid(),
-                        Amout= 1,
+                        Amout = 1,
                         Product = product,
                     });
                 }
