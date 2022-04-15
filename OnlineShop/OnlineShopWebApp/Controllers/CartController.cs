@@ -29,7 +29,7 @@ namespace OnlineShopWebApp.Controllers
 
             cartManager.AddProductToCart(Constants.UserId, foundProduct);
             var cart = cartManager.TryGetCartByUserID(Constants.UserId);
-            return View("Index", cart);
+            return RedirectToAction("Index", cart);
         }
 
         public IActionResult RemoveFromCart(int id)
@@ -37,7 +37,10 @@ namespace OnlineShopWebApp.Controllers
             var foundProduct = productManager.FindProduct(id);
             cartManager.RemoveProductFromCart(Constants.UserId, foundProduct);
             var cart = cartManager.TryGetCartByUserID(Constants.UserId);
-            return View("Index", cart);
+
+          return  RedirectToAction("Index", cart);
+          
+         
         }
 
 

@@ -80,6 +80,11 @@ namespace OnlineShopWebApp
             var cartLine = cart.CartLines.FirstOrDefault(x => x.Product.Id == product.Id);
             cartLine.Amount--;
 
+            if (cartLine.Amount <= 0)
+            {
+                cart.CartLines.Remove(cartLine);
+            }
+
         }
 
 
