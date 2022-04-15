@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 namespace OnlineShopWebApp
 {
-    public class ProductInMemoryRepository : IProductsRepository
+    public class ProductsInMemoryRepository : IProductsRepository
     {
         private List<Product> products = new List<Product>()
         {
