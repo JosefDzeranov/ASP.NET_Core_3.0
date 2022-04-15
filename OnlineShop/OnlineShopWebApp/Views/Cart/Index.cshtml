@@ -29,8 +29,8 @@ else
                         <td>@item.Product.Cost</td>
                         <td>@item.Amount</td>
                         <td>@item.Cost</td>
-                        <td><a class="btn btn-dark btn-sm" href="/cart/Add" role="button" action="@item.Amount-1">-</a></td>
-                        <td><a class="btn btn-dark btn-sm" href="/cart/Add" role="button" action="@item.Amount+1">+</a></td>
+                        <td><a class="btn btn-dark btn-sm" href="/cart/remove?productId=@item.Product.Id" role="button">-</a></td>
+                        <td><a class="btn btn-dark btn-sm" href="/cart/add?productId=@item.Product.Id" role="button">+</a></td>
                     </tr>
                     }
                 </tbody>
