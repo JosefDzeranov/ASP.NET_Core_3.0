@@ -1,6 +1,6 @@
 ﻿@using OnlineShopWebApp
 @using OnlineShopWebApp.Models
-@model IBasketStorage
+@model Basket
 
 @{
     ViewData["Title"] = "Basket Page";
@@ -19,19 +19,19 @@
                         <th scope="col">Cost</th>
                     </tr>
                 </thead>
-                @foreach (var b in Model.Basket)
+                @foreach (var item in Model.Items)
                 {
                     <tbody class="border-top-0" align="center">
                         <tr>
-                            <td><a style="color: darkblue" href="/product/index/@b.Product.Id">@b.Product.Name</a></td>
+                            <td><a style="color: darkblue" href="/product/index/@item.Product.Id">@item.Product.Name</a></td>
                             <td>
-                                @b.Quantity&nbsp;&nbsp;&nbsp;
+                                @item.Quantity&nbsp;&nbsp;&nbsp;
                                 <div class="btn-group" role="group" aria-label="Add/Remove buttons">
-                                    <a class="btn btn-outline-dark btn-sm" role="button" href="/basket/remove/@b.Product.Id">&ndash;</a>   
-                                    <a class="btn btn-outline-dark btn-sm" role="button" href="/basket/add/@b.Product.Id">+</a>          
+                                    <a class="btn btn-outline-dark btn-sm" role="button" href="/basket/remove/@item.Product.Id">&ndash;</a> 
+                                    <a class="btn btn-outline-dark btn-sm" role="button" href="/basket/add/@item.Product.Id">+</a>          
                                 </div>
                             </td>
-                            <td>$@b.Product.Cost</td>
+                            <td>$@item.Product.Cost</td>
                         </tr>
                     </tbody>
                 }
@@ -39,7 +39,7 @@
                     <tr>
                         <td></td>
                         <td><a class="btn btn-outline-dark btn-sm text-nowrap" href="/basket/clear" role="button">Clear basket</a></td>
-                        <td colspan="3" class="align-content-end"><b>Total: $@Model.GetTotalSum()</b></td>
+                        <td colspan="3" class="align-content-end"><b>Total: $@Model.TotalCost</b></td>
                     </tr>
                 </tfoot>
             </table>

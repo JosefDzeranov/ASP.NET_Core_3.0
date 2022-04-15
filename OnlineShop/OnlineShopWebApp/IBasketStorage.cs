@@ -5,9 +5,8 @@ namespace OnlineShopWebApp
     public interface IBasketStorage
     {
         Basket TryGetByUserId(string userId);
-        void AddProduct(Product product);
-        void RemoveProduct(Product product);
-        void ClearBasket();
-        decimal GetTotalSum();
+        void AddProduct(string userId, Product product);
+        void RemoveProduct(string userId, Product product);
+        void ClearBasket(string userId);
     }
 }

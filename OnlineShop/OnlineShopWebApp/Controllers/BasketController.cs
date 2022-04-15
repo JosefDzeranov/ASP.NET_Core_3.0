@@ -17,7 +17,7 @@ namespace OnlineShopWebApp.Controllers
         {
             var basket = BasketStorage.TryGetByUserId(Constants.UserId);
 
-            if (basket == null)
+            if (basket == null || basket.Items.Count == 0)
             {
                 return View("Empty");
             }
@@ -28,14 +28,14 @@ namespace OnlineShopWebApp.Controllers
         public IActionResult Add(int id)
         {
             var product = ProductStorage.TryGetProduct(id);
-            BasketStorage.AddProduct(product, Constants.UserId);
+            BasketStorage.AddProduct(Constants.UserId, product);
             return RedirectToAction("Index");
         }
 
         public IActionResult Remove(int id)
         {
             var product = ProductStorage.TryGetProduct(id);
-            BasketStorage.RemoveProduct(product, Constants.UserId);
+            BasketStorage.RemoveProduct(Constants.UserId, product);
             return RedirectToAction("Index");
         }
 
