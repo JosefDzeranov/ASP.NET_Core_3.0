@@ -1,24 +1,23 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
+﻿using Microsoft.AspNetCore.Mvc;
 using OnlineShopWebApp.Models;
 
 namespace OnlineShopWebApp.Controllers
 {
     public class HomeController : Controller
     {
-       
-        public string Index()
+        IProductManager _productManager;
+
+        public HomeController(IProductManager productManager)
         {
-            return ProductManager.ShowProducts();
+            _productManager = productManager;
+        }
+        public IActionResult Index()
+        {
+
+            var products = _productManager.productList;
+
+            return View(products);
         }
 
-      
-
-      
     }
 }

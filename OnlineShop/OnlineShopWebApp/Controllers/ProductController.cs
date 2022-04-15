@@ -4,22 +4,21 @@ namespace OnlineShopWebApp.Controllers
 {
     public class ProductController : Controller
     {
+        private readonly IProductManager productManager;
 
-
-        public string Index(int id)
+        public IActionResult Index(int id)
         {
-            var foundProduct = ProductManager.FindProduct(id);
-            if (foundProduct != null)
-            {
-                return $"{foundProduct.Id}\n{foundProduct.Name}\n{foundProduct.Cost}\n{foundProduct.Description}";
-            }
-            else
-            {
-                return $"Продукта с Id {id} не существует";
-            }
+            var foundProduct = productManager.FindProduct(id);
+            return View(foundProduct);
+
+
         }
 
-
-
+        public ProductController(IProductManager productManager)
+        {
+            this.productManager = productManager;
+        }
     }
+
+    
 }

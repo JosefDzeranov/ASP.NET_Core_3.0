@@ -1,0 +1,52 @@
+﻿@model Cart
+
+
+<style>
+    table, th, td {
+        border: 1px solid black;
+    }
+
+    table {
+        border-collapse: collapse;
+    }
+</style>
+
+@if (Model.CartLines.Count == 0 )
+{
+    <h1>Корзина пуста</h1>
+   
+
+}
+else
+{
+    <p><b>ВАША КОРЗИНА:</b></p>
+    <table>
+        <tr>
+            <th> Наименование</th>
+            <th>Количество</th>
+            <th>Стоимость</th>
+        </tr>
+
+
+        @foreach (var cartLine in Model.CartLines)
+        {
+            <tr>
+                <td>@cartLine.Product.Name</td>
+                <td>@cartLine.Amount</td>
+                <td>@cartLine.Cost</td>
+
+            </tr>
+
+        }
+        <tr>
+
+            <td colspan="2"><b>Сумма корзины:</b></td>
+            <td><b>@Model.CartCost</b></td>
+        </tr>
+    </table>
+
+    <p></p>
+    <p>
+        <a class="btn btn-dark" href="#" role="button">Оформить заказ</a>
+    </p>
+}
