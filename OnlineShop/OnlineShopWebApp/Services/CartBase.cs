@@ -8,7 +8,7 @@ namespace OnlineShopWebApp.Services
 {
     public class CartBase : ICartBase
     {
-        private static List<Cart> Сarts { get; set; } = new List<Cart>();
+        private List<Cart> Сarts { get; set; } = new List<Cart>();
 
         public Cart TryGetByUserId(string userId)
         {
@@ -82,7 +82,7 @@ namespace OnlineShopWebApp.Services
                     }
                 }
             }
-            if(existingCart.Items.Count == 0)
+            if (existingCart.Items.Count == 0)
             {
                 Сarts.Remove(existingCart);
             }
