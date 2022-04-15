@@ -23,6 +23,7 @@ namespace OnlineShopWebApp
             services.AddSingleton<IProductStorage, ProductStorage>();
             services.AddSingleton<IBasketStorage, BasketStorage>();
             services.AddSingleton<IOrderStorage, OrderStorage>();
+            services.AddSingleton<IDeliveryStorage, DeliveryStorage>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

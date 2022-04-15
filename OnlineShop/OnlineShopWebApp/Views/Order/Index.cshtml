@@ -6,3 +6,44 @@
     ViewData["Title"] = "Order Page";
 }
 
+<div class="container">
+    <h2>Order #1234</h2>
+    <p>@Model.Date</p>
+    <div class="row">
+        <div class="col-4">
+            <h5>Your order:</h5>
+            @foreach (var item in Model.Basket.Items)
+            {
+                <p>@item.Product.Name (@item.Quantity) - $@item.Cost</p>
+            }
+            <h6>Total: $@Model.Basket.TotalCost</h6>
+        </div>
+        <div class="col-8">
+            <h5>Input your delivery details:</h5>
+            <label>Name:</label>
+            <div>
+                <input type="text" />
+            </div>
+            <label>Address:</label>
+            <div>
+                <input type="text" />
+            </div>
+            <label>Phone:</label>
+            <div>
+                <input type="text" />
+            </div>
+            <label>Email:</label>
+            <div>
+                <input type="text" />
+                <br /><br />
+            </div>
+            <div>
+                <a class="btn btn-outline-dark btn-sm text-nowrap" href="/" role="button">Continue shopping</a>&nbsp;&nbsp;&nbsp;
+                <a class="btn btn-dark btn-sm text-nowrap" href="/order/buy/index" role="button">Buy</a>
+            </div>
+
+        </div>
+    </div>
+</div>
+</div>
+

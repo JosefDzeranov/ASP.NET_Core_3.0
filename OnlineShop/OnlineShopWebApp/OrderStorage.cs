@@ -1,4 +1,5 @@
 ﻿using System;
+using Microsoft.AspNetCore.Mvc;
 using OnlineShopWebApp.Models;
 using System.Collections.Generic;
 using System.Linq;
@@ -6,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace OnlineShopWebApp
 {
-    public class OrderStorage
+    public class OrderStorage: IOrderStorage
     {
         private List<Order> orders = new List<Order>();
         public List<Order> Orders
@@ -24,9 +25,12 @@ namespace OnlineShopWebApp
 
         public void AddOrder(string userId, Basket basket, Delivery delivery)
         {
-            var order = orders.FirstOrDefault(item => item.UserId == userId);
-
-
+            var order = TryGetByUserId(userId);
+            if(order == null)
+            {
+                var newOrder = new Order(userId, basket, delivery);
+                orders.Add(newOrder);
+            }
         }
     }
 }
