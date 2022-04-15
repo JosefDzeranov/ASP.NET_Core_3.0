@@ -15,11 +15,11 @@ namespace OnlineShopWebApp.Models
             return orders.FirstOrDefault(x => x.UserId == userId);
         }
 
-        public void Add(string userId, string lastname, string name, string mail, string adress, string phone)
+        public void Add(Order order)
         {
             int LastOrderNumber = 0;
             if (orders.Count > 0)
-                LastOrderNumber = orders.FindLast(x => x.UserId == userId).OrderNumber;
+                LastOrderNumber = orders.FindLast(x => x.UserId == order.UserId).OrderNumber;
             else
                 LastOrderNumber++;
 
@@ -28,12 +28,12 @@ namespace OnlineShopWebApp.Models
                 Id = Guid.NewGuid(),
                 OrderNumber = LastOrderNumber,
                 OrderDate = DateTime.Now,
-                LastName = lastname,
-                Name = name,
-                Mail = mail,
-                Address = adress,
-                Phone = phone,
-                UserId = userId,
+                LastName = order.LastName,
+                Name = order.Name,
+                Mail = order.Mail,
+                Address = order.Address,
+                Phone = order.Phone,
+                UserId = order.UserId,
                 Items = new List<OrderItem>
                     {
                         new OrderItem

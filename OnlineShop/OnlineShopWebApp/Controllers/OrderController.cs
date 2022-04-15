@@ -7,8 +7,6 @@ namespace OnlineShopWebApp.Controllers
     {
         private readonly IOrdersStorage ordersStorage;
 
-        private readonly static Constants constants;
-
         public OrderController(IOrdersStorage ordersStorage)
         {
             this.ordersStorage = ordersStorage;
@@ -16,16 +14,16 @@ namespace OnlineShopWebApp.Controllers
 
         public IActionResult Index()
         {
-            var order = ordersStorage.TryGetOrderByUserId(constants.UserId);
+            var order = ordersStorage.TryGetOrderByUserId(Constants.UserId);
 
             return View(order);
         }
 
-        public IActionResult Add(string userId, string lastname, string name, string mail, string adress, string phone)
+        public IActionResult Add(IOrdersStorage ordersStorage, Models.Order order)
         {
-            ordersStorage.Add(userId, lastname, name, mail, adress, phone);
+            ordersStorage.Add(order);
 
-            var order = ordersStorage.TryGetOrderByUserId(constants.UserId);
+            var order = ordersStorage.TryGetOrderByUserId(Constants.UserId);
 
             return View(order);
         }

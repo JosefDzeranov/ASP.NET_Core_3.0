@@ -6,6 +6,6 @@ namespace OnlineShopWebApp.Interface
     {
         Order TryGetOrderByUserId(string userId);
 
-        void Add(string userId, string lastname, string name, string mail, string adress, string phone);
+        void Add(Order order);
     }
 }
