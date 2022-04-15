@@ -15,8 +15,6 @@
                 return Amount * Product.Cost;
             }
         }
-
-
         public CartLine(Product product)
         {
             Product = product;

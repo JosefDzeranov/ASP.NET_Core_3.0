@@ -11,7 +11,6 @@ namespace OnlineShopWebApp.Controllers
             var foundProduct = productManager.FindProduct(id);
             return View(foundProduct);
 
-
         }
 
         public ProductController(IProductManager productManager)
@@ -20,5 +19,5 @@ namespace OnlineShopWebApp.Controllers
         }
     }
 
-    
+
 }
