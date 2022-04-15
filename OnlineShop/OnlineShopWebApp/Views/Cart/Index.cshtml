@@ -37,11 +37,8 @@ else
                 <td>@cartLine.Product.Name</td>
                 <td>@cartLine.Amount</td>
                 <td>@cartLine.Cost</td>
-                <td>
-                    <a class="btn-outline-dark" href="/cart/addtocart/@cartLine.Product.Id" role="button"> + </a>
-
-                </td>
-                <td>  <a class="btn-outline-dark" href="/cart/RemoveFromCart/@cartLine.Product.Id" role="button"> - </a></td>
+                <td><a class="btn-outline-dark" href="/cart/addtocart/@cartLine.Product.Id" role="button"> + </a></td>
+                <td><a class="btn-outline-dark" href="/cart/RemoveFromCart/@cartLine.Product.Id" role="button"> - </a></td>
 
             </tr>
 
@@ -56,5 +53,8 @@ else
     <p></p>
     <p>
         <a class="btn btn-dark" href="#" role="button">Оформить заказ</a>
+    </p>
+    <p>
+        <a class="btn btn-dark" href="/cart/clearcart" role="button">Очистить корзину</a>
     </p>
 }

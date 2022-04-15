@@ -38,9 +38,16 @@ namespace OnlineShopWebApp.Controllers
             cartManager.RemoveProductFromCart(Constants.UserId, foundProduct);
             var cart = cartManager.TryGetCartByUserID(Constants.UserId);
 
-          return  RedirectToAction("Index", cart);
-          
-         
+            return RedirectToAction("Index", cart);
+
+        }
+
+        public IActionResult ClearCart()
+        {
+            var cart = cartManager.TryGetCartByUserID(Constants.UserId);
+            cartManager.RemoveCartLines(cart);
+            return RedirectToAction("Index", cart);
+
         }
 
 
@@ -48,7 +55,7 @@ namespace OnlineShopWebApp.Controllers
 
 }
 
-   
+
 
 
 

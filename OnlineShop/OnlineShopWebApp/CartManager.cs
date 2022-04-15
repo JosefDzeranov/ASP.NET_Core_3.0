@@ -8,9 +8,6 @@ namespace OnlineShopWebApp
     public class CartManager : ICartManager
     {
         static List<Cart> cartList = new List<Cart>();
-
-
-
         public Cart CreateCart()
         {
             var cart = new Cart(Constants.UserId);
@@ -42,8 +39,6 @@ namespace OnlineShopWebApp
             if (cart != null)
             {
 
-
-
                 if (cart.CartLines.FirstOrDefault(x => x.Product.Id == product.Id) != null)
                 {
                     var cartLine = cart.CartLines.FirstOrDefault(x => x.Product.Id == product.Id);
@@ -67,10 +62,7 @@ namespace OnlineShopWebApp
                 cartLine.Amount++;
                 cart.CartLines.Add(cartLine);
 
-
             }
-
-
 
         }
 
@@ -87,12 +79,15 @@ namespace OnlineShopWebApp
 
         }
 
+        public void RemoveCartLines(Cart cart)
+        {
+            cart.CartLines.Clear();
+        }
 
 
         public Cart TryGetCartByUserID(string userId)
         {
             return cartList.FirstOrDefault(x => x.UserId == userId);
-
 
         }
 
