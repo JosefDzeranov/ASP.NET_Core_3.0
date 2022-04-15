@@ -1,0 +1,27 @@
+﻿@model List<Product>
+
+    <div class="row">
+        <div class="col">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Cost, @Constants.Rub</th>
+                        <th>Description</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                        {
+                        <tr>
+                            <td>
+                                <a style="color:black" href="/product/item/@item.Id">@item.Name </a>
+                            </td>
+                            <td>@item.Cost</td>
+                            <td>@item.Description</td>
+                        </tr>
+                        }
+                </tbody>
+            </table>
+        </div>
+    </div>

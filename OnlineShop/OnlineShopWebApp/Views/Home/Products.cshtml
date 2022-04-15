@@ -10,7 +10,7 @@
         <div class="col-4 card">
             <div class="card-body">
                 <a style="color:black" href="/product/item/@product.Id">
-                    <h3>@product.Name, @product.Cost rub</h3>
+                    <h3>@product.Name, @product.Cost @Constants.Rub</h3>
                 </a>
                 <img class="card-img-top" src=@product.ImagePath>
                 <a class="btn btn-outline-warning btn-sm" href="/cart/add?productId=@product.Id" role="button">Add to Cart</a>

@@ -21,13 +21,12 @@ namespace OnlineShopWebApp.Controllers
         {
             return View();
         }
-            public IActionResult Buy()
+        public IActionResult Buy()
         {
             var existingCart = cartsRepository.TryGetByUserId(Constants.UserId);
             odersRepository.Add(existingCart);
             cartsRepository.Clear(Constants.UserId);
             return View();
-
         }
     }
 }
