@@ -4,7 +4,7 @@
     ViewData["Title"] = "Cart";
 }
 
-@if(Model == null)
+@if(Model == null || Model.Items.Count==0)
 {
     <h3>Empty Cart</h3>
 }
@@ -16,9 +16,10 @@ else
                 <thead>
                     <tr>
                         <th>Name</th>
-                        <th>Cost, rub</th>
+                        <th>Cost, @Constants.Rub</th>
                         <th>Amount</th>
-                        <th>Sum, rub</th>
+                        <th>Sum, @Constants.Rub</th>
+                        <th></th>
                     </tr>
                 </thead>
                 <tbody>
@@ -29,18 +30,23 @@ else
                         <td>@item.Product.Cost</td>
                         <td>@item.Amount</td>
                         <td>@item.Cost</td>
+                        <td>
+                            <a class="btn btn-dark btn-sm" href="/cart/remove?productId=@item.Product.Id" role="button">-</a>
+                            <a class="btn btn-dark btn-sm" href="/cart/add?productId=@item.Product.Id" role="button">+</a>
+                        </td>
                     </tr>
                     }
                 </tbody>
             </table>
             <div class="text-right">
-                <h3>Total cost</h3>
-                <h3>@Model.Cost</h3>
+                <p>Total cost</p>
+                <p>@Model.Cost</p>
             </div>
             <div class="text-center">
-                @*<button type="button" class="" href="/home/products">Continue explore</button>*@
                 <a class="btn btn-outline-warning btn-sm" href="/home/products" role="button">Continue explore</a>
-                <a class="btn btn-outline-success btn-sm" href="#" role="button">Сomplete the purchase</a>
+                <a class="btn btn-outline-success btn-sm" href="#" role="button">Сomplete</a>
+                <a class="btn btn-outline-danger btn-sm" href="/cart/clear" role="button">Clear</a>
+
             </div>
         </div>
 
