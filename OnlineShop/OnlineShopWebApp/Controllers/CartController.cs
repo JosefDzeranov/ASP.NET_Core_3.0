@@ -9,10 +9,10 @@ namespace OnlineShopWebApp.Controllers
 {
     public class CartController : Controller
     {
-        private readonly ProductsRepozitory productsRepozitory;
-        private readonly CartsRepozitory cartsRepozitory;
+        private readonly IProductsRepozitory productsRepozitory;
+        private readonly ICartsRepozitory cartsRepozitory;
 
-        public CartController(ProductsRepozitory productsRepozitory, CartsRepozitory cartsRepozitory)
+        public CartController(IProductsRepozitory productsRepozitory, ICartsRepozitory cartsRepozitory)
         {
             this.productsRepozitory = productsRepozitory;
             this.cartsRepozitory = cartsRepozitory;

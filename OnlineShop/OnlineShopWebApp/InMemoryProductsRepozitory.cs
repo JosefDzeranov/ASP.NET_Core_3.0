@@ -6,7 +6,7 @@ using OnlineShopWebApp.Models;
 
 namespace OnlineShopWebApp
 {
-    public class ProductsRepozitory
+    public class InMemoryProductsRepozitory : IProductsRepozitory
     {
         private List<Product> products = new List<Product>()
         {

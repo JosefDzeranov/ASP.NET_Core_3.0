@@ -6,16 +6,16 @@ using OnlineShopWebApp.Models;
 
 namespace OnlineShopWebApp
 {
-    public class CartsRepozitory
+    public class InMemoryCartsRepozitory : ICartsRepozitory
     {
         private List<Cart> carts = new List<Cart>();
 
-        internal Cart TryGetByUserId(string userId)
+        public Cart TryGetByUserId(string userId)
         {
             return carts.FirstOrDefault(x => x.UserId == userId);
         }
 
-        internal void Add(Product product, string userId)
+        public void Add(Product product, string userId)
         {
             var existingCart = TryGetByUserId(userId);
             if (existingCart == null)
