@@ -19,6 +19,7 @@ else
                         <th>Cost, @Constants.Rub</th>
                         <th>Amount</th>
                         <th>Sum, @Constants.Rub</th>
+                        <th></th>
                     </tr>
                 </thead>
                 <tbody>
@@ -29,8 +30,10 @@ else
                         <td>@item.Product.Cost</td>
                         <td>@item.Amount</td>
                         <td>@item.Cost</td>
-                        <td><a class="btn btn-dark btn-sm" href="/cart/remove?productId=@item.Product.Id" role="button">-</a></td>
-                        <td><a class="btn btn-dark btn-sm" href="/cart/add?productId=@item.Product.Id" role="button">+</a></td>
+                        <td>
+                            <a class="btn btn-dark btn-sm" href="/cart/remove?productId=@item.Product.Id" role="button">-</a>
+                            <a class="btn btn-dark btn-sm" href="/cart/add?productId=@item.Product.Id" role="button">+</a>
+                        </td>
                     </tr>
                     }
                 </tbody>

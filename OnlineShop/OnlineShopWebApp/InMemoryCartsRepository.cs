@@ -66,11 +66,11 @@ namespace OnlineShopWebApp
             {
                 existingCartItem.Amount -= 1;
             }
-            if (existingCartItem.Amount<0)
+            if (existingCartItem.Amount==0)
             {
-                existingCartItem.Amount = 0;
-
+                existingCart.Items.Remove(existingCartItem);
             }
+            
         }
     }
 }
