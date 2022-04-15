@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using OnlineShopWebApp.Models;
 using OnlineShopWebApp.Services;
+using OnlineShopWebApp.ViewModels;
 using System;
 
 namespace OnlineShopWebApp.Controllers
@@ -9,6 +10,7 @@ namespace OnlineShopWebApp.Controllers
     {
         private readonly ICartBase cartBase;
         private readonly IOrderBase orderBase;
+        
         public OrderController(ICartBase cartBase, IOrderBase orderBase)
         {
             this.cartBase = cartBase;
@@ -19,28 +21,34 @@ namespace OnlineShopWebApp.Controllers
         {
             var existingCart = cartBase.TryGetByUserId(Const.UserId);
 
-            return View(existingCart);
+            var orderVM = new OrderVM();
+            orderVM.Cart = existingCart;
+
+            return View(orderVM);
         }
 
-        public IActionResult Create(string firstname, string lastname, string email, string phone, string address)
+        public IActionResult Create(OrderVM orderVM)
         {
-            var existingCart = cartBase.TryGetByUserId(Const.UserId);
-            var order = new Order()
-            {
-                Id = Guid.NewGuid(),
-                UserId = Const.UserId,
-                Cart = existingCart,
-                FirstName = firstname,
-                LastName = lastname,
-                Email = email,
-                Phone = phone,
-                Address = address,
-                Created = DateTime.Now,
-                TotalCost = existingCart.TotalCost,
+            //var existingCart = cartBase.TryGetByUserId(Const.UserId);
+            //var order = new Order()
+            //{
+            //    Id = Guid.NewGuid(),
+            //    UserId = Const.UserId,
+            //    Cart = existingCart,
+            //    FirstName = firstname,
+            //    LastName = lastname,
+            //    Email = email,
+            //    Phone = phone,
+            //    Address = address,
+            //    Created = DateTime.Now,
+            //    TotalCost = existingCart.TotalCost,
 
-            };
-            orderBase.Add(order);
+            //};
+            orderBase.Add(orderVM.Order);
             cartBase.RemoveAll(Const.UserId);
+
+
+
             return View();
         }
 
