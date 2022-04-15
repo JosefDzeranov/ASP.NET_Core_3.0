@@ -74,6 +74,16 @@ namespace OnlineShopWebApp
 
         }
 
+        public void RemoveProductFromCart(string userId, Product product)
+        {
+            var cart = cartList.FirstOrDefault(x => x.UserId == userId);
+            var cartLine = cart.CartLines.FirstOrDefault(x => x.Product.Id == product.Id);
+            cartLine.Amount--;
+
+        }
+
+
+
         public Cart TryGetCartByUserID(string userId)
         {
             return cartList.FirstOrDefault(x => x.UserId == userId);
@@ -81,7 +91,7 @@ namespace OnlineShopWebApp
 
         }
 
-      
+
     }
 
 

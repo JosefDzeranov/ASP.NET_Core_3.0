@@ -32,13 +32,24 @@ namespace OnlineShopWebApp.Controllers
             return View("Index", cart);
         }
 
+        public IActionResult RemoveFromCart(int id)
+        {
+            var foundProduct = productManager.FindProduct(id);
+            cartManager.RemoveProductFromCart(Constants.UserId, foundProduct);
+            var cart = cartManager.TryGetCartByUserID(Constants.UserId);
+            return View("Index", cart);
+        }
 
 
     }
 
-
-
 }
+
+   
+
+
+
+
 
 
 
