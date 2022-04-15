@@ -4,7 +4,7 @@
     ViewData["Title"] = "Cart";
 }
 
-@if(Model == null)
+@if(Model == null || Model.Items.Count==0)
 {
     <h3>Empty Cart</h3>
 }
@@ -44,7 +44,9 @@ else
             </div>
             <div class="text-center">
                 <a class="btn btn-outline-warning btn-sm" href="/home/products" role="button">Continue explore</a>
-                <a class="btn btn-outline-success btn-sm" href="#" role="button">Сomplete the purchase</a>
+                <a class="btn btn-outline-success btn-sm" href="#" role="button">Сomplete</a>
+                <a class="btn btn-outline-danger btn-sm" href="/cart/clear" role="button">Clear</a>
+
             </div>
         </div>
 
