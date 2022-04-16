@@ -25,6 +25,13 @@ namespace OnlineShopWebApp.Controllers
             return View(order);
         }
 
-        
+        public IActionResult MakeOrder()
+        {
+            var cart = cartManager.TryGetCartByUserID(Constants.UserId);
+            cartManager.RemoveCartLines(cart);
+            return View();
+        }
+
+
     }
 }

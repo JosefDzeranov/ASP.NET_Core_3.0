@@ -15,8 +15,6 @@ namespace OnlineShopWebApp
         {
             ordersList.Add(order);
             
-
-
         }
 
         public Order TryGetOrderById(string userId)
