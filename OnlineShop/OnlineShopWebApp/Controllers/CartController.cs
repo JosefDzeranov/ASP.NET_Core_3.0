@@ -13,13 +13,6 @@ namespace OnlineShopWebApp.Controllers
 {
     public class CartController : Controller
     {
-        private readonly ILogger<CartController> _logger;
-
-        public CartController(ILogger<CartController> logger)
-        {
-            _logger = logger;
-        }
-
         public IActionResult Index()
         {
             var cart = CartBase.TryGetByUserId(TestUser.UserId);
@@ -31,11 +24,6 @@ namespace OnlineShopWebApp.Controllers
             var product = ProductBase.AllProducts().FirstOrDefault(x => x.Id == productId);
             CartBase.Add(product, TestUser.UserId);
             return RedirectToAction("Index");
-        }
-
-        public IActionResult Privacy()
-        {
-            return View();
         }
     }
 }
