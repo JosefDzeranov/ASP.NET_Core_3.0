@@ -7,24 +7,24 @@ namespace OnlineShopWebApp.Controllers
 {
     public class OrderController : Controller
     {
-        private readonly ICartBase cartBase;
-        private readonly IOrderBase orderBase;
-        public OrderController(ICartBase cartBase, IOrderBase orderBase)
+        private readonly ICartRepository cartRepository;
+        private readonly IOrderRepository orderRepository;
+        public OrderController(ICartRepository cartRepository, IOrderRepository orderRepository)
         {
-            this.cartBase = cartBase;
-            this.orderBase = orderBase;
+            this.cartRepository = cartRepository;
+            this.orderRepository = orderRepository;
         }
 
         public IActionResult Index()
         {
-            var existingCart = cartBase.TryGetByUserId(Const.UserId);
+            var existingCart = cartRepository.TryGetByUserId(Const.UserId);
 
             return View(existingCart);
         }
 
         public IActionResult Create(string firstname, string lastname, string email, string phone, string address)
         {
-            var existingCart = cartBase.TryGetByUserId(Const.UserId);
+            var existingCart = cartRepository.TryGetByUserId(Const.UserId);
             var order = new Order()
             {
                 Id = Guid.NewGuid(),
@@ -39,14 +39,14 @@ namespace OnlineShopWebApp.Controllers
                 TotalCost = existingCart.TotalCost,
 
             };
-            orderBase.Add(order);
-            cartBase.RemoveAll(Const.UserId);
+            orderRepository.Add(order);
+            cartRepository.RemoveAll(Const.UserId);
             return View();
         }
 
         public IActionResult Orders()
         {
-            var existingOrders = orderBase.TryGetAll();
+            var existingOrders = orderRepository.TryGetAll();
 
             return View(existingOrders);
         }

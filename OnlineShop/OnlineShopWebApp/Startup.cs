@@ -21,10 +21,10 @@ namespace OnlineShopWebApp
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllersWithViews();
-            services.AddSingleton<IProductBase,ProductBase>();
-            services.AddSingleton<ICartBase,CartBase>();
-            services.AddSingleton<IOrderBase, OrderBase>();
-            services.AddSingleton<IFavorites, Favorites>();
+            services.AddSingleton<IProductRepository,ProductRepository>();
+            services.AddSingleton<ICartRepository,CartRepository>();
+            services.AddSingleton<IOrderRepository, OrderRepository>();
+            services.AddSingleton<IFavoriteRepository, FavoriteRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

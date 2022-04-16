@@ -2,7 +2,7 @@
 
 namespace OnlineShopWebApp.Services
 {
-    public interface ICartBase
+    public interface ICartRepository
     {
 
          Cart TryGetByUserId(string userId);

@@ -5,9 +5,9 @@ using System.Linq;
 
 namespace OnlineShopWebApp.Services
 {
-    public class Favorites : IFavorites
+    public class FavoriteRepository : IFavoriteRepository
     {
-        private static List<Favorite> favorites = new List<Favorite>();
+        private  List<Favorite> favorites = new List<Favorite>();
 
         public void Add(Product product, string userId)
         {

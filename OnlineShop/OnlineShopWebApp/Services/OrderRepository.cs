@@ -4,7 +4,7 @@ using System.Linq;
 
 namespace OnlineShopWebApp.Services
 {
-    public class OrderBase : IOrderBase
+    public class OrderRepository : IOrderRepository
     {
         private static List<Order> Orders { get; set; } = new List<Order>();
 

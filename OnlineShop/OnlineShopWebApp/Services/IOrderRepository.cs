@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace OnlineShopWebApp.Services
 {
-    public interface IOrderBase
+    public interface IOrderRepository
     {
         Order TryGetByUserId(string userId);
         List<Order> TryGetAll ();

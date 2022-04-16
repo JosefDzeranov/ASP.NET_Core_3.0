@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace OnlineShopWebApp.Services
 {
-    public interface IFavorites
+    public interface IFavoriteRepository
     {
         Favorite TryGetByUserId(string userId);
 
