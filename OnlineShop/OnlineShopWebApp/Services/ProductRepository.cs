@@ -6,7 +6,7 @@ namespace OnlineShopWebApp.Services
 {
     public class ProductRepository : IProductRepository
     {
-        private static List<Product> products = new List<Product>()
+        private List<Product> products = new List<Product>()
         {
            new Product(1, "Незнайка на луне", 345.6m , "Описание товара", "/images/book.png" ),
            new Product(2, "Что делать?", 556.5m,"Описание товара", "/images/book.png"),

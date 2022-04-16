@@ -7,7 +7,7 @@ namespace OnlineShopWebApp.Services
 {
     public class FavoriteRepository : IFavoriteRepository
     {
-        private  List<Favorite> favorites = new List<Favorite>();
+        private List<Favorite> favorites = new List<Favorite>();
 
         public void Add(Product product, string userId)
         {
@@ -42,7 +42,7 @@ namespace OnlineShopWebApp.Services
         public void Remove(Product product, string userId)
         {
             var existingFavorite = TryGetByUserId(userId);
-            if(existingFavorite != null)
+            if (existingFavorite != null)
             {
                 existingFavorite.Products.Remove(product);
             }
