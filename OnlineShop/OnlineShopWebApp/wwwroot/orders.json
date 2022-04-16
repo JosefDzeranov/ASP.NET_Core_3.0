@@ -1,0 +1,1 @@
+﻿[{"Cart":{"CartLines":[{"Product":{"Id":1,"Name":"Cheeseburger","Cost":150.0,"TotalCost":0.0,"Description":"бургер с говяжьей котлетой и сыром","Number":0},"Amount":1,"Cost":150.0}],"Id":1,"UserId":"UserId","CartCost":150.0},"UserId":"UserId","Name":null,"Adress":null,"Email":null}]
