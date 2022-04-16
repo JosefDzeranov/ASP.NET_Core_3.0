@@ -5,10 +5,10 @@ using System.IO;
 
 namespace OnlineShopWebApp
 {
-    public class OrderManagerJson : IOrderManager
+    public class OrderManager : IOrderManager
     {
         
-        string path = @"G:\VSrepos\ASP.NET_Core_3.0.git\OnlineShop\OnlineShopWebApp\wwwroot\orders.json";
+       
 
         List<Order> ordersList = new List<Order>();
         public void SaveOrder(Order order)
