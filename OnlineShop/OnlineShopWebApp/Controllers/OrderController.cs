@@ -27,24 +27,12 @@ namespace OnlineShopWebApp.Controllers
             return View(orderVM);
         }
 
-        public IActionResult Create(OrderVM orderVM)
+        [HttpPost]
+        public IActionResult Create(Order order)
         {
-            //var existingCart = cartBase.TryGetByUserId(Const.UserId);
-            //var order = new Order()
-            //{
-            //    Id = Guid.NewGuid(),
-            //    UserId = Const.UserId,
-            //    Cart = existingCart,
-            //    FirstName = firstname,
-            //    LastName = lastname,
-            //    Email = email,
-            //    Phone = phone,
-            //    Address = address,
-            //    Created = DateTime.Now,
-            //    TotalCost = existingCart.TotalCost,
-
-            //};
-            orderBase.Add(orderVM.Order);
+            var existingCart = cartBase.TryGetByUserId(Const.UserId);
+            order.Cart = existingCart;
+            orderBase.Add(order);
             cartBase.RemoveAll(Const.UserId);
 
 

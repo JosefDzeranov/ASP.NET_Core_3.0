@@ -48,7 +48,6 @@
 <input asp-for=Order.UserId type="hidden" value=@Model.Cart.UserId />
 <input asp-for=Order.TotalCost type="hidden" value=@Model.Cart.TotalCost />
 <input asp-for=Order.Created type="hidden" value=@DateTime.Now />
-<input asp-for=Cart type="hidden" value=@Model.Cart />
 <div class="row">
 
     <table class="table">
@@ -79,7 +78,8 @@
 </div>
 
 <div>
-    <input type="submit" class="btn btn-success" value="Подтвердить"/>
+    <button type="submit" class="btn btn-success" >Оформить заказ</button>
+   
 
 </div>
 
