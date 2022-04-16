@@ -1,15 +1,5 @@
 ﻿@model List<Product>
 
-
-
-@{
-    ViewData["Title"] = "Home Page";
-
-}
-
-
-
-
 <div class="row">
 
     @foreach (var product in Model)
@@ -23,9 +13,8 @@
                     <h5>@product.Name</h5>
                 </a>
                 <h5>@product.Cost rub.</h5>
+                <h5>@product.Description</h5>
                 <a class="btn btn-dark" href="/cart/addtocart/@product.Id" role="button">добавить в корзину</a>
-                <br />
-               <br /> <a class="btn btn-dark" href="/comparison/addtocompare/@product.Id" role="button">сравнить</a>
             </div>
 
         </div>
@@ -33,7 +22,3 @@
     }
 
 </div>
-
-
-
-
