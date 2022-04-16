@@ -33,7 +33,7 @@ namespace OnlineShopWebApp.Controllers
             var existingCart = cartBase.TryGetByUserId(Const.UserId);
             order.Cart = existingCart;
             orderBase.Add(order);
-            cartBase.RemoveAll(Const.UserId);
+            cartBase.Clear(Const.UserId);
 
 
 

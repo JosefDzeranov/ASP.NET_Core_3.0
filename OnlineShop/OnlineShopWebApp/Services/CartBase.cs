@@ -57,7 +57,7 @@ namespace OnlineShopWebApp.Services
 
         }
 
-        public void RemoveAll(string userId)
+        public void Clear(string userId)
         {
             var existingCart = TryGetByUserId(userId);
             if (existingCart != null)
@@ -67,7 +67,7 @@ namespace OnlineShopWebApp.Services
 
         }
 
-        public void Remove(Product product, string userId)
+        public void RemoveItem(Product product, string userId)
         {
             var existingCart = TryGetByUserId(userId);
             if (existingCart != null)
