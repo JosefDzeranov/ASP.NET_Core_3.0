@@ -13,16 +13,16 @@ namespace OnlineShopWebApp.Controllers
 {
     public class ProductController : Controller
     {
-        private readonly ILogger<ProductController> _logger;
+        private readonly ProductBase _productBase;
 
-        public ProductController(ILogger<ProductController> logger)
+        public ProductController(ProductBase productBase)
         {
-            _logger = logger;
+            _productBase = productBase;
         }
 
         public IActionResult Index(int id)
         {
-            var products = ProductBase.AllProducts().FirstOrDefault(p => p.Id == id);
+            var products = _productBase.AllProducts().FirstOrDefault(p => p.Id == id);
             return View(products);
         }
 

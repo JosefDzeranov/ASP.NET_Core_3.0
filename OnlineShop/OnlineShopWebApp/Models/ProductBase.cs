@@ -7,9 +7,9 @@ using System.Xml.Linq;
 
 namespace OnlineShopWebApp.Models
 {
-    public static class ProductBase
+    public class ProductBase
     {
-        public static IEnumerable<Product> AllProducts()
+        public IEnumerable<Product> AllProducts()
         {
             var xDoc = XDocument.Load("Models/products.xml");
             var products = xDoc.Element("products")

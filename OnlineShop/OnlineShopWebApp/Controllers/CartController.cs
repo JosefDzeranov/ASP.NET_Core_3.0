@@ -13,16 +13,26 @@ namespace OnlineShopWebApp.Controllers
 {
     public class CartController : Controller
     {
+        private readonly ProductBase _productBase;
+        private readonly CartBase _cartBase;
+
+
         public IActionResult Index()
         {
-            var cart = CartBase.TryGetByUserId(TestUser.UserId);
+            var cart = _cartBase.TryGetByUserId(TestUser.UserId);
             return View(cart);
+        }
+
+        public CartController(ProductBase productBase, CartBase cartBase)
+        {
+            _productBase = productBase;
+            _cartBase = cartBase;
         }
 
         public IActionResult Add(int productId)
         {
-            var product = ProductBase.AllProducts().FirstOrDefault(x => x.Id == productId);
-            CartBase.Add(product, TestUser.UserId);
+            var product = _productBase.AllProducts().FirstOrDefault(x => x.Id == productId);
+            _cartBase.Add(product, TestUser.UserId);
             return RedirectToAction("Index");
         }
     }
