@@ -17,8 +17,19 @@ namespace OnlineShopWebApp.Models
             {
                 decimal Cost = 0;
 
-                Cost = CartLines.Sum(x => x.Cost);
+                Cost = CartLines?.Sum(x => x.Cost) ?? 0;
                 return Cost;
+            }
+        }
+
+        public decimal Amount
+        {
+            get
+            {
+                decimal Amount = 0;
+
+                Amount = CartLines?.Sum(x => x.Amount) ?? 0;
+                return Amount;
             }
         }
 
