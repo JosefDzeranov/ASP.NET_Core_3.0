@@ -47,7 +47,7 @@
                         <a class="navbar-brand" asp-area="" asp-controller="Product" asp-action="Items">Index</a>
                     </li>
                     <li class="nav-item">
-                        <a class="navbar-brand" asp-area="" asp-controller="Cart" asp-action="Index">Cart @ViewBag.ProductCount</a>
+                        <a class="navbar-brand" asp-area="" asp-controller="Cart" asp-action="Index">Cart @await Component.InvokeAsync("Cart")</a>
                     </li>
                     @*<li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#" id="navbarScrollingDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false"> Menu </a>
@@ -58,7 +58,7 @@
                                     <hr class="dropdown-divider">
                                 </li>
                                 <li><a class="dropdown-item" href="#">Item</a></li>
-                            </ul>
+                            </ul>ynk
                         </li>*@
                 </ul>
             </div>
