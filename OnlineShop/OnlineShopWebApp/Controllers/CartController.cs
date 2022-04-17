@@ -24,5 +24,16 @@ namespace OnlineShopWebApp.Controllers
             cartsStorage.Add(product, Constants.UserId);
             return RedirectToAction("Index");
         }
+
+        public IActionResult DecreaseAmount(int productId)
+        {
+            cartsStorage.DecreaseAmount(productId, Constants.UserId);    
+            return RedirectToAction("Index");
+        }
+        public IActionResult Clear()
+        {
+            cartsStorage.Clear(Constants.UserId);
+            return RedirectToAction("Index");
+        }
     }
 }
