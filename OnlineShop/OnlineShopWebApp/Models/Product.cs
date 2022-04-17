@@ -8,7 +8,7 @@
         public string Description { get; }
         public string ImagePath { get; }
 
-        public Product(int id,string name, decimal cost, string description, string imagePath)
+        public Product(int id, string name, decimal cost, string description, string imagePath)
         {
             Id = id;
 

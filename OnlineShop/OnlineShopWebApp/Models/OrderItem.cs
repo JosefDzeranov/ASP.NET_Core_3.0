@@ -9,10 +9,10 @@ namespace OnlineShopWebApp.Models
         public int Count { get; set; }
         public decimal Cost 
         {
-            get
-            {
-                return Product.Cost * Count;
-            } 
+            get;
+            //{
+            //    return Product.Cost * Count;
+            //} 
         }
     }
 }

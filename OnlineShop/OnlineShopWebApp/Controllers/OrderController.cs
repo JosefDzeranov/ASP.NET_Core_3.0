@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using OnlineShopWebApp.Interface;
+using OnlineShopWebApp.Models;
 
 namespace OnlineShopWebApp.Controllers
 {
@@ -19,13 +20,13 @@ namespace OnlineShopWebApp.Controllers
             return View(order);
         }
 
-        public IActionResult Add(IOrdersStorage ordersStorage, Models.Order order)
+        public IActionResult Add(Order order, Customer customer)
         {
-            ordersStorage.Add(order);
+            ordersStorage.Add(order, customer, Constants.UserId);
 
-            var order = ordersStorage.TryGetOrderByUserId(Constants.UserId);
+            //var order2 = ordersStorage.TryGetOrderByUserId(Constants.UserId);
 
-            return View(order);
+            return RedirectToAction("OrderComplete");
         }
 
         public IActionResult OrderMaking()
@@ -35,7 +36,9 @@ namespace OnlineShopWebApp.Controllers
 
         public IActionResult OrderComplete()
         {
-            return View();
+            var order = ordersStorage.TryGetOrderByUserId(Constants.UserId);
+
+            return View(order);
         }
     }
 }

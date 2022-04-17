@@ -7,7 +7,8 @@ namespace OnlineShopWebApp.Models
 {
     public class OrdersStorage : IOrdersStorage
     {
-        private List<Order> orders { get; set; } = new List<Order>();
+        private List<Order> orders = new List<Order>();
+
         private List<Cart> carts = new List<Cart>();
 
         public Order TryGetOrderByUserId(string userId)
@@ -15,7 +16,7 @@ namespace OnlineShopWebApp.Models
             return orders.FirstOrDefault(x => x.UserId == userId);
         }
 
-        public void Add(Order order)
+        public void Add(Order order, Customer customer, string userId)
         {
             int LastOrderNumber = 0;
             if (orders.Count > 0)
@@ -23,17 +24,23 @@ namespace OnlineShopWebApp.Models
             else
                 LastOrderNumber++;
 
-            var newOrder = new Order
+            var newOrder = new Order()
             {
                 Id = Guid.NewGuid(),
                 OrderNumber = LastOrderNumber,
-                OrderDate = DateTime.Now,
-                LastName = order.LastName,
-                Name = order.Name,
-                Mail = order.Mail,
-                Address = order.Address,
-                Phone = order.Phone,
-                UserId = order.UserId,
+                OrderDateTime = DateTime.Now,
+                Customer = new List<Customer>
+                {
+                    new Customer()
+                    {
+                        LastName = customer.LastName,
+                        Name = customer.Name,
+                        Mail = customer.Mail,
+                        Address = customer.Address,
+                        Phone = customer.Phone,
+                    }
+                },
+                UserId = Constants.UserId,
                 Items = new List<OrderItem>
                     {
                         new OrderItem
@@ -43,7 +50,9 @@ namespace OnlineShopWebApp.Models
                         }
                     }
             };
+
             orders.Add(newOrder);
+
             RemoveAll();
         }
 
