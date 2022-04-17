@@ -20,7 +20,7 @@ namespace OnlineShopWebApp.Views.Shared.ViewComponents.CartViewComponents
             var cart = cartsRepository.TryGetByUserId(Constants.UserId);
             var productsCount = cart?.Amount ?? 0;
 
-            return View("Cart", productsCount);
+            return (productsCount == 0) ? View("EmptyCart", string.Empty) : View("Cart", productsCount);
         }
     }
 }
