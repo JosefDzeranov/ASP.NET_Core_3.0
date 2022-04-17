@@ -1,0 +1,41 @@
+﻿@using OnlineShopWebApp.Models
+@model Basket
+
+@{
+    ViewData["Title"] = "Compare Page";
+}
+
+<div class="container">   
+    <div class="row">
+        <div class="col-12 mb-4">
+            <h2>Choose what you like more</h2>
+        </div>
+        @foreach (var item in Model.Items)
+        {
+            <div class="col-4 mb-4">
+                <img class="img-thumbnail mb-2" src="@item.Product.Image" alt="@item.Product.Name">
+                <a style="color: darkblue" href="/product/index/@item.Product.Id"><h5>@item.Product.Name</h5></a>
+                <h6>$@item.Product.Cost</h6>
+                <p>@item.Product.Description</p>
+                <div class="row justify-content-between">
+                    <div class="col-auto text-left">
+                        <a class="btn btn-outline-dark btn-sm text-nowrap" href="/basket/add/@item.Product.Id" role="button">Add to basket</a>
+                    </div>
+                    <div class="col-auto text-right">
+                        <a class="btn btn-outline-dark btn-sm text-nowrap" href="/compare/remove/@item.Product.Id" role="button">Remove from list</a>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+    <div class="row mt-4">
+        <div class="col-12 text-center">
+            <a class="btn btn-outline-dark btn-sm text-nowrap active" href="/" role="button">Continue shopping</a>
+        </div>
+    </div>
+</div>
+
+
+
+
+
