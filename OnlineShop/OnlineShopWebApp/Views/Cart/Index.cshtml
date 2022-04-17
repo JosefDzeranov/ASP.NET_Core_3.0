@@ -8,6 +8,7 @@ else
 {
     <div class="row">
         <div class="col">
+            <a class="btn btn-danger btn-sm float-right" href="/cart/delete" role="button">Очистить корзину</a>
             <table class="table">
                 <thead>
                     <tr>
@@ -20,16 +21,16 @@ else
                 <tbody>
                     @foreach (var item in Model.Items)
                     {
-                    <tr>
-                        <td>@item.Product.Name</td>
-                        <td>@item.Product.Cost</td>
-                        <td>
-                            <a class="btn btn-dark" href="/cart/del?productId=@item.Product.Id" role="button">-</a>
-                            @item.Amount
-                            <a class="btn btn-dark" href="/cart/add?productId=@item.Product.Id" role="button">+</a>
-                        </td>
-                        <td>@item.Cost</td>
-                    </tr>
+                        <tr>
+                            <td>@item.Product.Name</td>
+                            <td>@item.Product.Cost</td>
+                            <td>
+                                <a class="btn btn-dark" href="/cart/del?itemId=@item.Product.Id" role="button">-</a>
+                                @item.Amount
+                                <a class="btn btn-dark" href="/cart/add?productId=@item.Product.Id" role="button">+</a>
+                            </td>
+                            <td>@item.Cost</td>
+                        </tr>
                     }
                 </tbody>
             </table>

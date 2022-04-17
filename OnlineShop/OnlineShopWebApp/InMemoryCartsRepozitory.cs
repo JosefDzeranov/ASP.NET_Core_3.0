@@ -61,14 +61,23 @@ namespace OnlineShopWebApp
         {
             var existingCart = TryGetByUserId(userId);
             var existingCartItem = existingCart.Items.FirstOrDefault(x => x.Product.Id == product.Id);
-            if (existingCartItem.Amount>1)
+            if (existingCartItem.Amount > 1)
             {
                 existingCartItem.Amount -= 1;
             }
             else
             {
-                existingCart.Remove(existingCartItem);
+                existingCart.Items.Remove(existingCartItem);
+                if (existingCart.Items.Count == 0)
+                {
+                    carts.Clear();
+                }
             }
+        }
+
+        public void DeleteByUserId(string userId)
+        {
+            carts.Clear();
         }
     }
 }

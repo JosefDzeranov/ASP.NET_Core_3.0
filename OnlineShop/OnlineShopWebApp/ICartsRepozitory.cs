@@ -7,5 +7,8 @@ namespace OnlineShopWebApp
         Cart TryGetByUserId(string userId);
 
         void Add(Product product, string userId);
+
+        void Del(Product product, string userId);
+        void DeleteByUserId(string userId);
     }
 }
