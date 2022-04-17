@@ -8,9 +8,13 @@ namespace OnlineShopWebApp.Controllers
     {
         private readonly IOrdersStorage ordersStorage;
 
-        public OrderController(IOrdersStorage ordersStorage)
+        private readonly ICartsStorage cartsStorage;
+
+        public OrderController(IOrdersStorage ordersStorage, ICartsStorage cartsStorage)
         {
             this.ordersStorage = ordersStorage;
+
+            this.cartsStorage = cartsStorage;
         }
 
         public IActionResult Index()
@@ -24,7 +28,7 @@ namespace OnlineShopWebApp.Controllers
         {
             ordersStorage.Add(order, customer, Constants.UserId);
 
-            //var order2 = ordersStorage.TryGetOrderByUserId(Constants.UserId);
+            cartsStorage.RemoveAll();
 
             return RedirectToAction("OrderComplete");
         }
