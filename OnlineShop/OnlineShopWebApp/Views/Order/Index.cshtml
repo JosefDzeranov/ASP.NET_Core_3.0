@@ -1,22 +1,24 @@
-﻿<div class="row">
-    <div class="col">
+﻿<form method="post"> 
+    <div class="row">
+        <div class="col">
 
-        <lable>Name</lable>
-        <div>
-            <input type="text" />
+            <lable>Name</lable>
+            <div>
+                <input type="text" name="name"/>
+            </div>
+
+            <lable>Address</lable>
+            <div>
+                <input type="text" name="address"/>
+            </div>
+
+            <lable>Phone</lable>
+            <div>
+                <input type="text" name="phone"/>
+            </div>
+
+            <br />
+            <button class="btn btn-outline-success btn-sm" type="submit" asp-controller="Order" asp-action="Buy">Сomplete</button>
         </div>
-
-        <lable>Address</lable>
-        <div>
-            <input type="text" />
-        </div>
-
-        <lable>Phone</lable>
-        <div>
-            <input type="text" />
-        </div>
-       
-        <br />
-        <a class="btn btn-outline-success btn-sm" href="/order/buy" role="button">Сomplete</a>
-
     </div>
+</form>
