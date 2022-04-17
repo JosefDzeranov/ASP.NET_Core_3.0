@@ -12,6 +12,7 @@ namespace OnlineShopWebApp.Models
             get { return Product.Cost * Quantity; }
         }
 
+        public BasketItem () { }
         public BasketItem (Product product)
         {
             Id = Guid.NewGuid();

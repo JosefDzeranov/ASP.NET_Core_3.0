@@ -29,6 +29,8 @@ namespace OnlineShopWebApp.Controllers
         }
         public IActionResult Buy()
         {
+            var order = OrderStorage.TryGetByUserId(Constants.UserId);
+            OrderStorage.SaveOrderToXmlFile(order);
             BasketStorage.ClearBasket(Constants.UserId);
             return View();
         }

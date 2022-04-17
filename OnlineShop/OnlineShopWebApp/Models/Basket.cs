@@ -14,6 +14,7 @@ namespace OnlineShopWebApp.Models
             get { return Items.Sum(item => item.Cost); }
         }
 
+        public Basket () { }
         public Basket(string userId)
         {
             Id = Guid.NewGuid();

@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace OnlineShopWebApp.Models
 {
@@ -13,6 +10,7 @@ namespace OnlineShopWebApp.Models
         public Basket Basket { get; set; }
         public Delivery Delivery { get; set; }
 
+        public Order () { }
         public Order(string userId, Basket basket, Delivery delivery)
         {
             Id = Guid.NewGuid();

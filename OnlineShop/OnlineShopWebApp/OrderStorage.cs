@@ -1,9 +1,8 @@
-﻿using System;
-using Microsoft.AspNetCore.Mvc;
+﻿using System.IO;
 using OnlineShopWebApp.Models;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
+using System.Xml.Serialization;
 
 namespace OnlineShopWebApp
 {
@@ -31,6 +30,16 @@ namespace OnlineShopWebApp
                 var newOrder = new Order(userId, basket, delivery);
                 orders.Add(newOrder);
             }
+        }
+
+        public void SaveOrderToXmlFile(Order order)
+        {
+            var xmlSerializer = new XmlSerializer(typeof(Order));
+            using (FileStream fs = new FileStream("Data/Orders/order.xml", FileMode.OpenOrCreate))
+            {
+                xmlSerializer.Serialize(fs, order);
+            }
+
         }
     }
 }
