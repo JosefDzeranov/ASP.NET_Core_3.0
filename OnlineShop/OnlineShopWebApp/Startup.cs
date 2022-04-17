@@ -26,6 +26,7 @@ namespace OnlineShopWebApp
         {
             services.AddSingleton<IProductsStorage, InMemoryProductsStorage>();
             services.AddSingleton<ICartsStorage, InMemoryCartsStorage>();
+            services.AddSingleton<IOrdersStorage, InMemoryOrdersStorage>();
             services.AddControllersWithViews();
         }
 
