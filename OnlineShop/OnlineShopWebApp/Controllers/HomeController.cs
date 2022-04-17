@@ -7,22 +7,22 @@ namespace OnlineShopWebApp.Controllers
     public class HomeController : Controller
     {
         private readonly IProductsRepository productsRepository;
+        private readonly ICartsRepository cartsRepository;
 
-        public HomeController(IProductsRepository productsRepository)
+
+        public HomeController(IProductsRepository productsRepository, ICartsRepository cartsRepository)
         {
             this.productsRepository = productsRepository;
+            this.cartsRepository = cartsRepository;
         }
 
         public IActionResult Products()
         {
+            var cart = cartsRepository.TryGetByUserId(Constants.UserId);
+            ViewBag.ProductCount = cart?.Amount;
             var products = productsRepository.GetAll();
             return View(products);
-            /// <summary>
-            /// Use them to pass only constants and small data.
-            /// ViewBag.Product = result;
-            /// ViewData["Products"] = result;
-            /// TempData["Products"] = result;
-            /// </summary>
+            
         }
 
         public IActionResult Privacy()
