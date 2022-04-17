@@ -26,13 +26,10 @@ namespace OnlineShopWebApp.Models
             {
                 return View("Cart", productCount);
             }
-            
 
-            
-               
-           
+
         }
-           
+
     }
 
 }
