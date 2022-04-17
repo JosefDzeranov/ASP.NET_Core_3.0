@@ -20,7 +20,7 @@ namespace OnlineShopWebApp.Models
         {
             int LastOrderNumber = 0;
             if (orders.Count > 0)
-                LastOrderNumber = orders.FindLast(x => x.UserId == order.UserId).OrderNumber;
+                LastOrderNumber = orders.FindLast(x => x.UserId == userId).OrderNumber;
             else
                 LastOrderNumber++;
 

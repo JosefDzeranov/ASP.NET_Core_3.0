@@ -17,15 +17,5 @@ namespace OnlineShopWebApp.Models
         public string Mail { get; set; }
 
         public string Address { get; set; }
-
-        //public Customer(string name, string lastname, string email, string adress, string phone)
-        //{
-        //    Id = new Guid();
-        //    LastName = lastname;
-        //    Name = name;
-        //    Phone = phone;
-        //    Mail = email;
-        //    Address = adress;
-        //}
     }
 }

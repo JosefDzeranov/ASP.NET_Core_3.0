@@ -15,30 +15,21 @@ else
     <div class="row">
         <div class="col">
             <div>
-                @foreach (var order in Model.Items)
-                {
-                    <br />
-                    <a href="/order/index/@order.Id">@Model.OrderNumber</a>
-                    <a href="/order/index/@order.Id">@Model.OrderDateTime</a>
-                    <a href="/order/index/@order.Id">@Model.CostOrder</a>
-                    <a href="/order/index/@order.Id">@order.</a>
-                }
                 <table class="table table-striped">
                     <thead class="table-light" align="center">
                         <tr>
                             <th scope="col">Номер</th>
                             <th scope="col">Дата</th>
-                            <th scope="col">Стоимость (руб.)</th>
-                            <th scope="col">Количество</th>
+                            @*<th scope="col">Стоимость (руб.)</th>*@
                         </tr>
                     </thead>
                     <tbody>
                         @foreach (var order in Model.Items)
                         {
                             <tr>
-                            <td><a href="/product/index/@order.Id">@order.Id</a></td>
-                            <td>@order.Cost</td>
-                            <td>@order.Count</td>
+                                <td><a href="/order/index/@order.Id">@Model.OrderNumber</a></td>
+                                <td><a href="/order/index/@order.Id">@Model.OrderDateTime</a></td>
+                                @*<td><a href="/order/index/@order.Id">@Model.CostOrder</a></td>*@
                             </tr>
                         }
                     </tbody>
