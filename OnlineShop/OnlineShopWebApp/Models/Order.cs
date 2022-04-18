@@ -15,7 +15,7 @@ namespace OnlineShopWebApp.Models
         public override string ToString()
         {
             return $"{Name}{Constants.Separator}{Phone}{Constants.Separator}{Email}{Constants.Separator}{Address}";
-    }
+        }
     }
 
     
