@@ -25,11 +25,11 @@ namespace OnlineShopWebApp
 
         public static void AddProductInBaset(int productId, int personId)
         {
-            FindPerson(personId).BasketList.Add(ProductCatalog.FindProduct(productId));
+            FindPerson(personId).CartList.Add(ProductCatalog.FindProduct(productId));
         }
         public static void DeleteProductInBaset(int productId, int personId)
         {
-            FindPerson(personId).BasketList.RemoveAt(productId);
+            FindPerson(personId).CartList.RemoveAt(productId);
         }
         public static Person FindPerson(int personId)
         {

@@ -4,7 +4,7 @@ using OnlineShopWebApp;
 namespace OnlineDesignBureauWebApp.Controllers
 {
 
-    public class BasketController : Controller
+    public class CartController : Controller
     {
         public IActionResult Index(int personId)
         {
@@ -17,7 +17,7 @@ namespace OnlineDesignBureauWebApp.Controllers
             PersonCatalog.WriteToJson();
             return RedirectToAction("Index",personId);
         }
-        public IActionResult DeleteProductInBasket(int productId, int personId)
+        public IActionResult DeleteProductInCart(int productId, int personId)
         {
             PersonCatalog.DeleteProductInBaset(productId, personId);
             PersonCatalog.WriteToJson();
