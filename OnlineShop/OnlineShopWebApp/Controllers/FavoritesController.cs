@@ -3,12 +3,12 @@ using OnlineShopWebApp.Services;
 
 namespace OnlineShopWebApp.Controllers
 {
-    public class FavoriteController : Controller
+    public class FavoritesController : Controller
     {
         private readonly IProductRepository productRepository;
         private readonly IFavoriteRepository favoriteRepository;
 
-        public FavoriteController(IProductRepository productRepository, IFavoriteRepository favoriteRepository)
+        public FavoritesController(IProductRepository productRepository, IFavoriteRepository favoriteRepository)
         {
             this.productRepository = productRepository;
             this.favoriteRepository = favoriteRepository;
@@ -17,7 +17,8 @@ namespace OnlineShopWebApp.Controllers
         public IActionResult Index()
         {
             var favorite = favoriteRepository.TryGetByUserId(Const.UserId);
-            return View(favorite.Products);
+            var products = favorite?.Products;
+            return View(products);
         }
 
 
