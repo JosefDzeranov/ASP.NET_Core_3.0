@@ -33,13 +33,9 @@ namespace OnlineShopWebApp.Controllers
         public IActionResult Remove(int productId)
         {
 
-<<<<<<< HEAD
-            var product = productBase.TryGetById(productId);
-            cartBase.RemoveItem(product, Const.UserId);
-=======
+
             var product = productRepository.TryGetById(productId);
-            cartRepository.Remove(product, Const.UserId);
->>>>>>> karpunin_lesson4_5
+            cartRepository.RemoveItem(product, Const.UserId);
 
             return RedirectToAction("Index");
         }
@@ -47,11 +43,9 @@ namespace OnlineShopWebApp.Controllers
         {
 
            
-<<<<<<< HEAD
-            cartBase.Clear(Const.UserId);
-=======
-            cartRepository.RemoveAll(Const.UserId);
->>>>>>> karpunin_lesson4_5
+
+            cartRepository.Clear(Const.UserId);
+
 
             return RedirectToAction("Index");
         }
