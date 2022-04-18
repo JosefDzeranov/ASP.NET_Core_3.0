@@ -8,7 +8,7 @@ namespace OnlineShopWebApp
 
         void Add(Product product, string userId);
 
-        void Del(Product product, string userId);
-        void DeleteByUserId(string userId);
+        void Delete(Product product, string userId);
+        void Clear(string userId);
     }
 }

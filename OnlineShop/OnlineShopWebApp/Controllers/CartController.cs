@@ -30,16 +30,16 @@ namespace OnlineShopWebApp.Controllers
             return RedirectToAction("Index");
         }
 
-        public IActionResult Del(int itemId)
+        public IActionResult Delete(int itemId)
         {
             var product = productsRepozitory.TryGetById(itemId);
-            cartsRepozitory.Del(product, Constants.UserId);
+            cartsRepozitory.Delete(product, Constants.UserId);
             return RedirectToAction("Index");
         }
 
-        public IActionResult Delete()
+        public IActionResult Clear()
         {
-            cartsRepozitory.DeleteByUserId(Constants.UserId);
+            cartsRepozitory.Clear(Constants.UserId);
             return RedirectToAction("Index");
         }
     }

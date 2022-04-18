@@ -57,7 +57,7 @@ namespace OnlineShopWebApp
             }
         }
 
-        public void Del(Product product, string userId)
+        public void Delete(Product product, string userId)
         {
             var existingCart = TryGetByUserId(userId);
             var existingCartItem = existingCart.Items.FirstOrDefault(x => x.Product.Id == product.Id);
@@ -68,14 +68,10 @@ namespace OnlineShopWebApp
             else
             {
                 existingCart.Items.Remove(existingCartItem);
-                if (existingCart.Items.Count == 0)
-                {
-                    carts.Clear();
-                }
             }
         }
 
-        public void DeleteByUserId(string userId)
+        public void Clear (string userId)
         {
             carts.Clear();
         }
