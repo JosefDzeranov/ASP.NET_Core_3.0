@@ -4,34 +4,34 @@ namespace OnlineShopWebApp.Controllers
 {
     public class OrderController : Controller
     {
-        private IOrderStorage OrderStorage { get; }
-        private IBasketStorage BasketStorage { get; }
-        private IDeliveryStorage DeliveryStorage { get; }
+        private readonly IOrderStorage _orderStorage;
+        private readonly IBasketStorage _basketStorage;
+        private readonly IDeliveryStorage _deliveryStorage;
 
         public OrderController(IOrderStorage orderStorage, IBasketStorage basketStorage, IDeliveryStorage deliveryStorage)
         {
-            OrderStorage = orderStorage;
-            BasketStorage = basketStorage;
-            DeliveryStorage = deliveryStorage;
+            _orderStorage = orderStorage;
+            _basketStorage = basketStorage;
+            _deliveryStorage = deliveryStorage;
         }
         public IActionResult Index()
         {
-            var order = OrderStorage.TryGetByUserId(Constants.UserId);
+            var order = _orderStorage.TryGetByUserId(Constants.UserId);
             return View(order);
         }
 
         public IActionResult Add()
         {
-            var basket = BasketStorage.TryGetByUserId(Constants.UserId);
-            var delivery = DeliveryStorage.GetDeliveryData();
-            OrderStorage.AddOrder(Constants.UserId, basket, delivery);
+            var basket = _basketStorage.TryGetByUserId(Constants.UserId);
+            var delivery = _deliveryStorage.GetDeliveryData();
+            _orderStorage.AddOrder(Constants.UserId, basket, delivery);
             return RedirectToAction("Index");
         }
         public IActionResult Buy()
         {
-            var order = OrderStorage.TryGetByUserId(Constants.UserId);
-            OrderStorage.SaveOrderToXmlFile(order);
-            BasketStorage.ClearBasket(Constants.UserId);
+            var order = _orderStorage.TryGetByUserId(Constants.UserId);
+            _orderStorage.SaveOrderToXmlFile(order);
+            _basketStorage.ClearBasket(Constants.UserId);
             return View();
         }
     }

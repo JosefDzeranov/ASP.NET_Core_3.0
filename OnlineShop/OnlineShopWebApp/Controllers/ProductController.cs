@@ -4,14 +4,14 @@ namespace OnlineShopWebApp.Controllers
 {
     public class ProductController : Controller
     {
-        private IProductStorage ProductStorage { get; }
+        private readonly IProductStorage _productStorage;
         public ProductController(IProductStorage productStorage)
         {
-            ProductStorage = productStorage;
+            _productStorage = productStorage;
         }
         public IActionResult Index(int id)
         {
-            var product = ProductStorage.TryGetProduct(id);              
+            var product = _productStorage.TryGetProduct(id);              
             return View(product);
         }
     }
