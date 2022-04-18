@@ -1,4 +1,5 @@
-﻿@model List<Product>
+﻿
+@model List<Product>
 
 @{
     ViewData["Title"] = "Home Page";
@@ -16,7 +17,7 @@
                     <h5 class="card-title">@product.Name</h5>
                     <div>
                         <h4>@product.Cost руб.</h4>
-                        <a href="/favorites/add?productId=@product.Id" class="btn btn-primary btn-sm">в избранное</a>
+                        <a href="/favorites/Remove?productId=@product.Id" class="btn btn-danger btn-sm">удалить из избранного</a>
                     </div>
 
                     <a href="/cart/add?productId=@product.Id" class="btn btn-dark btn-sm">Добавить в корзину</a>
@@ -26,8 +27,3 @@
         </div>
     }
 </div>
-
-
-
-
-

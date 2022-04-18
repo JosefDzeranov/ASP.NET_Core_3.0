@@ -3,10 +3,10 @@ using System.Collections.Generic;
 
 namespace OnlineShopWebApp.Services
 {
-    public interface IProductBase
+    public interface IProductRepository
     {
         Product TryGetById(int id);
         List<Product> GetAll();
-        
+
     }
 }

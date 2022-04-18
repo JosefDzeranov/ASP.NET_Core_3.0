@@ -4,7 +4,7 @@ using System.Linq;
 
 namespace OnlineShopWebApp.Services
 {
-    public class ProductBase : IProductBase
+    public class ProductRepository : IProductRepository
     {
         private List<Product> products = new List<Product>()
         {
@@ -16,6 +16,7 @@ namespace OnlineShopWebApp.Services
 
         };
 
+        
 
         public List<Product> GetAll()
         {
