@@ -65,6 +65,12 @@ namespace OnlineShopWebApp.Services
                 return CartItems.Sum(item => item.Key.Cost * item.Value);
             }
         }
-
+        public int Amount
+        {
+            get
+            {
+                return CartItems.Sum(item => item.Value);
+            }
+        }
     }
 }
