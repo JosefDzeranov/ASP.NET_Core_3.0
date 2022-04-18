@@ -8,7 +8,7 @@ namespace OnlineShopWebApp.Services
 {
     public class CartBase : ICartBase
     {
-        public static List<Cart> Сarts { get; set; } = new List<Cart>();
+        private List<Cart> Сarts { get; set; } = new List<Cart>();
 
         public Cart TryGetByUserId(string userId)
         {
@@ -57,7 +57,7 @@ namespace OnlineShopWebApp.Services
 
         }
 
-        public void RemoveAll(string userId)
+        public void Clear(string userId)
         {
             var existingCart = TryGetByUserId(userId);
             if (existingCart != null)
@@ -67,7 +67,7 @@ namespace OnlineShopWebApp.Services
 
         }
 
-        public void Remove(Product product, string userId)
+        public void RemoveItem(Product product, string userId)
         {
             var existingCart = TryGetByUserId(userId);
             if (existingCart != null)
@@ -82,7 +82,7 @@ namespace OnlineShopWebApp.Services
                     }
                 }
             }
-            if(existingCart.Items.Count == 0)
+            if (existingCart.Items.Count == 0)
             {
                 Сarts.Remove(existingCart);
             }

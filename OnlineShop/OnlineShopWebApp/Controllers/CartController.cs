@@ -33,8 +33,8 @@ namespace OnlineShopWebApp.Controllers
         public IActionResult Remove(int productId)
         {
 
-            var product = prodcutBase.TryGetById(productId);
-            cartBase.Remove(product, Const.UserId);
+            var product = productBase.TryGetById(productId);
+            cartBase.RemoveItem(product, Const.UserId);
 
             return RedirectToAction("Index");
         }
@@ -42,7 +42,7 @@ namespace OnlineShopWebApp.Controllers
         {
 
            
-            cartBase.RemoveAll(Const.UserId);
+            cartBase.Clear(Const.UserId);
 
             return RedirectToAction("Index");
         }
