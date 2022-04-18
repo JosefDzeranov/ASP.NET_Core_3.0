@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace OnlineShopWebApp
 {
-    public class InMemoryCartsRepository : ICartsRepository
+    public class CartsRepositoryInMemory : ICartsRepository
     {
         public List<Cart> Carts { get; set; } = new List<Cart>();
 
@@ -18,7 +18,7 @@ namespace OnlineShopWebApp
         public void Add(Product product, string userId)
         {
             var existingCart = TryGetByUserId(userId);
-            if (existingCart==null)
+            if (existingCart == null)
             {
                 var newCart = new Cart
                 {
