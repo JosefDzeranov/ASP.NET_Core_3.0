@@ -9,10 +9,10 @@ namespace OnlineShopWebApp.Controllers
 {
     public class UserController : Controller
     {
-        //public IActionResult Index()
-        //{
-        //    return View();
-        //}
+        public IActionResult Index()
+        {
+            return View();
+        }
 
         [HttpPost]
         public IActionResult Login(User user)
