@@ -17,7 +17,7 @@ namespace OnlineShopWebApp.Controllers
         [HttpPost]
         public IActionResult Login(User user)
         {
-            return RedirectToAction("Products", "Home");
+            return View();
         }
     }
 }
