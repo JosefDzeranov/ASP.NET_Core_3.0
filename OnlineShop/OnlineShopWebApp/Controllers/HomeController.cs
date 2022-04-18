@@ -5,22 +5,18 @@ using OnlineShopWebApp.Models;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
-using System.Linq;
-using System.Threading.Tasks;
+
 
 namespace OnlineShopWebApp.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly ILogger<HomeController> _logger;
+
         private readonly IProductDataSource productDataSource;
         private readonly ICartRepository cartRepository;
 
-        public HomeController(
-            ILogger<HomeController> logger,
-            IProductDataSource productDataSource, ICartRepository cartRepository)
+        public HomeController(IProductDataSource productDataSource, ICartRepository cartRepository)
         {
-            _logger = logger;
             this.productDataSource = productDataSource;
             this.cartRepository = cartRepository;
         }
@@ -38,7 +34,7 @@ namespace OnlineShopWebApp.Controllers
 
         public IActionResult Index()
         {
-           
+
             var products = productDataSource.GetAllProducts();
 
             return View(products);

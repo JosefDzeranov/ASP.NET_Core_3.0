@@ -4,11 +4,11 @@ using System.Linq;
 
 namespace OnlineShopWebApp.Services
 {
-    public class InMemoryCartsRepository : ICartRepository
+    public class InMemoryCartRepository : ICartRepository
     {
         private readonly IProductDataSource productDataSource;
 
-        public InMemoryCartsRepository(IProductDataSource productDataSource)
+        public InMemoryCartRepository(IProductDataSource productDataSource)
         {
             this.productDataSource = productDataSource;
         }

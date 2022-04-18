@@ -1,5 +1,6 @@
 ﻿@model Customer
 <body>
+	<form method ="post">
 	<form action="/ordercomplete/index">
 		
 		<fieldset>
@@ -10,16 +11,18 @@
 			<input id="user-name" type="text" placeholder="Например, Иван" autofocus><br>
 			
 			<label for="user-name">Введите фамилию</label>
-			<input id="user-name" type="text" placeholder="Например, Иванов"><br>
+			<input id="user-name" type="text"  name="name" placeholder="Например, Иванов"><br>
 			<label for="#">Введите номер телефона</label>
-			<input type="tel" placeholder="+79031234567"><br>
+			<input type="text" name="phone" placeholder="+79031234567"><br>
 			<label for="#">Введите email</label><br>
-			<input type="email" placeholder="mail@mail.ru"><br>
+			<input type="text" name="email" placeholder="mail@mail.ru"><br>
 			<label for="adress">Введите адрес</label>
-			<input type="text"><br>
-			<input type="submit" value="Отправить" a class ="btn btn-outline-success" role="button" href="/ordercomplete/index">
+			<input type="text" name="adress" /> <br>
+			<input type="submit" value="Отправить" a class ="btn btn-outline-success" role="button" href="/ordercomplete/index" asp-controller="OrderComplete" asp-action="Buy">
+			@*<button class="btn btn-outline-success" role="button" type="submit" href="/ordercomplete/index" value="Отправить" asp-controller="OrderComplete" asp-action="Buy"></button>*@
 		
 		</fieldset>
+	</form>
 	</form>
 </body>
 
