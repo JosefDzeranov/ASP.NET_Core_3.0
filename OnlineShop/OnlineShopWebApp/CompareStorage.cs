@@ -6,67 +6,59 @@ namespace OnlineShopWebApp
 {
     public class CompareStorage : ICompareStorage
     {
-        private List<Basket> baskets = new List<Basket>();
+        private List<Basket> compareBaskets = new List<Basket>();
 
-        public List<Basket> Baskets
+        public List<Basket> CompareBaskets
         {
             get
             {
-                return baskets;
+                return compareBaskets;
             }
         }
 
         public Basket TryGetByUserId(string userId)
         {
-            return baskets.FirstOrDefault(b => b.UserId == userId);
+            return compareBaskets.FirstOrDefault(b => b.UserId == userId);
         }
 
         public void AddProduct(string userId, Product product)
         {
-            var basket = TryGetByUserId(userId);
+            var compareBasket = TryGetByUserId(userId);
 
-            if (basket == null)
+            if (compareBasket == null)
             {
-                var newBasket = new Basket(userId);
-                newBasket.Items.Add(new BasketItem(product));
-                baskets.Add(newBasket);
+                var newCompareBasket = new Basket(userId);
+                newCompareBasket.Items.Add(new BasketItem(product));
+                compareBaskets.Add(newCompareBasket);
             }
             else
             {
-                var basketItem = basket.Items.FirstOrDefault(item => item.Product.Id == product.Id);
-                if (basketItem != null)
+                var basketItem = compareBasket.Items.FirstOrDefault(item => item.Product.Id == product.Id);
+                if (basketItem == null)
                 {
-                    basketItem.Quantity++;
-                }
-                else
-                {
-                    basket.Items.Add(new BasketItem(product));
+                    compareBasket.Items.Add(new BasketItem(product));
                 }
             }
         }
 
         public void RemoveProduct(string userId, Product product)
         {
-            var basket = TryGetByUserId(userId);
+            var compareBasket = TryGetByUserId(userId);
 
-            if (basket != null)
+            if (compareBasket != null)
             {
-                var basketItem = basket.Items.FirstOrDefault(item => item.Product.Id == product.Id);
+                var basketItem = compareBasket.Items.FirstOrDefault(item => item.Product.Id == product.Id);
 
                 if (basketItem != null)
                 {
-                    basketItem.Quantity--;
-                    if (basketItem.Quantity == 0)
-                    {
-                        basket.Items.Remove(basketItem);
-                    }
+                        compareBasket.Items.Remove(basketItem);
                 }
             }
         }
         public void ClearBasket(string userId)
         {
-            var basket = TryGetByUserId(userId);
-            basket.Items.Clear();
+            var compareBasket = TryGetByUserId(userId);
+            compareBasket.Items.Clear();
         }
     }
 }
