@@ -17,7 +17,10 @@ namespace OnlineShopWebApp.Models
             get { return Items.Sum(x => x.Cost); }
         }
 
-
+        public decimal Count
+        {
+            get { return Items.Count; }
+        }
 
 
     }
