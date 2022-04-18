@@ -6,7 +6,7 @@ using System.Linq;
 namespace OnlineShopWebApp.Services
 
 {
-    public class CartBase : ICartBase
+    public class CartRepository : ICartRepository
     {
         private List<Cart> Сarts { get; set; } = new List<Cart>();
 

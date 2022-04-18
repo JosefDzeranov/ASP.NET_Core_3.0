@@ -5,18 +5,18 @@ namespace OnlineShopWebApp.Controllers
 {
     public class CartController : Controller
     {
-        private readonly IProductBase productBase;
-        private readonly ICartBase cartBase;
+        private readonly IProductRepository productRepository;
+        private readonly ICartRepository cartRepository;
 
-        public CartController(IProductBase productBase, ICartBase cartBase)
+        public CartController(IProductRepository productRepository, ICartRepository cartRepository)
         {
-            this.productBase = productBase;
-            this.cartBase = cartBase;
+            this.productRepository = productRepository;
+            this.cartRepository = cartRepository;
 
         }
         public IActionResult Index()
         {
-            var cart = cartBase.TryGetByUserId(Const.UserId);
+            var cart = cartRepository.TryGetByUserId(Const.UserId);
 
             return View(cart);
         }
@@ -24,8 +24,8 @@ namespace OnlineShopWebApp.Controllers
         public IActionResult Add(int productId)
         {
 
-            var product = productBase.TryGetById(productId);
-            cartBase.Add(product, Const.UserId);
+            var product = productRepository.TryGetById(productId);
+            cartRepository.Add(product, Const.UserId);
 
             return RedirectToAction("Index");
         }
@@ -33,8 +33,9 @@ namespace OnlineShopWebApp.Controllers
         public IActionResult Remove(int productId)
         {
 
-            var product = productBase.TryGetById(productId);
-            cartBase.RemoveItem(product, Const.UserId);
+
+            var product = productRepository.TryGetById(productId);
+            cartRepository.RemoveItem(product, Const.UserId);
 
             return RedirectToAction("Index");
         }
@@ -42,7 +43,9 @@ namespace OnlineShopWebApp.Controllers
         {
 
            
-            cartBase.Clear(Const.UserId);
+
+            cartRepository.Clear(Const.UserId);
+
 
             return RedirectToAction("Index");
         }

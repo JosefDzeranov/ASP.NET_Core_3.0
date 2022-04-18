@@ -6,16 +6,16 @@ namespace OnlineShopWebApp.Controllers
 {
     public class ProductController : Controller
     {
-        private readonly IProductBase productBase;
+        private readonly IProductRepository productRepository;
 
-        public ProductController(IProductBase productBase)
+        public ProductController(IProductRepository productRepository)
         {
-            this.productBase = productBase;
+            this.productRepository = productRepository;
         }
         public IActionResult Index(int id)
         {
 
-            var product = productBase.TryGetById(id);
+            var product = productRepository.TryGetById(id);
             if (product == null)
             {
                 return NotFound();
