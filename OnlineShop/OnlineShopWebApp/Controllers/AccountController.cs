@@ -19,5 +19,10 @@ namespace OnlineShopWebApp.Controllers
         {
             return View();
         }
+        [HttpPost]
+        public IActionResult Register(string login, string password)
+        {
+            return View();
+        }
     }
 }
