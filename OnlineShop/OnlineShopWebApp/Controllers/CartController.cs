@@ -35,5 +35,11 @@ namespace OnlineShopWebApp.Controllers
             _cartBase.Add(product, TestUser.UserId);
             return RedirectToAction("Index");
         }
+
+        public IActionResult DecreaseAmount(int productId)
+        {
+            _cartBase.DecreaseAmount(productId, TestUser.UserId);
+            return RedirectToAction("Index");
+        }
     }
 }
