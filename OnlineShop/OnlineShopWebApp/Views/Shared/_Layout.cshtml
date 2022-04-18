@@ -20,14 +20,12 @@
                     <ul class="navbar-nav flex-grow-1">
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-                        </li>
+                        </li>                       
                     </ul>
                     <div class="col-auto">
-                            <a class="btn btn-outline-dark btn-sm text-nowrap mr-2" href="/basket/index" role="button">Basket</a>
-                            <a class="btn btn-outline-dark btn-sm text-nowrap" href="/compare/index" role="button">Compare list</a>
+                            <a class="btn btn-outline-dark btn-sm text-nowrap mr-2" asp-area="" asp-controller="Basket" asp-action="Index" role="button">Basket</a>
+                            <a class="btn btn-outline-dark btn-sm text-nowrap mr-2" asp-area="" asp-controller="Compare" asp-action="Index" role="button">Compare list</a>
+                            <a class="btn btn-outline-dark btn-sm text-nowrap mr-2" asp-area="" asp-controller="Favorites" asp-action="Index" role="button">Favorites</a>
                         </div>
                 </div>
             </div>
