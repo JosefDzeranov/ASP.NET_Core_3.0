@@ -12,9 +12,9 @@ namespace OnlineShopWebApp.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly ProductBase _productBase;
+        private readonly IProductBase _productBase;
 
-        public HomeController(ProductBase productBase)
+        public HomeController(IProductBase productBase)
         {
             _productBase = productBase;
         }

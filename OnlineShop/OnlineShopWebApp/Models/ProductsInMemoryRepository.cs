@@ -7,7 +7,7 @@ using System.Xml.Linq;
 
 namespace OnlineShopWebApp.Models
 {
-    public class ProductBase
+    public class ProductsInMemoryRepository : IProductBase
     {
         public IEnumerable<Product> AllProducts()
         {
@@ -21,6 +21,6 @@ namespace OnlineShopWebApp.Models
                                        p.Element("description").Value));
             return products;
         }
-        
+
     }
 }

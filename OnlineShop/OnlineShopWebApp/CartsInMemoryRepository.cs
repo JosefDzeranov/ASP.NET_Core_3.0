@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace OnlineShopWebApp
 {
-    public class CartBase
+    public class CartsInMemoryRepository : ICartBase
     {
         private List<Cart> carts = new List<Cart>();
 

@@ -13,8 +13,8 @@ namespace OnlineShopWebApp.Controllers
 {
     public class CartController : Controller
     {
-        private readonly ProductBase _productBase;
-        private readonly CartBase _cartBase;
+        private readonly IProductBase _productBase;
+        private readonly ICartBase _cartBase;
 
 
         public IActionResult Index()
@@ -23,7 +23,7 @@ namespace OnlineShopWebApp.Controllers
             return View(cart);
         }
 
-        public CartController(ProductBase productBase, CartBase cartBase)
+        public CartController(IProductBase productBase, ICartBase cartBase)
         {
             _productBase = productBase;
             _cartBase = cartBase;

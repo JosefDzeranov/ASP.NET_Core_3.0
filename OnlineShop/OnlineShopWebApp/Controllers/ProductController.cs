@@ -13,9 +13,9 @@ namespace OnlineShopWebApp.Controllers
 {
     public class ProductController : Controller
     {
-        private readonly ProductBase _productBase;
+        private readonly IProductBase _productBase;
 
-        public ProductController(ProductBase productBase)
+        public ProductController(IProductBase productBase)
         {
             _productBase = productBase;
         }
