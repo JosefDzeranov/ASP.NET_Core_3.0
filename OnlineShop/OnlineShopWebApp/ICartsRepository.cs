@@ -6,5 +6,7 @@ namespace OnlineShopWebApp
     {
         void Add(Product product, string userId);
         Cart TryGetByUserId(string userId);
+        void DecreaseAmount(int productId, string userId);
+        void Clear(string userId);
     }
 }
