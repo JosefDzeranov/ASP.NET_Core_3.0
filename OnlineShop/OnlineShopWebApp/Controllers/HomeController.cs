@@ -14,13 +14,15 @@ namespace OnlineShopWebApp.Controllers
     {
         private readonly ILogger<HomeController> _logger;
         private readonly IProductDataSource productDataSource;
+        private readonly ICartRepository cartRepository;
 
         public HomeController(
             ILogger<HomeController> logger,
-            IProductDataSource productDataSource)
+            IProductDataSource productDataSource, ICartRepository cartRepository)
         {
             _logger = logger;
             this.productDataSource = productDataSource;
+            this.cartRepository = cartRepository;
         }
 
         public IActionResult Privacy()
