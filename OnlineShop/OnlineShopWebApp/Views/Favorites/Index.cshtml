@@ -6,8 +6,9 @@
 }
 
 
-
-<div class="row">
+@if(@Model != null)
+{
+    <div class="row">
     @foreach (var product in Model)
     {
         <div class="col-3">
@@ -27,3 +28,4 @@
         </div>
     }
 </div>
+}
