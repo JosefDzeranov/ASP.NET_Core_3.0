@@ -9,12 +9,7 @@ namespace OnlineDesignBureauWebApp
 {
     public class ProductCatalog : IProductMemoryStorage
     {
-        public List<Product> Products { get; set; }
-
-        public ProductCatalog()
-        {
-            Products = new List<Product>();
-        }
+        public List<Product> Products { get; set; } = new List<Product>();
 
         public string WriteToStorage()
         {

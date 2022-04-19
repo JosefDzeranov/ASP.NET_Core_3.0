@@ -15,12 +15,8 @@ namespace OnlineShopWebApp
         {
             this.productCatalog = productCatalog;
         }
-        public List<Person> Persons { get; set; }
+        public List<Person> Persons { get; set; } = new List<Person>();
 
-        public PersonCatalog()
-        {
-            Persons=new List<Person>();
-        }
         public void WriteToStorage()
         {
             string nameFile = "list_of_persons";
