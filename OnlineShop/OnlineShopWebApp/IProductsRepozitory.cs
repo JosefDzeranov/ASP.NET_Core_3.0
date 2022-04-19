@@ -8,5 +8,7 @@ namespace OnlineShopWebApp
     {
         List<Product> GetAll();
         Product TryGetById(int id);
+        void AddToCompare(Product product);
+        List<Product> Compare();
     }
 }

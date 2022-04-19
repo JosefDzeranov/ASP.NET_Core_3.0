@@ -19,9 +19,18 @@ namespace OnlineShopWebApp.Controllers
         {
             var product = productsRepozitory.TryGetById(id);
             return View(product);
-
-
-
         }
+        public IActionResult Compare()
+        {
+            var productsToCompare = productsRepozitory.Compare();
+            return View(productsToCompare);
+        }
+        public IActionResult AddToCompare(int productId)
+        {
+            var product = productsRepozitory.TryGetById(productId);
+            productsRepozitory.AddToCompare(product);
+            return RedirectToAction("Compare");
+        }
+
     }
 }
