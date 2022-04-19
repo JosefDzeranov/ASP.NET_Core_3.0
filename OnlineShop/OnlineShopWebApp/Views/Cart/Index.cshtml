@@ -1,6 +1,6 @@
 ﻿@model OnlineShopWebApp.Models.Person;
 @{
-    ViewData["Title"] = "AddProductInBasket";
+    ViewData["Title"] = "AddProductInCart";
 }
 
 
@@ -37,7 +37,7 @@
                         <td>@Model.BasketList[i].Cost</td>
                         <td>
                             <a class="btn btn-outline-dark text-nowrap btn-sm mx-1 my-1" 
-                               asp-area="" asp-controller="Basket" 
+                               asp-area="" asp-controller="Cart" 
                                asp-action="DeleteProductInBasket" 
                                asp-route-productId="@i" 
                                role="button">Удалить из списка</a>

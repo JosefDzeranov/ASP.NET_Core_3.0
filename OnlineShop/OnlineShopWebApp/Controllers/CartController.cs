@@ -4,14 +4,14 @@ using OnlineShopWebApp;
 namespace OnlineDesignBureauWebApp.Controllers
 {
 
-    public class BasketController : Controller
+    public class CartController : Controller
     {
         public IActionResult Index(int personId)
         {
             return View(PersonCatalog.FindPerson(personId));
         }
 
-        public IActionResult AddProductInBasket(int productId, int personId)
+        public IActionResult AddProductInCart(int productId, int personId)
         {
             PersonCatalog.AddProductInBaset(productId, personId);
             PersonCatalog.WriteToJson();
