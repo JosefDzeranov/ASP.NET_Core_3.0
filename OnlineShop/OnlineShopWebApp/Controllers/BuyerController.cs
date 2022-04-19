@@ -16,6 +16,5 @@ namespace OnlineDesignBureauWebApp.Controllers
         {
             return View(buyerStorage.FindPerson(personId));
         }
-
     }
 }

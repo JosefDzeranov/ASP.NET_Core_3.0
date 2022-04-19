@@ -31,10 +31,12 @@ namespace OnlineShopWebApp
         {
             Product product = productCatalog.FindProduct(productId, productCatalog.Products);
             FindPerson(personId).CartList.Add(product);
+            WriteToStorage();
         }
         public void DeleteProductInCart(int productId, int personId)
         {
             FindPerson(personId).CartList.RemoveAt(productId);
+            WriteToStorage();
         }
         public Buyer FindPerson(int personId)
         {
