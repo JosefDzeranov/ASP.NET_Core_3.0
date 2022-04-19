@@ -6,9 +6,9 @@ namespace OnlineDesignBureauWebApp.Controllers
 {
     public class CartController : Controller
     {
-        private readonly IPersonMemoryStorage personCatalog;
-        private readonly IProductMemoryStorage productCatalog;
-        public CartController(IPersonMemoryStorage personCatalog, IProductMemoryStorage productCatalog)
+        private readonly IPersonStorage personCatalog;
+        private readonly IProductStorage productCatalog;
+        public CartController(IPersonStorage personCatalog, IProductStorage productCatalog)
         {
             this.personCatalog = personCatalog;
             this.productCatalog = productCatalog;

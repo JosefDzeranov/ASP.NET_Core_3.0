@@ -5,8 +5,8 @@ namespace OnlineDesignBureauWebApp.Controllers
 {
     public class ProductController : Controller
     {
-        private readonly IProductMemoryStorage productCatalog;
-        public ProductController(IProductMemoryStorage productCatalog)
+        private readonly IProductStorage productCatalog;
+        public ProductController(IProductStorage productCatalog)
         {
             this.productCatalog = productCatalog;
         }

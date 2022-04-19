@@ -3,7 +3,7 @@ using OnlineDesignBureauWebApp.Models;
 
 namespace OnlineShopWebApp.Interfase
 {
-    public interface IProductMemoryStorage
+    public interface IProductStorage
     {
         List<Product> Products { get; set; }
         string WriteToStorage();

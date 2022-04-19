@@ -7,8 +7,8 @@ namespace OnlineDesignBureauWebApp.Controllers
 
     public class PersonController : Controller
     {
-        private readonly IPersonMemoryStorage personCatalog;
-        public PersonController(IPersonMemoryStorage personCatalog)
+        private readonly IPersonStorage personCatalog;
+        public PersonController(IPersonStorage personCatalog)
         {
             this.personCatalog = personCatalog;
         }

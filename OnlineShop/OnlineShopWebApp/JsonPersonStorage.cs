@@ -8,9 +8,8 @@ using OnlineShopWebApp.Models;
 
 namespace OnlineShopWebApp
 {
-    public class PersonCatalog:IPersonMemoryStorage
+    public class JsonPersonStorage:IPersonStorage
     {
-        public IProductMemoryStorage productCatalog {get;}
 
         public List<Person> Persons { get; set; } = new List<Person>();
 
@@ -28,7 +27,7 @@ namespace OnlineShopWebApp
             Persons = JsonConvert.DeserializeObject<List<Person>>(json);
         }
 
-        public void AddProductInCart(int productId, int personId, IProductMemoryStorage productCatalog)
+        public void AddProductInCart(int productId, int personId, IProductStorage productCatalog)
         {
             Product product = productCatalog.FindProduct(productId, productCatalog.Products);
             FindPerson(personId).CartList.Add(product);

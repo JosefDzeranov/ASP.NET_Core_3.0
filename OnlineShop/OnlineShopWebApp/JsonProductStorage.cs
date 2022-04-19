@@ -6,7 +6,7 @@ using OnlineShopWebApp.Interfase;
 
 namespace OnlineDesignBureauWebApp
 {
-    public class ProductCatalog:IProductMemoryStorage
+    public class JsonProductStorage:IProductStorage
     {
         public List<Product> Products { get; set; } = new List<Product>();
 
