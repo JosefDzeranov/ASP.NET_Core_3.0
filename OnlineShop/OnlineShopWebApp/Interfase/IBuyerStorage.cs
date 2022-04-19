@@ -3,9 +3,9 @@ using OnlineShopWebApp.Models;
 
 namespace OnlineShopWebApp.Interfase
 {
-    public interface IPersonStorage
+    public interface IBuyerStorage
     {
-        List<Person> Persons { get; set; }
+        List<Buyer> Persons { get; set; }
         void WriteToStorage();
 
         void ReadToStorage();
@@ -14,6 +14,6 @@ namespace OnlineShopWebApp.Interfase
 
         void DeleteProductInCart(int productId, int personId);
 
-        Person FindPerson(int personId);
+        Buyer FindPerson(int personId);
     }
 }

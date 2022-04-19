@@ -8,10 +8,10 @@ using OnlineShopWebApp.Models;
 
 namespace OnlineShopWebApp
 {
-    public class JsonPersonStorage:IPersonStorage
+    public class JsonBuyerStorage:IBuyerStorage
     {
 
-        public List<Person> Persons { get; set; } = new List<Person>();
+        public List<Buyer> Persons { get; set; } = new List<Buyer>();
 
         public void WriteToStorage()
         {
@@ -24,7 +24,7 @@ namespace OnlineShopWebApp
             string nameFile = "list_of_persons";
             Persons.Clear();
             string json = File.ReadAllText($"{nameFile}.json");
-            Persons = JsonConvert.DeserializeObject<List<Person>>(json);
+            Persons = JsonConvert.DeserializeObject<List<Buyer>>(json);
         }
 
         public void AddProductInCart(int productId, int personId, IProductStorage productCatalog)
@@ -36,10 +36,10 @@ namespace OnlineShopWebApp
         {
             FindPerson(personId).CartList.RemoveAt(productId);
         }
-        public Person FindPerson(int personId)
+        public Buyer FindPerson(int personId)
         {
-            Person person = Persons.Find(x => x.Id == personId);
-            return person;
+            Buyer buyer = Persons.Find(x => x.Id == personId);
+            return buyer;
         }
     }
 }
