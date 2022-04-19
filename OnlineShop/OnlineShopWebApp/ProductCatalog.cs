@@ -11,6 +11,11 @@ namespace OnlineDesignBureauWebApp
     {
         public List<Product> Products { get; set; }
 
+        public ProductCatalog()
+        {
+            Products = new List<Product>();
+        }
+
         public string WriteToStorage()
         {
             string nameFile = "projects_for_sale";
