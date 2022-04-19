@@ -11,9 +11,13 @@ namespace OnlineShopWebApp
 
     public class PersonCatalog : IPersonMemoryStorage
     {
-        public ProductCatalog productCatalog { get; }
-
-        public List<Person> Persons { get; set; } = new List<Person>();
+        //public ProductCatalog productCatalog { get; }
+        private readonly ProductCatalog productCatalog;
+        public PersonCatalog(ProductCatalog productCatalog)
+        {
+            this.productCatalog = productCatalog;
+        }
+        public List<Person> Persons = new List<Person>();
 
         public void WriteToStorage()
         {

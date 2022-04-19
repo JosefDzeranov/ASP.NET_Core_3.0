@@ -6,7 +6,7 @@ namespace OnlineShopWebApp.Interfase
     
     public interface IPersonMemoryStorage
     {
-        List<Person> Persons { get; set; }
+        //List<Person> Persons { get; set; }
         void WriteToStorage();
 
         void ReadToStorage();

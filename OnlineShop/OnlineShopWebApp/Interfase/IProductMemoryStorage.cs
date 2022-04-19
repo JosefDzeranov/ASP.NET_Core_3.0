@@ -5,7 +5,7 @@ namespace OnlineShopWebApp.Interfase
 {
     public interface IProductMemoryStorage
     {
-        List<Product> Products { get; set; }
+        //List<Product> Products { get; set; }
         string WriteToStorage();
         void ReadToStorage();
         Product FindProduct(int productId, List<Product> products);
