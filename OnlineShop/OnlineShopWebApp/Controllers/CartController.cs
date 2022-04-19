@@ -29,5 +29,18 @@ namespace OnlineShopWebApp.Controllers
             cartsRepozitory.Add(product, Constants.UserId);
             return RedirectToAction("Index");
         }
+
+        public IActionResult Delete(int itemId)
+        {
+            var product = productsRepozitory.TryGetById(itemId);
+            cartsRepozitory.Delete(product, Constants.UserId);
+            return RedirectToAction("Index");
+        }
+
+        public IActionResult Clear()
+        {
+            cartsRepozitory.Clear(Constants.UserId);
+            return RedirectToAction("Index");
+        }
     }
 }

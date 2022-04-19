@@ -56,5 +56,24 @@ namespace OnlineShopWebApp
                 }
             }
         }
+
+        public void Delete(Product product, string userId)
+        {
+            var existingCart = TryGetByUserId(userId);
+            var existingCartItem = existingCart.Items.FirstOrDefault(x => x.Product.Id == product.Id);
+            if (existingCartItem.Amount > 1)
+            {
+                existingCartItem.Amount -= 1;
+            }
+            else
+            {
+                existingCart.Items.Remove(existingCartItem);
+            }
+        }
+
+        public void Clear (string userId)
+        {
+            carts.Clear();
+        }
     }
 }
