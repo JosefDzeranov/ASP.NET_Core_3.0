@@ -5,15 +5,15 @@ namespace OnlineShopWebApp.Interfase
 {
     public interface IBuyerStorage
     {
-        List<Buyer> Persons { get; set; }
+        List<Buyer> Buyers { get; set; }
         void WriteToStorage();
 
         void ReadToStorage();
 
-        void AddProductInCart(int productId, int personId, IProductStorage productCatalog);
+        void AddProductInCart(int productId, int personId);
 
         void DeleteProductInCart(int productId, int personId);
 
-        Buyer FindPerson(int personId);
+        Buyer FindBuyer(int personId);
     }
 }

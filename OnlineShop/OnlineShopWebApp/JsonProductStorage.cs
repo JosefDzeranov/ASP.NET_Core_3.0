@@ -9,19 +9,18 @@ namespace OnlineDesignBureauWebApp
     public class JsonProductStorage:IProductStorage
     {
         public List<Product> Products { get; set; } = new List<Product>();
+        string nameSave = "projects_for_sale";
 
         public string WriteToStorage()
         {
-            string nameFile = "projects_for_sale";
             string json = JsonConvert.SerializeObject(Products, Formatting.Indented);
-            File.WriteAllText($"{nameFile}.json", json);
+            File.WriteAllText($"{nameSave}.json", json);
             return json;
         }
         public void ReadToStorage()
         {
-            string nameFile = "projects_for_sale";
             Products.Clear();
-            string json = File.ReadAllText($"{nameFile}.json");
+            string json = File.ReadAllText($"{nameSave}.json");
             Products = JsonConvert.DeserializeObject<List<Product>>(json);
         }
 

@@ -10,37 +10,37 @@ namespace OnlineShopWebApp
 {
     public class JsonBuyerStorage:IBuyerStorage
     {
-
-        public List<Buyer> Persons { get; set; } = new List<Buyer>();
+        private IProductStorage productStorage { get; }
+        public List<Buyer> Buyers { get; set; } = new List<Buyer>();
+        string nameSave = "list_of_buyers";
 
         public void WriteToStorage()
         {
-            string nameFile = "list_of_persons";
-            string json = JsonConvert.SerializeObject(Persons, Formatting.Indented);
-            File.WriteAllText($"{nameFile}.json", json);
+            string json = JsonConvert.SerializeObject(Buyers, Formatting.Indented);
+            File.WriteAllText($"{nameSave}.json", json);
         }
         public void ReadToStorage()
         {
-            string nameFile = "list_of_persons";
-            Persons.Clear();
-            string json = File.ReadAllText($"{nameFile}.json");
-            Persons = JsonConvert.DeserializeObject<List<Buyer>>(json);
+            Buyers.Clear();
+            string json = File.ReadAllText($"{nameSave}.json");
+            Buyers = JsonConvert.DeserializeObject<List<Buyer>>(json);
         }
 
-        public void AddProductInCart(int productId, int personId, IProductStorage productCatalog)
+        public void AddProductInCart(int productId, int personId)
         {
-            Product product = productCatalog.FindProduct(productId, productCatalog.Products);
-            FindPerson(personId).CartList.Add(product);
+            List<Product> products = productStorage.Products;
+            Product product = productStorage.FindProduct(productId, products);
+            FindBuyer(personId).CartList.Add(product);
             WriteToStorage();
         }
         public void DeleteProductInCart(int productId, int personId)
         {
-            FindPerson(personId).CartList.RemoveAt(productId);
+            FindBuyer(personId).CartList.RemoveAt(productId);
             WriteToStorage();
         }
-        public Buyer FindPerson(int personId)
+        public Buyer FindBuyer(int personId)
         {
-            Buyer buyer = Persons.Find(x => x.Id == personId);
+            Buyer buyer = Buyers.Find(x => x.Id == personId);
             return buyer;
         }
     }

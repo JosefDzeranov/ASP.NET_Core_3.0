@@ -14,7 +14,7 @@ namespace OnlineDesignBureauWebApp.Controllers
         }
         public IActionResult Index(int personId)
         {
-            return View(buyerStorage.FindPerson(personId));
+            return View(buyerStorage.FindBuyer(personId));
         }
     }
 }

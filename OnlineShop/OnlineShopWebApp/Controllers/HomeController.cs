@@ -17,7 +17,7 @@ namespace OnlineDesignBureauWebApp.Controllers
         {
             if (productStorage.Products.Count == 0)
                 productStorage.ReadToStorage();
-            if (buyerStorage.Persons.Count == 0)
+            if (buyerStorage.Buyers.Count == 0)
                 buyerStorage.ReadToStorage();
             return View(productStorage.Products);
         }
