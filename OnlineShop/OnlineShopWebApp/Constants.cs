@@ -5,5 +5,6 @@ namespace OnlineShopWebApp
     {
         public static string UserId = "UserId";
         public static string Rub = "₽";
+        public static char Separator = ',';
     }
 }

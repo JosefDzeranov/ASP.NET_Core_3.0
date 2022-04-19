@@ -17,7 +17,6 @@ namespace OnlineShopWebApp
                 return Items?.Sum(x => x.Cost) ?? 0;
             }
         }
-
         public int Amount
         {
             get
