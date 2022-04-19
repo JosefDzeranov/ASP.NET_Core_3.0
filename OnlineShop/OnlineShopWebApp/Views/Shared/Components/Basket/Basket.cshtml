@@ -1,6 +1,11 @@
-﻿@model int
+﻿@model Basket
 
-@if (@Model > 0)
-{
-    @Model
-}
+<a class="btn btn-outline-dark btn-sm text-nowrap mr-2 position-relative" asp-area="" asp-controller="Basket" asp-action="Index" role="button">
+    Basket
+    @if (@Model?.TotalQuantity > 0)
+    {
+        <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill border border-dark bg-light text-dark">
+            @Model.TotalQuantity
+        </span>
+    }
+</a>

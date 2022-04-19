@@ -13,7 +13,7 @@
                     </li>
                 </ul>
                 <div class="col-auto">
-                    <a class="btn btn-outline-dark btn-sm text-nowrap mr-2" asp-area="" asp-controller="Basket" asp-action="Index" role="button">Basket @await Component.InvokeAsync("Basket")</a>
+                    @await Component.InvokeAsync("Basket")                    
                     <a class="btn btn-outline-dark btn-sm text-nowrap mr-2" asp-area="" asp-controller="Compare" asp-action="Index" role="button">Compare list</a>
                     <a class="btn btn-outline-dark btn-sm text-nowrap mr-2" asp-area="" asp-controller="Favorites" asp-action="Index" role="button">Favorites</a>
                 </div>

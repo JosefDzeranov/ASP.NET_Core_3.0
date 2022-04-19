@@ -14,8 +14,8 @@ namespace OnlineShopWebApp.Views.Components.Basket
         public IViewComponentResult Invoke()
         {
             var basket = _basketStorage.TryGetByUserId(Constants.UserId);
-            var productCount = basket?.TotalQuantity;
-            return View("Basket", productCount);
+           // var productCount = basket?.TotalQuantity;
+            return View("Basket", basket);
         }
     }
 }
