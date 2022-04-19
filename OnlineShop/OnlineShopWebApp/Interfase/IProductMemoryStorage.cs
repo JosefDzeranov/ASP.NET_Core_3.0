@@ -8,7 +8,7 @@ namespace OnlineShopWebApp.Interfase
         List<Product> Products { get; set; }
         string WriteToStorage();
         void ReadToStorage();
-        Product FindProduct(int productId);
+        Product FindProduct(int productId, List<Product> products);
         string ReadDataProducts();
     }
 }

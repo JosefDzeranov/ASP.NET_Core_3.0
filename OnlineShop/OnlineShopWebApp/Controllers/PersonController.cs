@@ -7,9 +7,10 @@ namespace OnlineDesignBureauWebApp.Controllers
     public class PersonController : Controller
     {
         private readonly PersonCatalog personCatalog;
-
-        public PersonController(PersonCatalog personCatalog)
+        private readonly ProductCatalog productCatalog;
+        public PersonController(ProductCatalog productCatalog, PersonCatalog personCatalog)
         {
+            this.productCatalog = productCatalog;
             this.personCatalog = personCatalog;
         }
         public IActionResult Index(int personId)

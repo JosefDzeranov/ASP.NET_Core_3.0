@@ -26,7 +26,7 @@ namespace OnlineDesignBureauWebApp
             Products = JsonConvert.DeserializeObject<List<Product>>(json);
         }
 
-        public Product FindProduct(int productId)
+        public Product FindProduct(int productId, List<Product> products)
         {
             Product product = Products.Find(x => x.Id == productId);
             return product;

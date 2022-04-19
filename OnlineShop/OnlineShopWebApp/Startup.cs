@@ -18,9 +18,9 @@ namespace OnlineDesignBureauWebApp
         public IConfiguration Configuration { get; }
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddControllersWithViews();
             services.AddSingleton<IProductMemoryStorage, ProductCatalog>();
             services.AddSingleton<IPersonMemoryStorage, PersonCatalog>();
-            services.AddControllersWithViews();
 
         }
 
