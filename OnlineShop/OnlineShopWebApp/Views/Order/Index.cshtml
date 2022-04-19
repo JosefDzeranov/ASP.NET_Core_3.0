@@ -18,32 +18,51 @@
             }
             <h6>Total: $@Model.Basket.TotalCost</h6>
         </div>
-        <div class="col-8">
-            <h5>Input your delivery details:</h5>
-            <label>Name:</label>
-            <div>
-                <input type="text" />
+        <form method="post">
+            <div class="col-8">
+                <h5>Input your delivery details:</h5>
+                <p>Address:</p>
+                <label>ZipCode</label>
+                <div>
+                    <input type="text" name="delivery.Address.ZipCode" />
+                </div>
+                <label>Country:</label>
+                <div>
+                    <input type="text" name="delivery.Address.Country" />
+                </div>
+                <label>City:</label>
+                <div>
+                    <input type="text" name="delivery.Address.City" />
+                </div>
+                <label>Street:</label>
+                <div>
+                    <input type="text" name="delivery.Address.Street" />
+                </div>
+                <label>House:</label>
+                <div>
+                    <input type="text" name="delivery.Address.House" />
+                </div><label>Apartment:</label>
+                <div>
+                    <input type="text" name="delivery.Address.Apartment" />
+                </div>
+                <label>Phone:</label>
+                <div>
+                    <input type="text" name="delivery.Phone" />
+                </div>
+                <label>Email:</label>
+                <div>
+                    <input type="text" name="delivery.Address.Email" />
+                </div>
+                <div>
+                    <a class="btn btn-dark btn-sm text-nowrap" type="submit" role="button" asp-controller="Order" asp-action="Buy">Buy</a>
+                </div>
             </div>
-            <label>Address:</label>
-            <div>
-                <input type="text" />
-            </div>
-            <label>Phone:</label>
-            <div>
-                <input type="text" />
-            </div>
-            <label>Email:</label>
-            <div>
-                <input type="text" />
-                <br /><br />
-            </div>
-            <div>
-                <a class="btn btn-outline-dark btn-sm text-nowrap" href="/" role="button">Continue shopping</a>&nbsp;&nbsp;&nbsp;
-                <a class="btn btn-dark btn-sm text-nowrap" href="/order/buy/index" role="button">Buy</a>
-            </div>
-
+        </form>
+        <div>
+            <a class="btn btn-outline-dark btn-sm text-nowrap" href="/" role="button">Continue shopping</a>&nbsp;&nbsp;&nbsp;
         </div>
+
     </div>
 </div>
-</div>
+
 

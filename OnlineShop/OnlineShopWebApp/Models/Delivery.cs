@@ -10,7 +10,14 @@ namespace OnlineShopWebApp.Models
         public Guid Id { get; set; }
         public string UserId { get; set; }
         public Address Address { get; set; }
-        public string PhoneNumber { get; set; }
+        public string Phone { get; set; }
         public string Email { get; set; }
+
+        public Delivery()
+        {
+            Id = Guid.NewGuid();
+            UserId = Constants.UserId;
+            Address = new Address();
+        }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using OnlineShopWebApp.Models;
 
 namespace OnlineShopWebApp.Controllers
 {
@@ -6,13 +7,11 @@ namespace OnlineShopWebApp.Controllers
     {
         private readonly IOrderStorage _orderStorage;
         private readonly IBasketStorage _basketStorage;
-        private readonly IDeliveryStorage _deliveryStorage;
 
-        public OrderController(IOrderStorage orderStorage, IBasketStorage basketStorage, IDeliveryStorage deliveryStorage)
+        public OrderController(IOrderStorage orderStorage, IBasketStorage basketStorage)
         {
             _orderStorage = orderStorage;
             _basketStorage = basketStorage;
-            _deliveryStorage = deliveryStorage;
         }
         public IActionResult Index()
         {
@@ -22,14 +21,16 @@ namespace OnlineShopWebApp.Controllers
 
         public IActionResult Add()
         {
-            var basket = _basketStorage.TryGetByUserId(Constants.UserId);
-            var delivery = _deliveryStorage.GetDeliveryData();
-            _orderStorage.AddOrder(Constants.UserId, basket, delivery);
+            var basket = _basketStorage.TryGetByUserId(Constants.UserId);           
+            _orderStorage.AddOrder(Constants.UserId, basket);
             return RedirectToAction("Index");
         }
+
+        [HttpPost]
         public IActionResult Buy()
         {
-            var order = _orderStorage.TryGetByUserId(Constants.UserId);
+           var order = _orderStorage.TryGetByUserId(Constants.UserId);
+           // order.Delivery = delivery;
             _orderStorage.SaveOrderToXmlFile(order);
             _basketStorage.ClearBasket(Constants.UserId);
             return View();

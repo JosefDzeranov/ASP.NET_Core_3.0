@@ -11,13 +11,13 @@ namespace OnlineShopWebApp.Models
         public Delivery Delivery { get; set; }
 
         public Order () { }
-        public Order(string userId, Basket basket, Delivery delivery)
+        public Order(string userId, Basket basket)
         {
             Id = Guid.NewGuid();
             Date = DateTime.Now;
             UserId = userId;
             Basket = basket;
-            Delivery = delivery;
+            Delivery = new Delivery();
         }
     }
 }
