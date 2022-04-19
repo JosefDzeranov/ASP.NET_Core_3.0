@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using OnlineShopWebApp.Models;
 
 namespace OnlineShopWebApp
 {
@@ -24,6 +25,9 @@ namespace OnlineShopWebApp
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllersWithViews();
+
+            services.AddSingleton<ICartManager,CartManager>();
+            services.AddSingleton<IProductManager,ProductManager>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

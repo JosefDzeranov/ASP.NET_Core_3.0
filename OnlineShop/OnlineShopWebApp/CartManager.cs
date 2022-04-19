@@ -5,20 +5,21 @@ using System.Linq;
 
 namespace OnlineShopWebApp
 {
-    public static class CartManager
+    public class CartManager : ICartManager
     {
         static List<Cart> cartList = new List<Cart>();
 
 
 
-        public static Cart CreateCart()
+        public Cart CreateCart()
         {
-            Cart cart = new Cart(Constants.UserId);
+            var cart = new Cart(Constants.UserId);
 
-            if (!cartList.Contains(cart))
+            if (cartList.Count == 0)
             {
                 cartList.Add(cart);
                 cart = cartList.FirstOrDefault(x => x.UserId == cart.UserId);
+
             }
             else
             {
@@ -28,17 +29,20 @@ namespace OnlineShopWebApp
             return cart;
         }
 
-        public static List<Cart> GetCarts()
+        public List<Cart> GetCarts()
         {
             return cartList;
         }
 
-        public static void AddProductToCart(string userId, Product product)
+        public void AddProductToCart(string userId, Product product)
         {
+            var cart = cartList.FirstOrDefault(x => x.UserId == userId);
 
-            if (cartList.FirstOrDefault(x => x.UserId == userId) != null)
+
+            if (cart != null)
             {
-                var cart = cartList.FirstOrDefault(x => x.UserId == userId);
+
+
 
                 if (cart.CartLines.FirstOrDefault(x => x.Product.Id == product.Id) != null)
                 {
@@ -55,12 +59,13 @@ namespace OnlineShopWebApp
             }
             else
             {
-                var cart = CreateCart();
 
-                cart.CartLines.Add(new CartLine(product));
-                var cartLine = cart.CartLines.FirstOrDefault(x => x.Product.Id == product.Id);
+                cart = CreateCart();
+                cartList.Add(cart);
+                var cartLine = new CartLine(product);
+
                 cartLine.Amount++;
-
+                cart.CartLines.Add(cartLine);
 
 
             }
@@ -69,9 +74,14 @@ namespace OnlineShopWebApp
 
         }
 
+        public Cart TryGetCartByUserID(string userId)
+        {
+            return cartList.FirstOrDefault(x => x.UserId == userId);
 
 
+        }
 
+      
     }
 
 
