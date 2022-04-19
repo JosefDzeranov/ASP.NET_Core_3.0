@@ -33,6 +33,14 @@ namespace OnlineShopWebApp.Models
         {
             return $"Id: {Id};\nИмя: {FistName};\nФамилия: {Surname};\nВозраст: {Age};\nEmail: {Email};";
         }
-
+        public decimal SumCost(List<Product> listProducts)
+        {
+            decimal sum = 0;
+            foreach (var product in listProducts)
+            {
+                sum += product.Cost;
+            }
+            return sum;
+        }
     }
 }

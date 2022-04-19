@@ -5,9 +5,9 @@ namespace OnlineDesignBureauWebApp.Controllers
     public class ProductController : Controller
     {
         private readonly ProductCatalog productCatalog;
-        public ProductController()
+        public ProductController(ProductCatalog productCatalog)
         {
-            productCatalog = new ProductCatalog();
+            this.productCatalog = productCatalog;
         }
         public IActionResult Index(int id)
         {

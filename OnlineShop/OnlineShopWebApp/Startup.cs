@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using OnlineShopWebApp;
 
 namespace OnlineDesignBureauWebApp
 {
@@ -17,6 +18,8 @@ namespace OnlineDesignBureauWebApp
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllersWithViews();
+            services.AddSingleton<PersonCatalog>();
+            services.AddSingleton<ProductCatalog>();
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)

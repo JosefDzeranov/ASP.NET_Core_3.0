@@ -6,36 +6,36 @@ using OnlineShopWebApp.Models;
 
 namespace OnlineShopWebApp
 {
-    public static class PersonCatalog
+    public class PersonCatalog
     {
-        public static List<Person> persons = new List<Person>();
-        public static void WriteToJson()
+        public static List<Person> Persons = new List<Person>();
+
+        public void WriteToJson()
         {
             string nameFile = "list_of_persons";
-            string json = JsonConvert.SerializeObject(persons, Formatting.Indented);
+            string json = JsonConvert.SerializeObject(Persons, Formatting.Indented);
             File.WriteAllText($"{nameFile}.json", json);
         }
-        public static void ReadToJson()
+        public void ReadToJson()
         {
             string nameFile = "list_of_persons";
-            persons.Clear();
+            Persons.Clear();
             string json = File.ReadAllText($"{nameFile}.json");
-            persons = JsonConvert.DeserializeObject<List<Person>>(json);
+            Persons = JsonConvert.DeserializeObject<List<Person>>(json);
         }
 
-        public static void AddProductInBaset(int productId, int personId)
+        public void AddProductInCart(int productId, int personId)
         {
             FindPerson(personId).CartList.Add(ProductCatalog.FindProduct(productId));
         }
-        public static void DeleteProductInBaset(int productId, int personId)
+        public void DeleteProductInCart(int productId, int personId)
         {
             FindPerson(personId).CartList.RemoveAt(productId);
         }
-        public static Person FindPerson(int personId)
+        public Person FindPerson(int personId)
         {
-            Person person = persons.Find(x => x.Id == personId);
+            Person person = Persons.Find(x => x.Id == personId);
             return person;
         }
     }
-
 }

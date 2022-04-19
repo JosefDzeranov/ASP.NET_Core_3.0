@@ -7,7 +7,12 @@ namespace OnlineDesignBureauWebApp
 {
     public class ProductCatalog
     {
-        public static List<Product> products = new List<Product>();
+        public static List<Product> products { get; set; }
+
+        public ProductCatalog()
+        {
+            products = new List<Product>();
+        }
 
         public string WriteToJson()
         {
@@ -41,17 +46,5 @@ namespace OnlineDesignBureauWebApp
             }
             return result;
         }
-
-        public static decimal SumCost(List<Product> listProducts)
-        {
-            decimal sum = 0;
-            foreach(var product in listProducts)
-            {
-                sum += product.Cost;
-            }
-            return sum;
-        }
-
-
     }
 }
