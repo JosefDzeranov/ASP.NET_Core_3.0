@@ -5,7 +5,7 @@ namespace OnlineShopWebApp.Controllers
 {
     public class OrderController : Controller
     {
-        IOrderManager orderManager;
+        private readonly IOrderManager orderManager;
         private readonly ICartManager cartManager;
 
 
