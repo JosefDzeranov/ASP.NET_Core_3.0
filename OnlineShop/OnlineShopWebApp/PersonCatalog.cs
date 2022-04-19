@@ -2,13 +2,20 @@
 using Newtonsoft.Json;
 using System.IO;
 using OnlineDesignBureauWebApp;
+using OnlineDesignBureauWebApp.Models;
 using OnlineShopWebApp.Models;
 
 namespace OnlineShopWebApp
 {
     public class PersonCatalog
     {
-        public static List<Person> Persons = new List<Person>();
+        private readonly ProductCatalog productCatalog;
+        public PersonCatalog(ProductCatalog productCatalog)
+        {
+            this.productCatalog = productCatalog;
+        }
+
+        public List<Person> Persons = new List<Person>();
 
         public void WriteToJson()
         {
@@ -26,7 +33,8 @@ namespace OnlineShopWebApp
 
         public void AddProductInCart(int productId, int personId)
         {
-            FindPerson(personId).CartList.Add(ProductCatalog.FindProduct(productId));
+            Product product = productCatalog.FindProduct(productId, FindPerson(personId).CartList);
+            FindPerson(personId).CartList.Add(product);
         }
         public void DeleteProductInCart(int productId, int personId)
         {

@@ -11,7 +11,7 @@ namespace OnlineDesignBureauWebApp.Controllers
         }
         public IActionResult Index(int id)
         {
-            var product = ProductCatalog.products[id];
+            var product = productCatalog.products[id];
             return View (product);
         }
         public string Save(string name)

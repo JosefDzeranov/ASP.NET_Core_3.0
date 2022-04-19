@@ -16,11 +16,11 @@ namespace OnlineDesignBureauWebApp.Controllers
         }
         public IActionResult Index()
         {
-            if (ProductCatalog.products.Count == 0)
+            if (productCatalog.products.Count == 0)
                 productCatalog.ReadToJson();
-            if (PersonCatalog.Persons.Count == 0)
+            if (personCatalog.Persons.Count == 0)
                 personCatalog.ReadToJson();
-            return View(ProductCatalog.products);
+            return View(productCatalog.products);
         }
     }
 }

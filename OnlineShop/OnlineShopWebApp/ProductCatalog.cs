@@ -7,13 +7,7 @@ namespace OnlineDesignBureauWebApp
 {
     public class ProductCatalog
     {
-        public static List<Product> products { get; set; }
-
-        public ProductCatalog()
-        {
-            products = new List<Product>();
-        }
-
+        public List<Product> products = new List<Product>();
         public string WriteToJson()
         {
             string nameFile = "projects_for_sale";
@@ -29,7 +23,7 @@ namespace OnlineDesignBureauWebApp
             products = JsonConvert.DeserializeObject<List<Product>>(json);
         }
 
-        public static Product FindProduct(int productId)
+        public Product FindProduct(int productId, List<Product> products)
         {
             Product product = products.Find(x => x.Id == productId);
             return product;
