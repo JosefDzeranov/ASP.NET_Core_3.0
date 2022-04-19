@@ -11,19 +11,25 @@ namespace OnlineShopWebApp.Controllers
     {
         public IActionResult Index()
         {
+
             return View();
         }
 
-        //[HttpPost]
+        public IActionResult NewUser()
+        {
+            return View();
+        }
+
+        [HttpPost]
         public IActionResult Login(User user)
         {
-            return View();
+            return RedirectToAction("Products","Home");
         }
 
-        //[HttpPost]
+        [HttpPost]
         public IActionResult Register(User user)
         {
-            return View();
+            return RedirectToAction("Products", "Home");
         }
     }
 }
