@@ -10,7 +10,7 @@ namespace OnlineShopWebApp
 {
     public class PersonCatalog:IPersonMemoryStorage
     {
-        public ProductCatalog productCatalog {get;}
+        public IProductMemoryStorage productCatalog {get;}
 
         public List<Person> Persons { get; set; } = new List<Person>();
 

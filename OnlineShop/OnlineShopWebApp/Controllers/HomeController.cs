@@ -1,13 +1,14 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using OnlineShopWebApp;
+using OnlineShopWebApp.Interfase;
 
 namespace OnlineDesignBureauWebApp.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly ProductCatalog productCatalog;
-        private readonly PersonCatalog personCatalog;
-        public HomeController(PersonCatalog personCatalog, ProductCatalog productCatalog)
+        private readonly IProductMemoryStorage productCatalog;
+        private readonly IPersonMemoryStorage personCatalog;
+        public HomeController(IPersonMemoryStorage personCatalog, IProductMemoryStorage productCatalog)
         {
             this.personCatalog = personCatalog;
             this.productCatalog = productCatalog;

@@ -1,16 +1,15 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using OnlineShopWebApp;
+using OnlineShopWebApp.Interfase;
 
 namespace OnlineDesignBureauWebApp.Controllers
 {
     public class CartController : Controller
     {
-        private readonly ProductCatalog productCatalog;
-        private readonly PersonCatalog personCatalog;
-        public CartController(PersonCatalog personCatalog, ProductCatalog productCatalog)
+        private readonly IPersonMemoryStorage personCatalog;
+        public CartController(IPersonMemoryStorage personCatalog)
         {
             this.personCatalog = personCatalog;
-            this.productCatalog = productCatalog;
         }
         public IActionResult Index(int personId)
         {
