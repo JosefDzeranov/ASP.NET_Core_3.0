@@ -3,20 +3,16 @@ using Newtonsoft.Json;
 using System.IO;
 using OnlineDesignBureauWebApp;
 using OnlineDesignBureauWebApp.Models;
+using OnlineShopWebApp.Interfase;
 using OnlineShopWebApp.Models;
 
 namespace OnlineShopWebApp
 {
-    public class PersonCatalog
+    public class PersonCatalog:IPersonMemoryStorage
     {
         public ProductCatalog productCatalog {get;}
 
-        public List<Person> Persons = new List<Person>();
-
-        public PersonCatalog(ProductCatalog productCatalog)
-        {
-            this.productCatalog = productCatalog;
-        }
+        public List<Person> Persons { get; set; } = new List<Person>();
 
         public void WriteToStorage()
         {
@@ -34,7 +30,7 @@ namespace OnlineShopWebApp
 
         public void AddProductInCart(int productId, int personId)
         {
-            Product product = productCatalog.FindProduct(productId, productCatalog.products);
+            Product product = productCatalog.FindProduct(productId, productCatalog.Products);
             FindPerson(personId).CartList.Add(product);
         }
         public void DeleteProductInCart(int productId, int personId)

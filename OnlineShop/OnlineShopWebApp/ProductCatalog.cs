@@ -2,25 +2,27 @@
 using System.Collections.Generic;
 using System.IO;
 using Newtonsoft.Json;
+using OnlineShopWebApp.Interfase;
 
 namespace OnlineDesignBureauWebApp
 {
-    public class ProductCatalog
+    public class ProductCatalog:IProductMemoryStorage
     {
-        public List<Product> products = new List<Product>();
+        public List<Product> Products { get; set; } = new List<Product>();
+
         public string WriteToStorage()
         {
             string nameFile = "projects_for_sale";
-            string json = JsonConvert.SerializeObject(products, Formatting.Indented);
+            string json = JsonConvert.SerializeObject(Products, Formatting.Indented);
             File.WriteAllText($"{nameFile}.json", json);
             return json;
         }
         public void ReadToStorage()
         {
             string nameFile = "projects_for_sale";
-            products.Clear();
+            Products.Clear();
             string json = File.ReadAllText($"{nameFile}.json");
-            products = JsonConvert.DeserializeObject<List<Product>>(json);
+            Products = JsonConvert.DeserializeObject<List<Product>>(json);
         }
 
         public Product FindProduct(int productId, List<Product> products)
@@ -31,10 +33,10 @@ namespace OnlineDesignBureauWebApp
 
         public string ReadDataProducts()
         {
-            if (products.Count == 0)
+            if (Products.Count == 0)
                 ReadToStorage();
             var result = "";
-            foreach (var product in products)
+            foreach (var product in Products)
             {
                 result += product + "\n\n";
             }

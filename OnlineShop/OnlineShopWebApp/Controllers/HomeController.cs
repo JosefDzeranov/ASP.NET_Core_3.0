@@ -14,11 +14,11 @@ namespace OnlineDesignBureauWebApp.Controllers
         }
         public IActionResult Index()
         {
-            if (productCatalog.products.Count == 0)
+            if (productCatalog.Products.Count == 0)
                 productCatalog.ReadToStorage();
             if (personCatalog.Persons.Count == 0)
                 personCatalog.ReadToStorage();
-            return View(productCatalog.products);
+            return View(productCatalog.Products);
         }
     }
 }
