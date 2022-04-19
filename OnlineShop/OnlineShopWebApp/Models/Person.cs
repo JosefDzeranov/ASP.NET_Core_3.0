@@ -12,7 +12,7 @@ namespace OnlineShopWebApp.Models
         public int Age { get; }
         public string Email { get; }
         public List<Product> ComparisonList { get; set; }
-        public List<Product> BasketList { get; set; }
+        public List<Product> CartList { get; set; }
         public List<Product> OrdersList { get; set; }
 
         private string password;
@@ -25,7 +25,7 @@ namespace OnlineShopWebApp.Models
             Email = email;
             password = password_input;
             ComparisonList = new List<Product>();
-            BasketList = new List<Product>();
+            CartList = new List<Product>();
             OrdersList = new List<Product>();
         }
 

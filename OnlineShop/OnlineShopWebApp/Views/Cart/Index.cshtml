@@ -22,23 +22,23 @@
                 <th scope="col"> </th>
             </tr>
             </thead>
-            @if (Model.BasketList.Count != 0)
+            @if (Model.CartList.Count != 0)
             {
                 <tbody>
 
-                @for (int i = 0; i < Model.BasketList.Count; i++)
+                @for (int i = 0; i < Model.CartList.Count; i++)
                 {
                     <tr>
                         <th scope="row">@(i+1)</th>
-                        <td>№ @Model.BasketList[i].Name @Model.BasketList[i].Description</td>
-                        <td> <img class="card-img-top " src="/image/@Model.BasketList[i].Images[0]" width="200"/></td>
-                        <td>@Model.BasketList[i].Length х @Model.BasketList[i].Width</td>
-                        <td>@Model.BasketList[i].Square</td>
-                        <td>@Model.BasketList[i].Cost</td>
+                        <td>№ @Model.CartList[i].Name @Model.CartList[i].Description</td>
+                        <td> <img class="card-img-top " src="/image/@Model.CartList[i].Images[0]" width="200"/></td>
+                        <td>@Model.CartList[i].Length х @Model.CartList[i].Width</td>
+                        <td>@Model.CartList[i].Square</td>
+                        <td>@Model.CartList[i].Cost</td>
                         <td>
                             <a class="btn btn-outline-dark text-nowrap btn-sm mx-1 my-1" 
                                asp-area="" asp-controller="Cart" 
-                               asp-action="DeleteProductInBasket" 
+                               asp-action="DeleteProductInCart" 
                                asp-route-productId="@i" 
                                role="button">Удалить из списка</a>
                         </td>
@@ -49,7 +49,7 @@
                 <td></td>
                 <td></td>
                 <td>Итого:</td>
-                <td>  @ProductCatalog.SumCost(@Model.BasketList)</td>
+                <td>  @ProductCatalog.SumCost(@Model.CartList)</td>
                 <td></td>
                 </tbody>
             }
