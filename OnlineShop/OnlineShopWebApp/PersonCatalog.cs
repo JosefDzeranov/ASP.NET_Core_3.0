@@ -9,21 +9,22 @@ namespace OnlineShopWebApp
 {
     public class PersonCatalog
     {
-        private readonly ProductCatalog productCatalog;
+        public ProductCatalog productCatalog {get;}
+
+        public List<Person> Persons = new List<Person>();
+
         public PersonCatalog(ProductCatalog productCatalog)
         {
             this.productCatalog = productCatalog;
         }
 
-        public List<Person> Persons = new List<Person>();
-
-        public void WriteToJson()
+        public void WriteToStorage()
         {
             string nameFile = "list_of_persons";
             string json = JsonConvert.SerializeObject(Persons, Formatting.Indented);
             File.WriteAllText($"{nameFile}.json", json);
         }
-        public void ReadToJson()
+        public void ReadToStorage()
         {
             string nameFile = "list_of_persons";
             Persons.Clear();
@@ -33,7 +34,7 @@ namespace OnlineShopWebApp
 
         public void AddProductInCart(int productId, int personId)
         {
-            Product product = productCatalog.FindProduct(productId, FindPerson(personId).CartList);
+            Product product = productCatalog.FindProduct(productId, productCatalog.products);
             FindPerson(personId).CartList.Add(product);
         }
         public void DeleteProductInCart(int productId, int personId)

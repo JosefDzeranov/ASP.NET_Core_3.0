@@ -8,14 +8,14 @@ namespace OnlineDesignBureauWebApp
     public class ProductCatalog
     {
         public List<Product> products = new List<Product>();
-        public string WriteToJson()
+        public string WriteToStorage()
         {
             string nameFile = "projects_for_sale";
             string json = JsonConvert.SerializeObject(products, Formatting.Indented);
             File.WriteAllText($"{nameFile}.json", json);
             return json;
         }
-        public void ReadToJson()
+        public void ReadToStorage()
         {
             string nameFile = "projects_for_sale";
             products.Clear();
@@ -32,7 +32,7 @@ namespace OnlineDesignBureauWebApp
         public string ReadDataProducts()
         {
             if (products.Count == 0)
-                ReadToJson();
+                ReadToStorage();
             var result = "";
             foreach (var product in products)
             {

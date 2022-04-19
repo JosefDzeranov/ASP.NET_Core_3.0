@@ -16,7 +16,7 @@ namespace OnlineDesignBureauWebApp.Controllers
         }
         public string Save(string name)
         {
-            return productCatalog.WriteToJson();
+            return productCatalog.WriteToStorage();
         }
     }
 }

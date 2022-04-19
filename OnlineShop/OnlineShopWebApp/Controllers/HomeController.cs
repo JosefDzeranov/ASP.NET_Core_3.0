@@ -7,8 +7,6 @@ namespace OnlineDesignBureauWebApp.Controllers
     {
         private readonly ProductCatalog productCatalog;
         private readonly PersonCatalog personCatalog;
-
-
         public HomeController(PersonCatalog personCatalog, ProductCatalog productCatalog)
         {
             this.personCatalog = personCatalog;
@@ -17,9 +15,9 @@ namespace OnlineDesignBureauWebApp.Controllers
         public IActionResult Index()
         {
             if (productCatalog.products.Count == 0)
-                productCatalog.ReadToJson();
+                productCatalog.ReadToStorage();
             if (personCatalog.Persons.Count == 0)
-                personCatalog.ReadToJson();
+                personCatalog.ReadToStorage();
             return View(productCatalog.products);
         }
     }

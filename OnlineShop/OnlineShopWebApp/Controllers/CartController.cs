@@ -3,13 +3,14 @@ using OnlineShopWebApp;
 
 namespace OnlineDesignBureauWebApp.Controllers
 {
-
     public class CartController : Controller
     {
+        private readonly ProductCatalog productCatalog;
         private readonly PersonCatalog personCatalog;
-        public CartController(PersonCatalog personCatalog)
+        public CartController(PersonCatalog personCatalog, ProductCatalog productCatalog)
         {
             this.personCatalog = personCatalog;
+            this.productCatalog = productCatalog;
         }
         public IActionResult Index(int personId)
         {
@@ -19,13 +20,13 @@ namespace OnlineDesignBureauWebApp.Controllers
         public IActionResult AddProductInCart(int productId, int personId)
         {
             personCatalog.AddProductInCart(productId, personId);
-            personCatalog.WriteToJson();
+            personCatalog.WriteToStorage();
             return RedirectToAction("Index",personId);
         }
         public IActionResult DeleteProductInCart(int productId, int personId)
         {
             personCatalog.DeleteProductInCart(productId, personId);
-            personCatalog.WriteToJson();
+            personCatalog.WriteToStorage();
             return RedirectToAction("Index", personId);
         }
 
