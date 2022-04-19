@@ -32,5 +32,16 @@ namespace OnlineShopWebApp.Controllers
             return RedirectToAction("Compare");
         }
 
+        public IActionResult ClearCompare()
+        {
+            productsRepozitory.ClearCompare();
+            return RedirectToAction("Compare");
+        }
+        public IActionResult DeleteComparingProduct(int productId)
+        {
+            var product = productsRepozitory.TryGetById(productId);
+            productsRepozitory.DeleteComparingProduct(product);
+            return RedirectToAction("Compare");
+        }
     }
 }

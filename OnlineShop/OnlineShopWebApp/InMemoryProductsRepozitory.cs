@@ -34,12 +34,26 @@ namespace OnlineShopWebApp
 
         public void AddToCompare(Product product)
         {
-            productsToCompare.Add(product);
+
+            var existingProductToCompare = productsToCompare.FirstOrDefault(x => x.Id == product.Id);
+            if (existingProductToCompare == null)
+            {
+                productsToCompare.Add(product);
+            }
         }
 
         public List<Product> Compare()
         {
             return productsToCompare;
+        }
+
+        public void ClearCompare()
+        {
+            productsToCompare.Clear();
+        }
+        public void DeleteComparingProduct(Product product)
+        {
+            productsToCompare.Remove(product);
         }
     }
 }
