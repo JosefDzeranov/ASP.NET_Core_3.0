@@ -92,3 +92,10 @@
 .card:hover .card__btn {
     top: 0;
 }
+
+.a {
+    text-decoration: none;
+}
+a {
+    text-decoration: none; /* Отменяем подчеркивание у ссылки */
+} 
