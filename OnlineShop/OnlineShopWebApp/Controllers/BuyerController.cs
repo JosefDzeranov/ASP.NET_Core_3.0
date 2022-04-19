@@ -7,14 +7,14 @@ namespace OnlineDesignBureauWebApp.Controllers
 
     public class BuyerController : Controller
     {
-        private readonly IBuyerStorage buyerCatalog;
-        public BuyerController(IBuyerStorage buyerCatalog)
+        private readonly IBuyerStorage buyerStorage;
+        public BuyerController(IBuyerStorage buyerStorage)
         {
-            this.buyerCatalog = buyerCatalog;
+            this.buyerStorage = buyerStorage;
         }
         public IActionResult Index(int personId)
         {
-            return View(buyerCatalog.FindPerson(personId));
+            return View(buyerStorage.FindPerson(personId));
         }
 
     }

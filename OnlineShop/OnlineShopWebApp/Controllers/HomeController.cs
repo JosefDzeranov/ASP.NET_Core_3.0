@@ -6,20 +6,20 @@ namespace OnlineDesignBureauWebApp.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly IProductStorage productCatalog;
-        private readonly IBuyerStorage buyerCatalog;
-        public HomeController(IBuyerStorage buyerCatalog, IProductStorage productCatalog)
+        private readonly IProductStorage productStorage;
+        private readonly IBuyerStorage buyerStorage;
+        public HomeController(IBuyerStorage buyerStorage, IProductStorage productStorage)
         {
-            this.buyerCatalog = buyerCatalog;
-            this.productCatalog = productCatalog;
+            this.buyerStorage = buyerStorage;
+            this.productStorage = productStorage;
         }
         public IActionResult Index()
         {
-            if (productCatalog.Products.Count == 0)
-                productCatalog.ReadToStorage();
-            if (buyerCatalog.Persons.Count == 0)
-                buyerCatalog.ReadToStorage();
-            return View(productCatalog.Products);
+            if (productStorage.Products.Count == 0)
+                productStorage.ReadToStorage();
+            if (buyerStorage.Persons.Count == 0)
+                buyerStorage.ReadToStorage();
+            return View(productStorage.Products);
         }
     }
 }

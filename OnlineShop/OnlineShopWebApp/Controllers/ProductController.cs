@@ -5,19 +5,19 @@ namespace OnlineDesignBureauWebApp.Controllers
 {
     public class ProductController : Controller
     {
-        private readonly IProductStorage productCatalog;
-        public ProductController(IProductStorage productCatalog)
+        private readonly IProductStorage productStorage;
+        public ProductController(IProductStorage productStorage)
         {
-            this.productCatalog = productCatalog;
+            this.productStorage = productStorage;
         }
         public IActionResult Index(int id)
         {
-            var product = productCatalog.Products[id];
+            var product = productStorage.Products[id];
             return View (product);
         }
         public string Save(string name)
         {
-            return productCatalog.WriteToStorage();
+            return productStorage.WriteToStorage();
         }
     }
 }
