@@ -6,26 +6,30 @@
 }
 else
 {
-    <div class="row">
-        @foreach (var product in Model)
-        {
-            <div class="col-3 card shadow">
+<div class="row">
+    @foreach (var product in Model)
+    {
+        <div class="col-3 card shadow">
 
-                <img class="card-img-top" src="https://static4.depositphotos.com/1015530/309/i/600/depositphotos_3098299-stock-photo-single-green-book.jpg" />
+            <img class="card-img-top" src="https://static4.depositphotos.com/1015530/309/i/600/depositphotos_3098299-stock-photo-single-green-book.jpg" />
 
-                <div class="card-body">
-                    <a style="color:grey" href="/product/index/@product.Id">
-                        <h5>@product.Name</h5>
-                    </a>
+            <div class="card-body">
+                <a style="color:grey" href="/product/index/@product.Id">
+                    <h5>@product.Name</h5>
+                </a>
+                <table>
+                    <tr><td>Цена @product.Cost руб.</td></tr>
+                    <tr><td>Количество страниц @product.Pages</td></tr>
 
-                    <h4>@product.Cost</h4>
+                </table>
 
-                    <a class="btn btn-dark" href="/cart/add?productId=@product.Id" role="button">Добавить в корзину</a>
-                    <p></p>
-                    <a class="btn btn-danger" href="/product/deletecomparingproduct?productId=@product.Id" role="button">Удалить из сравнения</a>
+                <a class="btn btn-dark" href="/cart/add?productId=@product.Id" role="button">Добавить в корзину</a>
+                <p></p>
+                <a class="btn btn-danger" href="/product/deletecomparingproduct?productId=@product.Id" role="button">Удалить из сравнения</a>
 
-                </div>
             </div>
+        </div>
+    
         }
     </div>
     <br />
