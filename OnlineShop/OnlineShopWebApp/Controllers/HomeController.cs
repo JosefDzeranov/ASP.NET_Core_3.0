@@ -6,17 +6,21 @@ namespace OnlineDesignBureauWebApp.Controllers
     public class HomeController : Controller
     {
         private readonly ProductCatalog productCatalog;
-        public HomeController()
+        private readonly PersonCatalog personCatalog;
+
+
+        public HomeController(PersonCatalog personCatalog, ProductCatalog productCatalog)
         {
-            productCatalog = new ProductCatalog();
+            this.personCatalog = personCatalog;
+            this.productCatalog = productCatalog;
         }
         public IActionResult Index()
         {
-            if (ProductCatalog.products.Count == 0)
+            if (productCatalog.products.Count == 0)
                 productCatalog.ReadToJson();
-            if (PersonCatalog.persons.Count == 0)
-                PersonCatalog.ReadToJson();
-            return View(ProductCatalog.products);
+            if (personCatalog.Persons.Count == 0)
+                personCatalog.ReadToJson();
+            return View(productCatalog.products);
         }
     }
 }

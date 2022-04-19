@@ -7,8 +7,7 @@ namespace OnlineDesignBureauWebApp
 {
     public class ProductCatalog
     {
-        public static List<Product> products = new List<Product>();
-
+        public List<Product> products = new List<Product>();
         public string WriteToJson()
         {
             string nameFile = "projects_for_sale";
@@ -24,7 +23,7 @@ namespace OnlineDesignBureauWebApp
             products = JsonConvert.DeserializeObject<List<Product>>(json);
         }
 
-        public static Product FindProduct(int productId)
+        public Product FindProduct(int productId, List<Product> products)
         {
             Product product = products.Find(x => x.Id == productId);
             return product;
@@ -41,17 +40,5 @@ namespace OnlineDesignBureauWebApp
             }
             return result;
         }
-
-        public static decimal SumCost(List<Product> listProducts)
-        {
-            decimal sum = 0;
-            foreach(var product in listProducts)
-            {
-                sum += product.Cost;
-            }
-            return sum;
-        }
-
-
     }
 }
