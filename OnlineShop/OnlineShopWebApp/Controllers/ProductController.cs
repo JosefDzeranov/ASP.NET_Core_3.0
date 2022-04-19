@@ -5,18 +5,18 @@ namespace OnlineDesignBureauWebApp.Controllers
     public class ProductController : Controller
     {
         private readonly ProductCatalog productCatalog;
-        public ProductController()
+        public ProductController(ProductCatalog productCatalog)
         {
-            productCatalog = new ProductCatalog();
+            this.productCatalog = productCatalog;
         }
         public IActionResult Index(int id)
         {
-            var product = ProductCatalog.products[id];
+            var product = productCatalog.Products[id];
             return View (product);
         }
         public string Save(string name)
         {
-            return productCatalog.WriteToJson();
+            return productCatalog.WriteToStorage();
         }
     }
 }

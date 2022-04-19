@@ -5,18 +5,20 @@ namespace OnlineDesignBureauWebApp.Controllers
 {
     public class HomeController : Controller
     {
+        private readonly PersonCatalog personCatalog;
         private readonly ProductCatalog productCatalog;
-        public HomeController()
+        public HomeController(ProductCatalog productCatalog, PersonCatalog personCatalog)
         {
-            productCatalog = new ProductCatalog();
+            this.productCatalog = productCatalog;
+            this.personCatalog = personCatalog;
         }
         public IActionResult Index()
         {
-            if (ProductCatalog.products.Count == 0)
-                productCatalog.ReadToJson();
-            if (PersonCatalog.persons.Count == 0)
-                PersonCatalog.ReadToJson();
-            return View(ProductCatalog.products);
+            if (productCatalog.Products.Count == 0)
+                productCatalog.ReadToStorage();
+            if (personCatalog.Persons.Count == 0)
+                personCatalog.ReadToStorage();
+            return View(productCatalog.Products);
         }
     }
 }
