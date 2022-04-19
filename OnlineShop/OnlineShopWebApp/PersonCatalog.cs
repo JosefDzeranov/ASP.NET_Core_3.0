@@ -28,7 +28,7 @@ namespace OnlineShopWebApp
             Persons = JsonConvert.DeserializeObject<List<Person>>(json);
         }
 
-        public void AddProductInCart(int productId, int personId)
+        public void AddProductInCart(int productId, int personId, IProductMemoryStorage productCatalog)
         {
             Product product = productCatalog.FindProduct(productId, productCatalog.Products);
             FindPerson(personId).CartList.Add(product);

@@ -7,9 +7,11 @@ namespace OnlineDesignBureauWebApp.Controllers
     public class CartController : Controller
     {
         private readonly IPersonMemoryStorage personCatalog;
-        public CartController(IPersonMemoryStorage personCatalog)
+        private readonly IProductMemoryStorage productCatalog;
+        public CartController(IPersonMemoryStorage personCatalog, IProductMemoryStorage productCatalog)
         {
             this.personCatalog = personCatalog;
+            this.productCatalog = productCatalog;
         }
         public IActionResult Index(int personId)
         {
@@ -18,7 +20,7 @@ namespace OnlineDesignBureauWebApp.Controllers
 
         public IActionResult AddProductInCart(int productId, int personId)
         {
-            personCatalog.AddProductInCart(productId, personId);
+            personCatalog.AddProductInCart(productId, personId, productCatalog);
             personCatalog.WriteToStorage();
             return RedirectToAction("Index",personId);
         }
