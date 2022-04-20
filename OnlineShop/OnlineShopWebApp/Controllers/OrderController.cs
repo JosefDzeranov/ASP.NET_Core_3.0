@@ -8,13 +8,13 @@ namespace OnlineShopWebApp.Controllers
 {
     public class OrderController : Controller
     {
-        private readonly ICartsRepozitory cartsRepozitory;
-        private readonly IOrdersRepozitory ordersRepozitory;
+        private readonly ICartsRepository cartsRepository;
+        private readonly IOrdersRepository ordersRepository;
 
-        public OrderController(ICartsRepozitory cartsRepozitory, IOrdersRepozitory ordersRepozitory)
+        public OrderController(ICartsRepository cartsRepository, IOrdersRepository ordersRepository)
         {
-            this.cartsRepozitory = cartsRepozitory;
-            this.ordersRepozitory = ordersRepozitory;
+            this.cartsRepository = cartsRepository;
+            this.ordersRepository = ordersRepository;
         }
 
         public IActionResult Index()
@@ -24,9 +24,9 @@ namespace OnlineShopWebApp.Controllers
 
         public IActionResult Buy()
         {
-            var cart = cartsRepozitory.TryGetByUserId(Constants.UserId);
-            ordersRepozitory.Add(cart);
-            cartsRepozitory.Clear(Constants.UserId);
+            var cart = cartsRepository.TryGetByUserId(Constants.UserId);
+            ordersRepository.Add(cart);
+            cartsRepository.Clear(Constants.UserId);
             return View();
         }
     }

@@ -25,7 +25,7 @@ else
 
                 <a class="btn btn-dark" href="/cart/add?productId=@product.Id" role="button">Добавить в корзину</a>
                 <p></p>
-                <a class="btn btn-danger" href="/product/deletecomparingproduct?productId=@product.Id" role="button">Удалить из сравнения</a>
+                <a class="btn btn-danger" href="/compare/delete?productId=@product.Id" role="button">Удалить из сравнения</a>
 
             </div>
         </div>
@@ -33,5 +33,5 @@ else
         }
     </div>
     <br />
-    <a class="btn btn-danger" href="/product/clearcompare" role="button">Очистить сравнение</a>
+    <a class="btn btn-danger" href="/compare/clear" role="button">Очистить сравнение</a>
 }

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace OnlineShopWebApp
 {
-    public class InMemoryOrdersRepozitory : IOrdersRepozitory
+    public class InMemoryOrdersRepository : IOrdersRepository
     {
         private List<Cart> orders = new List<Cart>();
 

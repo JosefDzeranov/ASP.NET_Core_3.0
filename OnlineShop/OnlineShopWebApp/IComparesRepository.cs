@@ -1,16 +1,14 @@
 ﻿using OnlineShopWebApp.Models;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace OnlineShopWebApp
 {
-    public interface IFavouritesRepozitory
+    public interface IComparesRepository
     {
-        List<Product> GetFavourites();
+        List<Product> GetCompare();
         void Add(Product product);
-        void ClearFavourites();
+        void Clear();
         void Delete(Product product);
+
     }
 }

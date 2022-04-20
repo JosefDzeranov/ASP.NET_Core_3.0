@@ -6,38 +6,39 @@ using System.Threading.Tasks;
 
 namespace OnlineShopWebApp.Controllers
 {
-    public class FavouriteController : Controller
+    public class CompareController : Controller
+
+
     {
         private readonly IProductsRepository productsRepository;
-        private readonly IFavouritesRepository favouritesRepository;
+        private readonly IComparesRepository comparesRepository;
 
-        public FavouriteController(IProductsRepository productsRepository, IFavouritesRepository favouritesRepository)
+        public CompareController(IProductsRepository productsRepository, IComparesRepository comparesRepository)
         {
             this.productsRepository = productsRepository;
-            this.favouritesRepository = favouritesRepository;
+            this.comparesRepository = comparesRepository;
         }
         public IActionResult Index()
         {
-            var favouriteProducts = favouritesRepository.GetFavourites();
-            return View(favouriteProducts);
+            var productsToCompare = comparesRepository.GetCompare();
+            return View(productsToCompare);
         }
-
         public IActionResult Add(int productId)
         {
             var product = productsRepository.TryGetById(productId);
-            favouritesRepository.Add(product);
+            comparesRepository.Add(product);
             return RedirectToAction("Index");
         }
 
-        public IActionResult ClearFavourites()
+        public IActionResult Clear()
         {
-            favouritesRepository.ClearFavourites();
+            comparesRepository.Clear();
             return RedirectToAction("Index");
         }
         public IActionResult Delete(int productId)
         {
             var product = productsRepository.TryGetById(productId);
-            favouritesRepository.Delete(product);
+            comparesRepository.Delete(product);
             return RedirectToAction("Index");
         }
     }

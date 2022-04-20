@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace OnlineShopWebApp
 {
-    public class InMemoryFavouritesRepozitory : IFavouritesRepozitory
+    public class InMemoryFavouritesRepository : IFavouritesRepository
     {
         private List<Product> favourites = new List<Product>();
 

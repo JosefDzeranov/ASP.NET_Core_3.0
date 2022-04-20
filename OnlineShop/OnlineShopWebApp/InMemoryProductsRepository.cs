@@ -6,7 +6,7 @@ using OnlineShopWebApp.Models;
 
 namespace OnlineShopWebApp
 {
-    public class InMemoryProductsRepozitory : IProductsRepozitory
+    public class InMemoryProductsRepository : IProductsRepository
     {
         private List<Product> products = new List<Product>()
         {
@@ -16,7 +16,7 @@ namespace OnlineShopWebApp
             new Product("Крутые наследнички", 350, "Автор: Дарья Донцова Жанр: детектив", 425),
         };
 
-        private List<Product> productsToCompare = new List<Product>();
+
         public List<Product> GetAll()
         {
             return products;
@@ -30,30 +30,6 @@ namespace OnlineShopWebApp
                     return product;
             }
             return null;
-        }
-
-        public void AddToCompare(Product product)
-        {
-
-            var existingProductToCompare = productsToCompare.FirstOrDefault(x => x.Id == product.Id);
-            if (existingProductToCompare == null)
-            {
-                productsToCompare.Add(product);
-            }
-        }
-
-        public List<Product> Compare()
-        {
-            return productsToCompare;
-        }
-
-        public void ClearCompare()
-        {
-            productsToCompare.Clear();
-        }
-        public void DeleteComparingProduct(Product product)
-        {
-            productsToCompare.Remove(product);
         }
     }
 }
