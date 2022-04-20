@@ -27,12 +27,42 @@ namespace OnlineShopWebApp
         {
             List<Product> products = productStorage.Products;
             Product product = productStorage.FindProduct(productId, products);
-            FindBuyer(buyerId).CartList.Add(product);
+            Buyer buyer = FindBuyer(buyerId);
+            buyer.CartList=buyer.SumDuplicates(product);
             WriteToStorage();
         }
-        public void DeleteProductInCart(int productId, int personId)
+        public void DeleteProductInCart(int productId, int buyerId)
         {
-            FindBuyer(personId).CartList.RemoveAt(productId);
+            List<Buyer.CartBuyer> cart = FindBuyer(buyerId).CartList;
+            for (int i = 0; i < cart.Count; i++)
+            {
+                cart.RemoveAt(i);
+            }
+            WriteToStorage();
+        }
+
+        public void ReduceDuplicateProductCart(int productId, int buyerId)
+        {
+            List<Buyer.CartBuyer> cart = FindBuyer(buyerId).CartList;
+            for (int i = 0; i < cart.Count; i++)
+            {
+                if (productId == cart[i].Product.Id)
+                {
+                    if (cart[i].NumDuplicates > 1)
+                    {
+                        cart[i].NumDuplicates--;
+                    }
+                    else
+                    {
+                        cart.RemoveAt(i);
+                    }
+                }
+            }
+            WriteToStorage();
+        }
+        public void CleenCart(int buyerId)
+        {
+            FindBuyer(buyerId).CartList.Clear();
             WriteToStorage();
         }
         public Buyer FindBuyer(int personId)

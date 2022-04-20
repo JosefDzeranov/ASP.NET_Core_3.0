@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using OnlineShopWebApp;
 using OnlineShopWebApp.Interfase;
+using OnlineShopWebApp.Models;
 
 namespace OnlineDesignBureauWebApp.Controllers
 {
@@ -27,8 +28,16 @@ namespace OnlineDesignBureauWebApp.Controllers
             buyerStorage.DeleteProductInCart(productId, buyerId);
             return RedirectToAction("Index", buyerId);
         }
-
-
+        public IActionResult ReduceDuplicateProductCart(int productId, int buyerId)
+        {
+            buyerStorage.ReduceDuplicateProductCart(productId, buyerId);
+            return RedirectToAction("Index", buyerId);
+        }
+        public IActionResult CleenCart(int buyerId)
+        {
+            buyerStorage.CleenCart(buyerId);
+            return RedirectToAction("Index", buyerId);
+        }
     }
 
 
