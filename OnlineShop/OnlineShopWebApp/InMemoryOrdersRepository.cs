@@ -8,11 +8,22 @@ namespace OnlineShopWebApp
 {
     public class InMemoryOrdersRepository : IOrdersRepository
     {
-        private List<Cart> orders = new List<Cart>();
+        private List<Order> orders = new List<Order>();
 
-        public void Add(Cart cart)
+        public void Add(Cart cart, Order order)
         {
-            orders.Add(cart);
+            var newOrder = new Order
+            {
+                Id = Guid.NewGuid(),
+                UserId = Constants.UserId,
+                Cart = cart,
+                Name = order.Name,
+                Adress = order.Adress,
+                Phone = order.Phone,
+            };
+
+            orders.Add(newOrder);
         }
+
     }
 }

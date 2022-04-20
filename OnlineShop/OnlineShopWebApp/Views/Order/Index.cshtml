@@ -1,15 +1,16 @@
-﻿
+﻿<form method="post">
     <div class="row text-center">
         <div class="col text-center">
             <label>Фамилия Имя</label>
-            <input type="text"/>
+            <input type="text" name="name" />
             <br />
             <label>Адрес</label>
-            <input type="text"/>
+            <input type="text" name="adress" />
             <br />
             <label>Номер телефона</label>
-            <input type="text"/>
+            <input type="text" name="phone" />
             <br />
-            <a class="btn btn-success btn-sm" href="/order/buy" role="button">Завершить оформление</a>
+            <button class="btn btn-success btn-sm" type="submit" asp-controller="Order" asp-action="Buy">Завершить оформление</button>
         </div>
     </div>
+</form>

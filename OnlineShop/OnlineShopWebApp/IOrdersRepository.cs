@@ -8,6 +8,6 @@ namespace OnlineShopWebApp
 {
     public interface IOrdersRepository
     {
-        public void Add(Cart cart);
+        void Add(Cart cart, Order order)
     }
 }
