@@ -29,17 +29,6 @@ namespace OnlineShopWebApp.Models
                 Id = Guid.NewGuid(),
                 OrderNumber = LastOrderNumber,
                 OrderDateTime = DateTime.Now,
-                Customer = new List<Customer>
-                {
-                    new Customer()
-                    {
-                        LastName = customer.LastName,
-                        Name = customer.Name,
-                        Mail = customer.Mail,
-                        Address = customer.Address,
-                        Phone = customer.Phone,
-                    }
-                },
                 UserId = Constants.UserId,
                 Items = new List<OrderItem>
                     {

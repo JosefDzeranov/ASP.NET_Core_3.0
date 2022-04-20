@@ -49,9 +49,9 @@ namespace OnlineShopWebApp.Controllers
             return RedirectToAction("Index");
         }
 
-        public IActionResult RemoveCartUser(string userId)
+        public IActionResult RemoveCartUser()
         {
-            cartsStorage.RemoveCartUser(userId);
+            cartsStorage.RemoveCartUser(Constants.UserId);
 
             return RedirectToAction("Index");
         }
