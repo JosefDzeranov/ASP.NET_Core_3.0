@@ -1,9 +1,14 @@
-﻿
+﻿@{
+    ViewData["Title"] = "Регистрация";
+}
 <div class="card shadow">
     <div class="card-body">
         <form method="post" asp-action="Register">
             <div class="row justify-content-center">
                 <div class="col-6">
+                    <div class="mb-3 text-center">
+                        <h3>Регистрация</h3>
+                    </div>
                     <div class="mb-3">
                         <input type="text" class="form-control" name="Name" placeholder="логин" />
                     </div>
