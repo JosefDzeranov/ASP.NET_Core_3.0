@@ -10,18 +10,18 @@ namespace OnlineShopWebApp.Controllers
         private readonly IProductManager productManager;
         private readonly IFavorites favoritesManager;
 
-        List<Product> favoritesList = new List<Product>();
+
 
         public FavoritesController(IProductManager productManager, IFavorites favoritesManager)
         {
             this.productManager = productManager;
             this.favoritesManager = favoritesManager;
-            
+
         }
 
         public IActionResult Index()
         {
-            favoritesList = favoritesManager.Products;
+            var favoritesList = favoritesManager.Products;
             return View(favoritesList);
 
         }
@@ -35,7 +35,7 @@ namespace OnlineShopWebApp.Controllers
             if (favoritesManager.Products.FirstOrDefault(x => x.Id == id) == null)
             {
                 favoritesManager.AddProduct(foundProduct);
-                favoritesList = favoritesManager.Products;
+                var favoritesList = favoritesManager.Products;
                 return View(favoritesList);
             }
             else
