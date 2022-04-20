@@ -29,9 +29,10 @@ namespace OnlineShopWebApp
         {
             productsToCompare.Clear();
         }
-        public void Delete(Product product)
+        public void Delete(int id)
         {
-            productsToCompare.Remove(product);
+            var existingProductToCompare = productsToCompare.FirstOrDefault(x => x.Id == idd);
+            productsToCompare.Remove(existingProductToCompare);
         }
     }
 }

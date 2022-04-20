@@ -29,9 +29,10 @@ namespace OnlineShopWebApp
         {
             favourites.Clear();
         }
-        public void Delete(Product product)
+        public void Delete(int id)
         {
-            favourites.Remove(product);
+            var existingProduct = favourites.FirstOrDefault(x => x.Id == id);
+            favourites.Remove(existingProduct);
         }
     }
 }

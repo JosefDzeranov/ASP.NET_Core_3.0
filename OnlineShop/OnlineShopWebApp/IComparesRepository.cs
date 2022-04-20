@@ -9,7 +9,7 @@ namespace OnlineShopWebApp
         void Add(Product product);
 
         void Clear();
-        void Delete(Product product);
+        void Delete(int id);
 
     }
 }
