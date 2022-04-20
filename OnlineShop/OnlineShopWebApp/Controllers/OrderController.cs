@@ -28,7 +28,7 @@ namespace OnlineShopWebApp.Controllers
         {
             ordersStorage.Add(order, customer, Constants.UserId);
 
-            cartsStorage.RemoveAll();
+            cartsStorage.RemoveCartUser(Constants.UserId);
 
             return RedirectToAction("OrderComplete");
         }

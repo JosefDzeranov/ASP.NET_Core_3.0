@@ -80,9 +80,10 @@ namespace OnlineShopWebApp.Models
             }
         }
 
-        public void RemoveAll()
+        public void RemoveCartUser(string userId)
         {
-            carts.Clear();
+            carts.Remove(carts.FirstOrDefault(x => x.UserId == userId));
+            //cart.Clear();
         }
     }
 }
