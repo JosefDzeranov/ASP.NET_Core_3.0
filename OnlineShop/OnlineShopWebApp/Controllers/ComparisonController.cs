@@ -5,12 +5,12 @@ namespace OnlineShopWebApp.Controllers
     public class ComparisonController : Controller
     {
         private readonly IProductsRepository productRepository;
-        private readonly ICartsRepository cartsRepository;
+        private readonly IComparisonRepository comparisonRepository;
 
-        public ComparisonController(IProductsRepository productRepository, ICartsRepository cartsRepository)
+        public ComparisonController(IProductsRepository productRepository, IComparisonRepository comparisonRepository)
         {
             this.productRepository = productRepository;
-            this.cartsRepository = cartsRepository;
+            this.comparisonRepository = comparisonRepository;
         }
 
         public IActionResult Compare()
@@ -21,7 +21,7 @@ namespace OnlineShopWebApp.Controllers
         public IActionResult Add(int productId)
         {
             var product = productRepository.TryGetByid(productId);
-            cartsRepository.Add(product, Constants.UserId);
+            comparisonRepository.Add(product, Constants.UserId);
             return RedirectToAction("Compare");
         }
     }

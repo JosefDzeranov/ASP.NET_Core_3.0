@@ -1,7 +1,10 @@
-﻿namespace OnlineShopWebApp
+﻿using OnlineShopWebApp.Models;
+
+namespace OnlineShopWebApp
 {
     public interface IComparisonRepository
     {
-        void Add(Cart cart);
+        Compare TryGetByUserId(string userId);
+        void Add(Product product, string userId);
     }
 }

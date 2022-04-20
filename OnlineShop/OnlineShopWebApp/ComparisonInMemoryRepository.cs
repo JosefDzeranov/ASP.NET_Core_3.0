@@ -7,11 +7,16 @@ namespace OnlineShopWebApp
 {
     public class ComparisonInMemoryRepository : IComparisonRepository
     {
-        private List<Cart> orders = new List<Cart>();
+        private List<Compare> compares = new List<Compare>();
 
-        public void Add(Cart cart)
+        public void Add(Compare compare, string userId)
         {
-            orders.Add(cart);
+            compares.Add(compare);
+        }
+
+        public Compare TryGetByUserId(string userId)
+        {
+            return compares.FirstOrDefault(x => x.UserId == userId);
         }
     }
 }
