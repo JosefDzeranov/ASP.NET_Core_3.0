@@ -18,8 +18,7 @@ namespace OnlineShopWebApp.Controllers
         }
         public IActionResult Index()
         {
-            var favouriteProducts = favouritesRepository.GetFavourites();
-            return View(favouriteProducts);
+            return View(favouritesRepository.GetFavourites());
         }
 
         public IActionResult Add(int productId)

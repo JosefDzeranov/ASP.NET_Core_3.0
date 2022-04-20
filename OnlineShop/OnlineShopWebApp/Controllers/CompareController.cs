@@ -20,8 +20,8 @@ namespace OnlineShopWebApp.Controllers
         }
         public IActionResult Index()
         {
-            var productsToCompare = comparesRepository.GetCompare();
-            return View(productsToCompare);
+            
+            return View(comparesRepository.GetCompare());
         }
         public IActionResult Add(int productId)
         {
