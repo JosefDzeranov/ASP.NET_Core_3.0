@@ -1,0 +1,20 @@
+﻿@model UserCredentials
+<body>
+<form method="post" action="/authorizationform/login">
+<div class="row text-center">
+	<div class="col">
+		<label>Вход</label>
+		<div><br>
+			<label>	<input type="text" name="userName" placeholder="Логин" /></label></div>
+	<div><br>
+		<label> <input type="text" name="password" placeholder="Пароль" /></label>
+	</div>
+	<div> 
+		<label><input type="checkbox" value="true" name="rememberMe"/>Запомнить меня?</label>
+	</div> <br>		
+		<input type="submit" value="Войти" class ="btn btn-outline-success" role="button" href="/authorizationform/login" asp-controller="AuthorizationForm" asp-action="Login">
+	</div>
+	<div><a href="#">Регистрация нового пользователя</a></div>
+</div>
+</form>
+</body>
