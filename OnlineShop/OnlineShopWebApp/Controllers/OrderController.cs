@@ -25,7 +25,6 @@ namespace OnlineShopWebApp.Controllers
         {
             _cartBase.Delete(TestUser.UserId);
             return View();
-            //return RedirectToAction("Congratulation");
         }
 
     }
