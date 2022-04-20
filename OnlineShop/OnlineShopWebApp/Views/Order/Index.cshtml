@@ -42,11 +42,6 @@
 
         </div>
     </div>
-    <input asp-for=Order.Id type="hidden" value=@Guid.NewGuid() />
-    <input asp-for=Order.Cart type="hidden" value=@Model.Cart />
-    <input asp-for=Order.UserId type="hidden" value=@Model.Cart.UserId />
-    <input asp-for=Order.TotalCost type="hidden" value=@Model.Cart.TotalCost />
-    <input asp-for=Order.Created type="hidden" value=@DateTime.Now />
     <div class="row">
 
         <table class="table">
