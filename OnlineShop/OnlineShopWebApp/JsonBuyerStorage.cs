@@ -23,11 +23,11 @@ namespace OnlineShopWebApp
             string json = File.ReadAllText($"{nameSave}.json");
             Buyers = JsonConvert.DeserializeObject<List<Buyer>>(json);
         }
-        public void AddProductInCart(int productId, int personId, IProductStorage productStorage)
+        public void AddProductInCart(int productId, int buyerId, IProductStorage productStorage)
         {
             List<Product> products = productStorage.Products;
             Product product = productStorage.FindProduct(productId, products);
-            FindBuyer(personId).CartList.Add(product);
+            FindBuyer(buyerId).CartList.Add(product);
             WriteToStorage();
         }
         public void DeleteProductInCart(int productId, int personId)

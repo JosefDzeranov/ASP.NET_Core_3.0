@@ -13,18 +13,15 @@ namespace OnlineDesignBureauWebApp.Controllers
             this.buyerStorage = buyerStorage;
             this.productStorage = productStorage;
         }
-        public IActionResult Index(int personId)
+        public IActionResult Index(int buyerId)
         {
-            return View(buyerStorage.FindBuyer(personId));
+            return View(buyerStorage.FindBuyer(buyerId));
         }
-        public IActionResult AddProductInCart(int productId, int buyerId, IProductStorage productStorage)
+        public IActionResult AddProductInCart(int productId, int buyerId)
         {
             buyerStorage.AddProductInCart(productId, buyerId, productStorage);
             return RedirectToAction("Index", buyerId);
         }
-
-
-
         public IActionResult DeleteProductInCart(int productId, int buyerId)
         {
             buyerStorage.DeleteProductInCart(productId, buyerId);

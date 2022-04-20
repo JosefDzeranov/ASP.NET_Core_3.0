@@ -23,13 +23,11 @@ namespace OnlineDesignBureauWebApp
             string json = File.ReadAllText($"{nameSave}.json");
             Products = JsonConvert.DeserializeObject<List<Product>>(json);
         }
-
         public Product FindProduct(int productId, List<Product> products)
         {
             Product product = products.Find(x => x.Id == productId);
             return product;
         }
-
         public string ReadDataProducts()
         {
             if (Products.Count == 0)

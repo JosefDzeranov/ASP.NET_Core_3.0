@@ -10,7 +10,7 @@ namespace OnlineShopWebApp.Interfase
 
         void ReadToStorage();
 
-        void AddProductInCart(int productId, int personId, IProductStorage productStorage);
+        void AddProductInCart(int productId, int buyerId, IProductStorage productStorage);
 
         void DeleteProductInCart(int productId, int personId);
 
