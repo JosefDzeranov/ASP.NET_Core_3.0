@@ -36,26 +36,5 @@ namespace OnlineShopWebApp.Models
                 return Items.Sum(x => x.Cost);
             }
         }
-
-        //public Order(string userId, string lastName, string name, string phone, string mail, string address)
-        //{
-        //    UserId = userId;
-
-        //    Id = Guid.NewGuid();
-
-        //    OrderNumber++;
-
-        //    OrderDateTime = DateTime.Now;
-
-        //    LastName = lastName;
-
-        //    Name = name;
-
-        //    Phone = phone;
-
-        //    Mail = mail;
-
-        //    Address = address;
-        //}
     }
 }
