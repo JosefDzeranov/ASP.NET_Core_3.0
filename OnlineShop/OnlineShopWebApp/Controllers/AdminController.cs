@@ -12,5 +12,10 @@ namespace OnlineShopWebApp.Controllers
         {
             return View();
         }
+
+        public IActionResult Status()
+        {
+            return View();
+        }
     }
 }
