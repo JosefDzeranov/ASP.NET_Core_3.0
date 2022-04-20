@@ -16,7 +16,6 @@ namespace OnlineShopWebApp
             new Product("Крутые наследнички", 350, "Автор: Дарья Донцова Жанр: детектив", 425),
         };
 
-
         public List<Product> GetAll()
         {
             return products;

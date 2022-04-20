@@ -29,7 +29,5 @@ namespace OnlineShopWebApp.Models
         {
             return $"{Id}\n{Name}\n{Cost}";
         }
-
-
     }
 }
