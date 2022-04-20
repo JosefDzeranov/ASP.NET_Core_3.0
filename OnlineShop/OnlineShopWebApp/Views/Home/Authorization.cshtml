@@ -1,0 +1,22 @@
+﻿<form method="post">
+    <div class="row text-center">
+        <div class="col text-center">
+            <label>Логин</label>
+            <input type="text" name="login" />
+            <br />
+            <label>Пароль</label>
+            <input type="text" name="password" />
+            <br />
+            <div class="form-check">
+                <input class="form-check-input" type="checkbox" value="true" name="remember">
+                <label class="form-check-label">
+                    Запомнить меня
+                </label>
+            </div>
+            <br />
+            <button class="btn btn-dark" type="submit" asp-controller="Home" asp-action="Enter">Вход</button>
+            <br />
+            <a href="#">Регистрация нового пользователя</a>
+        </div>
+    </div>
+</form>

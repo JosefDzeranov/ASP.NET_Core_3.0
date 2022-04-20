@@ -26,7 +26,16 @@ namespace OnlineShopWebApp.Controllers
             return View(products);
         }
 
+        public IActionResult Authorization()
+        {
+           return View();
+        }
 
+        [HttpPost]
+        public IActionResult Enter(string login, string password, bool remember)
+        {
+            return View();
+        }
 
         public IActionResult Privacy()
         {
