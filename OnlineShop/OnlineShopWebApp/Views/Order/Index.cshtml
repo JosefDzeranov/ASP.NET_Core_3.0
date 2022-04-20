@@ -4,8 +4,9 @@
 @{
     ViewData["Title"] = "Оформление заказа";
 }
-
-<form method="post" asp-action="Create">
+@if(@Model.Cart != null)
+{
+    <form method="post" asp-action="Create">
     <div class="row">
         <div class="col text-center">
             <div>
@@ -77,4 +78,10 @@
 
     </div>
 
-</form>
+    </form>
+}
+else
+{
+    <h2 class="text-center">Нет заказа.</h2>
+    <a href="/home/index" class="btn btn-dark">Перейти в каталог</a>
+}
