@@ -15,11 +15,5 @@ namespace OnlineShopWebApp
         void RemoveProductFromCart(string userId, Product product);
         void RemoveCartLines(Cart cart);
 
-
-
-
-
-
-
     }
 }
