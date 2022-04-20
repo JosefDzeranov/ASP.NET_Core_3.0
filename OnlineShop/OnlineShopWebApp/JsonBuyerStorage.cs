@@ -9,7 +9,7 @@ namespace OnlineShopWebApp
 {
     public class JsonBuyerStorage:IBuyerStorage
     {
-        private IProductStorage productStorage { get; }
+        
         public List<Buyer> Buyers { get; set; } = new List<Buyer>();
         string nameSave = "list_of_buyers";
         public void WriteToStorage()
@@ -23,7 +23,7 @@ namespace OnlineShopWebApp
             string json = File.ReadAllText($"{nameSave}.json");
             Buyers = JsonConvert.DeserializeObject<List<Buyer>>(json);
         }
-        public void AddProductInCart(int productId, int personId)
+        public void AddProductInCart(int productId, int personId, IProductStorage productStorage)
         {
             List<Product> products = productStorage.Products;
             Product product = productStorage.FindProduct(productId, products);

@@ -7,19 +7,24 @@ namespace OnlineDesignBureauWebApp.Controllers
     public class CartController : Controller
     {
         private readonly IBuyerStorage buyerStorage;
-        public CartController(IBuyerStorage buyerStorage)
+        private readonly IProductStorage productStorage;
+        public CartController(IBuyerStorage buyerStorage, IProductStorage productStorage)
         {
             this.buyerStorage = buyerStorage;
+            this.productStorage = productStorage;
         }
         public IActionResult Index(int personId)
         {
             return View(buyerStorage.FindBuyer(personId));
         }
-        public IActionResult AddProductInCart(int productId, int personId)
+        public IActionResult AddProductInCart(int productId, int buyerId, IProductStorage productStorage)
         {
-            buyerStorage.AddProductInCart(productId, personId);
-            return RedirectToAction("Index",personId);
+            buyerStorage.AddProductInCart(productId, buyerId, productStorage);
+            return RedirectToAction("Index", buyerId);
         }
+
+
+
         public IActionResult DeleteProductInCart(int productId, int buyerId)
         {
             buyerStorage.DeleteProductInCart(productId, buyerId);
@@ -28,4 +33,6 @@ namespace OnlineDesignBureauWebApp.Controllers
 
 
     }
+
+
 }
