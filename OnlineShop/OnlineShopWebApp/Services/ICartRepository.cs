@@ -6,6 +6,7 @@ namespace OnlineShopWebApp.Services
 	public interface ICartRepository
 	{
 		Dictionary<Product, int> CartItems { get; set; }
+
 		decimal Cost { get; }
 
 		void Add(int id);
@@ -15,9 +16,9 @@ namespace OnlineShopWebApp.Services
 		void Add(Product product);
 
 		void Remove(Product product);
+
 		void RemoveAll();
 
 		int Amount { get; }
-
 	}
 }
