@@ -28,9 +28,9 @@ namespace OnlineShopWebApp.Controllers
             return RedirectToAction("Index");
         }
 
-        public IActionResult ClearFavourites()
+        public IActionResult Clear()
         {
-            favouritesRepository.ClearFavourites();
+            favouritesRepository.Clear();
             return RedirectToAction("Index");
         }
         public IActionResult Delete(int productId)

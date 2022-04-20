@@ -10,7 +10,7 @@ namespace OnlineShopWebApp
     {
         List<Product> GetFavourites();
         void Add(Product product);
-        void ClearFavourites();
+        void Clear();
         void Delete(Product product);
     }
 }

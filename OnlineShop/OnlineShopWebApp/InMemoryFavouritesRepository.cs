@@ -25,7 +25,7 @@ namespace OnlineShopWebApp
 
         }
 
-        public void ClearFavourites()
+        public void Clear()
         {
             favourites.Clear();
         }

@@ -22,7 +22,7 @@ else
 
                     <a class="btn btn-dark" href="/cart/add?productId=@product.Id" role="button">Добавить в корзину</a>
                     <p></p>
-                    <a class="btn btn-success btn-sm" href="/product/addtocompare?productId=@product.Id" role="button">Добавить в сравнение</a>
+                    <a class="btn btn-success btn-sm" href="/compare/add?productId=@product.Id" role="button">Добавить в сравнение</a>
                     <p></p>
                     <a class="btn btn-danger" href="/favourite/delete?productId=@product.Id" role="button">Удалить из избранного</a>
                 </div>
@@ -30,6 +30,6 @@ else
         }
     </div>
     <br />
-    <a class="btn btn-danger" href="/favourite/clearfavourites" role="button">Очистить избранное</a>
+    <a class="btn btn-danger" href="/favourite/clear" role="button">Очистить избранное</a>
 
 }
