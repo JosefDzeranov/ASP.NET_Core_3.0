@@ -6,20 +6,15 @@ namespace OnlineShopWebApp.Models
     public class ComparisonManager : IComparison
     {
 
-        public List<Product> products = new List<Product>();
-        public List<Product> Products
-        {
-            get
-            {
-                return products;
-            }
-        }
+        public List<Product> Products { get; } = new List<Product>();
+
+
         public void AddProduct(Product product)
         {
             Products.Add(product);
         }
 
-      public List<Product> GetProducts()
+        public List<Product> GetProducts()
         {
             return Products;
         }
