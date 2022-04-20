@@ -1,0 +1,31 @@
+﻿@using OnlineShopWebApp.Models
+@model IEnumerable<Product>
+
+
+
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="row text-te">
+    <div class="col text-md-center" >
+
+        <label>Введите ФИО</label>
+        <div>
+            <input class="text" />
+        </div>
+
+        <label>Введите адрес доставки</label>
+        <div>
+            <input class="text" />
+        </div>
+
+        <label>Введите номер телефона</label>
+        <div>
+            <input class="text" />
+        </div>
+
+        <br />
+        <a class="btn btn-danger" href="/order/congratulation" role="button">Оформить заказ</a>
+    </div>
+</div>
