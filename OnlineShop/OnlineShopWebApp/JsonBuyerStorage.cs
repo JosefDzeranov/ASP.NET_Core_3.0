@@ -1,10 +1,9 @@
-﻿using System.Collections.Generic;
-using Newtonsoft.Json;
-using System.IO;
-using OnlineDesignBureauWebApp;
+﻿using Newtonsoft.Json;
 using OnlineDesignBureauWebApp.Models;
 using OnlineShopWebApp.Interfase;
 using OnlineShopWebApp.Models;
+using System.Collections.Generic;
+using System.IO;
 
 namespace OnlineShopWebApp
 {
@@ -13,7 +12,6 @@ namespace OnlineShopWebApp
         private IProductStorage productStorage { get; }
         public List<Buyer> Buyers { get; set; } = new List<Buyer>();
         string nameSave = "list_of_buyers";
-
         public void WriteToStorage()
         {
             string json = JsonConvert.SerializeObject(Buyers, Formatting.Indented);
@@ -25,7 +23,6 @@ namespace OnlineShopWebApp
             string json = File.ReadAllText($"{nameSave}.json");
             Buyers = JsonConvert.DeserializeObject<List<Buyer>>(json);
         }
-
         public void AddProductInCart(int productId, int personId)
         {
             List<Product> products = productStorage.Products;
