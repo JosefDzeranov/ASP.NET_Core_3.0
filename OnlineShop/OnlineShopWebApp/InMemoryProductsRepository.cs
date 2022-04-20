@@ -6,7 +6,7 @@ using OnlineShopWebApp.Models;
 
 namespace OnlineShopWebApp
 {
-    public class InMemoryProductsRepozitory : IProductsRepozitory
+    public class InMemoryProductsRepository : IProductsRepository
     {
         private List<Product> products = new List<Product>()
         {
@@ -51,9 +51,10 @@ namespace OnlineShopWebApp
         {
             productsToCompare.Clear();
         }
-        public void DeleteComparingProduct(Product product)
+        public void DeleteComparingProduct(int productId)
         {
-            productsToCompare.Remove(product);
+            var existingProductToCompare = productsToCompare.FirstOrDefault(x => x.Id == productId);
+            productsToCompare.Remove(existingProductToCompare);
         }
     }
 }

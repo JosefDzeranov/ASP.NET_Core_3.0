@@ -9,38 +9,37 @@ namespace OnlineShopWebApp.Controllers
 {
     public class ProductController : Controller
     {
-        private readonly IProductsRepozitory productsRepozitory;
+        private readonly IProductsRepository productsRepository;
 
-        public ProductController(IProductsRepozitory productsRepozitory)
+        public ProductController(IProductsRepository productsRepository)
         {
-            this.productsRepozitory = productsRepozitory;
+            this.productsRepository = productsRepository;
         }
         public IActionResult Index(int id)
         {
-            var product = productsRepozitory.TryGetById(id);
+            var product = productsRepository.TryGetById(id);
             return View(product);
         }
         public IActionResult Compare()
         {
-            var productsToCompare = productsRepozitory.Compare();
+            var productsToCompare = productsRepository.Compare();
             return View(productsToCompare);
         }
         public IActionResult AddToCompare(int productId)
         {
-            var product = productsRepozitory.TryGetById(productId);
-            productsRepozitory.AddToCompare(product);
+            var product = productsRepository.TryGetById(productId);
+            productsRepository.AddToCompare(product);
             return RedirectToAction("Compare");
         }
 
         public IActionResult ClearCompare()
         {
-            productsRepozitory.ClearCompare();
+            productsRepository.ClearCompare();
             return RedirectToAction("Compare");
         }
         public IActionResult DeleteComparingProduct(int productId)
         {
-            var product = productsRepozitory.TryGetById(productId);
-            productsRepozitory.DeleteComparingProduct(product);
+            productsRepository.DeleteComparingProduct(productId);
             return RedirectToAction("Compare");
         }
     }

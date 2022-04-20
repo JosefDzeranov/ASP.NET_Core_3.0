@@ -4,13 +4,13 @@ using System.Collections.Generic;
 
 namespace OnlineShopWebApp
 {
-    public interface IProductsRepozitory
+    public interface IProductsRepository
     {
         List<Product> GetAll();
         Product TryGetById(int id);
         void AddToCompare(Product product);
         List<Product> Compare();
         void ClearCompare();
-        void DeleteComparingProduct(Product product);
+        void DeleteComparingProduct(int productId);
     }
 }
