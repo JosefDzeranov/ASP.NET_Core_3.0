@@ -20,5 +20,6 @@ namespace OnlineShopWebApp.Services
 		void RemoveAll();
 
 		int Amount { get; }
+
 	}
 }
