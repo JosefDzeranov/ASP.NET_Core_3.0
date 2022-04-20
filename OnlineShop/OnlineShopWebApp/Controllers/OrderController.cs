@@ -24,10 +24,10 @@ namespace OnlineShopWebApp.Controllers
         }
 
         [HttpPost]
-        public IActionResult Buy(Order order)
+        public IActionResult Buy(User user)
         {
             var cart = cartsRepository.TryGetByUserId(Constants.UserId);
-            ordersRepository.Add(cart, order);
+            ordersRepository.Add(cart, user);
             cartsRepository.Clear(Constants.UserId);
             return View();
         }

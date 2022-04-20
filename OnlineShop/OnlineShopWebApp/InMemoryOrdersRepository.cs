@@ -10,16 +10,13 @@ namespace OnlineShopWebApp
     {
         private List<Order> orders = new List<Order>();
 
-        public void Add(Cart cart, Order order)
+        public void Add(Cart cart, User user)
         {
             var newOrder = new Order
             {
                 Id = Guid.NewGuid(),
-                UserId = Constants.UserId,
                 Cart = cart,
-                Name = order.Name,
-                Adress = order.Adress,
-                Phone = order.Phone,
+                User = user,
             };
 
             orders.Add(newOrder);
