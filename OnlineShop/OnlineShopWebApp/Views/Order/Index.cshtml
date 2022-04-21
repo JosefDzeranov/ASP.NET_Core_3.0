@@ -1,0 +1,217 @@
+﻿@model OnlineShopWebApp.Models.Buyer;
+@{
+    ViewData["Title"] = "Оформление заказа";
+}
+
+
+<div class="text-center">
+    <h1 class="display-5 Title_sile">Оформление заказа</h1>
+    <p></p>
+</div>
+<p>
+    <a class="btn btn-outline-dark text-nowrap" data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
+        Заполнить данные о заказчике
+    </a>
+</p>
+<div class="collapse" id="collapseExample">
+    <div class="card card-body">
+        Пожалуйста, заполните следующие данные:
+        <p><font color="red">*</font> - обязательно к заполнению</p>
+        <div class="row">
+            <div class="text-center col-3 ">Фамилия<font color="red">*</font>:</div>
+            <div class="col-9">
+                <form>
+                    <div class="form-group">
+                        <input type="email" class="form-control" id="exampleFormControlInput2" placeholder="Фамилия">
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-3  text-center">Имя<font color="red">*</font>:</div>
+            <div class="col-9">
+                <form>
+                    <div class="form-group">
+                        <input type="email" class="form-control" id="exampleFormControlInput3" placeholder="Имя">
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-3 text-center">Отчество<font color="red">*</font>:</div>
+            <div class="col-9">
+                <form>
+                    <div class="form-group">
+                        <input type="email" class="form-control" id="exampleFormControlInput4" placeholder="Отчество">
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-3  text-center">Контактный телефон<font color="red">*</font>:</div>
+            <div class="col-9">
+                <form>
+                    <div class="form-group">
+                        <input type="email" class="form-control" id="exampleFormControlInput5" placeholder="+70123456789">
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-3  text-center">Электронная почта<font color="red">*</font>:</div>
+            <div class="col-9">
+                <form>
+                    <div class="form-group">
+                        <input type="email" class="form-control" id="exampleFormControlInput5" placeholder="email@mail.com">
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-3 text-center">Комментарий:</div>
+            <div class="col-9">
+                <form>
+                    <div class="form-group">
+                        <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <button type="submit" class="btn btn-outline-dark col-3">Сохранить данные</button>
+    </div>
+</div>
+
+<h6>Список приобретаемых товаров:</h6>
+<h6>Пожалуйста, выберите дополнительные опции, если это необходимо</h6>
+<div class="accordion" id="accordionExample">
+    @foreach (var prod in Model.CartList)
+    {
+        for (int i = 1; i <= prod.NumDuplicates; i++)
+        {
+            <div class="card">
+                <div class="card-header" id="headingOne">
+                    <h2 class="mb-0">
+                        <button class="btn btn-link btn-block text-left collapsed" type="button" data-toggle="collapse" data-target=#id_@prod.Product.Name@i aria-expanded="false" aria-controls=id_@prod.Product.Name@i>
+                            @prod.Product.Name - @prod.Product.Description ( тип @i )
+                        </button>
+                    </h2>
+                </div>
+
+                <div id=id_@prod.Product.Name@i class="collapse" aria-labelledby="heading1" data-parent="#accordionExample">
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-3">
+                                <img class="card-img-top" src="/image/@prod.Product.Images[0]">
+                            </div>
+                            <div class="col">
+                                <div class="card-body">
+                                    <h6>@prod.Product.Name - @prod.Product.Description ( тип @i )</h6>
+                                    <h6>Общая площадь: @prod.Product.Square м.кв.</h6>
+                                    <h6>Габариты: @prod.Product.Length х @prod.Product.Width м</h6>
+                                    <h6>Комплектация<font color="red">*</font>:</h6>
+                                    <hr/>
+                                    <div class="row small">
+                                        <div class="col-9">
+                                            Архитектурный и конструктивный разделы:
+                                        </div>
+                                        <div class="col-3">
+                                            @prod.Product.Cost руб
+                                        </div>
+                                    </div>
+                                    <div class="row small">
+                                        <div class="col-9">
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
+                                                <label class="form-check-label" for="defaultCheck1">
+                                                    Паспорт проекта
+                                                </label>
+                                            </div>
+                                        </div>
+                                        <div class="col-3">
+                                            5000.0 руб
+                                        </div>
+                                    </div>
+                                    <div class="row small">
+                                        <div class="col-9">
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
+                                                <label class="form-check-label" for="defaultCheck1">
+                                                    Копия проекта
+                                                </label>
+                                            </div>
+                                        </div>
+                                        <div class="col-3">
+                                            2000.0 руб
+                                        </div>
+                                    </div>
+                                    <div class="row small">
+                                        <div class="col-9">
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
+                                                <label class="form-check-label" for="defaultCheck1">
+                                                    Посадка дома и других строений на участок
+                                                </label>
+                                            </div>
+                                        </div>
+                                        <div class="col-3">
+                                            3000.0 руб
+                                        </div>
+                                    </div>
+                                    <div class="row small">
+                                        <div class="col-9">
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
+                                                <label class="form-check-label" for="defaultCheck1">
+                                                    Электронная копия документа (PDF)
+                                                </label>
+                                            </div>
+                                        </div>
+                                        <div class="col-3">
+                                            7000.0 руб
+                                        </div>
+                                    </div>
+                                    <div class="row small">
+                                        <div class="col-9">
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
+                                                <label class="form-check-label" for="defaultCheck1">
+                                                    Цветные фасады:
+                                                </label>
+                                            </div>
+                                        </div>
+                                        <div class="col-3">
+                                            500.0 руб
+                                        </div>
+                                    </div>
+                                    <div class="row small">
+                                        <div class="col-9">
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
+                                                <label class="form-check-label" for="defaultCheck1">
+                                                    Инженерные сети:
+                                                </label>
+                                            </div>
+                                        </div>
+                                        <div class="col-3">
+                                            8000.0 руб
+                                        </div>
+                                    </div>
+                                    <hr/>
+                                    <div class="row">
+                                        <div class="col-9"><h6>Полная стоимость проекта:</h6></div>
+                                        <div class="col-3"><h6>@prod.Product.Cost руб</h6></div>
+                                    </div>
+                                    <h6 class="small"><font color="red">*</font> Паспорт проекта и Дополнительный комплект чертежей без лицензии (копия для строителей) отдельно от основного комплекта не продаются.</h6>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+    }
+</div>
+
+<a class="btn btn-outline-dark text-nowrap col-3 mx-0 my-3" asp-area="" asp-controller="Order" asp-action="ReportTransaction" role="button">Отправить заявку</a>
+
+

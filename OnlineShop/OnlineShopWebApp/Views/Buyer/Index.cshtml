@@ -1,20 +1,25 @@
 ﻿@model OnlineShopWebApp.Models.Buyer;
 @{
-    ViewData["Title"] = "Home Page";
+    ViewData["Title"] = "Личный кабинет";
 }
 
-<div class="container text-center">
-    <div class="row">
-        <h5 class="display-5 Title_sile">Личный кабинет</h5>
-    </div>
+<div class="container">
+    <h3 class="display-5 Title_sile">Личный кабинет</h3>
 </div>
+
+<p></p>
+
 <div class="container">
     <div class="row">
-        <img src="image/all-foto.jpg" class="col-2 card-img-top" />
+        <div class="col-2">
+            <img class="card-img-top img-fluid" src="/image/all-foto.jpg" />
+        </div>
+
         <div class="col">
             <p>Id: @Model.Id</p>
-            <p>Имя: @Model.FistName</p>
             <p>Фамилия: @Model.Surname</p>
+            <p>Имя: @Model.Fistname</p>
+            <p>Отчество: @Model.Secondname</p>
             <p>Возраст: @Model.Age</p>
             <p>Email: @Model.Email</p>
         </div>

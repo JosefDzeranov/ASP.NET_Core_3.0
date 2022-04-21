@@ -1,6 +1,6 @@
 ﻿@model OnlineShopWebApp.Models.Buyer;
 @{
-    ViewData["Title"] = "Cart";
+    ViewData["Title"] = "Корзина покупок";
 }
 
 
@@ -19,7 +19,7 @@
                     <th scope="col" class="align-top">Габариты (м)</th>
                     <th scope="col" class="align-top">Площадь (м2)</th>
                     <th scope="col" class="align-top">Стоймость (руб)</th>
-                    <th scope="col" class="align-top">Количество</th>
+                    <th scope="col" class="align-top">Количество (типов)</th>
                     <th scope="col" class="align-top">Общая стоймость (руб)</th>
                     <th scope="col"> </th>
                 </tr>
@@ -85,7 +85,7 @@
 
         </table>
     </div>
-    <a class="btn btn-outline-dark text-nowrap btn-sm mx-1 my-1" href="#" role="button">Оформить заказ</a>
+    <a class="btn btn-outline-dark text-nowrap btn-sm mx-1 my-1" asp-area="" asp-controller="Order" asp-action="Index"  role="button">Оформить заказ</a>
     <a class="btn btn-outline-dark text-nowrap btn-sm mx-1 my-1" asp-area="" asp-controller="Home" asp-action="Index" role="button">Продолжить покупки</a>
     <a class="btn btn-outline-dark text-nowrap btn-sm mx-1 my-1" asp-area="" asp-controller="Cart" asp-action="CleenCart" role="button">Очистить корзину</a>
 </div>

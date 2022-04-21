@@ -1,43 +1,29 @@
 [
   {
     "ComparisonList": [],
-    "CartList": [
+    "CartList": [],
+    "OrdersList": [
       {
         "Product": {
-          "Id": 1,
-          "Name": "63-42",
+          "Id": 2,
+          "Name": "57-07",
           "Cost": 32000.0,
-          "Square": 109.0,
-          "Width": 8.36,
-          "Length": 14.06,
+          "Square": 116.0,
+          "Width": 8.45,
+          "Length": 10.85,
           "Description": "Проект двухэтажного дома из газабетона с терассой",
           "Images": [
-            "1-1.jpg"
+            "2-1.jpg"
           ]
         },
-        "NumDuplicates": 2
-      },
-      {
-        "Product": {
-          "Id": 3,
-          "Name": "57-00",
-          "Cost": 36000.0,
-          "Square": 193.0,
-          "Width": 11.75,
-          "Length": 12.5,
-          "Description": "Проект двухэтажного дома из газабетона с терассой",
-          "Images": [
-            "3-1.jpg"
-          ]
-        },
-        "NumDuplicates": 3
+        "NumDuplicates": 1
       }
     ],
-    "OrdersList": [],
     "Id": 0,
-    "FistName": "Александр",
+    "Fistname": "Александр",
+    "Secondname": "Николаевич",
     "Surname": "Молостов",
     "Age": 30,
-    "Email": "email"
+    "Email": "email@mail.com"
   }
 ]
