@@ -1,34 +1,44 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using OnlineShopWebApp;
+using OnlineShopWebApp.Interfase;
+using OnlineShopWebApp.Models;
 
 namespace OnlineDesignBureauWebApp.Controllers
 {
-
     public class CartController : Controller
     {
-        private readonly PersonCatalog personCatalog;
-        public CartController(PersonCatalog personCatalog)
+        private readonly IBuyerStorage buyerStorage;
+        private readonly IProductStorage productStorage;
+        public CartController(IBuyerStorage buyerStorage, IProductStorage productStorage)
         {
-            this.personCatalog = personCatalog;
+            this.buyerStorage = buyerStorage;
+            this.productStorage = productStorage;
         }
-        public IActionResult Index(int personId)
+        public IActionResult Index(int buyerId)
         {
-            return View(personCatalog.FindPerson(personId));
+            return View(buyerStorage.FindBuyer(buyerId));
         }
-
-        public IActionResult AddProductInCart(int productId, int personId)
+        public IActionResult AddProductInCart(int productId, int buyerId)
         {
-            personCatalog.AddProductInCart(productId, personId);
-            personCatalog.WriteToJson();
-            return RedirectToAction("Index",personId);
+            buyerStorage.AddProductInCart(productId, buyerId, productStorage);
+            return RedirectToAction("Index", buyerId);
         }
-        public IActionResult DeleteProductInCart(int productId, int personId)
+        public IActionResult DeleteProductInCart(int productId, int buyerId)
         {
-            personCatalog.DeleteProductInCart(productId, personId);
-            personCatalog.WriteToJson();
-            return RedirectToAction("Index", personId);
+            buyerStorage.DeleteProductInCart(productId, buyerId);
+            return RedirectToAction("Index", buyerId);
         }
-
-
+        public IActionResult ReduceDuplicateProductCart(int productId, int buyerId)
+        {
+            buyerStorage.ReduceDuplicateProductCart(productId, buyerId);
+            return RedirectToAction("Index", buyerId);
+        }
+        public IActionResult CleenCart(int buyerId)
+        {
+            buyerStorage.CleenCart(buyerId);
+            return RedirectToAction("Index", buyerId);
+        }
     }
+
+
 }

@@ -4,6 +4,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using OnlineShopWebApp;
+using OnlineShopWebApp.Interfase;
 
 namespace OnlineDesignBureauWebApp
 {
@@ -18,8 +19,8 @@ namespace OnlineDesignBureauWebApp
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllersWithViews();
-            services.AddSingleton<PersonCatalog>();
-            services.AddSingleton<ProductCatalog>();
+            services.AddSingleton<IBuyerStorage, JsonBuyerStorage>();
+            services.AddSingleton<IProductStorage, JsonProductStorage>();
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)

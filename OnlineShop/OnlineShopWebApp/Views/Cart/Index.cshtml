@@ -1,6 +1,6 @@
-﻿@model OnlineShopWebApp.Models.Person;
+﻿@model OnlineShopWebApp.Models.Buyer;
 @{
-    ViewData["Title"] = "AddProductInCart";
+    ViewData["Title"] = "Корзина покупок";
 }
 
 
@@ -12,39 +12,64 @@
     <div class="table-responsive">
         <table class="table table-bordered caption-top">
             <thead>
-            <tr>
-                <th scope="col">#</th>
-                <th scope="col">Название проекта</th>
-                <th scope="col">Изображение</th>
-                <th scope="col">Габариты (м)</th>
-                <th scope="col">Площадь (м2)</th>
-                <th scope="col">Стоймость (руб)</th>
-                <th scope="col"> </th>
-            </tr>
+                <tr>
+                    <th scope="col" class="align-top">#</th>
+                    <th scope="col" class="align-top">Название проекта</th>
+                    <th scope="col" class="align-top">Изображение</th>
+                    <th scope="col" class="align-top">Габариты (м)</th>
+                    <th scope="col" class="align-top">Площадь (м2)</th>
+                    <th scope="col" class="align-top">Стоймость (руб)</th>
+                    <th scope="col" class="align-top">Количество (типов)</th>
+                    <th scope="col" class="align-top">Общая стоймость (руб)</th>
+                    <th scope="col"> </th>
+                </tr>
             </thead>
             @if (Model.CartList.Count != 0)
             {
                 <tbody>
 
-                @for (int i = 0; i < Model.CartList.Count; i++)
-                {
-                    <tr>
-                        <th scope="row">@(i+1)</th>
-                        <td>№ @Model.CartList[i].Name @Model.CartList[i].Description</td>
-                        <td> <img class="card-img-top " src="/image/@Model.CartList[i].Images[0]" width="200"/></td>
-                        <td>@Model.CartList[i].Length х @Model.CartList[i].Width</td>
-                        <td>@Model.CartList[i].Square</td>
-                        <td>@Model.CartList[i].Cost</td>
-                        <td>
-                            <a class="btn btn-outline-dark text-nowrap btn-sm mx-1 my-1" 
-                               asp-area="" asp-controller="Cart" 
-                               asp-action="DeleteProductInCart" 
-                               asp-route-productId="@i" 
-                               role="button">Удалить из списка</a>
-                        </td>
-                    </tr>
-                }
+                    @for (int i = 0; i < Model.CartList.Count; i++)
+                    {
+                        <tr>
+                            <th scope="row">@(i+1)</th>
+                            <td>№ @Model.CartList[i].Product.Name @Model.CartList[i].Product.Description</td>
+                            <td> <img class="card-img-top " src="/image/@Model.CartList[i].Product.Images[0]" width="200" /></td>
+                            <td>@Model.CartList[i].Product.Length х @Model.CartList[i].Product.Width</td>
+                            <td>@Model.CartList[i].Product.Square</td>
+                            <td>@Model.CartList[i].Product.Cost</td>
+                            <td>@Model.CartList[i].NumDuplicates</td>
+                            <td>@(Model.CartList[i].NumDuplicates*Model.CartList[i].Product.Cost)</td>
+                            <td>
+                                <div class="d-grid gap-2">
+                                    <a class="btn btn-outline-dark text-nowrap mx-1 my-1" 
+                                       asp-area=""
+                                       asp-controller="Cart"
+                                       asp-action="AddProductInCart"
+                                       asp-route-productId="@Model.CartList[i].Product.Id"
+                                       role="button">
+                                        +
+                                    </a>
+                                    <a class="btn btn-outline-dark text-nowrap mx-auto my-1"
+                                       asp-area="" asp-controller="Cart"
+                                       asp-action="ReduceDuplicateProductCart"
+                                       asp-route-productId="@Model.CartList[i].Product.Id"
+                                       role="button">
+                                        -
+                                    </a>
+                                    <a class="btn btn-outline-dark text-nowrap mx-1 my-1 border-1"
+                                       asp-area="" asp-controller="Cart"
+                                       asp-action="DeleteProductInCart"
+                                       asp-route-productId="@Model.CartList[i].Product.Id"
+                                       role="button">
+                                        Удалить <br/> проект
+                                    </a>
+                                </div>
+                            </td>
+                        </tr>
+                    }
                 <th scope="row"></th>
+                <td></td>
+                <td></td>
                 <td></td>
                 <td></td>
                 <td></td>
@@ -55,11 +80,12 @@
             }
             else
             {
-                <td colspan="7">Проекты отсутствуют</td>
+                <td colspan="9">Проекты отсутствуют</td>
             }
 
         </table>
     </div>
-    <a class="btn btn-outline-dark text-nowrap btn-sm mx-1 my-1" href="#" role="button">Оформить заказ</a>
+    <a class="btn btn-outline-dark text-nowrap btn-sm mx-1 my-1" asp-area="" asp-controller="Order" asp-action="Index"  role="button">Оформить заказ</a>
     <a class="btn btn-outline-dark text-nowrap btn-sm mx-1 my-1" asp-area="" asp-controller="Home" asp-action="Index" role="button">Продолжить покупки</a>
+    <a class="btn btn-outline-dark text-nowrap btn-sm mx-1 my-1" asp-area="" asp-controller="Cart" asp-action="CleenCart" role="button">Очистить корзину</a>
 </div>
