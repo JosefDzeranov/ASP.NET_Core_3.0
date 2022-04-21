@@ -4,37 +4,45 @@
 }
 
 
+<div class="row">
+    <div class="col-3">
+                <div class="list-group">
+                    <a href="#" class="list-group-item list-group-item-action" >Заказы</a>
+                    <a href="#" class="list-group-item list-group-item-action" >Пользователи</a>
+                    <a href="#" class="list-group-item list-group-item-action" >Роли</a>
+                    <a href="#" class="list-group-item list-group-item-action" >Продукты</a>
+                </div>
+    </div>
+    <div class="col-9">
+        <div class="card">
+            <div class="card-body">
+                <h3>Список заказов</h3>
+                <div class="row">
+                    <table class="table">
+                        <tr>
+                            <th>Id</th>
+                            <th>ФИО</th>
+                            <th>Дата</th>
+                            <th>Сумма</th>
+                        </tr>
+                        @foreach (var order in Model)
+                        {
+                            <tr>
+                                <td>@order.Id</td>
+                                <td>@order.FirstName @order.LastName</td>
+                                <td>@order.Created</td>
+                                <td>@order.TotalCost</td>
+                            </tr>
+                        }
+                    </table>
+                </div>
+            </div>
+        </div>
 
-
-
-
-
-@if (Model != null)
-{
-    <div class="row">
-
-        <table class="table">
-
-            <tr>
-                <th>Id</th>
-                <th>ФИО</th>
-                <th>Дата</th>
-                <th>Сумма</th>
-
-            </tr>
-
-            @foreach (var order in Model)
-            {
-                <tr>
-                    <td>@order.Id</td>
-                    <td>@order.FirstName @order.LastName</td>
-                    <td>@order.Created</td>
-                    <td>@order.TotalCost</td>
-
-                </tr>
-            }
-
-        </table>
 
     </div>
-}
+</div>
+
+
+
+
