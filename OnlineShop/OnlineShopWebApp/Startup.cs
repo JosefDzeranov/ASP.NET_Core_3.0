@@ -28,6 +28,7 @@ namespace OnlineShopWebApp
             services.AddSingleton <IProductDataSource, InMemoryProductDataSource>();
             services.AddSingleton<ICustomerProfile, InMemoryCustomerProfile>();
             services.AddSingleton<IOrdersRepository, InMemoryOrdersRepository>();
+        
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
