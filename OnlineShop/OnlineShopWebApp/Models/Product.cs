@@ -9,17 +9,19 @@ namespace OnlineShopWebApp.Models
     {
         private static int constantCounter = 0;
         public int Id { get; }
-        public string Name { get; }
-        public decimal Cost { get; }
-        public string Description { get; }
+        public string Name { get; set; }
+        public decimal Cost { get; set; }
+        public string Description { get; set; }
+        public int Pages { get; set; }
 
 
-        public Product(string name, decimal cost, string description)
+        public Product(string name, decimal cost, string description, int pages)
         {
             Id = constantCounter;
             Name = name;
             Cost = cost;
             Description = description;
+            Pages = pages;
             constantCounter++;
         }
 

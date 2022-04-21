@@ -6,7 +6,7 @@ using OnlineShopWebApp.Models;
 
 namespace OnlineShopWebApp
 {
-    public class InMemoryCartsRepozitory : ICartsRepozitory
+    public class InMemoryCartsRepository : ICartsRepository
     {
         private List<Cart> carts = new List<Cart>();
 

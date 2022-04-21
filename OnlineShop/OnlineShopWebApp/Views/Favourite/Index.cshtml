@@ -1,0 +1,35 @@
+﻿@model List<Product>
+
+@if (Model == null || Model.Count == 0)
+{
+    <h3>Список избранного пуст</h3>
+}
+else
+{
+    <div class="row">
+        @foreach (var product in Model)
+        {
+            <div class="col-3 card shadow">
+
+                <img class="card-img-top" src="https://static4.depositphotos.com/1015530/309/i/600/depositphotos_3098299-stock-photo-single-green-book.jpg" />
+
+                <div class="card-body">
+                    <a style="color:grey" href="/product/index/@product.Id">
+                        <h5>@product.Name</h5>
+                    </a>
+
+                    <h4>@product.Cost</h4>
+
+                    <a class="btn btn-dark" href="/cart/add?productId=@product.Id" role="button">Добавить в корзину</a>
+                    <p></p>
+                    <a class="btn btn-success btn-sm" href="/compare/add?productId=@product.Id" role="button">Добавить в сравнение</a>
+                    <p></p>
+                    <a class="btn btn-danger" href="/favourite/delete?productId=@product.Id" role="button">Удалить из избранного</a>
+                </div>
+            </div>
+        }
+    </div>
+    <br />
+    <a class="btn btn-danger" href="/favourite/clear" role="button">Очистить избранное</a>
+
+}

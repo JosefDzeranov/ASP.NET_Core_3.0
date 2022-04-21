@@ -6,8 +6,8 @@ using System.Threading.Tasks;
 
 namespace OnlineShopWebApp
 {
-    public interface IOrdersRepozitory
+    public interface IOrdersRepository
     {
-        public void Add(Cart cart);
+        void Add(Cart cart, User user);
     }
 }

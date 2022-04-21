@@ -9,19 +9,16 @@ namespace OnlineShopWebApp.Controllers
 {
     public class ProductController : Controller
     {
-        private readonly IProductsRepozitory productsRepozitory;
+        private readonly IProductsRepository productsRepository;
 
-        public ProductController(IProductsRepozitory productsRepozitory)
+        public ProductController(IProductsRepository productsRepository)
         {
-            this.productsRepozitory = productsRepozitory;
+            this.productsRepository = productsRepository;
         }
         public IActionResult Index(int id)
         {
-            var product = productsRepozitory.TryGetById(id);
+            var product = productsRepository.TryGetById(id);
             return View(product);
-
-
-
         }
     }
 }

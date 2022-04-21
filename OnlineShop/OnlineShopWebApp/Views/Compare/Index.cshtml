@@ -1,9 +1,11 @@
 ﻿@model List<Product>
 
-@{
-    ViewData["Title"] = "Home Page";
+@if (Model == null || Model.Count == 0)
+{
+    <h3>Добавьте товары для сравнения</h3>
 }
-
+else
+{
 <div class="row">
     @foreach (var product in Model)
     {
@@ -15,15 +17,23 @@
                 <a style="color:grey" href="/product/index/@product.Id">
                     <h5>@product.Name</h5>
                 </a>
+                <table>
+                    <tr><td>Цена @product.Cost руб.</td></tr>
+                    <tr><td>Количество страниц @product.Pages</td></tr>
 
-                <h4>@product.Cost</h4>
+                </table>
 
                 <a class="btn btn-dark" href="/cart/add?productId=@product.Id" role="button">Добавить в корзину</a>
                 <p></p>
-                <a class="btn btn-success btn-sm" href="/compare/add?productId=@product.Id" role="button">Добавить в сравнение</a>
-                <p></p>
                 <a class="btn btn-success btn-sm" href="/favourite/add?productId=@product.Id" role="button">Добавить в избранное</a>
+                <p></p>
+                <a class="btn btn-danger" href="/compare/delete?productId=@product.Id" role="button">Удалить из сравнения</a>
+
             </div>
         </div>
-    }
-</div>
+    
+        }
+    </div>
+    <br />
+    <a class="btn btn-danger" href="/compare/clear" role="button">Очистить сравнение</a>
+}
