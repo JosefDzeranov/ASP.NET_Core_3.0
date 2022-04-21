@@ -3,7 +3,7 @@
     ViewData["Title"] = "Home Page";
 }
 
-<div class="row">
+@*<div class="row">
     @foreach (var product in Model)
     {
         <div class="col-3 card shadow">
@@ -16,9 +16,34 @@
             </div>
         </div>
     }
-</div>
+</div>*@
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
-</div>
+<section class="main-content">
+    <div class="container">
+        <div class="row">
+            @foreach (var product in Model)
+            {
+                <div class="col-lg-4 col-sm-6">
+                    <div class="product-card">
+                        <div class="product-thumb">
+                            <img class="card-img-top" src=@product.ImagesPath alt="Изображение товара" />
+                        </div>
+                        <div class="product-details">
+                            <a style="color:black" href="/product/index/@product.Id"><h4>@product.Name</h4></a>
+                            <p>@product.Description</p>
+                        </div>
+                        <div class="product-bottom-details d-flex">
+                            <div class="product-price">
+                                <small>₽@product.Price</small>
+                            </div>
+                            <div class="product-links">
+                                <a href="/cart/add?productId=@product.Id"><i class="fa-solid fa-circle-heart"></i></a>
+                                <a href="#"><i class="far fa-heart"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }    
+        </div>
+    </div>
+</section>
