@@ -16,11 +16,5 @@ namespace OnlineShopWebApp.Controllers
             var product = productReposititory.TryGetById(id);
             return View(product);
         }
-
-        public IActionResult Items()
-        {
-            var products = productReposititory.GetAll();
-            return View(products);
-        }
     }
 }
