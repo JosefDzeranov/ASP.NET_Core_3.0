@@ -1,15 +1,12 @@
 ﻿@model Customer
 <body>
-	<form method ="post">
-	<form action="/ordercomplete/index">
-		
+	<form method ="post" action="/ordercomplete/index">		
 		<fieldset>
 			<legend> 
 				Контакты пользователя 
 			</legend>
 			<label for="user-name">Введите имя</label>
 			<input id="user-name" type="text" placeholder="Например, Иван" autofocus><br>
-			
 			<label for="user-name">Введите фамилию</label>
 			<input id="user-name" type="text"  name="name" placeholder="Например, Иванов"><br>
 			<label for="#">Введите номер телефона</label>
@@ -19,17 +16,7 @@
 			<label for="adress">Введите адрес</label>
 			<input type="text" name="adress" /> <br>
 			<input type="submit" value="Отправить" a class ="btn btn-outline-success" role="button" href="/ordercomplete/index" asp-controller="OrderComplete" asp-action="Buy">
-		
-		
 		</fieldset>
 	</form>
-	</form>
 </body>
-
-					<tr>@Model?.Name</tr>>
-					<td>@Model?.Surname</td>
-					<td>@Model?.Phone</td>
-					<td>@Model?.Email</td>
-					<td>@Model?.Adress</td>
-								
 				
