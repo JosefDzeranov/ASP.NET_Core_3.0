@@ -18,7 +18,7 @@ namespace OnlineShopWebApp
 
         public Compare TryGetByUserId(string userId)
         {
-            return compareLists.FirstOrDefault(b => b.UserId == userId);
+            return compareLists.FirstOrDefault(item => item.UserId == userId);
         }
 
         public void AddProduct(string userId, Product product)
