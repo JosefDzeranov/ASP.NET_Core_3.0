@@ -1,26 +1,25 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using OnlineShopWebApp;
+using OnlineShopWebApp.Interfase;
 
 namespace OnlineDesignBureauWebApp.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly ProductCatalog productCatalog;
-        private readonly PersonCatalog personCatalog;
-
-
-        public HomeController(PersonCatalog personCatalog, ProductCatalog productCatalog)
+        private readonly IProductStorage productStorage;
+        private readonly IBuyerStorage buyerStorage;
+        public HomeController(IBuyerStorage buyerStorage, IProductStorage productStorage)
         {
-            this.personCatalog = personCatalog;
-            this.productCatalog = productCatalog;
+            this.buyerStorage = buyerStorage;
+            this.productStorage = productStorage;
         }
         public IActionResult Index()
         {
-            if (productCatalog.products.Count == 0)
-                productCatalog.ReadToJson();
-            if (personCatalog.Persons.Count == 0)
-                personCatalog.ReadToJson();
-            return View(productCatalog.products);
+            if (productStorage.Products.Count == 0)
+                productStorage.ReadToStorage();
+            if (buyerStorage.Buyers.Count == 0)
+                buyerStorage.ReadToStorage();
+            return View(productStorage.Products);
         }
     }
 }

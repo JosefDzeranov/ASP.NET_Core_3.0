@@ -1,22 +1,23 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using OnlineShopWebApp.Interfase;
 
 namespace OnlineDesignBureauWebApp.Controllers
 {
     public class ProductController : Controller
     {
-        private readonly ProductCatalog productCatalog;
-        public ProductController(ProductCatalog productCatalog)
+        private readonly IProductStorage productStorage;
+        public ProductController(IProductStorage productStorage)
         {
-            this.productCatalog = productCatalog;
+            this.productStorage = productStorage;
         }
         public IActionResult Index(int id)
         {
-            var product = productCatalog.products[id];
+            var product = productStorage.Products[id];
             return View (product);
         }
         public string Save(string name)
         {
-            return productCatalog.WriteToJson();
+            return productStorage.WriteToStorage();
         }
     }
 }

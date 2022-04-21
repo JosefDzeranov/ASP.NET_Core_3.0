@@ -4,26 +4,15 @@ using OnlineDesignBureauWebApp.Models;
 
 namespace OnlineShopWebApp.Models
 {
-    public class Person
+    public class Buyer:User
     {
-        public int Id { get; }
-        public string FistName { get; }
-        public string Surname { get; }
-        public int Age { get; }
-        public string Email { get; }
         public List<Product> ComparisonList { get; set; }
         public List<Product> CartList { get; set; }
         public List<Product> OrdersList { get; set; }
 
-        private string password;
-        public Person(int id, string fistName, string surname, int age, string email, string password_input)
+        
+        public Buyer(int id, string fistName, string surname, int age, string email, string password_input) : base(id, fistName, surname, age,  email,  password_input)
         {
-            Id = id;
-            FistName = fistName;
-            Surname = surname;
-            Age = age;
-            Email = email;
-            password = password_input;
             ComparisonList = new List<Product>();
             CartList = new List<Product>();
             OrdersList = new List<Product>();

@@ -1,0 +1,37 @@
+[
+  {
+    "ComparisonList": [],
+    "CartList": [
+      {
+        "Id": 3,
+        "Name": "57-00",
+        "Cost": 36000.0,
+        "Square": 193.0,
+        "Width": 11.75,
+        "Length": 12.5,
+        "Description": "Проект двухэтажного дома из газабетона с терассой",
+        "Images": [
+          "3-1.jpg"
+        ]
+      },
+      {
+        "Id": 2,
+        "Name": "57-07",
+        "Cost": 32000.0,
+        "Square": 116.0,
+        "Width": 8.45,
+        "Length": 10.85,
+        "Description": "Проект двухэтажного дома из газабетона с терассой",
+        "Images": [
+          "2-1.jpg"
+        ]
+      }
+    ],
+    "OrdersList": [],
+    "Id": 0,
+    "FistName": "Александр",
+    "Surname": "Молостов",
+    "Age": 30,
+    "Email": "email"
+  }
+]
