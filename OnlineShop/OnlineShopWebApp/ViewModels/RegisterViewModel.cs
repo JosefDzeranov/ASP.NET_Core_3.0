@@ -1,6 +1,6 @@
 ﻿namespace OnlineShopWebApp.ViewModels
 {
-    public class RegisterVM
+    public class RegisterViewModel
     {
 
         public string Name { get; set; }
