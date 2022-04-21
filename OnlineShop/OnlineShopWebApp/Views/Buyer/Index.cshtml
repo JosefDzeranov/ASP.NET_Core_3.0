@@ -1,6 +1,6 @@
 ﻿@model OnlineShopWebApp.Models.Buyer;
 @{
-    ViewData["Title"] = "Home Page";
+    ViewData["Title"] = "Личный кабинет";
 }
 
 <div class="container text-center">
@@ -13,8 +13,9 @@
         <img src="image/all-foto.jpg" class="col-2 card-img-top" />
         <div class="col">
             <p>Id: @Model.Id</p>
-            <p>Имя: @Model.FistName</p>
             <p>Фамилия: @Model.Surname</p>
+            <p>Имя: @Model.Fistname</p>
+            <p>Отчество: @Model.Secondname</p>
             <p>Возраст: @Model.Age</p>
             <p>Email: @Model.Email</p>
         </div>

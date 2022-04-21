@@ -15,19 +15,20 @@ namespace OnlineShopWebApp.Models
 
         public List<Product> ComparisonList { get; set; }
         public List<CartBuyer> CartList { get; set; }
-        public List<Product> OrdersList { get; set; }
+        public List<CartBuyer> OrdersList { get; set; }
 
         
-        public Buyer(int id, string fistName, string surname, int age, string email, string password_input) : base(id, fistName, surname, age,  email,  password_input)
+        public Buyer(int id, string fistname, string secondname, string surname, int age, string email, string password_input) 
+            : base(id, fistname, secondname, surname, age,  email,  password_input)
         {
             ComparisonList = new List<Product>();
             CartList = new List<CartBuyer>();
-            OrdersList = new List<Product>();
+            OrdersList = new List<CartBuyer>();
         }
 
         public override string ToString()
         {
-            return $"Id: {Id};\nИмя: {FistName};\nФамилия: {Surname};\nВозраст: {Age};\nEmail: {Email};";
+            return $"Id: {Id};\nИмя: {Fistname};\nФамилия: {Surname};\nВозраст: {Age};\nEmail: {Email};";
         }
         public decimal SumCost(List<CartBuyer> listProducts)
         {

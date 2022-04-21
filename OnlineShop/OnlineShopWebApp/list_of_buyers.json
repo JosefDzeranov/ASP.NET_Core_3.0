@@ -31,13 +31,29 @@
           ]
         },
         "NumDuplicates": 3
+      },
+      {
+        "Product": {
+          "Id": 4,
+          "Name": "40-11",
+          "Cost": 36000.0,
+          "Square": 251.0,
+          "Width": 13.76,
+          "Length": 14.8,
+          "Description": "Проект двухэтажного дома из кирпича с терассой",
+          "Images": [
+            "4-1.jpg"
+          ]
+        },
+        "NumDuplicates": 1
       }
     ],
     "OrdersList": [],
     "Id": 0,
-    "FistName": "Александр",
+    "Fistname": "Александр",
+    "Secondname": "Николаевич",
     "Surname": "Молостов",
     "Age": 30,
-    "Email": "email"
+    "Email": "email@mail.com"
   }
 ]
