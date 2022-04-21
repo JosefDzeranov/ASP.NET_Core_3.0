@@ -1,0 +1,25 @@
+﻿@model List<Order>
+<h3>Список заказов</h3>
+                <div class="row">
+                    <table class="table">
+                        <tr>
+                            <th>№</th>
+                            <th>Сумма</th>
+                            <th>Статус</th>
+                            <th>Польозватель(логин)</th>
+                            <th>Дата</th>
+                            <th>Время</th>
+                        </tr>
+                        @foreach (var order in Model)
+                        {
+                            <tr>
+                                <td>@order.Id</td>
+                                <td>@order.TotalCost ₽</td>
+                                <td>@order.Status</td>
+                                 <td>@order.Email</td>
+                                <td>@order.Created.ToString("d")</td>
+                                <td>@order.Created.ToString("t")</td>
+                            </tr>
+                        }
+                    </table>
+                </div>

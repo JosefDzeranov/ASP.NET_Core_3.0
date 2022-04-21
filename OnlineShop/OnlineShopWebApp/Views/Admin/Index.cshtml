@@ -1,4 +1,4 @@
-﻿@model List<Order>
+﻿@model int
 @{
     ViewData["Title"] = "Панель администратора";
 }
@@ -7,39 +7,30 @@
 <div class="row">
     <div class="col-3">
         <div class="list-group">
-            <a asp-controller="Admin" asp-action="Index" class="list-group-item list-group-item-action">Заказы</a>
-            <a href="#" class="list-group-item list-group-item-action">Пользователи</a>
-            <a href="#" class="list-group-item list-group-item-action">Роли</a>
-            <a href="#" class="list-group-item list-group-item-action">Продукты</a>
+            <a asp-controller="Admin" asp-action="Index" asp-route-id="0" class="list-group-item list-group-item-action">Заказы</a>
+            <a asp-controller="Admin" asp-action="Index" asp-route-id="1" class="list-group-item list-group-item-action">Пользователи</a>
+            <a asp-controller="Admin" asp-action="Index" asp-route-id="2" class="list-group-item list-group-item-action">Роли</a>
+            <a asp-controller="Admin" asp-action="Index" asp-route-id="3" class="list-group-item list-group-item-action">Продукты</a>
         </div>
     </div>
     <div class="col-9">
         <div class="card">
             <div class="card-body">
-                <h3>Список заказов</h3>
-                <div class="row">
-                    <table class="table">
-                        <tr>
-                            <th>№</th>
-                            <th>Сумма</th>
-                            <th>Статус</th>
-                            <th>Польозватель(логин)</th>
-                            <th>Дата</th>
-                            <th>Время</th>
-                        </tr>
-                        @foreach (var order in Model)
-                        {
-                            <tr>
-                                <td>@order.Id</td>
-                                <td>@order.TotalCost ₽</td>
-                                <td>@order.Status</td>
-                                 <td>@order.Email</td>
-                                <td>@order.Created.ToString("d")</td>
-                                <td>@order.Created.ToString("t")</td>
-                            </tr>
-                        }
-                    </table>
-                </div>
+
+               
+                @switch (Model)
+                {
+                    case 0:
+                        @await Component.InvokeAsync("Orders");
+                        break;
+                    case 3:
+                        @await Component.InvokeAsync("Products");
+                        break;
+                    default:
+                        @await Component.InvokeAsync("Orders");
+                        break;
+                }
+
             </div>
         </div>
 

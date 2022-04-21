@@ -12,11 +12,11 @@ namespace OnlineShopWebApp.Controllers
             this.orderRepository = orderRepository;
         }
 
-        public IActionResult Index()
+        public IActionResult Index(int id)
         {
-            var existingOrders = orderRepository.TryGetAll();
 
-            return View(existingOrders);
+            return View(id);
         }
+
     }
 }

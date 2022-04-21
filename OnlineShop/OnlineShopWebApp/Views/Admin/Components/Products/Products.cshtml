@@ -1,0 +1,20 @@
+﻿@model List<Product>
+
+    <h3>Список товаров</h3>
+                <div class="row">
+                    <table class="table">
+                        <tr>
+                            <th>№</th>
+                            <th>Название</th>
+                            <th>Цена</th>   
+                        </tr>
+                        @foreach (var product in Model)
+                        {
+                            <tr>
+                                <td>@product.Id</td>
+                                <td>@product.Name</td>
+                                <td>@product.Cost ₽</td>     
+                            </tr>
+                        }
+                    </table>
+                </div>
