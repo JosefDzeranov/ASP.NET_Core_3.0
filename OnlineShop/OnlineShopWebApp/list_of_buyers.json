@@ -2,7 +2,23 @@
   {
     "ComparisonList": [],
     "CartList": [],
-    "OrdersList": [],
+    "OrdersList": [
+      {
+        "Product": {
+          "Id": 2,
+          "Name": "57-07",
+          "Cost": 32000.0,
+          "Square": 116.0,
+          "Width": 8.45,
+          "Length": 10.85,
+          "Description": "Проект двухэтажного дома из газабетона с терассой",
+          "Images": [
+            "2-1.jpg"
+          ]
+        },
+        "NumDuplicates": 1
+      }
+    ],
     "Id": 0,
     "Fistname": "Александр",
     "Secondname": "Николаевич",

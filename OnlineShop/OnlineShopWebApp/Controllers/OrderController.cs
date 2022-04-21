@@ -5,10 +5,10 @@ using OnlineShopWebApp.Interfase;
 namespace OnlineDesignBureauWebApp.Controllers
 {
 
-    public class MakingPurchaseController : Controller
+    public class OrderController : Controller
     {
         private readonly IBuyerStorage buyerStorage;
-        public MakingPurchaseController(IBuyerStorage buyerStorage)
+        public OrderController(IBuyerStorage buyerStorage)
         {
             this.buyerStorage = buyerStorage;
         }
