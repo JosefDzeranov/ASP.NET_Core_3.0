@@ -22,12 +22,12 @@ namespace OnlineShopWebApp
             return orders.FirstOrDefault(order => order.UserId == userId);
         }
 
-        public void AddOrder(string userId, Basket basket)
+        public void AddOrder(string userId, Basket basket, Delivery delivery)
         {
             var order = TryGetByUserId(userId);
             if (order == null)
             {
-                var newOrder = new Order(userId, basket);
+                var newOrder = new Order(userId, basket, delivery);
                 orders.Add(newOrder);
             }
         }

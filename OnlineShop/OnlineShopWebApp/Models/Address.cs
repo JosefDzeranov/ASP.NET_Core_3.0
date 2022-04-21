@@ -8,5 +8,7 @@
         public string Street { get; set; }
         public string House { get; set; }
         public string Apartment { get; set; }
+
+        public Address() { } // Empty ctor for XML serializing.
     }
 }

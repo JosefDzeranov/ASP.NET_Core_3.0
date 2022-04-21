@@ -8,7 +8,7 @@
         public decimal Cost { get; set; }
         public string Description { get; set; }
 
-        public Product () { }
+        public Product () { } // Empty ctor for XML serializing.
         public Product(int id, string image, string name, decimal cost, string description)
         {
             Id = id;

@@ -15,22 +15,16 @@ namespace OnlineShopWebApp.Controllers
         }
         public IActionResult Index()
         {
-            var order = _orderStorage.TryGetByUserId(Constants.UserId);
-            return View(order);
-        }
-
-        public IActionResult Add()
-        {
-            var basket = _basketStorage.TryGetByUserId(Constants.UserId);           
-            _orderStorage.AddOrder(Constants.UserId, basket);
-            return RedirectToAction("Index");
+            var basket = _basketStorage.TryGetByUserId(Constants.UserId);
+            return View(basket);
         }
 
         [HttpPost]
-        public IActionResult Buy()
+        public IActionResult Buy(Delivery delivery)
         {
-           var order = _orderStorage.TryGetByUserId(Constants.UserId);
-           // order.Delivery = delivery;
+            var basket = _basketStorage.TryGetByUserId(Constants.UserId);
+            _orderStorage.AddOrder(Constants.UserId, basket, delivery);
+            var order = _orderStorage.TryGetByUserId(Constants.UserId);
             _orderStorage.SaveOrderToXmlFile(order);
             _basketStorage.ClearBasket(Constants.UserId);
             return View();

@@ -10,14 +10,14 @@ namespace OnlineShopWebApp.Models
         public Basket Basket { get; set; }
         public Delivery Delivery { get; set; }
 
-        public Order () { }
-        public Order(string userId, Basket basket)
+        public Order () { } // Empty ctor for XML serializing.
+        public Order(string userId, Basket basket, Delivery delivery)
         {
             Id = Guid.NewGuid();
             Date = DateTime.Now;
             UserId = userId;
             Basket = basket;
-            Delivery = new Delivery();
+            Delivery = delivery;
         }
     }
 }
