@@ -6,59 +6,59 @@ namespace OnlineShopWebApp
 {
     public class FavoritesStorage : IFavoritesStorage
     {
-        private List<Basket> favoritesBaskets = new List<Basket>();
+        private List<Favorites> favoritesLists = new List<Favorites>();
 
-        public List<Basket> FavoritesBaskets
+        public List<Favorites> FavoritesLists
         {
             get
             {
-                return favoritesBaskets;
+                return favoritesLists;
             }
         }
 
-        public Basket TryGetByUserId(string userId)
+        public Favorites TryGetByUserId(string userId)
         {
-            return favoritesBaskets.FirstOrDefault(b => b.UserId == userId);
+            return favoritesLists.FirstOrDefault(item => item.UserId == userId);
         }
 
         public void AddProduct(string userId, Product product)
         {
-            var favoritesBasket = TryGetByUserId(userId);
+            var favoritesList = TryGetByUserId(userId);
 
-            if (favoritesBasket == null)
+            if (favoritesList == null)
             {
-                var newCompareBasket = new Basket(userId);
-                newCompareBasket.Items.Add(new BasketItem(product));
-                favoritesBaskets.Add(newCompareBasket);
+                var newfavoritesList = new Favorites(userId);
+                newfavoritesList.Products.Add(product);
+                favoritesLists.Add(newfavoritesList);
             }
             else
             {
-                var basketItem = favoritesBasket.Items.FirstOrDefault(item => item.Product.Id == product.Id);
-                if (basketItem == null)
+                var productInList = favoritesList.Products.FirstOrDefault(item => item.Id == product.Id);
+                if (productInList == null)
                 {
-                    favoritesBasket.Items.Add(new BasketItem(product));
+                    favoritesList.Products.Add(product);
                 }
             }
         }
 
         public void RemoveProduct(string userId, Product product)
         {
-            var favoritesBasket = TryGetByUserId(userId);
+            var favoritesList = TryGetByUserId(userId);
 
-            if (favoritesBasket != null)
+            if (favoritesList != null)
             {
-                var basketItem = favoritesBasket.Items.FirstOrDefault(item => item.Product.Id == product.Id);
+                var productInList = favoritesList.Products.FirstOrDefault(item => item.Id == product.Id);
 
-                if (basketItem != null)
+                if (productInList != null)
                 {
-                    favoritesBasket.Items.Remove(basketItem);
+                    favoritesList.Products.Remove(productInList);
                 }
             }
         }
-        public void ClearBasket(string userId)
+        public void Clear(string userId)
         {
-            var favoritesBasket = TryGetByUserId(userId);
-            favoritesBasket.Items.Clear();
+            var favoritesList = TryGetByUserId(userId);
+            favoritesList.Products.Clear();
         }
     }
 }
