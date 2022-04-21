@@ -4,21 +4,6 @@
     "CartList": [
       {
         "Product": {
-          "Id": 1,
-          "Name": "63-42",
-          "Cost": 32000.0,
-          "Square": 109.0,
-          "Width": 8.36,
-          "Length": 14.06,
-          "Description": "Проект двухэтажного дома из газабетона с терассой",
-          "Images": [
-            "1-1.jpg"
-          ]
-        },
-        "NumDuplicates": 2
-      },
-      {
-        "Product": {
           "Id": 3,
           "Name": "57-00",
           "Cost": 36000.0,
@@ -28,21 +13,6 @@
           "Description": "Проект двухэтажного дома из газабетона с терассой",
           "Images": [
             "3-1.jpg"
-          ]
-        },
-        "NumDuplicates": 3
-      },
-      {
-        "Product": {
-          "Id": 4,
-          "Name": "40-11",
-          "Cost": 36000.0,
-          "Square": 251.0,
-          "Width": 13.76,
-          "Length": 14.8,
-          "Description": "Проект двухэтажного дома из кирпича с терассой",
-          "Images": [
-            "4-1.jpg"
           ]
         },
         "NumDuplicates": 1
