@@ -23,13 +23,30 @@ namespace OnlineShopWebApp.Controllers
         public IActionResult DeleteProduct(int id)
         {
             var product = productRepository.TryGetById(id);
-            if(product != null)
+            if (product != null)
             {
                 productRepository.Delete(product);
             }
-            return RedirectToAction("Index", "Admin",new { id = 3 });
+            return RedirectToAction("Index", "Admin", new { id = 3 });
+        }
+
+        public IActionResult EditProduct(int id)
+        {
+            var product = productRepository.TryGetById(id);
+
+            return View(product);
         }
 
 
+        public IActionResult AddProduct()
+        {
+            return View();
+        }
+        [HttpPost]
+        public IActionResult AddProduct(Product product)
+        {
+            productRepository.Add(product);
+            return RedirectToAction("Index", "Admin", new { id = 3 });
+        }
     }
 }

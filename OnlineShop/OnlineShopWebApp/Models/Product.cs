@@ -8,15 +8,11 @@
         public decimal Cost { get; set; }
         public string Description { get; set; }
         public string ImgPath { get; set; }
-        public Product(string name, decimal cost, string description, string imgPath)
+       
+        public Product()
         {
             this.Id = CurrentId;
-            this.Name = name;
-            this.Cost = cost;
-            this.Description = description;
-            this.ImgPath = imgPath;
-           CurrentId++;
+            CurrentId++;
         }
-        
     }
 }
