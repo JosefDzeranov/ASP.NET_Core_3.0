@@ -28,5 +28,9 @@ namespace OnlineShopWebApp.Services
             return products.FirstOrDefault(product => product.Id == id);
         }
 
+        public void Delete(Product product)
+        {
+            products.Remove(product);
+        }
     }
 }

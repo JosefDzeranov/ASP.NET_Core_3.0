@@ -6,14 +6,19 @@
                         <tr>
                             <th>№</th>
                             <th>Название</th>
-                            <th>Цена</th>   
+                            <th>Цена</th>
+                            <th></th>
                         </tr>
                         @foreach (var product in Model)
                         {
                             <tr>
                                 <td>@product.Id</td>
                                 <td>@product.Name</td>
-                                <td>@product.Cost ₽</td>     
+                                <td>@product.Cost ₽</td> 
+                                <td>
+                                    <button class="btn btn-primary">Изменить</button>
+                                    <a asp-controller="Admin" asp-action="DeleteProduct" asp-route-id="@product.Id" class="btn btn-danger">Удалить</a>
+                                </td>
                             </tr>
                         }
                     </table>
