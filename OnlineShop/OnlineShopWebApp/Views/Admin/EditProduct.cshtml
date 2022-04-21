@@ -13,6 +13,10 @@
                     <div class="mb-3">
                         <input type="text" class="form-control" name="Description" placeholder="Описание" value="@Model.Description"/>
                     </div>
+                     <div class="mb-3">
+                        <input type="text" class="form-control" name="ImgPath" placeholder="Картинка" value="/images/book.png"/>
+                    </div>
+                    <input type="hidden" class="form-control" name="ProductId" value="@Model.Id"/>
                     <div class="mb-3 text-center">
                         <button type="submit" class="btn btn-dark">Изменить</button>
                     </div>

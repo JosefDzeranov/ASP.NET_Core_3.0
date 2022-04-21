@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using OnlineShopWebApp.Models;
 using OnlineShopWebApp.Services;
+using OnlineShopWebApp.ViewModels;
 
 namespace OnlineShopWebApp.Controllers
 {
@@ -36,7 +37,22 @@ namespace OnlineShopWebApp.Controllers
 
             return View(product);
         }
+        [HttpPost]
+        public IActionResult EditProduct(ProductViewModel productViewModel)
+        {
 
+            var product = productRepository.TryGetById(productViewModel.ProductId);
+
+            product.Name = productViewModel.Name;
+            product.Cost = productViewModel.Cost;
+            product.Description = productViewModel.Description;
+            product.ImgPath = productViewModel.ImgPath;
+
+            productRepository.Update(product);
+
+
+            return RedirectToAction("Index", "Admin", new { id = 3 });
+        }
 
         public IActionResult AddProduct()
         {

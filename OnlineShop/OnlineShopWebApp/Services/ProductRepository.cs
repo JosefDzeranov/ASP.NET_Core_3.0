@@ -67,5 +67,12 @@ namespace OnlineShopWebApp.Services
         {
             products.Add(product);
         }
+
+        public void Update(Product product)
+        {
+            var oldProduct = TryGetById(product.Id);
+            products.Remove(oldProduct);
+            products.Add(product);
+        }
     }
 }
