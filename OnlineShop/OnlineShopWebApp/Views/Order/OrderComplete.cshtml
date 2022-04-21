@@ -1,0 +1,28 @@
+﻿@using OnlineShopWebApp.Models
+
+@model Order
+
+@if (Model == null)
+{
+    <div class="404">
+        <h3 align="center">Заказов нет</h3>
+        <img class="card-img-top" src="/images/no_order.jpg" />
+    </div>
+}
+else
+{
+    <div>
+        <h3 align="center">Ваш заказ оформлен</h3>
+        <h5>Номер заказа</h5>
+        <a href="/order/index/?orderNumber">@Model.OrderNumber</a>
+        <h5>Дата заказа</h5>
+        <a href="/order/index/?orderDateTime">@Model.OrderDateTime</a>
+        <h5>Стоимость заказа</h5>
+        <a href="/order/index/?costOrder">@Model.CostOrder</a>
+        <h5>Кол-во товаров в заказе</h5>
+        <a href="/order/index/?countItems">@Model.CountItems</a>
+        <div class="text-center">
+            <a class="btn btn-dark" href="/home/index" role="button">Продолжить покупки</a>
+        </div>
+    </div>
+}

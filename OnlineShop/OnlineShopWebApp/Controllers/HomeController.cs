@@ -6,7 +6,6 @@ namespace OnlineShopWebApp.Controllers
 {
     public class HomeController : Controller
     {
-        //private readonly ProductsStorage productsStorage;
         private readonly IProductsStorage productsStorage;
 
         public HomeController(IProductsStorage productsStorage)

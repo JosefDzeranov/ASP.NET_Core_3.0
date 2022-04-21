@@ -35,7 +35,6 @@ else
                             <td>@product.Cost</td>
                             <td>@product.Count</td>
                             <td><a href="/cart/RemoveCountProductCart/?productId=@product.Product.Id&cartid=@product.ItemId" type="button" class="btn btn-danger">-</a><a href="/cart/add/?productId=@product.Product.Id" type="button" class="btn btn-danger">+</a></td>
-                            @*<td><a href="#" type="button" class="btn btn-warning">+</a></td>*@
                         </tr>
                     }
                 </tbody>
@@ -48,13 +47,14 @@ else
                     <td><h3>@Model.Cost</h3></td>
                 </tr>
             </table>
+            <div class="text-right">
+                <a type="button" class="btn btn-outline-danger" href="/cart/RemoveCartUser/?userId=@Model .UserId" role="button">Очистить корзину</a>
+            </div>
             <div class="text-center">
-                <a type="button" class="btn btn-dark" href="/home/index" role="button">Продолжить покупки</a>
-                <a type="button" class="btn btn-dark" href="#" role="button">Оформить заказ</a>
+                <a class="btn btn-dark" href="/home/index" role="button">Продолжить покупки</a>
+                <a class="btn btn-dark" href="/order/OrderMaking" role="button">Оформить заказ</a>
             </div>
         </div>
     </div>
-    <div class="text-right">
-        <a type="button" class="btn btn-outline-danger" href="/cart/removeall" role="button">Очистить корзину</a>
-    </div>
+
 }

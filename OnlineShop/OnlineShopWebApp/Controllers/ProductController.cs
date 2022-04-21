@@ -8,7 +8,7 @@ namespace OnlineShopWebApp.Controllers
     {
         private readonly IProductsStorage productsStorage;
 
-        public ProductController (IProductsStorage productsStorage)
+        public ProductController(IProductsStorage productsStorage)
         {
             this.productsStorage = productsStorage;
         }

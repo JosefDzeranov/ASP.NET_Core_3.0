@@ -7,8 +7,7 @@ namespace OnlineShopWebApp.Models
 {
     public class CartsStorage : ICartsStorage
     {
-        private List<Cart> carts { get; set; } = new List<Cart>();
-        private List<CartItem> cartUser { get; set; } = new List<CartItem>();
+        private List<Cart> carts = new List<Cart>();
 
         public Cart TryGetByUserId(string userId)
         {
@@ -79,11 +78,11 @@ namespace OnlineShopWebApp.Models
                     existingCartItem.Count -= 1;
 
             }
-        } 
+        }
 
-        public void RemoveAll()
+        public void RemoveCartUser(string userId)
         {
-            carts.Clear();
+            carts.Remove(carts.FirstOrDefault(x => x.UserId == userId));
         }
     }
 }

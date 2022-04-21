@@ -6,9 +6,9 @@ namespace OnlineShopWebApp.Interface
     public interface IProductsStorage
     {
         List<Product> GetAll();
-        
+
         Product TryGetProduct(int id);
-        
+
         List<Product> DeserializeJsonProducts();
 
 

@@ -1,0 +1,41 @@
+﻿@using OnlineShopWebApp.Models
+
+@model Order
+
+<h2 align="center">Заказы</h2>
+@if (Model == null)
+{
+    <div class="404">
+        <h3 align="center">Заказов нет</h3>
+        <img class="card-img-top" src="/images/no_order.jpg" />
+    </div>
+}
+else
+{
+    <div class="row">
+        <div class="col">
+            <div>
+                <table class="table table-striped">
+                    <thead class="table-light" align="center">
+                        <tr>
+                            <th scope="col">Номер</th>
+                            <th scope="col">Дата</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var order in Model.Items)
+                        {
+                            <tr>
+                                <td><a href="/order/index/@order.Id">@Model.OrderNumber</a></td>
+                                <td><a href="/order/index/@order.Id">@Model.OrderDateTime</a></td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+            <div class="text-center">
+                <a type="button" class="btn btn-dark" href="/home/index" role="button">Продолжить покупки</a>
+            </div>
+        </div>
+    </div>
+}
