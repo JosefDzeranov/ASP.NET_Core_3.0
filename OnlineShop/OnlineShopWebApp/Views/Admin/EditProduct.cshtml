@@ -1,0 +1,28 @@
+﻿@model Product
+<div class="card shadow">
+    <div class="card-body">
+        <form method="post" asp-action="EditProduct">
+            <div class="row justify-content-center">
+                <div class="col-6">
+                    <div class="mb-3">
+                        <input type="text" class="form-control" name="Name" placeholder="Имя" value="@Model.Name" />
+                    </div>
+                    <div class="mb-3">
+                        <input type="text" class="form-control" name="Cost" placeholder="Цена" value="@Model.Cost"/>
+                    </div>
+                    <div class="mb-3">
+                        <input type="text" class="form-control" name="Description" placeholder="Описание" value="@Model.Description"/>
+                    </div>
+                    <div class="mb-3 text-center">
+                        <button type="submit" class="btn btn-dark">Изменить</button>
+                    </div>
+                    <div class="mb-3 text-center">
+                        <a class="card-link text-dark" asp-controller="Account" asp-action="Register">Регистрация нового пользователя</a>
+                    </div>
+                </div>
+
+            </div>
+
+        </form>
+    </div>
+</div>
