@@ -71,6 +71,11 @@ namespace OnlineShopWebApp
                 {
                     existingCart.Items.Remove(existingCartItem);
                 }
+                if( !existingCart.Items.Any())
+                {
+                    carts.Remove(existingCart);
+                }
+                
             }
         }
 
