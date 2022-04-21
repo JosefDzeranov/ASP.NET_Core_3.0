@@ -13,20 +13,20 @@ namespace OnlineDesignBureauWebApp
 
         public string WriteToStorage()
         {
-            string json = JsonConvert.SerializeObject(Products, Formatting.Indented);
+            var json = JsonConvert.SerializeObject(Products, Formatting.Indented);
             File.WriteAllText($"{nameSave}.json", json);
             return json;
         }
         public void ReadToStorage()
         {
             Products.Clear();
-            string json = File.ReadAllText($"{nameSave}.json");
+            var json = File.ReadAllText($"{nameSave}.json");
             Products = JsonConvert.DeserializeObject<List<Product>>(json);
         }
 
         public Product FindProduct(int productId, List<Product> products)
         {
-            Product product = products.Find(x => x.Id == productId);
+            var product = products.Find(x => x.Id == productId);
             return product;
         }
 

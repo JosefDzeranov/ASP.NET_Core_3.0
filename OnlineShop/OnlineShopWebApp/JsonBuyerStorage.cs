@@ -14,19 +14,19 @@ namespace OnlineShopWebApp
         string nameSave = "list_of_buyers";
         public void WriteToStorage()
         {
-            string json = JsonConvert.SerializeObject(Buyers, Formatting.Indented);
+            var json = JsonConvert.SerializeObject(Buyers, Formatting.Indented);
             File.WriteAllText($"{nameSave}.json", json);
         }
         public void ReadToStorage()
         {
             Buyers.Clear();
-            string json = File.ReadAllText($"{nameSave}.json");
+            var json = File.ReadAllText($"{nameSave}.json");
             Buyers = JsonConvert.DeserializeObject<List<Buyer>>(json);
         }
         public void AddProductInCart(int productId, int personId)
         {
-            List<Product> products = productStorage.Products;
-            Product product = productStorage.FindProduct(productId, products);
+            var products = productStorage.Products;
+            var product = productStorage.FindProduct(productId, products);
             FindBuyer(personId).CartList.Add(product);
             WriteToStorage();
         }
@@ -37,7 +37,7 @@ namespace OnlineShopWebApp
         }
         public Buyer FindBuyer(int personId)
         {
-            Buyer buyer = Buyers.Find(x => x.Id == personId);
+            var buyer = Buyers.Find(x => x.Id == personId);
             return buyer;
         }
     }
