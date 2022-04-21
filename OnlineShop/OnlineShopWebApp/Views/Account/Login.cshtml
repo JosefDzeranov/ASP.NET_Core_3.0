@@ -1,0 +1,33 @@
+﻿@{
+    ViewData["Title"] = "Вход";
+}
+<div class="card shadow">
+    <div class="card-body">
+        <form method="post" asp-action="Login">
+            <div class="row justify-content-center">
+                <div class="col-6">
+                    <div class="mb-3">
+                        <input type="text" class="form-control" name="Name" placeholder="логин" />
+                    </div>
+                    <div class="mb-3">
+                        <input type="password" class="form-control" name="Password" placeholder="пароль" />
+                    </div>
+                    <div class=" mb-3 form-check text-center">
+                        <input class="form-check-input" type="checkbox" value="true" name="RememberMe">
+                        <label class="form-check-label">
+                            Запомнить меня?
+                        </label>
+                    </div>
+                    <div class="mb-3 text-center">
+                        <button type="submit" class="btn btn-dark">Войти</button>
+                    </div>
+                    <div class="mb-3 text-center">
+                        <a class="card-link text-dark" asp-controller="Account" asp-action="Register">Регистрация нового пользователя</a>
+                    </div>
+                </div>
+
+            </div>
+
+        </form>
+    </div>
+</div>

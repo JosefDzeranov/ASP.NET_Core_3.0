@@ -33,7 +33,8 @@ namespace OnlineShopWebApp.Controllers
 
             var existingCart = cartRepository.TryGetByUserId(Const.UserId);
             order.Cart = existingCart;
-        
+            order.UserId = Const.UserId;
+            order.TotalCost = existingCart.TotalCost;
             orderRepository.Add(order);
             cartRepository.Clear(Const.UserId);
 
