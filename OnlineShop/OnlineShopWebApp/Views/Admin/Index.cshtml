@@ -1,0 +1,40 @@
+﻿@model List<Order>
+@{
+    ViewData["Title"] = "Панель администратора";
+}
+
+
+
+
+
+
+
+@if (Model != null)
+{
+    <div class="row">
+
+        <table class="table">
+
+            <tr>
+                <th>Id</th>
+                <th>ФИО</th>
+                <th>Дата</th>
+                <th>Сумма</th>
+
+            </tr>
+
+            @foreach (var order in Model)
+            {
+                <tr>
+                    <td>@order.Id</td>
+                    <td>@order.FirstName @order.LastName</td>
+                    <td>@order.Created</td>
+                    <td>@order.TotalCost</td>
+
+                </tr>
+            }
+
+        </table>
+
+    </div>
+}
