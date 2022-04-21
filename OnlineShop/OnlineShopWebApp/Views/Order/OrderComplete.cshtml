@@ -21,35 +21,8 @@ else
         <a href="/order/index/?costOrder">@Model.CostOrder</a>
         <h5>Кол-во товаров в заказе</h5>
         <a href="/order/index/?countItems">@Model.CountItems</a>
-@*      <h5>Состав заказа следующий</h5>
-        <div class="row">
-            <div class="col">
-                <div>
-                    <table class="table table-striped">
-                        <thead class="table-light" align="center">
-                            <tr>
-                                <th scope="col">Наименование</th>
-                                <th scope="col">Количество</th>
-                                <th scope="col">Стоимость (руб.)</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @foreach (var order in Model.Items)
-                            {
-                                <tr>
-                                    <td><a href="/order/index/@order.Product.Name">@order.Product.Name</a></td>
-                                    <td><a href="/order/index/@order.Cost">@order.Product.Cost</a></td>
-                                </tr>
-                            }
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-        </div>
-*@
         <div class="text-center">
             <a class="btn btn-dark" href="/home/index" role="button">Продолжить покупки</a>
-            @*<a align="center" class="btn btn-dark" href="/order/add/?userId=@Model.UserId" role="button">Оформить заказ</a>*@
         </div>
     </div>
 }

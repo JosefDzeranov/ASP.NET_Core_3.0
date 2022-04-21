@@ -2,12 +2,12 @@
 
 namespace OnlineShopWebApp.Models
 {
-    public class OrderItem 
+    public class OrderItem
     {
         public Guid Id { get; set; }
         public Product Product { get; set; }
         public int Count { get; set; }
-        public decimal Cost 
+        public decimal Cost
         {
             get;
         }

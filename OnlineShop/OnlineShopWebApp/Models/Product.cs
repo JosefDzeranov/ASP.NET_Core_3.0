@@ -17,10 +17,9 @@
             Cost = cost;
 
             Description = description;
-            
+
             ImagePath = imagePath;
         }
-
 
         public override string ToString()
         {

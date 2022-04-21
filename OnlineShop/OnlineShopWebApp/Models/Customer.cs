@@ -4,18 +4,14 @@ using System.Linq;
 
 namespace OnlineShopWebApp.Models
 {
-    public class Customer 
+    public class Customer
     {
-        public Guid Id { get; set; }
+        public Guid Id { get; }
 
         public string LastName { get; set; }
 
         public string Name { get; set; }
 
-        public string Phone { get; set; }
-
-        public string Mail { get; set; }
-
-        public string Address { get; set; }
+        public List<Contacts> Contacts { get; set; }
     }
 }

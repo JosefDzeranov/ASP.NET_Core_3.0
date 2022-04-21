@@ -15,7 +15,7 @@ namespace OnlineShopWebApp.Controllers
 
             this.productsStorage = productsStorage;
         }
-        
+
         public IActionResult Index()
         {
             var cart = cartsStorage.TryGetByUserId(Constants.UserId);

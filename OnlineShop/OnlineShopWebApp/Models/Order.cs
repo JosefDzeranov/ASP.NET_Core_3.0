@@ -16,23 +16,8 @@ namespace OnlineShopWebApp.Models
 
         public List<OrderItem> Items { get; set; }
 
-        /// <summary>
-        //// Общее кол-во наименований товара
-        /// </summary>
-        public int CountItems
-        {
-            get
-            {
-                return Items.Sum(x => x.Count);
-            }
-        }
+        public int CountItems { get { return Items.Sum(x => x.Count); } }
 
-        public decimal CostOrder
-        {
-            get
-            {
-                return Items.Sum(x => x.Cost);
-            }
-        }
+        public decimal CostOrder { get { return Items.Sum(x => x.Cost); } }
     }
 }

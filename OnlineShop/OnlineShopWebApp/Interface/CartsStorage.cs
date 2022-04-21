@@ -48,8 +48,8 @@ namespace OnlineShopWebApp.Models
                     existingCart.Items.Add(new CartItem
                     {
                         ItemId = Guid.NewGuid(),
-                        Count= 1,
-                        Product= product
+                        Count = 1,
+                        Product = product
                     });
                 }
             }
@@ -83,7 +83,6 @@ namespace OnlineShopWebApp.Models
         public void RemoveCartUser(string userId)
         {
             carts.Remove(carts.FirstOrDefault(x => x.UserId == userId));
-            //cart.Clear();
         }
     }
 }

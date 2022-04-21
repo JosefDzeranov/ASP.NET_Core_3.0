@@ -41,7 +41,7 @@ namespace OnlineShopWebApp.Models
             return productsJson;
         }
 
-        public Product TryGetProduct (int id)
+        public Product TryGetProduct(int id)
         {
             List<Product> productsJson;
 
@@ -49,9 +49,9 @@ namespace OnlineShopWebApp.Models
             {
                 productsJson = DeserializeJsonProducts();
             }
-            catch (Exception) 
-            { 
-                return null; 
+            catch (Exception)
+            {
+                return null;
             }
 
             return productsJson.FirstOrDefault(x => x.Id == id);

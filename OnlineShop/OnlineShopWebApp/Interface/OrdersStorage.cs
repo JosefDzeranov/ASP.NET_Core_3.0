@@ -42,10 +42,10 @@ namespace OnlineShopWebApp.Models
 
             orders.Add(newOrder);
 
-            RemoveAll();
+            RemoveCartUser();
         }
 
-        public void RemoveAll()
+        public void RemoveCartUser()
         {
             carts.Clear();
         }
