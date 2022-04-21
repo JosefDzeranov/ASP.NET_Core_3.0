@@ -19,8 +19,7 @@ namespace OnlineDesignBureauWebApp.Controllers
         public IActionResult ReportTransaction(int buyerId)
         {
             buyerStorage.FindBuyer(buyerId).OrdersList.AddRange(buyerStorage.FindBuyer(buyerId).CartList);
-            buyerStorage.FindBuyer(buyerId).CartList.Clear();
-            buyerStorage.WriteToStorage();
+            buyerStorage.CleenCart(buyerId);
             return View();
         }
     }
