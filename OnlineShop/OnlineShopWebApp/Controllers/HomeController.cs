@@ -8,9 +8,13 @@ namespace OnlineShopWebApp.Controllers
     {
         private readonly IProductsStorage productsStorage;
 
-        public HomeController(IProductsStorage productsStorage)
+        private readonly ICartsStorage cartsStorage;
+
+        public HomeController(IProductsStorage productsStorage, ICartsStorage cartsStorage)
         {
             this.productsStorage = productsStorage;
+
+            this.cartsStorage = cartsStorage;
         }
 
         public IActionResult Index()
