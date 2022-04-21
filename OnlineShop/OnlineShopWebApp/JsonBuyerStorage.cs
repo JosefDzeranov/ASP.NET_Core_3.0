@@ -14,26 +14,26 @@ namespace OnlineShopWebApp
         string nameSave = "list_of_buyers";
         public void WriteToStorage()
         {
-            string json = JsonConvert.SerializeObject(Buyers, Formatting.Indented);
+            var json = JsonConvert.SerializeObject(Buyers, Formatting.Indented);
             File.WriteAllText($"{nameSave}.json", json);
         }
         public void ReadToStorage()
         {
             Buyers.Clear();
-            string json = File.ReadAllText($"{nameSave}.json");
+            var json = File.ReadAllText($"{nameSave}.json");
             Buyers = JsonConvert.DeserializeObject<List<Buyer>>(json);
         }
         public void AddProductInCart(int productId, int buyerId, IProductStorage productStorage)
         {
-            List<Product> products = productStorage.Products;
-            Product product = productStorage.FindProduct(productId, products);
-            Buyer buyer = FindBuyer(buyerId);
+            var products = productStorage.Products;
+            var product = productStorage.FindProduct(productId, products);
+            var buyer = FindBuyer(buyerId);
             buyer.CartList=buyer.SumDuplicates(product);
             WriteToStorage();
         }
         public void DeleteProductInCart(int productId, int buyerId)
         {
-            List<Buyer.CartBuyer> cart = FindBuyer(buyerId).CartList;
+            var cart = FindBuyer(buyerId).CartList;
             for (int i = 0; i < cart.Count; i++)
             {
                 cart.RemoveAt(i);
@@ -43,7 +43,7 @@ namespace OnlineShopWebApp
 
         public void ReduceDuplicateProductCart(int productId, int buyerId)
         {
-            List<Buyer.CartBuyer> cart = FindBuyer(buyerId).CartList;
+            var cart = FindBuyer(buyerId).CartList;
             for (int i = 0; i < cart.Count; i++)
             {
                 if (productId == cart[i].Product.Id)
@@ -67,7 +67,7 @@ namespace OnlineShopWebApp
         }
         public Buyer FindBuyer(int personId)
         {
-            Buyer buyer = Buyers.Find(x => x.Id == personId);
+            var buyer = Buyers.Find(x => x.Id == personId);
             return buyer;
         }
     }
