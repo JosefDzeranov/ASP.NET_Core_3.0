@@ -7,7 +7,7 @@ namespace OnlineShopWebApp
 {
     public class ProductStorage: IProductStorage
     {  
-        public IEnumerable<Product> GetProductData()
+        public List<Product> GetProductData()
         {
             var xDoc = XDocument.Load("Data/products.xml");
             var products = xDoc.Element("products")
@@ -17,7 +17,7 @@ namespace OnlineShopWebApp
                                        p.Element("img").Value,
                                        p.Element("name").Value,
                                        decimal.Parse(p.Element("cost").Value),
-                                       p.Element("description").Value));
+                                       p.Element("description").Value)).ToList();
             return products;
         }
 

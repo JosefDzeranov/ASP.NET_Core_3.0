@@ -4,6 +4,11 @@ namespace OnlineShopWebApp.Controllers
 {
     public class AdminController : Controller
     {
+        private readonly IProductStorage _productStorage;
+        public AdminController(IProductStorage productStorage)
+        {
+            _productStorage = productStorage;
+        }
         public IActionResult Index()
         {
             return View();
@@ -26,7 +31,8 @@ namespace OnlineShopWebApp.Controllers
 
         public IActionResult Products()
         {
-            return View();
+            var products = _productStorage.GetProductData();
+            return View(products);
         }
     }
 }

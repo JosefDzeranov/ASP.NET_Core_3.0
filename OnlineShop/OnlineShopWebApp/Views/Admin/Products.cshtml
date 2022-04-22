@@ -1,14 +1,52 @@
-﻿@{
+﻿@using OnlineShopWebApp
+@using OnlineShopWebApp.Models
+@using System.Collections.Generic;
+@model List<Product>
+
+@{
     ViewData["Title"] = "Products";
 }
 
 <div class="container">
     <div class="row">
-        <div class="col-4">
+        <div class="col-2">
             @await Html.PartialAsync("AdminMenuLeft")
         </div>
         <div class="col-8">
             <h2>Products</h2>
+            <table class="table border-left border-right border-top border-bottom mt-4">
+                <caption>Product list</caption>
+                <thead class="table-light">
+                    <tr>
+                        <th scope="col">№</th>
+                        <th scope="col">Name</th>
+                        <th scope="col">Cost</th>
+                        <th scope="col"></th>
+                    </tr>
+                </thead>
+                @foreach (var product in Model)
+                {
+                    <tbody class="border-top-0">
+                        <tr>
+                            <td>
+                                @(@Model.IndexOf(product) + 1)
+                            </td>
+                            <td>
+                                <a style="color: darkblue" href="/product/index/@product.Id">@product.Name</a>
+                            </td>
+                            <td>
+                                $@product.Cost
+                            </td>
+                            <td>
+                                <div class="btn-group ml-2" role="group" aria-label="Edit/Remove buttons">
+                                    <a class="btn btn-outline-dark btn-sm" role="button" href="/admin/edit/@product.Id">Edit</a>
+                                    <a class="btn btn-outline-dark btn-sm" role="button" href="/admin/remove/@product.Id">Remove</a>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                }
+            </table>
         </div>
     </div>
 </div>

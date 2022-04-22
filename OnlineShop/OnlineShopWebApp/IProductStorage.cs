@@ -5,7 +5,7 @@ namespace OnlineShopWebApp
 {
     public interface IProductStorage
     {
-        IEnumerable<Product> GetProductData();
+        List<Product> GetProductData();
         Product TryGetProduct(int id);
 
     }
