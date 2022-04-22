@@ -10,14 +10,10 @@ namespace OnlineShopWebApp.Models
         {
             public Product Product { get; set; }
             public int NumDuplicates { get; set; }
-
         }
-
         public List<Product> ComparisonList { get; set; }
         public List<CartBuyer> CartList { get; set; }
         public List<CartBuyer> OrdersList { get; set; }
-
-        
         public Buyer(int id, string fistname, string secondname, string surname, int age, string email, string password_input) 
             : base(id, fistname, secondname, surname, age,  email,  password_input)
         {
@@ -25,7 +21,6 @@ namespace OnlineShopWebApp.Models
             CartList = new List<CartBuyer>();
             OrdersList = new List<CartBuyer>();
         }
-
         public override string ToString()
         {
             return $"Id: {Id};\nИмя: {Fistname};\nФамилия: {Surname};\nВозраст: {Age};\nEmail: {Email};";
@@ -57,6 +52,5 @@ namespace OnlineShopWebApp.Models
             }
             return CartList;
         }
-
     }
 }
