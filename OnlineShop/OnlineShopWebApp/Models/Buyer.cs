@@ -9,6 +9,7 @@ namespace OnlineShopWebApp.Models
         public class CartBuyer
         {
             public Product Product { get; set; }
+            //public 
             public int NumDuplicates { get; set; }
         }
         public List<Product> ComparisonList { get; set; }

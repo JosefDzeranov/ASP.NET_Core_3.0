@@ -12,6 +12,7 @@ namespace OnlineDesignBureauWebApp.Controllers
         {
             this.buyerStorage = buyerStorage;
         }
+        [HttpPost]
         public IActionResult Index(int buyerId)
         {
             return View(buyerStorage.FindBuyer(buyerId));
@@ -21,6 +22,11 @@ namespace OnlineDesignBureauWebApp.Controllers
             buyerStorage.FindBuyer(buyerId).OrdersList.AddRange(buyerStorage.FindBuyer(buyerId).CartList);
             buyerStorage.CleenCart(buyerId);
             return View();
+        }
+
+        public IActionResult Buy()
+        {
+            throw new System.NotImplementedException();
         }
     }
 }

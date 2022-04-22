@@ -3,12 +3,13 @@
     ViewData["Title"] = "Оформление заказа";
 }
 
-
+<form method="post">
 <div class="text-center">
     <h1 class="display-5 Title_sile">Оформление заказа</h1>
     <p></p>
 </div>
 <p>
+    <button class="btn btn-outline-light type="submit" asp-controller="Order" asp-action="Buy"></button>
     <a class="btn btn-outline-dark text-nowrap" data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
         Заполнить данные о заказчике
     </a>
@@ -211,6 +212,8 @@
         }
     }
 </div>
+</form>
+
 
 <a class="btn btn-outline-dark text-nowrap col-3 mx-0 my-3" asp-area="" asp-controller="Order" asp-action="ReportTransaction" role="button">Отправить заявку</a>
 

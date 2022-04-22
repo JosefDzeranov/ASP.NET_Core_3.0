@@ -15,12 +15,12 @@ namespace OnlineShopWebApp
         public void WriteToStorage()
         {
             var json = JsonConvert.SerializeObject(Buyers, Formatting.Indented);
-            File.WriteAllText($"{nameSave}.json", json);
+            File.WriteAllText($"Data/{nameSave}.json", json);
         }
         public void ReadToStorage()
         {
             Buyers.Clear();
-            var json = File.ReadAllText($"{nameSave}.json");
+            var json = File.ReadAllText($"Data/{nameSave}.json");
             Buyers = JsonConvert.DeserializeObject<List<Buyer>>(json);
         }
         public void AddProductInCart(int productId, int buyerId, IProductStorage productStorage)
