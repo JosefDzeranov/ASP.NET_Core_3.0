@@ -24,42 +24,42 @@
                     <th scope="col"> </th>
                 </tr>
             </thead>
-            @if (Model.CartList.Count != 0)
+            @if (Model.Cart.Count != 0)
             {
                 <tbody>
 
-                    @for (int i = 0; i < Model.CartList.Count; i++)
+                    @for (int i = 0; i < Model.Cart.Count; i++)
                     {
                         <tr>
                             <th scope="row">@(i+1)</th>
-                            <td>№ @Model.CartList[i].Product.Name @Model.CartList[i].Product.Description</td>
-                            <td> <img class="card-img-top " src="/image/@Model.CartList[i].Product.Images[0]" width="200" /></td>
-                            <td>@Model.CartList[i].Product.Length х @Model.CartList[i].Product.Width</td>
-                            <td>@Model.CartList[i].Product.Square</td>
-                            <td>@Model.CartList[i].Product.Cost</td>
-                            <td>@Model.CartList[i].NumDuplicates</td>
-                            <td>@(Model.CartList[i].NumDuplicates*Model.CartList[i].Product.Cost)</td>
+                            <td>№ @Model.Cart[i].Product.Name @Model.Cart[i].Product.Description</td>
+                            <td> <img class="card-img-top " src="/image/@Model.Cart[i].Product.Images[0]" width="200" /></td>
+                            <td>@Model.Cart[i].Product.Length х @Model.Cart[i].Product.Width</td>
+                            <td>@Model.Cart[i].Product.Square</td>
+                            <td>@Model.Cart[i].Product.Cost</td>
+                            <td>@Model.Cart[i].Count</td>
+                            <td>@(Model.Cart[i].Count * Model.Cart[i].Product.Cost)</td>
                             <td>
                                 <div class="d-grid gap-2">
                                     <a class="btn btn-outline-dark text-nowrap mx-1 my-1" 
                                        asp-area=""
                                        asp-controller="Cart"
-                                       asp-action="AddProductInCart"
-                                       asp-route-productId="@Model.CartList[i].Product.Id"
+                                       asp-action="AddProduct"
+                                       asp-route-productId="@Model.Cart[i].Product.Id"
                                        role="button">
                                         +
                                     </a>
                                     <a class="btn btn-outline-dark text-nowrap mx-auto my-1"
                                        asp-area="" asp-controller="Cart"
                                        asp-action="ReduceDuplicateProductCart"
-                                       asp-route-productId="@Model.CartList[i].Product.Id"
+                                       asp-route-productId="@Model.Cart[i].Product.Id"
                                        role="button">
                                         -
                                     </a>
                                     <a class="btn btn-outline-dark text-nowrap mx-1 my-1 border-1"
                                        asp-area="" asp-controller="Cart"
                                        asp-action="DeleteProductInCart"
-                                       asp-route-productId="@Model.CartList[i].Product.Id"
+                                       asp-route-productId="@Model.Cart[i].Product.Id"
                                        role="button">
                                         Удалить <br/> проект
                                     </a>
@@ -74,7 +74,7 @@
                 <td></td>
                 <td></td>
                 <td>Итого:</td>
-                <td>  @Model.SumCost(@Model.CartList)</td>
+                <td>  @Model.SumCost(@Model.Cart)</td>
                 <td></td>
                 </tbody>
             }

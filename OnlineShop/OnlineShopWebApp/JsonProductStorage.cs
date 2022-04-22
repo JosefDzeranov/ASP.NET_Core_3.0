@@ -6,11 +6,14 @@ using OnlineShopWebApp.Interfase;
 
 namespace OnlineDesignBureauWebApp
 {
-    public class JsonProductStorage:IProductStorage
+    public class JsonProductStorage : IProductStorage
     {
         public List<Product> Products { get; set; } = new List<Product>();
-        string nameSave = "projects_for_sale";
-
+        string nameSave = "projects_for_sale.json";
+        public JsonProductStorage()
+        {
+            ReadToStorage();
+        }
         public string WriteToStorage()
         {
             var json = JsonConvert.SerializeObject(Products, Formatting.Indented);
@@ -19,14 +22,12 @@ namespace OnlineDesignBureauWebApp
         }
         public void ReadToStorage()
         {
-            Products.Clear();
-            var json = File.ReadAllText($"{nameSave}.json");
+            var json = File.ReadAllText(nameSave);
             Products = JsonConvert.DeserializeObject<List<Product>>(json);
         }
-        public Product FindProduct(int productId, List<Product> products)
+        public Product FindProduct(int productId)
         {
-            var product = products.Find(x => x.Id == productId);
-            return product;
+            return Products.Find(x => x.Id == productId);
         }
         public string ReadDataProducts()
         {
