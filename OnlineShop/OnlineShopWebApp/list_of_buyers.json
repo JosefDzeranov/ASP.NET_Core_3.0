@@ -1,53 +1,7 @@
 [
   {
     "ComparisonList": [],
-    "CartList": [
-      {
-        "Product": {
-          "Id": 1,
-          "Name": "63-42",
-          "Cost": 32000.0,
-          "Square": 109.0,
-          "Width": 8.36,
-          "Length": 14.06,
-          "Description": "Проект двухэтажного дома из газабетона с терассой",
-          "Images": [
-            "1-1.jpg"
-          ]
-        },
-        "NumDuplicates": 1
-      },
-      {
-        "Product": {
-          "Id": 2,
-          "Name": "57-07",
-          "Cost": 32000.0,
-          "Square": 116.0,
-          "Width": 8.45,
-          "Length": 10.85,
-          "Description": "Проект двухэтажного дома из газабетона с терассой",
-          "Images": [
-            "2-1.jpg"
-          ]
-        },
-        "NumDuplicates": 1
-      },
-      {
-        "Product": {
-          "Id": 3,
-          "Name": "57-00",
-          "Cost": 36000.0,
-          "Square": 193.0,
-          "Width": 11.75,
-          "Length": 12.5,
-          "Description": "Проект двухэтажного дома из газабетона с терассой",
-          "Images": [
-            "3-1.jpg"
-          ]
-        },
-        "NumDuplicates": 1
-      }
-    ],
+    "CartList": [],
     "OrdersList": [
       {
         "Product": {

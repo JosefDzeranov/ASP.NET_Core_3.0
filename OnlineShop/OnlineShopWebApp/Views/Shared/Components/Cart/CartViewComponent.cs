@@ -3,11 +3,11 @@ using OnlineShopWebApp.Interfase;
 
 namespace OnlineShopWebApp.Views.Shared.Components.Cart
 {
-    public class CartView:ViewComponent
+    public class CartViewComponent:ViewComponent
     {
         private readonly IBuyerStorage buyerStorage;
 
-        public CartView(IBuyerStorage buyerStorage)
+        public CartViewComponent(IBuyerStorage buyerStorage)
         {
             this.buyerStorage = buyerStorage;
         }
