@@ -1,0 +1,63 @@
+<?xml version="1.0"?>
+<Order xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <Id>4878fb30-0473-4ad5-959c-ecefb27fc668</Id>
+  <Date>2022-04-22T22:03:47.5931764+03:00</Date>
+  <UserId>UserId</UserId>
+  <Basket>
+    <Id>a7353f55-5480-4f32-b6b6-358770fcc124</Id>
+    <UserId>UserId</UserId>
+    <Items>
+      <BasketItem>
+        <Id>0b4ef318-e682-4eea-8d9d-702fe385bc42</Id>
+        <Product>
+          <Id>2</Id>
+          <Image>/img/portret.jpg</Image>
+          <Name>Portret</Name>
+          <Cost>3000</Cost>
+          <Description>
+			Illustration, 
+			3757x2129px
+			(31.8cm x 18cm 300dpi), 
+			1.4MB | jpg
+		</Description>
+        </Product>
+        <Quantity>1</Quantity>
+      </BasketItem>
+      <BasketItem>
+        <Id>e9e87c19-6ae4-477f-bcfa-62fcfe131a53</Id>
+        <Product>
+          <Id>3</Id>
+          <Image>/img/landscape.jpg</Image>
+          <Name>Landscape</Name>
+          <Cost>2000</Cost>
+          <Description>
+			Photography,
+			3247x2463px
+			(27.5cm x 20.9cm 300dpi),
+			745kB | jpg
+		</Description>
+        </Product>
+        <Quantity>1</Quantity>
+      </BasketItem>
+      <BasketItem>
+        <Id>b5e97997-9d1b-48b0-9196-ef526a942857</Id>
+        <Product>
+          <Id>4</Id>
+          <Image>/img/abstraction.jpg</Image>
+          <Name>Abstraction</Name>
+          <Cost>1000</Cost>
+          <Description>
+			Digital drawing,
+			3247x2463px
+			(27.5cm x 20.9cm 300dpi),
+			745kB | jpg
+		</Description>
+        </Product>
+        <Quantity>1</Quantity>
+      </BasketItem>
+    </Items>
+  </Basket>
+  <Delivery>
+    <Address />
+  </Delivery>
+</Order>
