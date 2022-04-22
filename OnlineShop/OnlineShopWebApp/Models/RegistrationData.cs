@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace OnlineShopWebApp.Models
 {
-    public class RegistrationData : Controller
+    public class RegistrationData
     {
         public string Login { get; set; }
         public string Password1 { get; set; }
