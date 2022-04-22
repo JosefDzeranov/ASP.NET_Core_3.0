@@ -14,12 +14,12 @@ namespace OnlineShopWebApp.Controllers
         }
         public IActionResult Index()
         {
-            var compareBasket = _compareStorage.TryGetByUserId(Constants.UserId);
-            if (compareBasket == null || compareBasket.Items.Count == 0)
+            var compareList = _compareStorage.TryGetByUserId(Constants.UserId);
+            if (compareList == null || compareList.Products.Count == 0)
             {
                 return View("Empty");
             }
-            return View(compareBasket);
+            return View(compareList);
         }
 
         public IActionResult Add(int id)
@@ -38,7 +38,7 @@ namespace OnlineShopWebApp.Controllers
 
         public IActionResult Clear()
         {
-            _compareStorage.ClearBasket(Constants.UserId);
+            _compareStorage.Clear(Constants.UserId);
             return RedirectToAction("Index");
         }
     }
