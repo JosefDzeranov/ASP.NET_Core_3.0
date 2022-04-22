@@ -17,7 +17,8 @@ namespace OnlineShopWebApp.Controllers
         public IActionResult Index()
         {
             var favourite = favouriteRepository.TryGetByUserId(Constants.UserId);
-            return View();
+
+            return View(favourite.Products);
         }
 
         public IActionResult Add(int productId)
@@ -25,7 +26,7 @@ namespace OnlineShopWebApp.Controllers
             var product = productsRepository.TryGetByid(productId);
             favouriteRepository.Add(product, Constants.UserId);
 
-            return RedirectToAction("Home");
+            return RedirectToAction("Index", "Favourite");
         }
 
         public IActionResult Clear(int productId)
