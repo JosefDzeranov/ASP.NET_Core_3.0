@@ -1,0 +1,30 @@
+﻿@{
+    ViewData["Title"] = "Sign in";
+}
+<div class="container align-content-center">
+    <div class="row text-center">
+        <div class="col-4 mx-auto">
+            <h2>Sign in</h2>
+            <form method="post">
+                <div class="mb-3">
+                    <input class="form-control" type="text" name="email" placeholder="Email">
+                </div>
+                <div class="mb-3">
+                    <input class="form-control" type="password" name="password" placeholder="Password">
+                </div>
+                <div class="form-check mb-3">
+                    <input class="form-check-input" type="checkbox" value="true" name="rememberme">
+                    <label class="form-check-label">
+                        Remember me
+                    </label>
+                </div>
+                <div class="mb-3">
+                    <button type="submit" class="btn btn-outline-dark btn-sm active" asp-controller="Users" asp-action="Signin">Sign in</button>
+                </div>
+                <div class="mb-3">
+                    <button type="submit" class="btn btn-outline-dark btn-sm" disabled asp-controller="Users" asp-action="Signup">Sign up</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
