@@ -6,7 +6,6 @@
 
   <ItemGroup>
     <Folder Include="Data\Orders\" />
-    <Folder Include="Data\Orders\" />
   </ItemGroup>
 
 </Project>
