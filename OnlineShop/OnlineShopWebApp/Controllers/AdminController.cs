@@ -29,5 +29,19 @@ namespace OnlineShopWebApp.Controllers
             var products = _productStorage.GetProductData();
             return View(products);
         }
+
+        public IActionResult Add(int id)
+        {
+            return View();
+        }
+        
+        public IActionResult Edit(int id)
+        {
+            return View();
+
+        }public IActionResult Remove(int id)
+        {
+            return View();
+        }
     }
 }

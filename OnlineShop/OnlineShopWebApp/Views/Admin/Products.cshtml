@@ -14,6 +14,7 @@
         </div>
         <div class="col-10">
             <h2>Products</h2>
+            <h6><a class="nav-link ml-0" asp-controller="Admin" asp-action="Add">Add new Product</a></h6>
             <table class="table border-left border-right border-top border-bottom mt-4">
                 <caption>Product list</caption>
                 <thead class="table-light">
@@ -24,23 +25,23 @@
                         <th scope="col"></th>
                     </tr>
                 </thead>
-                @foreach (var product in Model)
+                @for (int i = 0; i < Model.Count; i++)
                 {
                     <tbody class="border-top-0">
                         <tr>
                             <td>
-                                @(@Model.IndexOf(product) + 1)
+                                @(i + 1)
                             </td>
                             <td>
-                                <a style="color: darkblue" href="/product/index/@product.Id">@product.Name</a>
+                                <a style="color: darkblue" href="/product/index/@Model[i].Id">@Model[i].Name</a>
                             </td>
                             <td>
-                                $@product.Cost
+                                $@Model[i].Cost
                             </td>
                             <td>
                                 <div class="btn-group ml-2" role="group" aria-label="Edit/Remove buttons">
-                                    <a class="btn btn-outline-dark btn-sm" role="button" href="/admin/edit/@product.Id">Edit</a>
-                                    <a class="btn btn-outline-dark btn-sm" role="button" href="/admin/remove/@product.Id">Remove</a>
+                                    <a class="btn btn-outline-dark btn-sm" role="button" href="/admin/edit/@Model[i].Id">Edit</a>
+                                    <a class="btn btn-outline-dark btn-sm" role="button" href="/admin/remove/@Model[i].Id">Remove</a>
                                 </div>
                             </td>
                         </tr>
