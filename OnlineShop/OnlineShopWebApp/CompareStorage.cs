@@ -8,14 +8,6 @@ namespace OnlineShopWebApp
     {
         private List<Compare> compareLists = new List<Compare>();
 
-        public List<Compare> CompareLists
-        {
-            get
-            {
-                return compareLists;
-            }
-        }
-
         public Compare TryGetByUserId(string userId)
         {
             return compareLists.FirstOrDefault(item => item.UserId == userId);

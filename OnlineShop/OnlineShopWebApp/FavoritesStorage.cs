@@ -8,14 +8,6 @@ namespace OnlineShopWebApp
     {
         private List<Favorites> favoritesLists = new List<Favorites>();
 
-        public List<Favorites> FavoritesLists
-        {
-            get
-            {
-                return favoritesLists;
-            }
-        }
-
         public Favorites TryGetByUserId(string userId)
         {
             return favoritesLists.FirstOrDefault(item => item.UserId == userId);
