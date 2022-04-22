@@ -14,12 +14,12 @@ namespace OnlineShopWebApp.Controllers
         }
         public IActionResult Index()
         {
-            var favoritesBasket = _favoritesStorage.TryGetByUserId(Constants.UserId);
-            if (favoritesBasket == null || favoritesBasket.Items.Count == 0)
+            var favoritesList = _favoritesStorage.TryGetByUserId(Constants.UserId);
+            if (favoritesList == null || favoritesList.Products.Count == 0)
             {
                 return View("Empty");
             }
-            return View(favoritesBasket);
+            return View(favoritesList);
         }
 
         public IActionResult Add(int id)
@@ -38,7 +38,7 @@ namespace OnlineShopWebApp.Controllers
 
         public IActionResult Clear()
         {
-            _favoritesStorage.ClearBasket(Constants.UserId);
+            _favoritesStorage.Clear(Constants.UserId);
             return RedirectToAction("Index");
         }
     }
