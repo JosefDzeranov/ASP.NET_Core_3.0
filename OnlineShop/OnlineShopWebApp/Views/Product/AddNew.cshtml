@@ -1,0 +1,21 @@
+﻿<form method="post">
+    <div class="row text-center">
+        @await Html.PartialAsync("AdministrationMenu")
+        <div class="col text-center">
+            <h3>Добавление нового продукта</h3>
+            <label>Название</label>
+            <input type="text" name="name" />
+            <br />
+            <label>Цена</label>
+            <input type="text" name="cost" />
+            <br />
+            <label>Описание</label>
+            <input type="text" name="description" />
+            <br />
+            <label>Количество страниц</label>
+            <input type="text" name="pages" />
+            <br />
+            <button class="btn btn-dark" type="submit" asp-controller="Product" asp-action="Add">Добавить</button>
+        </div>
+    </div>
+</form>

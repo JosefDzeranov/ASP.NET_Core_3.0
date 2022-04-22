@@ -20,5 +20,20 @@ namespace OnlineShopWebApp.Controllers
             var product = productsRepository.TryGetById(id);
             return View(product);
         }
+
+        public IActionResult Delete(int productId)
+        {
+            productsRepository.Delete(productId);
+            return View("Views/Administration/Products.cshtml");
+        }
+        public IActionResult AddNew ()
+        {
+            return View();
+        }
+        public IActionResult Add(Information information)
+        {
+            productsRepository.Add(information);
+            return View();
+        }
     }
 }

@@ -8,15 +8,9 @@ namespace OnlineShopWebApp
 {
     public class InMemoryProductsRepository : IProductsRepository
     {
-        private List<Product> products = new List<Product>()
-        {
-            new Product("Оно", 450, "Автор: Стивен Кинг Жанр: мистика, ужасы", 1025),
-            new Product("Мрачный жнец", 350, "Автор: Терри Пратчетт Жанр: фэнтези", 356),
-            new Product("Странник по звездам", 300, "Автор: Джек Лондон Жанр: роман", 332),
-            new Product("Крутые наследнички", 350, "Автор: Дарья Донцова Жанр: детектив", 425),
-        };
+        private List<Product> products = new List<Product>();
 
-
+        private static int constantCounter = 0;
         public List<Product> GetAll()
         {
             return products;
@@ -31,5 +25,23 @@ namespace OnlineShopWebApp
             }
             return null;
         }
+        public void Delete(int id)
+        {
+            var product = products.FirstOrDefault(x => x.Id == id);
+            products.Remove(product);
+        }
+
+        public void Add(Information information)
+        {
+
+            var newProduct = new Product
+            {
+                Id = constantCounter,
+                Information = information,
+            };
+            products.Add(newProduct);
+            constantCounter++;
+        }
     }
 }
+

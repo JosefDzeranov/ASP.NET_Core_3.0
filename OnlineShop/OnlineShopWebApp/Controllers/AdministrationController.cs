@@ -8,6 +8,13 @@ namespace OnlineShopWebApp.Controllers
 {
     public class AdministrationController : Controller
     {
+        private readonly IProductsRepository productsRepository;
+
+        public AdministrationController(IProductsRepository productsRepository)
+        {
+            this.productsRepository = productsRepository;
+        }
+
         public IActionResult Orders()
         {
             return View();
@@ -24,7 +31,8 @@ namespace OnlineShopWebApp.Controllers
         }
         public IActionResult Products()
         {
-            return View();
+            var products = productsRepository.GetAll();
+            return View(products);
         }
     }
 }

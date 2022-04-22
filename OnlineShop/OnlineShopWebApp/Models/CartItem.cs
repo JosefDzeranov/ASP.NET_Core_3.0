@@ -14,7 +14,7 @@ namespace OnlineShopWebApp.Models
         {
             get
             {
-                return Product.Cost * Amount;
+                return Product.Information.Cost * Amount;
             }
         }
     }
