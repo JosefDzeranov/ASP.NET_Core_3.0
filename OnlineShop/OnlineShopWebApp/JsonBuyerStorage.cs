@@ -65,9 +65,9 @@ namespace OnlineShopWebApp
             FindBuyer(buyerId).CartList.Clear();
             WriteToStorage();
         }
-        public Buyer FindBuyer(int personId)
+        public Buyer FindBuyer(int buyerId)
         {
-            var buyer = Buyers.Find(x => x.Id == personId);
+            var buyer = Buyers.Find(x => x.Id == buyerId);
             return buyer;
         }
     }

@@ -12,6 +12,6 @@ namespace OnlineShopWebApp.Interfase
         void DeleteProductInCart(int productId, int personId);
         void ReduceDuplicateProductCart(int productId, int buyerId);
         void CleenCart(int buyerId);
-        Buyer FindBuyer(int personId);
+        Buyer FindBuyer(int buyerId);
     }
 }

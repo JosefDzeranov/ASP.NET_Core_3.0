@@ -2,7 +2,10 @@
     <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
         <div class="container">
             <a class="btn btn-link" asp-area="" asp-controller="Buyer" asp-action="Index"><img src="/image/account.svg" width="20" height="20"></a>
-            <a class="btn btn-link" asp-area="" asp-controller="Cart" asp-action="Index"><img src="/image/icon_basket.svg" width="20" height="20"><span class="top-0 translate-middle visually-hidden font-weight-light rounded-circle border p-0 small">+2</span></a>
+            <a class="btn btn-link" asp-area="" asp-controller="Cart" asp-action="Index">
+                <img src="/image/icon_basket.svg" width="20" height="20">
+                <span class="top-0 translate-middle visually-hidden font-weight-light rounded-circle border p-0 small">@await Component.InvokeAsync("CartView")</span>
+            </a>
             <a class="navbar-brand" href="#"><img src="/image/search_box.svg" height="20"></a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                     aria-expanded="false" aria-label="Toggle navigation">

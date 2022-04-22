@@ -52,5 +52,18 @@ namespace OnlineShopWebApp.Models
             }
             return CartList;
         }
+
+        public int SumAllProducts()
+        {
+            int sum = 0;
+            foreach (var prod in CartList)
+            {
+                for (int i = 0; i < prod.NumDuplicates; i++)
+                {
+                    sum++;
+                }
+            }
+            return sum;
+        }
     }
 }

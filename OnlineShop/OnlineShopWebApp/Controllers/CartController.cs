@@ -1,7 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using OnlineShopWebApp;
 using OnlineShopWebApp.Interfase;
-using OnlineShopWebApp.Models;
 
 namespace OnlineDesignBureauWebApp.Controllers
 {

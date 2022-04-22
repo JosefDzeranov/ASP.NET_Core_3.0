@@ -21,6 +21,5 @@ namespace OnlineDesignBureauWebApp.Controllers
                 buyerStorage.ReadToStorage();
             return View(productStorage.Products);
         }
-
     }
 }
