@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using OnlineShopWebApp.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -23,7 +24,9 @@ namespace OnlineShopWebApp.Controllers
         {
             return View();
         }
-        public IActionResult Registrate(string login, string password1, string password2)
+
+        [HttpPost]
+        public IActionResult Registrate(RegistrationData registrationData)
         {
             return View();
         }
