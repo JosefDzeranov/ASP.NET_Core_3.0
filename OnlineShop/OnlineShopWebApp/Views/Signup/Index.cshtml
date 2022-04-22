@@ -1,0 +1,24 @@
+﻿@{
+    ViewData["Title"] = "Sign in Page";
+}
+<div class="container align-content-center">
+    <div class="row text-center">
+        <div class="col-4 mx-auto">
+            <h2>Registration</h2>
+            <form method="post">
+                <div class="mb-3">
+                    <input class="form-control" type="text" name="login" placeholder="Login">
+                </div>
+                <div class="mb-3">
+                    <input class="form-control" type="text" name="password" placeholder="Password">
+                </div>
+                <div class="mb-3">
+                    <input class="form-control" type="text" name="confirm" placeholder="Confirm password">
+                </div>
+                <div class="mb-3">
+                    <button type="submit" class="btn btn-outline-dark btn-sm active" asp-controller="Signup" asp-action="Signup">Sign up</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
