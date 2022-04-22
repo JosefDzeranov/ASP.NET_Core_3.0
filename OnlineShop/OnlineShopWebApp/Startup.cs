@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using OnlineShopWebApp.Services;
 
 namespace OnlineShopWebApp
 {
@@ -27,6 +28,7 @@ namespace OnlineShopWebApp
             services.AddSingleton<IProductsRepository, ProductsInMemoryRepository>();
             services.AddSingleton<ICartsRepository, CartsInMemoryRepository>();
             services.AddSingleton<IOrderRepository, OrderRepository>();
+            services.AddSingleton<IFavouriteRepository, FavouriteRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
