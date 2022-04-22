@@ -1,5 +1,5 @@
 ﻿@using OnlineShopWebApp.Models
-@model Basket
+@model Favorites
 
 @{
     ViewData["Title"] = "Favorites Page";
@@ -10,18 +10,18 @@
         <div class="col-12 mb-4">
             <h2>Favorites</h2>
         </div>
-        @foreach (var item in Model.Items)
+        @foreach (var item in Model.Products)
         {
             <div class="col-4 mb-4">
-                <img class="img-thumbnail mb-2" src="@item.Product.Image" alt="@item.Product.Name">
-                <a style="color: darkblue" href="/product/index/@item.Product.Id"><h5>@item.Product.Name</h5></a>
-                <h6>$@item.Product.Cost</h6>                
+                <img class="img-thumbnail mb-2" src="@item.Image" alt="@item.Name">
+                <a style="color: darkblue" href="/product/index/@item.Id"><h5>@item.Name</h5></a>
+                <h6>$@item.Cost</h6>                
                 <div class="row justify-content-between">
                     <div class="col-auto text-left">
-                        <a class="btn btn-outline-dark btn-sm text-nowrap" href="/basket/add/@item.Product.Id" role="button">Add to basket</a>
+                        <a class="btn btn-outline-dark btn-sm text-nowrap" href="/basket/add/@item.Id" role="button">Add to basket</a>
                     </div>
                     <div class="col-auto text-right">
-                        <a class="btn btn-outline-dark btn-sm text-nowrap" href="/favorites/remove/@item.Product.Id" role="button">Remove</a>
+                        <a class="btn btn-outline-dark btn-sm text-nowrap" href="/favorites/remove/@item.Id" role="button">Remove</a>
                     </div>
                 </div>
             </div>
