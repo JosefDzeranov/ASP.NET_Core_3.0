@@ -1,0 +1,36 @@
+﻿@model Customer
+<body>
+	<form method ="post">
+	<
+		
+		<fieldset>
+			<legend> 
+				Контакты пользователя 
+			</legend>
+			<label for="user-name">Введите имя</label>
+			<input id="user-name" type="text" placeholder="Например, Иван" autofocus><br>
+			
+			<label for="user-name">Введите фамилию</label>
+			<input id="user-name" type="text"  name="name" placeholder="Например, Иванов"><br>
+			<label for="#">Введите номер телефона</label>
+			<input type="text" name="phone" placeholder="+79031234567"><br>
+			<label for="#">Введите email</label><br>
+			<input type="text" name="email" placeholder="mail@mail.ru"><br>
+			<label for="adress">Введите адрес</label>
+			<input type="text" name="adress" /> <br>
+			<input type="submit" value="Отправить" a class ="btn btn-outline-success" role="button" href="/ordercomplete/index" asp-controller="Order" asp-action="Buy">
+				
+		</fieldset>
+	</form>
+<<<<<<< Updated upstream
+	</body>
+=======
+</body>
+>>>>>>> Stashed changes
+
+					<tr>@Model?.Name</tr>>
+					<td>@Model?.Surname</td>
+					<td>@Model?.Phone</td>
+					<td>@Model?.Email</td>
+					<td>@Model?.Adress</td>
+								
