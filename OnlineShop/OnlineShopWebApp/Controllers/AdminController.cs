@@ -15,10 +15,12 @@ namespace OnlineShopWebApp.Controllers
             this.productRepository = productRepository;
         }
 
-        public IActionResult Index(int id)
+        public IActionResult Orders()
         {
 
-            return View(id);
+            var existingOrders = orderRepository.TryGetAll();
+
+            return View(existingOrders);
         }
 
         public IActionResult DeleteProduct(int id)
@@ -28,7 +30,7 @@ namespace OnlineShopWebApp.Controllers
             {
                 productRepository.Delete(product);
             }
-            return RedirectToAction("Index", "Admin", new { id = 3 });
+            return RedirectToAction("Products", "Admin");
         }
 
         public IActionResult EditProduct(int id)
@@ -51,7 +53,7 @@ namespace OnlineShopWebApp.Controllers
             productRepository.Update(product);
 
 
-            return RedirectToAction("Index", "Admin", new { id = 3 });
+            return RedirectToAction("Products", "Admin");
         }
 
         public IActionResult AddProduct()
@@ -62,7 +64,23 @@ namespace OnlineShopWebApp.Controllers
         public IActionResult AddProduct(Product product)
         {
             productRepository.Add(product);
-            return RedirectToAction("Index", "Admin", new { id = 3 });
+            return RedirectToAction("Products", "Admin");
         }
+
+        public IActionResult Users()
+        {
+            return View();
+        }
+        public IActionResult Roles()
+        {
+            return View();
+        }
+        public IActionResult Products()
+        {
+            var products = productRepository.GetAll();
+
+            return View(products);
+        }
+
     }
 }

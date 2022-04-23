@@ -1,5 +1,16 @@
-﻿@model List<Order>
-<h3>Список заказов</h3>
+﻿
+@model List<Order>
+@{
+    ViewData["Title"] = "Панель администратора";
+}
+
+
+<div class="row">
+   @await Html.PartialAsync("AdminLeftPanel")
+    <div class="col-9">
+        <div class="card">
+            <div class="card-body">
+                <h3>Список заказов</h3>
                 <div class="row">
                     <table class="table">
                         <tr>
@@ -23,3 +34,10 @@
                         }
                     </table>
                 </div>
+            </div>
+        </div>
+
+
+    </div>
+</div>
+
