@@ -7,9 +7,14 @@ namespace OnlineShopWebApp.Models
 {
     public class Order
     {
-        public string Name { get; set; }
-        public string Phone { get; set; }
-        public string Addres { get; set; }
+        public Guid Id { get; set; }
+        public UserDeliveryInfo User { get; set; }
+        public List<CartItem> Items { get; set; }
+
+        public Order()
+        {
+            Id = Guid.NewGuid();
+        }
 
     }
 }
