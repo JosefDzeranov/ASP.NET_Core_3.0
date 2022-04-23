@@ -36,7 +36,7 @@ namespace OnlineShopWebApp.Controllers
             {
                 favoritesManager.AddProduct(foundProduct);
                 var favoritesList = favoritesManager.Products;
-                return RedirectToAction("Index", favoritesList);
+                return RedirectToAction("Index");
             }
             else
             {
