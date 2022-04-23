@@ -14,22 +14,32 @@ namespace OnlineShopWebApp.Controllers
             return View();
         }
 
-        public IActionResult NewUser()
+        public IActionResult NewUser(User user)
         {
+            if (user.Password == user.PasswordConfirm)
+            {
+                ModelState.AddModelError("", "Passwords should match.");
+            }
+            if (!ModelState.IsValid)
+            {
+                return Content($"{user.Login}- not valid");
+            }
             return View();
         }
 
         [HttpPost]
         public IActionResult Login(User user)
         {
-            if (user.Login == user.Password)
+            if (user.Login == "Login")
             {
-                ModelState.AddModelError("", "Name and Login should not be the same.");
+                ModelState.AddModelError("", "Please enter your personal Login.");
             }
+
             if (!ModelState.IsValid)
             {
                 return Content($"{user.Login}- not valid");
             }
+
             return RedirectToAction("Products","Home");
         }
 

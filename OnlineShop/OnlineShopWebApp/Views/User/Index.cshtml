@@ -4,8 +4,6 @@
     <div class="row">
         <div class="col-3">
 
-            <h3>Log in</h3>
-
             <div class="validation" asp-validation-summary="ModelOnly"></div>
 
             <div class="form-group">
@@ -15,14 +13,8 @@
             </div>
 
             <div class="form-group">
-                <label asp-for="Email">E-mail</label>
-                <input asp-for="Email" class="form-control" placeholder="name@example.com" />
-                <span asp-validation-for="Email"></span>
-            </div>
-
-            <div class="form-group">
                 <label asp-for="Password">Password</label>
-                <input asp-for="Password" class="form-control" placeholder="Password" />
+                <input type="password" asp-for="Password" class="form-control" placeholder="Password" />
                 <span asp-validation-for="Password"></span>
             </div>
 
@@ -40,12 +32,5 @@
     </div>
 </form>
 
-<div class="row">
-    <div class="col-3">
-        <br />
-        <div>
-            <button class="btn btn-outline-warning btn-sm" type="submit" asp-controller="User" asp-action="NewUser">New? Create an account</button>
-        </div>
-    </div>
-</div>
+@await Html.PartialAsync("Button")
 
