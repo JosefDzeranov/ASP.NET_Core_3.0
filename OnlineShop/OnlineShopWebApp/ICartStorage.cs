@@ -12,14 +12,8 @@ namespace OnlineShopWebApp
 
         Cart TryGetCartByUserID(string userId);
 
-        void RemoveProductFromCart(string userId, Product product);
+        void RemoveProductFromCart(string userId, int productId);
         void RemoveCartLines(Cart cart);
-
-
-
-
-
-
 
     }
 }
