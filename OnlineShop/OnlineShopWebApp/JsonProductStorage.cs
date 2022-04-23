@@ -17,7 +17,7 @@ namespace OnlineDesignBureauWebApp
         public string WriteToStorage()
         {
             var json = JsonConvert.SerializeObject(Products, Formatting.Indented);
-            File.WriteAllText($"{nameSave}.json", json);
+            File.WriteAllText(nameSave, json);
             return json;
         }
         public void ReadToStorage()
