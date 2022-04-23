@@ -15,6 +15,7 @@ namespace OnlineShopWebApp.Controllers
         {
             this.productManager = productManager;
             this.comparisonManager = comparisonManager;
+            this.comparisonManager.UserId = Constants.UserId;
         }
 
         public IActionResult Index()
