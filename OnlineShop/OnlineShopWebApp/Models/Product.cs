@@ -2,7 +2,7 @@
 {
     public class Product
     {
-        public int Id { get;}
+        public int Id { get; }
         public string Name { get; set; }
         public decimal Cost { get; set; }
         public decimal TotalCost { get; set; }
@@ -15,9 +15,8 @@
             Name = name;
             Cost = cost;
             Description = description;
-           
+
         }
 
-        
     }
 }

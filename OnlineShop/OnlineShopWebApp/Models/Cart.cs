@@ -15,7 +15,6 @@ namespace OnlineShopWebApp.Models
         {
             get
             {
-
                 decimal Cost = 0;
 
                 Cost = CartLines.Sum(x => x.Cost);
@@ -24,14 +23,11 @@ namespace OnlineShopWebApp.Models
         }
 
 
-
         public Cart(string userId)
         {
             IdCounter++;
             Id = IdCounter;
             UserId = userId;
-            
-
         }
     }
 }

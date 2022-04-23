@@ -20,7 +20,6 @@ namespace OnlineShopWebApp
             Host.CreateDefaultBuilder(args)
                 .ConfigureWebHostDefaults(webBuilder =>
                 {
-                    //test
                     webBuilder.UseStartup<Startup>();
                 });
     }

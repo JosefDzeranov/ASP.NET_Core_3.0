@@ -28,17 +28,27 @@ namespace OnlineShopWebApp.Controllers
 
 
             cartManager.AddProductToCart(Constants.UserId, foundProduct);
-            var cart = cartManager.TryGetCartByUserID(Constants.UserId);
-            return View("Index", cart);
+           
+            return RedirectToAction("Index");
         }
 
+        public IActionResult RemoveFromCart(int id)
+        {
+            var foundProduct = productManager.FindProduct(id);
+            cartManager.RemoveProductFromCart(Constants.UserId, foundProduct.Id);
+         
+            return RedirectToAction("Index");
 
+        }
+
+        public IActionResult ClearCart()
+        {
+            var cart = cartManager.TryGetCartByUserID(Constants.UserId);
+            cartManager.RemoveCartLines(cart);
+            return RedirectToAction("Index");
+
+        }
 
     }
 
-
-
 }
-
-
-
