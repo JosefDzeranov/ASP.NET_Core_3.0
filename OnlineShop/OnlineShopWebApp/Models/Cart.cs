@@ -15,7 +15,15 @@ namespace OnlineShopWebApp.Models
         {
             get
             {
-                return Items.Sum(x => x.Cost);
+                return Items?.Sum(x => x.Cost) ?? 0;
+            }
+        }
+
+        public int Amount
+        {
+            get
+            {
+                return Items?.Sum(x => x.Amount) ?? 0;
             }
         }
     }

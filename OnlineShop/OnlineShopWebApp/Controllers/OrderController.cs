@@ -23,7 +23,9 @@ namespace OnlineShopWebApp.Controllers
         {
             return View();
         }
-        public IActionResult Buy()
+
+        [HttpPost]
+        public IActionResult Buy(Order order)
         {
             var existingCart = cartsStorage.TryGetByUserId(Constants.UserId);
             ordersStorage.Add(existingCart);
