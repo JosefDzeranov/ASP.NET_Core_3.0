@@ -1,0 +1,28 @@
+﻿
+<form method="post">
+    <div>
+        <h2>Вход</h2>
+    </div>
+
+    <div class="row">
+        <div class="col-3">
+            <input type="text" name="username" />
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-3">
+            <input class="form-control" ctype="password" name="password" />
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-3">
+            <input class="form-control" ctype="password" name="confirmPassword" />
+        </div>
+    </div>
+    <br />
+    <div>
+        <button type="submit" asp-controller="Account" asp-action="Register">Зарегистрироваться</button>
+    </div>
+</form>
