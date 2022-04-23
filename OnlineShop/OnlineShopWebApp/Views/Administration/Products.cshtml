@@ -3,13 +3,13 @@
 <div class="row">
     @await Html.PartialAsync("AdministrationMenu")
 
-    
+
     <div class="col-10">
         <h3>Список продуктов</h3>
 
         <div class="row">
             <div class="col">
-                <a href="/product/addnew">Добавить новый продукт</a>
+                <a href="/administration/addnew">Добавить новый продукт</a>
                 <table class="table">
                     <thead>
                         <tr>
@@ -25,10 +25,14 @@
                         {
                             <tr>
                                 <td>@product.Id</td>
-                                <td>@product.Information.Name</td>
-                                <td>@product.Information.Cost</td>
-                                <td><a href="#">Редактировать</a></td>
-                                <td><a href="/products/delete?productId=@product.Id">Удалить</a></td>
+                                <td>
+                                    <a style="color:grey" href="/product/index/@product.Id">
+                                        <h5>@product.Name</h5>
+                                    </a>
+                                </td>
+                                <td>@product.Cost</td>
+                                <td><a href="/administration/edit?productId=@product.Id">Редактировать</a></td>
+                                <td><a href="/administration/delete?productId=@product.Id">Удалить</a></td>
                             </tr>
                         }
                     </tbody>

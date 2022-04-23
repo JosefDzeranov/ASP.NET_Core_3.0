@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using OnlineShopWebApp.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -34,5 +35,33 @@ namespace OnlineShopWebApp.Controllers
             var products = productsRepository.GetAll();
             return View(products);
         }
+
+        public IActionResult AddNew()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public IActionResult Add(Product product)
+        {
+            productsRepository.Add(product);
+            return View();
+        }
+        public IActionResult Edit()
+        {
+            return View();
+        }
+        [HttpPost]
+        public IActionResult EditData(int productId)
+        {
+            productsRepository.Edit(productId);
+            return View();
+        }
+        public IActionResult Delete(int productId)
+        {
+            productsRepository.Delete(productId);
+            return RedirectToAction("Products");
+        }
+
     }
 }

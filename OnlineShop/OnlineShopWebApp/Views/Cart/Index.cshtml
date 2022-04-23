@@ -22,8 +22,8 @@ else
                     @foreach (var item in Model.Items)
                     {
                         <tr>
-                            <td>@item.Product.Information.Name</td>
-                            <td>@item.Product.Information.Cost</td>
+                            <td>@item.Product.Name</td>
+                            <td>@item.Product.Cost</td>
                             <td>
                                 <a class="btn btn-dark" href="/cart/delete?itemId=@item.Product.Id" role="button">-</a>
                                 @item.Amount
