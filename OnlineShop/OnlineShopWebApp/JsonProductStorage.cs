@@ -1,31 +1,34 @@
-﻿using OnlineDesignBureauWebApp.Models;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.IO;
 using Newtonsoft.Json;
 using OnlineShopWebApp.Interfase;
+using OnlineShopWebApp.Models;
 
-namespace OnlineDesignBureauWebApp
+namespace OnlineShopWebApp
 {
     public class JsonProductStorage:IProductStorage
     {
         public List<Product> Products { get; set; } = new List<Product>();
-        string nameSave = "projects_for_sale";
+        string nameSave = "Data/projects_for_sale.json";
 
+        public JsonProductStorage()
+        {
+            ReadToStorage();
+        }
         public string WriteToStorage()
         {
             var json = JsonConvert.SerializeObject(Products, Formatting.Indented);
-            File.WriteAllText($"Data/{nameSave}.json", json);
+            File.WriteAllText(nameSave, json);
             return json;
         }
         public void ReadToStorage()
         {
-            Products.Clear();
-            var json = File.ReadAllText($"Data/{nameSave}.json");
+            var json = File.ReadAllText(nameSave);
             Products = JsonConvert.DeserializeObject<List<Product>>(json);
         }
-        public Product FindProduct(int productId, List<Product> products)
+        public Product FindProduct(int productId)
         {
-            var product = products.Find(x => x.Id == productId);
+            var product = Products.Find(x => x.Id == productId);
             return product;
         }
         public string ReadDataProducts()

@@ -1,70 +1,82 @@
 ﻿using System.Collections.Generic;
-using OnlineDesignBureauWebApp.Models;
+using OnlineShopWebApp.Models;
 
 
 namespace OnlineShopWebApp.Models
 {
     public class Buyer: User
     {
-        public class CartBuyer
-        {
-            public Product Product { get; set; }
-            //public 
-            public int NumDuplicates { get; set; }
-        }
-        public List<Product> ComparisonList { get; set; }
-        public List<CartBuyer> CartList { get; set; }
-        public List<CartBuyer> OrdersList { get; set; }
+
+        public List<Product> Comparison { get; set; }
+        public List<CartItem> Cart { get; set; }
+        public List<CartItem> Orders { get; set; }
         public Buyer(int id, string fistname, string secondname, string surname, int age, string email, string password_input) 
             : base(id, fistname, secondname, surname, age,  email,  password_input)
         {
-            ComparisonList = new List<Product>();
-            CartList = new List<CartBuyer>();
-            OrdersList = new List<CartBuyer>();
+            Comparison = new List<Product>();
+            Cart = new List<CartItem>();
+            Orders = new List<CartItem>();
         }
         public override string ToString()
         {
             return $"Id: {Id};\nИмя: {Fistname};\nФамилия: {Surname};\nВозраст: {Age};\nEmail: {Email};";
         }
-        public decimal SumCost(List<CartBuyer> listProducts)
+        public decimal SumCost(List<CartItem> listProducts)
         {
             decimal sum = 0;
             foreach (var product in listProducts)
             {
-                sum += product.Product.Cost * product.NumDuplicates;
+                sum += product.Product.Cost * product.Count;
             }
             return sum;
         }
-        public List<CartBuyer> SumDuplicates(Product product)
+        public void AddProductInCart(Product product)
         {
-            if (CartList.Find(x => x.Product.Id == product.Id)!=null)
+            var existingCartItem = Cart.Find(x => x.Product.Id == product.Id);
+            if (existingCartItem != null)
             {
-                for (int i = 0; i < CartList.Count; i++)
-                {
-                    if (product.Id == CartList[i].Product.Id)
-                    {
-                        CartList[i].NumDuplicates++;
-                    }
-                }
+                existingCartItem.Count++;
             }
             else
             {
-                CartList.Add(new CartBuyer(){Product = product, NumDuplicates = 1});
+                Cart.Add(new CartItem(){Product = product, Count = 1});
             }
-            return CartList;
+        }
+
+        public void DeleteProductInCart(int productId)
+        {
+            Cart.RemoveAll(CartItem => CartItem.Product.Id == productId);
         }
 
         public int SumAllProducts()
         {
             int sum = 0;
-            foreach (var prod in CartList)
+            foreach (var prod in Cart)
             {
-                for (int i = 0; i < prod.NumDuplicates; i++)
+                for (int i = 0; i < prod.Count; i++)
                 {
                     sum++;
                 }
             }
             return sum;
+        }
+
+        public void ReduceDuplicateProductCart(int productId)
+        {
+            var existingCartItem = Cart.Find(x => x.Product.Id == productId);
+            if (existingCartItem != null)
+            {
+                existingCartItem.Count--;
+            }
+
+            if (existingCartItem.Count <= 0)
+            {
+                Cart.RemoveAll(CartItem.)
+            }
+            else
+            {
+                Cart.Add(new CartItem() { Product = product, Count = 1 });
+            }
         }
     }
 }

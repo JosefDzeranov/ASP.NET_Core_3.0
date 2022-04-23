@@ -1,5 +1,5 @@
 ﻿using System.Collections.Generic;
-using OnlineDesignBureauWebApp.Models;
+using OnlineShopWebApp.Models;
 
 namespace OnlineShopWebApp.Models
 {

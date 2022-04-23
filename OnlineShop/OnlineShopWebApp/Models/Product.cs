@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace OnlineDesignBureauWebApp.Models
+namespace OnlineShopWebApp.Models
 {
     public class Product
     {
@@ -24,9 +24,6 @@ namespace OnlineDesignBureauWebApp.Models
             Description = description;
             Images = images;
         }
-        public override string ToString()
-        {
-            return $"Id={Id}\nName={Name}\nCost={Cost}\nSquare={Square}м2\nDimensions={Math.Round(Width, 0)}x{Math.Round(Length, 0)}\n{Description}";
-        }
+
     }
 }

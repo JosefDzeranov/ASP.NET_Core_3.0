@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using OnlineShopWebApp.Interfase;
 
-namespace OnlineDesignBureauWebApp.Controllers
+namespace OnlineShopWebApp.Controllers
 {
     public class ProductController : Controller
     {

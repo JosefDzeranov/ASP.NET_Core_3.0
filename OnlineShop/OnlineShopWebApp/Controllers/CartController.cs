@@ -1,7 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using OnlineShopWebApp.Interfase;
+using OnlineShopWebApp.Models;
 
-namespace OnlineDesignBureauWebApp.Controllers
+namespace OnlineShopWebApp.Controllers
 {
     public class CartController : Controller
     {
@@ -16,25 +17,25 @@ namespace OnlineDesignBureauWebApp.Controllers
         {
             return View(buyerStorage.FindBuyer(buyerId));
         }
-        public IActionResult AddProductInCart(int productId, int buyerId)
+        public IActionResult AddProduct(int product, int buyerId)
         {
-            buyerStorage.AddProductInCart(productId, buyerId, productStorage);
-            return RedirectToAction("Index", buyerId);
+            buyerStorage.AddProductInCart(product, buyerId);
+            return RedirectToAction("Index", new {buyerId});
         }
-        public IActionResult DeleteProductInCart(int productId, int buyerId)
+        public IActionResult DeleteProduct(int productId, int buyerId)
         {
             buyerStorage.DeleteProductInCart(productId, buyerId);
-            return RedirectToAction("Index", buyerId);
+            return RedirectToAction("Index", new { buyerId });
         }
-        public IActionResult ReduceDuplicateProductCart(int productId, int buyerId)
+        public IActionResult ReduceDuplicateProduct(int productId, int buyerId)
         {
             buyerStorage.ReduceDuplicateProductCart(productId, buyerId);
-            return RedirectToAction("Index", buyerId);
+            return RedirectToAction("Index", new { buyerId });
         }
-        public IActionResult CleenCart(int buyerId)
+        public IActionResult Clear(int buyerId)
         {
-            buyerStorage.CleenCart(buyerId);
-            return RedirectToAction("Index", buyerId);
+            buyerStorage.ClearCart(buyerId);
+            return RedirectToAction("Index", new { buyerId });
         }
     }
 

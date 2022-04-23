@@ -1,5 +1,5 @@
 
-namespace OnlineDesignBureauWebApp.Models
+namespace OnlineShopWebApp.Models
 {
     public class ErrorViewModel
     {

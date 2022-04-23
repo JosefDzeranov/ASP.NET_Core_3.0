@@ -1,5 +1,5 @@
 ﻿using System.Collections.Generic;
-using OnlineDesignBureauWebApp.Models;
+using OnlineShopWebApp.Models;
 
 namespace OnlineShopWebApp.Interfase
 {
@@ -8,7 +8,7 @@ namespace OnlineShopWebApp.Interfase
         List<Product> Products { get; set; }
         string WriteToStorage();
         void ReadToStorage();
-        Product FindProduct(int productId, List<Product> products);
+        Product FindProduct(int productIds);
         string ReadDataProducts();
     }
 }

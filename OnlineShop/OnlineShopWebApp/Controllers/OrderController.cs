@@ -2,7 +2,7 @@
 using OnlineShopWebApp;
 using OnlineShopWebApp.Interfase;
 
-namespace OnlineDesignBureauWebApp.Controllers
+namespace OnlineShopWebApp.Controllers
 {
 
     public class OrderController : Controller
@@ -19,8 +19,8 @@ namespace OnlineDesignBureauWebApp.Controllers
         }
         public IActionResult ReportTransaction(int buyerId)
         {
-            buyerStorage.FindBuyer(buyerId).OrdersList.AddRange(buyerStorage.FindBuyer(buyerId).CartList);
-            buyerStorage.CleenCart(buyerId);
+            buyerStorage.FindBuyer(buyerId).Orders.AddRange(buyerStorage.FindBuyer(buyerId).Cart);
+            buyerStorage.ClearCart(buyerId);
             return View();
         }
 

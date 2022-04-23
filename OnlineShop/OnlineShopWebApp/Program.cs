@@ -2,7 +2,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Hosting;
 using System.Drawing.Text;
 
-namespace OnlineDesignBureauWebApp
+namespace OnlineShopWebApp
 {
     public class Program
     {

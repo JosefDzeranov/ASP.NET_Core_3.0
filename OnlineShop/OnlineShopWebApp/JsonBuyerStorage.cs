@@ -1,5 +1,4 @@
 ﻿using Newtonsoft.Json;
-using OnlineDesignBureauWebApp.Models;
 using OnlineShopWebApp.Interfase;
 using OnlineShopWebApp.Models;
 using System.Collections.Generic;
@@ -9,60 +8,53 @@ namespace OnlineShopWebApp
 {
     public class JsonBuyerStorage:IBuyerStorage
     {
-        
+        private const string buyersFileName = "Data/list_of_buyers.json";
+        private IProductStorage productStorage;
+
         public List<Buyer> Buyers { get; set; } = new List<Buyer>();
-        string nameSave = "list_of_buyers";
+
+        public JsonBuyerStorage()
+        {
+            ReadToStorage();
+        }
+
         public void WriteToStorage()
         {
             var json = JsonConvert.SerializeObject(Buyers, Formatting.Indented);
-            File.WriteAllText($"Data/{nameSave}.json", json);
+            File.WriteAllText(buyersFileName, json);
         }
+
         public void ReadToStorage()
         {
-            Buyers.Clear();
-            var json = File.ReadAllText($"Data/{nameSave}.json");
+            var json = File.ReadAllText(buyersFileName);
             Buyers = JsonConvert.DeserializeObject<List<Buyer>>(json);
         }
-        public void AddProductInCart(int productId, int buyerId, IProductStorage productStorage)
+        
+        public void AddProductInCart(int productId, int buyerId)
         {
-            var products = productStorage.Products;
-            var product = productStorage.FindProduct(productId, products);
             var buyer = FindBuyer(buyerId);
-            buyer.CartList=buyer.SumDuplicates(product);
+            var product = productStorage.FindProduct(productId);
+            buyer.AddProductInCart(product);
             WriteToStorage();
         }
+
         public void DeleteProductInCart(int productId, int buyerId)
         {
-            var cart = FindBuyer(buyerId).CartList;
-            for (int i = 0; i < cart.Count; i++)
-            {
-                cart.RemoveAt(i);
-            }
+            var buyer = FindBuyer(buyerId);
+            buyer.DeleteProductInCart(productId);
             WriteToStorage();
         }
 
         public void ReduceDuplicateProductCart(int productId, int buyerId)
         {
-            var cart = FindBuyer(buyerId).CartList;
-            for (int i = 0; i < cart.Count; i++)
-            {
-                if (productId == cart[i].Product.Id)
-                {
-                    if (cart[i].NumDuplicates > 1)
-                    {
-                        cart[i].NumDuplicates--;
-                    }
-                    else
-                    {
-                        cart.RemoveAt(i);
-                    }
-                }
-            }
+            var buyer = FindBuyer(buyerId);
+            buyer.ReduceDuplicateProductCart(productId);
             WriteToStorage();
         }
-        public void CleenCart(int buyerId)
+
+        public void ClearCart(int buyerId)
         {
-            FindBuyer(buyerId).CartList.Clear();
+            FindBuyer(buyerId).Cart.Clear();
             WriteToStorage();
         }
         public Buyer FindBuyer(int buyerId)
