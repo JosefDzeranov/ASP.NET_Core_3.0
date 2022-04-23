@@ -6,12 +6,12 @@ namespace OnlineShopWebApp.Controllers
     public class HomeController : Controller
     {
         IProductManager _productManager;
-        ICartManager cartManager;
+      
 
-        public HomeController(IProductManager productManager, ICartManager cartManager)
+        public HomeController(IProductManager productManager)
         {
             _productManager = productManager;
-            this.cartManager = cartManager;
+          
         }
         public IActionResult Index()
         {
