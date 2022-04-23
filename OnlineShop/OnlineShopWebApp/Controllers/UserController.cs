@@ -14,16 +14,9 @@ namespace OnlineShopWebApp.Controllers
             return View();
         }
 
-        public IActionResult NewUser(User user)
+        public IActionResult NewUser()
         {
-            if (user.Password == user.PasswordConfirm)
-            {
-                ModelState.AddModelError("", "Passwords should match.");
-            }
-            if (!ModelState.IsValid)
-            {
-                return Content($"{user.Login}- not valid");
-            }
+
             return View();
         }
 
@@ -32,12 +25,12 @@ namespace OnlineShopWebApp.Controllers
         {
             if (user.Login == "Login")
             {
-                ModelState.AddModelError("", "Please enter your personal Login.");
+                ModelState.AddModelError("", "Please enter unique Login.");
             }
 
-            if (!ModelState.IsValid)
+            if (ModelState.IsValid)
             {
-                return Content($"{user.Login}- not valid");
+                return Content($"{user.Login} - not valid");
             }
 
             return RedirectToAction("Products","Home");
@@ -46,6 +39,14 @@ namespace OnlineShopWebApp.Controllers
         [HttpPost]
         public IActionResult Register(User user)
         {
+            if (user.Password == user.PasswordConfirm)
+            {
+                ModelState.AddModelError("", "Passwords should match.");
+            }
+            if (ModelState.IsValid)
+            {
+                return Content($"{user.Login} - not valid");
+            }
             return RedirectToAction("Products", "Home");
         }
     }

@@ -13,7 +13,7 @@
             </div>
 
             <div class="form-group">
-                <label asp-for="SecondName">FirstName</label>
+                <label asp-for="SecondName">SecondName</label>
                 <input asp-for="SecondName" class="form-control" placeholder="FirstName" />
                 <span asp-validation-for="SecondName"></span>
             </div>
@@ -36,6 +36,7 @@
                 <span asp-validation-for="PasswordConfirm"></span>
             </div>
 
+            <br />
             <div>
                 <button class="btn btn-outline-success btn-sm" type="submit" asp-controller="User" asp-action="Register">Register</button>
             </div>
