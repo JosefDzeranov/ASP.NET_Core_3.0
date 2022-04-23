@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using OnlineShopWebApp.Models;
 
 namespace OnlineShopWebApp.Controllers
 {
@@ -30,9 +31,16 @@ namespace OnlineShopWebApp.Controllers
             return View(products);
         }
 
-        public IActionResult Add(int id)
+        public IActionResult Add()
         {
             return View();
+        }
+
+        [HttpPost]
+        public IActionResult Add(Product product)
+        {
+            _productStorage.AddProductToXml(product);
+            return RedirectToAction("Products");
         }
         
         public IActionResult Edit(int id)

@@ -9,13 +9,6 @@ namespace OnlineShopWebApp
     public class OrderStorage: IOrderStorage
     {
         private List<Order> orders = new List<Order>();
-        public List<Order> Orders
-        {
-            get
-            {
-                return orders;
-            }
-        }
 
         public Order TryGetByUserId(string userId)
         {
@@ -39,7 +32,6 @@ namespace OnlineShopWebApp
             {
                 xmlSerializer.Serialize(fs, order);
             }
-
         }
     }
 }

@@ -13,7 +13,7 @@
         @foreach (var item in Model.Products)
         {
             <div class="col-4 mb-4">
-                <img class="img-thumbnail mb-2" src="@item.Image" alt="@item.Name">
+                <img class="img-thumbnail mb-2" src="@item.ImagePath" alt="@item.Name">
                 <a style="color: darkblue" href="/product/index/@item.Id"><h5>@item.Name</h5></a>
                 <h6>$@item.Cost</h6>
                 <p>@item.Description</p>

@@ -14,7 +14,7 @@
         </div>
         <div class="col-10">
             <h2>Products</h2>
-            <h6><a class="nav-link ml-0" asp-controller="Admin" asp-action="Add">Add new Product</a></h6>
+            <h6><a class="nav-link" asp-controller="Admin" asp-action="Add">Add new Product</a></h6>
             <table class="table border-left border-right border-top border-bottom mt-4">
                 <caption>Product list</caption>
                 <thead class="table-light">
@@ -33,7 +33,7 @@
                                 @(i + 1)
                             </td>
                             <td>
-                                <a style="color: darkblue" href="/product/index/@Model[i].Id">@Model[i].Name</a>
+                                <a href="/product/index/@Model[i].Id">@Model[i].Name</a>
                             </td>
                             <td>
                                 $@Model[i].Cost

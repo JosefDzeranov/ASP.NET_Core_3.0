@@ -7,10 +7,10 @@
 
 <div class="row">
         <div class="col col-md-7">
-            <img class="img-thumbnail" src="@Model.Image" alt="@Model.Name">
+            <img class="img-thumbnail" src="@Model.ImagePath" alt="@Model.Name">
         </div>
         <div class="col-md-5 align-self-end">
-            <a style="color: darkblue" href="/product/index/@Model.Id"><h5>@Model.Name</h5></a>
+            <a href="/product/index/@Model.Id"><h5>@Model.Name</h5></a>
             <h6>$@Model.Cost</h6>
             <p>@Model.Description</p>
             <div class="row justify-content-end">              

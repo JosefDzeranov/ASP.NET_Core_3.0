@@ -1,0 +1,30 @@
+﻿@{
+    ViewData["Title"] = "Add product";
+}
+<div class="container align-content-center">
+    <div class="row">
+        <div class="col-2">
+            @await Html.PartialAsync("AdminMenuLeft") 
+        </div>
+        <div class="col-10 mx-auto">
+            <h2>Add product</h2>
+            <form method="post">
+                <div class="mb-3">
+                    <input class="form-control" type="text" name="imagepath" placeholder="Image path">
+                </div>
+                <div class="mb-3">
+                    <input class="form-control" type="text" name="name" placeholder="Name">
+                </div>
+                <div class="mb-3">
+                    <input class="form-control" type="number" name="cost" placeholder="Cost">
+                </div>
+                <div class="mb-3">
+                    <input class="form-control" type="text" name="description" placeholder="Description">
+                </div>
+                <div class="mb-3">
+                    <button type="submit" class="btn btn-outline-dark btn-sm active" asp-controller="Admin" asp-action="Add">Add</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

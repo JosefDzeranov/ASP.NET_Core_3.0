@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Xml.Linq;
+using System.IO;
+using System.Xml.Serialization;
 
 namespace OnlineShopWebApp
 {
@@ -26,6 +28,24 @@ namespace OnlineShopWebApp
             var product = GetProductData().Where(p => p.Id == id)
                                                  .FirstOrDefault();
             return product;
+        }
+
+        public void AddProductToXml(Product product)
+        {
+            var xmlSerializer = new XmlSerializer(typeof(Product));
+            using (FileStream fs = new FileStream("Data/AllProducts.xml", FileMode.OpenOrCreate))
+            {
+                xmlSerializer.Serialize(fs, product);
+            }
+        }
+
+        public void EditProduct(int id)
+        {
+
+        }
+        public void RemoveProduct(int id)
+        {
+
         }
     }
 }

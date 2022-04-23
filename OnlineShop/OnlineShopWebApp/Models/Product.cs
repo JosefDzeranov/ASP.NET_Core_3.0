@@ -1,18 +1,29 @@
-﻿namespace OnlineShopWebApp.Models
+﻿using System;
+
+namespace OnlineShopWebApp.Models
 {
     public class Product
     {
+        public Guid GuidId { get; set; }
         public int Id { get; set; }
-        public string Image { get; set; }
+        public string ImagePath { get; set; }
         public string Name { get; set; }
         public decimal Cost { get; set; }
         public string Description { get; set; }
 
         public Product () { } // Empty ctor for XML serializing.
-        public Product(int id, string image, string name, decimal cost, string description)
+        public Product(string imagePath, string name, decimal cost, string description)
+        {
+            GuidId = Guid.NewGuid();
+            ImagePath = imagePath;
+            Name = name;
+            Cost = cost;
+            Description = description;
+        }
+        public Product(int id, string imagePath, string name, decimal cost, string description)
         {
             Id = id;
-            Image = image;
+            ImagePath = imagePath;
             Name = name;
             Cost = cost;
             Description = description;
