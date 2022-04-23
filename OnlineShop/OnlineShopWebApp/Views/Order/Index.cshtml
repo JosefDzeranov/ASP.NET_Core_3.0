@@ -1,22 +1,24 @@
-﻿<div class="row text-center">
-    <div class="col">
+﻿<form method="post">
+    <div class="row text-center">
+        <div class="col">
 
-        <label>Введите ФИО</label>
-        <div>
-            <input class="text" />
+            <label>Введите ФИО</label>
+            <div>
+                <input class="text" name="name" />
+            </div>
+
+            <label>Введите адрес доставки</label>
+            <div>
+                <input class="text" name="addres" />
+            </div>
+
+            <label>Введите номер телефона</label>
+            <div>
+                <input class="text" name="phone" />
+            </div>
+
+            <br />
+            <button type="submit" class="btn btn-outline-success" asp-controller="Order" asp-action="Buy">Оформить заказ</button>
         </div>
-
-        <label>Введите адрес доставки</label>
-        <div>
-            <input class="text" />
-        </div>
-
-        <label>Введите номер телефона</label>
-        <div>
-            <input class="text" />
-        </div>
-
-        <br />
-        <a class="btn btn-outline-success" href="/order/buy" role="button">Оформить заказ</a>
     </div>
-</div>
+</form>
