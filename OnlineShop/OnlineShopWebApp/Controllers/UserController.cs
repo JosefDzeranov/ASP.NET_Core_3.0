@@ -23,6 +23,14 @@ namespace OnlineShopWebApp.Controllers
         [HttpPost]
         public IActionResult Login(User user)
         {
+            if (user.Login == user.Password)
+            {
+                ModelState.AddModelError("", "Name and Login should not be the same.");
+            }
+            if (!ModelState.IsValid)
+            {
+                return Content($"{user.Login}- not valid");
+            }
             return RedirectToAction("Products","Home");
         }
 
