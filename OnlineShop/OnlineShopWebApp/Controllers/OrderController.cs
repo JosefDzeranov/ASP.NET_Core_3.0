@@ -5,7 +5,7 @@ namespace OnlineShopWebApp.Controllers
 {
     public class OrderController : Controller
     {
-        private readonly IOrderManager orderManager;
+        IOrderManager orderManager;
         private readonly ICartManager cartManager;
 
 
@@ -19,18 +19,22 @@ namespace OnlineShopWebApp.Controllers
         {
             var cart = cartManager.TryGetCartByUserID(Constants.UserId);
 
-            var order = new Order(cart, Constants.UserId);
-
-            return View(order);
+            return View(cart);
         }
 
-        public IActionResult MakeOrder()
+        public IActionResult MakeOrder(string name, string adress, string email)
         {
             var cart = cartManager.TryGetCartByUserID(Constants.UserId);
-            orderManager.SaveOrder(new Order(cart, Constants.UserId));
 
 
+            var order = new Order(cart, Constants.UserId);
+            order.Adress = adress;
+            order.Name = name;
+            order.Email = email;
+
+            orderManager.SaveOrder(order);
             cartManager.RemoveCartLines(cart);
+
             return View();
         }
 

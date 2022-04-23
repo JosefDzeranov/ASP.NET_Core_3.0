@@ -1,4 +1,4 @@
-﻿@model Order
+﻿@model Cart
 
 
 
@@ -12,7 +12,7 @@
     }
 </style>
 
-    <p><b>ВАШ ЗАКАЗ:</b></p>
+<p><b>ВАШ ЗАКАЗ:</b></p>
 <table>
     <tr>
         <th> Наименование</th>
@@ -20,7 +20,7 @@
         <th>Стоимость</th>
     </tr>
 
-    @foreach (var cartLine in Model.Cart.CartLines)
+    @foreach (var cartLine in Model.CartLines)
     {
         <tr>
             <td>@cartLine.Product.Name</td>
@@ -34,28 +34,29 @@
     <tr>
 
         <td colspan="2"><b>Сумма заказа:</b></td>
-        <td><b>@Model.Cart.CartCost</b></td>
+        <td><b>@Model.CartCost</b></td>
     </tr>
 </table>
-<p>Ваше имя:</p>
-<textarea>@Model.Name </textarea>
-<p>
-    Ваш адрес:
-</p>
-<textarea>@Model.Adress </textarea>
 
-<p>
-    Ваша электронная почта:
-</p>
-<textarea>@Model.Email </textarea>
+<form method="post">
+    <p>Ваше имя:</p>
+    <input type="text" name="name"/>
+    <p>
+        Ваш адрес:
+    </p>
+    <input type="text" name="adress"/>
 
+    <p>
+        Ваша электронная почта:
+    </p>
+    <input type="text" name="email"/> <br />
+    <br />
+    <button class="btn btn-dark" type="submit" asp-controller="Order" asp-action="MakeOrder">заказать</button>
 
+</form>
 
+@*<br />  <a class="btn btn-dark" href="/order/makeorder" role="button">заказать</a>*@
 
-
-<p>
-    <a class="btn btn-dark" href="/order/makeorder" role="button">заказать</a>
-</p>
 
 
 
