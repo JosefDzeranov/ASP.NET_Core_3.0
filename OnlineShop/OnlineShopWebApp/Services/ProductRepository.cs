@@ -13,35 +13,40 @@ namespace OnlineShopWebApp.Services
                Name = "Незнайка на луне",
                Cost = 345.6m,
                Description = "Описание товара",
-               ImgPath ="/images/book.png"
+               ImgPath ="/images/book.png",
+               CategoryName = Product.Category.Фантастика
            },
            new Product()
            {
                Name = "Что делать?",
                Cost = 556.5m,
                Description = "Описание товара",
-               ImgPath ="/images/book.png"
+               ImgPath ="/images/book.png",
+               CategoryName = Product.Category.Классика
            },
            new Product()
            {
                Name = "Одисея капитана Блада",
                Cost = 1360.4m,
                Description = "Описание товара",
-               ImgPath ="/images/book.png"
+               ImgPath ="/images/book.png",
+               CategoryName = Product.Category.Приключения
            },
             new Product()
            {
                Name = "Война и мир",
                Cost = 790.6m,
                Description = "Описание товара",
-               ImgPath ="/images/book.png"
+               ImgPath ="/images/book.png",
+               CategoryName = Product.Category.Классика
            },
             new Product()
            {
                Name = "Овод",
                Cost = 860.45m,
                Description = "Описание товара",
-               ImgPath ="/images/book.png"
+               ImgPath ="/images/book.png",
+               CategoryName = Product.Category.Классика
            },
 
 

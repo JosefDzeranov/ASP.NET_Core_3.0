@@ -7,24 +7,49 @@
 
 
 <div class="row">
-    @foreach (var product in Model)
-    {
-        <div class="col-3">
-            <div class="card-deck">
-                <img src="@product.ImgPath" class="card-img-top" alt="изображение книги" />
-                <div class="card-body">
-                    <h5 class="card-title">@product.Name</h5>
-                    <div>
-                        <h4>@product.Cost руб.</h4>
-                        <a href="/favorites/add?productId=@product.Id" class="btn btn-primary btn-sm">в избранное</a>
-                    </div>
-
-                    <a href="/cart/add?productId=@product.Id" class="btn btn-dark btn-sm">Добавить в корзину</a>
-                    <a href="/product/index/@product.Id" class="btn btn-dark btn-sm">Подробнее</a>
-                </div>
+    <div class="col-3">
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">Фильтр</h5>
+                <h6 class="card-title">Категория</h6>
             </div>
         </div>
-    }
+    </div>
+    <div class="col-9">
+        <div class="row">
+            @foreach (var product in Model)
+            {
+
+                <div class="card mb-3" style="max-width: 740px;">
+                    <div class="row g-0">
+                        <div class="col-md-4">
+                            <img src="@product.ImgPath" class="img-fluid rounded-start" alt="изображение книги">
+                        </div>
+                        <div class="col-md-6">
+                            <div class="card-body">
+
+                                <h5 class="card-title"><a href="/product/index/@product.Id" class="card-link">@product.Name</a></h5>
+                                <h6>Жанр:</h6>
+                                <p class="card-text">
+                                    @product.CategoryName
+                                </p>
+
+                            </div>
+                        </div>
+                        <div class="col-md-2">
+                        <p class="card-text">
+                            <a href="/favorites/add?productId=@product.Id" class="btn btn-primary btn-sm">в избранное</a>
+                            <a href="/cart/add?productId=@product.Id" class="btn btn-dark btn-sm">Добавить в корзину</a> 
+                        </p>
+                    </div>
+                    </div>
+                    
+                </div>
+
+            }
+        </div>
+    </div>
+
 </div>
 
 
