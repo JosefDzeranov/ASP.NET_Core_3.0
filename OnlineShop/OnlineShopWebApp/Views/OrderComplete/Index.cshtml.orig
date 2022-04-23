@@ -9,6 +9,7 @@
 			</legend>
 			<label for="user-name">Введите имя</label>
 			<input id="user-name" type="text" placeholder="Например, Иван" autofocus><br>
+			
 			<label for="user-name">Введите фамилию</label>
 			<input id="user-name" type="text"  name="name" placeholder="Например, Иванов"><br>
 			<label for="#">Введите номер телефона</label>
@@ -21,7 +22,11 @@
 				
 		</fieldset>
 	</form>
+<<<<<<< Updated upstream
 	</body>
+=======
+</body>
+>>>>>>> Stashed changes
 
 					<tr>@Model?.Name</tr>>
 					<td>@Model?.Surname</td>

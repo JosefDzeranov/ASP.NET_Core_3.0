@@ -1,7 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using OnlineShopWebApp.Services;
 using OnlineShopWebApp.Models;
-using OnlineShopWebApp.Controllers;
 
 namespace OnlineShopWebApp.Controllers
 {
@@ -19,12 +18,12 @@ namespace OnlineShopWebApp.Controllers
         }
         public IActionResult Index()
         {
-          return View();
+            return View();
         }
-        
+
         [HttpPost]
-       public IActionResult Buy(Order order)
-       {            
+        public IActionResult Buy(Order order)
+        {
             ordersRepository.Add(order);
             cartRepository.RemoveAll();
             return View();
