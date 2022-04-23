@@ -29,6 +29,7 @@ namespace OnlineShopWebApp
             services.AddSingleton<ICartManager,CartManager>();
             services.AddSingleton<IProductManager,ProductManager>();
             services.AddSingleton<IOrderManager, OrderManager>();
+            services.AddSingleton<IComparison, ComparisonManager>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
