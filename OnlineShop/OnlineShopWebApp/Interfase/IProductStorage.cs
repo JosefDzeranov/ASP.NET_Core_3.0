@@ -6,9 +6,8 @@ namespace OnlineShopWebApp.Interfase
     public interface IProductStorage
     {
         List<Product> Products { get; set; }
-        string WriteToStorage();
-        void ReadToStorage();
         Product FindProduct(int productIds);
-        string ReadDataProducts();
+        string WriteToStorage();
+
     }
 }

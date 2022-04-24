@@ -15,32 +15,24 @@ namespace OnlineShopWebApp
         {
             ReadToStorage();
         }
+
+        public Product FindProduct(int productId)
+        {
+            var product = Products.Find(x => x.Id == productId);
+            return product;
+        }
+
         public string WriteToStorage()
         {
             var json = JsonConvert.SerializeObject(Products, Formatting.Indented);
             File.WriteAllText(nameSave, json);
             return json;
         }
-        public void ReadToStorage()
+
+        private void ReadToStorage()
         {
             var json = File.ReadAllText(nameSave);
             Products = JsonConvert.DeserializeObject<List<Product>>(json);
-        }
-        public Product FindProduct(int productId)
-        {
-            var product = Products.Find(x => x.Id == productId);
-            return product;
-        }
-        public string ReadDataProducts()
-        {
-            if (Products.Count == 0)
-                ReadToStorage();
-            var result = "";
-            foreach (var product in Products)
-            {
-                result += product + "\n\n";
-            }
-            return result;
         }
     }
 }

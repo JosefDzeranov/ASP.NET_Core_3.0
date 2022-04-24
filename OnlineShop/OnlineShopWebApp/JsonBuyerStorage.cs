@@ -6,28 +6,16 @@ using System.IO;
 
 namespace OnlineShopWebApp
 {
-    public class JsonBuyerStorage:IBuyerStorage
+    public class JsonBuyerStorage : IBuyerStorage
     {
         private const string buyersFileName = "Data/list_of_buyers.json";
         private IProductStorage productStorage;
 
-        public List<Buyer> Buyers { get; set; } = new List<Buyer>();
+        private List<Buyer> buyers = new List<Buyer>();
 
         public JsonBuyerStorage()
         {
             ReadToStorage();
-        }
-
-        public void WriteToStorage()
-        {
-            var json = JsonConvert.SerializeObject(Buyers, Formatting.Indented);
-            File.WriteAllText(buyersFileName, json);
-        }
-
-        public void ReadToStorage()
-        {
-            var json = File.ReadAllText(buyersFileName);
-            Buyers = JsonConvert.DeserializeObject<List<Buyer>>(json);
         }
         
         public void AddProductInCart(int productId, int buyerId)
@@ -54,13 +42,34 @@ namespace OnlineShopWebApp
 
         public void ClearCart(int buyerId)
         {
-            FindBuyer(buyerId).Cart.Clear();
+            var buyer = FindBuyer(buyerId);
+            buyer.ClearCart();
             WriteToStorage();
         }
+
+        public void ReportTransaction(int buyerId)
+        {
+            var buyer = FindBuyer(buyerId);
+            buyer.ReportTransaction();
+            WriteToStorage();
+        }
+
         public Buyer FindBuyer(int buyerId)
         {
-            var buyer = Buyers.Find(x => x.Id == buyerId);
+            var buyer = buyers.Find(x => x.Id == buyerId);
             return buyer;
+        }
+
+        private void WriteToStorage()
+        {
+            var json = JsonConvert.SerializeObject(buyers, Formatting.Indented);
+            File.WriteAllText(buyersFileName, json);
+        }
+
+        private void ReadToStorage()
+        {
+            var json = File.ReadAllText(buyersFileName);
+            buyers = JsonConvert.DeserializeObject<List<Buyer>>(json);
         }
     }
 }

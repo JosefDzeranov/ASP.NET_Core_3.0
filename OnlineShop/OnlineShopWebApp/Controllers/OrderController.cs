@@ -12,16 +12,17 @@ namespace OnlineShopWebApp.Controllers
         {
             this.buyerStorage = buyerStorage;
         }
+
         [HttpPost]
         public IActionResult Index(int buyerId)
         {
             return View(buyerStorage.FindBuyer(buyerId));
         }
+
         public IActionResult ReportTransaction(int buyerId)
         {
-            buyerStorage.FindBuyer(buyerId).Orders.AddRange(buyerStorage.FindBuyer(buyerId).Cart);
-            buyerStorage.ClearCart(buyerId);
-            return View();
+            buyerStorage.ReportTransaction(buyerId);
+            return View(); 
         }
 
         public IActionResult Buy()

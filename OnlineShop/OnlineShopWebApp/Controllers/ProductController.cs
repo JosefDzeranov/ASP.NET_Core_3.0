@@ -10,11 +10,13 @@ namespace OnlineShopWebApp.Controllers
         {
             this.productStorage = productStorage;
         }
+
         public IActionResult Index(int id)
         {
             var product = productStorage.Products[id];
             return View (product);
         }
+
         public string Save(string name)
         {
             return productStorage.WriteToStorage();

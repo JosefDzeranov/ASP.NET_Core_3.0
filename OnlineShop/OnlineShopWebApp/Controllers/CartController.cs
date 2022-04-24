@@ -17,21 +17,25 @@ namespace OnlineShopWebApp.Controllers
         {
             return View(buyerStorage.FindBuyer(buyerId));
         }
+
         public IActionResult AddProduct(int product, int buyerId)
         {
             buyerStorage.AddProductInCart(product, buyerId);
             return RedirectToAction("Index", new {buyerId});
         }
+
         public IActionResult DeleteProduct(int productId, int buyerId)
         {
             buyerStorage.DeleteProductInCart(productId, buyerId);
             return RedirectToAction("Index", new { buyerId });
         }
+
         public IActionResult ReduceDuplicateProduct(int productId, int buyerId)
         {
             buyerStorage.ReduceDuplicateProductCart(productId, buyerId);
             return RedirectToAction("Index", new { buyerId });
         }
+
         public IActionResult Clear(int buyerId)
         {
             buyerStorage.ClearCart(buyerId);

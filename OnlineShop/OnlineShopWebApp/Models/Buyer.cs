@@ -7,16 +7,10 @@ namespace OnlineShopWebApp.Models
     public class Buyer: User
     {
 
-        public List<Product> Comparison { get; set; }
-        public List<CartItem> Cart { get; set; }
-        public List<CartItem> Orders { get; set; }
-        public Buyer(int id, string fistname, string secondname, string surname, int age, string email, string password_input) 
-            : base(id, fistname, secondname, surname, age,  email,  password_input)
-        {
-            Comparison = new List<Product>();
-            Cart = new List<CartItem>();
-            Orders = new List<CartItem>();
-        }
+        public List<Product> Comparisons { get; set; } = new List<Product>();
+        public List<CartItem> Cart { get; set; } = new List<CartItem>();
+        public List<CartItem> Orders { get; set; } = new List<CartItem>();
+
         public override string ToString()
         {
             return $"Id: {Id};\nИмя: {Fistname};\nФамилия: {Surname};\nВозраст: {Age};\nEmail: {Email};";
@@ -30,6 +24,7 @@ namespace OnlineShopWebApp.Models
             }
             return sum;
         }
+
         public void AddProductInCart(Product product)
         {
             var existingCartItem = Cart.Find(x => x.Product.Id == product.Id);
@@ -45,7 +40,7 @@ namespace OnlineShopWebApp.Models
 
         public void DeleteProductInCart(int productId)
         {
-            Cart.RemoveAll(CartItem => CartItem.Product.Id == productId);
+            Cart.RemoveAll(cartItem => cartItem.Product.Id == productId);
         }
 
         public int SumAllProducts()
@@ -71,12 +66,20 @@ namespace OnlineShopWebApp.Models
 
             if (existingCartItem.Count <= 0)
             {
-                Cart.RemoveAll(CartItem.)
+                Cart.Remove(existingCartItem);
             }
-            else
-            {
-                Cart.Add(new CartItem() { Product = product, Count = 1 });
-            }
+
+        }
+
+        public void ClearCart()
+        {
+            Cart.Clear();
+        }
+
+        public void ReportTransaction()
+        {
+            Orders.AddRange(Cart);
+            Cart.Clear();
         }
     }
 }

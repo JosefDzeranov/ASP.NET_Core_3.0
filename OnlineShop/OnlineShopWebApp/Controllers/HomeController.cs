@@ -11,6 +11,7 @@ namespace OnlineShopWebApp.Controllers
         {
             this.productStorage = productStorage;
         }
+
         public IActionResult Index()
         {
             return View(productStorage.Products);
