@@ -1,7 +1,18 @@
 ﻿<div class="row">
     @await Html.PartialAsync("AdminPanel")
 
+
+    <h1>Edit</h1>
+        
+    <div>
+        <a asp-action="Index">Back to List</a>
+    </div>
+
     <div class="col-9">
+        <div class="form-group">
+            <input type="text" name="name" class="form-control" placeholder="Name">
+        </div>
+
         <div class="form-group">
             <input type="text" name="name" class="form-control" placeholder="Name">
         </div>
@@ -15,12 +26,13 @@
         </div>
 
         <div>
-            <label class="form-label" for="customFile">Add product main picture</label>
-            <input type="file" class="form-control" id="customFile" />
+            <label class="form-label" for="item">Add product main picture</label>
+            <input type="file" class="form-control" id="item" accept=".png" />
         </div>
 
+        <br />
         <div>
-            <a class="btn btn-outline-success btn-sm" href="#" role="button">Add product</a>
+            <a class="btn btn-outline-success btn-sm" href="#" role="button">Update</a>
         </div>
     </div>
 </div>

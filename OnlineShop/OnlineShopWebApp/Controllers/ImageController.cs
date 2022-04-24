@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Mvc;
 using OnlineShopWebApp.Models;
 using System;
 using System.Collections.Generic;
@@ -8,41 +9,18 @@ using System.Threading.Tasks;
 
 namespace OnlineShopWebApp.Controllers
 {
-    public class AdminController : Controller
+    public class ImageController : Controller
     {
 
         private readonly IProductsRepository productReposititory;
 
-        public AdminController(IProductsRepository productsRepository)
+        public ImageController(IProductsRepository productReposititory)
         {
-            this.productReposititory = productsRepository;
+            this.productReposititory = productReposititory;
         }
 
-        public IActionResult AdminPanel()
+        public IActionResult Index()
         {
-            return View();
-        }
-        public IActionResult Orders()
-        {
-            return View();
-        }
-        public IActionResult Products()
-        {
-            var products = productReposititory.GetAll();
-            return View(products);
-        }
-        public IActionResult Status()
-        {
-            return View();
-        }
-        public IActionResult Users()
-        {
-            return View();
-        }
-
-        public IActionResult Edit()
-        {
-
             return View();
         }
 
@@ -65,11 +43,15 @@ namespace OnlineShopWebApp.Controllers
         [HttpPost]
         public IActionResult Delete(int id, Image image)
         {
-            var imagePath = Path.Combine("/Image/", image.Name);
+            var imagePath = Path.Combine("/Image/", image.Name); 
             if (System.IO.File.Exists(imagePath))
                 System.IO.File.Delete(imagePath);
-
+            
             return RedirectToAction("Index");
         }
+
+
+
+
     }
 }

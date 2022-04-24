@@ -4,6 +4,7 @@
     @await Html.PartialAsync("AdminPanel")
 
     <div class="col-9">
+
         <table class="table">
             <thead>
                 <tr>
@@ -13,25 +14,29 @@
                     
                 </tr>
             </thead>
+
             <tbody>
                 @foreach (var item in Model)
-                {
-                <tr>
-                    <td>@(item.Id+1)</td>
-                    <td>
-                        <a style="color:black" href="/product/item/@item.Id">@item.Name </a>
-                    </td>
-                    <td>@item.Cost</td>
-                    <td>
-                        <a style="color:black" asp-controller="Admin" asp-action="Edit">Edit </a>
-                    </td>
-                    <td>
-                        <a class="btn btn-outline-dark btn-sm" href="#" role="button">Delete</a>
-                    <td>
+                    {
+                    <tr>
+                        <td>@(item.Id+1)</td>                    
+                        <td>
+                            <a style="color:black" href="/product/item/@item.Id">@item.Name </a>
+                        </td>
+                    
+                        <td>@item.Cost</td>
+                        <td>
+                            <a style="color:black" asp-controller="Admin" asp-action="Edit">Edit </a>
+                        </td>
 
-                </tr>
-                }
+                        <td>
+                            <a class="btn btn-outline-dark btn-sm" href="#" role="button">Delete</a>
+                        <td>
+                    </tr>
+                    }
             </tbody>
+
         </table>
+
     </div>
 </div>
