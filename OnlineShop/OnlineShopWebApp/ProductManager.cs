@@ -13,20 +13,14 @@ namespace OnlineShopWebApp
 
         };
 
-
-
         public List<Product> AllProducts()
         {
-
             return productList;
-
         }
 
         public Product FindProduct(int id)
         {
-
             return productList.Find(product => product.Id == id);
-
         }
 
     }

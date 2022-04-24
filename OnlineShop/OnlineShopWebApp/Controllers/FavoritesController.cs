@@ -45,7 +45,5 @@ namespace OnlineShopWebApp.Controllers
 
         }
 
-
     }
-
 }

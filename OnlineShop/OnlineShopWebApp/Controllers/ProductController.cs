@@ -17,8 +17,6 @@ namespace OnlineShopWebApp.Controllers
             return View(foundProduct);
         }
 
-        
     }
-
 
 }

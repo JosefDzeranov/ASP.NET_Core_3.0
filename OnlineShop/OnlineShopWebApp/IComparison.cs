@@ -8,8 +8,6 @@ namespace OnlineShopWebApp.Models
         public List<Product> Products { get; }
         public void AddProduct(Product product);
         public List<Product> GetProducts();
-
-      
-        
+                
     }
 }

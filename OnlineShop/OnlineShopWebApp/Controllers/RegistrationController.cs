@@ -5,8 +5,6 @@ namespace OnlineShopWebApp.Controllers
 {
     public class RegistrationController : Controller
     {
-
-
         public IActionResult Index()
         {
 
@@ -18,7 +16,7 @@ namespace OnlineShopWebApp.Controllers
         {
             return RedirectToAction("Index", "Home");
         }
-       
+
     }
 
 }
