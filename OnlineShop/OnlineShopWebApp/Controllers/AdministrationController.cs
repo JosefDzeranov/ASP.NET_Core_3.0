@@ -47,14 +47,15 @@ namespace OnlineShopWebApp.Controllers
             productsRepository.Add(product);
             return View();
         }
-        public IActionResult Edit()
+        public IActionResult Edit(int productId)
         {
-            return View();
+            var product = productsRepository.TryGetById(productId);
+            return View(product);
         }
         [HttpPost]
-        public IActionResult EditData(int productId)
+        public IActionResult EditProduct(int productId, Product product)
         {
-            productsRepository.Edit(productId);
+            productsRepository.Edit(productId, product);
             return View();
         }
         public IActionResult Delete(int productId)
