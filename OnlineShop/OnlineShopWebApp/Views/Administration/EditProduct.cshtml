@@ -1,0 +1,25 @@
+﻿<form method="post">
+@model Product
+
+<h2>Редактирование продукта</h2>
+
+
+   
+    <input type="hidden" value=@Model.Id name="id" />
+
+<p> Имя продукта:</p>
+    <input type="text" name="name"/>
+    <p>
+        Цена:
+    </p>
+    <input type="text" name="cost"/>
+
+    <p>
+        Описание:
+    </p>
+    <input type="text" name="description"/> <br />
+    <br />
+    <button class="btn btn-dark" type="submit" asp-controller="Administration" asp-action="SaveEditedProduct">сохранить изменения</button>
+
+
+</form>

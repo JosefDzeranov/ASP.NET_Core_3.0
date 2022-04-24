@@ -20,7 +20,7 @@ namespace OnlineShopWebApp.Controllers
 
         public IActionResult Orders()
         {
-            
+
             return View();
         }
 
@@ -38,6 +38,30 @@ namespace OnlineShopWebApp.Controllers
         {
             var productList = productManager.productList;
             return View(productList);
+        }
+
+        public IActionResult EditProduct(int id)
+        {
+            var product = productManager.FindProduct(id);
+            return View(product);
+        }
+
+        [HttpPost]
+        public IActionResult SaveEditedProduct(int id, string name, string cost, string description)
+        {
+
+            foreach (var product in productManager.productList)
+            {
+                if (product.Id == id)
+                {
+                    product.Name = name;
+                    product.Cost = decimal.Parse(cost);
+                    product.Description = description;
+
+                }
+            }
+
+            return View();
         }
     }
 

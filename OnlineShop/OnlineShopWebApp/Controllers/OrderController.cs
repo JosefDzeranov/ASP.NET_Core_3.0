@@ -21,7 +21,7 @@ namespace OnlineShopWebApp.Controllers
 
             return View(cart);
         }
-
+       
         public IActionResult MakeOrder(string name, string adress, string email)
         {
             var cart = cartManager.TryGetCartByUserID(Constants.UserId);

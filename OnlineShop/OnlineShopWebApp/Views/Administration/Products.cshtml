@@ -32,7 +32,7 @@
                     <td>@(i+1)</td>
                     <td><a class="text-dark" href="/product/index/@Model[i].Id" role="button">@Model[i].Name</a></td>
                     <td>@Model[i].Cost</td>
-                    <td><a class="text" href="#" role="button">Редактировать</a></td>
+                    <td><a class="text" href="/administration/EditProduct/@Model[i].Id" role="button">Редактировать</a></td>
                     <td><a class="text" href="#" role="button">Удалить</a></td>
                 </tr>
             }
