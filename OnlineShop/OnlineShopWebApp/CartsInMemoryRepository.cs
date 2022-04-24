@@ -79,7 +79,7 @@ namespace OnlineShopWebApp
             }
         }
 
-        void ICartBase.Delete(string userId)
+        public void Delete(string userId)
         {
             var existingCart = TryGetByUserId(userId);
             carts.Remove(existingCart);
