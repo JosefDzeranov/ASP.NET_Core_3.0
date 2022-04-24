@@ -49,7 +49,8 @@ namespace OnlineShopWebApp.Controllers
 
         }public IActionResult Remove(string productId)
         {
-            return View();
+            _productStorage.RemoveProduct(productId);
+            return RedirectToAction("Products"); ;
         }
     }
 }

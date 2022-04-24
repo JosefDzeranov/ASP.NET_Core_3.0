@@ -51,7 +51,14 @@ namespace OnlineShopWebApp
         }
         public void RemoveProduct(string productId)
         {
+            var xDoc = XDocument.Load("Data/AllProducts.xml");
+            var root = xDoc.Element("products");
 
+            var product = root.Elements("product")
+                              .FirstOrDefault(p => p.Attribute("id").Value == productId);
+
+                product.Remove();
+                xDoc.Save("Data/AllProducts.xml");
         }
     }
 }
