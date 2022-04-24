@@ -9,7 +9,7 @@ namespace OnlineShopWebApp
         List<Product> GetProductData();
         Product TryGetProduct(string productId);
         void AddProductToXml(Product product);
-        void EditProduct(string productId);
+        void EditProduct(Product product);
         void RemoveProduct(string productId);
     }
 }

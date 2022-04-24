@@ -45,9 +45,18 @@ namespace OnlineShopWebApp.Controllers
         
         public IActionResult Edit(string productId)
         {
-            return View();
-
-        }public IActionResult Remove(string productId)
+            var product = _productStorage.TryGetProduct(productId);
+            return View(product);
+        }
+        
+        [HttpPost]
+        public IActionResult Save(Product product)
+        {
+            _productStorage.EditProduct(product);
+            return RedirectToAction("Products");
+        }
+ 
+        public IActionResult Remove(string productId)
         {
             _productStorage.RemoveProduct(productId);
             return RedirectToAction("Products"); ;

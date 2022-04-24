@@ -8,11 +8,11 @@ namespace OnlineShopWebApp
 {
     public class ProductStorage : IProductStorage
     {
-        //private List<Product> _products = new List<Product>();
+        private List<Product> _products = new List<Product>();
         public List<Product> GetProductData()
         {
             var xDoc = XDocument.Load("Data/AllProducts.xml");
-            var products = xDoc.Element("products")
+            _products = xDoc.Element("products")
                                .Elements("product")
                                .Select(p => new Product(  
                                        p.Attribute("id").Value,
@@ -20,7 +20,7 @@ namespace OnlineShopWebApp
                                        p.Element("name").Value,
                                        decimal.Parse(p.Element("cost").Value),
                                        p.Element("description").Value)).ToList();
-            return products;
+            return _products;
         }
 
         public Product TryGetProduct(string productId)
@@ -45,10 +45,28 @@ namespace OnlineShopWebApp
             xDoc.Save("Data/AllProducts.xml");
         }
 
-        public void EditProduct(string productId)
+        public void EditProduct(Product product)
         {
+            var xDoc = XDocument.Load("Data/AllProducts.xml");
+            var editProduct = xDoc.Element("products")
+                              .Elements("product")
+                              .FirstOrDefault(p => p.Attribute("id").Value == product.Id);
+            
+            var imagePath = editProduct.Element("img");
+            imagePath.Value = product.ImagePath;
+            
+            var name = editProduct.Element("name");
+            name.Value = product.Name;
 
+            var cost = editProduct.Element("cost");
+            cost.Value = product.Cost.ToString();
+
+            var desc = editProduct.Element("description");
+            desc.Value = product.Description;
+
+            xDoc.Save("Data/AllProducts.xml");
         }
+
         public void RemoveProduct(string productId)
         {
             var xDoc = XDocument.Load("Data/AllProducts.xml");

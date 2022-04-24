@@ -1,0 +1,40 @@
+﻿@model Product
+
+@{
+    ViewData["Title"] = "Edit product data";
+}
+<div class="container align-content-center">
+    <div class="row">
+        <div class="col-2">
+            @await Html.PartialAsync("AdminMenuLeft")
+        </div>
+        <div class="col-10 mx-auto">
+            <h2>Edit product data</h2>
+            <form method="post">
+                <div class="mb-3">
+                    <label class="form-label text-muted" for="inputId">Id</label>
+                    <textarea class="form-control" id="inputId" rows="1" name="id" placeholder="Id" readonly>@Model.Id</textarea>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label text-muted" for="inputImagePath">Image path</label>
+                    <textarea class="form-control" id="inputImagePath" rows="1" name="imagepath">@Model.ImagePath</textarea>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label text-muted" for="inputName">Name</label>
+                    <textarea class="form-control" id="inputName" rows="1" name="name" placeholder="Name">@Model.Name</textarea>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label text-muted" for="inputCost">Cost</label>
+                    <textarea class="form-control" id="inputCost" rows="1" name="cost" placeholder="Cost">@Model.Cost</textarea>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label text-muted" for="inputDescription">Description</label>
+                    <textarea class="form-control" id="inputDescription" rows="4" name="description" placeholder="Description">@Model.Description</textarea>
+                </div>
+                <div class="mb-3">
+                    <button type="submit" class="btn btn-outline-dark btn-sm active" asp-controller="Admin" asp-action="Save">Save</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
