@@ -1,0 +1,75 @@
+<?xml version="1.0"?>
+<Order xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <Id>95b593da-1620-4aa6-af74-83f8ec6219d5</Id>
+  <Date>2022-04-24T14:12:51.3623228+03:00</Date>
+  <UserId>UserId</UserId>
+  <Basket>
+    <Id>d74f9733-ef24-4b61-aee4-7f7fc9b91b12</Id>
+    <UserId>UserId</UserId>
+    <Items>
+      <BasketItem>
+        <Id>72e2e68b-d068-4603-b723-7b9acee401d4</Id>
+        <Product>
+          <GuidId>400b8ca2-9989-40de-b485-899fd8a22f1f</GuidId>
+          <Id>d222806d-de99-41e8-9e98-cccce9a3316b</Id>
+          <ImagePath>/img/abstraction.jpg</ImagePath>
+          <Name>Abstraction</Name>
+          <Cost>1000</Cost>
+          <Description>
+		  Digital drawing,
+		  3247x2463px
+		  (27.5cm x 20.9cm 300dpi),
+		  745kB | jpg
+	  </Description>
+        </Product>
+        <Quantity>2</Quantity>
+      </BasketItem>
+      <BasketItem>
+        <Id>c63c7a0c-7620-45a7-aa9e-c8c8f8bd41c6</Id>
+        <Product>
+          <GuidId>83c4318f-2a2d-4498-aa80-cf8e95d4f0d5</GuidId>
+          <Id>e8d5d360-182b-48a0-aa22-8bce77b61b07</Id>
+          <ImagePath>/img/landscape.jpg</ImagePath>
+          <Name>Landscape</Name>
+          <Cost>2000</Cost>
+          <Description>
+		  Photography,
+		  3247x2463px
+		  (27.5cm x 20.9cm 300dpi),
+		  745kB | jpg
+	  </Description>
+        </Product>
+        <Quantity>1</Quantity>
+      </BasketItem>
+      <BasketItem>
+        <Id>8bae7f85-4117-4b88-a523-df7e3e38c993</Id>
+        <Product>
+          <GuidId>3c433003-9efa-4ee9-b573-82dd536f1a33</GuidId>
+          <Id>4f70b2db-ac68-4d84-9a74-1b99479502d9</Id>
+          <ImagePath>/img/portret.jpg</ImagePath>
+          <Name>Portret</Name>
+          <Cost>3000</Cost>
+          <Description>
+		  Illustration,
+		  3757x2129px
+		  (31.8cm x 18cm 300dpi),
+		  1.4MB | jpg
+	  </Description>
+        </Product>
+        <Quantity>1</Quantity>
+      </BasketItem>
+    </Items>
+  </Basket>
+  <Delivery>
+    <Address>
+      <ZipCode>12312312</ZipCode>
+      <Country>qweqweq </Country>
+      <City> qwe qwe</City>
+      <Street>erwer ew</Street>
+      <House>33</House>
+      <Apartment>332</Apartment>
+    </Address>
+    <Phone>3232</Phone>
+    <Email>qweqw</Email>
+  </Delivery>
+</Order>

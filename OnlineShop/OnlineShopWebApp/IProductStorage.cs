@@ -1,4 +1,5 @@
-﻿using OnlineShopWebApp.Models;
+﻿using System;
+using OnlineShopWebApp.Models;
 using System.Collections.Generic;
 
 namespace OnlineShopWebApp
@@ -6,9 +7,9 @@ namespace OnlineShopWebApp
     public interface IProductStorage
     {
         List<Product> GetProductData();
-        Product TryGetProduct(int id);
+        Product TryGetProduct(string productId);
         void AddProductToXml(Product product);
-        void EditProduct(int id);
-        void RemoveProduct(int id);
+        void EditProduct(string productId);
+        void RemoveProduct(string productId);
     }
 }

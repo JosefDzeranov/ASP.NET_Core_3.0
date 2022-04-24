@@ -27,7 +27,7 @@ namespace OnlineShopWebApp.Controllers
 
         public IActionResult Products()
         {
-            var products = _productStorage.GetProductData();
+            var products = _productStorage?.GetProductData();
             return View(products);
         }
 
@@ -43,11 +43,11 @@ namespace OnlineShopWebApp.Controllers
             return RedirectToAction("Products");
         }
         
-        public IActionResult Edit(int id)
+        public IActionResult Edit(string productId)
         {
             return View();
 
-        }public IActionResult Remove(int id)
+        }public IActionResult Remove(string productId)
         {
             return View();
         }
