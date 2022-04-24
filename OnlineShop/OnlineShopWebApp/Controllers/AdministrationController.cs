@@ -63,6 +63,13 @@ namespace OnlineShopWebApp.Controllers
 
             return View();
         }
+
+        public IActionResult RemoveProduct(int id)
+        {
+            var product = productManager.FindProduct(id);
+            productManager.productList.Remove(product);
+            return View(product);
+        }
     }
 
 }
