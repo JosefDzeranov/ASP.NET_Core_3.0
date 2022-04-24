@@ -4,43 +4,40 @@
     <img>/img/stilllife.jpg</img>
     <name>Still life</name>
     <cost>1500</cost>
-    <description>
-		  Photography,
-		  3452x4591px
-		  (29.2cm x 38.9cm 300dpi),
-		  3.9 MB | jpg
+    <description>Photography,
+3452x4591px
+(29.2cm x 38.9cm 300dpi),
+3.9 MB | jpg
 	  </description>
   </product>
   <product id="4f70b2db-ac68-4d84-9a74-1b99479502d9">
     <img>/img/portret.jpg</img>
     <name>Portret</name>
     <cost>3000</cost>
-    <description>
-		  Illustration,
-		  3757x2129px
-		  (31.8cm x 18cm 300dpi),
-		  1.4MB | jpg
+    <description>Illustration,
+3757x2129px
+(31.8cm x 18cm 300dpi),
+1.4MB | jpg
 	  </description>
   </product>
   <product id="e8d5d360-182b-48a0-aa22-8bce77b61b07">
     <img>/img/landscape.jpg</img>
     <name>Landscape</name>
     <cost>2000</cost>
-    <description>
-		  Photography,
-		  3247x2463px
-		  (27.5cm x 20.9cm 300dpi),
-		  745kB | jpg
+    <description>Photography,
+3247x2463px
+(27.5cm x 20.9cm 300dpi),
+745kB | jpg
 	  </description>
   </product>
   <product id="d222806d-de99-41e8-9e98-cccce9a3316b">
     <img>/img/abstraction.jpg</img>
     <name>Abstraction</name>
     <cost>1000</cost>
-    <description>		  Digital drawing,
-		  3247x2463px
-		  (27.5cm x 20.9cm 300dpi),
-		  745kB | jpg
+    <description>Digital drawing,
+3247x2463px
+(27.5cm x 20.9cm 300dpi),
+745kB | jpg
 	  </description>
   </product>
 </products>
