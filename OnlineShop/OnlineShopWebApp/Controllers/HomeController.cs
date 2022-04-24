@@ -22,5 +22,26 @@ namespace OnlineShopWebApp.Controllers
             return View(products);
         }
 
+        [HttpPost]
+        public IActionResult SearchByName(string name)
+        {
+            if (name != null)
+            {
+                if (_productManager.productList.Find(x => x.Name.ToLower() == name.ToLower()) != null)
+                {
+                    var id = _productManager.productList.Find(x => x.Name.ToLower() == name.ToLower()).Id;
+
+                    return Redirect($"/product/index/{id}");
+
+                }
+                else
+                {
+                    return View();
+                }
+            }
+            return RedirectToAction("Index");
+        }
+
+
     }
 }
