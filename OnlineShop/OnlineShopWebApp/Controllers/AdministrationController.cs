@@ -10,12 +10,13 @@ namespace OnlineShopWebApp.Controllers
         public IActionResult Index()
         {
 
-            return View();
+            return View("Orders");
         }
 
         public IActionResult Orders()
         {
-            return RedirectToAction("Index");
+            
+            return View();
         }
 
         public IActionResult Users()

@@ -1,1 +1,32 @@
-﻿
+﻿<style>
+    table, th, td, caption, tr {
+        border: 1px solid black;
+    }
+
+    table {
+        border-collapse: collapse;
+    }
+</style>
+
+<div class="row">
+    @await Html.PartialAsync("Menu")
+   
+
+    <div class="column">
+        <table>
+            <tr>
+                <th>Список заказов</th>
+                
+            </tr>
+            <tr>
+                <th>N</th>
+                <th>Сумма</th>
+                <th>Статус</th>
+                <th>Пользователь (логин)</th>
+                <th>Дата</th>
+                <th>Время</th>
+            </tr>
+            <tr></tr>
+        </table>
+    </div>
+</div>
