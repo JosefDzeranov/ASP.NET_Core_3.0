@@ -5,7 +5,12 @@ namespace OnlineShopWebApp.Controllers
 {
     public class AdministrationController : Controller
     {
+        private readonly IProductManager productManager;
 
+        public AdministrationController(IProductManager productManager)
+        {
+            this.productManager = productManager;
+        }
 
         public IActionResult Index()
         {
@@ -31,7 +36,8 @@ namespace OnlineShopWebApp.Controllers
 
         public IActionResult Products()
         {
-            return View();
+            var productList = productManager.productList;
+            return View(productList);
         }
     }
 
