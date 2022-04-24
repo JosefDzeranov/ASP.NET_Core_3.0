@@ -5,7 +5,7 @@ namespace OnlineShopWebApp.Interfase
 {
     public interface IBuyerStorage
     {
-        void AddProductInCart(int productId, int buyerId);
+        void AddProductInCart(Product product, int buyerId);
         void DeleteProductInCart(int productId, int buyerId);
         void ReduceDuplicateProductCart(int productId, int buyerId);
         void ReportTransaction(int buyerId);

@@ -18,8 +18,9 @@ namespace OnlineShopWebApp.Controllers
             return View(buyerStorage.FindBuyer(buyerId));
         }
 
-        public IActionResult AddProduct(int product, int buyerId)
+        public IActionResult AddProduct(int productId, int buyerId)
         {
+            var product = productStorage.FindProduct(productId);
             buyerStorage.AddProductInCart(product, buyerId);
             return RedirectToAction("Index", new {buyerId});
         }

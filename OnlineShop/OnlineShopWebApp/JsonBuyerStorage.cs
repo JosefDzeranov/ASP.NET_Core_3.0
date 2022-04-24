@@ -9,7 +9,6 @@ namespace OnlineShopWebApp
     public class JsonBuyerStorage : IBuyerStorage
     {
         private const string buyersFileName = "Data/list_of_buyers.json";
-        private IProductStorage productStorage;
 
         private List<Buyer> buyers = new List<Buyer>();
 
@@ -18,10 +17,9 @@ namespace OnlineShopWebApp
             ReadToStorage();
         }
         
-        public void AddProductInCart(int productId, int buyerId)
+        public void AddProductInCart(Product product, int buyerId)
         {
             var buyer = FindBuyer(buyerId);
-            var product = productStorage.FindProduct(productId);
             buyer.AddProductInCart(product);
             WriteToStorage();
         }
