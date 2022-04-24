@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using OnlineShopWebApp.Models;
 
 
@@ -9,7 +10,8 @@ namespace OnlineShopWebApp.Models
 
         public List<Product> Comparisons { get; set; } = new List<Product>();
         public List<CartItem> Cart { get; set; } = new List<CartItem>();
-        public List<CartItem> Orders { get; set; } = new List<CartItem>();
+        public InfoBuying infoBuying { get; set; } = new InfoBuying();
+        public List<OrderItem> Orders { get; set; } = new List<OrderItem>();
 
         public override string ToString()
         {
@@ -76,10 +78,22 @@ namespace OnlineShopWebApp.Models
             Cart.Clear();
         }
 
-        public void ReportTransaction()
+        public void Buy()
         {
-            Orders.AddRange(Cart);
+            foreach (var cartItem in Cart)
+            {
+                Orders.Add(new OrderItem()
+                {
+                    CartItem = cartItem, 
+                    InfoBuying = infoBuying
+                });
+            }
             Cart.Clear();
+        }
+
+        public void SaveInfoBuying(InfoBuying infoBuying)
+        {
+            this.infoBuying=infoBuying;
         }
     }
 }

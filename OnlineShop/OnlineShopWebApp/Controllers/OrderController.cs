@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using OnlineShopWebApp;
 using OnlineShopWebApp.Interfase;
+using OnlineShopWebApp.Models;
 
 namespace OnlineShopWebApp.Controllers
 {
@@ -13,21 +14,30 @@ namespace OnlineShopWebApp.Controllers
             this.buyerStorage = buyerStorage;
         }
 
-        [HttpPost]
         public IActionResult Index(int buyerId)
         {
             return View(buyerStorage.FindBuyer(buyerId));
         }
-
-        public IActionResult ReportTransaction(int buyerId)
+        [HttpPost]
+        public IActionResult SaveInfoBuying(InfoBuying infoBuying, int buyerId)
         {
-            buyerStorage.ReportTransaction(buyerId);
+            buyerStorage.SaveInfoBuying(infoBuying, buyerId);
+            return RedirectToAction("Index", new { buyerId });
+        }
+        public IActionResult RewriteInfoBuying(int buyerId)
+        {
+            buyerStorage.ClearInfoBuying(buyerId);
+            return RedirectToAction("Index", new { buyerId });
+
+        }
+
+        public IActionResult Buy(int buyerId)
+        {
+            buyerStorage.Buy(buyerId);
             return View(); 
         }
 
-        public IActionResult Buy()
-        {
-            throw new System.NotImplementedException();
-        }
+
+
     }
 }

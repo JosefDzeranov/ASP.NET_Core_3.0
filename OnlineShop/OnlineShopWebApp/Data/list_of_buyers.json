@@ -4,56 +4,27 @@
     "Cart": [
       {
         "Product": {
-          "Id": 0,
-          "Name": "58-70",
-          "Cost": 32000.0,
-          "Square": 118.0,
-          "Width": 11.9,
-          "Length": 13.9,
-          "Description": "Проект одноэтажного дома из газабетона",
+          "Id": 5,
+          "Name": "45-64NKL",
+          "Cost": 50000.0,
+          "Square": 245.0,
+          "Width": 12.74,
+          "Length": 14.24,
+          "Description": "Проект двухэтажного дома из кирпича с терассой",
           "Images": [
-            "0-1.jpg"
+            "5-1.jpg"
           ]
         },
-        "Count": 3
-      },
-      {
-        "Product": {
-          "Id": 3,
-          "Name": "57-00",
-          "Cost": 36000.0,
-          "Square": 193.0,
-          "Width": 11.75,
-          "Length": 12.5,
-          "Description": "Проект двухэтажного дома из газабетона с терассой",
-          "Images": [
-            "3-1.jpg"
-          ]
-        },
-        "Count": 2
-      },
-      {
-        "Product": {
-          "Id": 7,
-          "Name": "58-10L",
-          "Cost": 38000.0,
-          "Square": 229.0,
-          "Width": 13.86,
-          "Length": 17.66,
-          "Description": "Проект двухэтажного дома из газабетона с терассой",
-          "Images": [
-            "7-1.jpg"
-          ]
-        },
-        "Count": 3
+        "Count": 1
       }
     ],
+    "infoBuying": null,
     "Orders": [],
     "Id": 0,
-    "Fistname": null,
-    "Secondname": null,
-    "Surname": null,
-    "Age": 0,
-    "Email": null
+    "Fistname": "Александр",
+    "Secondname": "Николаевич",
+    "Surname": "Молостов",
+    "Age": 30,
+    "Email": "email@email.com"
   }
 ]

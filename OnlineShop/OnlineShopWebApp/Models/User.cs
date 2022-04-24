@@ -5,12 +5,12 @@ namespace OnlineShopWebApp.Models
 {
     public class User
     {
-        public int Id { get; }
-        public string Fistname { get; }
-        public string Secondname { get; }
-        public string Surname { get; }
-        public int Age { get; }
-        public string Email { get; }
+        public int Id { get; set; }
+        public string Fistname { get; set; }
+        public string Secondname { get; set; }
+        public string Surname { get; set; }
+        public int Age { get; set; }
+        public string Email { get; set; }
 
     }
 }

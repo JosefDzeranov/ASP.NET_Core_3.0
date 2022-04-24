@@ -45,10 +45,24 @@ namespace OnlineShopWebApp
             WriteToStorage();
         }
 
-        public void ReportTransaction(int buyerId)
+        public void SaveInfoBuying(InfoBuying infoBuying, int buyerId)
         {
             var buyer = FindBuyer(buyerId);
-            buyer.ReportTransaction();
+            buyer.SaveInfoBuying(infoBuying);
+            WriteToStorage();
+        }
+
+        public void ClearInfoBuying(int buyerId)
+        {
+            var buyer = FindBuyer(buyerId);
+            buyer.infoBuying = null;
+            WriteToStorage();
+        }
+
+        public void Buy(int buyerId)
+        {
+            var buyer = FindBuyer(buyerId);
+            buyer.Buy();
             WriteToStorage();
         }
 

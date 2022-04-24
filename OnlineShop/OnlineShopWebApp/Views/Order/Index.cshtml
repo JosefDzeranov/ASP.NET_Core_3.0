@@ -3,82 +3,26 @@
     ViewData["Title"] = "Оформление заказа";
 }
 
-<form method="post">
+
 <div class="text-center">
     <h1 class="display-5 Title_sile">Оформление заказа</h1>
     <p></p>
 </div>
+
+
 <p>
-    <button class="btn btn-outline-light type="submit" asp-controller="Order" asp-action="Buy"></button>
-    <a class="btn btn-outline-dark text-nowrap" data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
+    <a class="btn btn-outline-dark text-nowrap" 
+   data-toggle="collapse" 
+   href="#collapseExample" 
+   role="button" 
+   aria-expanded="false" 
+   aria-controls="collapseExample">
         Заполнить данные о заказчике
     </a>
 </p>
 <div class="collapse" id="collapseExample">
     <div class="card card-body">
-        Пожалуйста, заполните следующие данные:
-        <p><font color="red">*</font> - обязательно к заполнению</p>
-        <div class="row">
-            <div class="text-center col-3 ">Фамилия<font color="red">*</font>:</div>
-            <div class="col-9">
-                <form>
-                    <div class="form-group">
-                        <input type="email" class="form-control" id="exampleFormControlInput2" placeholder="Фамилия">
-                    </div>
-                </form>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-3  text-center">Имя<font color="red">*</font>:</div>
-            <div class="col-9">
-                <form>
-                    <div class="form-group">
-                        <input type="email" class="form-control" id="exampleFormControlInput3" placeholder="Имя">
-                    </div>
-                </form>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-3 text-center">Отчество<font color="red">*</font>:</div>
-            <div class="col-9">
-                <form>
-                    <div class="form-group">
-                        <input type="email" class="form-control" id="exampleFormControlInput4" placeholder="Отчество">
-                    </div>
-                </form>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-3  text-center">Контактный телефон<font color="red">*</font>:</div>
-            <div class="col-9">
-                <form>
-                    <div class="form-group">
-                        <input type="email" class="form-control" id="exampleFormControlInput5" placeholder="+70123456789">
-                    </div>
-                </form>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-3  text-center">Электронная почта<font color="red">*</font>:</div>
-            <div class="col-9">
-                <form>
-                    <div class="form-group">
-                        <input type="email" class="form-control" id="exampleFormControlInput5" placeholder="email@mail.com">
-                    </div>
-                </form>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-3 text-center">Комментарий:</div>
-            <div class="col-9">
-                <form>
-                    <div class="form-group">
-                        <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
-                    </div>
-                </form>
-            </div>
-        </div>
-        <button type="submit" class="btn btn-outline-dark col-3">Сохранить данные</button>
+        @await Component.InvokeAsync("InfoBuying")
     </div>
 </div>
 
@@ -212,9 +156,9 @@
         }
     }
 </div>
-</form>
 
 
-<a class="btn btn-outline-dark text-nowrap col-3 mx-0 my-3" asp-area="" asp-controller="Order" asp-action="ReportTransaction" role="button">Отправить заявку</a>
+
+<a class="btn btn-outline-dark text-nowrap col-3 mx-0 my-3" asp-area="" asp-controller="Order" asp-action="Buy" role="button">Отправить заявку</a>
 
 
