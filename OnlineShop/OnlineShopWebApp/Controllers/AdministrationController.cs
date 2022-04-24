@@ -70,6 +70,23 @@ namespace OnlineShopWebApp.Controllers
             productManager.productList.Remove(product);
             return View(product);
         }
+
+        public IActionResult AddNewProduct()
+        {
+            
+            return View();
+        }
+
+        [HttpPost]
+        public IActionResult SaveAddedProduct(string id, string name, string cost, string description)
+        {
+
+            var product = new Product(int.Parse(id), name, decimal.Parse(cost), description);
+            productManager.productList.Add(product);
+           
+
+            return View(product);
+        }
     }
 
 }

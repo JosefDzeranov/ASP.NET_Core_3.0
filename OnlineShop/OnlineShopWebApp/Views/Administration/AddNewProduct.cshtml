@@ -1,0 +1,21 @@
+﻿
+<form method="post">
+<h2>Добавление нового продукта:</h2>
+
+<p>Введите наименование продукта:</p>
+<input type="text" name ="name" />
+
+<p>Введите Id продукта:</p>
+<input type="text" name ="id" />
+
+<p>Введите цену товара:</p>
+<input type="text" name ="cost" />
+
+<p>Введите описание товара:</p>
+<input type="text" name = "description" /> <br />
+<p></p>
+
+<button class="btn btn-dark" type="submit" asp-controller="Administration" asp-action="SaveAddedProduct">Добавить продукт</button>
+
+
+</form>
