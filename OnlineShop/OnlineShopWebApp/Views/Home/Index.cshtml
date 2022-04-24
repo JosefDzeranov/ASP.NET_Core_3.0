@@ -4,7 +4,17 @@
     ViewData["Title"] = "Home Page";
 }
 
+<form method="post">
+    <div class="row ">
+        <div class="col text-center">
+             <input type="search"  style="width: 60%" name="searchname" placeholder="Введите название книги" />
+            <button class="btn btn-dark" type="submit" asp-controller="Home" asp-action="SearchByName">Поиск</button>
+        </div>
+    </div>
+</form>
+<br />
 <div class="row">
+
     @foreach (var product in Model)
     {
         <div class="col-3 card shadow">

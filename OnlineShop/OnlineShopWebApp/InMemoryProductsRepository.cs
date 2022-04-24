@@ -36,7 +36,7 @@ namespace OnlineShopWebApp
             },
         };
 
-        
+
         public List<Product> GetAll()
         {
             return products;
@@ -51,7 +51,7 @@ namespace OnlineShopWebApp
             }
             return null;
         }
-        
+
         public void Add(Product product)
         {
             products.Add(product);
@@ -69,6 +69,16 @@ namespace OnlineShopWebApp
         {
             var product = products.FirstOrDefault(x => x.Id == id);
             products.Remove(product);
+        }
+
+        public Product TryGetByName(string name)
+        {
+            var findProduct = products.FirstOrDefault(x => x.Name.ToLower() == name.ToLower());
+            if (findProduct != null)
+            {
+                return findProduct;
+            }
+            return null;
         }
     }
 }
