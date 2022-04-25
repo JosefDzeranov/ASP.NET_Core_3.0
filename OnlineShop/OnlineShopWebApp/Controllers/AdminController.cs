@@ -24,6 +24,7 @@ namespace OnlineShopWebApp.Controllers
         }
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 
         public IActionResult DeleteProduct(int id)
         {
@@ -91,6 +92,8 @@ namespace OnlineShopWebApp.Controllers
             return View();
         }
 >>>>>>> karpunin_lesson5_4
+=======
+>>>>>>> parent of f662e62 (adding partial view adminLeftPanel and view methods into AdminController)
 =======
 >>>>>>> parent of f662e62 (adding partial view adminLeftPanel and view methods into AdminController)
     }
