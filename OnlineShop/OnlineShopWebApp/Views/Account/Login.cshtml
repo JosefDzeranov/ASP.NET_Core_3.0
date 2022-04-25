@@ -1,20 +1,25 @@
-﻿@{
+﻿@using OnlineShopWebApp.ViewModels
+@model LoginViewModel
+
+@{
     ViewData["Title"] = "Вход";
 }
 <div class="card shadow">
     <div class="card-body">
-        <form asp-action="Login">
+        <form asp-controller="Account" asp-action="Login">
             <div class="row justify-content-center">
                 <div class="col-6">
-                    <div class="mb-3">
-                        <input type="text" class="form-control" name="Name" placeholder="логин" />
+                    <div class="mb-3">  
+                        <input type="text" asp-for="Name" class="form-control" placeholder="логин" />
+                        <span asp-validation-for="Name"></span>
                     </div>
                     <div class="mb-3">
-                        <input type="password" class="form-control" name="Password" placeholder="пароль" />
+                        <input type="password" asp-for="Password" class="form-control" placeholder="пароль" />
+                         <span asp-validation-for="Password"></span>
                     </div>
                     <div class=" mb-3 form-check text-center">
-                        <input class="form-check-input" type="checkbox" value="true" name="RememberMe">
-                        <label class="form-check-label">
+                        <input class="form-check-input" type="checkbox" asp-for="RememberMe" value="true" name="RememberMe">
+                        <label asp-for="RememberMe"class="form-check-label">
                             Запомнить меня?
                         </label>
                     </div>
