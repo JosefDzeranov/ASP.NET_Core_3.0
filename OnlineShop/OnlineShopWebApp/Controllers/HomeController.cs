@@ -15,24 +15,29 @@ namespace OnlineShopWebApp.Controllers
         {
             this.productRepository = productRepository;
         }
-        public IActionResult Index(List<Product> filteredPoducts)
+        public IActionResult Index(Product.Category categoryName)
         {
-            var products = productRepository.GetAll();
-            if (filteredPoducts.Count != 0)
-            {
-
-                products = filteredPoducts;
-            }
             
 
-            return View(products);
+            if (categoryName != 0)
+            {
+                var filteredPoducts = productRepository.GetAll().Where(x => x.CategoryName == categoryName);
+                return View(filteredPoducts);
+            }
+            else
+            {
+                var products = productRepository.GetAll();
+                return View(products);
+            }
+
+           
         }
         [HttpPost]
-        public IActionResult Filter(int categoryName)
+        public IActionResult Filter(Product.Category categoryName)
         {
-            var filteredPoducts = productRepository.GetAll().Where(x => (int)x.CategoryName == categoryName);
             
-            return RedirectToAction("Index", filteredPoducts);
+            
+            return RedirectToAction("Index", categoryName);
         }
         public IActionResult Privacy()
         {
