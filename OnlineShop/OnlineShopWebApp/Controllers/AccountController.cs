@@ -15,5 +15,14 @@ namespace OnlineShopWebApp.Controllers
             return RedirectToAction("Index","Home");
         }
 
+        public IActionResult Register()
+        {
+            return View();
+        }
+        [HttpPost]
+        public IActionResult Register(Register register)
+        {
+            return RedirectToAction("Index", "Home");
+        }
     }
 }
