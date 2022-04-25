@@ -29,7 +29,7 @@
 <h6>Список приобретаемых товаров:</h6>
 <h6>Пожалуйста, выберите дополнительные опции, если это необходимо</h6>
 <div class="accordion" id="accordionExample">
-    @await Component.InvokeAsync("FormCheck", Model.Cart)
+    @await Html.PartialAsync("FormCheque", Model.Cart)
 </div>
 
 <a class="btn btn-outline-dark text-nowrap col-3 mx-0 my-3" asp-area="" asp-controller="Order" asp-action="Buy" role="button">Отправить заявку</a>
