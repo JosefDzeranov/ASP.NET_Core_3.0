@@ -25,7 +25,10 @@
         </table>
         <div class="text-left">
             <a class="btn btn-outline-success" href="/home/index" role="button">Продолжить покупки</a>
-            <a class="btn btn-success" href="/cart/add?productId=Id" role="button">Добавить в корзину</a>
+            @foreach (var button in Model)
+            {
+                <a class="btn btn-success" href="/cart/add?productId=@button.Id" role="button">Добавить в корзину</a>
+            }
             <a class="btn btn-danger" href="/cart/clear" role="button">Очистить избранное</a>
         </div>
     </div>
