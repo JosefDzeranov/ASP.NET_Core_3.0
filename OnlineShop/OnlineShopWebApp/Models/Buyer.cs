@@ -13,10 +13,6 @@ namespace OnlineShopWebApp.Models
         public InfoBuying infoBuying { get; set; } = new InfoBuying();
         public List<OrderItem> Orders { get; set; } = new List<OrderItem>();
 
-        public override string ToString()
-        {
-            return $"Id: {Id};\nИмя: {Fistname};\nФамилия: {Surname};\nВозраст: {Age};\nEmail: {Email};";
-        }
         public decimal SumCost(List<CartItem> listProducts)
         {
             decimal sum = 0;

@@ -15,16 +15,18 @@
             "5-1.jpg"
           ]
         },
-        "Count": 1
+        "Count": 2
       }
     ],
     "infoBuying": null,
     "Orders": [],
     "Id": 0,
+    "login": null,
     "Fistname": "Александр",
     "Secondname": "Николаевич",
     "Surname": "Молостов",
     "Age": 30,
-    "Email": "email@email.com"
+    "Email": "email@email.com",
+    "Password": null
   }
 ]

@@ -1,7 +1,7 @@
 ﻿<header>
     <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
         <div class="container">
-            <a class="btn btn-link" asp-area="" asp-controller="Buyer" asp-action="Index"><img src="/image/account.svg" width="20" height="20"></a>
+            <a class="btn btn-link" asp-area="" asp-controller="Login" asp-action="Index"><img src="/image/account.svg" width="20" height="20"></a>
             <a class="btn btn-link" asp-area="" asp-controller="Cart" asp-action="Index">
                 <img src="/image/icon_basket.svg" width="20" height="20">
                 @await Component.InvokeAsync("Cart")
@@ -20,16 +20,19 @@
                         <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Услуги</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Проекты</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Каталог готовых проектов</a>
+                        <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Каталог проектов</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Утилиты</a>
                     </li>
                     <li class="nav-item">
+                        <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Портфолио</a>
+                    </li>
+                    <li class="nav-item">
                         <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Контакты</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-dark" asp-area="" asp-controller="AdminPanel" asp-action="Index">Панель администратора</a>
                     </li>
                 </ul>
             </div>

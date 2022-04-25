@@ -1,0 +1,35 @@
+﻿@{
+    ViewData["Title"] = "Авторизация";
+}
+
+<form method="post">
+<div class="container">
+
+    <h3 class="display-5 text-center">Вход</h3>
+    <p></p>
+    <div class="form-group col-md-3 mx-auto">
+        <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="Логин" name="login"/>
+    </div>
+    <p></p>
+    <div class="form-group  col-md-3 mx-auto">
+        <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="Пароль" name="password"/>
+    </div>
+    <div class="row  col-md-3 mx-auto">
+        <div class="form-check col-1">
+            <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
+        </div>
+        <div class="col">Запомнить меня?</div>
+    </div>
+    <p></p>
+    <div class="col-md-1 mx-auto">
+        <button type="submit" class="btn btn-outline-dark text-center" asp-controller="Login" asp-action="Enter">Войти</button>
+    </div>
+</div>
+</form>
+<p></p>
+<div class="col-md-3 mx-auto">
+    <a class="btn btn-light text-center" asp-controller="Login" asp-action="NewUser">Регистрация нового пользователя</a>
+</div>
+
+
+
