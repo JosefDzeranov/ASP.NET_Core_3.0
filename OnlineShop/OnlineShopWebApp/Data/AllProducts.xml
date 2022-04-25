@@ -40,4 +40,10 @@
 745kB | jpg
 	  </description>
   </product>
+  <product id="31e26b1d-0010-4ad2-aa6f-efdbd05cf3f6">
+    <img>/img/portret.jpg</img>
+    <name>Girl's portret</name>
+    <cost>2000</cost>
+    <description>Photography</description>
+  </product>
 </products>

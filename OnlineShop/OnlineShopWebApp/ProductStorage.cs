@@ -1,5 +1,4 @@
-﻿using System;
-using OnlineShopWebApp.Models;
+﻿using OnlineShopWebApp.Models;
 using System.Collections.Generic;
 using System.Linq;
 using System.Xml.Linq;
@@ -25,9 +24,14 @@ namespace OnlineShopWebApp
 
         public Product TryGetProduct(string productId)
         {
-            var product = GetProductData().Where(p => p.Id == productId)
-                                                 .FirstOrDefault();
+            var product = GetProductData().FirstOrDefault(p => p.Id == productId);
             return product;
+        }
+
+        public IEnumerable<Product> SearchByName(string name)
+        {
+            var products = GetProductData().Where(p => p.Name.ToLower().Contains(name.ToLower()));
+            return products;
         }
 
         public void AddProductToXml(Product product)
