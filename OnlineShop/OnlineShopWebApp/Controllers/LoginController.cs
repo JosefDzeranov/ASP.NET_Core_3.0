@@ -10,14 +10,19 @@ namespace OnlineShopWebApp.Controllers
             return View();
         }
         [HttpPost]
-        public IActionResult Enter(User user)
+        public IActionResult Registration(User user, string checkPassword)
         {
             throw new System.NotImplementedException();
         }
         [HttpPost]
-        public IActionResult NewUser(User user)
+        public IActionResult Enter(User user)
         {
             throw new System.NotImplementedException();
+        }
+        
+        public IActionResult NewUser()
+        {
+            return View();
         }
     }
 }

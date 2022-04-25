@@ -2,6 +2,7 @@
     ViewData["Title"] = "Авторизация";
 }
 
+<form method="post">
 <div class="container">
 
     <h3 class="display-5 text-center">Вход</h3>
@@ -23,13 +24,12 @@
     <div class="col-md-1 mx-auto">
         <button type="submit" class="btn btn-outline-dark text-center" asp-controller="Login" asp-action="Enter">Войти</button>
     </div>
-    <p></p>
-    <div class="col-md-3 mx-auto">
-        <button type="submit" class="btn btn-light text-center" asp-controller="Login" asp-action="NewUser">Регистрация нового пользователя</button>
-    </div>
 </div>
-
-
+</form>
+<p></p>
+<div class="col-md-3 mx-auto">
+    <a class="btn btn-light text-center" asp-controller="Login" asp-action="NewUser">Регистрация нового пользователя</a>
+</div>
 
 
 
