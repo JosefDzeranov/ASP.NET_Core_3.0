@@ -22,6 +22,7 @@ namespace OnlineShopWebApp.Controllers
 
             return View(existingOrders);
         }
+<<<<<<< HEAD
 
         public IActionResult DeleteProduct(int id)
         {
@@ -67,6 +68,8 @@ namespace OnlineShopWebApp.Controllers
             return RedirectToAction("Products", "Admin");
         }
 
+=======
+>>>>>>> karpunin_lesson5_4
         public IActionResult Users()
         {
             return View();
@@ -77,10 +80,15 @@ namespace OnlineShopWebApp.Controllers
         }
         public IActionResult Products()
         {
+<<<<<<< HEAD
             var products = productRepository.GetAll();
 
             return View(products);
         }
 
+=======
+            return View();
+        }
+>>>>>>> karpunin_lesson5_4
     }
 }
