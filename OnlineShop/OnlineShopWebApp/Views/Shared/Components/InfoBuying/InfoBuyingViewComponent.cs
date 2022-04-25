@@ -3,7 +3,7 @@ using OnlineShopWebApp.Interfase;
 
 namespace OnlineShopWebApp.Views.Shared.Components.InfoBuying
 {
-    // Бланк для заполнения данных для оформления заказа
+    // Бланк для заполнения данных покупателя для оформления заказа
     public class InfoBuyingViewComponent:ViewComponent
     {
         private readonly IBuyerStorage buyerStorage;
