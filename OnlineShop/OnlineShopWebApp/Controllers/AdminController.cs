@@ -15,7 +15,7 @@ namespace OnlineShopWebApp.Controllers
             this.productRepository = productRepository;
         }
 
-        public IActionResult Orders()
+        public IActionResult Index()
         {
 
             var existingOrders = orderRepository.TryGetAll();
