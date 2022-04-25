@@ -1,0 +1,19 @@
+﻿<form method="post">
+    <h5>
+        Вход
+    </h5>
+    <div>
+
+        <input type="text" name="login" placeholder="Логин" /> <br />
+        <input type="text" name="password" placeholder="Пароль" /> <br />
+
+    </div>
+    <div>
+        <input type="checkbox" name="isRemembered" typeof="bool" value="true" /> Запомнить меня? <br />
+        <button class="btn btn-dark" type="submit" asp-controller="Authorization" asp-action="Enter">Войти</button> <br />
+        <a class="text-dark" href="#" role="button">Регистрация нового пользователя</a> <br />
+    </div>
+   
+    
+
+</form>
