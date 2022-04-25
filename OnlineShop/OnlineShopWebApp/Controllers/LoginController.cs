@@ -15,7 +15,7 @@ namespace OnlineShopWebApp.Controllers
         }
 
         [HttpPost]
-        public IActionResult Enter(string login, string password, bool remember)
+        public IActionResult Enter(EnterData enterData)
         {
             return View();
         }
