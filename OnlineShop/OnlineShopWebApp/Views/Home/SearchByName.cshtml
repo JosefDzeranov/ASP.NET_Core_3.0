@@ -1,8 +1,12 @@
-﻿@model Product
+﻿@model List<Product>
 
-@if (Model == null)
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+@if (Model.Count == 0)
 {
-    <h3>Продукт не найден</h3>
+    <h3>Товары не найдены</h3>
 }
 else
 {
@@ -16,23 +20,27 @@ else
     </form>
     <br />
     <div class="row">
-        <div class="col-3 card shadow">
 
-            <img class="card-img-top" src="https://static4.depositphotos.com/1015530/309/i/600/depositphotos_3098299-stock-photo-single-green-book.jpg" />
+        @foreach (var product in Model)
+        {
+            <div class="col-3 card shadow">
 
-            <div class="card-body">
-                <a style="color:grey" href="/product/index/@Model.Id">
-                    <h5>@Model.Name</h5>
-                </a>
+                <img class="card-img-top" src="https://static4.depositphotos.com/1015530/309/i/600/depositphotos_3098299-stock-photo-single-green-book.jpg" />
 
-                <h4>@Model.Cost</h4>
+                <div class="card-body">
+                    <a style="color:grey" href="/product/index/@product.Id">
+                        <h5>@product.Name</h5>
+                    </a>
 
-                <a class="btn btn-dark" href="/cart/add?productId=@Model.Id" role="button">Добавить в корзину</a>
-                <p></p>
-                <a class="btn btn-success btn-sm" href="/compare/add?productId=@Model.Id" role="button">Добавить в сравнение</a>
-                <p></p>
-                <a class="btn btn-success btn-sm" href="/favourite/add?productId=@Model.Id" role="button">Добавить в избранное</a>
+                    <h4>@product.Cost</h4>
+
+                    <a class="btn btn-dark" href="/cart/add?productId=@product.Id" role="button">Добавить в корзину</a>
+                    <p></p>
+                    <a class="btn btn-success btn-sm" href="/compare/add?productId=@product.Id" role="button">Добавить в сравнение</a>
+                    <p></p>
+                    <a class="btn btn-success btn-sm" href="/favourite/add?productId=@product.Id" role="button">Добавить в избранное</a>
+                </div>
             </div>
-        </div>
+        }
     </div>
 }
