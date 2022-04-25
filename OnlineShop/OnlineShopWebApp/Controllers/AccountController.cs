@@ -11,7 +11,7 @@ namespace OnlineShopWebApp.Controllers
             return View();
         }
         [HttpPost]
-        public IActionResult Login(LoginVM loginVM)
+        public IActionResult Login(LoginViewModel loginVM)
         {
             return View();
         }
@@ -21,7 +21,7 @@ namespace OnlineShopWebApp.Controllers
             return View();
         }
         [HttpPost]
-        public IActionResult Register(RegisterVM registerVM)
+        public IActionResult Register(RegisterViewModel registerVM)
         {
             return View();
         }

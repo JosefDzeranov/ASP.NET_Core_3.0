@@ -21,7 +21,7 @@ namespace OnlineShopWebApp.Controllers
         {
             var existingCart = cartRepository.TryGetByUserId(Const.UserId);
 
-            var orderVM = new OrderVM();
+            var orderVM = new OrderViewModel();
             orderVM.Cart = existingCart;
 
             return View(orderVM);
