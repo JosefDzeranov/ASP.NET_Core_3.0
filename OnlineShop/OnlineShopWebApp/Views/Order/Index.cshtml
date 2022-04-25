@@ -1,25 +1,51 @@
-﻿<form method="post"> 
+﻿@model Order
+
+<form method="post">
     <div class="row">
-        <div class="col">
+        <div class="col-3">
 
-            <lable>Name</lable>
-            <div>
-                <input type="text" name="name" />
+            <div class="validation" asp-validation-summary="ModelOnly"></div>
+
+            <div class="form-group">
+                <label asp-for="FirstName">Firstname</label>
+                <input asp-for="FirstName" class="form-control" placeholder="Firstname" />
+                <span asp-validation-for="FirstName"></span>
             </div>
 
-            <lable>Email</lable>
-            <div>
-                <input type="text" name="email" />
+            <div class="form-group">
+                <label asp-for="SecondName">Secondname</label>
+                <input asp-for="SecondName" class="form-control" placeholder="Secondname" />
+                <span asp-validation-for="SecondName"></span>
             </div>
 
-            <lable>Address</lable>
-            <div>
-                <input type="text" name="address" />
+            <div class="form-group">
+                <label asp-for="Email">Email</label>
+                <input asp-for="Email" class="form-control" placeholder="name@example.com" />
+                <span asp-validation-for="Email"></span>
             </div>
 
-            <lable>Phone</lable>
-            <div>
-                <input type="text" name="phone" />
+            <div class="form-group">
+                <label asp-for="Phone">Phone</label>
+                <input asp-for="Phone" class="form-control" placeholder="Phone" />
+                <span asp-validation-for="Phone"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Address">Address</label>
+                <input asp-for="Address" class="form-control" placeholder="Address" />
+                <span asp-validation-for="Address"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Country">Country</label>
+                <input asp-for="Country" class="form-control" placeholder="Country" />
+                <span asp-validation-for="Country"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="City">City</label>
+                <input asp-for="City" class="form-control" placeholder="City" />
+                <span asp-validation-for="City"></span>
             </div>
 
             <br />
@@ -27,3 +53,4 @@
         </div>
     </div>
 </form>
+

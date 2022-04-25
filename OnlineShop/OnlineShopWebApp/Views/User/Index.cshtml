@@ -1,30 +1,43 @@
-﻿<form method="post">
+﻿@model User
+
+<form method="post">
     <div class="row">
         <div class="col-3">
 
-            <h3>Log in</h3>
+            <div class="validation" asp-validation-summary="ModelOnly"></div>
 
             <div class="form-group">
-                <input type="text" name="login" class="form-control" placeholder="Name">
+                <label asp-for="Login">Login</label>
+                <input asp-for="Login" class="form-control" placeholder="Login" />
+                <span asp-validation-for="Login"></span>
             </div>
 
             <div class="form-group">
-                <input type="text" name="email" class="form-control" placeholder="name@example.com">
+                <label asp-for="Password">Password</label>
+                <input type="password" asp-for="Password" class="form-control" placeholder="Password" />
+                <span asp-validation-for="Password"></span>
             </div>
 
-            <div class="form-group">
-                <input type="text" name="Password" class="form-control" placeholder="Password">
-            </div>
-
+            <br />
             <div class="form-check">
                 <input class="form-check-input" type="checkbox" typeof="bool" value="true" name="IsRemembered">
                 <label class="form-check-label">Remember me</label>
             </div>
 
+            <br />
             <div>
                 <button class="btn btn-outline-success btn-sm" type="submit" asp-controller="User" asp-action="Login">Login</button>
-                <button class="btn btn-outline-danger btn-sm" type="submit" asp-controller="User" asp-action="NewUser">Create an account</button>
             </div>
         </div>
     </div>
 </form>
+
+<div class="row">
+    <div class="col-3">
+        <br />
+        <div>
+            <a class="btn btn-outline-warning btn-sm" asp-controller="User" asp-action="NewUser" role="button">New? Create an account.</a>
+        </div>
+    </div>
+</div>
+
