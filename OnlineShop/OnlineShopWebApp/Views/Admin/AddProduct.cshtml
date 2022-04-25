@@ -1,0 +1,30 @@
+﻿<div class="card shadow">
+    <div class="card-body">
+        <form method="post" asp-action="AddProduct">
+            <div class="row justify-content-center">
+                <div class="col-6">
+                    <div class="mb-3">
+                        <input type="text" class="form-control" name="Name" placeholder="Имя"/>
+                    </div>
+                    <div class="mb-3">  
+                        <input type="text" class="form-control" name="Cost" placeholder="Цена"/>
+                    </div>
+                    <div class="mb-3">
+                        <input type="text" class="form-control" name="Description" placeholder="Описание"/>
+                    </div>
+                     <div class="mb-3">
+                        <input type="text" class="form-control" name="ImgPath" placeholder="Картинка" value="/images/book.png"/>
+                    </div>
+                    <div class="mb-3 text-center">
+                        <button type="submit" class="btn btn-dark">Добавить</button>
+                    </div>
+                    <div class="mb-3 text-center">
+                        <a class="btn btn-dark" asp-controller="Admin" asp-action="Index" asp-route-id="3">Отмена</a>
+                    </div>
+                </div>
+
+            </div>
+
+        </form>
+    </div>
+</div>

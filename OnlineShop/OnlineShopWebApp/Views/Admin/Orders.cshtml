@@ -1,11 +1,12 @@
-﻿@model List<Order>
+﻿
+@model List<Order>
 @{
     ViewData["Title"] = "Панель администратора";
 }
 
 
 <div class="row">
-   @await Html.PartialAsync("AdminLeftPanel")
+     @await Html.PartialAsync("AdminLeftPanel")
     <div class="col-9">
         <div class="card">
             <div class="card-body">
@@ -39,7 +40,4 @@
 
     </div>
 </div>
-
-
-
 
