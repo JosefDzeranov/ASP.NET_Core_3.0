@@ -1,8 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using OnlineShopWebApp;
 using OnlineShopWebApp.Interfase;
 
-namespace OnlineDesignBureauWebApp.Controllers
+namespace OOnlineShopWebApp.Controllers
 {
 
     public class BuyerController : Controller

@@ -1,14 +1,13 @@
 ﻿using System.Collections.Generic;
-using OnlineDesignBureauWebApp.Models;
+using OnlineShopWebApp.Models;
 
 namespace OnlineShopWebApp.Interfase
 {
     public interface IProductStorage
     {
         List<Product> Products { get; set; }
+        Product FindProduct(int productIds);
         string WriteToStorage();
-        void ReadToStorage();
-        Product FindProduct(int productId, List<Product> products);
-        string ReadDataProducts();
+
     }
 }

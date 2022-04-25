@@ -6,7 +6,7 @@ using Microsoft.Extensions.Hosting;
 using OnlineShopWebApp;
 using OnlineShopWebApp.Interfase;
 
-namespace OnlineDesignBureauWebApp
+namespace OnlineShopWebApp
 {
     public class Startup
     {

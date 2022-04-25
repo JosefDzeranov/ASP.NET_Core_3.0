@@ -1,0 +1,105 @@
+﻿@model InfoBuying
+
+<form method="post">
+@if (Model == null)
+{
+    <text>
+            <p>Пожалуйста, заполните следующие данные:</p>
+            <p><font color="red">*</font> - обязательно к заполнению</p>
+            <div class="row">
+                <div class="text-center col-3 ">Фамилия<font color="red">*</font>:</div>
+                <div class="col-9">
+                    <div class="form-group">
+                        <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="Фамилия" name="surname"/>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-3  text-center">Имя<font color="red">*</font>:</div>
+                <div class="col-9">
+                    <div class="form-group">
+                        <input type="text" class="form-control" id="exampleFormControlInput2" placeholder="Имя" name="firstname"/>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-3 text-center">Отчество<font color="red">*</font>:</div>
+                <div class="col-9">
+                    <div class="form-group">
+                        <input type="text" class="form-control" id="exampleFormControlInput3" placeholder="Отчество" name="secondname"/>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-3  text-center">Контактный телефон<font color="red">*</font>:</div>
+                <div class="col-9">
+                    <div class="form-group">
+                        <input type="text" class="form-control" id="exampleFormControlInput4" placeholder="+70123456789" name="phone"/>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-3  text-center">Электронная почта<font color="red">*</font>:</div>
+                <div class="col-9">
+                    <div class="form-group">
+                        <input type="text" class="form-control" id="exampleFormControlInput5" placeholder="email@mail.com" name="email"/>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-3 text-center">Комментарий:</div>
+                <div class="col-9">
+                    <div class="form-group">
+                        <textarea class="form-control" id="exampleFormControlTextarea6" rows="3"  name="commentary"></textarea>
+                    </div>
+                </div>
+            </div>
+
+            <button type="submit" class="btn btn-outline-dark col-3" asp-controller="Order" asp-action="RewriteInfoBuying">Заполнить новые данные</button>
+            <button type="submit" class="btn btn-outline-dark col-3" asp-controller="Order" asp-action="SaveInfoBuying">Сохранить данные</button>
+    </text>
+}
+else
+{
+    <text>
+        <p>Пожалуйста, проверьте сохраненные данные:</p>
+            <div class="row">
+                <div class="text-center col-3 ">Фамилия:</div>
+                <div class="col-9">
+                    <p>@Model.Surname</p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-3  text-center">Имя:</div>
+                <div class="col-9">
+                    <p>@Model.Firstname</p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-3 text-center">Отчество:</div>
+                <div class="col-9">
+                    <p>@Model.Secondname</p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-3  text-center">Контактный телефон:</div>
+                <div class="col-9">
+                    <p>@Model.Phone</p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-3  text-center">Электронная почта:</div>
+                <div class="col-9">
+                    <p>@Model.Email</p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-3 text-center">Комментарий:</div>
+                <div class="col-9">
+                    <p>@Model.Commentary</p>
+                </div>
+            </div>
+        <button type="submit" class="btn btn-outline-dark col-3" asp-controller="Order" asp-action="RewriteInfoBuying">Заполнить новые данные</button>
+    </text>
+}
+</form>

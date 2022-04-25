@@ -1,8 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using OnlineShopWebApp;
 using OnlineShopWebApp.Interfase;
+using OnlineShopWebApp.Models;
 
-namespace OnlineDesignBureauWebApp.Controllers
+namespace OnlineShopWebApp.Controllers
 {
 
     public class OrderController : Controller
@@ -12,15 +12,31 @@ namespace OnlineDesignBureauWebApp.Controllers
         {
             this.buyerStorage = buyerStorage;
         }
+
         public IActionResult Index(int buyerId)
         {
             return View(buyerStorage.FindBuyer(buyerId));
         }
-        public IActionResult ReportTransaction(int buyerId)
+        [HttpPost]
+        public IActionResult SaveInfoBuying(InfoBuying infoBuying, int buyerId)
         {
-            buyerStorage.FindBuyer(buyerId).OrdersList.AddRange(buyerStorage.FindBuyer(buyerId).CartList);
-            buyerStorage.CleenCart(buyerId);
-            return View();
+            buyerStorage.SaveInfoBuying(infoBuying, buyerId);
+            return RedirectToAction("Index", new { buyerId });
         }
+        public IActionResult RewriteInfoBuying(int buyerId)
+        {
+            buyerStorage.ClearInfoBuying(buyerId);
+            return RedirectToAction("Index", new { buyerId });
+
+        }
+
+        public IActionResult Buy(int buyerId)
+        {
+            buyerStorage.Buy(buyerId);
+            return View(); 
+        }
+
+
+
     }
 }

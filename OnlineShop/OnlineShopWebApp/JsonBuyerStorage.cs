@@ -1,5 +1,4 @@
 ﻿using Newtonsoft.Json;
-using OnlineDesignBureauWebApp.Models;
 using OnlineShopWebApp.Interfase;
 using OnlineShopWebApp.Models;
 using System.Collections.Generic;
@@ -7,68 +6,82 @@ using System.IO;
 
 namespace OnlineShopWebApp
 {
-    public class JsonBuyerStorage:IBuyerStorage
+    public class JsonBuyerStorage : IBuyerStorage
     {
+        private const string buyersFileName = "Data/list_of_buyers.json";
+
+        private List<Buyer> buyers = new List<Buyer>();
+
+        public JsonBuyerStorage()
+        {
+            ReadToStorage();
+        }
         
-        public List<Buyer> Buyers { get; set; } = new List<Buyer>();
-        string nameSave = "list_of_buyers";
-        public void WriteToStorage()
+        public void AddProductInCart(Product product, int buyerId)
         {
-            var json = JsonConvert.SerializeObject(Buyers, Formatting.Indented);
-            File.WriteAllText($"{nameSave}.json", json);
-        }
-        public void ReadToStorage()
-        {
-            Buyers.Clear();
-            var json = File.ReadAllText($"{nameSave}.json");
-            Buyers = JsonConvert.DeserializeObject<List<Buyer>>(json);
-        }
-        public void AddProductInCart(int productId, int buyerId, IProductStorage productStorage)
-        {
-            var products = productStorage.Products;
-            var product = productStorage.FindProduct(productId, products);
             var buyer = FindBuyer(buyerId);
-            buyer.CartList=buyer.SumDuplicates(product);
+            buyer.AddProductInCart(product);
             WriteToStorage();
         }
+
         public void DeleteProductInCart(int productId, int buyerId)
         {
-            var cart = FindBuyer(buyerId).CartList;
-            for (int i = 0; i < cart.Count; i++)
-            {
-                cart.RemoveAt(i);
-            }
+            var buyer = FindBuyer(buyerId);
+            buyer.DeleteProductInCart(productId);
             WriteToStorage();
         }
 
         public void ReduceDuplicateProductCart(int productId, int buyerId)
         {
-            var cart = FindBuyer(buyerId).CartList;
-            for (int i = 0; i < cart.Count; i++)
-            {
-                if (productId == cart[i].Product.Id)
-                {
-                    if (cart[i].NumDuplicates > 1)
-                    {
-                        cart[i].NumDuplicates--;
-                    }
-                    else
-                    {
-                        cart.RemoveAt(i);
-                    }
-                }
-            }
+            var buyer = FindBuyer(buyerId);
+            buyer.ReduceDuplicateProductCart(productId);
             WriteToStorage();
         }
-        public void CleenCart(int buyerId)
+
+        public void ClearCart(int buyerId)
         {
-            FindBuyer(buyerId).CartList.Clear();
+            var buyer = FindBuyer(buyerId);
+            buyer.ClearCart();
             WriteToStorage();
         }
-        public Buyer FindBuyer(int personId)
+
+        public void SaveInfoBuying(InfoBuying infoBuying, int buyerId)
         {
-            var buyer = Buyers.Find(x => x.Id == personId);
+            var buyer = FindBuyer(buyerId);
+            buyer.SaveInfoBuying(infoBuying);
+            WriteToStorage();
+        }
+
+        public void ClearInfoBuying(int buyerId)
+        {
+            var buyer = FindBuyer(buyerId);
+            buyer.infoBuying = null;
+            WriteToStorage();
+        }
+
+        public void Buy(int buyerId)
+        {
+            var buyer = FindBuyer(buyerId);
+            buyer.Buy();
+            WriteToStorage();
+        }
+
+        public Buyer FindBuyer(int buyerId)
+        {
+            var buyer = buyers.Find(x => x.Id == buyerId);
             return buyer;
+        }
+
+        private void WriteToStorage()
+        {
+            var json = JsonConvert.SerializeObject(buyers, Formatting.Indented);
+            File.WriteAllText(buyersFileName, json);
+        }
+
+        private void ReadToStorage()
+        {
+            var json = File.ReadAllText(buyersFileName);
+            buyers = JsonConvert.DeserializeObject<List<Buyer>>(json);
         }
     }
 }

@@ -1,0 +1,32 @@
+[
+  {
+    "Comparisons": [],
+    "Cart": [
+      {
+        "Product": {
+          "Id": 5,
+          "Name": "45-64NKL",
+          "Cost": 50000.0,
+          "Square": 245.0,
+          "Width": 12.74,
+          "Length": 14.24,
+          "Description": "Проект двухэтажного дома из кирпича с терассой",
+          "Images": [
+            "5-1.jpg"
+          ]
+        },
+        "Count": 2
+      }
+    ],
+    "infoBuying": null,
+    "Orders": [],
+    "Id": 0,
+    "login": null,
+    "Fistname": "Александр",
+    "Secondname": "Николаевич",
+    "Surname": "Молостов",
+    "Age": 30,
+    "Email": "email@email.com",
+    "Password": null
+  }
+]

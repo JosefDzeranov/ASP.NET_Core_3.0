@@ -4,7 +4,7 @@
 <head >
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - ООО "Капремонтпроект"</title>
+    <title>@ViewData["Title"] - @MyConstant.NameOrganization</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" />
 </head>
@@ -13,52 +13,14 @@
              background-repeat: no-repeat; 
              background-attachment: fixed; 
              background-position: top right; background-size: 25%;">
-<header>
-    <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
-        <div class="container">
-            <a class="btn btn-link" asp-area="" asp-controller="Buyer" asp-action="Index"><img src="/image/account.svg" width="20" height="20"></a>
-            <a class="btn btn-link" asp-area="" asp-controller="Cart" asp-action="Index"><img src="/image/icon_basket.svg" width="20" height="20"><span class="top-0 translate-middle visually-hidden font-weight-light rounded-circle border p-0 small">+2</span></a>
-            <a class="navbar-brand" href="#"><img src="/image/search_box.svg" height="20"></a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                    aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
-                <ul class="navbar-nav flex-grow-1">
-                    <li class="nav-item">
-                        <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Титул</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Услуги</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Проекты</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Каталог готовых проектов</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Утилиты</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Контакты</a>
-                    </li>
-                </ul>
-            </div>
-        </div>
-    </nav>
-</header>
+@await Html.PartialAsync("Header")
 <div class="container">
     <main role="main" class="pb-3">
         @RenderBody()
     </main>
 </div>
+@await Html.PartialAsync("Footer")
 
-<footer class="border-top footer text-muted">
-    <div class="container" style="color: #282832">
-        ООО "Капремонтпроект" - <a asp-area="" asp-controller="Home" asp-action="Index">Каталог готовых проектов</a>
-    </div>
-</footer>
 <script src="~/lib/jquery/dist/jquery.min.js"></script>
 <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
 <script src="~/js/site.js" asp-append-version="true"></script>

@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using OnlineShopWebApp.Interfase;
 
-namespace OnlineDesignBureauWebApp.Controllers
+namespace OnlineShopWebApp.Controllers
 {
     public class ProductController : Controller
     {
@@ -10,11 +10,13 @@ namespace OnlineDesignBureauWebApp.Controllers
         {
             this.productStorage = productStorage;
         }
+
         public IActionResult Index(int id)
         {
             var product = productStorage.Products[id];
             return View (product);
         }
+
         public string Save(string name)
         {
             return productStorage.WriteToStorage();
