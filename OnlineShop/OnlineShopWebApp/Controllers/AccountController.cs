@@ -23,6 +23,15 @@ namespace OnlineShopWebApp.Controllers
         [HttpPost]
         public IActionResult Register(RegisterViewModel registerVM)
         {
+            if(registerVM.Password == registerVM.Name)
+            {
+                ModelState.AddModelError("Name", "Имя и пароль не должны совпадать");
+            }
+
+            if (ModelState.IsValid)
+            {
+                RedirectToAction("Index","Home");
+            }
             return View();
         }
     }
