@@ -33,15 +33,15 @@
                                 @(i + 1)
                             </td>
                             <td>
-                                <a href="/product/index/@Model[i].Id">@Model[i].Name</a>
+                                <a href="/product/index?id=@Model[i].Id">@Model[i].Name</a>
                             </td>
                             <td>
                                 $@Model[i].Cost
                             </td>
                             <td>
                                 <div class="btn-group ml-2" role="group" aria-label="Edit/Remove buttons">
-                                    <a class="btn btn-outline-dark btn-sm" role="button" href="/admin/edit/@Model[i].Id">Edit</a>
-                                    <a class="btn btn-outline-dark btn-sm" role="button" href="/admin/remove/@Model[i].Id">Remove</a>
+                                    <a class="btn btn-outline-dark btn-sm" role="button" href="/admin/edit?id=@Model[i].Id">Edit</a>
+                                    <a class="btn btn-outline-dark btn-sm" role="button" href="/admin/remove?id=@Model[i].Id">Remove</a>
                                 </div>
                             </td>
                         </tr>

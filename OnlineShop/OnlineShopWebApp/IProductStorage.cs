@@ -6,10 +6,9 @@ namespace OnlineShopWebApp
     public interface IProductStorage
     {
         List<Product> GetProductData();
-        Product TryGetProduct(string productId);
-        IEnumerable<Product> SearchByName(string name);
-        void AddProductToXml(Product product);
+        Product TryGetProduct(Guid id);
+        void AddProduct(Product product);
         void EditProduct(Product product);
-        void RemoveProduct(string productId);
+        void RemoveProduct(Guid id);
     }
 }

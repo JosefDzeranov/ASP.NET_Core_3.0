@@ -1,44 +1,44 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <products>
-  <product id="ac642a89-d05b-4a56-b263-6253227023ec">
+  <product id="efdf7bce-d7f8-4365-bee7-db0a140bd23b">
     <img>/img/stilllife.jpg</img>
-    <name>Still life</name>
-    <cost>1500</cost>
-    <description>Photography,
-3452x4591px
-(29.2cm x 38.9cm 300dpi),
-3.9 MB | jpg
-	  </description>
+    <name>Still Life</name>
+    <cost>100</cost>
+    <description>Photography, 
+4000x5000 px,
+3,5 Mb, Tiff</description>
   </product>
-  <product id="4f70b2db-ac68-4d84-9a74-1b99479502d9">
+  <product id="8e73079c-6b70-4a3e-ae4b-39add95110a6">
     <img>/img/portret.jpg</img>
-    <name>Portret</name>
-    <cost>3000</cost>
-    <description>Illustration,
-3757x2129px
-(31.8cm x 18cm 300dpi),
-1.4MB | jpg
-	  </description>
+    <name>Girl's portret</name>
+    <cost>400</cost>
+    <description>Photography, 
+4000x5000 px,
+3,8 Mb, Tiff</description>
   </product>
-  <product id="e8d5d360-182b-48a0-aa22-8bce77b61b07">
+  <product id="8bedfbeb-4b64-4798-90f9-45ce95844b5c">
     <img>/img/landscape.jpg</img>
     <name>Landscape</name>
-    <cost>2000</cost>
-    <description>Photography,
-3247x2463px
-(27.5cm x 20.9cm 300dpi),
-745kB | jpg
-	  </description>
+    <cost>300</cost>
+    <description>illustration, 
+4000x5000 px,
+5,5 Mb, Tiff</description>
   </product>
-  <product id="d222806d-de99-41e8-9e98-cccce9a3316b">
+  <product id="921a9f51-6676-4b80-8e9a-3feb2c02275a">
     <img>/img/abstraction.jpg</img>
-    <name>Abstraction</name>
-    <cost>1000</cost>
-    <description>Digital drawing,
-3247x2463px
-(27.5cm x 20.9cm 300dpi),
-745kB | jpg
-	  </description>
+    <name>Abstract</name>
+    <cost>250</cost>
+    <description>Digital drawing, 
+4000x5000 px,
+2,5 Mb, Tiff</description>
+  </product>
+  <product id="5df6fd9c-21a5-4e17-9b36-fa2a6d498bf3">
+    <img>/img/test.jpg</img>
+    <name>Test portret</name>
+    <cost>0</cost>
+    <description>Photography, 
+4000x5000 px,
+3,5 Mb, Tiff</description>
   </product>
   <product id="31e26b1d-0010-4ad2-aa6f-efdbd05cf3f6">
     <img>/img/portret.jpg</img>

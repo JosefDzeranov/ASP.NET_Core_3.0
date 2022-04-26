@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using System;
+using Microsoft.AspNetCore.Mvc;
 using OnlineShopWebApp.Models;
 
 namespace OnlineShopWebApp.Controllers
@@ -27,7 +28,7 @@ namespace OnlineShopWebApp.Controllers
 
         public IActionResult Products()
         {
-            var products = _productStorage?.GetProductData();
+            var products = _productStorage.GetProductData();
             return View(products);
         }
 
@@ -39,13 +40,13 @@ namespace OnlineShopWebApp.Controllers
         [HttpPost]
         public IActionResult Add(Product product)
         {
-            _productStorage.AddProductToXml(product);
+            _productStorage.AddProduct(product);
             return RedirectToAction("Products");
         }
         
-        public IActionResult Edit(string productId)
+        public IActionResult Edit(Guid id)
         {
-            var product = _productStorage.TryGetProduct(productId);
+            var product = _productStorage.TryGetProduct(id);
             return View(product);
         }
         
@@ -56,9 +57,9 @@ namespace OnlineShopWebApp.Controllers
             return RedirectToAction("Products");
         }
  
-        public IActionResult Remove(string productId)
+        public IActionResult Remove(Guid id)
         {
-            _productStorage.RemoveProduct(productId);
+            _productStorage.RemoveProduct(id);
             return RedirectToAction("Products"); ;
         }
     }
