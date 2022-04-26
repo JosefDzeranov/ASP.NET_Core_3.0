@@ -2,12 +2,11 @@
 
 <form method="post">
     <div class="row text-center">
-        <div class="col text-center">
+        <div class="col">
             <div class="validation" asp-validation-summary="All">
                 <h3>Регистрация</h3>
-                <label></label>
                 <div>
-                    <label asp-for="Name">Имя</label><br />
+                    <label asp-for="Name">Имя</label>
                     <input type="text" asp-for="Name" />
                     <span asp-validation-for="Name" />
                 </div><br />
