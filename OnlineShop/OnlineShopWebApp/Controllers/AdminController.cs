@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using System;
+using Microsoft.AspNetCore.Mvc;
 using OnlineShopWebApp.Models;
 
 namespace OnlineShopWebApp.Controllers
@@ -43,7 +44,7 @@ namespace OnlineShopWebApp.Controllers
             return RedirectToAction("Products");
         }
         
-        public IActionResult Edit(string id)
+        public IActionResult Edit(Guid id)
         {
             var product = _productStorage.TryGetProduct(id);
             return View(product);
@@ -56,7 +57,7 @@ namespace OnlineShopWebApp.Controllers
             return RedirectToAction("Products");
         }
  
-        public IActionResult Remove(string id)
+        public IActionResult Remove(Guid id)
         {
             _productStorage.RemoveProduct(id);
             return RedirectToAction("Products"); ;

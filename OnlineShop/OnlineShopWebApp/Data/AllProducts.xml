@@ -1,9 +1,43 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <products>
-  <product id="b990c22a-06c0-4c11-a397-80a673f43c69">
+  <product id="efdf7bce-d7f8-4365-bee7-db0a140bd23b">
+    <img>/img/stilllife.jpg</img>
+    <name>Still Life</name>
+    <cost>100</cost>
+    <description>Photography, 
+4000x5000 px,
+3,5 Mb, Tiff</description>
+  </product>
+  <product id="8e73079c-6b70-4a3e-ae4b-39add95110a6">
+    <img>/img/portret.jpg</img>
+    <name>Girl's portret</name>
+    <cost>400</cost>
+    <description>Photography, 
+4000x5000 px,
+3,8 Mb, Tiff</description>
+  </product>
+  <product id="8bedfbeb-4b64-4798-90f9-45ce95844b5c">
+    <img>/img/landscape.jpg</img>
+    <name>Landscape</name>
+    <cost>300</cost>
+    <description>illustration, 
+4000x5000 px,
+5,5 Mb, Tiff</description>
+  </product>
+  <product id="921a9f51-6676-4b80-8e9a-3feb2c02275a">
+    <img>/img/abstraction.jpg</img>
+    <name>Abstract</name>
+    <cost>250</cost>
+    <description>Digital drawing, 
+4000x5000 px,
+2,5 Mb, Tiff</description>
+  </product>
+  <product id="5df6fd9c-21a5-4e17-9b36-fa2a6d498bf3">
     <img>/img/test.jpg</img>
-    <name>zxczxczxczxc</name>
-    <cost>87598349</cost>
-    <description>zxcxz</description>
+    <name>Test portret</name>
+    <cost>0</cost>
+    <description>Photography, 
+4000x5000 px,
+3,5 Mb, Tiff</description>
   </product>
 </products>

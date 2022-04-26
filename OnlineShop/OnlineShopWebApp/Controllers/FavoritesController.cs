@@ -23,14 +23,14 @@ namespace OnlineShopWebApp.Controllers
             return View(favoritesList);
         }
 
-        public IActionResult Add(string id)
+        public IActionResult Add(Guid id)
         {
             var product = _productStorage.TryGetProduct(id);
             _favoritesStorage.AddProduct(Constants.UserId, product);
             return RedirectToAction("Index");
         }
 
-        public IActionResult Remove(string id)
+        public IActionResult Remove(Guid id)
         {
             var product = _productStorage.TryGetProduct(id);
             _favoritesStorage.RemoveProduct(Constants.UserId, product);
