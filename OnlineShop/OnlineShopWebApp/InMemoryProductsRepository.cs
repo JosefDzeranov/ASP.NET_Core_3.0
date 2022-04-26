@@ -35,8 +35,6 @@ namespace OnlineShopWebApp
               Pages = 425
             },
         };
-
-        private List<Product> findProducts = new List<Product>();
         public List<Product> GetAll()
         {
             return products;
@@ -73,11 +71,13 @@ namespace OnlineShopWebApp
 
         public List<Product> TryGetByName(string name)
         {
+            List<Product> findProducts = new List<Product>();
+
             findProducts.Clear();
             {
                 foreach (var product in products)
                 {
-                    if (product.Name.ToLower().IndexOf(name.ToLower()) != -1)
+                    if (product.Name.ToLower().Contains(name.ToLower()))
                     {
                         findProducts.Add(product);
                     }
