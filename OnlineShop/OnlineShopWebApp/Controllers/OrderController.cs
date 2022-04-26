@@ -26,10 +26,17 @@ namespace OnlineShopWebApp.Controllers
         [HttpPost]
         public IActionResult Buy(User user)
         {
-            var cart = cartsRepository.TryGetByUserId(Constants.UserId);
-            ordersRepository.Add(cart, user);
-            cartsRepository.Clear(Constants.UserId);
-            return View();
+            if (ModelState.IsValid)
+            {
+                var cart = cartsRepository.TryGetByUserId(Constants.UserId);
+                ordersRepository.Add(cart, user);
+                cartsRepository.Clear(Constants.UserId);
+                return View();
+            }
+            else
+            {
+                return View(user);
+            }
         }
     }
 }

@@ -1,16 +1,32 @@
-﻿<form method="post">
+﻿@model User
+
+<form method="post">
     <div class="row text-center">
         <div class="col text-center">
-            <label>Фамилия Имя</label>
-            <input type="text" name="name" />
-            <br />
-            <label>Адрес</label>
-            <input type="text" name="adress" />
-            <br />
-            <label>Номер телефона</label>
-            <input type="text" name="phone" />
-            <br />
-            <button class="btn btn-success btn-sm" type="submit" asp-controller="Order" asp-action="Buy">Завершить оформление</button>
+            <div class="validation" asp-validation-summary="All">
+                <h3>Оформление заказа</h3>
+                <div>
+                    <label asp-for="Name">Фамилия Имя</label>
+                    <input type="text" asp-for="Name" />
+                    <span asp-validation-for="Name" />
+                </div><br />
+                <div>
+                    <label asp-for="Adress">Адрес</label>
+                    <input type="text" asp-for="Adress" />
+                    <span asp-validation-for="Adress" />
+                </div><br />
+                <div>
+                    <label asp-for="Phone">Номер телефона</label>
+                    <input type="text" asp-for="Phone" />
+                    <span asp-validation-for="Phone" />
+                </div><br />
+                <div>
+                    <label asp-for="Email">E-mail</label>
+                    <input type="text" asp-for="Email" />
+                    <span asp-validation-for="Email" />
+                </div><br />
+                <button class="btn btn-success btn-sm" type="submit" asp-controller="Order" asp-action="Buy">Завершить оформление</button>
+            </div>
         </div>
     </div>
 </form>
