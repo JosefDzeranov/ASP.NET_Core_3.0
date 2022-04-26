@@ -5,9 +5,7 @@
         @await Html.PartialAsync("AdministrationMenu")
         <div class="col text-center">
             <h3>Редактировать информацию о продукте</h3>
-            <label>Id</label>
-            <input type="text" name="id" value="@Model.Id" readonly placeholder="@Model.Id"/>
-            <br />
+            <input type="hidden" name="id" value="@Model.Id"/>
             <label>Название</label>
             <input type="text" name="name" value="@Model.Name" />
             <br />
