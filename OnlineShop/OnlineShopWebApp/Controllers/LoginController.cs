@@ -27,6 +27,11 @@ namespace OnlineShopWebApp.Controllers
         [HttpPost]
         public IActionResult Registrate(RegistrationData registrationData)
         {
+            if (ModelState.IsValid)
+            {
+                return Content($"{registrationData.Name} {registrationData.Age}");
+            }
+
             return View();
         }
     }
