@@ -10,10 +10,30 @@ namespace OnlineShopWebApp
     {
         private List<Product> products = new List<Product>()
         {
-            new Product("Оно", 450, "Автор: Стивен Кинг Жанр: мистика, ужасы", 1025),
-            new Product("Мрачный жнец", 350, "Автор: Терри Пратчетт Жанр: фэнтези", 356),
-            new Product("Странник по звездам", 300, "Автор: Джек Лондон Жанр: роман", 332),
-            new Product("Крутые наследнички", 350, "Автор: Дарья Донцова Жанр: детектив", 425),
+            new Product
+            { Name = "Оно",
+              Cost = 450,
+              Description = "Автор: Стивен Кинг Жанр: мистика, ужасы",
+              Pages = 1025
+            },
+            new Product
+            { Name = "Мрачный жнец",
+              Cost = 350,
+              Description = "Автор: Терри Пратчетт Жанр: фэнтези",
+              Pages = 356
+            },
+            new Product
+            { Name = "Странник по звездам",
+              Cost = 300,
+              Description = "Автор: Джек Лондон Жанр: роман",
+              Pages = 332
+            },
+            new Product
+            { Name = "Крутые наследнички",
+              Cost = 350,
+              Description = "Автор: Дарья Донцова Жанр: детектив",
+              Pages = 425
+            },
         };
 
 
@@ -31,5 +51,25 @@ namespace OnlineShopWebApp
             }
             return null;
         }
+
+        public void Add(Product product)
+        {
+            products.Add(product);
+        }
+
+        public void Edit(Product newProduct)
+        {
+            var product = products.FirstOrDefault(x => x.Id == newProduct.Id);
+            product.Name = newProduct.Name;
+            product.Cost = newProduct.Cost;
+            product.Description = newProduct.Description;
+            product.Pages = newProduct.Pages;
+        }
+        public void Delete(int id)
+        {
+            var product = products.FirstOrDefault(x => x.Id == id);
+            products.Remove(product);
+        }
     }
 }
+

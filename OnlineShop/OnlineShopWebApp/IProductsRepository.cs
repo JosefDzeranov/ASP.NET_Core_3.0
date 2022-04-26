@@ -8,6 +8,8 @@ namespace OnlineShopWebApp
     {
         List<Product> GetAll();
         Product TryGetById(int id);
-        
+        void Add(Product product);
+        void Edit(Product newProduct);
+        void Delete(int id);
     }
 }
