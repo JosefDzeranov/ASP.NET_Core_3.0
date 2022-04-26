@@ -13,8 +13,7 @@
             <h2>Edit product data</h2>
             <form method="post">
                 <div class="mb-3">
-                    <label class="form-label text-muted" for="inputId">Id</label>
-                    <textarea class="form-control" id="inputId" rows="1" name="id">@Model.Id</textarea>
+                    <textarea class="form-control" rows="1" name="id" hidden>@Model.Id</textarea>
                 </div>
                 <div class="mb-3">
                     <label class="form-label text-muted" for="inputImagePath">Image path</label>
