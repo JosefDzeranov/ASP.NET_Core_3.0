@@ -1,5 +1,4 @@
-﻿using System;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 
 namespace OnlineShopWebApp.Controllers
 {
@@ -10,9 +9,9 @@ namespace OnlineShopWebApp.Controllers
         {
             _productStorage = productStorage;
         }
-        public IActionResult Index(string productId)
+        public IActionResult Index(string id)
         {
-            var product = _productStorage?.TryGetProduct(productId);
+            var product = _productStorage.TryGetProduct(id);
             return View(product);
         }
     }

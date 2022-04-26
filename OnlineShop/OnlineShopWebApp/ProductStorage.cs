@@ -23,14 +23,14 @@ namespace OnlineShopWebApp
             return _products;
         }
 
-        public Product TryGetProduct(string productId)
+        public Product TryGetProduct(string id)
         {
-            var product = GetProductData().Where(p => p.Id == productId)
+            var product = GetProductData().Where(p => p.Id == id)
                                                  .FirstOrDefault();
             return product;
         }
 
-        public void AddProductToXml(Product product)
+        public void AddProduct(Product product)
         {
             var xDoc = XDocument.Load("Data/AllProducts.xml");
             var root = xDoc.Element("products");
@@ -67,13 +67,13 @@ namespace OnlineShopWebApp
             xDoc.Save("Data/AllProducts.xml");
         }
 
-        public void RemoveProduct(string productId)
+        public void RemoveProduct(string id)
         {
             var xDoc = XDocument.Load("Data/AllProducts.xml");
             var root = xDoc.Element("products");
 
             var product = root.Elements("product")
-                              .FirstOrDefault(p => p.Attribute("id").Value == productId);
+                              .FirstOrDefault(p => p.Attribute("id").Value == id);
 
                 product.Remove();
                 xDoc.Save("Data/AllProducts.xml");

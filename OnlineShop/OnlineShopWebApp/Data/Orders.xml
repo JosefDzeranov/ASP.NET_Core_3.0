@@ -1,31 +1,34 @@
 <?xml version="1.0"?>
 <Order xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
-  <Id>95b593da-1620-4aa6-af74-83f8ec6219d5</Id>
-  <Date>2022-04-24T14:12:51.3623228+03:00</Date>
+  <Id>bb860bdd-c36a-4edb-8aa1-07444dc3e91c</Id>
+  <Date>2022-04-26T15:10:20.1839478+03:00</Date>
   <UserId>UserId</UserId>
   <Basket>
-    <Id>d74f9733-ef24-4b61-aee4-7f7fc9b91b12</Id>
+    <Id>23d1eb28-3bb5-47d1-87b9-7ac217390334</Id>
     <UserId>UserId</UserId>
     <Items>
       <BasketItem>
-        <Id>72e2e68b-d068-4603-b723-7b9acee401d4</Id>
+        <Id>8c391a99-f49d-403c-be13-6634e8cc6add</Id>
         <Product>
-          <GuidId>400b8ca2-9989-40de-b485-899fd8a22f1f</GuidId>
-          <Id>d222806d-de99-41e8-9e98-cccce9a3316b</Id>
-          <ImagePath>/img/abstraction.jpg</ImagePath>
-          <Name>Abstraction</Name>
-          <Cost>1000</Cost>
-          <Description>
-		  Digital drawing,
-		  3247x2463px
-		  (27.5cm x 20.9cm 300dpi),
-		  745kB | jpg
+          <GuidId>daa76d39-fcd8-4d1b-9756-50f2a26fb403</GuidId>
+          <Id>e8d5d360-182b-48a0-aa22-8bce77b61b07</Id>
+          <ImagePath>/img/landscape.jpg</ImagePath>
+          <Name>Landscape</Name>
+          <Cost>2000</Cost>
+          <Description>Photography,
+3247x2463px
+(27.5cm x 20.9cm 300dpi),
+745kB | jpg
 	  </Description>
         </Product>
-        <Quantity>2</Quantity>
+        <Quantity>1</Quantity>
       </BasketItem>
-      <BasketItem>
-        <Id>c63c7a0c-7620-45a7-aa9e-c8c8f8bd41c6</Id>
+    </Items>
+  </Basket>
+  <Delivery>
+    <Address />
+  </Delivery>
+</Order>aa9e-c8c8f8bd41c6</Id>
         <Product>
           <GuidId>83c4318f-2a2d-4498-aa80-cf8e95d4f0d5</GuidId>
           <Id>e8d5d360-182b-48a0-aa22-8bce77b61b07</Id>
