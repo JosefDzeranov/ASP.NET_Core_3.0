@@ -9,10 +9,10 @@ namespace OnlineShopWebApp.Models
     public class EnterData
     {
         [Required(ErrorMessage = "Введите логин")]
-        string Login { get; set; }
+        public string Login { get; set; }
 
         [Required(ErrorMessage = "Введите пароль")]
-        string Password { get; set; }
-        bool Remember { get; set; }
+        public string Password { get; set; }
+        public bool Remember { get; set; }
     }
 }
