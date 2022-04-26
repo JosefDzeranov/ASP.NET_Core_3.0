@@ -46,9 +46,19 @@ namespace OnlineShopWebApp.Controllers
 
         public IActionResult Edit()
         {
-
             return View();
         }
+
+        [HttpPost]
+        public IActionResult UpdateDescription(Product product)
+        {
+            productReposititory.TryGetById(product.Id);
+            productReposititory.EditDescription(product);
+            
+            return View(productReposititory);
+        }
+
+
 
         //[HttpPost]
         //public IActionResult Create(int id, Image image)

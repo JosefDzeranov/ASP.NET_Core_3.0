@@ -34,5 +34,18 @@ namespace OnlineShopWebApp
 
             return null;
         }
+
+        public List<Product> EditDescription(Product productToReplaceWith)
+        {
+            var productToReplace = TryGetById(productToReplaceWith.Id);
+            productToReplace.Description = productToReplaceWith.Description;
+            productToReplace.Cost = productToReplaceWith.Cost;
+
+            var products = GetAll();
+            products.RemoveAt(productToReplaceWith.Id);
+            products.Insert(productToReplaceWith.Id, productToReplaceWith);
+
+            return products;
+        }
     }
 }
