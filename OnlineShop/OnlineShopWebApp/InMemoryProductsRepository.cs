@@ -72,8 +72,6 @@ namespace OnlineShopWebApp
         public List<Product> TryGetByName(string name)
         {
             List<Product> findProducts = new List<Product>();
-
-            findProducts.Clear();
             {
                 foreach (var product in products)
                 {
