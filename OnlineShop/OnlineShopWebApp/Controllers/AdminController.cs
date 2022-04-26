@@ -22,19 +22,23 @@ namespace OnlineShopWebApp.Controllers
         {
             return View();
         }
+
         public IActionResult Orders()
         {
             return View();
         }
+
         public IActionResult Products()
         {
             var products = productReposititory.GetAll();
             return View(products);
         }
+
         public IActionResult Status()
         {
             return View();
         }
+
         public IActionResult Users()
         {
             return View();
