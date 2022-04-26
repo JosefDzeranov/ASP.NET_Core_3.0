@@ -1,23 +1,25 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using OnlineShopWebApp.Models;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace OnlineShopWebApp.Controllers
 {
     public class HomeController : Controller
     {
         IProductManager _productManager;
-      
+
 
         public HomeController(IProductManager productManager)
         {
             _productManager = productManager;
-          
+
         }
         public IActionResult Index()
         {
-           
+
             var products = _productManager.productList;
-           
+
 
             return View(products);
         }
@@ -25,25 +27,22 @@ namespace OnlineShopWebApp.Controllers
         [HttpPost]
         public IActionResult SearchByName(string name)
         {
+
+            var productByPartName = new List<Product>(); 
             if (name != null)
             {
-               
-                var productByPartName = _productManager.productList.Find(x =>x.Name.ToLower().Contains(name.ToLower()));
-                if (productByPartName != null)
-                {
-                    var id = productByPartName.Id;
+                productByPartName = _productManager.productList.FindAll(x => x.Name.ToLower().Contains(name.ToLower()));
+                return View(productByPartName);
 
-                    return Redirect($"/product/index/{id}");
-
-                }
-                else
-                {
-                    return View();
-                }
             }
-            return RedirectToAction("Index");
-        }
+            else
+            {
+                return RedirectToAction("Index");
+            }
+           
 
+        }
 
     }
 }
+
