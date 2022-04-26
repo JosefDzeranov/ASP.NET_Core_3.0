@@ -1,30 +1,36 @@
-﻿<div class="row">
-    @await Html.PartialAsync("AdminPanel")
+﻿@model Product
 
-    <form method="post">
-        <div class="col">
+
+<form method="post">
+    <div class="row">
+        @await Html.PartialAsync("AdminPanel")
+
+        <div class="col-9">
+
+            <h3>Edit descrption for Product ID=@Model.Id</h3>
 
             <div class="form-group">
-                <input type="text" class="form-control" placeholder="New name" name="Name">
+                <input type="text" class="form-control" placeholder="@Model.Name" name="Name">
             </div>
 
             <div class="form-group">
-                <input type="text" class="form-control" placeholder="New cost" name="Cost">
+                <input type="text" class="form-control" placeholder="@Model.Cost" name="Cost">
             </div>
 
             <div class="form-group">
-                <input type="text" class="form-control" placeholder="New description" name="Description">
+                <input type="text" class="form-control" placeholder="@Model.Description" name="Description">
             </div>
 
             @*<div>
-                    <label class="form-label" for="item">Add product main picture</label>
-                    <input type="file" class="form-control" id="item" accept=".png" />
-                </div>*@
+                <label class="form-label" for="item">Add product main picture</label>
+                <input type="file" class="form-control" id="item" accept=".png" />
+            </div>*@
 
             <br />
             <div>
-                <a class="btn btn-outline-success btn-sm" asp-controller="Admin" asp-action="UpdateDescription" role="button">Update</a>
+                <button class="btn btn-outline-success btn-sm" type="submit" asp-controller="Admin" asp-action="UpdateDescription" role="button">Update</button>
             </div>
         </div>
-    </form>
-</div>
+    </div>
+</form>
+            

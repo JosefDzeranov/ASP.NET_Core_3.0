@@ -44,17 +44,29 @@ namespace OnlineShopWebApp.Controllers
             return View();
         }
 
-        public IActionResult Edit()
+        //public IActionResult AddNew()
+        //{
+        //    return View();
+        //}
+
+        //if I pass Product product it does not work, how does it understand what I am passing
+        public IActionResult Edit(int id)
         {
-            return View();
+            var productToEdit = productReposititory.TryGetById(id);
+            return View(productToEdit);
         }
 
         [HttpPost]
         public IActionResult UpdateDescription(Product product)
         {
             productReposititory.EditDescription(product);
-            
-            return View();
+            return RedirectToAction("Products");
+        }
+
+        public IActionResult Delete(Product product)
+        {
+            productReposititory.Delete(product);
+            return RedirectToAction("Products");
         }
 
 

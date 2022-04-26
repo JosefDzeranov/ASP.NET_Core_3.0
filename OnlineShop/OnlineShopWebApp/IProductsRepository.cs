@@ -7,7 +7,9 @@ namespace OnlineShopWebApp
     {
         List<Product> GetAll();
         Product TryGetById(int id);
-        List<Product> EditDescription(Product productToReplaceWith);
+        void EditDescription(Product product);
+        void Delete(Product product);
+        void Add(Product product);
     }
-   
+
 }
