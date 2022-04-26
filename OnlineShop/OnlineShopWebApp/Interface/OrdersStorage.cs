@@ -16,6 +16,10 @@ namespace OnlineShopWebApp.Models
             return orders.FirstOrDefault(x => x.UserId == userId);
         }
 
+        public List<Order> TryGetOrderAllByUserId(string userId)
+        {
+            return orders.FindAll(x => x.UserId == userId);
+        }
         public void Add(Order order, Customer customer, string userId)
         {
             int LastOrderNumber = 0;

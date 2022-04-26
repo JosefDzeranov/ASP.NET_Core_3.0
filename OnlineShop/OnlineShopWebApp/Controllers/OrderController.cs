@@ -19,7 +19,7 @@ namespace OnlineShopWebApp.Controllers
 
         public IActionResult Index()
         {
-            var order = ordersStorage.TryGetOrderByUserId(Constants.UserId);
+            var order = ordersStorage.TryGetOrderAllByUserId(Constants.UserId);
 
             return View(order);
         }

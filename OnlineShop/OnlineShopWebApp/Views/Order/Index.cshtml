@@ -1,6 +1,6 @@
 ﻿@using OnlineShopWebApp.Models
 
-@model Order
+@model List<Order>
 
 <h2 align="center">Заказы</h2>
 @if (Model == null)
@@ -23,11 +23,11 @@ else
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach (var order in Model.Items)
+                        @foreach (var order in Model)
                         {
                             <tr>
-                                <td><a href="/order/index/@order.Id">@Model.OrderNumber</a></td>
-                                <td><a href="/order/index/@order.Id">@Model.OrderDateTime</a></td>
+                                <td><a href="/order/index/@order.Id">@order.OrderNumber</a></td>
+                                <td><a href="/order/index/@order.Id">@order.OrderDateTime</a></td>
                             </tr>
                         }
                     </tbody>
