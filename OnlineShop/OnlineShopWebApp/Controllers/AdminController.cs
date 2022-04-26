@@ -52,10 +52,9 @@ namespace OnlineShopWebApp.Controllers
         [HttpPost]
         public IActionResult UpdateDescription(Product product)
         {
-            productReposititory.TryGetById(product.Id);
             productReposititory.EditDescription(product);
             
-            return View(productReposititory);
+            return View();
         }
 
 
