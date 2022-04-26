@@ -18,6 +18,8 @@ namespace OnlineShopWebApp.Controllers
         {
             var favourite = favouriteRepository.TryGetByUserId(Constants.UserId);
 
+            if (favourite == null)
+                return View("notFound");
             return View(favourite.Products);
         }
 
