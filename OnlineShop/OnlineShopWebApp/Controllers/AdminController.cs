@@ -46,30 +46,30 @@ namespace OnlineShopWebApp.Controllers
             return View();
         }
 
-        [HttpPost]
-        public IActionResult Create(int id, Image image)
-        {
-            if (ModelState.IsValid)
-            {
-                var fileName = Path.GetFileNameWithoutExtension(image.Name);
-                var extension = Path.GetExtension(image.Name);
-                image.Name = "item" + productReposititory.TryGetById(id) + extension;
-                var path = Path.Combine("/Image/", fileName);
-                var fileStream = new FileStream(path, FileMode.Create);
+        //[HttpPost]
+        //public IActionResult Create(int id, Image image)
+        //{
+        //    if (ModelState.IsValid)
+        //    {
+        //        var fileName = Path.GetFileNameWithoutExtension(image.Name);
+        //        var extension = Path.GetExtension(image.Name);
+        //        image.Name = "item" + productReposititory.TryGetById(id) + extension;
+        //        var path = Path.Combine("/Image/", fileName);
+        //        var fileStream = new FileStream(path, FileMode.Create);
 
-                return RedirectToAction("Index");
-            }
-            return View(image);
-        }
+        //        return RedirectToAction("Index");
+        //    }
+        //    return View(image);
+        //}
 
-        [HttpPost]
-        public IActionResult Delete(int id, Image image)
-        {
-            var imagePath = Path.Combine("/Image/", image.Name);
-            if (System.IO.File.Exists(imagePath))
-                System.IO.File.Delete(imagePath);
+        //[HttpPost]
+        //public IActionResult Delete(int id, Image image)
+        //{
+        //    var imagePath = Path.Combine("/Image/", image.Name);
+        //    if (System.IO.File.Exists(imagePath))
+        //        System.IO.File.Delete(imagePath);
 
-            return RedirectToAction("Index");
-        }
+        //    return RedirectToAction("Index");
+        //}
     }
 }
