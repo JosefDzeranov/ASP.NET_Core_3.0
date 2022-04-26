@@ -36,7 +36,7 @@ namespace OnlineShopWebApp.Controllers
             var product = productsRepository.TryGetByid(productId);
             favouriteRepository.Clear(product, Constants.UserId);
 
-            return RedirectToAction("Home");
+            return RedirectToAction("Index", "Home");
         }
     }
 }

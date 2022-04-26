@@ -2,12 +2,12 @@
 
 namespace OnlineShopWebApp.Controllers
 {
-    public class CompareControllers : Controller
+    public class CompareController : Controller
     {
         private readonly IProductsRepository productsRepository;
         private readonly ICompareRepository compareRepository;
 
-        public CompareControllers(IProductsRepository productsRepository, ICompareRepository compareRepository)
+        public CompareController(IProductsRepository productsRepository, ICompareRepository compareRepository)
         {
             this.productsRepository = productsRepository;
             this.compareRepository = compareRepository;
