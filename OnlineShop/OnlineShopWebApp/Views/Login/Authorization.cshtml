@@ -1,13 +1,20 @@
-﻿<form method="post">
+﻿@model EnterData
+
+<form method="post">
     <div class="row text-center">
-        <div class="col text-center">
+        <div class="col">
+            <div class="validation" asp-validation-summary="All"></div>
             <h3>Вход</h3>
-            <label>Логин</label>
-            <input type="text" name="login" />
-            <br />
-            <label>Пароль</label>
-            <input type="text" name="password" />
-            <br />
+            <div>
+                <label asp-for="Login">Логин</label>
+                <input type="text" asp-for="Login" />
+                <span asp-validation-for="Login" />
+            </div><br />
+            <div>
+                <label asp-for="Password">Пароль</label>
+                <input type="password" asp-for="Password" />
+                <span asp-validation-for="Password" />
+            </div><br />
             <div class="form-check">
                 <input class="form-check-input" type="checkbox" value="true" name="remember">
                 <label class="form-check-label">

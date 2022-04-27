@@ -17,7 +17,14 @@ namespace OnlineShopWebApp.Controllers
         [HttpPost]
         public IActionResult Enter(EnterData enterData)
         {
-            return View();
+            if (ModelState.IsValid)
+            {
+                return View();
+            }
+            else
+            {
+                return View(enterData);
+            }
         }
 
         public IActionResult Registration()
@@ -27,7 +34,14 @@ namespace OnlineShopWebApp.Controllers
         [HttpPost]
         public IActionResult Registrate(RegistrationData registrationData)
         {
-            return View();
+            if (ModelState.IsValid)
+            {
+                return View();
+            }
+            else
+            {
+                return View(registrationData);
+            }
         }
     }
 }

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -7,8 +8,11 @@ namespace OnlineShopWebApp.Models
 {
     public class EnterData
     {
-        string Login { get; set; }
-        string Password { get; set; }
-        bool Remember { get; set; }
+        [Required(ErrorMessage = "Введите логин")]
+        public string Login { get; set; }
+
+        [Required(ErrorMessage = "Введите пароль")]
+        public string Password { get; set; }
+        public bool Remember { get; set; }
     }
 }
