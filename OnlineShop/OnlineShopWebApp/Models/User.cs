@@ -31,11 +31,12 @@ namespace OnlineShopWebApp.Models
         [EmailAddress(ErrorMessage = "Некорректный адрес")]
         public string Email { get; set; }
 
+        [StringLength(100, MinimumLength = 8, ErrorMessage = "Длина пароля должна быть от 8")]
         [Required(ErrorMessage = "Не указан пароль")]
         public string Password { get; set; }
 
         [Required(ErrorMessage = "Не указан повторный пароль")]
-        [Compare("Password", ErrorMessage = "Пароли не совпадают")]
+        [Compare("Password", ErrorMessage = "Проверочный пароль должен совпадать с паролем")]
         public string PasswordConfirm { get; set; }
 
     }
