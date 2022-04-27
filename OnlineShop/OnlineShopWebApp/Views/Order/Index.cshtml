@@ -40,16 +40,16 @@
 
 <form method="post">
     <p>Ваше имя:</p>
-    <input type="text" name="name"/>
+    <input type="text" name="name" required/>
     <p>
         Ваш адрес:
     </p>
-    <input type="text" name="adress"/>
+    <input type="text" name="adress" required/>
 
     <p>
         Ваша электронная почта:
     </p>
-    <input type="text" name="email"/> <br />
+    <input type="email" name="email" required/> <br />
     <br />
     <button class="btn btn-dark" type="submit" asp-controller="Order" asp-action="MakeOrder">заказать</button>
 
