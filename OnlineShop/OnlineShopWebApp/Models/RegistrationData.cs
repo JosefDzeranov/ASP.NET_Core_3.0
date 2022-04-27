@@ -26,10 +26,10 @@ namespace OnlineShopWebApp.Models
 
         [Required(ErrorMessage = "Введите пароль")]
         [StringLength(50, MinimumLength = 8, ErrorMessage = "Пароль должен содержать не менее 8 символов")]
-        public string Password1 { get; set; }
+        public string Password { get; set; }
 
         [Required(ErrorMessage = "Повторите пароль")]
         [Compare("Password1", ErrorMessage = "Пароли не совпадают")]
-        public string Password2 { get; set; }
+        public string PasswordConfirm { get; set; }
     }
 }
