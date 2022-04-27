@@ -1,0 +1,28 @@
+﻿@model Product
+<div class="row">
+	@await Html.PartialAsync("AdminMenu")
+
+	<div class="col-9">
+		<h3>Добавить продукт</h3>
+	</div>
+</div>
+<form method="post" action="/admin/AddProduct">
+	<div class="row text-center">
+	<div class="col">
+		<div><br>
+			<label>	<input type="text" name="Name" placeholder="Продукт"/></label></div>
+	<div><br>
+		<label><input type="text" name="Cost" placeholder="Цена"/></label></div>
+	<div><br> 
+		<label><input type="text" name="Description" placeholder="Описание"/></label></div>
+	<div><br>
+		<label>Добавить изображение</label><br />
+		<label><input type="file" name="password"></label></div>
+	<div><br>
+		
+		<input type="submit" value="Добавить" class ="btn btn-outline-success" role="button" href="/admin/AddProduct" asp-controller="admin" asp-action="AddProduct"/></div>
+	<div><br>
+		</div>
+		</div>
+		</div>
+</form>

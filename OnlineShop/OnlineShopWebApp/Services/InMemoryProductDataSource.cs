@@ -22,5 +22,27 @@ namespace OnlineShopWebApp.Services
 		{
 			return products.FirstOrDefault(x => x.Id == id);
 		}
+
+		public void AddProduct(Product product)
+        {
+			product.Id = Product.GetNextId();
+
+			products.Add(product);
+        }
+
+		public void RemoveProduct (int Id)
+        {
+			var product = products.FirstOrDefault(x => x.Id == Id);
+			products.Remove(product);
+        }
+
+		public void EditProduct (Product product)
+        {
+			var existing = GetProductById(product.Id);
+			existing.Name = product.Name;
+			existing.Cost = product.Cost;
+			existing.Description = product.Description;
+			existing.ImagePath = product.ImagePath;
+        }
 	}
 }

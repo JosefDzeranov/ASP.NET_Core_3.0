@@ -1,0 +1,16 @@
+﻿@model Product
+
+<form method="post" asp-action="EditProduct">
+<div class="row">
+	@await Html.PartialAsync("AdminMenu")
+
+	<div class="col-9">
+		<h3>Редактировать информацию о продукте</h3>
+		<input type="hidden" asp-for="Id"/>
+		<input type="text" asp-for="Name" /><br />
+		<input type="text" asp-for="Cost"/><br />
+		<input type="text" asp-for="Description"/><br />
+		<input type="submit" value="Сохранить изменения" class ="btn btn-outline-success" role="button"  />
+	</div>
+</div>
+</form>
