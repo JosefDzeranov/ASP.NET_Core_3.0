@@ -30,18 +30,15 @@ namespace OnlineShopWebApp.Controllers
         [HttpPost]
         public IActionResult Create(Order order)
         {
-            if (ModelState.IsValid)
-            {
-                var existingCart = cartRepository.TryGetByUserId(Const.UserId);
-                order.Cart = existingCart;
-                order.UserId = Const.UserId;
-                order.TotalCost = existingCart.TotalCost;
-                orderRepository.Add(order);
-                cartRepository.Clear(Const.UserId);
-                return View();
-            }
-            return RedirectToAction("Index", "Order");
 
+            var existingCart = cartRepository.TryGetByUserId(Const.UserId);
+            order.Cart = existingCart;
+            order.UserId = Const.UserId;
+            order.TotalCost = existingCart.TotalCost;
+            orderRepository.Add(order);
+            cartRepository.Clear(Const.UserId);
+
+            return View();
         }
 
         public IActionResult Orders()
