@@ -5,7 +5,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <None Include="Views\Account\Index.cshtml" />
+    <None Include="Views\Authorization\Index.cshtml" />
   </ItemGroup>
 
 </Project>

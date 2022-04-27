@@ -1,8 +1,8 @@
-﻿<div class="container align-content-center">
-    <div class="row text-center">
-        <div class="col-4 mx-auto">
-            <h2>Авторизируйтесь</h2>
-            <form method="post">
+﻿<form method="post">
+    <div class="container align-content-center">
+        <div class="row text-center">
+            <div class="col-4 mx-auto">
+                <h2>Авторизируйтесь</h2>
                 <div class="mb-3">
                     <input class="form-control" type="text" name="name" placeholder="Введите имя">
                 </div>
@@ -16,12 +16,12 @@
                     </label>
                 </div>
                 <div class="mb-3">
-                    <button type="submit" class="btn btn-outline-dark" asp-controller="Account" asp-action="Authorization">Войти</button>
+                    <button type="submit" class="btn btn-outline-dark" asp-controller="Authorization" asp-action="Authorize">Войти</button>
                 </div>
                 <div class="mb-3">
-                    <a href="#">Регистрация нового пользователя</a>
+                    <a href="/registration/index">Регистрация нового пользователя</a>
                 </div>
-            </form>
+            </div>
         </div>
     </div>
-</div> 
+</form>
