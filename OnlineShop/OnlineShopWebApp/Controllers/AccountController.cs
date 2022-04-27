@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace OnlineShopWebApp.Controllers
 {
-    public class AuthorizationController : Controller
+    public class AccountController : Controller
     {
         public IActionResult Index()
         {
@@ -16,7 +16,7 @@ namespace OnlineShopWebApp.Controllers
         }
 
         [HttpPost]
-        public IActionResult Authorize(Authorization authorization)
+        public IActionResult Authorization(Authorization authorization)
         {
             return RedirectToAction("Index", "Home");
         }
