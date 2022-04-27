@@ -55,9 +55,9 @@ namespace OnlineShopWebApp
             products.Add(product);
         }
 
-        public void Edit(int id, Product newProduct)
+        public void Edit(Product newProduct)
         {
-            var product = products.FirstOrDefault(x => x.Id == id);
+            var product = products.FirstOrDefault(x => x.Id == newProduct.Id);
             product.Name = newProduct.Name;
             product.Cost = newProduct.Cost;
             product.Description = newProduct.Description;

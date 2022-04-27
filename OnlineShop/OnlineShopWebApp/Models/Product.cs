@@ -20,9 +20,5 @@ namespace OnlineShopWebApp.Models
             Id = constantCounter;
             constantCounter++;        
         }
-        //public override string ToString()
-        //{
-         //   return $"{Id}\n{Name}\n{Cost}";
-        //}
     }
 }

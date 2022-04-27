@@ -53,9 +53,9 @@ namespace OnlineShopWebApp.Controllers
             return View(product);
         }
         [HttpPost]
-        public IActionResult EditProduct(int productId, Product product)
+        public IActionResult EditProduct(Product product)
         {
-            productsRepository.Edit(productId, product);
+            productsRepository.Edit(product);
             return View();
         }
         public IActionResult Delete(int productId)

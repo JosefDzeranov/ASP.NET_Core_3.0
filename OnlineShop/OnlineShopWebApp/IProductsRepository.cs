@@ -10,7 +10,7 @@ namespace OnlineShopWebApp
         Product TryGetById(int id);
         List<Product> TryGetByName(string name);
         void Add(Product product);
-        void Edit(int id, Product newProduct);
+        void Edit(Product newProduct);
         void Delete(int id);
     }
 }
