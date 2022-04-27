@@ -44,8 +44,15 @@ namespace OnlineShopWebApp.Controllers
         [HttpPost]
         public IActionResult Add(Product product)
         {
+            if (ModelState.IsValid)
+            { 
             productsRepository.Add(product);
             return View();
+            }
+            else
+            {
+                return View(product);
+            }
         }
         public IActionResult Edit(int productId)
         {
@@ -55,8 +62,15 @@ namespace OnlineShopWebApp.Controllers
         [HttpPost]
         public IActionResult EditProduct(Product product)
         {
-            productsRepository.Edit(product);
-            return View();
+            if (ModelState.IsValid)
+            {
+                productsRepository.Edit(product);
+                return View();
+            }
+            else
+            {
+                return View(product);
+            }
         }
         public IActionResult Delete(int productId)
         {

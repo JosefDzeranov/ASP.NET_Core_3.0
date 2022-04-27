@@ -29,7 +29,7 @@ namespace OnlineShopWebApp.Models
         public string Password { get; set; }
 
         [Required(ErrorMessage = "Повторите пароль")]
-        [Compare("Password1", ErrorMessage = "Пароли не совпадают")]
+        [Compare("Password", ErrorMessage = "Пароли не совпадают")]
         public string PasswordConfirm { get; set; }
     }
 }
