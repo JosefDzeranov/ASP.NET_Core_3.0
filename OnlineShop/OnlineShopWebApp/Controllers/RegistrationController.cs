@@ -18,6 +18,7 @@ namespace OnlineShopWebApp.Controllers
         [HttpPost]
         public IActionResult Registrate(Registration registration)
         {
+
             return RedirectToAction("Index", "Home");
         }
     }
