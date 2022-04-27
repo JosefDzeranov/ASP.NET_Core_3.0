@@ -5,19 +5,29 @@ namespace OnlineShopWebApp.Controllers
 {
     public class LoginController : Controller
     {
+
         public IActionResult Index()
         {
             return View();
         }
         [HttpPost]
-        public IActionResult Registration(User user, string checkPassword)
+        public IActionResult Registration(User user)
         {
-            throw new System.NotImplementedException();
+            if (ModelState.IsValid)
+            {
+                return Content($"{user.Login} - {user.Password}");
+            }
+            else return Content("errorValid");
         }
         [HttpPost]
         public IActionResult Enter(User user)
         {
-            throw new System.NotImplementedException();
+            if (ModelState.IsValid)
+            {
+                return Content($"{user.Login} - {user.Password}");
+            }
+            else return Content("errorValid");
+
         }
         
         public IActionResult NewUser()

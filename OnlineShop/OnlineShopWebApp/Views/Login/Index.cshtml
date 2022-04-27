@@ -1,18 +1,22 @@
-﻿@{
+﻿@model User
+@{
     ViewData["Title"] = "Авторизация";
 }
 
-<form method="post">
+<form method="post" asp-controller="Login" asp-action="Enter">
 <div class="container">
-
     <h3 class="display-5 text-center">Вход</h3>
     <p></p>
     <div class="form-group col-md-3 mx-auto">
-        <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="Логин" name="login"/>
+        <label asp-for="Login" class="text-center">Логин</label>
+        <input type="text" class="form-control" id="Input1" placeholder="Логин" required="" name="Login" asp-for="Login"/>
+        <span asp-validation-for="Login"></span>
     </div>
     <p></p>
     <div class="form-group  col-md-3 mx-auto">
-        <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="Пароль" name="password"/>
+        <label asp-for="Password" class="text-center">Пароль</label>
+        <input type="password" class="form-control" id="Input2" placeholder="Пароль" name="Password" required=""  asp-for="Password"/>
+        <span asp-validation-for="Password"></span>
     </div>
     <div class="row  col-md-3 mx-auto">
         <div class="form-check col-1">
