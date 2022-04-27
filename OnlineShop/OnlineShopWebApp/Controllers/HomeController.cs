@@ -19,18 +19,6 @@ namespace OnlineShopWebApp.Controllers
             return View(products);
         }
 
-        [HttpPost]
-        public IActionResult Search(string name)
-        {
-            var products = _productStorage.SearchByName(name);
-
-            if(products.Count() == 0)
-            {
-                return View("NotFound");
-            }
-            return View(products);
-        }
-
         public IActionResult Privacy()
         {
             return View();
