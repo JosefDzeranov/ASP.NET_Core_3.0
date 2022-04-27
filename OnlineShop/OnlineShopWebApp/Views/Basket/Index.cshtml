@@ -27,8 +27,8 @@
                             <td>
                                 @item.Quantity
                                 <div class="btn-group ml-2" role="group" aria-label="Add/Remove buttons">
-                                    <a class="btn btn-outline-dark btn-sm" role="button" href="/basket/remove/@item.Product.Id">&ndash;</a> 
-                                    <a class="btn btn-outline-dark btn-sm" role="button" href="/basket/add/@item.Product.Id">+</a>          
+                                    <a class="btn btn-outline-dark btn-sm" role="button" href="/basket/remove?id=@item.Product.Id">&ndash;</a> 
+                                    <a class="btn btn-outline-dark btn-sm" role="button" href="/basket/add?id=@item.Product.Id">+</a>          
                                 </div>
                             </td>
                             <td>$@item.Cost</td>
