@@ -26,14 +26,14 @@
                     <span asp-validation-for="Login" />
                 </div><br />
                 <div>
-                    <label asp-for="Password1">Пароль</label>
-                    <input type="password" asp-for="Password1" />
-                    <span asp-validation-for="Password1" />
+                    <label asp-for="Password">Пароль</label>
+                    <input type="password" asp-for="Password" />
+                    <span asp-validation-for="Password" />
                 </div><br />
                 <div>
-                    <label asp-for="Password2">Повторите пароль</label>
-                    <input type="password" asp-for="Password2" />
-                    <span asp-validation-for="Password2" />
+                    <label asp-for="PasswordConfirm">Повторите пароль</label>
+                    <input type="password" asp-for="PasswordConfirm" />
+                    <span asp-validation-for="PasswordConfirm" />
                 </div><br />
                 <button class="btn btn-dark" type="submit" asp-controller="Login" asp-action="Registrate">Зарегистрироваться</button>
             </div>
