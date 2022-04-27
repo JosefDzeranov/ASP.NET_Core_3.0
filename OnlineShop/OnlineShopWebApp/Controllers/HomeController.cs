@@ -12,12 +12,26 @@ namespace OnlineShopWebApp.Controllers
         {
             _productStorage = productStorage;
         }
-        
+
         public IActionResult Index()
         {
-            var products = _productStorage.GetProductData();
+            var products = _productStorage?.GetProductData();
             return View(products);
         }
+
+        [HttpPost]
+        public IActionResult Search(string name)
+        {
+            var products = _productStorage.SearchByName(name);
+
+            if (products.Count() == 0)
+            {
+                return View("NotFound");
+            }
+
+            return View(products);
+        }
+
 
         public IActionResult Privacy()
         {

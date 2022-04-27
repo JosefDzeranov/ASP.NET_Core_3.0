@@ -8,6 +8,7 @@ namespace OnlineShopWebApp
     {
         List<Product> GetProductData();
         Product TryGetProduct(Guid id);
+        IEnumerable<Product> SearchByName(string name);
         void AddProduct(Product product);
         void EditProduct(Product product);
         void RemoveProduct(Guid id);

@@ -29,6 +29,11 @@ namespace OnlineShopWebApp
             return product;
         }
 
+        public IEnumerable<Product> SearchByName(string name)
+        {
+            var products = GetProductData().Where(p => p.Name.ToLower().Contains(name.ToLower()));
+            return products;
+        }
         public void AddProduct(Product product)
         {
             var xDoc = XDocument.Load("Data/AllProducts.xml");

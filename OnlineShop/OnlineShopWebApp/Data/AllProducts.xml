@@ -32,12 +32,12 @@
 4000x5000 px,
 2,5 Mb, Tiff</description>
   </product>
-  <product id="5df6fd9c-21a5-4e17-9b36-fa2a6d498bf3">
+  <product id="ab059ad8-98d2-4b3d-b8d0-c119a039c8f8">
     <img>/img/test.jpg</img>
     <name>Test portret</name>
-    <cost>1</cost>
-    <description>Photography, 
-4000x5000 px,
-3,5 Mb, Tiff</description>
+    <cost>100</cost>
+    <description>Photography,
+4000 x 5000 px,
+4,5 Mb Tiff</description>
   </product>
 </products>
