@@ -14,7 +14,7 @@ namespace OnlineShopWebApp
             { Name = "Оно",
               Cost = 450,
               Description = "Автор: Стивен Кинг Жанр: мистика, ужасы",
-              Pages = 1025
+              Pages = 1025,
             },
             new Product
             { Name = "Мрачный жнец",
@@ -35,8 +35,6 @@ namespace OnlineShopWebApp
               Pages = 425
             },
         };
-
-
         public List<Product> GetAll()
         {
             return products;
@@ -69,6 +67,21 @@ namespace OnlineShopWebApp
         {
             var product = products.FirstOrDefault(x => x.Id == id);
             products.Remove(product);
+        }
+
+        public List<Product> TryGetByName(string name)
+        {
+            List<Product> findProducts = new List<Product>();
+            {
+                foreach (var product in products)
+                {
+                    if (product.Name.ToLower().Contains(name.ToLower()))
+                    {
+                        findProducts.Add(product);
+                    }
+                }
+            }
+            return findProducts;
         }
     }
 }

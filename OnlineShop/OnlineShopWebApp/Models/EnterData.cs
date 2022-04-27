@@ -12,4 +12,3 @@ namespace OnlineShopWebApp.Models
         bool Remember { get; set; }
     }
 }
-

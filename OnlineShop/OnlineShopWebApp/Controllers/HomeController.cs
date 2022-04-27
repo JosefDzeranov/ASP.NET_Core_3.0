@@ -26,7 +26,15 @@ namespace OnlineShopWebApp.Controllers
             return View(products);
         }
 
-        
+        [HttpPost]
+        public IActionResult SearchByName(string searchname)
+        {
+            var findProduct = productsRepository.TryGetByName(searchname);
+            return View(findProduct);
+        }
+
+
+
 
         public IActionResult Privacy()
         {

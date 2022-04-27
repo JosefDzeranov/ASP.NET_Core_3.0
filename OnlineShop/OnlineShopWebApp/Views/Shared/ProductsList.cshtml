@@ -1,0 +1,32 @@
+﻿<form method="post">
+    <div class="row ">
+        <div class="col text-center">
+            <input type="search" style="width: 60%" name="searchname" placeholder="Введите название книги" />
+            <button class="btn btn-dark" type="submit" asp-controller="Home" asp-action="SearchByName">Поиск</button>
+        </div>
+    </div>
+</form>
+<br />
+<div class="row">
+    @foreach (var product in Model)
+    {
+        <div class="col-3 card shadow">
+
+            <img class="card-img-top" src="https://static4.depositphotos.com/1015530/309/i/600/depositphotos_3098299-stock-photo-single-green-book.jpg" />
+
+            <div class="card-body">
+                <a style="color:grey" href="/product/index/@product.Id">
+                    <h5>@product.Name</h5>
+                </a>
+
+                <h4>@product.Cost</h4>
+
+                <a class="btn btn-dark" href="/cart/add?productId=@product.Id" role="button">Добавить в корзину</a>
+                <p></p>
+                <a class="btn btn-success btn-sm" href="/compare/add?productId=@product.Id" role="button">Добавить в сравнение</a>
+                <p></p>
+                <a class="btn btn-success btn-sm" href="/favourite/add?productId=@product.Id" role="button">Добавить в избранное</a>
+            </div>
+        </div>
+    }
+</div>
