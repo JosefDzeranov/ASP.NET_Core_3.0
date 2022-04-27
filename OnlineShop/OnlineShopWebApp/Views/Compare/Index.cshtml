@@ -8,21 +8,21 @@
 <div class="container">   
     <div class="row">
         <div class="col-12 mb-4">
-            <h2>Choose what you like more</h2>
+            <h2>Compare</h2>
         </div>
         @foreach (var item in Model.Products)
         {
             <div class="col-4 mb-4">
-                <img class="img-thumbnail mb-2" src="@item.Image" alt="@item.Name">
-                <a style="color: darkblue" href="/product/index/@item.Id"><h5>@item.Name</h5></a>
+                <img class="img-thumbnail mb-2" src="@item.ImagePath" alt="@item.Name">
+                <a style="color: darkblue" href="/product/index?id=@item.Id"><h5>@item.Name</h5></a>
                 <h6>$@item.Cost</h6>
                 <p>@item.Description</p>
                 <div class="row justify-content-between">
                     <div class="col-auto text-left">
-                        <a class="btn btn-outline-dark btn-sm text-nowrap" href="/basket/add/@item.Id" role="button">Add to basket</a>
+                        <a class="btn btn-outline-dark btn-sm text-nowrap" href="/basket/add?id=@item.Id" role="button">Add to basket</a>
                     </div>
                     <div class="col-auto text-right">
-                        <a class="btn btn-outline-dark btn-sm text-nowrap" href="/compare/remove/@item.Id" role="button">Remove from list</a>
+                        <a class="btn btn-outline-dark btn-sm text-nowrap" href="/compare/remove?id=@item.Id" role="button">Remove from list</a>
                     </div>
                 </div>
             </div>

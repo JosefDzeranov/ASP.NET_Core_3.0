@@ -7,21 +7,21 @@
 
 <div class="row">
         <div class="col col-md-7">
-            <img class="img-thumbnail" src="@Model.Image" alt="@Model.Name">
+            <img class="img-thumbnail" src="@Model.ImagePath" alt="@Model.Name">
         </div>
         <div class="col-md-5 align-self-end">
-            <a style="color: darkblue" href="/product/index/@Model.Id"><h5>@Model.Name</h5></a>
+            <a href="/product/index?id=@Model.Id"><h5>@Model.Name</h5></a>
             <h6>$@Model.Cost</h6>
             <p>@Model.Description</p>
             <div class="row justify-content-end">              
                 <div class="col-auto text-right">
-                    <a class="btn btn-outline-dark btn-sm mr-2 text-nowrap" href="/compare/add/@Model.Id" role="button" alt="Add to Compare list">Compare</a>
-                    <a class="btn btn-outline-dark btn-sm mr-2 text-nowrap" href="/favorites/add/@Model.Id" role="button" alt="Add to Favorites">
+                    <a class="btn btn-outline-dark btn-sm mr-2 text-nowrap" href="/compare/add?id=@Model.Id" role="button" alt="Add to Compare list">Compare</a>
+                    <a class="btn btn-outline-dark btn-sm mr-2 text-nowrap" href="/favorites/add?id=@Model.Id" role="button" alt="Add to Favorites">
                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-heart-fill" viewBox="0 0 16 16">
                             <path fill-rule="evenodd" d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314z" />
                         </svg>
                     </a>
-                    <a class="btn btn-outline-dark btn-sm mr-2 text-nowrap" href="/basket/add/@Model.Id" role="button" alt="Add to Basket">
+                    <a class="btn btn-outline-dark btn-sm mr-2 text-nowrap" href="/basket/add?id=@Model.Id" role="button" alt="Add to Basket">
                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-basket2" viewBox="0 0 16 16">
                             <path d="M4 10a1 1 0 0 1 2 0v2a1 1 0 0 1-2 0v-2zm3 0a1 1 0 0 1 2 0v2a1 1 0 0 1-2 0v-2zm3 0a1 1 0 1 1 2 0v2a1 1 0 0 1-2 0v-2z" />
                             <path d="M5.757 1.071a.5.5 0 0 1 .172.686L3.383 6h9.234L10.07 1.757a.5.5 0 1 1 .858-.514L13.783 6H15.5a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-.623l-1.844 6.456a.75.75 0 0 1-.722.544H3.69a.75.75 0 0 1-.722-.544L1.123 8H.5a.5.5 0 0 1-.5-.5v-1A.5.5 0 0 1 .5 6h1.717L5.07 1.243a.5.5 0 0 1 .686-.172zM2.163 8l1.714 6h8.246l1.714-6H2.163z" />

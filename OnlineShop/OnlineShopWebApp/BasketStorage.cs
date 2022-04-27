@@ -8,14 +8,6 @@ namespace OnlineShopWebApp
     {
         private List<Basket> baskets = new List<Basket>();
 
-        public List<Basket> Baskets
-        {
-            get 
-            {
-                return baskets;
-            }
-        }
-
         public Basket TryGetByUserId(string userId)
         {
             return baskets.FirstOrDefault(b => b.UserId == userId);

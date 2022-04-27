@@ -1,14 +1,16 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using System;
+using Microsoft.AspNetCore.Mvc;
+using OnlineShopWebApp.Models;
 
 namespace OnlineShopWebApp.Controllers
 {
     public class AdminController : Controller
     {
-        public IActionResult Index()
+        private readonly IProductStorage _productStorage;
+        public AdminController(IProductStorage productStorage)
         {
-            return View();
+            _productStorage = productStorage;
         }
-
         public IActionResult Orders()
         {
             return View();
@@ -26,7 +28,39 @@ namespace OnlineShopWebApp.Controllers
 
         public IActionResult Products()
         {
+            var products = _productStorage.GetProductData();
+            return View(products);
+        }
+
+        public IActionResult Add()
+        {
             return View();
+        }
+
+        [HttpPost]
+        public IActionResult Add(Product product)
+        {
+            _productStorage.AddProduct(product);
+            return RedirectToAction("Products");
+        }
+        
+        public IActionResult Edit(Guid id)
+        {
+            var product = _productStorage.TryGetProduct(id);
+            return View(product);
+        }
+        
+        [HttpPost]
+        public IActionResult Save(Product product)
+        {
+            _productStorage.EditProduct(product);
+            return RedirectToAction("Products");
+        }
+ 
+        public IActionResult Remove(Guid id)
+        {
+            _productStorage.RemoveProduct(id);
+            return RedirectToAction("Products"); ;
         }
     }
 }

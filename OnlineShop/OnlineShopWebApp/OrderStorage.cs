@@ -9,13 +9,6 @@ namespace OnlineShopWebApp
     public class OrderStorage: IOrderStorage
     {
         private List<Order> orders = new List<Order>();
-        public List<Order> Orders
-        {
-            get
-            {
-                return orders;
-            }
-        }
 
         public Order TryGetByUserId(string userId)
         {
@@ -35,11 +28,10 @@ namespace OnlineShopWebApp
         public void SaveOrderToXmlFile(Order order)
         {
             var xmlSerializer = new XmlSerializer(typeof(Order));
-            using (FileStream fs = new FileStream("Data/Orders/order.xml", FileMode.OpenOrCreate))
+            using (FileStream fs = new FileStream("Data/Orders.xml", FileMode.OpenOrCreate))
             {
                 xmlSerializer.Serialize(fs, order);
             }
-
         }
     }
 }
