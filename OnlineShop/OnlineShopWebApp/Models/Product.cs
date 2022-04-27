@@ -18,7 +18,7 @@
 		{
         }
 
-		public Product(string name, decimal cost, string description, string imagePath) : this()
+		public Product(string name, decimal cost, string description, string imagePath)
 		{
             Id = GetNextId();
 			Name = name;
