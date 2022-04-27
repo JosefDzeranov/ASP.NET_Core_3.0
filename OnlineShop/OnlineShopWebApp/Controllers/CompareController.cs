@@ -23,14 +23,14 @@ namespace OnlineShopWebApp.Controllers
             return View(compareList);
         }
 
-        public IActionResult Add(string id)
+        public IActionResult Add(Guid id)
         {
             var product = _productStorage.TryGetProduct(id);
             _compareStorage.AddProduct(Constants.UserId, product);
             return RedirectToAction("Index");
         }
 
-        public IActionResult Remove(string id)
+        public IActionResult Remove(Guid id)
         {
             var product = _productStorage.TryGetProduct(id);
             _compareStorage.RemoveProduct(Constants.UserId, product);

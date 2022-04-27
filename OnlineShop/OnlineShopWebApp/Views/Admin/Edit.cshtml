@@ -13,20 +13,19 @@
             <h2>Edit product data</h2>
             <form method="post">
                 <div class="mb-3">
-                    <label class="form-label text-muted" for="inputId">Id</label>
-                    <textarea class="form-control" id="inputId" rows="1" name="id">@Model.Id</textarea>
+                    <input class="form-control" rows="1" name="id" hidden value="@Model.Id">
                 </div>
                 <div class="mb-3">
                     <label class="form-label text-muted" for="inputImagePath">Image path</label>
-                    <textarea class="form-control" id="inputImagePath" rows="1" name="imagepath">@Model.ImagePath</textarea>
+                    <input class="form-control" id="inputImagePath" rows="1" name="imagepath" value="@Model.ImagePath">
                 </div>
                 <div class="mb-3">
                     <label class="form-label text-muted" for="inputName">Name</label>
-                    <textarea class="form-control" id="inputName" rows="1" name="name" placeholder="Name">@Model.Name</textarea>
+                    <input class="form-control" id="inputName" rows="1" name="name" placeholder="Name" value="@Model.Name">
                 </div>
                 <div class="mb-3">
                     <label class="form-label text-muted" for="inputCost">Cost</label>
-                    <textarea class="form-control" id="inputCost" rows="1" name="cost" placeholder="Cost">@Model.Cost</textarea>
+                    <input class="form-control" id="inputCost" rows="1" name="cost" placeholder="Cost" value="@Model.Cost">
                 </div>
                 <div class="mb-3">
                     <label class="form-label text-muted" for="inputDescription">Description</label>

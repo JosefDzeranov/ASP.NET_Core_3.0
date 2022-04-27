@@ -14,8 +14,8 @@ namespace OnlineShopWebApp
             var xDoc = XDocument.Load("Data/AllProducts.xml");
             _products = xDoc.Element("products")
                                .Elements("product")
-                               .Select(p => new Product(  
-                                       p.Attribute("id").Value,
+                               .Select(p => new Product(
+                                       Guid.Parse(p.Attribute("id").Value),
                                        p.Element("img").Value,
                                        p.Element("name").Value,
                                        decimal.Parse(p.Element("cost").Value),
@@ -23,10 +23,9 @@ namespace OnlineShopWebApp
             return _products;
         }
 
-        public Product TryGetProduct(string id)
+        public Product TryGetProduct(Guid id)
         {
-            var product = GetProductData().Where(p => p.Id == id)
-                                                 .FirstOrDefault();
+            var product = GetProductData().FirstOrDefault(p => p.Id == id);
             return product;
         }
 
@@ -34,9 +33,9 @@ namespace OnlineShopWebApp
         {
             var xDoc = XDocument.Load("Data/AllProducts.xml");
             var root = xDoc.Element("products");
-
+            product.Id = Guid.NewGuid();
             root.Add(new XElement("product",
-                         new XAttribute("id", product.GuidId),
+                         new XAttribute("id", product.Id),
                          new XElement("img", product.ImagePath),
                          new XElement("name", product.Name),
                          new XElement("cost", product.Cost),
@@ -50,7 +49,7 @@ namespace OnlineShopWebApp
             var xDoc = XDocument.Load("Data/AllProducts.xml");
             var editProduct = xDoc.Element("products")
                               .Elements("product")
-                              .FirstOrDefault(p => p.Attribute("id").Value == product.Id);
+                              .FirstOrDefault(p => Guid.Parse(p.Attribute("id").Value) == product.Id);
             
             var imagePath = editProduct.Element("img");
             imagePath.Value = product.ImagePath;
@@ -67,13 +66,13 @@ namespace OnlineShopWebApp
             xDoc.Save("Data/AllProducts.xml");
         }
 
-        public void RemoveProduct(string id)
+        public void RemoveProduct(Guid id)
         {
             var xDoc = XDocument.Load("Data/AllProducts.xml");
             var root = xDoc.Element("products");
 
             var product = root.Elements("product")
-                              .FirstOrDefault(p => p.Attribute("id").Value == id);
+                              .FirstOrDefault(p => Guid.Parse(p.Attribute("id").Value) == id);
 
                 product.Remove();
                 xDoc.Save("Data/AllProducts.xml");

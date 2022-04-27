@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using System;
+using Microsoft.AspNetCore.Mvc;
 
 namespace OnlineShopWebApp.Controllers
 {
@@ -24,14 +25,14 @@ namespace OnlineShopWebApp.Controllers
             return View(basket);
         }
 
-        public IActionResult Add(string id)
+        public IActionResult Add(Guid id)
         {
             var product = _productStorage.TryGetProduct(id);
             _basketStorage.AddProduct(Constants.UserId, product);
             return RedirectToAction("Index");
         }
 
-        public IActionResult Remove(string id)
+        public IActionResult Remove(Guid id)
         {
             var product = _productStorage.TryGetProduct(id);
             _basketStorage.RemoveProduct(Constants.UserId, product);
