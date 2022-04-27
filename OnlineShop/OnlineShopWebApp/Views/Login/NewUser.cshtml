@@ -9,15 +9,18 @@
         <h3 class="display-5 text-center">Регистрация</h3>
         <p></p>
         <div class="form-group col-md-3 mx-auto">
-            <input type="text" class="form-control" id="Input1" placeholder="Логин" name="Login" required minlength="2"  maxlength="25"/>
+            <label asp-for="Login"></label>
+            <input type="text" class="form-control" id="Input1" placeholder="Логин" name="Login" required minlength="2" maxlength="25"/>
             <span asp-validation-for="Login"></span>
         </div>
         <p></p>
         <div class="form-group  col-md-3 mx-auto">
+            <label asp-for="Password"></label>
             <input type="password" class="form-control" id="Input2" placeholder="Пароль" name="password" required minlength="8"/>
             <span asp-validation-for="Password"></span>
         </div>
         <div class="form-group  col-md-3 mx-auto">
+            <label asp-for="PasswordConfirm"></label>
             <input type="password" class="form-control" id="lInput3" placeholder="Подтвердите пароль" name="PasswordConfirm" required minlength="8"/>
             <span asp-validation-for="PasswordConfirm"></span>
         </div>

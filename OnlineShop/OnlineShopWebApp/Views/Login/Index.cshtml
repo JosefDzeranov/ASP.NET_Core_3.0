@@ -8,12 +8,14 @@
     <h3 class="display-5 text-center">Вход</h3>
     <p></p>
     <div class="form-group col-md-3 mx-auto">
+        <label asp-for="Login"></label>
         <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="Логин" name="Login" required minlength="2" maxlength="25"/>
         <span asp-validation-for="Login"></span>
     </div>
     <p></p>
     <div class="form-group  col-md-3 mx-auto">
-        <input type="password" class="form-control" id="exampleFormControlInput1" placeholder="Пароль" name="Password" required  minlength="8"/>
+        <label asp-for="Password"></label>
+        <input type="password" class="form-control" id="exampleFormControlInput1" placeholder="Пароль" name="Password" required minlength="8"/>
         <span asp-validation-for="Password"></span>
     </div>
     <div class="row  col-md-3 mx-auto">
