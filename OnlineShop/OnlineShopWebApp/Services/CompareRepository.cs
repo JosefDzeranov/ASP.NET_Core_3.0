@@ -17,7 +17,7 @@ namespace OnlineShopWebApp
         public void Add(Product product, string userId)
         {
             var existingCompare = TryGetByUserId(userId);
-            if (existingCompare != null)
+            if (existingCompare == null)
             {
                 var newCompare = new Compare()
                 {
@@ -32,7 +32,7 @@ namespace OnlineShopWebApp
             }
             else
             {
-                var existingpProduct = existingCompare.Products.FirstOrDefault(x => x.Id == product.Id);
+                var existingProduct = existingCompare.Products.FirstOrDefault(x => x.Id == product.Id);
                 if (existingCompare != null)
                 {
                     existingCompare.Products.Add(product);

@@ -4,10 +4,10 @@
     ViewData["Title"] = "Compare Page";
 }
 
-<div class="container">   
+<div class="container">
     <div class="row">
         <div class="col-12 mb-4">
-            <h2>Choose what you like more</h2>
+            <h2>Страница сравнения товара</h2>
         </div>
         @foreach (var item in Model.Products)
         {
@@ -18,10 +18,7 @@
                 <p>@item.Description</p>
                 <div class="row justify-content-between">
                     <div class="col-auto text-left">
-                        <a class="btn btn-outline-dark btn-sm text-nowrap" href="/basket/add/@item.Id" role="button">Add to basket</a>
-                    </div>
-                    <div class="col-auto text-right">
-                        <a class="btn btn-outline-dark btn-sm text-nowrap" href="/compare/remove/@item.Id" role="button">Remove from list</a>
+                        <a class="btn btn-outline-primary btn-sm text-nowrap" href="/cart/add?productId=@item.Id" role="button">Добавить в корзину</a>
                     </div>
                 </div>
             </div>
@@ -29,10 +26,10 @@
     </div>
     <div class="row mt-4">
         <div class="col-6 text-right">
-            <a class="btn btn-outline-dark btn-sm text-nowrap" href="/" role="button">Continue shopping</a>
+            <a class="btn btn-danger btn-sm text-nowrap" href="/compare/clear" role="button">Очистить все</a>
         </div>
         <div class="col-6 text-left">
-            <a class="btn btn-outline-dark btn-sm text-nowrap" href="/compare/clear" role="button">Clear</a>
+            <a class="btn btn-primary btn-sm text-nowrap" href="/home/index" role="button">Продолжить покупки</a>
         </div>
     </div>
 </div>

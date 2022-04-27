@@ -20,16 +20,16 @@
                         <td>@product.Price</td>
                         <td>@product.Description</td>
                     </tr>
+
+                    <div class="text-left">
+                        <a class="btn btn-success" href="/cart/add?productId=@product.Id" role="button">Добавить в корзину <br /></a>
+                        <a class="btn btn-danger" href="/favourite/clear/@product.Id" role="button">Очистить избранное</a>
+                    </div>
                 }
             </tbody>
         </table>
         <div class="text-left">
             <a class="btn btn-outline-success" href="/home/index" role="button">Продолжить покупки</a>
-            @foreach (var button in Model)
-            {
-                <a class="btn btn-success" href="/cart/add?productId=@button.Id" role="button">Добавить в корзину</a>
-            }
-            <a class="btn btn-danger" href="/favourite/clear" role="button">Очистить избранное</a>
         </div>
     </div>
 </div>
