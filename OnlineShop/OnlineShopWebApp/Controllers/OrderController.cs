@@ -20,14 +20,17 @@ namespace OnlineShopWebApp.Controllers
         [HttpPost]
         public IActionResult SaveInfoBuying(InfoBuying infoBuying, int buyerId)
         {
-            buyerStorage.SaveInfoBuying(infoBuying, buyerId);
-            return RedirectToAction("Index", new { buyerId });
+            if (ModelState.IsValid)
+            {
+                buyerStorage.SaveInfoBuying(infoBuying, buyerId);
+                return RedirectToAction("Index", new { buyerId });
+            }
+            else return Content("errorValid");
         }
         public IActionResult RewriteInfoBuying(int buyerId)
         {
             buyerStorage.ClearInfoBuying(buyerId);
             return RedirectToAction("Index", new { buyerId });
-
         }
 
         public IActionResult Buy(int buyerId)

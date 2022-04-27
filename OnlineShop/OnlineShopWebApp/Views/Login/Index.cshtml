@@ -4,31 +4,32 @@
 }
 
 <form method="post" asp-controller="Login" asp-action="Enter">
-<div class="container">
-    <h3 class="display-5 text-center">Вход</h3>
-    <p></p>
-    <div class="form-group col-md-3 mx-auto">
-        <label asp-for="Login" class="text-center">Логин</label>
-        <input type="text" class="form-control" id="Input1" placeholder="Логин" required="" name="Login" asp-for="Login"/>
-        <span asp-validation-for="Login"></span>
-    </div>
-    <p></p>
-    <div class="form-group  col-md-3 mx-auto">
-        <label asp-for="Password" class="text-center">Пароль</label>
-        <input type="password" class="form-control" id="Input2" placeholder="Пароль" name="Password" required=""  asp-for="Password"/>
-        <span asp-validation-for="Password"></span>
-    </div>
-    <div class="row  col-md-3 mx-auto">
-        <div class="form-check col-1">
-            <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
+    <div class="container">
+        <div class="was-validated" asp-validation-summary="All"></div>
+        <h3 class="display-5 text-center">Вход</h3>
+        <p></p>
+        <div class="form-group col-md-3 mx-auto">
+            <label asp-for="Login" class="text-center">Логин</label>
+            <input type="text" class="form-control" id="Input1" placeholder="Логин" required="" name="Login" asp-for="Login"/>
+            <span asp-validation-for="Login"></span>
         </div>
-        <div class="col">Запомнить меня?</div>
+        <p></p>
+        <div class="form-group  col-md-3 mx-auto">
+            <label asp-for="Password" class="text-center">Пароль</label>
+            <input type="password" class="form-control" id="Input2" placeholder="Пароль" name="Password" required="" asp-for="Password"/>
+            <span asp-validation-for="Password"></span>
+        </div>
+        <div class="row  col-md-3 mx-auto">
+            <div class="form-check col-1">
+                <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
+            </div>
+            <div class="col">Запомнить меня?</div>
+        </div>
+        <p></p>
+        <div class="col-md-1 mx-auto">
+            <button type="submit" class="btn btn-outline-dark text-center" asp-controller="Login" asp-action="Enter">Войти</button>
+        </div>
     </div>
-    <p></p>
-    <div class="col-md-1 mx-auto">
-        <button type="submit" class="btn btn-outline-dark text-center" asp-controller="Login" asp-action="Enter">Войти</button>
-    </div>
-</div>
 </form>
 <p></p>
 <div class="col-md-3 mx-auto">
