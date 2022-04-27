@@ -1,25 +1,32 @@
-﻿@{
+﻿@model SignUp
+
+@{
     ViewData["Title"] = "Sign up";
 }
 <div class="container align-content-center">
     <div class="row text-center">
         <div class="col-4 mx-auto">
             <h2>Sign up</h2>
-            <form method="post">
+            <form method="post" asp-controller="Users" asp-action="Signup">
                 <div class="mb-3">
-                    <input class="form-control" type="text" name="firstname" placeholder="First name">
+                    <input class="form-control" asp-for="FirstName" placeholder="First name">
+                    <span asp-validation-for="FirstName"></span>
                 </div>
                 <div class="mb-3">
-                    <input class="form-control" type="text" name="lastname" placeholder="Last name">
+                    <input class="form-control" asp-for="LastName" placeholder="Last name">
+                    <span asp-validation-for="LastName"></span>
                 </div>
                 <div class="mb-3">
-                    <input class="form-control" type="text" name="email" placeholder="Email">
+                    <input class="form-control" asp-for="Email" placeholder="Email">
+                    <span asp-validation-for="Email"></span>
                 </div>
                 <div class="mb-3">
-                    <input class="form-control" type="password" name="password" placeholder="Password">
+                    <input class="form-control" asp-for="Password" type="password" placeholder="Password">
+                    <span asp-validation-for="Password"></span>
                 </div>
                 <div class="mb-3">
-                    <input class="form-control" type="password" name="confirmpassword" placeholder="Confirm password">
+                    <input class="form-control" asp-for="ConfirmPassword" type="password" placeholder="Confirm password">
+                    <span asp-validation-for="ConfirmPassword"></span>
                 </div>
                 <div class="mb-3">
                     <button type="submit" class="btn btn-outline-dark btn-sm active" asp-controller="Users" asp-action="Signup">Sign up</button>
