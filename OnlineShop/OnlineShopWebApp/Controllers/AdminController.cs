@@ -2,6 +2,7 @@
 using OnlineShopWebApp.Models;
 using OnlineShopWebApp.Services;
 using OnlineShopWebApp.ViewModels;
+using System;
 
 namespace OnlineShopWebApp.Controllers
 {
@@ -75,6 +76,13 @@ namespace OnlineShopWebApp.Controllers
             var products = productRepository.GetAll();
 
             return View(products);
+        }
+        public IActionResult OrderDetail(Guid orderId)
+        {
+
+            
+
+            return View();
         }
 
 
