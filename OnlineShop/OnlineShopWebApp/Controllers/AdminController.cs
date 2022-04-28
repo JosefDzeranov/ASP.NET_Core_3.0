@@ -87,7 +87,7 @@ namespace OnlineShopWebApp.Controllers
             }
             return RedirectToAction("Products", "Admin");
         }
-        [HttpPost]
+        
         public IActionResult UpdateOrderStatus(Guid orderId, OrderStatus status)
         {
             orderRepository.UpdateStatus(orderId, status);
