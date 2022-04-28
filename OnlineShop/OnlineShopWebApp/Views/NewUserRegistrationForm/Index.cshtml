@@ -1,19 +1,42 @@
 ﻿@model NewUserRegistrationForm
 
-<form method="post" action="/newuserregistrationform/registration">
-<div class="row text-center">
-	<div class="col">
-		<label>Регистрация</label>
-		<div><br>
-			<label>	<input type="text" name="userName" placeholder="Логин"/></label></div>
-	<div><br>
-		<label><input type="text" name="password" placeholder="Пароль"/></label></div>
-	<div><br> 
-		<label><input type="text" name="confirmPassword" placeholder="Подтвердите пароль"/></label></div>
-		<input type="submit" value="Зарегистрироваться" class ="btn btn-outline-success" role="button" href="/newuserregistrationform/registration" asp-controller="newUserRegistrationForm" asp-action="Registration"></div>
-	<div><br>
-		</div>
+<form asp-action="Index" asp-controller="NewUserRegistrationForm" method="post">
+	<div>
+		<div class="validation" asp-validation-summary="All"></div>
+	
+		<h3>Регистрация</h3>
+
+		<div>
+			<label asp-for="UserName">Имя</label><br />
+			<input asp-for="UserName"/>
+			<span asp-validation-for="UserName"></span>
 		</div>
 
+		<div>
+			<label asp-for="Phone">Телефон</label><br />
+			<input asp-for="Phone"/>
+			<span asp-validation-for="Phone"></span>
+		</div>
+
+		<div>
+			<label asp-for="Login">Логин</label><br />
+			<input type="email" asp-for="Login"/>
+			<span asp-validation-for="Login"></span>
+		</div>
+
+		<div>
+			<label asp-for="Password">Пароль</label><br />
+			<input type="password" input asp-for="Password"/>
+			<span asp-validation-for="Password"></span>
+		</div>
+
+		<div>
+			<label asp-for="ConfirmPassword">Подтвердите пароль</label><br />
+			<input type ="password" input asp-for="ConfirmPassword"/>
+			<span asp-validation-for="ConfirmPassword"></span>
+		</div><br />
+
+		<input type="submit" value="Зарегистрироваться" class ="btn btn-outline-success" role="button"></div>
+		<div><br>
+</div>
 </form>
-				

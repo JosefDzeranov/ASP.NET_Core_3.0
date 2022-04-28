@@ -1,19 +1,14 @@
-﻿namespace OnlineShopWebApp.Models
+﻿using System.ComponentModel.DataAnnotations;
+namespace OnlineShopWebApp.Models
 {
     public class UserCredentials
     {
-        public UserCredentials()
-        {
-        }
+ 
+        [Required(ErrorMessage ="Не указан e-mail")]
+        [EmailAddress(ErrorMessage ="Введите корректный e-mail")]
+        public string Login { get; set; }
 
-        public UserCredentials(string userName, string password, bool rememberMe)
-        {
-            UserName = userName;
-            Password = password;
-            RememberMe = rememberMe;
-        }
-
-        public string UserName { get; set; }
+        [Required(ErrorMessage ="Не указан пароль")]
         public string Password { get; set; }  
         public bool RememberMe { get; set; }
     }
