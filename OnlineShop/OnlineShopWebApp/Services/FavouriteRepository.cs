@@ -16,27 +16,20 @@ namespace OnlineShopWebApp.Services
 
         public void Add(Product product, string userId)
         {
-            var existingFavourite = TryGetByUserId(userId);
-            if (existingFavourite == null)
-            {
-                var newFavourite = new Favourite()
-                {
-                    Id = Guid.NewGuid(),
-                    UserId = userId,
-                    Products = new List<Product>()
-                    {
-                        product
-                    }
-                };
+            var exsitingFavourite = TryGetByUserId(userId);
 
-                favourite.Add(newFavourite);
+            if (exsitingFavourite == null)
+            {
+                var newfavoritesList = new Favourite(userId);
+                newfavoritesList.Products.Add(product);
+                favourite.Add(newfavoritesList);
             }
             else
             {
-                var existingProduct = existingFavourite.Products.FirstOrDefault(x => x.Id == product.Id);
-                if (existingProduct != null)
+                var productInList = exsitingFavourite.Products.FirstOrDefault(item => item.Id == product.Id);
+                if (productInList == null)
                 {
-                    existingFavourite.Products.Add(product);
+                    exsitingFavourite.Products.Add(product);
                 }
             }
         }

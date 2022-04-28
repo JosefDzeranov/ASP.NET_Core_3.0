@@ -17,7 +17,7 @@ namespace OnlineShopWebApp.Controllers
         public IActionResult Index()
         {
             var favourite = favouriteRepository.TryGetByUserId(Constants.UserId);
-            if (favourite == null)
+            if (favourite == null || favourite.Products.Count == 0)
                 return View("notFound");
             return View(favourite.Products);
         }
