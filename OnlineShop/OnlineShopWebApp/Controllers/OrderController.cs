@@ -31,14 +31,17 @@ namespace OnlineShopWebApp.Controllers
         public IActionResult Create(Order order)
         {
 
-            var existingCart = cartRepository.TryGetByUserId(Const.UserId);
-            order.Cart = existingCart;
-            order.UserId = Const.UserId;
-            order.TotalCost = existingCart.TotalCost;
-            orderRepository.Add(order);
-            cartRepository.Clear(Const.UserId);
-
-            return View();
+            if (ModelState.IsValid)
+            {
+                var existingCart = cartRepository.TryGetByUserId(Const.UserId);
+                order.Cart = existingCart;
+                order.UserId = Const.UserId;
+                order.TotalCost = existingCart.TotalCost;
+                orderRepository.Add(order);
+                cartRepository.Clear(Const.UserId);
+                return View();
+            }
+            return RedirectToAction("Index", "Order");
         }
 
         public IActionResult Orders()
