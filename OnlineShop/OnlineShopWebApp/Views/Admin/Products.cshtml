@@ -1,9 +1,11 @@
 ﻿@model List<Product>
 
+
 <div class="row">
     @await Html.PartialAsync("AdminPanel")
 
     <div class="col-9">
+        <a asp-controller="Admin" asp-action="AddProduct">Add new Product</a>
 
         <table class="table">
             <thead>
