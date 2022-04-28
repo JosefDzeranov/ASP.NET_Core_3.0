@@ -1,14 +1,25 @@
-﻿<form method="post">
+﻿@model Registration
+<form method="post">
 <h5>
     Регистрация
 </h5>
-<div>
+ <div>
+        <label asp-for="Login"></label><br />
+        <input asp-for="Login"/>
+        <span asp-validation-for="Login"></span>
+    </div>
+    <div>
+        <label asp-for="Password"></label><br />
+        <input asp-for="Password"/>
+        <span asp-validation-for="Password"></span>
+    </div>
+    <div>
+        <label asp-for="ConfirmedPassword"></label><br />
+        <input asp-for="ConfirmedPassword"/>
+        <span asp-validation-for="ConfirmedPassword"></span>
+    </div>
 
-    <input type="email" name="login" placeholder="Логин" required/> <br />
-    <input type="text" name="password" placeholder="Пароль" required/> <br />
-    <input type="text" name="confirmedpassword" placeholder="Подтвердите пароль" required/> <br />
 
-</div>
     <br />
 <div>
     <button class="btn btn-dark" type="submit" asp-controller="Registration" asp-action="Register">Зарегистриоваться</button> <br />
@@ -16,3 +27,7 @@
 </div>
 
 </form>
+
+@section Scripts{
+    @await Html.PartialAsync("_ValidationScriptsPartial")
+}

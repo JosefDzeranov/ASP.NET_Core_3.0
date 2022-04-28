@@ -12,9 +12,17 @@ namespace OnlineShopWebApp.Controllers
         }
 
         [HttpPost]
-        public IActionResult Enter(string login, string password, bool isRemembered)
+        public IActionResult Enter(Authorization authorization)
         {
-            return RedirectToAction("Index", "Home");
+            if (ModelState.IsValid)
+            {
+                return RedirectToAction("Index", "Home");
+            }
+            else
+            {
+               return RedirectToAction("Index");
+            }
+            
         }
 
     }
