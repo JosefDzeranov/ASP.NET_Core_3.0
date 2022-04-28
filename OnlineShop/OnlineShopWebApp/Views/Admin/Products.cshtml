@@ -26,7 +26,8 @@
                     
                         <td>@item.Cost</td>
                         <td>
-                            <a style="color:black" asp-controller="Admin" asp-action="Edit">Edit </a>
+                            @*<a style="color:black" asp-controller="Admin" asp-action="Edit" asp-route-product="@item">Edit </a>*@
+                            <a style="color:black" asp-controller="Admin" asp-action="Edit" asp-route-id="@item.Id">Edit </a>
                         </td>
 
                         <td>
