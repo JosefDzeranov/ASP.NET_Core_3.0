@@ -34,10 +34,10 @@
                                     @Model.Status
                                 </button>
                                 <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                                    <li><a class="dropdown-item" href="#">@OrderStatus.New</a></li>
-                                    <li><a class="dropdown-item" href="#">@OrderStatus.Confirmed</a></li>
-                                    <li><a class="dropdown-item" href="#">@OrderStatus.Paid</a></li>
-                                    <li><a class="dropdown-item" href="#">@OrderStatus.Delivered</a></li>
+                                    <li><a class="dropdown-item" asp-controller="Admin" asp-action="UpdateOrderStatus" asp-route-orderId="@Model.Id" asp-route-status="@OrderStatus.New">@OrderStatus.New</a></li>
+                                    <li><a class="dropdown-item" asp-controller="Admin" asp-action="UpdateOrderStatus" asp-route-orderId="@Model.Id" asp-route-status="@OrderStatus.Confirmed">@OrderStatus.Confirmed</a></li>
+                                    <li><a class="dropdown-item" asp-controller="Admin" asp-action="UpdateOrderStatus" asp-route-orderId="@Model.Id" asp-route-status="@OrderStatus.Paid">@OrderStatus.Paid</a></li>
+                                    <li><a class="dropdown-item" asp-controller="Admin" asp-action="UpdateOrderStatus" asp-route-orderId="@Model.Id" asp-route-status="@OrderStatus.Delivered">@OrderStatus.Delivered</a></li>
                                 </ul>
                             </div>
                        

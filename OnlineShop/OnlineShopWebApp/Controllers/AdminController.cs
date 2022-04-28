@@ -79,11 +79,21 @@ namespace OnlineShopWebApp.Controllers
         }
         public IActionResult OrderDetail(Guid orderId)
         {
-            var order = orderRepository.TryGetById(orderId);
+            if(orderId != null)
+            {
+                var order = orderRepository.TryGetById(orderId);
 
-            return View(order);
+                return View(order);
+            }
+            return RedirectToAction("Products", "Admin");
         }
+        [HttpPost]
+        public IActionResult UpdateOrderStatus(Guid orderId, OrderStatus status)
+        {
+            orderRepository.UpdateStatus(orderId, status);
 
+            return RedirectToAction("OrderDetail","Admin", new { orderId });
+        }
 
     }
 }
