@@ -5,7 +5,7 @@ namespace OnlineShopWebApp.Models
     public class Product
     {
         private static int CurrentId = 1;
-        public int Id { get; }
+        public int Id { get; set; }
         [Required(ErrorMessage = "Название не заполнено")]
         [StringLength(16, MinimumLength = 2, ErrorMessage = "название должно быть от 2 до 25 символов")]
         public string Name { get; set; }

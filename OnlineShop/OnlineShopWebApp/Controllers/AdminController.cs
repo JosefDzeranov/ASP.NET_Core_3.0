@@ -40,17 +40,11 @@ namespace OnlineShopWebApp.Controllers
             return View(product);
         }
         [HttpPost]
-        public IActionResult EditProduct(ProductViewModel productViewModel)
+        public IActionResult EditProduct(Product changingProduct)
         {
 
-            var product = productRepository.TryGetById(productViewModel.ProductId);
 
-            product.Name = productViewModel.Name;
-            product.Cost = productViewModel.Cost;
-            product.Description = productViewModel.Description;
-            product.ImgPath = productViewModel.ImgPath;
-
-            productRepository.Update(product);
+            productRepository.Update(changingProduct);
 
 
             return RedirectToAction("Products", "Admin");
