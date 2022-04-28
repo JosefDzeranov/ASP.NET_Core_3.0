@@ -4,30 +4,39 @@
     {
         private static int instanceCounter =0;
 
-        public int Id { get; }
+        public int Id { get; set; }
 
-        public string Name { get; }
+        public string Name { get; set; }
 
-        public decimal Cost { get; }  
+        public decimal Cost { get; set; }  
         
-        public string Description { get; }
+        public string Description { get; set; }
 
-        public string ImagePath { get; }
+        public string ImagePath { get; set; }
+
+		public Product()
+		{
+        }
 
 		public Product(string name, decimal cost, string description, string imagePath)
 		{
-			Id = instanceCounter;
+            Id = GetNextId();
 			Name = name;
 			Cost = cost;
 			Description = description;
-
-			instanceCounter += 1;
-			ImagePath = imagePath;
+            ImagePath = imagePath;
 		}
 
 		public override string ToString()
         {
             return $"Id {this.Id}\nName {this.Name}\nCost {this.Cost}\nDescription {this.Description}\n\n";
+        }
+
+        public static int GetNextId()
+        {
+            instanceCounter += 1;
+
+            return instanceCounter;
         }
     }
 
