@@ -5,6 +5,11 @@ namespace OnlineShopWebApp.Controllers
 {
     public class UsersController : Controller
     {
+        private readonly IUserStorage _userStorage;
+        public UsersController(IUserStorage userStorage)
+        {
+            _userStorage = userStorage;
+        }
         public IActionResult Signin()
         {
             return View();
@@ -13,6 +18,10 @@ namespace OnlineShopWebApp.Controllers
         [HttpPost]
         public IActionResult Signin(SignIn signin)
         {
+            if(ModelState.IsValid)
+            {
+                _userStorage.AuthorizeUser(signin);
+            }
             return RedirectToAction("Index", "Home");
         }
 
@@ -24,6 +33,15 @@ namespace OnlineShopWebApp.Controllers
         [HttpPost]
         public IActionResult Signup(SignUp signup)
         {
+            if(signup.FirstName == signup.Password || signup.LastName == signup.Password)
+            {
+                ModelState.AddModelError("", "Name and password must not match.");
+            }
+
+            if (ModelState.IsValid)
+            {
+                _userStorage.CreateUser(signup);
+            }
             return RedirectToAction("Index", "Home");
         }
     }
