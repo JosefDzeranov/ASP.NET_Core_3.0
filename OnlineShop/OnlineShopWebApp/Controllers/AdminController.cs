@@ -25,8 +25,8 @@ namespace OnlineShopWebApp.Controllers
         }
         public IActionResult Products()
         {
-            productsRepository.GetAll();
-            return View();
+            var products = productsRepository.GetAll();
+            return View(products);
         }
 
         public IActionResult AddProduct()
