@@ -7,14 +7,10 @@
     ViewData["Title"] = "Home Page";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
-</div>
 @if (Model != null)
 {
     <div class="col-6 card shadow-sm">
-            <img class="card-img-bottom" src="https://poshvu.ru/img/b/170418/paltovaya-tkan-zelenogo-cveta-2-69015.jpg.c.jpg">
+            <img class="card-img-bottom" src="@Model.ImgPath">
 
             <div class="card-body">
                 <a style="color:green">

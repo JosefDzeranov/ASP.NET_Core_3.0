@@ -16,6 +16,8 @@ namespace OnlineShopWebApp.Models
 
         public string Description { get; set; }
 
+        public string? ImgPath { get; set; }
+
         public Product(int id, string name, decimal cost)
         {
             Id = id;
@@ -30,5 +32,8 @@ namespace OnlineShopWebApp.Models
             Cost = cost;
             Description = description;
         }
+
+        public Product() { }
+        
     }
 }

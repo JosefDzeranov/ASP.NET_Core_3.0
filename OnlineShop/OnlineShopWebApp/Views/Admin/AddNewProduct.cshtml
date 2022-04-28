@@ -1,0 +1,21 @@
+﻿<form method="post">
+    <div class="container align-content-center">
+        <div class="row text-center">
+            <div class="col-4 mx-auto">
+                <h2>Введите данные продукта</h2>
+                <div class="mb-3">
+                    <input class="form-control" type="text" name="name" placeholder="Введите название продукта">
+                </div>
+                <div class="mb-3">
+                    <input class="form-control" type="text" name="cost" placeholder="Введите стоимость продукта">
+                </div>
+                <div class="mb-3">
+                    <input class="form-control" type="text" name="Description" placeholder="Введите описание продукта">
+                </div>
+                <div class="mb-3">
+                    <button type="submit" class="btn btn-outline-dark" asp-controller="Product" asp-action="Add">Добавить новый продукт</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>

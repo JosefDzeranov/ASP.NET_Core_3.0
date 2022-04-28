@@ -26,6 +26,21 @@ namespace OnlineShopWebApp.Controllers
             return View(products);
         }
 
+        [HttpPost]
+        public IActionResult Add(Product product)
+        {
+            _productBase.Add(product);
+            return RedirectToAction("Products", "Admin");
+        }
+
+
+        [HttpPost]
+        public IActionResult Edit(int productId, Product product)
+        {
+            _productBase.Edit(productId, product);
+            return RedirectToAction("Index");
+        }
+
         public IActionResult Privacy()
         {
             return View();
