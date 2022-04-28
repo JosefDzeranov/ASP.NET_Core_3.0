@@ -39,5 +39,18 @@ namespace OnlineShopWebApp
             product.ImagePath = "/images/item1.png";
             products.Add(product);
         }
+
+        public void Update(Product product)
+        {
+            var existingProduct = products.FirstOrDefault(x => x.Id == product.Id);
+            if (existingProduct==null)
+            {
+                return;
+            }
+
+            existingProduct.Name = product.Name;
+            existingProduct.Cost = product.Cost;
+            existingProduct.Description = product.Description;
+        }
     }
 }

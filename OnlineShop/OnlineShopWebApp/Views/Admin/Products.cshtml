@@ -1,6 +1,5 @@
 ﻿@model List<Product>
 
-
 <div class="row">
     @await Html.PartialAsync("AdminPanel")
 
@@ -13,32 +12,31 @@
                     <th>#</th>
                     <th>Name</th>
                     <th>Cost, @Constants.Rub</th>
-
                 </tr>
             </thead>
 
             <tbody>
-                @foreach (var item in Model)
-                {
-    <tr>
-        <td>@(item.Id+1)</td>
-        <td>
-            <a style="color:black" href="/product/item/@item.Id">@item.Name </a>
-        </td>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@(item.Id+1)</td>
+                    <td>
+                        <a style="color:black" href="/product/item/@item.Id">@item.Name </a>
+                    </td>
 
-        <td>@item.Cost</td>
-        <td>
-            @*<a style="color:black" asp-controller="Admin" asp-action="Edit" asp-route-product="@item">Edit </a>*@
-            <a style="color:black" asp-controller="Admin" asp-action="Edit" asp-route-id="@item.Id">Edit </a>
-        </td>
+                    <td>@item.Cost</td>
+                    <td>
+                        @*<a style="color:black" asp-controller="Admin" asp-action="Edit" asp-route-product="@item">Edit </a>*@
+                        @*<a style="color:black" asp-controller="Admin" asp-action="Edit" asp-route-id="@item.Id">Edit </a>*@
+                        <a style="color:blue" asp-controller="Admin" asp-action="EditProduct" asp-route-id="@item.Id">Edit</a>
+                    </td>
 
-        <td>
-            <a class="btn btn-outline-dark btn-sm" href="#" role="button">Delete</a>
-        <td>
-    </tr>}
+                    <td>
+                        <a class="btn btn-outline-dark btn-sm" href="#" role="button">Delete</a>
+                    <td>
+                </tr>
+                }
             </tbody>
-
         </table>
-
     </div>
 </div>

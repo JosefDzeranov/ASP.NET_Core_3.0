@@ -45,6 +45,23 @@ namespace OnlineShopWebApp.Controllers
             return RedirectToAction("Products");
         }
 
+        public IActionResult EditProduct(int productId)
+        {
+            var product = productsRepository.TryGetById(productId);
+            return View(product);
+        }
+
+        [HttpPost]
+        public IActionResult EditProduct(Product product)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View();
+            }
+            productsRepository.Update(product);
+            return RedirectToAction("Products");
+        }
+
         public IActionResult Status()
         {
             return View();

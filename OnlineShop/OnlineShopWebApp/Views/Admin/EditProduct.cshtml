@@ -3,26 +3,28 @@
 <form method="post">
     <div class="validation" asp-validation-summary="All"></div>
 
+    <input type="hidden" name="Id" value="@Model.Id" />
+
     <div class="form-group">
         <label asp-for="Name">Name</label>
-        <input type="text" asp-for="Name" class="form-control" placeholder="Name" />
+        <input asp-for="Name" class="form-control" value="@Model?.Name" />
         <span asp-validation-for="Name"></span>
     </div>
 
     <div class="form-group">
-        <label asp-for="Cost">Password</label>
-        <input type="number" asp-for="Cost" class="form-control" placeholder="Cost" />
+        <label asp-for="Cost">Cost</label>
+        <input asp-for="Cost" class="form-control" value="@Model?.Cost" />
         <span asp-validation-for="Cost"></span>
     </div>
 
     <div class="form-group">
         <label asp-for="Description">Description</label>
-        <input type="text" asp-for="Description" class="form-control" placeholder="Description" />
+        <input asp-for="Description" class="form-control" value="@Model?.Description" />
         <span asp-validation-for="Description"></span>
     </div>
 
     <br />
     <div>
-        <button class="btn btn-outline-success btn-sm" type="submit" asp-controller="Admin" asp-action="AddProduct">Add Product</button>
+        <button class="btn btn-outline-success btn-sm" type="submit" asp-controller="Admin" asp-action="EditProduct">Edit Product</button>
     </div>
 </form>
