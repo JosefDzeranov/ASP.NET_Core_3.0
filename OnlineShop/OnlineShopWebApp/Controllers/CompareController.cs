@@ -16,8 +16,10 @@ namespace OnlineShopWebApp.Controllers
         public IActionResult Index()
         {
             var compareList = compareRepository.TryGetByUserId(Constants.UserId);
-            if (compareList == null)
-                return View("notFound");
+            if (compareList == null || compareList.Products.Count == 0)
+            {
+                return View("notfound");
+            }
             return View(compareList);
         }
 

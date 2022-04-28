@@ -7,8 +7,6 @@ namespace OnlineShopWebApp
 {
     public class CompareRepository : ICompareRepository
     {
-        public string UserId { get; set; }
-
         private List<Compare> compares = new List<Compare>();
 
         public Compare TryGetByUserId(string userId)
@@ -18,29 +16,24 @@ namespace OnlineShopWebApp
 
         public void Add(Product product, string userId)
         {
-            var existingCompare = TryGetByUserId(userId);
-            if (existingCompare == null)
+            var compareList = TryGetByUserId(userId);
+
+            if (compareList == null)
             {
-                var newCompare = new Compare()
-                {
-                    Id = Guid.NewGuid(),
-                    UserId = userId,
-                    Products = new List<Product>()
-                    {
-                        product
-                    }
-                };
-                compares.Add(newCompare);
+                var newCompareList = new Compare(userId);
+                newCompareList.Products.Add(product);
+                compares.Add(newCompareList);
             }
             else
             {
-                var existingProduct = existingCompare.Products.FirstOrDefault(x => x.Id == product.Id);
-                if (existingCompare != null)
+                var productInList = compareList.Products.FirstOrDefault(item => item.Id == product.Id);
+                if (productInList == null)
                 {
-                    existingCompare.Products.Add(product);
+                    compareList.Products.Add(product);
                 }
             }
         }
+
         public void Clear(Product product, string userId)
         {
             var existingCompare = TryGetByUserId(userId);
