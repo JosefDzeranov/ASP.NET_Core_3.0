@@ -42,7 +42,6 @@ namespace OnlineShopWebApp.Services
 			existing.Name = product.Name;
 			existing.Cost = product.Cost;
 			existing.Description = product.Description;
-			//existing.ImagePath = product.ImagePath;
         }
 	}
 }
