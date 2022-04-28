@@ -62,6 +62,12 @@ namespace OnlineShopWebApp.Controllers
             return RedirectToAction("Products");
         }
 
+        public IActionResult DeleteProduct(int productId)
+        {
+            productsRepository.Delete(productId);
+            return RedirectToAction("Products");
+        }
+
         public IActionResult Status()
         {
             return View();

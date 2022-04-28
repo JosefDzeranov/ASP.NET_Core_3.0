@@ -52,5 +52,10 @@ namespace OnlineShopWebApp
             existingProduct.Cost = product.Cost;
             existingProduct.Description = product.Description;
         }
+
+        public void Delete(int productId)
+        {
+            products.RemoveAt(productId);
+        }
     }
 }
