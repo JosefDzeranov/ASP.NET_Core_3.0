@@ -79,10 +79,9 @@ namespace OnlineShopWebApp.Controllers
         }
         public IActionResult OrderDetail(Guid orderId)
         {
+            var order = orderRepository.TryGetById(orderId);
 
-            
-
-            return View();
+            return View(order);
         }
 
 

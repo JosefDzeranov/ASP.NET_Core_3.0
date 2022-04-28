@@ -1,1 +1,56 @@
-﻿
+﻿@model Order
+@{
+    ViewData["Title"] = "";
+}
+
+
+<div class="row">
+    @await Html.PartialAsync("AdminLeftPanel")
+    <div class="col-9">
+        <div class="card">
+            <div class="card-body">
+                <h3>Заказ №@Model.Id</h3>
+                <hr />
+                <div class="row">
+                    <div class="col-4">
+                        <p class="text-black-50">Дата и время оформления:</p>
+                        <p class="text-black-50">Адрес доставки:</p>
+                        <p class="text-black-50">Получатель:</p>
+                        <p class="text-black-50">Телефон:</p>
+                        <p class="text-black-50">Email:</p>
+                        <p class="text-black-50">Сумма заказа:</p>
+                        <p class="text-black-50">Статус заказа:</p>
+                    </div>
+                    <div class="col-4">
+                        <p class="text-lg-right">@Model.Created.ToString("d") @Model.Created.ToString("t")</p>
+                        <p class="text-lg-right">@Model.Address</p>
+                        <p class="text-lg-right">@Model.FirstName @Model.LastName</p>
+                        <p class="text-lg-right">@Model.Phone</p>
+                        <p class="text-lg-right">@Model.Email</p>
+                        <p class="text-lg-right">@Model.TotalCost ₽</p>
+                        
+                            <div class="dropdown">
+                                <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                                    @Model.Status
+                                </button>
+                                <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                                    <li><a class="dropdown-item" href="#">@OrderStatus.New</a></li>
+                                    <li><a class="dropdown-item" href="#">@OrderStatus.Confirmed</a></li>
+                                    <li><a class="dropdown-item" href="#">@OrderStatus.Paid</a></li>
+                                    <li><a class="dropdown-item" href="#">@OrderStatus.Delivered</a></li>
+                                </ul>
+                            </div>
+                       
+
+
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+<script src="~/lib/bootstrap/dist/js/bootstrap.min.js" asp-append-version="true"></script>

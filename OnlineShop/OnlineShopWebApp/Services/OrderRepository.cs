@@ -1,4 +1,5 @@
 ﻿using OnlineShopWebApp.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -11,6 +12,11 @@ namespace OnlineShopWebApp.Services
         public void Add(Order order)
         {
             Orders.Add(order);
+        }
+
+        public Order TryGetById(Guid Id)
+        {
+            return Orders.FirstOrDefault(x => x.Id == Id);
         }
 
         public List<Order> TryGetAll()
