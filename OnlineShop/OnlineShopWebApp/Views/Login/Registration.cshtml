@@ -3,40 +3,39 @@
 <form method="post">
     <div class="row text-center">
         <div class="col">
-            <div class="validation" asp-validation-summary="All">
-                <h3>Регистрация</h3>
-                <div>
-                    <label asp-for="Name">Имя</label>
-                    <input type="text" asp-for="Name" />
-                    <span asp-validation-for="Name" />
-                </div><br />
-                <div>
-                    <label asp-for="Age">Возраст</label>
-                    <input type="text" asp-for="Age" />
-                    <span asp-validation-for="Age" />
-                </div><br />
-                <div>
-                    <label asp-for="Email">E-mail</label>
-                    <input type="email" asp-for="Email" />
-                    <span asp-validation-for="Email" />
-                </div><br />
-                <div>
-                    <label asp-for="Login">Логин</label>
-                    <input type="text" asp-for="Login" />
-                    <span asp-validation-for="Login" />
-                </div><br />
-                <div>
-                    <label asp-for="Password">Пароль</label>
-                    <input type="password" asp-for="Password" />
-                    <span asp-validation-for="Password" />
-                </div><br />
-                <div>
-                    <label asp-for="PasswordConfirm">Повторите пароль</label>
-                    <input type="password" asp-for="PasswordConfirm" />
-                    <span asp-validation-for="PasswordConfirm" />
-                </div><br />
-                <button class="btn btn-dark" type="submit" asp-controller="Login" asp-action="Registrate">Зарегистрироваться</button>
-            </div>
+            <div class="validation" asp-validation-summary="All"></div>
+            <h3>Регистрация</h3>
+            <div>
+                <label asp-for="Name">Имя</label>
+                <input asp-for="Name" />
+                <span asp-validation-for="Name" />
+            </div><br />
+            <div>
+                <label asp-for="Age">Возраст</label>
+                <input asp-for="Age" />
+                <span asp-validation-for="Age" />
+            </div><br />
+            <div>
+                <label asp-for="Email">E-mail</label>
+                <input asp-for="Email" />
+                <span asp-validation-for="Email" />
+            </div><br />
+            <div>
+                <label asp-for="Login">Логин</label>
+                <input asp-for="Login" />
+                <span asp-validation-for="Login" />
+            </div><br />
+            <div>
+                <label asp-for="Password">Пароль</label>
+                <input type="password" asp-for="Password" />
+                <span asp-validation-for="Password" />
+            </div><br />
+            <div>
+                <label asp-for="PasswordConfirm">Повторите пароль</label>
+                <input type="password" asp-for="PasswordConfirm" />
+                <span asp-validation-for="PasswordConfirm" />
+            </div><br />
+            <button class="btn btn-dark" type="submit" asp-controller="Login" asp-action="Registrate">Зарегистрироваться</button>
         </div>
     </div>
 </form>

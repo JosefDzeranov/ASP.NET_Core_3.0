@@ -4,19 +4,31 @@
     <div class="row">
         @await Html.PartialAsync("AdministrationMenu")
         <div class="col text-center">
+            <div class="validation" asp-validation-summary="All"></div>
             <h3>Редактировать информацию о продукте</h3>
-            <input type="hidden" name="id" value="@Model.Id"/>
-            <label>Название</label>
-            <input type="text" name="name" value="@Model.Name" />
+            <input type="hidden" name="id" value="@Model.Id" />
+            <div>
+                <label asp-for="Name">Название</label>
+                <input  asp-for="Name" />
+                <span asp-validation-for="Name" />
+            </div><br />
+            <div>
+                <label asp-for="Cost">Цена</label>
+                <input type="number" asp-for="Cost" />
+                <span asp-validation-for="Cost" />
+            </div>
             <br />
-            <label>Цена</label>
-            <input type="text" name="cost" value="@Model.Cost" />
+            <div>
+                <label asp-for="Description">Описание</label>
+                <input asp-for="Description" />
+                <span asp-validation-for="Description" />
+            </div>
             <br />
-            <label>Описание</label>
-            <input type="text" name="description" value="@Model.Description" />
-            <br />
-            <label>Количество страниц</label>
-            <input type="text" name="pages" value="@Model.Pages" />
+            <div>
+                <label asp-for="Pages">Количество страниц</label>
+                <input asp-for="Pages" />
+                <span asp-validation-for="Pages" />
+            </div>
             <br />
             <button class="btn btn-dark" type="submit" asp-controller="Administration" asp-action="EditProduct" asp-route-productId="@Model.Id">Сохранить</button>
         </div>
