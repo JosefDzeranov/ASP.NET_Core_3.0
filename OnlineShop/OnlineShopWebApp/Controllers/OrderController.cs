@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using OnlineShopWebApp.Models;
 using System;
 
 namespace OnlineShopWebApp.Controllers
@@ -19,7 +20,8 @@ namespace OnlineShopWebApp.Controllers
             return View();
         }
 
-        public IActionResult Buy()
+        [HttpPost]
+        public IActionResult Buy(Order order)
         {
             var existingCart = cartRepository.TryGetByUserId(Constants.UserId);
             ordersRepository.Add(existingCart);

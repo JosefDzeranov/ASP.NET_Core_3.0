@@ -1,35 +1,53 @@
 ﻿@model List<Product>
 
-<div class="row">
+@*<div class="row">
     <div class="col">
-        <table class="table table-striped">
-            <thead>
-                <tr>
-                    <th>id Продукта</th>
-                    <th>Имя продукта</th>
-                    <th>Цена</th>
-                    <th>Информация</th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach (var product in Model)
-                {
-                    <tr>
-                        <td>@product.Id</td>
-                        <td>@product.Name</td>
-                        <td>@product.Price</td>
-                        <td>@product.Description</td>
-                    </tr>
+    <table class="table table-striped">
+    <thead>
+    <tr>
+    <th>id Продукта</th>
+    <th>Имя продукта</th>
+    <th>Цена</th>
+    <th>Информация</th>
+    </tr>
+    </thead>
+    <tbody>
+    @foreach (var product in Model)
+    {
+    <tr>
+    <td>@product.Id</td>
+    <td>@product.Name</td>
+    <td>@product.Price</td>
+    <td>@product.Description</td>
+    </tr>
+    }
+    </tbody>
+    </table>
+    <div class="text-left">
+    <a class="btn btn-outline-success" href="/home/index" role="button">Продолжить покупки</a>
+    <a class="btn btn-success" href="/cart/add?productId=@product.Id" role="button">Добавить в корзину <br /></a>
+    <a class="btn btn-danger" href="/favourite/clear/@product.Id" role="button">Очистить избранное</a>
+    </div>
+    </div>
+    </div>
+*@
 
-                    <div class="text-left">
-                        <a class="btn btn-success" href="/cart/add?productId=@product.Id" role="button">Добавить в корзину <br /></a>
-                        <a class="btn btn-danger" href="/favourite/clear/@product.Id" role="button">Очистить избранное</a>
-                    </div>
-                }
-            </tbody>
-        </table>
-        <div class="text-left">
-            <a class="btn btn-outline-success" href="/home/index" role="button">Продолжить покупки</a>
-        </div>
+<div class="row">
+    <div class="col-3 card shadow">
+        @foreach (var product in Model)
+        {
+            <img class="card-img-top" src="@product.ImagesPath" alt="Image Picture" />
+
+
+            <div class="card-body">
+                <h5>@product.Name</h5>
+                <h5>@product.Description</h5>
+                <h5>@product.Price</h5>
+
+                <a class="btn btn-danger" href="/favourite/clear/@product.Id" role="button">Удалить из списка</a>
+                <a class="btn btn-success" href="/cart/add?productId=@product.Id" role="button">Добавить в корзину <br /></a>
+            </div>
+        }
+        <a class="btn btn-danger" href="/favourite/clear" role="button">Очистить избранное</a>
     </div>
 </div>

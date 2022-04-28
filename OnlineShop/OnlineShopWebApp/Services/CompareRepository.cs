@@ -7,6 +7,8 @@ namespace OnlineShopWebApp
 {
     public class CompareRepository : ICompareRepository
     {
+        public string UserId { get; set; }
+
         private List<Compare> compares = new List<Compare>();
 
         public Compare TryGetByUserId(string userId)
