@@ -8,6 +8,10 @@ namespace OnlineShopWebApp.Controllers
 {
     public class AdminController : Controller
     {
+        /// <summary>
+        /// 123123123
+        /// </summary>
+        /// <returns></returns>
         public IActionResult Index()
         {
             return View();

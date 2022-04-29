@@ -5,6 +5,9 @@ namespace OnlineShopWebApp.Controllers
 {
     public class CartController : Controller
     {
+        /// <summary>
+        /// 123123123
+        /// </summary>
         private readonly IProductsRepository productsRepository;
         private readonly ICartsRepository cartsRepository;
 
