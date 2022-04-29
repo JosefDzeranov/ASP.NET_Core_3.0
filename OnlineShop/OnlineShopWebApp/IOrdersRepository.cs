@@ -7,6 +7,6 @@ namespace OnlineShopWebApp
     {
         void AddCart(Cart cart);
         void SaveOrderInformation(Order order);
-        public List<Order> GetOrdersInformation();
+        List<Order> TryGetOrdersInformation();
     }
 }

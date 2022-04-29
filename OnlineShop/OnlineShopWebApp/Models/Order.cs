@@ -36,6 +36,27 @@ namespace OnlineShopWebApp.Models
         [StringLength(20, MinimumLength = 2, ErrorMessage = "Country should have length between 2 and 20 characters.")]
         public string Country { get; set; }
 
+        public Guid Id { get; set; }
+        public List<CartItem> Items { get; set; }
+
+        public OrderStatus Status { get; set; }
+        public DateTime CreatedDateTime { get; set; }
+
+        public Order()
+        {
+            Id = Guid.NewGuid();
+            Status = OrderStatus.Created;
+            CreatedDateTime = DateTime.Now;
+        }
+
+        public decimal Cost
+        {
+            get
+            {
+                return Items?.Sum(x => x.Cost) ?? 0;
+            }
+        }
+
         public override string ToString()
         {
             return $"{FirstName}{Constants.Separator}{Phone}{Constants.Separator}{Email}{Constants.Separator}{Address}";

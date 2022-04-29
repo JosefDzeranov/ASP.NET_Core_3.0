@@ -24,13 +24,11 @@ namespace OnlineShopWebApp
             FileProvider.Append(Path, jsonData);
         }
 
-        public List<Order> GetOrdersInformation()
+        public List<Order> TryGetOrdersInformation()
         {
             var fileData = FileProvider.Get(Path);
             var orderResults = JsonConvert.DeserializeObject<List<Order>>(fileData);
             return orderResults;
         }
-
-        
     }
 }
