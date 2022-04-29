@@ -1,8 +1,39 @@
-﻿<div class="row">
+﻿@model List<Order>
+
+<div class="row">
     @await Html.PartialAsync("AdministrationMenu")
 
 
     <div class="col-6">
         <h3>Список заказов</h3>
+        <div class="row">
+            <div class="col">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>№</th>
+                            <th>Сумма</th>
+                            <th>Статус</th>
+                            <th>Пользователь</th>
+                            <th>Дата</th>
+                            <th>Время</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var order in Model)
+                        {
+                            <tr>
+                                <td>@order.Id</td>
+                                <td>@order.Cart.FullCost.</td>
+                                <td>@order.State</td>
+                                <td>@order.EnterData</td>
+                                <td>@order.Date</td>
+                                <td>@order.Time</td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
     </div>
 </div>

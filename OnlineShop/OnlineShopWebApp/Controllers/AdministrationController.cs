@@ -10,15 +10,18 @@ namespace OnlineShopWebApp.Controllers
     public class AdministrationController : Controller
     {
         private readonly IProductsRepository productsRepository;
+        private readonly IOrdersRepository ordersRepository;
 
-        public AdministrationController(IProductsRepository productsRepository)
+        public AdministrationController(IProductsRepository productsRepository, IOrdersRepository ordersRepository)
         {
             this.productsRepository = productsRepository;
+            this.ordersRepository = ordersRepository;
         }
 
         public IActionResult Orders()
         {
-            return View();
+            var orders = ordersRepository.GetAll();
+            return View(orders);
         }
 
         public IActionResult Users()

@@ -8,11 +8,18 @@ namespace OnlineShopWebApp.Models
 {
     public class EnterData
     {
+        public string UserId { get; set; }
+
         [Required(ErrorMessage = "Введите логин")]
         public string Login { get; set; }
 
         [Required(ErrorMessage = "Введите пароль")]
         public string Password { get; set; }
         public bool Remember { get; set; }
+
+        public EnterData()
+        {
+            UserId = Constants.UserId;
+        }
     }
 }

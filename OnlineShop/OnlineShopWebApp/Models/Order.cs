@@ -7,8 +7,19 @@ namespace OnlineShopWebApp.Models
 {
     public class Order
     {
-        public Guid Id { get; set; }
+        private static int constantCounter = 1;
+        public int Id { get; set; }
         public User User { get; set; }
         public Cart Cart { get; set; }
+        public string State { get; set; }
+        public string Date { get; set; }
+        public string Time { get; set; }
+        public EnterData EnterData { get; set; }
+
+        public Order()
+        {
+            Id = constantCounter;
+            constantCounter++;
+        }
     }
 }

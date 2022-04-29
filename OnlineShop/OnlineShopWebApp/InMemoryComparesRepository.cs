@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace OnlineShopWebApp
 {
-    public class InMemoryComparesRepozitory : IComparesRepository
+    public class InMemoryComparesRepository : IComparesRepository
     {
         private List<Product> productsToCompare = new List<Product>();
 

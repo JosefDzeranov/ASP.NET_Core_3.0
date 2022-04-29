@@ -28,8 +28,9 @@ namespace OnlineShopWebApp.Controllers
         {
             if (ModelState.IsValid)
             {
+                var enterData = usersRepository.TryGetByUserId(Constants.);
                 var cart = cartsRepository.TryGetByUserId(Constants.UserId);
-                ordersRepository.Add(cart, user);
+                ordersRepository.Add(enterData, cart, user);
                 cartsRepository.Clear(Constants.UserId);
                 return View();
             }
