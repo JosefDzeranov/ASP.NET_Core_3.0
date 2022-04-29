@@ -1,11 +1,17 @@
-﻿namespace OnlineShopWebApp.Models
+﻿using System;
+using System.Collections.Generic;
+
+namespace OnlineShopWebApp.Models
 {
     public class Order
     {
-        public string InputName { get; set; }
-        public string InputLastName { get; set; }
-        public string InputCity { get; set; }
-        public string InputAddress { get; set; }
-        public string InputEmail { get; set; }
+        public Guid Id { get; set; }
+        public UserDeliveryInfo User { get; set; }
+        public List<CartItem> Items { get; set; }
+
+        public Order()
+        {
+            Id = Guid.NewGuid();
+        }
     }
 }
