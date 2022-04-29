@@ -25,7 +25,7 @@ namespace OnlineShopWebApp
             }
         }
 
-        public void SaveOrderToXmlFile(Order order)
+        public void SaveOrder(Order order)
         {
             var xmlSerializer = new XmlSerializer(typeof(Order));
             using (FileStream fs = new FileStream("Data/Orders.xml", FileMode.OpenOrCreate))

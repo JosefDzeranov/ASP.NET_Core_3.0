@@ -6,6 +6,6 @@ namespace OnlineShopWebApp
     {
         Order TryGetByUserId(string userId);
         void AddOrder(string userId, Basket basket, Delivery delivery);
-        void SaveOrderToXmlFile(Order order);
+        void SaveOrder(Order order);
     }
 }
