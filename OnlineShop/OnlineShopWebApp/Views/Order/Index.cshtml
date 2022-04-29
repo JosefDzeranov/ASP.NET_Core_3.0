@@ -2,25 +2,25 @@
     <div class="form-row">
         <div class="form-group col-md-6">
             <label for="inputName">Имя</label>
-            <input type="text" class="form-control" name="inputName" placeholder="Имя">
+            <input type="text" class="form-control" name="inputName" placeholder="Имя" />
         </div>
         <div class="form-group col-md-6">
             <label for="inputLastName">Фамилия</label>
-            <input type="text" class="form-control" name="inputLastName" placeholder="Фамилия">
+            <input type="text" class="form-control" name="inputLastName" placeholder="Фамилия" />
         </div>
     </div>
     <div class="form-group">
         <label for="inputCity">Город</label>
-        <input type="text" class="form-control" name="inputCity" placeholder="Город">
+        <input type="text" class="form-control" name="inputCity" placeholder="Город" />
     </div>
     <div class="form-group">
         <label for="inputAddress2">Адрес доставки</label>
-        <input type="text" class="form-control" name="inputAddress" placeholder="Адрес">
+        <input type="text" class="form-control" name="inputAddress" placeholder="Адрес" />
     </div>
     <div class="form-row">
         <div class="form-group col-md-6">
             <label for="inputEmail">Электронный адрес</label>
-            <input type="email" class="form-control" name="inputEmail">
+            <input type="email" class="form-control" name="inputEmail" />
         </div>
         <div class="form-group col-md-4">
             <label for="inputState">Способо доставки</label>
@@ -35,16 +35,16 @@
         </div>
         <div class="form-group col-md-2">
             <label for="inputPromo">Промокод</label>
-            <input type="text" class="form-control" id="inputPromo">
+            <input type="text" class="form-control" name="inputPromo">
         </div>
     </div>
     <div class="form-group">
         <div class="form-check">
             <label class="form-check-label">
-                <input class="form-check-input" type="checkbox" asp-controller="Order" asp-action="Buy"> Запомнить мои данные
+                <input class="form-check-input" type="checkbox" asp-controller="Order" asp-action="Index"> Запомнить мои данные
             </label>
         </div>
     </div>
-    <button type="submit" class="btn btn-primary">Отмена</button>
-    <button type="submit" class="btn btn-primary">Оформить</button>
+    <button class="btn btn-primary" type="submit">Отмена</button>
+    <button class="btn btn-primary" type="submit" asp-controller="Order" asp-action="Index">Оформить</button>
 </form>
