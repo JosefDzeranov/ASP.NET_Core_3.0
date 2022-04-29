@@ -42,10 +42,10 @@ namespace OnlineShopWebApp.Controllers
         [HttpPost]
         public IActionResult EditProduct(Product changingProduct)
         {
-
-
-            productRepository.Update(changingProduct);
-
+            if (ModelState.IsValid)
+            {
+                productRepository.Update(changingProduct);
+            }
 
             return RedirectToAction("Products", "Admin");
         }
