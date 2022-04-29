@@ -21,8 +21,9 @@ namespace OnlineShopWebApp.Controllers
             if(ModelState.IsValid)
             {
                 _userStorage.AuthorizeUser(signin);
+                return RedirectToAction("Index", "Home");
             }
-            return RedirectToAction("Index", "Home");
+            return View();
         }
 
         public IActionResult Signup()
@@ -33,21 +34,12 @@ namespace OnlineShopWebApp.Controllers
         [HttpPost]
         public IActionResult Signup(SignUp signup)
         {
-            if(signup.FirstName == signup.Password)
-            {
-                ModelState.AddModelError("", "FirstName and Password fields cannot be the same.");
-            }
-
-            if (signup.LastName == signup.Password)
-            {
-                ModelState.AddModelError("", "LastName and Password fields cannot be the same.");
-            }
-
             if (ModelState.IsValid)
             {
                 _userStorage.CreateUser(signup);
+                return RedirectToAction("Index", "Home");
             }
-            return RedirectToAction("Index", "Home");
+            return View();
         }
     }
 }
