@@ -7,22 +7,37 @@
 	</div>
 </div>
 <form method="post" action="/admin/AddProduct">
+	<div class="validation" asp-validation-summary="All"></div>
+
 	<div class="row text-center">
-	<div class="col">
+	<div class="col-3">
 		<div><br>
-			<label>	<input type="text" name="Name" placeholder="Продукт"/></label></div>
-	<div><br>
-		<label><input type="text" name="Cost" placeholder="Цена"/></label></div>
-	<div><br> 
-		<label><input type="text" name="Description" placeholder="Описание"/></label></div>
-	<div><br>
-		<label>Добавить изображение</label><br />
-		<label><input type="file" name="password"></label></div>
-	<div><br>
+			<label asp-for="Name">Продукт</label><br />
+			<input class="form-control" asp-for="Name" />
+			<span asp-validation-for="Name" />
+		</div>
+
+		<div><br>
+			<label asp-for="Cost">Цена</label><br />
+			<input class="form-control" asp-for="Cost" />
+			<span asp-validation-for="Cost" />
+		</div>
+
+		<div><br>
+			<label asp-for="Description">Описание</label><br />
+			<input class="form-control" asp-for="Description" />
+			<span asp-validation-for="Description" />
+		</div>
+	
+		<div>
+			<label>Добавить изображение</label><br />
+			<label><input type="file" name="file"></label></div>
+		<div><br>
 		
 		<input type="submit" value="Добавить" class ="btn btn-outline-success" role="button" href="/admin/AddProduct" asp-controller="admin" asp-action="AddProduct"/></div>
 	<div><br>
-		</div>
-		</div>
-		</div>
+	</div>
+	</div>
+	</div>
+	
 </form>

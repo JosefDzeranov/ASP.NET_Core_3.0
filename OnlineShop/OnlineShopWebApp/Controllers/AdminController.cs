@@ -1,8 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using OnlineShopWebApp.Services;
 using OnlineShopWebApp.Models;
-using System.Linq;
-
 
 namespace OnlineShopWebApp.Controllers
 {
@@ -41,10 +39,16 @@ namespace OnlineShopWebApp.Controllers
         }
 
         [HttpPost]
+
         public IActionResult AddProduct(Product product)
         {
-            productDataSource.AddProduct(product);
-            return RedirectToAction("Products");
+            if (ModelState.IsValid)
+            {
+                productDataSource.AddProduct(product);
+                return RedirectToAction("Products");
+            }
+
+            return View(product);
         }
 
         public IActionResult RemoveProduct(int productId)
@@ -56,15 +60,20 @@ namespace OnlineShopWebApp.Controllers
         [HttpGet]
         public IActionResult EditProduct(int productId)
         {
-            var product=productDataSource.GetProductById(productId);
+            var product = productDataSource.GetProductById(productId);
             return View(product);
         }
 
         [HttpPost]
+
         public IActionResult EditProduct(Product product)
         {
-            productDataSource.EditProduct(product);
-            return RedirectToAction("Products");
+            if (ModelState.IsValid)
+            {
+                productDataSource.EditProduct(product);
+                return RedirectToAction("Products");
+            }
+            return View(product);
         }
     }
 }
