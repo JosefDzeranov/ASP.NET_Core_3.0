@@ -11,33 +11,33 @@
 @if (Model != null)
 {
     <div class="row">
-        
-            <table class="table">
 
+        <table class="table">
+
+            <tr>
+                <th>Название</th>
+                <th>Цена руб.</th>
+                <th>Количество</th>
+                <th>Стоимость руб.</th>
+                <th></th>
+            </tr>
+
+            @foreach (var cartItem in Model.Items)
+            {
                 <tr>
-                    <th>Название</th>
-                    <th>Цена руб.</th>
-                    <th>Количество</th>
-                    <th>Стоимость руб.</th>
-                    <th></th>
+                    <td>@cartItem.Product.Name</td>
+                    <td>@cartItem.Product.Cost</td>
+                    <td>@cartItem.Quantinity</td>
+                    <td>@cartItem.Cost</td>
+                    <td>
+                        <a href="/cart/add?productId=@cartItem.Product.Id" class="btn btn-dark btn-sm">+</a>
+                        <a href="/cart/remove?productId=@cartItem.Product.Id" class="btn btn-dark btn-sm">-</a>
+                    </td>
                 </tr>
+            }
 
-                @foreach (var cartItem in Model.Items)
-                {
-                    <tr>
-                        <td>@cartItem.Product.Name</td>
-                        <td>@cartItem.Product.Cost</td>
-                        <td>@cartItem.Quantinity</td>
-                        <td>@cartItem.Cost</td>
-                        <td>
-                            <a href="/cart/add?productId=@cartItem.Product.Id" class="btn btn-dark btn-sm">+</a>
-                            <a href="/cart/remove?productId=@cartItem.Product.Id" class="btn btn-dark btn-sm">-</a>
-                        </td>
-                    </tr>
-                }
+        </table>
 
-            </table>
-       
     </div>
 
 
@@ -47,18 +47,16 @@
     </div>
 
     <div class="row">
-        <div class="col-6">
-            <a href="/order/index" class="btn btn-dark">Оформить заказ</a>
+        <div class="col">
+            <a href="/order/index" class="btn btn-success">Оформить заказ</a>
         </div>
-        <div class="col-6">
+        <div class="col">
             <a href="/home/index" class="btn btn-dark">Продолжить покупки</a>
         </div>
-    </div>
-    <div class="row">
-        <div class="col-6">
+        <div class="col">
             <a href="/cart/removeAll" class="btn btn-danger">Очистить корзину</a>
         </div>
-        
+
     </div>
 
 
