@@ -8,7 +8,6 @@ namespace OnlineShopWebApp.Controllers
 {
     public class AdminController : Controller
     {
-        // ertegerg
         public IActionResult Index()
         {
             return View();
