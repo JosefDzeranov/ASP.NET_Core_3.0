@@ -1,37 +1,40 @@
 <?xml version="1.0"?>
 <Order xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
-  <Id>bb860bdd-c36a-4edb-8aa1-07444dc3e91c</Id>
-  <Date>2022-04-26T15:10:20.1839478+03:00</Date>
+  <Id>b9d6a43d-90a5-49f4-837e-61530f1318ed</Id>
+  <Date>2022-04-29T13:25:17.572582+03:00</Date>
   <UserId>UserId</UserId>
   <Basket>
-    <Id>23d1eb28-3bb5-47d1-87b9-7ac217390334</Id>
+    <Id>08f2f84e-70c1-4d02-a30a-7a695a95ce09</Id>
     <UserId>UserId</UserId>
     <Items>
       <BasketItem>
-        <Id>8c391a99-f49d-403c-be13-6634e8cc6add</Id>
+        <Id>9c187071-2b83-4805-b980-53d2cb6119a4</Id>
         <Product>
-          <GuidId>daa76d39-fcd8-4d1b-9756-50f2a26fb403</GuidId>
-          <Id>e8d5d360-182b-48a0-aa22-8bce77b61b07</Id>
-          <ImagePath>/img/landscape.jpg</ImagePath>
-          <Name>Landscape</Name>
-          <Cost>2000</Cost>
-          <Description>Photography,
-3247x2463px
-(27.5cm x 20.9cm 300dpi),
-745kB | jpg
-	  </Description>
+          <Id>921a9f51-6676-4b80-8e9a-3feb2c02275a</Id>
+          <ImagePath>/img/abstraction.jpg</ImagePath>
+          <Name>Abstract</Name>
+          <Cost>250</Cost>
+          <Description>Digital drawing, 
+4000x5000 px,
+2,5 Mb, Tiff</Description>
         </Product>
         <Quantity>1</Quantity>
       </BasketItem>
     </Items>
   </Basket>
   <Delivery>
-    <Address />
+    <Address>
+      <ZipCode>zxzx</ZipCode>
+      <Country>zxz</Country>
+      <City>dasd</City>
+      <Street>asdas</Street>
+      <House>asd</House>
+      <Apartment>asd</Apartment>
+    </Address>
+    <Phone>asd</Phone>
+    <Email>asd@sfd</Email>
   </Delivery>
-</Order>aa9e-c8c8f8bd41c6</Id>
-        <Product>
-          <GuidId>83c4318f-2a2d-4498-aa80-cf8e95d4f0d5</GuidId>
-          <Id>e8d5d360-182b-48a0-aa22-8bce77b61b07</Id>
+</Order></Order></Id>
           <ImagePath>/img/landscape.jpg</ImagePath>
           <Name>Landscape</Name>
           <Cost>2000</Cost>

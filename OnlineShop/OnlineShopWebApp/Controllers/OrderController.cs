@@ -13,20 +13,24 @@ namespace OnlineShopWebApp.Controllers
             _orderStorage = orderStorage;
             _basketStorage = basketStorage;
         }
-        public IActionResult Index()
+        public IActionResult Index(Delivery delivery)
         {
-            var basket = _basketStorage.TryGetByUserId(Constants.UserId);
-            return View(basket);
+            //var basket = _basketStorage.TryGetByUserId(Constants.UserId);
+            //return View(basket);
+            return View(delivery);
         }
 
         [HttpPost]
         public IActionResult Buy(Delivery delivery)
         {
-            var basket = _basketStorage.TryGetByUserId(Constants.UserId);
-            _orderStorage.AddOrder(Constants.UserId, basket, delivery);
-            var order = _orderStorage.TryGetByUserId(Constants.UserId);
-            _orderStorage.SaveOrderToXmlFile(order);
-            _basketStorage.ClearBasket(Constants.UserId);
+            if (ModelState.IsValid)
+            {
+                var basket = _basketStorage.TryGetByUserId(Constants.UserId);
+                _orderStorage.AddOrder(Constants.UserId, basket, delivery);
+                var order = _orderStorage.TryGetByUserId(Constants.UserId);
+                _orderStorage.SaveOrderToXmlFile(order);
+                _basketStorage.ClearBasket(Constants.UserId);
+            }
             return View();
         }
     }

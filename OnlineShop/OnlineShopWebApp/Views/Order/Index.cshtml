@@ -1,69 +1,59 @@
-﻿@using OnlineShopWebApp
-@using OnlineShopWebApp.Models
-@model Basket
+﻿@using OnlineShopWebApp.Models
+@model Delivery
 
 @{
     ViewData["Title"] = "Order";
 }
 
 <div class="container">
-    <h2>Order</h2>
-    <div class="row">
-        <div class="col-3">
-            <h5>Your order:</h5>
-            @foreach (var item in Model.Items)
-            {
-                <p>@item.Product.Name (@item.Quantity) - $@item.Cost</p>
-            }
-            <h6>Total: $@Model.TotalCost</h6>
-        </div>
-        <form method="post">
-            <div class="col-8">
+    <div class="row text-center">
+        <div class="col-5">
+            <h2>Order</h2>
+            <form asp-action="Buy" asp-controller="Order">
+                <div class="validation" asp-validation-summary="ModelOnly"></div>
                 <h5>Input your delivery details:</h5>
                 <p>Address:</p>
-                <label>ZipCode</label>
-                <div>
-                    <input type="text" name="delivery.Address.ZipCode" />
+                <div class="mb-3">
+                    <input class="form-control form-control-sm" asp-for="Address.ZipCode" placeholder="Zip Code" />
+                    <span asp-validation-for="Address.ZipCode"></span>
                 </div>
-                <label>Country:</label>
-                <div>
-                    <input type="text" name="delivery.Address.Country" />
+                <div class="mb-3">
+                    <input class="form-control form-control-sm" asp-for="Address.Country" placeholder="Country" />
+                    <span asp-validation-for="Address.Country"></span>
                 </div>
-                <label>City:</label>
-                <div>
-                    <input type="text" name="delivery.Address.City" />
+                <div class="mb-3">
+                    <input class="form-control form-control-sm" asp-for="Address.City" placeholder="City" />
+                    <span asp-validation-for="Address.City"></span>
                 </div>
-                <label>Street:</label>
-                <div>
-                    <input type="text" name="delivery.Address.Street" />
+                <div class="mb-3">
+                    <input class="form-control form-control-sm" asp-for="Address.Street" placeholder="Street" />
+                    <span asp-validation-for="Address.Street"></span>
                 </div>
-                <label>House:</label>
-                <div>
-                    <input type="text" name="delivery.Address.House" />
-                </div><label>Apartment:</label>
-                <div>
-                    <input type="text" name="delivery.Address.Apartment" />
+                <div class="mb-3">
+                    <input class="form-control form-control-sm" asp-for="Address.House" placeholder="House" />
+                    <span asp-validation-for="Address.House"></span>
                 </div>
-                <label>Phone:</label>
-                <div>
-                    <input type="text" name="delivery.Phone" />
+                <div class="mb-3">
+                    <input class="form-control form-control-sm" asp-for="Address.Apartment" placeholder="Apartment" />
+                    <span asp-validation-for="Address.Apartment"></span>
                 </div>
-                <label>Email:</label>
-                <div>
-                    <input type="text" name="delivery.Email" />
+                <div class="mb-3">
+                    <input class="form-control form-control-sm" asp-for="Phone" placeholder="Phone" />
+                    <span asp-validation-for="Phone"></span>
                 </div>
-                <div>
+                <div class="mb-3">
+                    <input class="form-control form-control-sm" asp-for="Email" placeholder="Email" />
+                    <span asp-validation-for="Email"></span>
+                </div>
+                <div class="mb-3">
                     <button class="btn btn-dark btn-sm text-nowrap mt-3" type="submit" asp-controller="Order" asp-action="Buy">Buy</button>
                 </div>
+            </form>
+        </div>
+        <div class="row">
+            <div class="col-12 text-center">
+                <a class="btn btn-outline-dark btn-sm text-nowrap" href="/" role="button">Continue shopping</a>
             </div>
-        </form>
-
-    </div>
-    <div class="row">
-        <div class="col-12 text-center">
-            <a class="btn btn-outline-dark btn-sm text-nowrap" href="/" role="button">Continue shopping</a>
         </div>
     </div>
 </div>
-
-
