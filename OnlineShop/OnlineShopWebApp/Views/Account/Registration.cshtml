@@ -1,0 +1,28 @@
+﻿<form method="post">
+    <div class="mb-3">
+        <label for="exampleInputName" class="form-label">Имя</label>
+        <input type="text" class="form-control" name="InputName" aria-describedby="nameHelp">
+    </div>
+    <div class="mb-3">
+        <label for="exampleInputLastName" class="form-label">Фамилия</label>
+        <input type="text" class="form-control" name="InputLastName" aria-describedby="LastNameHelp">
+    </div>
+    <div class="mb-3">
+        <label for="exampleInputEmail1" class="form-label">Электронный адрес</label>
+        <input type="email" class="form-control" name="InputEmail1" aria-describedby="emailHelp">
+    </div>
+    <div class="mb-3">
+        <label for="exampleInputPassword1" class="form-label">Пароль</label>
+        <input type="password" class="form-control" name="InputPassword">
+    </div>
+    <div class="mb-3">
+        <label for="exampleInputConfirmPassword1" class="form-label">Повторите пароль</label>
+        <input type="password" class="form-control" name="InputConfirmPassword">
+    </div>
+    <div class="mb-3 form-check">
+        <input type="checkbox" class="form-check-input" name="exampleCheck1">
+        <label class="form-check-label" for="exampleCheck1">Запомнить данные входа</label>
+    </div>
+    <button type="submit" class="btn btn-outline-primary" asp-controller="Account" asp-action="Login">Уже есть аккаунт?</button>
+    <button type="submit" class="btn btn-primary">Создать аккаунт</button>
+</form>
