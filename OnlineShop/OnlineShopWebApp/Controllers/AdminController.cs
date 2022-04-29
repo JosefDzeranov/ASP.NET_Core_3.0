@@ -14,6 +14,10 @@ namespace OnlineShopWebApp.Controllers
             return View();
         }
 
+        /// <summary>
+        ///  2
+        /// </summary>
+        /// <returns></returns>
         public IActionResult Status()
         {
             return View();
