@@ -14,8 +14,6 @@ namespace OnlineShopWebApp.Models
         public string State { get; set; }
         public string Date { get; set; }
         public string Time { get; set; }
-        public EnterData EnterData { get; set; }
-
         public Order()
         {
             Id = constantCounter;
