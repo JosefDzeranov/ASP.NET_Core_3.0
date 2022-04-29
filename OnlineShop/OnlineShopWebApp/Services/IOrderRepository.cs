@@ -9,7 +9,7 @@ namespace OnlineShopWebApp.Services
         Order TryGetByUserId(string userId);
         List<Order> TryGetAll ();
         void Add(Order order);
-        Order TryGetById(Guid Id);
         void UpdateStatus(Guid orderId, OrderStatus status);
+        Order TryGetById(Guid Id);
     }
 }
