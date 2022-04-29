@@ -27,13 +27,7 @@ namespace OnlineShopWebApp.Models
         public string Address { get; set; }
         public decimal TotalCost { get; set; }
 
-        public enum OrderStatus
-        {
-            New,
-            Confirmed,
-            Paid
-
-        }
+        
 
     }
 }

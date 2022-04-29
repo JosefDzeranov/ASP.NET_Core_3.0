@@ -44,11 +44,6 @@ namespace OnlineShopWebApp.Controllers
             return RedirectToAction("Index", "Order");
         }
 
-        public IActionResult Orders()
-        {
-            var existingOrders = orderRepository.TryGetAll();
-
-            return View(existingOrders);
-        }
+       
     }
 }
