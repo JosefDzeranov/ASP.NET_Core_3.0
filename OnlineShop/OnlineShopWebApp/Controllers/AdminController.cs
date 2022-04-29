@@ -2,6 +2,7 @@
 using OnlineShopWebApp.Models;
 using OnlineShopWebApp.Services;
 using OnlineShopWebApp.ViewModels;
+using System;
 
 namespace OnlineShopWebApp.Controllers
 {
@@ -40,18 +41,12 @@ namespace OnlineShopWebApp.Controllers
             return View(product);
         }
         [HttpPost]
-        public IActionResult EditProduct(ProductViewModel productViewModel)
+        public IActionResult EditProduct(Product changingProduct)
         {
-
-            var product = productRepository.TryGetById(productViewModel.ProductId);
-
-            product.Name = productViewModel.Name;
-            product.Cost = productViewModel.Cost;
-            product.Description = productViewModel.Description;
-            product.ImgPath = productViewModel.ImgPath;
-
-            productRepository.Update(product);
-
+            if (ModelState.IsValid)
+            {
+                productRepository.Update(changingProduct);
+            }
 
             return RedirectToAction("Products", "Admin");
         }
@@ -82,7 +77,23 @@ namespace OnlineShopWebApp.Controllers
 
             return View(products);
         }
+        public IActionResult OrderDetail(Guid orderId)
+        {
+            if(orderId != null)
+            {
+                var order = orderRepository.TryGetById(orderId);
 
+                return View(order);
+            }
+            return RedirectToAction("Products", "Admin");
+        }
+        
+        public IActionResult UpdateOrderStatus(Guid orderId, OrderStatus status)
+        {
+            orderRepository.UpdateStatus(orderId, status);
+
+            return RedirectToAction("OrderDetail","Admin", new { orderId });
+        }
 
     }
 }

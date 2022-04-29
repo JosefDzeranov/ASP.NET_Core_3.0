@@ -5,23 +5,27 @@
             <div class="row justify-content-center">
                 <div class="col-6">
                     <div class="mb-3">
-                        <input type="text" class="form-control" name="Name" placeholder="Имя" value="@Model.Name" />
+                        <input type="text" class="form-control" asp-for="Name" placeholder="Имя" value="@Model.Name" />
+                        <span asp-validation-for="Name"></span>
                     </div>
                     <div class="mb-3">
-                        <input type="text" class="form-control" name="Cost" placeholder="Цена" value="@Model.Cost"/>
+                        <input type="text" class="form-control" asp-for="Cost" placeholder="Цена" value="@Model.Cost"/>
+                         <span asp-validation-for="Cost"></span>
                     </div>
                     <div class="mb-3">
-                        <input type="text" class="form-control" name="Description" placeholder="Описание" value="@Model.Description"/>
+                        <input type="text" class="form-control" asp-for="Description" placeholder="Описание" value="@Model.Description"/>
+                        <span asp-validation-for="Description"></span>
                     </div>
                      <div class="mb-3">
-                        <input type="text" class="form-control" name="ImgPath" placeholder="Картинка" value="/images/book.png"/>
+                        <input type="text" class="form-control" asp-for="ImgPath" placeholder="Картинка" value="/images/book.png"/>
+                         <span asp-validation-for="ImgPath"></span>
                     </div>
-                    <input type="hidden" class="form-control" name="ProductId" value="@Model.Id"/>
+                    <input type="hidden" class="form-control" asp-for="Id" value="@Model.Id"/>
                     <div class="mb-3 text-center">
                         <button type="submit" class="btn btn-dark">Изменить</button>
                     </div>
                     <div class="mb-3 text-center">
-                        <a class="btn btn-dark" asp-controller="Admin" asp-action="Index" asp-route-id="3">Отмена</a>
+                        <a class="btn btn-dark" asp-controller="Admin" asp-action="Products">Отмена</a>
                     </div>
                 </div>
 
