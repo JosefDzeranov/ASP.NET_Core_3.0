@@ -33,14 +33,6 @@ namespace OnlineShopWebApp.Controllers
             return RedirectToAction("Products", "Admin");
         }
 
-
-        [HttpPost]
-        public IActionResult Edit(int productId, Product product)
-        {
-            _productBase.Edit(productId, product);
-            return RedirectToAction("Index");
-        }
-
         public IActionResult Privacy()
         {
             return View();

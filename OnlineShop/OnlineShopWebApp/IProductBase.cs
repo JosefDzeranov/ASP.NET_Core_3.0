@@ -8,7 +8,7 @@ namespace OnlineShopWebApp
         IEnumerable<Product> AllProducts();
         void Add(Product product);
         void Delete(int productId);
-        void Edit(int productId, Product product);
+        void Edit(Product product);
         Product TryGetById(int productId);
     }
 }

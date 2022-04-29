@@ -38,10 +38,19 @@ namespace OnlineShopWebApp.Controllers
             return View();
         }
 
+        [HttpGet]
         public IActionResult EditProduct(int productId)
         {
             var product = _productBase.TryGetById(productId);
             return View(product);
+        }
+
+        [HttpPost]
+        public IActionResult EditProduct(Product product)
+        {
+            _productBase.Edit(product);
+            return RedirectToAction("products", "admin");
+
         }
 
         public IActionResult DeleteProduct(int productId)

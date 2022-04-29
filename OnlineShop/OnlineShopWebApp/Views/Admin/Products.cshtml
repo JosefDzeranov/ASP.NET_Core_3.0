@@ -22,7 +22,9 @@
                 <tbody>
                     <tr>
                         <td>@p.Id</td>
-                        <td>@p.Name </td>
+                        <td>
+                            <a style="color:black" href="/product/index/@p.Id">@p.Name </a>
+                        </td>
                         <td>@p.Cost руб.</td>
                         <td>
                             <a style="color:black" href="/admin/EditProduct?productId=@p.Id">Редактировать </a>

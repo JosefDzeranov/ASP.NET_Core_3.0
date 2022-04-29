@@ -56,10 +56,17 @@ namespace OnlineShopWebApp
             File.WriteAllText("Models/products.json", json);
         }
 
-        public void Edit(int productId, Product product)
+        public void Edit(Product product)
         {
-            Delete(productId);
-            Add(product);
+
+            var allProducts = AllProducts();
+            var existingProduct = allProducts.FirstOrDefault(x => x.Id == product.Id);
+            existingProduct.Name = product.Name;
+            existingProduct.Description = product.Description;
+            existingProduct.Cost = product.Cost;
+            existingProduct.ImgPath = "/img/Silk_green.jpg";
+            var json = System.Text.Json.JsonSerializer.Serialize(allProducts, jsonOption);
+            File.WriteAllText("Models/products.json", json);
         }
     }
 }
