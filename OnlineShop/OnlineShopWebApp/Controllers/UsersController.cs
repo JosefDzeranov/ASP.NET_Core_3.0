@@ -33,9 +33,14 @@ namespace OnlineShopWebApp.Controllers
         [HttpPost]
         public IActionResult Signup(SignUp signup)
         {
-            if(signup.FirstName == signup.Password || signup.LastName == signup.Password)
+            if(signup.FirstName == signup.Password)
             {
-                ModelState.AddModelError("", "Name and password must not match.");
+                ModelState.AddModelError("", "FirstName and Password fields cannot be the same.");
+            }
+
+            if (signup.LastName == signup.Password)
+            {
+                ModelState.AddModelError("", "LastName and Password fields cannot be the same.");
             }
 
             if (ModelState.IsValid)
