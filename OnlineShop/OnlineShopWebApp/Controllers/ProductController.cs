@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using OnlineShopWebApp.Services;
+using OnlineShopWebApp.Models;
 
 namespace OnlineShopWebApp.Controllers
 {
@@ -16,5 +17,6 @@ namespace OnlineShopWebApp.Controllers
             var product = productDataSource.GetProductById(id);
             return View(product);
         }
+
     }
 }
