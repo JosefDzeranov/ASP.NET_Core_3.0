@@ -4,7 +4,7 @@ namespace OnlineShopWebApp
 {
     public class ProductManager : IProductManager
     {
-        public List<Product> productList { get; set; } = new List<Product>
+        public List<Product> ProductList { get; set; } = new List<Product>
         {
 
                new Product(1, "Cheeseburger", 150, "бургер с говяжьей котлетой и сыром"),
@@ -12,15 +12,13 @@ namespace OnlineShopWebApp
                new Product(3, "Bigburger", 200, "бургер с двойной говяжьей котлетой")
 
         };
+        
 
-        public List<Product> AllProducts()
-        {
-            return productList;
-        }
+      
 
         public Product FindProduct(int id)
         {
-            return productList.Find(product => product.Id == id);
+            return ProductList.Find(product => product.Id == id);
         }
 
     }
