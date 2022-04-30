@@ -21,12 +21,13 @@
     "infoBuying": null,
     "Orders": [],
     "Id": 0,
-    "login": null,
+    "Login": null,
     "Fistname": "Александр",
     "Secondname": "Николаевич",
     "Surname": "Молостов",
     "Age": 30,
     "Email": "email@email.com",
-    "Password": null
+    "Password": null,
+    "PasswordConfirm": null
   }
 ]
