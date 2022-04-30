@@ -11,7 +11,18 @@ namespace OnlineShopWebApp.Controllers
         }
 
         [HttpPost]
-        public IActionResult Login(Account login)
+        public IActionResult Login(Account account)
+        {
+            return RedirectToAction("Index", "Home");
+        }
+
+        public IActionResult Registration()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public IActionResult Registration(Account account)
         {
             return RedirectToAction("Index", "Home");
         }
