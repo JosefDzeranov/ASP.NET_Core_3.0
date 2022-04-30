@@ -1,0 +1,25 @@
+﻿@model IEnumerable<Product>
+
+@if (Model.Any())
+{
+<div class="row">
+    @foreach (Product p in Model)
+    {
+        <div class="col-3 card shadow">
+            <img class="card-card-img-top" src="@p.ImgPath">
+
+            <div class="card-body">
+                <a style="color:black" href="/product/index/@p.Id">
+                    <h5>@p.Name</h5>
+                </a>
+                <h5>@p.Cost руб.</h5>
+                <a class="btn btn-dark" href="/cart/add?productId=@p.Id" role="button">Добавить в корзину</a>
+            </div>
+        </div>
+    }
+</div>
+}
+else
+{
+    <h2>К сожалению, товар не найден</h2>
+}

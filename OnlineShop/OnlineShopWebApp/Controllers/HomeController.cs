@@ -25,6 +25,20 @@ namespace OnlineShopWebApp.Controllers
             return View(products);
         }
 
+        public IActionResult SearchByName(string searchName)
+        {
+            if(string.IsNullOrEmpty(searchName))
+            {
+                searchName = String.Empty;
+            }
+            else
+            {
+                searchName.ToLower();
+            }
+            var products = _productBase.AllProducts().Where(x => x.Name.Contains(searchName));
+            return View(products);
+        }
+
         public IActionResult Privacy()
         {
             return View();
