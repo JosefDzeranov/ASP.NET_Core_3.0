@@ -8,5 +8,7 @@ namespace OnlineShopWebApp
      
         public Product FindProduct(int id);
 
+        public void EditProduct(Product product);
+
     }
 }

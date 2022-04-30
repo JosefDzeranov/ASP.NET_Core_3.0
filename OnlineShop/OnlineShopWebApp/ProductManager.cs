@@ -21,5 +21,18 @@ namespace OnlineShopWebApp
             return ProductList.Find(product => product.Id == id);
         }
 
+        public void EditProduct(Product editedProduct)
+        {
+            foreach (var product in ProductList)
+            {
+                if (product.Id == editedProduct.Id)
+                {
+                    product.Name = editedProduct.Name;
+                    product.Description = editedProduct.Description;
+                    product.Cost = editedProduct.Cost;
+                }
+            }
+        }
+
     }
 }

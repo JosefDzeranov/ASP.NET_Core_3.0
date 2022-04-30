@@ -8,16 +8,16 @@
     <input type="hidden" value=@Model.Id name="id" />
 
 <p> Имя продукта:</p>
-    <input type="text" name="name"/>
+    <input type="text" name="Name"/>
     <p>
         Цена:
     </p>
-    <input type="text" name="cost"/>
+    <input type="text" name="Cost"/>
 
     <p>
         Описание:
     </p>
-    <input type="text" name="description"/> <br />
+    <input type="text" name="Description"/> <br />
     <br />
     <button class="btn btn-dark" type="submit" asp-controller="Administration" asp-action="SaveEditedProduct">сохранить изменения</button>
 
