@@ -18,7 +18,7 @@ namespace OnlineShopWebApp.Models
             new Product(4,"Анализ документов и договоров", 3000, "Правовая экспертиза документов и договоров","/images/examination_documents.jpg"),
         };
 
-        public List<Product> GetAll()
+        public List<Product> GetAllFirst()
         {
             string currentFile = @"Models\Products.json";
 
@@ -26,6 +26,28 @@ namespace OnlineShopWebApp.Models
             {
                 string obj = JsonConvert.SerializeObject(products, Formatting.Indented);
                 File.WriteAllText(@"Models\Products.json", obj);
+            }
+            List<Product> productsJson;
+
+            try
+            {
+                productsJson = DeserializeJsonProducts();
+            }
+            catch (Exception)
+            {
+                return null;
+            }
+
+            return productsJson;
+        }
+
+        public List<Product> GetAll()
+        {
+            string currentFile = @"Models\Products.json";
+
+            if (!File.Exists(currentFile))
+            {
+                return null;
             }
             List<Product> productsJson;
 
@@ -66,6 +88,69 @@ namespace OnlineShopWebApp.Models
             List<Product> productsJson = JsonConvert.DeserializeObject<List<Product>>(strFromReq);
 
             return productsJson;
+        }
+
+        public void Delete(int productId)
+        {
+            List<Product> productsJson;
+
+            try
+            {
+                productsJson = DeserializeJsonProducts();
+
+                var product = productsJson.FirstOrDefault(x => x.Id == productId);
+
+                productsJson.Remove(product);
+
+
+                string currentFile = @"Models\Products.json";
+                
+                if (File.Exists(currentFile))
+                {
+                    GC.Collect();
+                    GC.WaitForPendingFinalizers();
+                    File.Delete(currentFile);
+                }
+
+                if (productsJson.Count != 0)
+                {
+                    string obj = JsonConvert.SerializeObject(productsJson, Formatting.Indented);
+                    File.WriteAllText(@"Models\Products.json", obj);
+                }
+            }
+            catch (Exception)
+            {
+
+            }
+        }
+
+        public void SaveEditedProduct(Product newProduct)
+        {
+            List<Product> productsJson;
+
+            try
+            {
+                productsJson = DeserializeJsonProducts();
+
+                var product = productsJson.FirstOrDefault(x => x.Id == newProduct.Id);
+                product.Name = newProduct.Name;
+                product.Cost = newProduct.Cost;
+                product.Description = newProduct.Description;
+
+                string currentFile = @"Models\Products.json";
+
+                if (File.Exists(currentFile))
+                {
+                    File.Delete(currentFile);
+                }
+
+                string obj = JsonConvert.SerializeObject(products, Formatting.Indented);
+                File.WriteAllText(@"Models\Products.json", obj);
+            }
+            catch (Exception)
+            {
+
+            }
         }
     }
 }

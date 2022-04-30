@@ -11,7 +11,7 @@
         @if (Model == null)
         {
             <div class="404">
-                <h2 align="center">Страница не найдена</h2>
+                <h2 align="center">Услуг нет.</h2>
                 <img class="card-img-top" src="/images/404.jpg" />
             </div>
         }
@@ -37,8 +37,8 @@
                                     <td>@product.Id</td>
                                     <td><a href="/product/index/@product.Id">@product.Name</a></td>
                                     <td>@product.Cost рублей</td>
-                                    <td><a class="btn btn-light" href="#" width="20px" role="button">Редактировать</a></td>
-                                    <td><a class="btn btn-light" href="#" width="20px" role="button">Удалить</a></td>
+                                    <td><a class="btn btn-light" href="/admin/edit?productId=@product.Id" width="20px" role="button">Редактировать</a></td>
+                                    <td><a class="btn btn-light" href="/admin/delete?productId=@product.Id" width="20px" role="button">Удалить</a></td>
                                 </tr>
                             }
                         </tbody>

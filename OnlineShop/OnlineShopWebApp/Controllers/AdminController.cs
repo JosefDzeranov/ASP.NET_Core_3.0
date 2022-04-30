@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using OnlineShopWebApp.Interface;
+using OnlineShopWebApp.Models;
 
 namespace OnlineShopWebApp.Controllers
 {
@@ -25,10 +26,31 @@ namespace OnlineShopWebApp.Controllers
         {
             return View();
         }
+
         public IActionResult Products()
         {
             var products = productsStorage.GetAll();
             return View(products);
+        }
+
+        public IActionResult Edit(int productId)
+        {
+            var product = productsStorage.TryGetProduct(productId);
+            return View(product);
+        }
+
+        [HttpPost]
+        public IActionResult SaveEditedProduct(Product product)
+        {
+            productsStorage.SaveEditedProduct(product);
+            return View();
+        }
+
+        public IActionResult Delete(int productId)
+        {
+            productsStorage.Delete(productId);
+
+            return RedirectToAction("Products");
         }
     }
 }

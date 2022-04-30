@@ -3,10 +3,10 @@
     public class Product
     {
         public int Id { get; set; }
-        public string Name { get; }
-        public decimal Cost { get; }
-        public string Description { get; }
-        public string ImagePath { get; }
+        public string Name { get; set; }
+        public decimal Cost { get; set; }
+        public string Description { get; set; }
+        public string ImagePath { get; set; }
 
         public Product(int id,string name, decimal cost, string description, string imagePath)
         {
