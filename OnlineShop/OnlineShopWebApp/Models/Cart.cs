@@ -18,7 +18,7 @@ namespace OnlineShopWebApp.Models
             }
         }
 
-        public int Amount
+        public decimal Amount
         {
             get
             {

@@ -81,5 +81,11 @@ namespace OnlineShopWebApp.Controllers
             return RedirectToAction("Products");
         }
 
+        public IActionResult EditState(Guid orderId)
+        {
+            var order = ordersRepository.TryGetById(orderId);
+            return View(order);
+        }
+
     }
 }

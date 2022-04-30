@@ -17,19 +17,21 @@
                             <th>Пользователь</th>
                             <th>Дата</th>
                             <th>Время</th>
+                            <th></th>
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach (var order in Model)
+                        @for (int i=0; i<Model.Count; i++)
                         {
-                            <tr>
-                                <td>@order.Id</td>
-                                <td>@order.Cart.FullCost.</td>
-                                <td>@order.State</td>
-                                <td>@order.User.Name</td>
-                                <td>@order.Date</td>
-                                <td>@order.Time</td>
-                            </tr>
+                        <tr>
+                            <td>@(i+1)</td>
+                            <td>@Model[i].Cart.FullCost.</td>
+                            <td>@Model[i].State</td>
+                            <td>@Model[i].User.Name</td>
+                            <td>@Model[i].Date</td>
+                            <td>@Model[i].Time</td>
+                            <td><a href="/administration/editstate?orderId=@Model[i].Id">Подробнее</a></td>
+                        </tr>
                         }
                     </tbody>
                 </table>

@@ -15,10 +15,15 @@ namespace OnlineShopWebApp
             return orders;
         }
 
+        public Order TryGetById(Guid id)
+        {
+            return orders.FirstOrDefault(x => x.Id == id);
+        }
         public void Add(Cart cart, User user)
         {
             var newOrder = new Order
             {
+                Id = new Guid(),
                 Cart = cart,
                 User = user,
                 State = "Создан",
