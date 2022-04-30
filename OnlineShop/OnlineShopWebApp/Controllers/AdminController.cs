@@ -1,10 +1,16 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using OnlineShopWebApp.Models;
+using OnlineShopWebApp.Interface;
 
 namespace OnlineShopWebApp.Controllers
 {
     public class AdminController : Controller
     {
+        private readonly IProductsStorage productsStorage;
+        public AdminController(IProductsStorage productsStorage)
+        {
+            this.productsStorage = productsStorage;
+        }
+
         public IActionResult Orders()
         {
             return View();
@@ -21,7 +27,8 @@ namespace OnlineShopWebApp.Controllers
         }
         public IActionResult Products()
         {
-            return View();
+            var products = productsStorage.GetAll();
+            return View(products);
         }
     }
 }

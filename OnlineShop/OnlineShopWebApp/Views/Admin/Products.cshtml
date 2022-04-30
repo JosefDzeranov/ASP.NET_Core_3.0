@@ -1,8 +1,50 @@
-﻿<div class="row">
+﻿@using OnlineShopWebApp.Models
+
+@model List<Product>
+<div class="row">
     @await Html.PartialAsync("AdminPanel")
 
 
     <div class="col-6">
         <h3 align="center">Список услуг</h3>
+
+        @if (Model == null)
+        {
+            <div class="404">
+                <h2 align="center">Страница не найдена</h2>
+                <img class="card-img-top" src="/images/404.jpg" />
+            </div>
+        }
+        else
+        {
+            <div class="row">
+                <div class="col">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>№</th>
+                                <th>Название</th>
+                                <th>Цена (руб.)</th>
+                                <th></th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var product in Model)
+                            {
+                                
+                                <tr>
+                                    <td>@product.Id</td>
+                                    <td><a href="/product/index/@product.Id">@product.Name</a></td>
+                                    <td>@product.Cost рублей</td>
+                                    <td><a class="btn btn-light" href="#" width="20px" role="button">Редактировать</a></td>
+                                    <td><a class="btn btn-light" href="#" width="20px" role="button">Удалить</a></td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        }
     </div>
 </div>
