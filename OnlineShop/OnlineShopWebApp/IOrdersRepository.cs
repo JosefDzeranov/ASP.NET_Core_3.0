@@ -11,5 +11,6 @@ namespace OnlineShopWebApp
         List<Order> GetAll();
         void Add(Cart cart, User user);
         Order TryGetById(Guid id);
+        void UpdateState(Guid orderId, OrderState state);
     }
 }

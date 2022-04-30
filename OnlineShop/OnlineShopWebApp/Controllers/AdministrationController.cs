@@ -48,9 +48,9 @@ namespace OnlineShopWebApp.Controllers
         public IActionResult Add(Product product)
         {
             if (ModelState.IsValid)
-            { 
-            productsRepository.Add(product);
-            return View();
+            {
+                productsRepository.Add(product);
+                return View();
             }
             else
             {
@@ -81,11 +81,17 @@ namespace OnlineShopWebApp.Controllers
             return RedirectToAction("Products");
         }
 
-        public IActionResult EditState(Guid orderId)
+        public IActionResult OrderDetails(Guid orderId)
         {
             var order = ordersRepository.TryGetById(orderId);
             return View(order);
         }
 
+        [HttpPost]
+        public IActionResult UpdateState(Guid orderId, OrderState state)
+        {
+            ordersRepository.UpdateState(orderId, state);
+            return RedirectToAction("Orders");
+        }
     }
 }

@@ -10,8 +10,13 @@ namespace OnlineShopWebApp.Models
         public Guid Id { get; set; }
         public User User { get; set; }
         public Cart Cart { get; set; }
-        public string State { get; set; }
+        public OrderState State { get; set; }
         public string Date { get; set; }
         public string Time { get; set; }
+
+        public Order()
+        {
+            State = OrderState.Created;
+        }
     }
 }

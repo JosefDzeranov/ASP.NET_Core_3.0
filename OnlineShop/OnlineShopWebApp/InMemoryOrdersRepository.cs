@@ -26,7 +26,6 @@ namespace OnlineShopWebApp
                 Id = new Guid(),
                 Cart = cart,
                 User = user,
-                State = "Создан",
                 Date = DateTime.Now.ToString("dd MMMM yyyy"),
                 Time = DateTime.Now.ToString("HH:mm:ss")
             };
@@ -34,5 +33,13 @@ namespace OnlineShopWebApp
             orders.Add(newOrder);
         }
 
+        public void UpdateState(Guid orderId, OrderState newState)
+        {
+            var existingOrder = TryGetById(orderId);
+            if (existingOrder != null)
+            {
+                existingOrder.State = newState;
+            }
+        }
     }
 }
