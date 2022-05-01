@@ -1,48 +1,14 @@
 <?xml version="1.0"?>
 <Order xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
-  <Id>47170515-d877-4fd4-aaac-fb2397b2bbc4</Id>
-  <Date>2022-05-02T00:58:06.5919281+03:00</Date>
+  <Id>80460a2b-5548-45d9-9989-cf098f5e6594</Id>
+  <Date>2022-05-02T01:12:27.177311+03:00</Date>
   <UserId>UserId</UserId>
   <Basket>
-    <Id>4c7ffe78-7d31-4fd5-8140-38ff8d6d57e3</Id>
+    <Id>e72c0248-dec9-4528-b88f-8e20a652aa33</Id>
     <UserId>UserId</UserId>
-    <Items />
-  </Basket>
-  <Delivery>
-    <Address>
-      <ZipCode>234324</ZipCode>
-      <Country>ewrwer</Country>
-      <City>werwer</City>
-      <Street>werwe</Street>
-      <House>rwer</House>
-      <Apartment>wer</Apartment>
-    </Address>
-    <Phone>12312312312</Phone>
-    <Email>ewrwerw@sddsf</Email>
-  </Delivery>
-</Order>f</Description>
-        </Product>
-        <Quantity>1</Quantity>
-      </BasketItem>
-    </Items>
-  </Basket>
-  <Delivery>
-    <Address>
-      <ZipCode>234324</ZipCode>
-      <Country>ewrwer</Country>
-      <City>werwer</City>
-      <Street>werwe</Street>
-      <House>rwer</House>
-      <Apartment>wer</Apartment>
-    </Address>
-    <Phone>12312312312</Phone>
-    <Email>ewrwerw@sddsf</Email>
-  </Delivery>
-</Order>     </Product>
-        <Quantity>1</Quantity>
-      </BasketItem>
+    <Items>
       <BasketItem>
-        <Id>7b15336d-7a2f-4818-916a-9a0083b7db14</Id>
+        <Id>70772590-faad-4aff-9785-be00e9f4559f</Id>
         <Product>
           <Id>921a9f51-6676-4b80-8e9a-3feb2c02275a</Id>
           <ImagePath>/img/abstraction.jpg</ImagePath>
@@ -58,29 +24,14 @@
   </Basket>
   <Delivery>
     <Address>
-      <ZipCode>123456</ZipCode>
-      <Country>qwe</Country>
-      <City>qwer</City>
-      <Street>1212</Street>
-      <House>12</House>
-      <Apartment>12</Apartment>
+      <ZipCode>123123</ZipCode>
+      <Country>qweqweqwe</Country>
+      <City>wqeqw</City>
+      <Street>eqwe</Street>
+      <House>eq</House>
+      <Apartment>we</Apartment>
     </Address>
-    <Phone>123123123</Phone>
-    <Email>123231@eqwe</Email>
-  </Delivery>
-</Order>asketItem>
-    </Items>
-  </Basket>
-  <Delivery>
-    <Address>
-      <ZipCode>12312312</ZipCode>
-      <Country>qweqweq </Country>
-      <City> qwe qwe</City>
-      <Street>erwer ew</Street>
-      <House>33</House>
-      <Apartment>332</Apartment>
-    </Address>
-    <Phone>3232</Phone>
-    <Email>qweqw</Email>
+    <Phone>1123123123</Phone>
+    <Email>qasa@wewe</Email>
   </Delivery>
 </Order>
