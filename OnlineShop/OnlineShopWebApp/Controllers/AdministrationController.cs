@@ -49,9 +49,17 @@ namespace OnlineShopWebApp.Controllers
         [HttpPost]
         public IActionResult SaveEditedProduct(Product product)
         {
-            productManager.EditProduct(product);
+            if (ModelState.IsValid)
+            {
+                productManager.EditProduct(product);
 
-            return View();
+                return View();
+            }
+            else
+            {
+                return RedirectToAction("EditProduct");
+            }
+            
         }
 
         public IActionResult RemoveProduct(int id)
