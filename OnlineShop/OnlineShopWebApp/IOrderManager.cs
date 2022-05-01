@@ -11,5 +11,6 @@ namespace OnlineShopWebApp
         public void SaveOrder(Order order);
         public Order TryGetOrderById(string userId);
         public Order TryGetOrderById(Guid id);
+        public void UpdateStatus(Guid id, OrderStatus status);
     }
 }

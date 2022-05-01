@@ -38,6 +38,15 @@ namespace OnlineShopWebApp.Controllers
 
         }
 
+        [HttpPost]
+        public IActionResult UpdateStatus(Guid id, OrderStatus status)
+        {
+
+            orderManager.UpdateStatus(id, status);
+            return RedirectToAction("Orders");
+
+        }
+
         public IActionResult Users()
         {
             return View();

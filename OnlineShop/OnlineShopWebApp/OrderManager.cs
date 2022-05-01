@@ -65,6 +65,15 @@ namespace OnlineShopWebApp
             return OrdersList;
         }
 
+        public void UpdateStatus(Guid id, OrderStatus status)
+        {
+            var order = TryGetOrderById(id);
 
+            if (order != null)
+            {
+                order.Status = status;
+            }
+           
+        }
     }
 }
