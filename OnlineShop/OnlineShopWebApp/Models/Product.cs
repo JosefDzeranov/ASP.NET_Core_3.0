@@ -18,5 +18,10 @@
 
         }
 
+        public Product()
+        {
+
+        }
+
     }
 }
