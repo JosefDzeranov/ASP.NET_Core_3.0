@@ -12,7 +12,7 @@
                 <div class="d-grid gap-2">
                     <a class="text-nowrap mx-1 my-1"
                        asp-area="" asp-controller="AdminPanel"
-                       asp-action="AddNewProduct"
+                       asp-action="CardNewProduct"
                        role="button">
                         Добавить новый продукт
                     </a>
@@ -47,8 +47,8 @@
                                         <div class="d-grid gap-2">
                                             <a class="text-nowrap mx-1 my-1"
                                                asp-area="" asp-controller="AdminPanel"
-                                               asp-action="UpdateProduct"
-                                               asp-route-productId="@Model[i].Id"
+                                               asp-action="CardUpdateProduct"
+                                               asp-route-idOldProduct="@Model[i].Id"
                                                role="button">
                                                 Редактировать
                                             </a>

@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using OnlineShopWebApp.Interfase;
+using OnlineShopWebApp.Models;
 
 namespace OOnlineShopWebApp.Controllers
 {
@@ -32,17 +33,31 @@ namespace OOnlineShopWebApp.Controllers
             var products = productStorage.Products;
             return View(products);
         }
-        public IActionResult DeleteProduct(int productId, int userId)
+        public IActionResult DeleteProduct(int idProduct, int userId)
         {
+            var product = productStorage.FindProduct(idProduct);
+            productStorage.DeleteProduct(product, userId);
             return RedirectToAction("Products");
         }
-        public IActionResult UpdateProduct(int productId, int userId)
+        public IActionResult CardUpdateProduct(int idOldProduct, int userId)
         {
+            var oldProduct = productStorage.FindProduct(idOldProduct);
+            return View(oldProduct);
+        }
+        [HttpPost]
+        public IActionResult UpdateProduct(Product oldProduct, Product newProduct, int userId)
+        {
+            productStorage.UpdateProduct(oldProduct, newProduct, userId);
             return RedirectToAction("Products");
         }
-
-        public IActionResult AddNewProduct(int userId)
+        public IActionResult CardNewProduct(int userId)
         {
+            return View();
+        }
+        [HttpPost]
+        public IActionResult AddNewProduct(Product product, int userId)
+        {
+            productStorage.AddNewProduct(product, userId);
             return RedirectToAction("Products");
         }
     }

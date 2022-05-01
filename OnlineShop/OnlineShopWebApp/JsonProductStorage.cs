@@ -34,5 +34,20 @@ namespace OnlineShopWebApp
             var json = File.ReadAllText(nameSave);
             Products = JsonConvert.DeserializeObject<List<Product>>(json);
         }
+
+        public void DeleteProduct(Product product, int userId)
+        {
+
+        }
+
+        public void UpdateProduct(Product oldProduct, Product newProduct, int userId)
+        {
+
+        }
+
+        public void AddNewProduct(Product product, int userId)
+        {
+
+        }
     }
 }
