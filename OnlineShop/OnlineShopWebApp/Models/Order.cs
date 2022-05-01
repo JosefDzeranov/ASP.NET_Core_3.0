@@ -14,11 +14,7 @@ namespace OnlineShopWebApp.Models
 
         public string Email { get; set; }
 
-        public Order(Cart cart, string userId)
-        {
-            Cart = cart;
-            UserId = userId;
-        }
+     
     }
 
 }

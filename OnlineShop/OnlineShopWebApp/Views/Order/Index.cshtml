@@ -1,4 +1,4 @@
-﻿@model Cart
+﻿@model MakingOrder
 
 
 
@@ -20,7 +20,7 @@
         <th>Стоимость</th>
     </tr>
 
-    @foreach (var cartLine in Model.CartLines)
+    @foreach (var cartLine in Model.Cart.CartLines)
     {
         <tr>
             <td>@cartLine.Product.Name</td>
@@ -34,26 +34,48 @@
     <tr>
 
         <td colspan="2"><b>Сумма заказа:</b></td>
-        <td><b>@Model.CartCost</b></td>
+        <td><b>@Model.Cart.CartCost</b></td>
     </tr>
 </table>
 
 <form method="post">
-    <p>Ваше имя:</p>
-    <input type="text" name="name" required/>
-    <p>
-        Ваш адрес:
-    </p>
-    <input type="text" name="adress" required/>
+    <div>
+        <label asp-for="Name"></label><br />
+        <input asp-for="Name" />
+        <span asp-validation-for="Name"></span>
+    </div>
+    <div>
+        <label asp-for="Adress"></label><br />
+        <input asp-for="Adress" />
+        <span asp-validation-for="Adress"></span>
+    </div>
+    <div>
+        <label asp-for="Email"></label><br />
+        <input asp-for="Email" />
+        <span asp-validation-for="Email"></span>
+    </div>
 
-    <p>
-        Ваша электронная почта:
-    </p>
-    <input type="email" name="email" required/> <br />
+
+    @*<p>Ваше имя:</p>
+        <input type="text" name="name" required />
+        <p>
+            Ваш адрес:
+        </p>
+        <input type="text" name="adress" required />
+
+        <p>
+            Ваша электронная почта:
+        </p>
+        <input type="email" name="email" required /> <br />*@
+
     <br />
     <button class="btn btn-dark" type="submit" asp-controller="Order" asp-action="MakeOrder">заказать</button>
 
 </form>
+
+@section Scripts{
+    @await Html.PartialAsync("_ValidationScriptsPartial")
+}
 
 
 

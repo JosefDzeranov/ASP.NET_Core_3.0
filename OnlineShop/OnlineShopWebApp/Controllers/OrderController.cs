@@ -18,24 +18,33 @@ namespace OnlineShopWebApp.Controllers
         public IActionResult Index()
         {
             var cart = cartManager.TryGetCartByUserID(Constants.UserId);
+            var makingOrder = new MakingOrder(cart);
 
-            return View(cart);
+            return View(makingOrder);
         }
        
-        public IActionResult MakeOrder(string name, string adress, string email)
+        [HttpPost]
+        public IActionResult MakeOrder(Order order)
         {
-            var cart = cartManager.TryGetCartByUserID(Constants.UserId);
 
+            if (ModelState.IsValid)
+            {
+                var cart = cartManager.TryGetCartByUserID(Constants.UserId);
 
-            var order = new Order(cart, Constants.UserId);
-            order.Adress = adress;
-            order.Name = name;
-            order.Email = email;
+                order.Cart = cart;
+                order.UserId = Constants.UserId;
 
-            orderManager.SaveOrder(order);
-            cartManager.RemoveCartLines(cart);
+                orderManager.SaveOrder(order);
+                cartManager.RemoveCartLines(cart);
+                return View();
+            }
+            else
+            {
+                return RedirectToAction("Index");
+            }
+            
 
-            return View();
+           
         }
 
     }
