@@ -12,15 +12,26 @@ namespace OnlineShopWebApp
                new Product(3, "Bigburger", 200, "бургер с двойной говяжьей котлетой")
 
         };
+        
 
-        public List<Product> AllProducts()
-        {
-            return ProductList;
-        }
+      
 
         public Product FindProduct(int id)
         {
             return ProductList.Find(product => product.Id == id);
+        }
+
+        public void EditProduct(Product editedProduct)
+        {
+            foreach (var product in ProductList)
+            {
+                if (product.Id == editedProduct.Id)
+                {
+                    product.Name = editedProduct.Name;
+                    product.Description = editedProduct.Description;
+                    product.Cost = editedProduct.Cost;
+                }
+            }
         }
 
     }

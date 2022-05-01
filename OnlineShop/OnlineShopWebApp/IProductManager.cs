@@ -5,8 +5,10 @@ namespace OnlineShopWebApp
     public interface IProductManager
     {
         public List<Product> ProductList { get; set; }
-       
+     
         public Product FindProduct(int id);
+
+        public void EditProduct(Product product);
 
     }
 }
