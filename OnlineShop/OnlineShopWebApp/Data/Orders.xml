@@ -1,14 +1,48 @@
 <?xml version="1.0"?>
 <Order xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
-  <Id>b9d6a43d-90a5-49f4-837e-61530f1318ed</Id>
-  <Date>2022-04-29T13:25:17.572582+03:00</Date>
+  <Id>47170515-d877-4fd4-aaac-fb2397b2bbc4</Id>
+  <Date>2022-05-02T00:58:06.5919281+03:00</Date>
   <UserId>UserId</UserId>
   <Basket>
-    <Id>08f2f84e-70c1-4d02-a30a-7a695a95ce09</Id>
+    <Id>4c7ffe78-7d31-4fd5-8140-38ff8d6d57e3</Id>
     <UserId>UserId</UserId>
-    <Items>
+    <Items />
+  </Basket>
+  <Delivery>
+    <Address>
+      <ZipCode>234324</ZipCode>
+      <Country>ewrwer</Country>
+      <City>werwer</City>
+      <Street>werwe</Street>
+      <House>rwer</House>
+      <Apartment>wer</Apartment>
+    </Address>
+    <Phone>12312312312</Phone>
+    <Email>ewrwerw@sddsf</Email>
+  </Delivery>
+</Order>f</Description>
+        </Product>
+        <Quantity>1</Quantity>
+      </BasketItem>
+    </Items>
+  </Basket>
+  <Delivery>
+    <Address>
+      <ZipCode>234324</ZipCode>
+      <Country>ewrwer</Country>
+      <City>werwer</City>
+      <Street>werwe</Street>
+      <House>rwer</House>
+      <Apartment>wer</Apartment>
+    </Address>
+    <Phone>12312312312</Phone>
+    <Email>ewrwerw@sddsf</Email>
+  </Delivery>
+</Order>     </Product>
+        <Quantity>1</Quantity>
+      </BasketItem>
       <BasketItem>
-        <Id>9c187071-2b83-4805-b980-53d2cb6119a4</Id>
+        <Id>7b15336d-7a2f-4818-916a-9a0083b7db14</Id>
         <Product>
           <Id>921a9f51-6676-4b80-8e9a-3feb2c02275a</Id>
           <ImagePath>/img/abstraction.jpg</ImagePath>
@@ -24,46 +58,17 @@
   </Basket>
   <Delivery>
     <Address>
-      <ZipCode>zxzx</ZipCode>
-      <Country>zxz</Country>
-      <City>dasd</City>
-      <Street>asdas</Street>
-      <House>asd</House>
-      <Apartment>asd</Apartment>
+      <ZipCode>123456</ZipCode>
+      <Country>qwe</Country>
+      <City>qwer</City>
+      <Street>1212</Street>
+      <House>12</House>
+      <Apartment>12</Apartment>
     </Address>
-    <Phone>asd</Phone>
-    <Email>asd@sfd</Email>
+    <Phone>123123123</Phone>
+    <Email>123231@eqwe</Email>
   </Delivery>
-</Order></Order></Id>
-          <ImagePath>/img/landscape.jpg</ImagePath>
-          <Name>Landscape</Name>
-          <Cost>2000</Cost>
-          <Description>
-		  Photography,
-		  3247x2463px
-		  (27.5cm x 20.9cm 300dpi),
-		  745kB | jpg
-	  </Description>
-        </Product>
-        <Quantity>1</Quantity>
-      </BasketItem>
-      <BasketItem>
-        <Id>8bae7f85-4117-4b88-a523-df7e3e38c993</Id>
-        <Product>
-          <GuidId>3c433003-9efa-4ee9-b573-82dd536f1a33</GuidId>
-          <Id>4f70b2db-ac68-4d84-9a74-1b99479502d9</Id>
-          <ImagePath>/img/portret.jpg</ImagePath>
-          <Name>Portret</Name>
-          <Cost>3000</Cost>
-          <Description>
-		  Illustration,
-		  3757x2129px
-		  (31.8cm x 18cm 300dpi),
-		  1.4MB | jpg
-	  </Description>
-        </Product>
-        <Quantity>1</Quantity>
-      </BasketItem>
+</Order>asketItem>
     </Items>
   </Basket>
   <Delivery>

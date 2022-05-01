@@ -6,11 +6,11 @@ namespace OnlineShopWebApp.Models
     {
         public Address Address { get; set; }
 
-        [Required(ErrorMessage = "Enter your phone number.")]
+        [Required]
         public string Phone { get; set; }
 
-        [Required(ErrorMessage = "Enter your email.")]
-        [EmailAddress(ErrorMessage = "Enter a valid email.")]
+        [Required]
+        [EmailAddress]
         public string Email { get; set; }
 
         public Delivery() { } // Empty ctor for XML serializing.

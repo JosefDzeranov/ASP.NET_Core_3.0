@@ -4,11 +4,11 @@ namespace OnlineShopWebApp.Models
 {
     public class SignIn
     {
-        [Required(ErrorMessage = "Email is not specified.")]
-        [EmailAddress(ErrorMessage = "Enter a valid email.")]
+        [Required]
+        [EmailAddress]
         public string Email { get; set; }
 
-        [Required(ErrorMessage = "Enter a password.")]
+        [Required]
         public string Password { get; set; }
         public bool RememberMe { get; set; }
     }
