@@ -36,7 +36,7 @@ namespace OnlineShopWebApp.Controllers
 
         public IActionResult Products()
         {
-            var productList = productManager.productList;
+            var productList = productManager.ProductList;
             return View(productList);
         }
 
@@ -47,19 +47,9 @@ namespace OnlineShopWebApp.Controllers
         }
 
         [HttpPost]
-        public IActionResult SaveEditedProduct(int id, string name, string cost, string description)
+        public IActionResult SaveEditedProduct(Product product)
         {
-
-            foreach (var product in productManager.productList)
-            {
-                if (product.Id == id)
-                {
-                    product.Name = name;
-                    product.Cost = decimal.Parse(cost);
-                    product.Description = description;
-
-                }
-            }
+            productManager.EditProduct(product);
 
             return View();
         }
@@ -67,23 +57,20 @@ namespace OnlineShopWebApp.Controllers
         public IActionResult RemoveProduct(int id)
         {
             var product = productManager.FindProduct(id);
-            productManager.productList.Remove(product);
+            productManager.ProductList.Remove(product);
             return View(product);
         }
 
         public IActionResult AddNewProduct()
         {
-            
+
             return View();
         }
 
         [HttpPost]
-        public IActionResult SaveAddedProduct(string id, string name, string cost, string description)
+        public IActionResult SaveAddedProduct(Product product)
         {
-
-            var product = new Product(int.Parse(id), name, decimal.Parse(cost), description);
-            productManager.productList.Add(product);
-           
+            productManager.ProductList.Add(product);
 
             return View(product);
         }
