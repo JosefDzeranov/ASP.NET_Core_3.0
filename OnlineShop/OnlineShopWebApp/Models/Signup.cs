@@ -1,15 +1,17 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using OnlineShopWebApp.Models.Attributes;
 
 namespace OnlineShopWebApp.Models
 {
+    [NamePasswordEqual]
     public class SignUp
     {
         [Required]
-        [StringLength(25, MinimumLength = 2, ErrorMessage = "The name shouldn't be less than 2 and more than 25 characters.")]
+        [StringLength(25, MinimumLength = 2)]
         public string FirstName { get; set; }
 
         [Required]
-        [StringLength(25, MinimumLength = 2, ErrorMessage = "The name shouldn't be less than 2 and more than 25 characters.")]
+        [StringLength(25, MinimumLength = 2)]
         public string LastName { get; set; }
 
         [Required]

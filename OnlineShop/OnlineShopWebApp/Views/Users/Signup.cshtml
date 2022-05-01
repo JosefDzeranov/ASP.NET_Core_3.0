@@ -1,4 +1,5 @@
 ﻿@using OnlineShopWebApp.Models
+@using OnlineShopWebApp.Models.Attributes;
 
 @model SignUp
 
@@ -9,8 +10,8 @@
     <div class="row text-center">
         <div class="col-4 mx-auto">
             <h2>Sign up</h2>
-            <form method="post" asp-controller="Users" asp-action="Signup">
-                <div class="validation" asp-validation-summary="ModelOnly"></div>
+            <form asp-controller="Users" asp-action="Signup">
+                <div class="validation" asp-validation-summary="All"></div>
                 <div class="mb-3">
                     <input class="form-control" asp-for="FirstName" placeholder="First name">
                     <span asp-validation-for="FirstName"></span>
