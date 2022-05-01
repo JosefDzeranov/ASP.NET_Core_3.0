@@ -11,11 +11,13 @@ namespace OnlineShopWebApp.Controllers
     {
         private readonly IProductsRepository productsRepository;
         private readonly IOrdersRepository ordersRepository;
+        private readonly IRolesRepository rolesRepository;
 
-        public AdministrationController(IProductsRepository productsRepository, IOrdersRepository ordersRepository)
+        public AdministrationController(IProductsRepository productsRepository, IOrdersRepository ordersRepository, IRolesRepository rolesRepository)
         {
             this.productsRepository = productsRepository;
             this.ordersRepository = ordersRepository;
+            this.rolesRepository = rolesRepository;
         }
 
         public IActionResult Orders()
@@ -25,11 +27,6 @@ namespace OnlineShopWebApp.Controllers
         }
 
         public IActionResult Users()
-        {
-            return View();
-        }
-
-        public IActionResult Roles()
         {
             return View();
         }
@@ -92,6 +89,40 @@ namespace OnlineShopWebApp.Controllers
         {
             ordersRepository.UpdateState(orderId, state);
             return RedirectToAction("Orders");
+        }
+
+
+        public IActionResult Roles()
+        {
+            var roles = rolesRepository.GetAll();
+            return View(roles);
+        }
+        public IActionResult AddRole()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public IActionResult AddRole(Role role)
+        {
+            if (rolesRepository.TryGetByName(role.Name) != null)
+            {
+                ModelState.AddModelError("", "Такая роль уже существует");
+            }
+            if (ModelState.IsValid)
+            {
+                rolesRepository.Add(role);
+                return RedirectToAction("Roles");
+            }
+            else
+            {
+                return View(role);
+            }
+        }
+        public IActionResult DeleteRole(string roleName)
+        {
+            rolesRepository.Delete(roleName);
+            return RedirectToAction("Roles");
         }
     }
 }
