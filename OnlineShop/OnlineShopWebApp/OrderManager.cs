@@ -10,32 +10,45 @@ namespace OnlineShopWebApp
 
         string path = @"wwwroot\orders.json";
 
-        List<Order> ordersList = new List<Order>();
+        public List<Order> OrdersList { get; set; } = new List<Order>();
+
+
         public void SaveOrder(Order order)
         {
-            ordersList.Add(order);
+            OrdersList.Add(order);
 
-            var jsonData = JsonConvert.SerializeObject(ordersList);
+            //var jsonData = JsonConvert.SerializeObject(OrdersList);
 
-            using (StreamWriter sw = new StreamWriter(path, true, System.Text.Encoding.UTF8))
-            {
-                sw.WriteLine(jsonData);
-            }
+            //using (StreamWriter sw = new StreamWriter(path, true, System.Text.Encoding.UTF8))
+            //{
+            //    sw.WriteLine(jsonData);
+            //}
 
         }
 
 
         public Order TryGetOrderById(string userId)
         {
-            string data = string.Empty;
+            //string data = string.Empty;
 
-            using (StreamReader sr = new StreamReader(path))
-            {
-                 data = sr.ReadToEnd();
-            }
-            ordersList = JsonConvert.DeserializeObject<List<Order>>(data);
+            //using (StreamReader sr = new StreamReader(path))
+            //{
+            //     data = sr.ReadToEnd();
+            //}
+            //OrdersList = JsonConvert.DeserializeObject<List<Order>>(data);
 
-            return ordersList.Find(x => x.UserId == userId);
+            return OrdersList.Find(x => x.UserId == userId);
+        }
+
+        public List<Order> GetOrders()
+        {
+            //string data = string.Empty;
+            //using (StreamReader sr = new StreamReader(path))
+            //{
+            //    data = sr.ReadToEnd();
+            //}
+            //OrdersList = JsonConvert.DeserializeObject<List<Order>>(data);
+            return OrdersList;
         }
 
 

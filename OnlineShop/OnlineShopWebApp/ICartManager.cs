@@ -14,6 +14,7 @@ namespace OnlineShopWebApp
 
         void RemoveProductFromCart(string userId, int productId);
         void RemoveCartLines(Cart cart);
+        void Clear(string userId);
 
     }
 }

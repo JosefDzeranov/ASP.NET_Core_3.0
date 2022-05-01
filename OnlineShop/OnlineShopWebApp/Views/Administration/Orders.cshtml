@@ -1,4 +1,5 @@
-﻿@*<style>
+﻿@model List<Order>
+@*<style>
     table, th, td, caption, tr {
         border: 1px solid black;
     }
@@ -16,7 +17,7 @@
         <table>
             <tr>
                 <th>Список заказов</th>
-                
+
             </tr>
             <tr>
                 <th>N</th>
@@ -26,7 +27,33 @@
                 <th>Дата</th>
                 <th>Время</th>
             </tr>
-            <tr></tr>
+
+            @if (Model != null)
+            {
+                @for (int i = 0; i < Model.Count; i++)
+                {
+                    <tr>
+                        <td>@(i+1)</td>
+                        <td>@Model[i].Cart.CartCost</td>
+                        <td>@Model[i].Status</td>
+                        <td>@Model[i].Name</td>
+                        <td>@Model[i].Date.ToString("d")</td>
+                        
+
+
+                    </tr>
+                }
+
+
+
+
+
+            }
+
+
+
+
+
         </table>
     </div>
 </div>

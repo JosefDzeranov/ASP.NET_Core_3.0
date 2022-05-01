@@ -5,7 +5,7 @@ namespace OnlineShopWebApp.Controllers
 {
     public class OrderController : Controller
     {
-        IOrderManager orderManager;
+        private readonly IOrderManager orderManager;
         private readonly ICartManager cartManager;
 
 
@@ -19,6 +19,7 @@ namespace OnlineShopWebApp.Controllers
         {
             var cart = cartManager.TryGetCartByUserID(Constants.UserId);
             var order = new Order(cart);
+         
 
             return View(order);
         }
@@ -33,9 +34,12 @@ namespace OnlineShopWebApp.Controllers
 
                 order.Cart = cart;
                 order.UserId = Constants.UserId;
+                order.Date =  System.DateTime.Now;
 
                 orderManager.SaveOrder(order);
-                cartManager.RemoveCartLines(cart);
+                cartManager.Clear(Constants.UserId);
+              
+             
                 return View();
             }
             else

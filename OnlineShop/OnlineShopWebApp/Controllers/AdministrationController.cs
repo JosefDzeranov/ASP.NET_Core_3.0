@@ -6,10 +6,12 @@ namespace OnlineShopWebApp.Controllers
     public class AdministrationController : Controller
     {
         private readonly IProductManager productManager;
+        private readonly IOrderManager orderManager;
 
-        public AdministrationController(IProductManager productManager)
+        public AdministrationController(IProductManager productManager, IOrderManager orderManager)
         {
             this.productManager = productManager;
+            this.orderManager = orderManager;
         }
 
         public IActionResult Index()
@@ -20,8 +22,11 @@ namespace OnlineShopWebApp.Controllers
 
         public IActionResult Orders()
         {
-
-            return View();
+            var ordersList = orderManager.GetOrders();
+            
+            return View(ordersList);
+            
+           
         }
 
         public IActionResult Users()
