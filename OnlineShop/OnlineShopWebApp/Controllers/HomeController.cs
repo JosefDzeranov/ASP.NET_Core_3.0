@@ -27,9 +27,9 @@ namespace OnlineShopWebApp.Controllers
         {
             if (name != null)
             {
-                if (_productManager.productList.Find(x => x.Name.ToLower() == name.ToLower()) != null)
+                if (_productManager.ProductList.Find(x => x.Name.ToLower() == name.ToLower()) != null)
                 {
-                    var id = _productManager.productList.Find(x => x.Name.ToLower() == name.ToLower()).Id;
+                    var id = _productManager.ProductList.Find(x => x.Name.ToLower() == name.ToLower()).Id;
 
                     return Redirect($"/product/index/{id}");
 
