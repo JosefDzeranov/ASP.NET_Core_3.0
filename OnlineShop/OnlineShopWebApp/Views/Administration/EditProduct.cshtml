@@ -8,7 +8,24 @@
 
     <input type="hidden" value=@Model.Id name="Id" />
 
-    <p> Имя продукта:</p>
+    <div>
+        <label asp-for="Name"></label><br />
+        <input asp-for="Name" />
+        <span asp-validation-for="Name"></span>
+    </div>
+    <div>
+        <label asp-for="Cost"></label><br />
+        <input asp-for="Cost" />
+        <span asp-validation-for="Cost"></span>
+    </div>
+    <div>
+        <label asp-for="Description"></label><br />
+        <input asp-for="Description" />
+        <span asp-validation-for="Description"></span>
+    </div>
+
+
+    @*<p> Имя продукта:</p>
     <input type="text" name="Name" />
     <p>
         Цена:
@@ -18,7 +35,8 @@
     <p>
         Описание:
     </p>
-    <input type="text" name="Description" /> <br />
+    <input type="text" name="Description" /> <br />*@
+
     <br />
     <button class="btn btn-dark" type="submit" asp-controller="Administration" asp-action="SaveEditedProduct">сохранить изменения</button>
 

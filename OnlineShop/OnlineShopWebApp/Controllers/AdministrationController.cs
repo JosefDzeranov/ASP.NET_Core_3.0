@@ -49,10 +49,18 @@ namespace OnlineShopWebApp.Controllers
         [HttpPost]
         public IActionResult SaveEditedProduct(Product product)
         {
-           
+
+            if (ModelState.IsValid)
+            {
                 productManager.EditProduct(product);
 
                 return View();
+            }
+            else
+            {
+                return RedirectToAction("EditProduct");
+            }
+               
            
             
         }

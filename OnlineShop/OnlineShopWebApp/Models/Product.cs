@@ -1,14 +1,20 @@
-﻿namespace OnlineShopWebApp
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace OnlineShopWebApp
 {
     public class Product
     {
         public int Id { get; set; }
-        public string Name { get; set; }
-        public decimal Cost { get; set; }
-      //  public decimal TotalCost { get; set; }
-        public string Description { get; set; }
-        //  public int Number { get; set; }
 
+        [Required(ErrorMessage ="Не указано название")]
+        public string Name { get; set; }
+
+        [Required(ErrorMessage = "Не указана цена")]
+        public decimal Cost { get; set; }
+
+        [Required(ErrorMessage = "Не указано описание")]
+        public string Description { get; set; }
+        
         public Product(int id, string name, decimal cost, string description)
         {
             Id = id;
