@@ -18,7 +18,7 @@ namespace OnlineShopWebApp.Controllers
         public IActionResult Index()
         {
 
-            var products = _productManager.productList;
+            var products = _productManager. ProductList;
 
 
             return View(products);
@@ -31,7 +31,7 @@ namespace OnlineShopWebApp.Controllers
             var productByPartName = new List<Product>(); 
             if (name != null)
             {
-                productByPartName = _productManager.productList.FindAll(x => x.Name.ToLower().Contains(name.ToLower()));
+                productByPartName = _productManager.ProductList.FindAll(x => x.Name.ToLower().Contains(name.ToLower()));
                 return View(productByPartName);
 
             }
