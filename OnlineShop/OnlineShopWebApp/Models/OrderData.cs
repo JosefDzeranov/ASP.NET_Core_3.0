@@ -4,9 +4,9 @@ using System.Linq;
 
 namespace OnlineShopWebApp.Models
 {
-    public class MakingOrder
+    public class OrderData
     {
-        public Cart Cart { get; set; }
+         public  Cart Cart { get; set; }
 
         [Required(ErrorMessage ="Не указано имя") ]
         public string Name { get; set; }
@@ -17,10 +17,7 @@ namespace OnlineShopWebApp.Models
         [Required(ErrorMessage = "Не указан e-mail")]
         public string Email { get; set; }
 
-        public MakingOrder(Cart cart)
-        {
-            Cart = cart;
-        }
+      
 
     }
 
