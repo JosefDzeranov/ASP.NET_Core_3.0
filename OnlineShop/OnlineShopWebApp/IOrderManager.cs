@@ -1,4 +1,5 @@
 ﻿using OnlineShopWebApp.Models;
+using System;
 using System.Collections.Generic;
 
 namespace OnlineShopWebApp
@@ -9,5 +10,6 @@ namespace OnlineShopWebApp
         public List<Order> GetOrders();
         public void SaveOrder(Order order);
         public Order TryGetOrderById(string userId);
+        public Order TryGetOrderById(Guid id);
     }
 }

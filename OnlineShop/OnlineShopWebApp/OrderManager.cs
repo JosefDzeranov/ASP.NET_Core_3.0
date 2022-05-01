@@ -1,5 +1,6 @@
 using Newtonsoft.Json;
 using OnlineShopWebApp.Models;
+using System;
 using System.Collections.Generic;
 using System.IO;
 
@@ -38,6 +39,19 @@ namespace OnlineShopWebApp
             //OrdersList = JsonConvert.DeserializeObject<List<Order>>(data);
 
             return OrdersList.Find(x => x.UserId == userId);
+        }
+
+        public Order TryGetOrderById(Guid id)
+        {
+            //string data = string.Empty;
+
+            //using (StreamReader sr = new StreamReader(path))
+            //{
+            //     data = sr.ReadToEnd();
+            //}
+            //OrdersList = JsonConvert.DeserializeObject<List<Order>>(data);
+
+            return OrdersList.Find(x => x.Id == id);
         }
 
         public List<Order> GetOrders()

@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 using OnlineShopWebApp.Models;
+using System;
 
 namespace OnlineShopWebApp.Controllers
 {
@@ -23,10 +24,18 @@ namespace OnlineShopWebApp.Controllers
         public IActionResult Orders()
         {
             var ordersList = orderManager.GetOrders();
-            
+
             return View(ordersList);
-            
-           
+
+
+        }
+
+        public IActionResult EditOrder(Guid id)
+        {
+            var order = orderManager.TryGetOrderById(id);
+
+            return View(order);
+
         }
 
         public IActionResult Users()
@@ -65,9 +74,9 @@ namespace OnlineShopWebApp.Controllers
             {
                 return RedirectToAction("EditProduct");
             }
-               
-           
-            
+
+
+
         }
 
         public IActionResult RemoveProduct(int id)
@@ -96,7 +105,7 @@ namespace OnlineShopWebApp.Controllers
             {
                 return RedirectToAction("AddNewProduct");
             }
-            
+
         }
     }
 
