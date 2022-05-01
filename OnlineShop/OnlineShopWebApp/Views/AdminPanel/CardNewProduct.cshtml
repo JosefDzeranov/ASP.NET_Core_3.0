@@ -1,0 +1,72 @@
+﻿
+@{
+    ViewData["Title"] = "Редактирование товара";
+}
+
+
+<form method="post" asp-controller="AdminPanel" asp-action="CardNewProduct">
+    <div class="container">
+        <div class="row">
+            @await Html.PartialAsync("MenuAdminPanel")
+            <div class="col-10 container">
+                <div class="container">
+                    <h3 class="display-5 Title_sile text-center">Добавление нового товара</h3>
+
+                    <div class="card">
+                        <div class="form-group p-3">
+                            <label class="text-center">Шифр:</label>
+                            <input type="text" class="form-control" id="Input1" placeholder="Шифр" required=""/>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="form-group p-3">
+                            <label class="text-center">Описание:</label>
+                            <input type="text" class="form-control" id="Input2" placeholder="Описание" required=""/>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="form-group p-3">
+                            <label class="text-center">Изображение:</label> <br/>
+                            <input type="text" class="form-control" id="Input3" placeholder="Изображение" required=""/>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="form-group p-3">
+                            <label class="text-center">Цена:</label>
+                            <input type="text" class="form-control" id="Input4" placeholder="Цена" required=""/>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="form-group p-3">
+                            <label class="text-center">Длина:</label>
+                            <input type="text" class="form-control" id="Input5" placeholder="Длина" required=""/>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="form-group p-3">
+                            <label class="text-center">Ширина:</label>
+                            <input type="text" class="form-control" id="Input5" placeholder="Ширина" required=""/>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="form-group p-3">
+                            <label class="text-center">Площадь:</label>
+                            <input type="text" class="form-control" id="Input5" placeholder="Площадь" required=""/>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-3 p-3">
+                    <a class="btn btn-light text-center" asp-controller="AdminPanel" asp-action="AddNewProduct">Сохранить изменения</a>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+</form>
+
+
+
+
+
+
