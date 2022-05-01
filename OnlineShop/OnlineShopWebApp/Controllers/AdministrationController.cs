@@ -79,10 +79,10 @@ namespace OnlineShopWebApp.Controllers
         }
 
         [HttpPost]
-        public IActionResult SaveAddedProduct(string id, string name, string cost, string description)
+        public IActionResult SaveAddedProduct(Product product/*string id, string name, string cost, string description*/)
         {
 
-            var product = new Product(int.Parse(id), name, decimal.Parse(cost), description);
+          //  var product = new Product(int.Parse(id), name, decimal.Parse(cost), description);
             productManager.ProductList.Add(product);
            
 

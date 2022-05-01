@@ -16,7 +16,7 @@ namespace OnlineShopWebApp.Controllers
         public IActionResult Index()
         {
            
-            var products = _productManager.productList;
+            var products = _productManager.ProductList;
            
 
             return View(products);

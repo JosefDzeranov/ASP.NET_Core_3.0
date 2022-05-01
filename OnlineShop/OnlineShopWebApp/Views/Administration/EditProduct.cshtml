@@ -1,23 +1,24 @@
-﻿<form method="post">
-@model Product
-
-<h2>Редактирование продукта</h2>
+﻿@model Product
+<form method="post">
 
 
-   
-    <input type="hidden" value=@Model.Id name="id" />
+    <h2>Редактирование продукта</h2>
 
-<p> Имя продукта:</p>
-    <input type="text" name="Name"/>
+
+
+    <input type="hidden" value=@Model.Id name="Id" />
+
+    <p> Имя продукта:</p>
+    <input type="text" name="Name" />
     <p>
         Цена:
     </p>
-    <input type="text" name="Cost"/>
+    <input type="text" name="Cost" />
 
     <p>
         Описание:
     </p>
-    <input type="text" name="Description"/> <br />
+    <input type="text" name="Description" /> <br />
     <br />
     <button class="btn btn-dark" type="submit" asp-controller="Administration" asp-action="SaveEditedProduct">сохранить изменения</button>
 
