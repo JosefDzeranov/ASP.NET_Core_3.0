@@ -18,9 +18,9 @@ namespace OnlineShopWebApp.Controllers
         public IActionResult Index()
         {
             var cart = cartManager.TryGetCartByUserID(Constants.UserId);
-            var makingOrder = new MakingOrder(cart);
+            var order = new Order(cart);
 
-            return View(makingOrder);
+            return View(order);
         }
        
         [HttpPost]
