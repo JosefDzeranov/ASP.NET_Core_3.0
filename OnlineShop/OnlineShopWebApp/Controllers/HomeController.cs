@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using OnlineShopWebApp.Models;
+using System.Collections.Generic;
 
 namespace OnlineShopWebApp.Controllers
 {
@@ -21,6 +22,26 @@ namespace OnlineShopWebApp.Controllers
 
             return View(products);
         }
+
+        [HttpPost]
+        public IActionResult SearchByName(string name)
+        {
+
+            var productByPartName = new List<Product>();
+            if (name != null)
+            {
+                productByPartName = _productManager.ProductList.FindAll(x => x.Name.ToLower().Contains(name.ToLower()));
+                return View(productByPartName);
+
+            }
+            else
+            {
+                return RedirectToAction("Index");
+            }
+
+
+        }
+
 
     }
 }
