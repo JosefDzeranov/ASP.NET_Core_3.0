@@ -1,13 +1,82 @@
-﻿@{
+﻿@model List<Product>
+@{
     ViewData["Title"] = "Панель администратора";
 }
 
 <div class="container">
     <div class="row">
         @await Html.PartialAsync("MenuAdminPanel")
-        <div class="col">
+        <div class="col-10 container">
             <div class="container">
                 <h3 class="display-5 Title_sile text-center">Список продуктов</h3>
+                <div class="d-grid gap-2">
+                    <a class="text-nowrap mx-1 my-1"
+                       asp-area="" asp-controller="AdminPanel"
+                       asp-action="AddNewProduct"
+                       role="button">
+                        Добавить новый продукт
+                    </a>
+                </div>
+                <div class="table-responsive">
+                    <table class="table table-bordered caption-top">
+                        <thead>
+                        <tr>
+                            <th scope="col" class="align-top small">№</th>
+                            <th scope="col" class="align-top small">Название проекта</th>
+                            <th scope="col" class="align-top small">Изображение</th>
+                            <th scope="col" class="align-top small">Габариты (м)</th>
+                            <th scope="col" class="align-top small">Площадь (м2)</th>
+                            <th scope="col" class="align-top small">Стоймость (руб)</th>
+                            <th scope="col" class="align-top small"> </th>
+                            <th scope="col" class="align-top small"> </th>
+                        </tr>
+                        </thead>
+                        @if (Model.Count != 0)
+                        {
+                            <tbody>
+                            @for (int i = 0; i < Model.Count; i++)
+                            {
+                                <tr>
+                                    <th class="small" scope="row">@(i + 1)</th>
+                                    <td class="small">@Model[i].Name. @Model[i].Description</td>
+                                    <td class="small"> <img class="card-img-top " src="/image/@Model[i].Images[0]" width="200"/></td>
+                                    <td class="small">@Model[i].Length х @Model[i].Width</td>
+                                    <td class="small">@Model[i].Square</td>
+                                    <td class="small">@Model[i].Cost</td>
+                                    <td class="small">
+                                        <div class="d-grid gap-2">
+                                            <a class="text-nowrap mx-1 my-1"
+                                               asp-area="" asp-controller="AdminPanel"
+                                               asp-action="UpdateProduct"
+                                               asp-route-productId="@Model[i].Id"
+                                               role="button">
+                                                Редактировать
+                                            </a>
+                                        </div>
+                                    </td>
+                                    <td class="small">
+                                        <div class="d-grid gap-2">
+                                            <a class="text-nowrap mx-1 my-1"
+                                               asp-area="" asp-controller="AdminPanel"
+                                               asp-action="DeleteProduct"
+                                               asp-route-productId="@Model[i].Id"
+                                               role="button">
+                                                Удалить
+                                            </a>
+                                        </div>
+                                    </td>
+                                </tr>
+
+                            }
+                            </tbody>
+                        }
+                        else
+                        {
+                            <td colspan="9">Проекты отсутствуют</td>
+                        }
+
+                    </table>
+                </div>
             </div>
         </div>
     </div>

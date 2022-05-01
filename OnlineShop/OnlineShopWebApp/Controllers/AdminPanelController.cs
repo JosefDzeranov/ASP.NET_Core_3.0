@@ -6,6 +6,11 @@ namespace OOnlineShopWebApp.Controllers
 
     public class AdminPanelController : Controller
     {
+        private readonly IProductStorage productStorage;
+        public AdminPanelController(IProductStorage productStorage)
+        {
+            this.productStorage = productStorage;
+        }
         public IActionResult Index(int personId)
         {
             return View();
@@ -24,7 +29,21 @@ namespace OOnlineShopWebApp.Controllers
         }
         public IActionResult Products(int personId)
         {
-            return View();
+            var products = productStorage.Products;
+            return View(products);
+        }
+        public IActionResult DeleteProduct(int productId, int userId)
+        {
+            return RedirectToAction("Products");
+        }
+        public IActionResult UpdateProduct(int productId, int userId)
+        {
+            return RedirectToAction("Products");
+        }
+
+        public IActionResult AddNewProduct(int userId)
+        {
+            return RedirectToAction("Products");
         }
     }
 }
