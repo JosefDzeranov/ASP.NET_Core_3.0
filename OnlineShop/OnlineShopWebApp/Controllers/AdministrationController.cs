@@ -81,9 +81,17 @@ namespace OnlineShopWebApp.Controllers
         [HttpPost]
         public IActionResult SaveAddedProduct(Product product)
         {
-            productManager.ProductList.Add(product);
+            if (ModelState.IsValid)
+            {
+                productManager.ProductList.Add(product);
 
-            return View(product);
+                return View(product);
+            }
+            else
+            {
+                return RedirectToAction("AddNewProduct");
+            }
+            
         }
     }
 
