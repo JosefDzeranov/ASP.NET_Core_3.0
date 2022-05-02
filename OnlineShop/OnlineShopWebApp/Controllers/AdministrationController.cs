@@ -18,7 +18,7 @@ namespace OnlineShopWebApp.Controllers
         public IActionResult Index()
         {
 
-            return View("Orders");
+            return RedirectToAction("Orders");
         }
 
         public IActionResult Orders()
