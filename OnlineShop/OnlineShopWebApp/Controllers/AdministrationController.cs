@@ -77,6 +77,13 @@ namespace OnlineShopWebApp.Controllers
             return RedirectToAction("Roles");
         }
 
+        public IActionResult RemoveRole(string name)
+        {
+            rolesManager.RemoveRole(name);
+
+            return RedirectToAction("Roles");
+        }
+
         public IActionResult Products()
         {
             var productList = productManager.ProductList;
