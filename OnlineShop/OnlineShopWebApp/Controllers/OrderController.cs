@@ -37,7 +37,8 @@ namespace OnlineShopWebApp.Controllers
               
 
                 orderManager.SaveOrder(order);
-                cartManager.Clear(Constants.UserId);
+              //  cartManager.Clear(Constants.UserId);
+                cartManager.RemoveCartLines(cart);
                 return View();
             }
             else
