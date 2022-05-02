@@ -5,6 +5,11 @@ namespace OnlineShopWebApp.Controllers
 {
     public class UsersController : Controller
     {
+        private readonly IUserStorage _userStorage;
+        public UsersController(IUserStorage userStorage)
+        {
+            _userStorage = userStorage;
+        }
         public IActionResult Signin()
         {
             return View();
@@ -13,7 +18,12 @@ namespace OnlineShopWebApp.Controllers
         [HttpPost]
         public IActionResult Signin(SignIn signin)
         {
-            return RedirectToAction("Index", "Home");
+            if(ModelState.IsValid)
+            {
+                _userStorage.AuthorizeUser(signin);
+                return RedirectToAction("Index", "Home");
+            }
+            return View();
         }
 
         public IActionResult Signup()
@@ -24,7 +34,12 @@ namespace OnlineShopWebApp.Controllers
         [HttpPost]
         public IActionResult Signup(SignUp signup)
         {
-            return RedirectToAction("Index", "Home");
+            if (ModelState.IsValid)
+            {
+                _userStorage.CreateUser(signup);
+                return RedirectToAction("Index", "Home");
+            }
+            return View();
         }
     }
 }

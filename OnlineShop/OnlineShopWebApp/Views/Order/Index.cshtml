@@ -1,6 +1,6 @@
-﻿@using OnlineShopWebApp
-@using OnlineShopWebApp.Models
-@model Basket
+﻿@using OnlineShopWebApp.Models
+
+@model OrderForm
 
 @{
     ViewData["Title"] = "Order";
@@ -11,53 +11,53 @@
     <div class="row">
         <div class="col-3">
             <h5>Your order:</h5>
-            @foreach (var item in Model.Items)
+            @foreach (var item in @Model.Basket.Items)
             {
                 <p>@item.Product.Name (@item.Quantity) - $@item.Cost</p>
             }
-            <h6>Total: $@Model.TotalCost</h6>
+            <h6>Total: $@Model.Basket.TotalCost</h6>
         </div>
-        <form method="post">
-            <div class="col-8">
-                <h5>Input your delivery details:</h5>
-                <p>Address:</p>
-                <label>ZipCode</label>
-                <div>
-                    <input type="text" name="delivery.Address.ZipCode" />
-                </div>
-                <label>Country:</label>
-                <div>
-                    <input type="text" name="delivery.Address.Country" />
-                </div>
-                <label>City:</label>
-                <div>
-                    <input type="text" name="delivery.Address.City" />
-                </div>
-                <label>Street:</label>
-                <div>
-                    <input type="text" name="delivery.Address.Street" />
-                </div>
-                <label>House:</label>
-                <div>
-                    <input type="text" name="delivery.Address.House" />
-                </div><label>Apartment:</label>
-                <div>
-                    <input type="text" name="delivery.Address.Apartment" />
-                </div>
-                <label>Phone:</label>
-                <div>
-                    <input type="text" name="delivery.Phone" />
-                </div>
-                <label>Email:</label>
-                <div>
-                    <input type="text" name="delivery.Email" />
-                </div>
-                <div>
-                    <button class="btn btn-dark btn-sm text-nowrap mt-3" type="submit" asp-controller="Order" asp-action="Buy">Buy</button>
-                </div>
+        <form asp-action="Buy" asp-controller="Order">
+            <div class="validation" asp-validation-summary="All"></div>
+            <h5>Input your delivery details:</h5>
+            <p>Address:</p>
+            <div class="mb-3">
+                <input class="form-control form-control-sm" asp-for="Delivery.Address.ZipCode" placeholder="Zip Code" />
+                <span asp-validation-for="Delivery.Address.ZipCode"></span>
+            </div>
+            <div class="mb-3">
+                <input class="form-control form-control-sm" asp-for="Delivery.Address.Country" placeholder="Country" />
+                <span asp-validation-for="Delivery.Address.Country"></span>
+            </div>
+            <div class="mb-3">
+                <input class="form-control form-control-sm" asp-for="Delivery.Address.City" placeholder="City" />
+                <span asp-validation-for="Delivery.Address.City"></span>
+            </div>
+            <div class="mb-3">
+                <input class="form-control form-control-sm" asp-for="Delivery.Address.Street" placeholder="Street" />
+                <span asp-validation-for="Delivery.Address.Street"></span>
+            </div>
+            <div class="mb-3">
+                <input class="form-control form-control-sm" asp-for="Delivery.Address.House" placeholder="House" />
+                <span asp-validation-for="Delivery.Address.House"></span>
+            </div>
+            <div class="mb-3">
+                <input class="form-control form-control-sm" asp-for="Delivery.Address.Apartment" placeholder="Apartment" />
+                <span asp-validation-for="Delivery.Address.Apartment"></span>
+            </div>
+            <p>Contacts:</p>
+            <div class="mb-3">
+                <input class="form-control form-control-sm" type="tel" asp-for="Delivery.Phone" placeholder="Phone" />
+                <span asp-validation-for="Delivery.Phone"></span>
+            </div>
+            <div class="mb-3">
+                <input class="form-control form-control-sm" type="email" asp-for="Delivery.Email" placeholder="Email" />
+                <span asp-validation-for="Delivery.Email"></span>
+            </div>
+            <div class="mb-3">
+                <button class="btn btn-dark btn-sm text-nowrap mt-3" type="submit" asp-controller="Order" asp-action="Buy">Buy</button>
             </div>
         </form>
-
     </div>
     <div class="row">
         <div class="col-12 text-center">
@@ -65,5 +65,3 @@
         </div>
     </div>
 </div>
-
-
