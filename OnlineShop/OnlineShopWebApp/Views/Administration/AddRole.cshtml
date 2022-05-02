@@ -1,8 +1,16 @@
-﻿<form method="post">
+﻿@model Role
+<form method="post">
     <h2>Добавление роли</h2>
     <p> Введите название роли: </p><br />
-    <input type="text" name="Name" required />
+
+    <div class="text-danger font-weight-bold" asp-validation-summary="All"></div>
+
+
+    <input class="form-control"name="Name" required />
+
+
+
     <br />
-    <button class="btn btn-dark" type="submit" asp-controller="Administration" asp-action="SaveAddedRole">Добавить роль</button>
+    <button class="btn btn-dark" type="submit" asp-controller="Administration" asp-action="AddRole">Добавить роль</button>
 
 </form>
