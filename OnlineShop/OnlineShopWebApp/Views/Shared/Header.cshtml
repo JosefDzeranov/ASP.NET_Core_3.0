@@ -1,4 +1,5 @@
-﻿<header>
+﻿<link rel="stylesheet" href="/css/font-glyphicons.css">
+<header>
     <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
         <div class="container">
             <a class="btn btn-link" asp-area="" asp-controller="Login" asp-action="Index"><img src="/image/account.svg" width="20" height="20"></a>
@@ -6,7 +7,14 @@
                 <img src="/image/icon_basket.svg" width="20" height="20">
                 @await Component.InvokeAsync("Cart")
             </a>
-            <a class="navbar-brand" href="#"><img src="/image/search_box.svg" height="20"></a>
+            <div class="input-group col-2 input-group-sm small ">
+                <div class="input-group-prepend">
+                    <button class="btn btn-outline-secondary " type="button" aria-label="search">
+                        <img src="/image/лупа 1.svg" width="14" height="14" />
+                    </button>
+                </div>
+                <input type="text" class="form-control rounded-right" placeholder="Поиск" aria-describedby="inputGroupPrepend3" required>
+            </div>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                     aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
