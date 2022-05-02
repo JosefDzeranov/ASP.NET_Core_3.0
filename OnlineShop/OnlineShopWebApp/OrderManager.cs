@@ -11,7 +11,7 @@ namespace OnlineShopWebApp
 
         string path = @"wwwroot\orders.json";
 
-        public List<Order> OrdersList { get; set; } = new List<Order>();
+        private List<Order> OrdersList = new List<Order>();
 
 
         public void SaveOrder(Order order)
@@ -76,9 +76,8 @@ namespace OnlineShopWebApp
                 order.Status = status;
                 SaveOrder(order);
 
-                
             }
-           
+
         }
     }
 }
