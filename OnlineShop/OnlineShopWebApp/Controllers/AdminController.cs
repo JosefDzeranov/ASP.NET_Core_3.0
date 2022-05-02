@@ -7,7 +7,10 @@ namespace OnlineShopWebApp.Controllers
     public class AdminController : Controller
     {
         private readonly IProductDataSource productDataSource;
-
+        /// <summary>
+        /// sdfskjldfjksljlfasjdf
+        /// </summary>
+        /// <param name="productDataSource"></param>
         public AdminController(IProductDataSource productDataSource)
         {
             this.productDataSource = productDataSource;
