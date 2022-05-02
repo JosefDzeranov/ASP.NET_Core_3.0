@@ -1,4 +1,5 @@
-﻿namespace OnlineShopWebApp.Models
+﻿using System.ComponentModel.DataAnnotations;
+namespace OnlineShopWebApp.Models
 {
     public class Product
     {
@@ -6,10 +7,14 @@
 
         public int Id { get; set; }
 
+        [Required(ErrorMessage ="Не указано имя")]
+        [StringLength(50, MinimumLength=4, ErrorMessage ="Название продукта должно быть от 4 до 50 символов")]
         public string Name { get; set; }
 
+        [Required(ErrorMessage = "Не указана цена продукта")]
         public decimal Cost { get; set; }  
         
+        [Required(ErrorMessage ="Описание продукта не может быть пустым")]
         public string Description { get; set; }
 
         public string ImagePath { get; set; }

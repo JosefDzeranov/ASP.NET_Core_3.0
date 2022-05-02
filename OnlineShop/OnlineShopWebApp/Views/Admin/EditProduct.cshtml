@@ -4,12 +4,23 @@
 <div class="row">
 	@await Html.PartialAsync("AdminMenu")
 
+
 	<div class="col-9">
 		<h3>Редактировать информацию о продукте</h3>
+
+		<div class="validation" asp-validation-summary="All"></div>
+
 		<input type="hidden" asp-for="Id"/>
-		<input type="text" asp-for="Name" /><br />
-		<input type="text" asp-for="Cost"/><br />
-		<input type="text" asp-for="Description"/><br />
+
+		<input type="text" asp-for="Name"/>
+		<span asp-validation-for="Name"></span><br />
+
+		<input type="number" asp-for="Cost"/>
+		<span asp-validation-for="Cost"></span><br />
+
+		<input type="text" asp-for="Description"/>
+		<span asp-validation-for="Description"></span><br />
+
 		<input type="submit" value="Сохранить изменения" class ="btn btn-outline-success" role="button"  />
 	</div>
 </div>
