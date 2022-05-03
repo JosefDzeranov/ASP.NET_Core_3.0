@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using OnlineShopWebApp.Services;
 using OnlineShopWebApp.Models;
+using System.Collections.Generic;
 
 namespace OnlineShopWebApp.Controllers
 {
@@ -21,9 +22,9 @@ namespace OnlineShopWebApp.Controllers
             return View();
         }
 
-        [HttpPost]
         public IActionResult Buy(Order order)
         {
+            order.CartItems =  new Dictionary<Product, int>(cartRepository.CartItems);
             ordersRepository.Add(order);
             cartRepository.RemoveAll();
             return View();

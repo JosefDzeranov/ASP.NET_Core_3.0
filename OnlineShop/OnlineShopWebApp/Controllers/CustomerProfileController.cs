@@ -22,7 +22,13 @@ namespace OnlineShopWebApp.Controllers
         {
             if (ModelState.IsValid)
             {
-              return Content($"{customer.Name}-{customer.Surname}-{customer.Email}-{customer.Phone}-{customer.Adress}");
+                var order = new Order();
+                order.Name = customer.Name;
+                order.Phone = customer.Phone;
+                order.Email = customer.Email;
+                order.Address = customer.Adress;
+
+                return RedirectToAction("Buy", "OrderComplete", order);
             }
 
             return View(customer);

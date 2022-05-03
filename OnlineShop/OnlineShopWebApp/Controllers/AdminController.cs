@@ -6,15 +6,19 @@ namespace OnlineShopWebApp.Controllers
 {
     public class AdminController : Controller
     {
-        private readonly IProductDataSource productDataSource;
+        private readonly IProductDataSource productDataSource; 
+        private readonly IOrdersRepository ordersRepository;
 
-        public AdminController(IProductDataSource productDataSource)
+        public AdminController(IProductDataSource productDataSource, IOrdersRepository ordersRepository)
         {
             this.productDataSource = productDataSource;
+            this.ordersRepository = ordersRepository;
         }
+
         public IActionResult Orders()
         {
-            return View();
+            var orders = ordersRepository.GetAll();
+            return View(orders);
         }
 
         public IActionResult Users()
@@ -74,6 +78,18 @@ namespace OnlineShopWebApp.Controllers
                 return RedirectToAction("Products");
             }
             return View(product);
+        }
+
+        public IActionResult OrderDetails(int orderId)
+        {
+            var order = ordersRepository.TryGetByUserId(orderId);
+            return View(order);
+        }
+
+        public IActionResult UpdateOrderStatus (int orderId, OrderStatus status)
+        {
+            ordersRepository.UpdateStatus(orderId, status);
+            return RedirectToAction("Orders"); 
         }
     }
 }
