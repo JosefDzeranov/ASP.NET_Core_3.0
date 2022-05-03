@@ -1,13 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
-using OnlineShopWebApp.Models;
-using System;
-using System.Collections.Generic;
-using System.Diagnostics;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Xml.Linq;
 
 namespace OnlineShopWebApp.Controllers
 {
@@ -24,13 +16,6 @@ namespace OnlineShopWebApp.Controllers
         {
             var products = _productBase.AllProducts().FirstOrDefault(p => p.Id == id);
             return View(products);
-        }
-
-        [HttpPost]
-        public IActionResult Add(Product product)
-        {
-            _productBase.Add(product);
-            return RedirectToAction("Products", "Admin");
         }
 
         public IActionResult Privacy()

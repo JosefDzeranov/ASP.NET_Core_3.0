@@ -5,7 +5,7 @@ using System.ComponentModel.DataAnnotations;
 namespace OnlineShopWebApp.Models
 {
     [NamePassword]
-    [LengthName]
+    [RegistrLengthName]
     public class Registration
     {
         [Required(ErrorMessage = "Введите логин")]

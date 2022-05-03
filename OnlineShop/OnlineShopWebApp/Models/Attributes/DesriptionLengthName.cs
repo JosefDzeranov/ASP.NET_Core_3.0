@@ -1,17 +1,16 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-
 namespace OnlineShopWebApp.Models.Attributes
 {
-    public class LengthName : ValidationAttribute
+    public class DesriptionLengthName : ValidationAttribute
     {
         public override bool IsValid(object value)
         {
-            Registration data = (Registration)value;
+            Product data = (Product)value;
 
-            if (data.Name.Length < 4)
+            if (data.Description.Length < 4)
             {
-                ErrorMessage = "Имя должно быть не короче 4-х символов";
+                ErrorMessage = "Описание слишком короткое";
                 return false;
             }
             return true;

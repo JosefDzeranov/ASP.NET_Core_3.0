@@ -1,26 +1,37 @@
-﻿@model Product
-<form method="post">
-    <div class="container align-content-center">
-        <div class="row text-center">
-            <div class="col-4 mx-auto">
-                <h2>Введите данные продукта</h2>
+﻿@using OnlineShopWebApp.Models
 
-                <div class="mb-3">
+@model Product
+
+@{
+    ViewData["Title"] = "Добавление нового продукта";
+}
+
+<div class="validation" asp-validation-summary="ModelOnly"></div>
+
+<div class="container align-content-center">
+    <div class="row text-center">
+        <div class="col-4 mx-auto">
+                <h2>Введите данные продукта</h2>
+                <div>
                     <input class="form-control" rows="1" name="id" hidden value="@Model.Id">
                 </div>
+            <form asp-action="EditProduct" asp-controller="Admin">
                 <div class="mb-3">
-                    <input class="form-control" type="text" name="Name" placeholder="Введите новое название продукта" value = "@Model.Name">
+                    <input class="form-control" asp-for="Name" placeholder="Введите новое название продукта" value="@Model.Name">
+                    <span asp-validation-for="Name"></span>
                 </div>
                 <div class="mb-3">
-                    <input class="form-control" type="text" name="Cost" placeholder="Введите новую стоимость продукта" value = "@Model.Cost">
+                    <input class="form-control" asp-for="Cost" placeholder="Введите новую стоимость продукта" value="@Model.Cost">
+                    <span asp-validation-for="Cost"></span>
                 </div>
                 <div class="mb-3">
-                    <input class="form-control" type="text" name="Description" placeholder="Введите новое описание продукта" value = "@Model.Description">
+                    <input class="form-control" asp-for="Description" placeholder="Введите новое описание продукта" value="@Model.Description">
+                    <span asp-validation-for="Description"></span>
                 </div>
                 <div class="mb-3">
                     <button type="submit" class="btn btn-outline-dark" asp-controller="Admin" asp-action="EditProduct">Добавить отредактированный продукт</button>
                 </div>
-            </div>
+            </form>
         </div>
     </div>
-</form>
+</div>

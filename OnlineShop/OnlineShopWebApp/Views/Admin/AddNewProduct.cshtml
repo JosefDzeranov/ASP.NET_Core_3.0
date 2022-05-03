@@ -1,21 +1,33 @@
-﻿<form method="post">
-    <div class="container align-content-center">
-        <div class="row text-center">
-            <div class="col-4 mx-auto">
-                <h2>Введите данные продукта</h2>
+﻿@using OnlineShopWebApp.Models
+
+@model Product
+
+@{
+    ViewData["Title"] = "Добавление нового продукта";
+}
+
+<div class="validation" asp-validation-summary="ModelOnly"></div>
+<div class="container align-content-center">
+    <div class="row text-center">
+        <div class="col-4 mx-auto">
+            <h2>Введите данные продукта</h2>
+            <form asp-action="AddNewProduct" asp-controller="Admin">
                 <div class="mb-3">
-                    <input class="form-control" type="text" name="name" placeholder="Введите название продукта">
+                    <input class="form-control" asp-for="Name" placeholder="Введите название продукта">
+                    <span asp-validation-for="Name"></span>
                 </div>
                 <div class="mb-3">
-                    <input class="form-control" type="text" name="cost" placeholder="Введите стоимость продукта">
+                    <input class="form-control" asp-for="Cost" placeholder="Введите название продукта">
+                    <span asp-validation-for="Cost"></span>
                 </div>
                 <div class="mb-3">
-                    <input class="form-control" type="text" name="Description" placeholder="Введите описание продукта">
+                    <input class="form-control" asp-for="Description" placeholder="Введите описание продукта">
+                    <span asp-validation-for="Description"></span>
                 </div>
                 <div class="mb-3">
-                    <button type="submit" class="btn btn-outline-dark" asp-controller="Product" asp-action="Add">Добавить новый продукт</button>
+                    <button type="submit" class="btn btn-outline-dark" asp-controller="Admin" asp-action="AddNewProduct">Добавить новый продукт</button>
                 </div>
-            </div>
+            </form>
         </div>
     </div>
-</form>
+</div>
