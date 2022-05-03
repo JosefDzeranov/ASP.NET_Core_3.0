@@ -1,25 +1,35 @@
-﻿@{
+﻿@using OnlineShopWebApp.Models
+@using OnlineShopWebApp.Models.Attributes;
+
+@model Product
+
+@{
     ViewData["Title"] = "Add product";
 }
 <div class="container align-content-center">
     <div class="row">
         <div class="col-2">
-            @await Html.PartialAsync("AdminMenuLeft") 
+            @await Html.PartialAsync("AdminMenuLeft")
         </div>
         <div class="col-10 mx-auto">
             <h2>Add product</h2>
-            <form method="post">
+            <form asp-action="Add" asp-controller="Admin">
+                <div class="validation" asp-validation-summary="All"></div>
                 <div class="mb-3">
-                    <input class="form-control" type="text" name="imagepath" placeholder="Use /img/test.jpg as Image path to add an image"/>
+                    <input class="form-control" asp-for="ImagePath" placeholder="Use /img/test.jpg as Image path to add an image" />
+                    <span asp-validation-for="ImagePath"></span>
                 </div>
                 <div class="mb-3">
-                    <input class="form-control" type="text" name="name" placeholder="Name">
+                    <input class="form-control" asp-for="Name" placeholder="Name" />
+                    <span asp-validation-for="Name"></span>
                 </div>
                 <div class="mb-3">
-                    <input class="form-control" type="number" name="cost" placeholder="Cost">
+                    <input class="form-control" type="number" asp-for="Cost" placeholder="Cost" />
+                    <span asp-validation-for="Cost"></span>
                 </div>
                 <div class="mb-3">
-                    <textarea class="form-control" rows="5" name="description" placeholder="Description"></textarea>
+                    <textarea class="form-control" rows="5" asp-for="Description" placeholder="Description"></textarea>
+                    <span asp-validation-for="Description"></span>
                 </div>
                 <div class="mb-3">
                     <button type="submit" class="btn btn-outline-dark btn-sm active" asp-controller="Admin" asp-action="Add">Add</button>

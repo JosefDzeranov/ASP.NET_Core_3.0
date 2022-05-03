@@ -40,23 +40,31 @@ namespace OnlineShopWebApp.Controllers
         [HttpPost]
         public IActionResult Add(Product product)
         {
-            _productStorage.AddProduct(product);
-            return RedirectToAction("Products");
+            if (ModelState.IsValid)
+            {
+                _productStorage.AddProduct(product);
+                return RedirectToAction("Products");
+            }
+            return View();
         }
-        
+
         public IActionResult Edit(Guid id)
         {
             var product = _productStorage.TryGetProduct(id);
             return View(product);
         }
-        
+
         [HttpPost]
         public IActionResult Save(Product product)
         {
-            _productStorage.EditProduct(product);
-            return RedirectToAction("Products");
+            if (ModelState.IsValid)
+            {
+                _productStorage.EditProduct(product);
+                return RedirectToAction("Products");
+            }
+            return View();
         }
- 
+
         public IActionResult Remove(Guid id)
         {
             _productStorage.RemoveProduct(id);
