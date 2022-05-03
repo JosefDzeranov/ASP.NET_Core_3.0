@@ -1,9 +1,12 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
+using Microsoft.AspNetCore.Localization;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Options;
+using System.Globalization;
 
 namespace OnlineShopWebApp
 {
@@ -26,6 +29,17 @@ namespace OnlineShopWebApp
             services.AddSingleton<ICompareStorage, CompareStorage>();
             services.AddSingleton<IFavoritesStorage, FavoritesStorage>();
             services.AddSingleton<IUserStorage, UserStorage>();
+
+            services.Configure<RequestLocalizationOptions>(options =>
+            {
+                var supportedCultures = new[]
+                {
+                    new CultureInfo("en-US")
+                };
+                options.DefaultRequestCulture = new RequestCulture("en-US");
+                options.SupportedCultures = supportedCultures;
+                options.SupportedUICultures = supportedCultures;
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -47,6 +61,9 @@ namespace OnlineShopWebApp
             app.UseRouting();
 
             app.UseAuthorization();
+
+            var localizationOptions = app.ApplicationServices.GetService<IOptions<RequestLocalizationOptions>>().Value;
+            app.UseRequestLocalization(localizationOptions);
 
             app.UseEndpoints(endpoints =>
             {
