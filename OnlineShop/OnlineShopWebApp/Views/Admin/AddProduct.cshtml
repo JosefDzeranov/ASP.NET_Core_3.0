@@ -1,0 +1,28 @@
+﻿@model Product
+
+<form method="post">
+    <div class="validation" asp-validation-summary="All"></div>
+
+    <div class="form-group">
+        <label asp-for="Name">Name</label>
+        <input type="text" asp-for="Name" class="form-control" placeholder="Name" />
+        <span asp-validation-for="Name"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Cost">Password</label>
+        <input type="number" asp-for="Cost" class="form-control" placeholder="Cost" />
+        <span asp-validation-for="Cost"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Description">Description</label>
+        <input type="text" asp-for="Description" class="form-control" placeholder="Description" />
+        <span asp-validation-for="Description"></span>
+    </div>
+
+    <br />
+    <div>
+        <button class="btn btn-outline-success btn-sm" type="submit" asp-controller="Admin" asp-action="AddProduct">Add Product</button>
+    </div>
+</form>
