@@ -14,14 +14,19 @@ namespace OnlineShopWebApp.Controllers
         private readonly ICartBase _cartBase;
         private readonly IUserBase _userBase;
 
-
-
-
         public OrderController(IOrderBase orderStorage, ICartBase cartBase, IUserBase userBase)
         {
             _orderBase = orderStorage;
             _cartBase = cartBase;
             _userBase = userBase;
+        }
+
+        private void AddNewOrder(DeliveryInfo deliveryInfo)
+        {
+            var existingUser = _userBase.AllUsers().First();
+            var cart = _cartBase.TryGetByUserId(existingUser.Id);
+            var order = new Order(cart, deliveryInfo);
+            _orderBase.Add(order);
         }
 
         public IActionResult Index()
@@ -32,12 +37,19 @@ namespace OnlineShopWebApp.Controllers
         [HttpPost]
         public IActionResult Buy(DeliveryInfo deliveryInfo)
         {
-            var existingUser = _userBase.AllUsers().First();
-            var cart = _cartBase.TryGetByUserId(existingUser.Id);
-            var order = new Order(cart, deliveryInfo);
-            _orderBase.Add(order);
-            _cartBase.Delete(existingUser.Id);
-            return View();
+            if (ModelState.IsValid)
+            {
+                AddNewOrder(deliveryInfo);
+
+                var existingUser = _userBase.AllUsers().First();
+                _cartBase.Delete(existingUser.Id);
+                return View();
+            }
+            else
+            {
+                return View("Index");
+            }
+            
 
         }
 

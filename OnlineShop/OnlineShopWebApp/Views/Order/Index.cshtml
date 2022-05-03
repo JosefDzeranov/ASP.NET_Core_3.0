@@ -1,4 +1,4 @@
-﻿<form method="post">
+﻿@*<form method="post">
     <div class="row text-center">
         <div class="col text-md-center">
 
@@ -19,6 +19,38 @@
 
             <br />
             <button class="btn btn-success btn-sm" type="submit" asp-controller="Order" asp-action="Buy">Завершить оформление</button>
+        </div>
+    </div>
+</form>*@
+
+@using OnlineShopWebApp.Models
+
+@model DeliveryInfo
+@{
+    ViewData["Title"] = "Оформление заказа";
+}
+<form asp-action="Buy" asp-controller="Order">
+    <div class="validation" asp-validation-summary="ModelOnly"></div>
+    <div class="container align-content-center">
+        <div class="row text-center">
+            <div class="col-4 mx-auto">
+                <h2>Зарегестрируйтесь</h2>
+                <div class="mb-3">
+                    <input class="form-control" asp-for="NameOfClient" placeholder="Введите ФИО">
+                    <span asp-validation-for="NameOfClient"></span>
+                </div>
+                <div class="mb-3">
+                    <input class="form-control" asp-for="AdressToDelivery" placeholder="Введите адрес доставки">
+                    <span asp-validation-for="AdressToDelivery"></span>
+                </div>
+                <div class="mb-3">
+                    <input class="form-control" asp-for="Phone" placeholder="Введите номер телефона">
+                    <span asp-validation-for="Phone"></span>
+                </div>
+                <div class="mb-3">
+                    <button type="submit" class="btn btn-outline-dark" asp-controller="Order" asp-action="Buy">Завершить оформление</button>
+                </div>
+            </div>
         </div>
     </div>
 </form>
