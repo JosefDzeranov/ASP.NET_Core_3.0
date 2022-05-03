@@ -28,7 +28,7 @@ namespace OnlineShopWebApp.Models
             UserId = userId;
             OrderDate = DateTime.Now;
 
-            Id = new Guid();
+            Id = Guid.NewGuid();
             Status = OrderStatus.Created;
 
 
