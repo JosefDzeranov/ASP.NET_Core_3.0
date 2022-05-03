@@ -33,31 +33,32 @@ namespace OOnlineShopWebApp.Controllers
             var products = productStorage.Products;
             return View(products);
         }
-        public IActionResult DeleteProduct(int idProduct, int userId)
+        public IActionResult DeleteProduct(int idProduct)
         {
             var product = productStorage.FindProduct(idProduct);
-            productStorage.DeleteProduct(product, userId);
+            productStorage.DeleteProduct(product);
             return RedirectToAction("Products");
         }
-        public IActionResult CardUpdateProduct(int idOldProduct, int userId)
+        public IActionResult CardUpdateProduct(int productId)
         {
-            var oldProduct = productStorage.FindProduct(idOldProduct);
+            var oldProduct = productStorage.FindProduct(productId);
             return View(oldProduct);
         }
         [HttpPost]
-        public IActionResult UpdateProduct(Product oldProduct, Product newProduct, int userId)
+        public IActionResult UpdateProduct(Product newProduct)
         {
-            productStorage.UpdateProduct(oldProduct, newProduct, userId);
+            var oldProduct = productStorage.FindProduct(newProduct.Id);
+            productStorage.UpdateProduct(oldProduct, newProduct);
             return RedirectToAction("Products");
         }
-        public IActionResult CardNewProduct(int userId)
+        public IActionResult CardNewProduct()
         {
             return View();
         }
         [HttpPost]
-        public IActionResult AddNewProduct(Product product, int userId)
+        public IActionResult AddNewProduct(Product product)
         {
-            productStorage.AddNewProduct(product, userId);
+            productStorage.AddNewProduct(product);
             return RedirectToAction("Products");
         }
     }

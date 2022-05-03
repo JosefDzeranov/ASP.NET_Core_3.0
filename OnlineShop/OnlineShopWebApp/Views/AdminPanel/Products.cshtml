@@ -48,7 +48,7 @@
                                             <a class="text-nowrap mx-1 my-1"
                                                asp-area="" asp-controller="AdminPanel"
                                                asp-action="CardUpdateProduct"
-                                               asp-route-idOldProduct="@Model[i].Id"
+                                               asp-route-productId="@Model[i].Id"
                                                role="button">
                                                 Редактировать
                                             </a>
@@ -59,7 +59,7 @@
                                             <a class="text-nowrap mx-1 my-1"
                                                asp-area="" asp-controller="AdminPanel"
                                                asp-action="DeleteProduct"
-                                               asp-route-productId="@Model[i].Id"
+                                               asp-route-idProduct="@Model[i].Id"
                                                role="button">
                                                 Удалить
                                             </a>
