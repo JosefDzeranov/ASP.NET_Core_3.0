@@ -18,7 +18,14 @@ namespace OnlineShopWebApp.Controllers
         [HttpPost]
         public IActionResult Registrate(Registration registration)
         {
-            return RedirectToAction("Index", "Home");
+            if (ModelState.IsValid)
+            {
+                return RedirectToAction("Index", "Home");
+            }
+            else
+            {
+                return View("Index");
+            }
         }
     }
 }

@@ -33,7 +33,7 @@ namespace OnlineShopWebApp.Controllers
             {
                 searchName = rawSearchName.ToLower();
             }
-            var products = _productBase.AllProducts().Where(x => x.Name.Contains(searchName));
+            var products = _productBase.AllProducts().Where(x => x.Name.ToLower().Contains(searchName));
             return View(products);
         }
 

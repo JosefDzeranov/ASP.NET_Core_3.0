@@ -1,16 +1,27 @@
-﻿<form method="post">
+﻿@using OnlineShopWebApp.Models
+
+@model Registration
+
+@{
+    ViewData["Title"] = "Регистрация";
+}
+<form asp-action="Registrate" asp-controller="Registration">
+    <div class="validation" asp-validation-summary="ModelOnly"></div>
     <div class="container align-content-center">
         <div class="row text-center">
             <div class="col-4 mx-auto">
                 <h2>Зарегестрируйтесь</h2>
                 <div class="mb-3">
-                    <input class="form-control" type="text" name="name" placeholder="Введите имя">
+                    <input class="form-control" asp-for="Name" placeholder="Введите имя">
+                    <span asp-validation-for="Name"></span>
                 </div>
                 <div class="mb-3">
-                    <input class="form-control" type="password" name="password" placeholder="Введите пароль">
+                    <input class="form-control" asp-for="Password" placeholder="Введите пароль">
+                    <span asp-validation-for="Password"></span>
                 </div>
                 <div class="mb-3">
-                    <input class="form-control" type="password" name="ConfirmPassword" placeholder="Повторите пароль">
+                    <input class="form-control" asp-for="ConfirmPassword" placeholder="Введите пароль повторно">
+                    <span asp-validation-for="ConfirmPassword"></span>
                 </div>
                 <div class="mb-3">
                     <button type="submit" class="btn btn-outline-dark" asp-controller="Registration" asp-action="Registrate">Зарегестрироваться</button>

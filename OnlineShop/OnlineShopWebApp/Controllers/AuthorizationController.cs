@@ -18,7 +18,15 @@ namespace OnlineShopWebApp.Controllers
         [HttpPost]
         public IActionResult Authorize(Authorization authorization)
         {
-            return RedirectToAction("Index", "Home");
+            
+            if (ModelState.IsValid)
+            {
+                return RedirectToAction("Index", "Home");
+            }
+            else
+            {
+                return View("Index");
+            }
         }
     }
 }
