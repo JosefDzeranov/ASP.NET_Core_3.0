@@ -9,7 +9,7 @@ namespace OnlineShopWebApp
 {
     public class OrdersRepositoryJSON: IOrdersRepository
     {
-        public static string Path { get; } = $"order.json";
+        public static string Path { get; } = "order.json";
 
         private List<Cart> orders = new List<Cart>();
 
@@ -26,8 +26,11 @@ namespace OnlineShopWebApp
 
         public List<Order> TryGetOrdersInformation()
         {
+            var orderResults = new List<Order>();
             var fileData = FileProvider.Get(Path);
-            var orderResults = JsonConvert.DeserializeObject<List<Order>>(fileData);
+            var orderResult = JsonConvert.DeserializeObject<Order>(fileData);
+
+            orderResults.Add(orderResult);
             return orderResults;
         }
     }
