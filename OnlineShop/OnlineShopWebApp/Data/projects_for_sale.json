@@ -48,6 +48,18 @@
     ]
   },
   {
+    "Id": 4,
+    "Name": "40-11",
+    "Cost": 36000.0,
+    "Square": 251.0,
+    "Width": 13.76,
+    "Length": 14.8,
+    "Description": "Проект двухэтажного дома из кирпича с терассой",
+    "Images": [
+      "4-1.jpg"
+    ]
+  },
+  {
     "Id": 5,
     "Name": "45-64NKL",
     "Cost": 50000.0,
@@ -73,38 +85,14 @@
   },
   {
     "Id": 7,
-    "Name": "1315",
-    "Cost": 546.0,
-    "Square": 334.0,
-    "Width": 43.0,
-    "Length": 3465.0,
-    "Description": "654654",
+    "Name": "58-10L",
+    "Cost": 38000.0,
+    "Square": 229.0,
+    "Width": 13.86,
+    "Length": 17.66,
+    "Description": "Проект двухэтажного дома из газабетона с терассой",
     "Images": [
-      "yufguyf"
-    ]
-  },
-  {
-    "Id": 8,
-    "Name": "sdfdfds",
-    "Cost": 2343432.0,
-    "Square": 23424.0,
-    "Width": 2342.0,
-    "Length": 234234.0,
-    "Description": "sdfadfasdf",
-    "Images": [
-      "dfsaff"
-    ]
-  },
-  {
-    "Id": 4,
-    "Name": "fetrrt",
-    "Cost": 55553.0,
-    "Square": 34535.0,
-    "Width": 35435.0,
-    "Length": 34535.0,
-    "Description": "etretret",
-    "Images": [
-      "rtwt"
+      "7-1.jpg"
     ]
   }
 ]
