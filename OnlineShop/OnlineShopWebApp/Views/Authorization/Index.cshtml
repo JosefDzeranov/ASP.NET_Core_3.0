@@ -1,13 +1,20 @@
-﻿<form method="post">
+﻿@model Authorization
+<form method="post">
     <h5>
         Вход
     </h5>
+   
     <div>
-
-        <input type="text" name="login" placeholder="Логин" /> <br />
-        <input type="text" name="password" placeholder="Пароль" /> <br />
-
+        <label asp-for="Login"></label><br />
+        <input asp-for="Login"/>
+        <span asp-validation-for="Login"></span>
     </div>
+    <div>
+        <label asp-for="Password"></label><br />
+        <input asp-for="Password"/>
+        <span asp-validation-for="Password"></span>
+    </div>
+   
     <div>
         <input type="checkbox" name="isRemembered" typeof="bool" value="true" /> Запомнить меня? <br />
         <button class="btn btn-dark" type="submit" asp-controller="Authorization" asp-action="Enter">Войти</button> <br />
@@ -17,3 +24,8 @@
     
 
 </form>
+@section Scripts{
+<script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
+<script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
+
+}

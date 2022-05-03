@@ -22,7 +22,6 @@ namespace OnlineShopWebApp
                 sw.WriteLine(jsonData);
             }
 
-
         }
 
 

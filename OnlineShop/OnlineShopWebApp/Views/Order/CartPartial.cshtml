@@ -1,0 +1,38 @@
+﻿@model Cart
+
+
+<style>
+    table, th, td {
+        border: 1px solid black;
+    }
+
+    table {
+        border-collapse: collapse;
+    }
+</style>
+
+<p><b>ВАШ ЗАКАЗ:</b></p>
+<table>
+    <tr>
+        <th> Наименование</th>
+        <th>Количество</th>
+        <th>Стоимость</th>
+    </tr>
+
+    @foreach (var cartLine in Model.CartLines)
+    {
+        <tr>
+            <td>@cartLine.Product.Name</td>
+            <td>@cartLine.Amount</td>
+            <td>@cartLine.Cost</td>
+
+
+        </tr>
+
+    }
+    <tr>
+
+        <td colspan="2"><b>Сумма заказа:</b></td>
+        <td><b>@Model.CartCost</b></td>
+    </tr>
+</table>

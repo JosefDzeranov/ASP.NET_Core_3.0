@@ -5,8 +5,6 @@ namespace OnlineShopWebApp.Controllers
 {
     public class RegistrationController : Controller
     {
-
-
         public IActionResult Index()
         {
 
@@ -14,11 +12,19 @@ namespace OnlineShopWebApp.Controllers
         }
 
         [HttpPost]
-        public IActionResult Register(string login, string password, string confirmedpassword)
+        public IActionResult Register(Registration registration)
         {
-            return RedirectToAction("Index", "Home");
+            if (ModelState.IsValid)
+            {
+                return RedirectToAction("Index", "Home");
+            }
+            else
+            {
+                return RedirectToAction("Index");
+            }
+            
         }
-       
+
     }
 
 }
