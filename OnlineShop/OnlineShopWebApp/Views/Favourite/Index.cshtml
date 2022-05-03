@@ -20,16 +20,16 @@ else
 
                     <h4>@product.Cost</h4>
 
-                    <a class="btn btn-dark" href="/cart/add?productId=@product.Id" role="button">Добавить в корзину</a>
+                    <a class="btn btn-dark" asp-area="" asp-controller="cart" asp-action="add" asp-route-productId="@product.Id" role="button">Добавить в корзину</a>
                     <p></p>
-                    <a class="btn btn-success btn-sm" href="/compare/add?productId=@product.Id" role="button">Добавить в сравнение</a>
+                    <a class="btn btn-success btn-sm" asp-area="" asp-controller="compare" asp-action="add" asp-route-productId="@product.Id" role="button">Добавить в сравнение</a>
                     <p></p>
-                    <a class="btn btn-danger" href="/favourite/delete?productId=@product.Id" role="button">Удалить из избранного</a>
+                    <a class="btn btn-danger" asp-area="" asp-controller="favourite" asp-action="delete" asp-route-productId="@product.Id" role="button">Удалить из избранного</a>
                 </div>
             </div>
         }
     </div>
     <br />
-    <a class="btn btn-danger" href="/favourite/clear" role="button">Очистить избранное</a>
+    <a class="btn btn-danger" asp-area="" asp-controller="favourite" asp-action="clear" role="button">Очистить избранное</a>
 
 }

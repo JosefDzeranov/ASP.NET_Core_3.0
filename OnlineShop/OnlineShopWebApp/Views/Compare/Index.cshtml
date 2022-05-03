@@ -23,11 +23,11 @@ else
 
                 </table>
 
-                <a class="btn btn-dark" href="/cart/add?productId=@product.Id" role="button">Добавить в корзину</a>
+                <a class="btn btn-dark" asp-area="" asp-controller="cart" asp-action="add" asp-route-productId="@product.Id" role="button">Добавить в корзину</a>
                 <p></p>
-                <a class="btn btn-success btn-sm" href="/favourite/add?productId=@product.Id" role="button">Добавить в избранное</a>
+                <a class="btn btn-success btn-sm" asp-area="" asp-controller="favourite" asp-action="add" asp-route-productId="@product.Id" role="button">Добавить в избранное</a>
                 <p></p>
-                <a class="btn btn-danger" href="/compare/delete?productId=@product.Id" role="button">Удалить из сравнения</a>
+                <a class="btn btn-danger" asp-area="" asp-controller="compare" asp-action="delete" asp-route-productId="@product.Id" role="button">Удалить из сравнения</a>
 
             </div>
         </div>
@@ -35,5 +35,5 @@ else
         }
     </div>
     <br />
-    <a class="btn btn-danger" href="/compare/clear" role="button">Очистить сравнение</a>
+    <a class="btn btn-danger" asp-area="" asp-controller="compare" asp-action="clear" role="button">Очистить сравнение</a>
 }

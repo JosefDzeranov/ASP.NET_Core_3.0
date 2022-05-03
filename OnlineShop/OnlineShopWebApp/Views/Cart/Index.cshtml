@@ -8,7 +8,7 @@ else
 {
     <div class="row">
         <div class="col">
-            <a class="btn btn-danger btn-sm float-right" href="/cart/clear" role="button">Очистить корзину</a>
+            <a class="btn btn-danger btn-sm float-right"  asp-area="" asp-controller="cart" asp-action="clear" role="button">Очистить корзину</a>
             <table class="table">
                 <thead>
                     <tr>
@@ -25,9 +25,9 @@ else
                             <td>@item.Product.Name</td>
                             <td>@item.Product.Cost</td>
                             <td>
-                                <a class="btn btn-dark" href="/cart/delete?itemId=@item.Product.Id" role="button">-</a>
+                                <a class="btn btn-dark" asp-area="" asp-controller="cart" asp-action="delete" asp-route-itemId="@item.Product.Id" role="button">-</a>
                                 @item.Amount
-                                <a class="btn btn-dark" href="/cart/add?productId=@item.Product.Id" role="button">+</a>
+                                <a class="btn btn-dark" asp-area="" asp-controller="cart" asp-action="add" asp-route-productId="@item.Product.Id" role="button">+</a>
                             </td>
                             <td>@item.Cost</td>
                         </tr>
@@ -39,8 +39,8 @@ else
     <div class="text-right">
         <div class="text-right">
             <h3>Итого @Model.FullCost руб</h3>
-            <a class="btn btn-success btn-sm" href="/home/index" role="button">Продолжить покупки</a>
-            <a class="btn btn-success btn-sm" href="/order/index" role="button">Оформить заказ</a>
+            <a class="btn btn-success btn-sm" asp-area="" asp-controller="home" asp-action="index" role="button">Продолжить покупки</a>
+            <a class="btn btn-success btn-sm" asp-area="" asp-controller="order" asp-action="index" role="button">Оформить заказ</a>
         </div>
     </div>
 }

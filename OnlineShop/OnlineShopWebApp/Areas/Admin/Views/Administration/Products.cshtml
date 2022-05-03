@@ -8,7 +8,7 @@
         <h3>Список продуктов</h3>
         <div class="row">
             <div class="col">
-                <a href="/administration/addnew">Добавить новый продукт</a>
+                <a asp-area="Admin" asp-controller="administration" asp-action="addnew">Добавить новый продукт</a>
                 <table class="table">
                     <thead>
                         <tr>
@@ -25,13 +25,13 @@
                             <tr>
                                 <td>@product.Id</td>
                                 <td>
-                                    <a style="color:grey" href="/product/index/@product.Id">
+                                    <a style="color:grey" asp-area="" asp-controller="product" asp-action="index"  asp-route-productId="@product.Id">
                                         <h5>@product.Name</h5>
                                     </a>
                                 </td>
                                 <td>@product.Cost</td>
-                                <td><a href="/administration/edit?productId=@product.Id">Редактировать</a></td>
-                                <td><a href="/administration/delete?productId=@product.Id">Удалить</a></td>
+                                <td><a asp-area="Admin" asp-controller="administration" asp-action="edit" asp-route-productId="@product.Id">Редактировать</a></td>
+                                <td><a asp-area="Admin" asp-controller="administration" asp-action="delete" asp-route-productId="@product.Id">Удалить</a></td>
                             </tr>
                         }
                     </tbody>
