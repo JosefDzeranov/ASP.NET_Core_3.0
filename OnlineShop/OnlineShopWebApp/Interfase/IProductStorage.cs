@@ -9,7 +9,7 @@ namespace OnlineShopWebApp.Interfase
         Product FindProduct(int productIds);
         string WriteToStorage();
         void DeleteProduct(Product product);
-        void UpdateProduct(Product oldProduct, Product newProduct);
+        void UpdateProduct(Product product);
         void AddNewProduct(Product product);
     }
 }

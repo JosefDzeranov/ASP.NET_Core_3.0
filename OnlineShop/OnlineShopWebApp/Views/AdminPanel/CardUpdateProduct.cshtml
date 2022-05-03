@@ -15,14 +15,14 @@
                     <div class="card">
                         <div class="form-group p-3">
                             <label class="text-center" asp-for="Name">Шифр: @Model.Name</label>
-                            <input type="text" class="form-control" placeholder="Шифр" name="Name" asp-for="@Model.Name"/>
+                            <input type="text" class="form-control" placeholder="Шифр" name="Name" asp-for="Name"/>
                             <span asp-validation-for="Name"></span>
                         </div>
                     </div>
                     <div class="card">
                         <div class="form-group p-3">
                             <label class="text-center">Описание: @Model.Description</label>
-                            <input type="text" class="form-control" id="Input2" placeholder="Описание" name="newProduct.Description" asp-for="Description"/>
+                            <input type="text" class="form-control" id="Input2" placeholder="Описание" name="Description" asp-for="Description"/>
                             <span asp-validation-for="Description"></span>
                         </div>
                     </div>
@@ -30,35 +30,35 @@
                         <div class="form-group p-3">
                             <label class="text-center">Изображение:</label> <br/>
                             <img class="card-img-top col-4 p-3" src="/image/@Model.Images[0]">
-                            <input type="text" class="form-control" id="Input3" placeholder="Изображение" name="newProduct.Images[0]" asp-for="Images[0]"/>
+                            <input type="text" class="form-control" id="Input3" placeholder="Изображение" name="Images[0]" asp-for="Images[0]"/>
                             <span asp-validation-for="Images[0]"></span>
                         </div>
                     </div>
                     <div class="card">
                         <div class="form-group p-3">
                             <label class="text-center">Цена: @Model.Cost</label>
-                            <input type="text" class="form-control" id="Input4" placeholder="Цена" name="newProduct.Cost" asp-for="Cost"/>
+                            <input type="text" class="form-control" id="Input4" placeholder="Цена" name="Cost" asp-for="Cost"/>
                             <span asp-validation-for="Cost"></span>
                         </div>
                     </div>
                     <div class="card">
                         <div class="form-group p-3">
                             <label class="text-center">Длина: @Model.Length</label>
-                            <input type="text" class="form-control" id="Input5" placeholder="Длина" name="newProduct.Length" asp-for="Length"/>
+                            <input type="text" class="form-control" id="Input5" placeholder="Длина" name="Length" asp-for="Length"/>
                             <span asp-validation-for="Length"></span>
                         </div>
                     </div>
                     <div class="card">
                         <div class="form-group p-3">
                             <label class="text-center">Ширина: @Model.Width</label>
-                            <input type="text" class="form-control" id="Input5" placeholder="Ширина" name="newProduct.Width" asp-for="Width"/>
+                            <input type="text" class="form-control" id="Input5" placeholder="Ширина" name="Width" asp-for="Width"/>
                             <span asp-validation-for="Width"></span>
                         </div>
                     </div>
                     <div class="card">
                         <div class="form-group p-3">
                             <label class="text-center">Площадь: @Model.Square</label>
-                            <input type="text" class="form-control" id="Input5" placeholder="Площадь" name="newProduct.Square" asp-for="Square"/>
+                            <input type="text" class="form-control" id="Input5" placeholder="Площадь" name="Square" asp-for="Square"/>
                             <span asp-validation-for="Square"></span>
                         </div>
                     </div>

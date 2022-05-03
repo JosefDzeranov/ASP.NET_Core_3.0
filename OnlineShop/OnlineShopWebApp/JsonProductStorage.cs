@@ -45,13 +45,14 @@ namespace OnlineShopWebApp
         }
 
 
-        public void UpdateProduct(Product oldProduct, Product newProduct)
+        public void UpdateProduct(Product newProduct)
         {
-            static void VerifyNull<T>(T TOld, T TNew)
+            var oldProduct = FindProduct(newProduct.Id);
+            static T VerifyNull<T>(T TOld, T TNew)
             {
-                if (TNew is object)
+                if (TNew is string)
                 {
-                   TOld ??= TNew;
+                    TOld = TNew ?? TOld;
                 }
                 else
                 {
@@ -66,14 +67,16 @@ namespace OnlineShopWebApp
                     }
                     
                 }
+
+                return TOld;
             }
-            VerifyNull(oldProduct.Cost, newProduct.Cost);
-            VerifyNull(oldProduct.Description, newProduct.Description);
-            VerifyNull(oldProduct.Images, newProduct.Images);
-            VerifyNull(oldProduct.Length, newProduct.Length);
-            VerifyNull(oldProduct.Name, newProduct.Name);
-            VerifyNull(oldProduct.Square, newProduct.Square);
-            VerifyNull(oldProduct.Width, newProduct.Width);
+            oldProduct.Cost = VerifyNull(oldProduct.Cost, newProduct.Cost);
+            oldProduct.Description = VerifyNull(oldProduct.Description, newProduct.Description);
+            oldProduct.Images[0] = VerifyNull(oldProduct.Images[0], newProduct.Images[0]);
+            oldProduct.Length = VerifyNull(oldProduct.Length, newProduct.Length);
+            oldProduct.Name = VerifyNull(oldProduct.Name, newProduct.Name);
+            oldProduct.Square = VerifyNull(oldProduct.Square, newProduct.Square);
+            oldProduct.Width = VerifyNull(oldProduct.Width, newProduct.Width);
             WriteToStorage();
         }
 

@@ -45,10 +45,9 @@ namespace OOnlineShopWebApp.Controllers
             return View(oldProduct);
         }
         [HttpPost]
-        public IActionResult UpdateProduct(Product newProduct)
+        public IActionResult UpdateProduct(Product product)
         {
-            var oldProduct = productStorage.FindProduct(newProduct.Id);
-            productStorage.UpdateProduct(oldProduct, newProduct);
+            productStorage.UpdateProduct(product);
             return RedirectToAction("Products");
         }
         public IActionResult CardNewProduct()
