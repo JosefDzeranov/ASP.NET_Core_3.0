@@ -1,0 +1,52 @@
+﻿@model Order
+
+<div class="row">
+    @await Html.PartialAsync("AdministrationMenu")
+
+    <form method="post">
+        <div class="col-6">
+            <div class="row">
+                <div class="col">
+                    <table class="table">
+                        <thead></thead>
+                        <tbody>
+                            <tr>
+                                <th>Дата и время</th>
+                                <td>@Model.Date в @Model.Time</td>
+                            </tr>
+                            <tr>
+                                <th>Адрес доставки</th>
+                                <td>@Model.User.Adress</td>
+                            </tr>
+                            <tr>
+                                <th>Получатель</th>
+                                <td>@Model.User.Name</td>
+                            </tr>
+                            <tr>
+                                <th>Телефон</th>
+                                <td>@Model.User.Phone</td>
+                            </tr>
+                            <tr>
+                                <th>E-mail</th>
+                                <td>@Model.User.Email</td>
+                            </tr>
+                            <tr>
+                                <th>Сумма</th>
+                                <td>@Model.Cart.FullCost</td>
+                            </tr>
+                            <tr>
+                                <th>Статус</th>
+                                <td>
+                                    <select asp-for="@Model.State"
+                                            asp-items="@Html.GetEnumSelectList<OrderState>()"
+                                            class="form-control"></select>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <button class="btn btn-dark" type="submit" asp-controller="Administration" asp-action="UpdateState" asp-route-orderId="@Model.Id">Сохранить</button>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>

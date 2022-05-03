@@ -1,0 +1,18 @@
+﻿@model Role
+
+<form method="post">
+    <div class="row">
+        @await Html.PartialAsync("AdministrationMenu")
+        <div class="col text-center">
+            <div class="validation" asp-validation-summary="All"></div>
+            <h3>Добавление новой роли</h3>
+            <div>
+                <label asp-for="Name">Название</label>
+                <input asp-for="Name" />
+                <span asp-validation-for="Name" />
+            </div><br />
+            <button class="btn btn-dark" type="submit" asp-controller="Administration" asp-action="AddRole">Сохранить</button>
+        </div>
+    </div>
+</form>
+

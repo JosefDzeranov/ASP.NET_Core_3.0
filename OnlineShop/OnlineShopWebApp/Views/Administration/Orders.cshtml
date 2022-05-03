@@ -1,8 +1,41 @@
-﻿<div class="row">
+﻿@model List<Order>
+
+<div class="row">
     @await Html.PartialAsync("AdministrationMenu")
 
 
     <div class="col-6">
         <h3>Список заказов</h3>
+        <div class="row">
+            <div class="col">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>№</th>
+                            <th>Сумма</th>
+                            <th>Статус</th>
+                            <th>Пользователь</th>
+                            <th>Дата</th>
+                            <th>Время</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @for (int i = 0; i < Model.Count; i++)
+                        {
+                            <tr>
+                                <td>@(i+1)</td>
+                                <td>@Model[i].Cart.FullCost.</td>
+                                <td>@EnumHelper.GetDisplayName(Model[i].State)</td>
+                                <td>@Model[i].User.Name</td>
+                                <td>@Model[i].Date</td>
+                                <td>@Model[i].Time</td>
+                                <td><a href="/administration/orderdetails?orderId=@Model[i].Id">Подробнее</a></td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
     </div>
 </div>

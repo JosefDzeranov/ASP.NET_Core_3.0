@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using OnlineShopWebApp.Controllers;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -23,10 +24,10 @@ namespace OnlineShopWebApp
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-
-            services.AddSingleton<IComparesRepository, InMemoryComparesRepozitory>(); 
+            services.AddSingleton<IRolesRepository, InMemoryRolesRepository>();
+            services.AddSingleton<IComparesRepository, InMemoryComparesRepository>();
             services.AddSingleton<IFavouritesRepository, InMemoryFavouritesRepository>();
-            services.AddSingleton<IOrdersRepository, InMemoryOrdersRepository>(); 
+            services.AddSingleton<IOrdersRepository, InMemoryOrdersRepository>();
             services.AddSingleton<ICartsRepository, InMemoryCartsRepository>();
             services.AddSingleton<IProductsRepository, InMemoryProductsRepository>();
             services.AddControllersWithViews();
