@@ -24,6 +24,7 @@ namespace OnlineShopWebApp
             services.AddSingleton<IProductDataSource, InMemoryProductDataSource>();
             services.AddSingleton<ICustomerProfile, InMemoryCustomerProfile>();
             services.AddSingleton<IOrdersRepository, InMemoryOrdersRepository>();
+            services.AddSingleton<IRolesRepository, InMemoryRolesRepository>();
         
         }
 

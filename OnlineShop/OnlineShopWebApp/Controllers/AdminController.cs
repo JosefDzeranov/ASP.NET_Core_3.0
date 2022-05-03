@@ -8,11 +8,13 @@ namespace OnlineShopWebApp.Controllers
     {
         private readonly IProductDataSource productDataSource; 
         private readonly IOrdersRepository ordersRepository;
+        private readonly IRolesRepository rolesRepository;
 
-        public AdminController(IProductDataSource productDataSource, IOrdersRepository ordersRepository)
+        public AdminController(IProductDataSource productDataSource, IOrdersRepository ordersRepository, IRolesRepository rolesRepository)
         {
             this.productDataSource = productDataSource;
             this.ordersRepository = ordersRepository;
+            this.rolesRepository = rolesRepository;
         }
 
         public IActionResult Orders()
@@ -28,7 +30,34 @@ namespace OnlineShopWebApp.Controllers
 
         public IActionResult Roles()
         {
-            return View();
+            var roles = rolesRepository.GetAll();
+            return View(roles);
+        }
+
+        public IActionResult AddRole()
+        {
+            return View(); 
+        }
+        [HttpPost]
+
+        public IActionResult AddRole(Role role)
+        {
+            if (rolesRepository.TryGetByName(role.Name)!=null)
+            {
+                ModelState.AddModelError("", "Такая роль уже существует");
+            }
+            if (ModelState.IsValid)
+            {
+                rolesRepository.Add(role);
+                return RedirectToAction("Roles");
+            }
+            return View(role);
+        }
+
+        public IActionResult RemoveRole(string roleName)
+        {
+            rolesRepository.Remove(roleName);
+            return RedirectToAction("Roles"); 
         }
 
         public IActionResult Products()
