@@ -20,7 +20,7 @@ namespace OnlineShopWebApp
 
         public void SaveOrderInformation(Order order)
         {
-            var jsonData = JsonConvert.SerializeObject(order.ToString());
+            var jsonData = JsonConvert.SerializeObject(order);
             FileProvider.Append(Path, jsonData);
         }
 
