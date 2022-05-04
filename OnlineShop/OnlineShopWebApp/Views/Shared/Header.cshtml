@@ -12,7 +12,7 @@
                         <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
                     </li>      
                      <li class="nav-item">
-                        <a class="nav-link" asp-area="" asp-controller="Admin" asp-action="Orders">Панель администратора</a>
+                        <a class="nav-link" asp-area="Admin" asp-controller="Admin" asp-action="Orders">Панель администратора</a>
                     </li>
                     <li class="nav-item">
                        @await Component.InvokeAsync("Favorites")
