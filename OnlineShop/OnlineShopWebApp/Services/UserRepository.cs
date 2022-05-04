@@ -8,27 +8,57 @@ namespace OnlineShopWebApp.Services
     public class UserRepository : IUserRepository
     {
         private List<User> users = new List<User>();
-        public void Add(User user)
+        public bool Add(User user)
         {
-            users.Add(user);
+            if (TryGetByEmail(user.Email) != null)
+            {
+                return false;
+            }
+            {
+                users.Add(user);
+                return true;
+            }
+
         }
 
-        public void Delete(Guid Id)
+        public bool Auth(string username, string password, bool rememberMe)
         {
-            var user = TryGetById(Id);
-            if(user != null)
+            var user = TryGetByEmail(username);
+
+            if (user != null)
+            {
+               if(user.Password == password)
+                {
+                    user.RememberMe = rememberMe;
+                    return true;
+                }
+            }
+
+            return false;
+
+        }
+
+        public void Delete(Guid id)
+        {
+            var user = TryGetById(id);
+            if (user != null)
             {
                 users.Remove(user);
             }
-            
+
+        }
+
+        public User TryGetByEmail(string email)
+        {
+            return users.FirstOrDefault(x => x.Email == email);
         }
 
         public User TryGetById(Guid id)
         {
-            return users.FirstOrDefault(x=>x.Id == id);
+            return users.FirstOrDefault(x => x.Id == id);
         }
 
-        public void Update(Guid Id)
+        public void Update(Guid id)
         {
             throw new NotImplementedException();
         }
