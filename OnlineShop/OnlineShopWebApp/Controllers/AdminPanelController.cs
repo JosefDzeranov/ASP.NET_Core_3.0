@@ -33,9 +33,9 @@ namespace OOnlineShopWebApp.Controllers
             var products = productStorage.Products;
             return View(products);
         }
-        public IActionResult DeleteProduct(int idProduct)
+        public IActionResult DeleteProduct(int productId)
         {
-            var product = productStorage.FindProduct(idProduct);
+            var product = productStorage.FindProduct(productId);
             productStorage.DeleteProduct(product);
             return RedirectToAction("Products");
         }
