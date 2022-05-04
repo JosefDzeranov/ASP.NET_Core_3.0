@@ -1,27 +1,49 @@
 using Microsoft.AspNetCore.Mvc;
 using OnlineShopWebApp.Models;
+using System;
 
 namespace OnlineShopWebApp.Controllers
 {
     public class AdministrationController : Controller
     {
         private readonly IProductManager productManager;
+        private readonly IOrderManager orderManager;
 
-        public AdministrationController(IProductManager productManager)
+        public AdministrationController(IProductManager productManager, IOrderManager orderManager)
         {
             this.productManager = productManager;
+            this.orderManager = orderManager;
         }
 
         public IActionResult Index()
         {
 
-            return View("Orders");
+            return RedirectToAction("Orders");
         }
 
         public IActionResult Orders()
         {
+            var ordersList = orderManager.GetOrders();
 
-            return View();
+            return View(ordersList);
+
+        }
+
+        public IActionResult EditOrder(Guid id)
+        {
+            var order = orderManager.TryGetOrderById(id);
+
+            return View(order);
+
+        }
+
+        [HttpPost]
+        public IActionResult UpdateStatus(Guid id, OrderStatus status)
+        {
+
+            orderManager.UpdateStatus(id, status);
+            return RedirectToAction("Orders");
+
         }
 
         public IActionResult Users()
@@ -60,9 +82,7 @@ namespace OnlineShopWebApp.Controllers
             {
                 return RedirectToAction("EditProduct");
             }
-               
-           
-            
+
         }
 
         public IActionResult RemoveProduct(int id)
@@ -91,7 +111,7 @@ namespace OnlineShopWebApp.Controllers
             {
                 return RedirectToAction("AddNewProduct");
             }
-            
+
         }
     }
 

@@ -1,5 +1,6 @@
 using Newtonsoft.Json;
 using OnlineShopWebApp.Models;
+using System;
 using System.Collections.Generic;
 using System.IO;
 
@@ -10,14 +11,16 @@ namespace OnlineShopWebApp
 
         string path = @"wwwroot\orders.json";
 
-        List<Order> ordersList = new List<Order>();
+        private List<Order> ordersList = new List<Order>();
+
+
         public void SaveOrder(Order order)
         {
             ordersList.Add(order);
 
             var jsonData = JsonConvert.SerializeObject(ordersList);
 
-            using (StreamWriter sw = new StreamWriter(path, true, System.Text.Encoding.UTF8))
+            using (StreamWriter sw = new StreamWriter(path, false, System.Text.Encoding.UTF8))
             {
                 sw.WriteLine(jsonData);
             }
@@ -25,19 +28,54 @@ namespace OnlineShopWebApp
         }
 
 
-        public Order TryGetOrderById(string userId)
+        public Order TryGetOrderByUserId(string userId)
         {
-            string data = string.Empty;
-
-            using (StreamReader sr = new StreamReader(path))
-            {
-                 data = sr.ReadToEnd();
-            }
-            ordersList = JsonConvert.DeserializeObject<List<Order>>(data);
+            
+            ordersList = GetOrders();
 
             return ordersList.Find(x => x.UserId == userId);
         }
 
+        public Order TryGetOrderById(Guid id)
+        {
+            
+            ordersList = GetOrders();
 
+            return ordersList.Find(x => x.Id == id);
+        }
+
+        public List<Order> GetOrders()
+        {
+            string data = string.Empty;
+            if (File.Exists(path))
+            {
+                using (StreamReader sr = new StreamReader(path))
+                {
+                    data = sr.ReadToEnd();
+                }
+                ordersList = JsonConvert.DeserializeObject<List<Order>>(data);
+            }
+            else
+            {
+                ordersList = new List<Order>();
+            }
+            
+            return ordersList;
+        }
+
+        public void UpdateStatus(Guid id, OrderStatus status)
+        {
+            var order = TryGetOrderById(id);
+
+            ordersList.Remove(order);
+
+            if (order != null)
+            {
+                order.Status = status;
+                SaveOrder(order);
+
+            }
+
+        }
     }
 }

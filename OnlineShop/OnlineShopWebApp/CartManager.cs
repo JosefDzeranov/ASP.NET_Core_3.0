@@ -84,6 +84,12 @@ namespace OnlineShopWebApp
             cart.CartLines.Clear();
         }
 
+        public void Clear(string userId)
+        {
+            var cart = TryGetCartByUserID(userId);
+            cartList.Remove(cart);
+        }
+
 
         public Cart TryGetCartByUserID(string userId)
         {

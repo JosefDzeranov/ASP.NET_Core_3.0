@@ -1,12 +1,4 @@
-﻿@*<style>
-    table, th, td, caption, tr {
-        border: 1px solid black;
-    }
-
-    table {
-        border-collapse: collapse;
-    }
-</style>*@
+﻿@model List<Order>
 
 <div class="row">
     @await Html.PartialAsync("Menu")
@@ -16,7 +8,7 @@
         <table>
             <tr>
                 <th>Список заказов</th>
-                
+
             </tr>
             <tr>
                 <th>N</th>
@@ -26,7 +18,23 @@
                 <th>Дата</th>
                 <th>Время</th>
             </tr>
-            <tr></tr>
+
+            @if (Model != null)
+            {
+                @for (int i = 0; i < Model.Count; i++)
+                {
+                    <tr>
+                        <td><a class="text" href="/administration/EditOrder/@Model[i].Id" role="button">Заказ № @(i+1)</a> </td>
+                        <td>@Model[i].Cart.CartCost</td>
+                        <td>@Model[i].Status</td>
+                        <td>@Model[i].OrderData.Name</td>
+                        <td>@Model[i].OrderDate.ToShortDateString()</td>
+                        <td>@Model[i].OrderDate.ToShortTimeString()</td>
+                    </tr>
+                }
+            }
+
+
         </table>
     </div>
 </div>
