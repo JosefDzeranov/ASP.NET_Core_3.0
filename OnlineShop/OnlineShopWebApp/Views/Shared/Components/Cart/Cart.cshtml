@@ -1,3 +1,9 @@
 ﻿@model decimal
 
-<a class="nav-link text-dark" asp-area="" asp-controller="Cart" asp-action="Index">Корзина(@Model)</a>
+<a type="button" class="nav-link" asp-area="" asp-controller="Cart" asp-action="Index">
+    Корзина
+    @if (Model > 0)
+    {
+        <span class="badge bg-secondary">@Model</span>
+    }
+</a>

@@ -1,2 +1,9 @@
 ﻿@model int
-<a class="nav-link text-dark" asp-area="" asp-controller="Favorites" asp-action="Index">Избранное @Model</a>
+
+<a type="button" class="nav-link" asp-area="" asp-controller="Favorites" asp-action="Index">
+    Избранное
+    @if (Model > 0)
+    {
+        <span class="badge bg-secondary">@Model</span>
+    }
+</a>
