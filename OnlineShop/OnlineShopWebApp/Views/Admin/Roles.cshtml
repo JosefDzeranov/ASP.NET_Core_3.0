@@ -1,7 +1,32 @@
-﻿<div class="row">
+﻿@model List<Role>
+<div class="row">
 	@await Html.PartialAsync("AdminMenu")
 
 	<div class="col-9">
-		<h3>Роли</h3>
+		<div class="row">
+			<h3>Список ролей</h3>
+		</div>
+		<a href="/admin/addRole">Добавить новую роль</a>
+		<div class="row">
+			<table class="table">
+				<thead>
+					<tr>
+						<th>№</th>
+						<th>Название</th>
+					</tr>
+				</thead>
+				<tbody>
+					@for(int i=0; i<Model.Count; i++)
+					{
+						<tr>
+							<td>@(i+1)</td>
+							<td>@Model[i].Name</td>
+							<td><a href="/admin/removeRole?roleName=@Model[i].Name">Удалить</a></td>
+						</tr>
+					}
+				</tbody>
+			</table>
+		</div>
+		
 	</div>
 </div>

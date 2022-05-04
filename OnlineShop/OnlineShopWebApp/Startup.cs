@@ -1,14 +1,10 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using System;
 using OnlineShopWebApp.Services;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+
 
 namespace OnlineShopWebApp
 {
@@ -25,9 +21,10 @@ namespace OnlineShopWebApp
         {
             services.AddControllersWithViews();
             services.AddSingleton<ICartRepository, InMemoryCartRepository>();
-            services.AddSingleton <IProductDataSource, InMemoryProductDataSource>();
+            services.AddSingleton<IProductDataSource, InMemoryProductDataSource>();
             services.AddSingleton<ICustomerProfile, InMemoryCustomerProfile>();
             services.AddSingleton<IOrdersRepository, InMemoryOrdersRepository>();
+            services.AddSingleton<IRolesRepository, InMemoryRolesRepository>();
         
         }
 
