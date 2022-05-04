@@ -49,8 +49,6 @@ namespace OnlineShopWebApp.Controllers
             {
                 return View("Index");
             }
-            
-
         }
 
     }

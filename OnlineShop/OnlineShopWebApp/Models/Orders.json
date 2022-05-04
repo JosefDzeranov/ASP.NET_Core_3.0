@@ -1,0 +1,64 @@
+[
+  {
+    "Id": 3,
+    "Cart": {
+      "Id": "f973d115-e32f-4224-ba41-aa8653a8e632",
+      "UserId": "1",
+      "Items": [
+        {
+          "Id": "fdcc9689-b5d4-4811-ba3b-f9be26e27508",
+          "Product": {
+            "Id": 1,
+            "Name": "Лён однотонный, голубой",
+            "Cost": 610,
+            "Description": "Ширина 135 см, Плотность от 239 г/м2, Состав: вискоза - 60%, лён - 30%, хлопок - 10%, Производитель - Китай",
+            "ImgPath": "/img/linen_blue.jpg"
+          },
+          "Amount": 4,
+          "Cost": 2440
+        }
+      ],
+      "Cost": 2440,
+      "Amount": 4
+    },
+    "DeliveryInfo": {
+      "AdressToDelivery": "ул. Дмитриева д.6. кв. 117",
+      "NameOfClient": "Михаил Загрёбкин",
+      "Phone": "\u002B7-985-041-95-94",
+      "Email": "Firokikidreamtek@yandex.ru"
+    },
+    "Status": 0,
+    "CreatedDate": "2022-05-04T23:58:30.1061817+03:00"
+  },
+  {
+    "Id": 4,
+    "Cart": {
+      "Id": "98187be1-56c2-446b-9180-3c3d254f2a73",
+      "UserId": "1",
+      "Items": [
+        {
+          "Id": "8d156533-f178-447b-a3a9-635e6d0dc1e5",
+          "Product": {
+            "Id": 2,
+            "Name": "Кашемировый трикотаж, фиолетовый",
+            "Cost": 4200,
+            "Description": "Ширина 120 см, Состав: эластан, кашемир, Производитель - Италия",
+            "ImgPath": "/img/cashemir_vi.jpg"
+          },
+          "Amount": 4,
+          "Cost": 16800
+        }
+      ],
+      "Cost": 16800,
+      "Amount": 4
+    },
+    "DeliveryInfo": {
+      "AdressToDelivery": "ул. Дмитриева д.6. кв. 117",
+      "NameOfClient": "Михаил Загрёбкин",
+      "Phone": "\u002B7-985-041-95-96",
+      "Email": "Firokikidreamtek@yandex.ru"
+    },
+    "Status": 0,
+    "CreatedDate": "2022-05-05T00:06:41.5138796+03:00"
+  }
+]

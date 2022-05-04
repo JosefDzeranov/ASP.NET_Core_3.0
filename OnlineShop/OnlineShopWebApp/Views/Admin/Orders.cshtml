@@ -1,8 +1,38 @@
-﻿<div class="row text-center">
+﻿@using OnlineShopWebApp.Models
+
+@model List<Order>
+<div class="row text-center">
 
     @await Html.PartialAsync("AdminMenu")
 
     <div class="col-9">
         <h3>Список заказов</h3>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>№</th>
+                    <th>Сумма</th>
+                    <th>Статус</th>
+                    <th>Пользователь(логин)</th>
+                    <th>Дата</th>
+                    <th>Время</th>
+                </tr>
+            </thead>
+            @foreach (var p in Model)
+            {
+                <tbody>
+                    <tr>
+                        <td>
+                            <a style="color:black" href="/admin/getOrder?orderId=@p.Id">@p.Id</a>
+                        </td>
+                        <td>@p.Cart.Cost</td>
+                        <td>@p.Status</td>
+                        <td>@p.DeliveryInfo.Email</td>
+                        <td>@p.CreatedDate.ToShortDateString()</td>
+                        <td>@p.CreatedDate.ToShortTimeString()</td>
+                    </tr>
+                </tbody>
+            }
+        </table>
     </div>
 </div>

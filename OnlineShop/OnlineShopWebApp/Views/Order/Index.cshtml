@@ -1,29 +1,4 @@
-﻿@*<form method="post">
-    <div class="row text-center">
-        <div class="col text-md-center">
-
-            <label>Введите ФИО</label>
-            <div>
-                <input class="text" name="NameOfClient"  />
-            </div>
-
-            <label>Введите адрес доставки</label>
-            <div>
-                <input class="text" name="AdressToDelivery" />
-            </div>
-
-            <label>Введите номер телефона</label>
-            <div>
-                <input class="text" name="Phone" />
-            </div>
-
-            <br />
-            <button class="btn btn-success btn-sm" type="submit" asp-controller="Order" asp-action="Buy">Завершить оформление</button>
-        </div>
-    </div>
-</form>*@
-
-@using OnlineShopWebApp.Models
+﻿@using OnlineShopWebApp.Models
 
 @model DeliveryInfo
 @{
@@ -46,6 +21,10 @@
                 <div class="mb-3">
                     <input class="form-control" asp-for="Phone" placeholder="Введите номер телефона">
                     <span asp-validation-for="Phone"></span>
+                </div>
+                <div class="mb-3">
+                    <input class="form-control" asp-for="Email" placeholder="Введите Email">
+                    <span asp-validation-for="Email"></span>
                 </div>
                 <div class="mb-3">
                     <button type="submit" class="btn btn-outline-dark" asp-controller="Order" asp-action="Buy">Завершить оформление</button>

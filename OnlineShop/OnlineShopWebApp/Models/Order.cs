@@ -4,18 +4,20 @@ namespace OnlineShopWebApp.Models
 {
     public class Order
     {
-        public Guid Id { get; set; }
+        public int Id { get; set; }
         public Cart Cart { get; set; }
         public DeliveryInfo DeliveryInfo { get; }
+        public OrderStatus Status { get; set; }
         public DateTime CreatedDate { get; set; }
-
 
         public Order(Cart cart, DeliveryInfo deliveryInfo)
         {
-            Id = Guid.NewGuid();
             CreatedDate = DateTime.Now;
             Cart = cart;
             DeliveryInfo = deliveryInfo;
+            Status = OrderStatus.Processing;
         }
+
+
     }
 }

@@ -1,20 +1,25 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using OnlineShopWebApp.Models;
+using System.Linq;
 
 namespace OnlineShopWebApp.Controllers
 {
     public class AdminController : Controller
     {
         private readonly IProductBase _productBase;
+        private readonly IOrderBase _orderBase;
 
-        public AdminController(IProductBase productBase)
+
+        public AdminController(IProductBase productBase, IOrderBase orderBase)
         {
             _productBase = productBase;
+            _orderBase = orderBase;
         }
 
         public IActionResult Orders()
         {
-            return View();
+            var orders = _orderBase.AllOrders();
+            return View(orders);
         }
 
         public IActionResult Users()
@@ -58,6 +63,13 @@ namespace OnlineShopWebApp.Controllers
         {
             var product = _productBase.TryGetById(productId);
             return View(product);
+        }
+
+        [HttpGet]
+        public IActionResult GetOrder(int orderId)
+        {
+            var necessaryOrder = _orderBase.AllOrders().FirstOrDefault(x => x.Id == orderId);
+            return View(necessaryOrder);
         }
 
         [HttpPost]

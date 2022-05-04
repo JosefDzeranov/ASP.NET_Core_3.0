@@ -15,5 +15,8 @@ namespace OnlineShopWebApp
         public string NameOfClient { get; set; }
         [Required(ErrorMessage = "Укажите контактный телефон")]
         public string Phone { get; set; }
+        [Required(ErrorMessage = "Укажите Email")]
+        public string Email { get; set; }
+
     }
 }

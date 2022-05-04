@@ -17,13 +17,12 @@ namespace OnlineShopWebApp
             Encoder = JavaScriptEncoder.Create(UnicodeRanges.BasicLatin, UnicodeRanges.Cyrillic),
             WriteIndented = true
         };
-        
+
 
         public int NextProductId()
         {
             var maxIdProduct = AllProducts().Select(x => x.Id).Max();
             return maxIdProduct + 1;
-
         }
         public IEnumerable<Product> AllProducts()
         {

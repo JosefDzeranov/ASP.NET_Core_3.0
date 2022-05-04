@@ -10,5 +10,6 @@ namespace OnlineShopWebApp
     public interface IOrderBase
     {
         void Add(Order order);
+        IEnumerable<Order> AllOrders();
     }
 }
