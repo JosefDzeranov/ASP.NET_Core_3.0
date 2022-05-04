@@ -10,10 +10,12 @@ namespace OnlineShopWebApp.Controllers
     {
         private readonly IOrderRepository orderRepository;
         private readonly IProductRepository productRepository;
-        public AdminController(IOrderRepository orderRepository, IProductRepository productRepository)
+        private readonly IRoleRepository roleRepository;
+        public AdminController(IOrderRepository orderRepository, IProductRepository productRepository, IRoleRepository roleRepository)
         {
             this.orderRepository = orderRepository;
             this.productRepository = productRepository;
+            this.roleRepository = roleRepository;
         }
 
         public IActionResult Orders()
@@ -68,7 +70,35 @@ namespace OnlineShopWebApp.Controllers
         }
         public IActionResult Roles()
         {
+            var roles = roleRepository.GetAll();
+            return View(roles);
+        }
+
+        public IActionResult AddRole()
+        {
             return View();
+        }
+
+        [HttpPost]
+        public IActionResult AddRole(Role role)
+        {
+            if(roleRepository.TryGetByName(role.Name)!= null)
+            {
+                ModelState.AddModelError("", "Роль с таким именем уже существует");
+            }
+            if (ModelState.IsValid)
+            {
+                roleRepository.Add(role);
+                return RedirectToAction("Roles", "Admin");
+            }
+
+            return View(role);
+        }
+        public IActionResult DeleteRole(string name)
+        {
+            roleRepository.Remove(name);
+
+            return RedirectToAction("Roles", "Admin");
         }
         public IActionResult Products()
         {
@@ -79,7 +109,7 @@ namespace OnlineShopWebApp.Controllers
         }
         public IActionResult OrderDetail(Guid orderId)
         {
-            if(orderId != null)
+            if (orderId != null)
             {
                 var order = orderRepository.TryGetById(orderId);
 
@@ -87,12 +117,12 @@ namespace OnlineShopWebApp.Controllers
             }
             return RedirectToAction("Products", "Admin");
         }
-        
+
         public IActionResult UpdateOrderStatus(Guid orderId, OrderStatus status)
         {
             orderRepository.UpdateStatus(orderId, status);
 
-            return RedirectToAction("OrderDetail","Admin", new { orderId });
+            return RedirectToAction("OrderDetail", "Admin", new { orderId });
         }
 
     }
