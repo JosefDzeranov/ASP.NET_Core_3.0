@@ -29,7 +29,6 @@ namespace OnlineShopWebApp.Controllers
 
             return View(ordersList);
 
-
         }
 
         public IActionResult EditOrder(Guid id)
@@ -123,8 +122,6 @@ namespace OnlineShopWebApp.Controllers
             {
                 return RedirectToAction("EditProduct");
             }
-
-
 
         }
 

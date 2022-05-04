@@ -25,7 +25,7 @@ namespace OnlineShopWebApp.Controllers
 
             return View(orderData);
         }
-       
+
         [HttpPost]
         public IActionResult MakeOrder(OrderData orderData)
         {
@@ -34,19 +34,19 @@ namespace OnlineShopWebApp.Controllers
             {
                 var cart = cartManager.TryGetCartByUserID(Constants.UserId);
                 var order = new Order(cart, orderData, Constants.UserId);
-              
+
 
                 orderManager.SaveOrder(order);
-                cartManager.Clear(Constants.UserId);
+                cartManager.RemoveCartLines(cart);
                 return View();
             }
             else
             {
                 return RedirectToAction("Index");
             }
-            
 
-           
+
+
         }
 
     }
