@@ -1,12 +1,34 @@
+@model List<User>
 
-﻿<div class="row">
-   @await Html.PartialAsync("AdminLeftPanel")
+<div class="row">
+    @await Html.PartialAsync("AdminLeftPanel")
     <div class="col-9">
         <div class="card">
             <div class="card-body">
                 <h3>Пользователи</h3>
                 <div class="row">
-                   
+                    <table class="table">
+                        <tr>
+                            <th>Email</th>
+                            <th>Имя</th>
+                            <th>Фамилия</th>
+                            <th>Телефон</th>
+                        </tr>
+                        @foreach (var user in Model)
+                        {
+                            <tr>
+                                <td><a asp-controller="User" asp-action="UserDetails">@user.Email</a></td>
+                                <td></td>
+                                <td></td>
+                                <td>   
+                                </td>
+                            </tr>
+                        }
+                        <tr>
+                            <td colspan="4"><a asp-controller="User" asp-action="AddUser" class="btn btn-primary">Новый пользователь</a></td>
+
+                        </tr>
+                    </table>
                 </div>
             </div>
         </div>

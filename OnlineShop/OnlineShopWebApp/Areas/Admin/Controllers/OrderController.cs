@@ -22,7 +22,7 @@ namespace OnlineShopWebApp.Areas.Admin.Controllers
             return View(existingOrders);
         }
 
-        public IActionResult OrderDetail(Guid orderId)
+        public IActionResult OrderDetails(Guid orderId)
         {
             var order = orderRepository.TryGetById(orderId);
             if (order!= null)
@@ -36,7 +36,7 @@ namespace OnlineShopWebApp.Areas.Admin.Controllers
         {
             orderRepository.UpdateStatus(orderId, status);
 
-            return RedirectToAction("OrderDetail", "Order", new { orderId });
+            return RedirectToAction("OrderDetails", "Order", new { orderId });
         }
     }
 }

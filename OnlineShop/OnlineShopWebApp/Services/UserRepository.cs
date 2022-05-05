@@ -48,6 +48,11 @@ namespace OnlineShopWebApp.Services
 
         }
 
+        public List<User> GetAll()
+        {
+            return users;
+        }
+
         public User TryGetByEmail(string email)
         {
             return users.FirstOrDefault(x => x.Email == email);

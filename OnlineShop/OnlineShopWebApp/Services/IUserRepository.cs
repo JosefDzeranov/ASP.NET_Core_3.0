@@ -1,5 +1,6 @@
 ﻿using OnlineShopWebApp.Models;
 using System;
+using System.Collections.Generic;
 
 namespace OnlineShopWebApp.Services
 {
@@ -11,5 +12,6 @@ namespace OnlineShopWebApp.Services
         User TryGetById(Guid id);
         User TryGetByEmail(string email);
         bool Auth(string username, string password, bool rememberMe);
+        List<User> GetAll();
     }
 }
