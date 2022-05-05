@@ -14,7 +14,7 @@ namespace OnlineShopWebApp.Models
         [Required]
         public string Email { get; set; }
         public bool RememberMe { get; set; }
-        public bool IsAdmin { get; set; }
+        public Role Role { get; set; }
 
     }
 }
