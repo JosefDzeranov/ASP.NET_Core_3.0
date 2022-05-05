@@ -16,6 +16,7 @@ namespace OnlineShopWebApp
 
         public void SaveOrder(Order order)
         {
+            ordersList = GetOrders();
             ordersList.Add(order);
 
             var jsonData = JsonConvert.SerializeObject(ordersList);
@@ -65,15 +66,21 @@ namespace OnlineShopWebApp
 
         public void UpdateStatus(Guid id, OrderStatus status)
         {
+           
             var order = TryGetOrderById(id);
-
-            ordersList.Remove(order);
-
+            
+          
             if (order != null)
             {
+              
                 order.Status = status;
-                SaveOrder(order);
 
+            }
+            var jsonData = JsonConvert.SerializeObject(ordersList);
+
+            using (StreamWriter sw = new StreamWriter(path, false, System.Text.Encoding.UTF8))
+            {
+                sw.WriteLine(jsonData);
             }
 
         }
