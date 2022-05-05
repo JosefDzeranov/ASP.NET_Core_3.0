@@ -41,6 +41,15 @@ namespace OnlineShopWebApp
             }
         }
 
+        public void UpdateOrderStatus(int orderId, OrderStatus status)
+        {
+            var allOrders = AllOrders();
+            var necessaryOrder = allOrders.FirstOrDefault(x => x.Id == orderId);
+            necessaryOrder.Status = status;
+            var json = System.Text.Json.JsonSerializer.Serialize(allOrders, jsonOption);
+            File.WriteAllText("Models/Orders.json", json);
+        }
+
         public void Add(Order order)
         {
             order.Id = NextOrderId();

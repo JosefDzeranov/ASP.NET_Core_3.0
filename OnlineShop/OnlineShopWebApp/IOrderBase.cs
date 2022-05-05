@@ -11,5 +11,6 @@ namespace OnlineShopWebApp
     {
         void Add(Order order);
         IEnumerable<Order> AllOrders();
+        void UpdateOrderStatus(int orderId, OrderStatus status);
     }
 }

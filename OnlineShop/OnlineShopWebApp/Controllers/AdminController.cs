@@ -65,11 +65,17 @@ namespace OnlineShopWebApp.Controllers
             return View(product);
         }
 
-        [HttpGet]
         public IActionResult GetOrder(int orderId)
         {
             var necessaryOrder = _orderBase.AllOrders().FirstOrDefault(x => x.Id == orderId);
             return View(necessaryOrder);
+        }
+
+        [HttpPost]
+        public IActionResult UpdateStatusOrder(int orderId, OrderStatus status)
+        {
+            _orderBase.UpdateOrderStatus(orderId, status);
+            return RedirectToAction("Orders");
         }
 
         [HttpPost]

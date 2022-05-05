@@ -7,42 +7,45 @@
 
     <div class="col-9">
         <h3>Заказ №@Model.Id</h3>
-        <table class="table">
-            <thead></thead>
-            <tbody>
-                <tr>
-                    <th>Дата и время оформления</th>
-                    <td>@Model.CreatedDate.ToShortDateString() в @Model.CreatedDate.ToShortTimeString()</td>
-                </tr>
-                <tr>
-                    <th>Адрес доставки</th>
-                    <td>@Model.DeliveryInfo.AdressToDelivery.</td>
-                </tr>
-                <tr>
-                    <th>Получатель</th>
-                    <td>@Model.DeliveryInfo.NameOfClient</td>
-                </tr>
-                <tr>
-                    <th>Телефон</th>
-                    <td>@Model.DeliveryInfo.Phone</td>
-                </tr>
-                <tr>
-                    <th>E-mail</th>
-                    <td>@Model.DeliveryInfo.Email</td>
-                </tr>
-                <tr>
-                    <th>Сумма</th>
-                    <td>@Model.Cart.Cost</td>
-                </tr>
-                <tr>
-                    <th>Статус</th>
-                    <td>
-                        <select asp-for="@Model.Status"
-                                asp-items="@Html.GetEnumSelectList<OrderStatus>()"
-                                class="form-control"></select>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
+        <form asp-action="UpdateStatusOrder" asp-controller="Admin">
+            <table class="table">
+                <thead></thead>
+                <tbody>
+                    <tr>
+                        <th>Дата и время оформления</th>
+                        <td>@Model.CreatedDate.ToShortDateString() в @Model.CreatedDate.ToShortTimeString()</td>
+                    </tr>
+                    <tr>
+                        <th>Адрес доставки</th>
+                        <td>@Model.DeliveryInfo.AdressToDelivery.</td>
+                    </tr>
+                    <tr>
+                        <th>Получатель</th>
+                        <td>@Model.DeliveryInfo.NameOfClient</td>
+                    </tr>
+                    <tr>
+                        <th>Телефон</th>
+                        <td>@Model.DeliveryInfo.Phone</td>
+                    </tr>
+                    <tr>
+                        <th>E-mail</th>
+                        <td>@Model.DeliveryInfo.Email</td>
+                    </tr>
+                    <tr>
+                        <th>Сумма руб.</th>
+                        <td>@Model.Cart.Cost</td>
+                    </tr>
+                    <tr>
+                        <th>Статус</th>
+                        <td>
+                            <select asp-for="@Model.Status"
+                                    asp-items="@Html.GetEnumSelectList<OrderStatus>()"
+                                    class="form-control"></select>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <button type="submit" class="btn btn-outline-dark" asp-controller="Admin" asp-action="UpdateStatusOrder" asp-route-orderId="@Model.Id">Обновить</button>
+        </form>
     </div>
 </div>
