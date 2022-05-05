@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using OnlineShopWebApp.Models;
 using OnlineShopWebApp.Services;
+using System;
 using System.Collections.Generic;
 
 namespace OnlineShopWebApp.Areas.Admin.Controllers
@@ -20,6 +21,13 @@ namespace OnlineShopWebApp.Areas.Admin.Controllers
             var users = userRepository.GetAll();
 
             return View(users);
+        }
+
+        public IActionResult UserDetails(Guid id)
+        {
+            var user = userRepository.TryGetById(id);
+
+            return View(user);
         }
     }
 }

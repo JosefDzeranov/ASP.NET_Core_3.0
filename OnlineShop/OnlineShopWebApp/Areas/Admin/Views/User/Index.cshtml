@@ -17,16 +17,15 @@
                         @foreach (var user in Model)
                         {
                             <tr>
-                                <td><a asp-controller="User" asp-action="UserDetails">@user.Email</a></td>
+                                <td><a asp-controller="User" asp-action="UserDetails" asp-route-id="@user.Id">@user.Email</a></td>
                                 <td></td>
                                 <td></td>
-                                <td>   
+                                <td>
                                 </td>
                             </tr>
                         }
                         <tr>
                             <td colspan="4"><a asp-controller="User" asp-action="AddUser" class="btn btn-primary">Новый пользователь</a></td>
-
                         </tr>
                     </table>
                 </div>
