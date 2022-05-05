@@ -27,6 +27,7 @@ namespace OnlineShopWebApp
             services.AddSingleton<IOrderRepository, OrderRepository>();
             services.AddSingleton<IFavoriteRepository, FavoriteRepository>();
             services.AddSingleton<IRoleRepository, RoleRepository>();
+            services.AddSingleton<IUserRepository, UserRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
