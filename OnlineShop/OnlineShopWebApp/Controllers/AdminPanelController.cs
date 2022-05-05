@@ -12,30 +12,30 @@ namespace OOnlineShopWebApp.Controllers
         {
             this.productStorage = productStorage;
         }
-        public IActionResult Index(int personId)
+        public IActionResult Index()
         {
             return View();
         }
-        public IActionResult Orders(int personId)
+        public IActionResult Orders()
         {
             return View();
         }
-        public IActionResult Users(int personId)
+        public IActionResult Users()
         {
             return View();
         }
-        public IActionResult Roles(int personId)
+        public IActionResult Roles()
         {
             return View();
         }
-        public IActionResult Products(int personId)
+        public IActionResult Products()
         {
             var products = productStorage.Products;
             return View(products);
         }
-        public IActionResult DeleteProduct(int idProduct)
+        public IActionResult DeleteProduct(int productId)
         {
-            var product = productStorage.FindProduct(idProduct);
+            var product = productStorage.FindProduct(productId);
             productStorage.DeleteProduct(product);
             return RedirectToAction("Products");
         }
@@ -47,8 +47,12 @@ namespace OOnlineShopWebApp.Controllers
         [HttpPost]
         public IActionResult UpdateProduct(Product product)
         {
-            productStorage.UpdateProduct(product);
-            return RedirectToAction("Products");
+            if (ModelState.IsValid)
+            {
+                productStorage.UpdateProduct(product);
+                return RedirectToAction("Products");
+            }
+            else return Content("errorValid");
         }
         public IActionResult CardNewProduct()
         {
@@ -57,8 +61,13 @@ namespace OOnlineShopWebApp.Controllers
         [HttpPost]
         public IActionResult AddNewProduct(Product product)
         {
-            productStorage.AddNewProduct(product);
-            return RedirectToAction("Products");
+            if (ModelState.IsValid)
+            {
+                productStorage.AddNewProduct(product);
+                return RedirectToAction("Products");
+            }
+            else return Content("errorValid");
+            
         }
     }
 }

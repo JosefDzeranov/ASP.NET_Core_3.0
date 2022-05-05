@@ -1,16 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Security.Cryptography.X509Certificates;
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
 using OnlineShopWebApp.Interfase;
 using OnlineShopWebApp.Models;
+using System.Collections.Generic;
+using System.IO;
 
 namespace OnlineShopWebApp
 {
     public class JsonProductStorage:IProductStorage
     {
+        private int instanceCounter { get; set; }
         public List<Product> Products { get; set; } = new List<Product>();
         string nameSave = "Data/projects_for_sale.json";
 
@@ -36,6 +34,17 @@ namespace OnlineShopWebApp
         {
             var json = File.ReadAllText(nameSave);
             Products = JsonConvert.DeserializeObject<List<Product>>(json);
+
+            List<int> idProducts = new List<int>();
+            foreach (var prod in Products)
+            {
+                idProducts.Add(prod.Id);
+            }
+            idProducts.Sort();
+            if (instanceCounter <= idProducts[^1])
+            {
+                instanceCounter = idProducts[^1];
+            }
         }
 
         public void DeleteProduct(Product product)
@@ -48,64 +57,28 @@ namespace OnlineShopWebApp
         public void UpdateProduct(Product newProduct)
         {
             var oldProduct = FindProduct(newProduct.Id);
-            static T VerifyNull<T>(T TOld, T TNew)
-            {
-                if (TNew is string)
-                {
-                    TOld = TNew ?? TOld;
-                }
-                else
-                {
-                    try
-                    {
-                        if (Convert.ToDouble(TNew)!=0) TOld = TNew;
-                    }
-                    catch (Exception e)
-                    {
-                        Console.WriteLine($"{e} - неозможно привести к double");
-                        throw;
-                    }
-                    
-                }
-
-                return TOld;
-            }
-            oldProduct.Cost = VerifyNull(oldProduct.Cost, newProduct.Cost);
-            oldProduct.Description = VerifyNull(oldProduct.Description, newProduct.Description);
-            oldProduct.Images[0] = VerifyNull(oldProduct.Images[0], newProduct.Images[0]);
-            oldProduct.Length = VerifyNull(oldProduct.Length, newProduct.Length);
-            oldProduct.Name = VerifyNull(oldProduct.Name, newProduct.Name);
-            oldProduct.Square = VerifyNull(oldProduct.Square, newProduct.Square);
-            oldProduct.Width = VerifyNull(oldProduct.Width, newProduct.Width);
+            oldProduct.Cost = newProduct.Cost;
+            oldProduct.Description = newProduct.Description;
+            oldProduct.Images[0] = newProduct.Images[0];
+            oldProduct.Length = newProduct.Length;
+            oldProduct.CodeNumber = newProduct.CodeNumber;
+            oldProduct.Square = newProduct.Square;
+            oldProduct.Width = newProduct.Width;
             WriteToStorage();
         }
 
         public void AddNewProduct(Product product)
         {
-            List<Product> sProducts = new List<Product>(Products.OrderBy(p => p.Id));
-            for (int i=0; i < sProducts.Count; i++)
-            {
-                while (i > 0 && sProducts[i].Id == sProducts[i - 1].Id)
-                {
-                    Products.Remove(sProducts[i]);
-                    sProducts.RemoveAt(i);
-                }
-            }
-            for (int i=0; i< sProducts.Count; i++)
-            {
-                if (sProducts[i].Id != i)
-                {
-                    product.Id = i;
-                    break;
-                }
-                if (i == sProducts.Count - 1)
-                {
-                    product.Id = i + 1;
-                    break;
-                }
-            }
+            product.Id = assignId();
             Products.Add(product);
             WriteToStorage();
+        }
+        
+
+        public int assignId()
+        {
+            instanceCounter++;
+            return instanceCounter;
         }
     }
 }
