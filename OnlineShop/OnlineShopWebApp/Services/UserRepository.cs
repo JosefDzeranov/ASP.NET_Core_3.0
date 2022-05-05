@@ -63,7 +63,7 @@ namespace OnlineShopWebApp.Services
             return users.FirstOrDefault(x => x.Id == id);
         }
 
-        public void Update(Guid id)
+        public void Update(User user)
         {
             throw new NotImplementedException();
         }

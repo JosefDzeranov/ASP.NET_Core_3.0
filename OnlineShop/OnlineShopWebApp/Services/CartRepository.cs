@@ -8,11 +8,11 @@ namespace OnlineShopWebApp.Services
 {
     public class CartRepository : ICartRepository
     {
-        private List<Cart> Сarts = new List<Cart>();
+        private List<Cart> сarts = new List<Cart>();
 
         public Cart TryGetByUserId(string userId)
         {
-            return Сarts.FirstOrDefault(x => x.UserId == userId);
+            return сarts.FirstOrDefault(x => x.UserId == userId);
         }
 
         public void Add(Product product, string userId)
@@ -34,7 +34,7 @@ namespace OnlineShopWebApp.Services
                         }
                     }
                 };
-                Сarts.Add(newCart);
+                сarts.Add(newCart);
             }
             else
             {
@@ -62,7 +62,7 @@ namespace OnlineShopWebApp.Services
             var existingCart = TryGetByUserId(userId);
             if (existingCart != null)
             {
-                Сarts.Remove(existingCart);
+                сarts.Remove(existingCart);
             }
 
         }
@@ -84,7 +84,7 @@ namespace OnlineShopWebApp.Services
             }
             if (existingCart.Items.Count == 0)
             {
-                Сarts.Remove(existingCart);
+                сarts.Remove(existingCart);
             }
         }
 

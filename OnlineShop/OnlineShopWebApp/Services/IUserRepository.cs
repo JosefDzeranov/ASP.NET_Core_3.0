@@ -7,7 +7,7 @@ namespace OnlineShopWebApp.Services
     public interface IUserRepository
     {
         bool Add(User user);
-        void Update(Guid id);
+        void Update(User user);
         void Delete(Guid id);
         User TryGetById(Guid id);
         User TryGetByEmail(string email);

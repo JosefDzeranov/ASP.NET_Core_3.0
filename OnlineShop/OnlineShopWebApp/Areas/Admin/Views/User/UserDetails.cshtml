@@ -32,9 +32,9 @@
                         </button>
                         <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
                             <li><a class="dropdown-item">Действия</a></li>
-                            <li><a class="dropdown-item" asp-controller="Order" asp-action="UpdateOrderStatus" asp-route-orderId="@Model.Id" asp-route-status="@OrderStatus.Confirmed">@OrderStatus.Confirmed</a></li>
-                            <li><a class="dropdown-item" asp-controller="Order" asp-action="UpdateOrderStatus" asp-route-orderId="@Model.Id" asp-route-status="@OrderStatus.Paid">@OrderStatus.Paid</a></li>
-                            <li><a class="dropdown-item" asp-controller="Order" asp-action="UpdateOrderStatus" asp-route-orderId="@Model.Id" asp-route-status="@OrderStatus.Delivered">@OrderStatus.Delivered</a></li>
+                            <li><a class="dropdown-item" asp-controller="User" asp-action="ChangePassword" asp-route-id="@Model.Id">Сменить пароль</a></li>
+                            <li><a class="dropdown-item" asp-controller="User" asp-action="UpdateUser" asp-route-id="@Model.Id">Редактировать данные</a></li>
+                            <li><a class="dropdown-item" asp-controller="User" asp-action="DeleteUser" asp-route-id="@Model.Id">Удалить</a></li>
                         </ul>
                     </div>
                 </div>

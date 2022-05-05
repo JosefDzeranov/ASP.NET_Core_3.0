@@ -66,5 +66,12 @@ namespace OnlineShopWebApp.Areas.Admin.Controllers
             }
             return View();
         }
+        
+        public IActionResult DeleteUser(Guid id)
+        {
+            userRepository.Delete(id);
+
+            return RedirectToAction("Index", "User");
+        }
     }
 }
