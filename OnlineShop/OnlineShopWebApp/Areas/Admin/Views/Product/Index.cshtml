@@ -21,13 +21,13 @@
                                 <td>@product.Name</td>
                                 <td>@product.Cost ₽</td>
                                 <td>
-                                    <a asp-controller="Admin" asp-action="EditProduct" asp-route-id="@product.Id" class="btn btn-primary">Изменить</a>
-                                    <a asp-controller="Admin" asp-action="DeleteProduct" asp-route-id="@product.Id" class="btn btn-danger">Удалить</a>
+                                    <a asp-controller="Product" asp-action="EditProduct" asp-route-id="@product.Id" class="btn btn-primary">Изменить</a>
+                                    <a asp-controller="Product" asp-action="DeleteProduct" asp-route-id="@product.Id" class="btn btn-danger">Удалить</a>
                                 </td>
                             </tr>
                         }
                         <tr>
-                            <td colspan="4"><a asp-controller="Admin" asp-action="AddProduct" class="btn btn-primary">Добавить новый</a></td>
+                            <td colspan="4"><a asp-controller="Product" asp-action="AddProduct" class="btn btn-primary">Добавить новый</a></td>
 
                         </tr>
 
