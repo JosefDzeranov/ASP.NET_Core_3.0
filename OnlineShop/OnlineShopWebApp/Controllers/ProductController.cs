@@ -11,9 +11,9 @@ namespace OnlineShopWebApp.Controllers
             this.productReposititory = productsRepository;
         }
          
-        public IActionResult Item(int id)
+        public IActionResult Item(int productId)
         {
-            var product = productReposititory.TryGetById(id);
+            var product = productReposititory.TryGetById(productId);
             return View(product);
         }
 

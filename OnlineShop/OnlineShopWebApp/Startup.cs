@@ -39,6 +39,13 @@ namespace OnlineShopWebApp
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllerRoute(
+                    name: "AdminArea",
+                    pattern: "{area:exists}/{controller=Home}/{action=Products}/{id?}");
+            });
+
+            app.UseEndpoints(endpoints =>
+            {
+                endpoints.MapControllerRoute(
                     name: "default",
                     pattern: "{controller=Home}/{action=Products}/{id?}");
             });

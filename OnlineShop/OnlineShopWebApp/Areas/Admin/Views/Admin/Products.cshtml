@@ -4,7 +4,7 @@
     @await Html.PartialAsync("AdminPanel")
 
     <div class="col-9">
-        <a asp-controller="Admin" asp-action="AddProduct">Add new Product</a>
+        <a asp-area = "Admin" asp-controller="Admin" asp-action="AddProduct">Add new Product</a>
 
         <table class="table">
             <thead>
@@ -26,13 +26,11 @@
 
                     <td>@item.Cost</td>
                     <td>
-                        @*<a style="color:black" asp-controller="Admin" asp-action="Edit" asp-route-product="@item">Edit </a>*@
-                        @*<a style="color:black" asp-controller="Admin" asp-action="Edit" asp-route-id="@item.Id">Edit </a>*@
-                        <a style="color:blue" asp-controller="Admin" asp-action="EditProduct" asp-route-productId="@item.Id">Edit</a>
+                        <a style="color:blue" asp-area = "Admin" asp-controller="Admin" asp-action="EditProduct" asp-route-productId="@item.Id">Edit</a>
                     </td>
 
                     <td>
-                        <a class="btn btn-outline-dark btn-sm" asp-controller="Admin" asp-action="DeleteProduct" asp-route-productId="@item.Id" role="button">Delete</a>
+                        <a class="btn btn-outline-dark btn-sm" asp-area = "Admin" asp-controller="Admin" asp-action="DeleteProduct" asp-route-productId="@item.Id" role="button">Delete</a>
                     <td>
                 </tr>
                 }
