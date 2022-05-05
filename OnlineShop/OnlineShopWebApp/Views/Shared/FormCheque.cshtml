@@ -8,13 +8,13 @@
             <div class="card">
                 <div class="card-header" id="headingOne">
                     <h2 class="mb-0">
-                        <button class="btn btn-link btn-block text-left collapsed" type="button" data-toggle="collapse" data-target=#id_@prod.Product.Name@i aria-expanded="false" aria-controls=id_@prod.Product.Name@i>
-                            @prod.Product.Name - @prod.Product.Description ( тип @i )
+                        <button class="btn btn-link btn-block text-left collapsed" type="button" data-toggle="collapse" data-target=#id_@prod.Product.CodeNumber@i aria-expanded="false" aria-controls=id_@prod.Product.CodeNumber@i>
+                            @prod.Product.CodeNumber - @prod.Product.Description ( тип @i )
                         </button>
                     </h2>
                 </div>
 
-                <div id=id_@prod.Product.Name@i class="collapse" aria-labelledby="heading1" data-parent="#accordionExample">
+                <div id=id_@prod.Product.CodeNumber@i class="collapse" aria-labelledby="heading1" data-parent="#accordionExample">
                     <div class="card-body">
                         <div class="row">
                             <div class="col-3">
@@ -22,7 +22,7 @@
                             </div>
                             <div class="col">
                                 <div class="card-body">
-                                    <h6>@prod.Product.Name - @prod.Product.Description ( тип @i )</h6>
+                                    <h6>@prod.Product.CodeNumber - @prod.Product.Description ( тип @i )</h6>
                                     <h6>Общая площадь: @prod.Product.Square м.кв.</h6>
                                     <h6>Габариты: @prod.Product.Length х @prod.Product.Width м</h6>
                                     <h6>Комплектация<font color="red">*</font>:</h6>

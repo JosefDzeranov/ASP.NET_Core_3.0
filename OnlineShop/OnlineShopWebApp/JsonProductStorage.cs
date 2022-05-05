@@ -1,17 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Security.Cryptography.X509Certificates;
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
 using OnlineShopWebApp.Interfase;
 using OnlineShopWebApp.Models;
+using System.Collections.Generic;
+using System.IO;
 
 namespace OnlineShopWebApp
 {
     public class JsonProductStorage:IProductStorage
     {
-        private static int instanceCounter;
+        private int instanceCounter { get; set; }
         public List<Product> Products { get; set; } = new List<Product>();
         string nameSave = "Data/projects_for_sale.json";
 
@@ -50,7 +47,6 @@ namespace OnlineShopWebApp
             }
         }
 
-
         public void DeleteProduct(Product product)
         {
             Products.Remove(product);
@@ -65,7 +61,7 @@ namespace OnlineShopWebApp
             oldProduct.Description = newProduct.Description;
             oldProduct.Images[0] = newProduct.Images[0];
             oldProduct.Length = newProduct.Length;
-            oldProduct.Name = newProduct.Name;
+            oldProduct.CodeNumber = newProduct.CodeNumber;
             oldProduct.Square = newProduct.Square;
             oldProduct.Width = newProduct.Width;
             WriteToStorage();
@@ -77,8 +73,9 @@ namespace OnlineShopWebApp
             Products.Add(product);
             WriteToStorage();
         }
+        
 
-        private int assignId()
+        public int assignId()
         {
             instanceCounter++;
             return instanceCounter;
