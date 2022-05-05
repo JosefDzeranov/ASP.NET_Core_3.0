@@ -1,15 +1,7 @@
-﻿<style>
-    table, th, td, caption, tr {
-        border: 1px solid black;
-    }
-
-    table {
-        border-collapse: collapse;
-    }
-</style>
+﻿@model List<Role>
 
 <div class="row">
-     @await Html.PartialAsync("Menu")
+    @await Html.PartialAsync("Menu")
 
     <div class="column">
         <table>
@@ -17,9 +9,20 @@
                 <th>Роли</th>
 
             </tr>
-            <tr>
-            </tr>
-            <tr></tr>
+            @if (Model != null)
+            {
+                @foreach (var role in Model)
+                {
+                    <tr>
+                        <td>@role.Name</td>
+                        <td><a class="btn-outline-dark" href="/administration/removerole/?name=@role.Name" role="button"> Удалить </a></td>
+                    </tr>
+                }
+
+            }
+        <tr>
+            <td><a class="btn-outline-dark" href="/administration/addrole" role="button"> Добавить </a></td>
+        </tr>
         </table>
     </div>
 </div>

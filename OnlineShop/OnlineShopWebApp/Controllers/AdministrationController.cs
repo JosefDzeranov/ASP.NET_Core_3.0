@@ -8,11 +8,13 @@ namespace OnlineShopWebApp.Controllers
     {
         private readonly IProductManager productManager;
         private readonly IOrderManager orderManager;
+        private readonly IRolesManager rolesManager;
 
-        public AdministrationController(IProductManager productManager, IOrderManager orderManager)
+        public AdministrationController(IProductManager productManager, IOrderManager orderManager, IRolesManager rolesManager)
         {
             this.productManager = productManager;
             this.orderManager = orderManager;
+            this.rolesManager = rolesManager;
         }
 
         public IActionResult Index()
@@ -53,7 +55,45 @@ namespace OnlineShopWebApp.Controllers
 
         public IActionResult Roles()
         {
+            var roles = rolesManager.Roles;
+            return View(roles);
+        }
+
+        public IActionResult AddRole()
+        {
+
             return View();
+        }
+
+        [HttpPost]
+        public IActionResult AddRole(Role role)
+        {
+
+            if (rolesManager.TryFindByName(role.Name) != null)
+            {
+                ModelState.AddModelError("", "такая роль уже есть");
+
+            }
+
+            if (ModelState.IsValid)
+            {
+                rolesManager.AddRole(role);
+                return RedirectToAction("Roles");
+            }
+
+            return View(role);
+
+
+        }
+
+
+
+
+        public IActionResult RemoveRole(string name)
+        {
+            rolesManager.RemoveRole(name);
+
+            return RedirectToAction("Roles");
         }
 
         public IActionResult Products()
