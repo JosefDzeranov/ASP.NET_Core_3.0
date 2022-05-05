@@ -10,17 +10,17 @@ namespace OnlineShopWebApp
     public class OrdersRepositoryJSON: IOrdersRepository
     {
         public static string Path { get; } = "order.json";
+        public static List<Order> orders = new List<Order>();
 
-        private List<Cart> orders = new List<Cart>();
+        private List<Cart> carts = new List<Cart>();
 
         public void AddCart(Cart cart)
         {
-            orders.Add(cart);
+            carts.Add(cart);
         }
 
         public void SaveOrderInformation(Order order)
         {
-            var orders = new List<Order>();
             orders.Add(order);
             var jsonData = JsonConvert.SerializeObject(orders, Formatting.Indented);
             FileProvider.Append(Path, jsonData);
