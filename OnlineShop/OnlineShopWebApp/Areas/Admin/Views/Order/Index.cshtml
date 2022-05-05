@@ -31,7 +31,7 @@
                                  <td>@order.Email</td>
                                 <td>@order.Created.ToString("d")</td>
                                 <td>@order.Created.ToString("t")</td>
-                                <td><a asp-controller="Admin" asp-action="OrderDetail" asp-route-orderId="@order.Id" class="btn btn-info">подробнее</a></td>
+                                <td><a asp-controller="Order" asp-action="OrderDetail" asp-route-orderId="@order.Id" class="btn btn-info">подробнее</a></td>
                             </tr>
                         }
                     </table>
