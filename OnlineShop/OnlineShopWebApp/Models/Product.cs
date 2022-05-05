@@ -13,6 +13,5 @@ namespace OnlineShopWebApp.Models
         public double Length { get; set; }
         public string Description { get; set; }
         public List<string> Images { get; set; }
-
     }
 }
