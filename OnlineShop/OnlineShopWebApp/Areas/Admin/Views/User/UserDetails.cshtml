@@ -15,7 +15,7 @@
                         </tr>
                         <tr>
                             <td class="text-black-50">Фамилия:</td>
-                            <td></td>
+                            <td>@Model.LastName</td>
                         </tr>
                         <tr>
                             <td class="text-black-50">Email:</td>
@@ -23,7 +23,7 @@
                         </tr>
                         <tr>
                             <td class="text-black-50">Телефон:</td>
-                            <td></td>
+                            <td>@Model.Phone</td>
                         </tr>
                     </table>
                     <div class="dropdown">
@@ -33,8 +33,8 @@
                         <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
                             <li><a class="dropdown-item">Действия</a></li>
                             <li><a class="dropdown-item" asp-controller="User" asp-action="ChangePassword" asp-route-id="@Model.Id">Сменить пароль</a></li>
-                            <li><a class="dropdown-item" asp-controller="User" asp-action="UpdateUser" asp-route-id="@Model.Id">Редактировать данные</a></li>
-                            <li><a class="dropdown-item" asp-controller="User" asp-action="DeleteUser" asp-route-id="@Model.Id">Удалить</a></li>
+                            <li><a class="dropdown-item" asp-controller="User" asp-action="ChangeInfo" asp-route-id="@Model.Id">Редактировать данные</a></li>
+                            <li><a class="dropdown-item" asp-controller="User" asp-action="Delete" asp-route-id="@Model.Id">Удалить</a></li>
                         </ul>
                     </div>
                 </div>

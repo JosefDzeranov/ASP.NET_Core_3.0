@@ -18,10 +18,9 @@
                         {
                             <tr>
                                 <td><a asp-controller="User" asp-action="UserDetails" asp-route-id="@user.Id">@user.Email</a></td>
-                                <td></td>
-                                <td></td>
-                                <td>
-                                </td>
+                                <td>@user.Name</td>
+                                <td>@user.LastName</td>
+                                <td>@user.Phone</td>
                             </tr>
                         }
                         <tr>
