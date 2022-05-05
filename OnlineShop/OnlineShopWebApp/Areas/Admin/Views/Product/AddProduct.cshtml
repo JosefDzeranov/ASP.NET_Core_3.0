@@ -1,7 +1,7 @@
 ﻿@model Product
 <div class="card shadow">
     <div class="card-body">
-        <form asp-controller="Admin" asp-action="AddProduct">
+        <form asp-controller="Product" asp-action="AddProduct">
             <div class="row justify-content-center">
                 <div class="col-6">
                     <div class="mb-3">
@@ -24,7 +24,7 @@
                         <button type="submit" class="btn btn-dark">Добавить</button>
                     </div>
                     <div class="mb-3 text-center">
-                        <a class="btn btn-dark" asp-controller="Admin" asp-action="Products">Отмена</a>
+                        <a class="btn btn-dark" asp-controller="Product" asp-action="Index">Отмена</a>
                     </div>
                 </div>
 
