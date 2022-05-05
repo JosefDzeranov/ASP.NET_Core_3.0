@@ -15,11 +15,7 @@ namespace OnlineShopWebApp.Models
         public string UserId { get; set; }
 
         public OrderData OrderData { get; set; }
-        //public string Name { get; set; }
-
-        //public string Adress { get; set; }
-
-        //public string Email { get; set; }
+   
 
         public Order(Cart cart, OrderData orderData, string userId)
         {
