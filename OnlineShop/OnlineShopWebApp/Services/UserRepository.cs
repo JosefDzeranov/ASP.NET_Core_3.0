@@ -65,7 +65,9 @@ namespace OnlineShopWebApp.Services
 
         public void Update(User user)
         {
-            throw new NotImplementedException();
+            var oldUser = TryGetById(user.Id);
+            users.Remove(oldUser);
+            users.Add(user); 
         }
     }
 }

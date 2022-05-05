@@ -73,5 +73,24 @@ namespace OnlineShopWebApp.Areas.Admin.Controllers
 
             return RedirectToAction("Index", "User");
         }
+        public IActionResult ChangePassword(Guid id)
+        {
+            var user = userRepository.TryGetById(id);
+            var userPasswordViewModel = new UserPasswordViewModel
+            {
+                Password = user.Password,
+                ConfirmPassword = user.Password,
+                UserId = user.Id,
+            };
+            return View(userPasswordViewModel);
+        }
+        [HttpPost]
+        public IActionResult ChangePassword(UserPasswordViewModel userPasswordViewModel)
+        {
+            var user = userRepository.TryGetById(userPasswordViewModel.UserId);
+            user.Password = userPasswordViewModel.Password;
+            userRepository.Update(user);
+            return RedirectToAction("Index", "User");
+        }
     }
 }
