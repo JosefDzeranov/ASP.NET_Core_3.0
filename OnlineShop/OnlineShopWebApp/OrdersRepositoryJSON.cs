@@ -20,17 +20,17 @@ namespace OnlineShopWebApp
 
         public void SaveOrderInformation(Order order)
         {
-            var jsonData = JsonConvert.SerializeObject(order);
+            var orders = new List<Order>();
+            orders.Add(order);
+            var jsonData = JsonConvert.SerializeObject(orders, Formatting.Indented);
             FileProvider.Append(Path, jsonData);
         }
 
         public List<Order> TryGetOrdersInformation()
         {
-            var orderResults = new List<Order>();
             var fileData = FileProvider.Get(Path);
-            var orderResult = JsonConvert.DeserializeObject<Order>(fileData);
+            var orderResults = JsonConvert.DeserializeObject<List<Order>>(fileData);
 
-            orderResults.Add(orderResult);
             return orderResults;
         }
     }
