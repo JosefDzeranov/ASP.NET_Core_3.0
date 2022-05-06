@@ -48,6 +48,11 @@ namespace OnlineShopWebApp.Services
 
         }
 
+        public List<User> GetAll()
+        {
+            return users;
+        }
+
         public User TryGetByEmail(string email)
         {
             return users.FirstOrDefault(x => x.Email == email);
@@ -58,9 +63,11 @@ namespace OnlineShopWebApp.Services
             return users.FirstOrDefault(x => x.Id == id);
         }
 
-        public void Update(Guid id)
+        public void Update(User user)
         {
-            throw new NotImplementedException();
+            var oldUser = TryGetById(user.Id);
+            users.Remove(oldUser);
+            users.Add(user); 
         }
     }
 }
