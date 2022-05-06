@@ -22,8 +22,33 @@
                                 <td>@product.Name</td>
                                 <td>@product.Cost ₽</td>
                                 <td>
-                                    <a asp-controller="Product" asp-action="EditProduct" asp-route-id="@product.Id" class="btn btn-primary">Изменить</a>
-                                    <a asp-controller="Product" asp-action="DeleteProduct" asp-route-id="@product.Id" class="btn btn-danger">Удалить</a>
+                                    <a asp-controller="Product" asp-action="EditProduct" asp-route-id="@product.Id" class="btn btn-primary">Изменить</a> 
+                                <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#DeleteProduct">
+                                        Удалить
+                                    </button>
+
+                                    <!-- Modal -->
+                                <div class="modal fade" id="DeleteProduct" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="DeleteProduct" aria-hidden="true">
+                                        <div class="modal-dialog">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title" id="DeleteProduct">Удаление товара</h5>
+                                                    <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    Вы действительно хотите удалить "@product.Name" ?
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Отмена</button>
+                                                    <a asp-controller="Product" asp-action="DeleteProduct" asp-route-id="@product.Id" type="button" class="btn btn-danger">Удалить</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+
+
+                                   
                                 </td>
                             </tr>
                         }
