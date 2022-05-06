@@ -4,7 +4,6 @@ using OnlineShopWebApp.Models;
 
 namespace OOnlineShopWebApp.Controllers
 {
-
     public class AdminPanelController : Controller
     {
         private readonly IProductStorage productStorage;
@@ -58,6 +57,7 @@ namespace OOnlineShopWebApp.Controllers
         {
             return View();
         }
+
         [HttpPost]
         public IActionResult AddNewProduct(Product product)
         {
