@@ -30,7 +30,7 @@
                                 <td>@Model[i].User.Name</td>
                                 <td>@Model[i].Date</td>
                                 <td>@Model[i].Time</td>
-                                <td><a asp-area="Admin" asp-controller="administration" asp-action="orderdetails" asp-route-orderId="@Model[i].Id">Подробнее</a></td>
+                                <td><a asp-area="Admin" asp-controller="order" asp-action="orderdetails" asp-route-orderId="@Model[i].Id">Подробнее</a></td>
                             </tr>
                         }
                     </tbody>

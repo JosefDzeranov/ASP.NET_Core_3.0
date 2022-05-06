@@ -8,7 +8,7 @@
         <h3>Список продуктов</h3>
         <div class="row">
             <div class="col">
-                <a asp-area="Admin" asp-controller="administration" asp-action="addnew">Добавить новый продукт</a>
+                <a asp-area="Admin" asp-controller="product" asp-action="add">Добавить новый продукт</a>
                 <table class="table">
                     <thead>
                         <tr>
@@ -30,8 +30,8 @@
                                     </a>
                                 </td>
                                 <td>@product.Cost</td>
-                                <td><a asp-area="Admin" asp-controller="administration" asp-action="edit" asp-route-productId="@product.Id">Редактировать</a></td>
-                                <td><a asp-area="Admin" asp-controller="administration" asp-action="delete" asp-route-productId="@product.Id">Удалить</a></td>
+                                <td><a asp-area="Admin" asp-controller="product" asp-action="edit" asp-route-productId="@product.Id">Редактировать</a></td>
+                                <td><a asp-area="Admin" asp-controller="product" asp-action="delete" asp-route-productId="@product.Id">Удалить</a></td>
                             </tr>
                         }
                     </tbody>
