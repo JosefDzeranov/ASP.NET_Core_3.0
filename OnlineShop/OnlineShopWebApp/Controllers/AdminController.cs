@@ -18,22 +18,26 @@ namespace OnlineShopWebApp.Controllers
 
         public IActionResult Orders()
         {
-            return View();
+            var admPanel = adminPanelRepository.TryGetByUserId(Constants.UserId);
+            return View(admPanel);
         }
 
         public IActionResult Users()
         {
-            return View();
+            var admPanel = adminPanelRepository.TryGetByUserId(Constants.UserId);
+            return View(admPanel);
         }
 
         public IActionResult Roles()
         {
-            return View();
+            var admPanel = adminPanelRepository.TryGetByUserId(Constants.UserId);
+            return View(admPanel);
         }
 
         public IActionResult Products()
         {
-            return View();
+            var admPanel = adminPanelRepository.TryGetByUserId(Constants.UserId);
+            return View(admPanel);
         }
 
         public IActionResult Clear(int productId)
