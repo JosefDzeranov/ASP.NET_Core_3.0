@@ -6,7 +6,6 @@ namespace OnlineShopWebApp.Models
 {
     public class User
     {
-        
         public int Id { get; set; }
 
         [Required(ErrorMessage = "Не указан логин")]
@@ -38,6 +37,6 @@ namespace OnlineShopWebApp.Models
         [Required(ErrorMessage = "Не указан повторный пароль")]
         [Compare("Password", ErrorMessage = "Проверочный пароль должен совпадать с паролем")]
         public string PasswordConfirm { get; set; }
-
+        
     }
 }

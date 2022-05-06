@@ -8,6 +8,8 @@ namespace OnlineShopWebApp.Interfase
         List<Product> Products { get; set; }
         Product FindProduct(int productIds);
         string WriteToStorage();
-
+        void DeleteProduct(Product product);
+        void UpdateProduct(Product product);
+        void AddNewProduct(Product product);
     }
 }

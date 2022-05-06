@@ -1,0 +1,78 @@
+﻿@model Product
+@{
+    ViewData["Title"] = "Редактирование товара";
+}
+
+<form method="post">
+    <div class="text-danger font-weight-bold" asp-validation-summary="All"></div>
+    <input type="hidden" name="Id" value="@Model.Id"/>
+    <div class="container">
+        <div class="row">
+            @await Html.PartialAsync("MenuAdminPanel")
+            <div class="col-10 container">
+                <div class="container">
+                    <h3 class="display-5 Title_sile text-center">Редактирование данных товара</h3>
+                    <div class="card">
+                        <div class="form-group p-3">
+                            <label class="text-center" asp-for="CodeNumber">Шифр: @Model.CodeNumber</label>
+                            <input type="text" class="form-control" placeholder="Шифр" required="" name="CodeNumber" asp-for="CodeNumber"/>
+                            <span asp-validation-for="CodeNumber"></span>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="form-group p-3">
+                            <label class="text-center">Описание: @Model.Description</label>
+                            <input type="text" class="form-control" id="Input2" placeholder="Описание" required="" name="Description" asp-for="Description"/>
+                            <span asp-validation-for="Description"></span>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="form-group p-3">
+                            <label class="text-center">Изображение:</label> <br/>
+                            <img class="card-img-top col-4 p-3" src="/image/@Model.Images[0]">
+                            <input type="text" class="form-control" id="Input3" placeholder="Изображение" required="" name="Images[0]" asp-for="Images[0]"/>
+                            <span asp-validation-for="Images[0]"></span>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="form-group p-3">
+                            <label class="text-center">Цена: @Model.Cost</label>
+                            <input type="text" class="form-control" id="Input4" placeholder="Цена" required="" name="Cost" asp-for="Cost"/>
+                            <span asp-validation-for="Cost"></span>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="form-group p-3">
+                            <label class="text-center">Длина: @Model.Length</label>
+                            <input type="text" class="form-control" id="Input5" placeholder="Длина" required="" name="Length" asp-for="Length"/>
+                            <span asp-validation-for="Length"></span>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="form-group p-3">
+                            <label class="text-center">Ширина: @Model.Width</label>
+                            <input type="text" class="form-control" id="Input5" placeholder="Ширина" required="" name="Width" asp-for="Width"/>
+                            <span asp-validation-for="Width"></span>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="form-group p-3">
+                            <label class="text-center">Площадь: @Model.Square</label>
+                            <input type="text" class="form-control" id="Input5" placeholder="Площадь" required="" name="Square" asp-for="Square"/>
+                            <span asp-validation-for="Square"></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-3 p-3">
+                    <button class="btn btn-light text-center" type="submit" asp-controller="AdminPanel" asp-action="UpdateProduct">Сохранить изменения</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+
+
+
+
+
+
