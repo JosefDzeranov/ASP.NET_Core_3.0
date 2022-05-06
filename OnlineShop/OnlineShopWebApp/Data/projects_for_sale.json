@@ -1,7 +1,7 @@
 [
   {
     "Id": 0,
-    "Name": "58-70",
+    "CodeNumber": "58-70",
     "Cost": 32000.0,
     "Square": 118.0,
     "Width": 11.9,
@@ -13,7 +13,7 @@
   },
   {
     "Id": 1,
-    "Name": "63-42",
+    "CodeNumber": "63-42",
     "Cost": 32000.0,
     "Square": 109.0,
     "Width": 8.36,
@@ -25,7 +25,7 @@
   },
   {
     "Id": 2,
-    "Name": "57-07",
+    "CodeNumber": "57-07",
     "Cost": 32000.0,
     "Square": 116.0,
     "Width": 8.45,
@@ -37,7 +37,7 @@
   },
   {
     "Id": 3,
-    "Name": "57-00",
+    "CodeNumber": "57-00",
     "Cost": 36000.0,
     "Square": 193.0,
     "Width": 11.75,
@@ -49,7 +49,7 @@
   },
   {
     "Id": 4,
-    "Name": "40-11",
+    "CodeNumber": "40-11",
     "Cost": 36000.0,
     "Square": 251.0,
     "Width": 13.76,
@@ -61,7 +61,7 @@
   },
   {
     "Id": 5,
-    "Name": "45-64NKL",
+    "CodeNumber": "45-64NKL",
     "Cost": 50000.0,
     "Square": 245.0,
     "Width": 12.74,
@@ -73,7 +73,7 @@
   },
   {
     "Id": 6,
-    "Name": "62-71BS",
+    "CodeNumber": "62-71BS",
     "Cost": 42000.0,
     "Square": 201.0,
     "Width": 11.06,
@@ -85,7 +85,7 @@
   },
   {
     "Id": 7,
-    "Name": "58-10L",
+    "CodeNumber": "58-10L",
     "Cost": 38000.0,
     "Square": 229.0,
     "Width": 13.86,
