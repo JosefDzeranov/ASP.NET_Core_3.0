@@ -1,5 +1,4 @@
-﻿using OnlineShopWebApp.Models;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -24,6 +23,5 @@ namespace OnlineShopWebApp
                 return Items?.Sum(x => x.Amount) ?? 0;
             }
         }
-
     }
 }

@@ -1,43 +1,32 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using OnlineShopWebApp.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
-namespace OnlineShopWebApp.Controllers
+namespace OnlineShopWebApp.Areas.Admin.Controllers
 {
     [Area("Admin")]
 
-    public class AdminController : Controller
+    public class ProductController : Controller
     {
         private readonly IProductsRepository productsRepository;
 
-        public AdminController(IProductsRepository productsRepository)
+        public ProductController(IProductsRepository productsRepository)
         {
             this.productsRepository = productsRepository;
         }
-        public IActionResult AdminPanel()
-        {
-            return View();
-        }
-        public IActionResult Orders()
-        {
-            return View();
-        }
-        public IActionResult Products()
+        
+        public IActionResult Index()
         {
             var products = productsRepository.GetAll();
             return View(products);
         }
 
-        public IActionResult AddProduct()
+        public IActionResult Add()
         {
             return View();
         }
 
         [HttpPost]
-        public IActionResult AddProduct(Product product)
+        public IActionResult Add(Product product)
         {
             if (!ModelState.IsValid)
             {
@@ -47,14 +36,14 @@ namespace OnlineShopWebApp.Controllers
             return RedirectToAction("Products");
         }
 
-        public IActionResult EditProduct(int productId)
+        public IActionResult Edit(int productId)
         {
             var product = productsRepository.TryGetById(productId);
             return View(product);
         }
 
         [HttpPost]
-        public IActionResult EditProduct(Product product)
+        public IActionResult Edit(Product product)
         {
             if (!ModelState.IsValid)
             {
@@ -64,19 +53,10 @@ namespace OnlineShopWebApp.Controllers
             return RedirectToAction("Products");
         }
 
-        public IActionResult DeleteProduct(int productId)
+        public IActionResult Delete(int productId)
         {
             productsRepository.Delete(productId);
             return RedirectToAction("Products");
-        }
-
-        public IActionResult Status()
-        {
-            return View();
-        }
-        public IActionResult Users()
-        {
-            return View();
         }
     }
 }

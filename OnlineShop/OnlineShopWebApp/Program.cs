@@ -13,6 +13,7 @@ namespace OnlineShopWebApp
 
         public static IHostBuilder CreateHostBuilder(string[] args) =>
             Host.CreateDefaultBuilder(args)
+
             .UseSerilog((hostingContext, loggerConfiguration) =>
             {
                 loggerConfiguration
@@ -20,9 +21,10 @@ namespace OnlineShopWebApp
                 .Enrich.FromLogContext()
                 .Enrich.WithProperty("ApplcaionName", "OnlineShop");
             })
-                .ConfigureWebHostDefaults(webBuilder =>
-                {
-                    webBuilder.UseStartup<Startup>();
-                });
+
+            .ConfigureWebHostDefaults(webBuilder =>
+            {
+                webBuilder.UseStartup<Startup>();
+            });
     }
 }

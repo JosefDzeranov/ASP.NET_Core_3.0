@@ -39,7 +39,7 @@ namespace OnlineShopWebApp
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllerRoute(
-                    name: "AdminArea",
+                    name: "Area",
                     pattern: "{area:exists}/{controller=Home}/{action=Products}/{id?}");
             });
 

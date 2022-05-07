@@ -9,11 +9,20 @@
         {
         <div class="col-4 card">
             <div class="card-body">
-                <a style="color:black" href="/product/item/@product.Id">
+                <a style="color:black" 
+                   asp-area=""
+                   asp-controller="Product"
+                   asp-action="Item"
+                   asp-route-id="@product.Id" >
                     <h3>@product.Name, @product.Cost @Constants.Rub</h3>
                 </a>
                 <img class="card-img-top" src=@product.ImagePath>
-                <a class="btn btn-outline-warning btn-sm" href="/cart/add?productId=@product.Id" role="button">Add to Cart</a>
+                <a class="btn btn-outline-warning btn-sm" role="button"
+                   asp-area=""
+                   asp-controller="Cart"
+                   asp-action="Add"
+                   asp-route-productId="@product.Id">
+                Add to Cart</a>
             </div>
         </div>
         }
