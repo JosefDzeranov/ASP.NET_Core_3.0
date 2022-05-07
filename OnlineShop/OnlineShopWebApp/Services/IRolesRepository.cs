@@ -1,5 +1,5 @@
 ﻿using System.Collections.Generic;
-using OnlineShopWebApp.Models;
+using OnlineShopWebApp.Areas.Admin.Models;
 namespace OnlineShopWebApp.Services
 {
     public interface IRolesRepository

@@ -6,7 +6,10 @@
 
 		<div class="row text-center">
 		<div class="col-3">
-		<a class="btn btn-outline-success" href="/admin/addProduct/" role="button">Добавить новый продукт</a>
+		<a asp-area="Admin"
+		asp-controller="Product"
+		asp-action="Add"
+		class="btn btn-outline-success" role="button">Добавить новый продукт</a>
 
 		<table class ="table">
 
@@ -21,8 +24,17 @@
 					<td>@item.Id</td>
 					<td><a href="/product/index/@item.Id">@item.Name</a></td>
 					<td>@item.Cost</td>
-					<td><a href="/admin/EditProduct?productId=@item.Id">Редактировать</a></td>
-					<td><a href="/admin/RemoveProduct?productId=@item.Id">Удалить</a></td>
+					<td><a 
+						asp-area="Admin"
+						asp-controller="Product"
+						asp-action="Edit"
+						asp-route-productId="@item.Id">Редактировать</a></td>
+					
+					<td><a 
+						asp-area="Admin"
+						asp-controller="Product"
+						asp-action="Remove"
+						asp-route-productId="@item.Id">Удалить</a></td>
 				</tr>
 			}
 		</table>

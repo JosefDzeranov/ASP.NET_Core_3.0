@@ -1,4 +1,4 @@
-﻿using System.ComponentModel.DataAnnotations; 
+﻿using System.ComponentModel.DataAnnotations;
 
 namespace OnlineShopWebApp.Models
 {
@@ -19,16 +19,16 @@ namespace OnlineShopWebApp.Models
         }
 
         [Required(ErrorMessage = "Не указано имя")]
-        [StringLength(25, MinimumLength = 2, ErrorMessage ="Имя должно содержать от 2 до 25 символов")]
-        public string UserName { get; set; }    
-       
+        [StringLength(25, MinimumLength = 2, ErrorMessage = "Имя должно содержать от 2 до 25 символов")]
+        public string UserName { get; set; }
+
         public string Phone { get; set; }
 
-        [Required(ErrorMessage ="Не указан e-mail")]
-        [EmailAddress(ErrorMessage ="Введите корректный e-mail")]
+        [Required(ErrorMessage = "Не указан e-mail")]
+        [EmailAddress(ErrorMessage = "Введите корректный e-mail")]
         public string Login { get; set; }
 
-        [Required(ErrorMessage ="Не указан пароль")]
+        [Required(ErrorMessage = "Не указан пароль")]
         public string Password { get; set; }
 
         [Required(ErrorMessage = "Не указан повторный пароль")]

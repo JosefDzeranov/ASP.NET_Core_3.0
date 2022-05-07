@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
-using OnlineShopWebApp.Models;
 using System.Linq;
+using OnlineShopWebApp.Areas.Admin.Models;
+
 namespace OnlineShopWebApp.Services
 {
     public class InMemoryRolesRepository:IRolesRepository

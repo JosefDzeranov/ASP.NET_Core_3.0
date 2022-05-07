@@ -1,0 +1,104 @@
+﻿using Microsoft.AspNetCore.Mvc;
+using OnlineShopWebApp.Services;
+using OnlineShopWebApp.Models;
+
+namespace OnlineShopWebApp.Controllers
+{
+    public class AdminController : Controller
+    {
+<<<<<<< HEAD
+        private readonly IProductDataSource productDataSource; 
+        private readonly IOrdersRepository ordersRepository;
+
+        public AdminController(IProductDataSource productDataSource, IOrdersRepository ordersRepository)
+=======
+        private readonly IProductDataSource productDataSource;
+        /// <summary>
+        /// sdfskjldfjksljlfasjdf
+        /// </summary>
+        /// <param name="productDataSource"></param>
+        public AdminController(IProductDataSource productDataSource)
+>>>>>>> 4263c032478e5c934340d9552db325398811ffa1
+        {
+            this.productDataSource = productDataSource;
+            this.ordersRepository = ordersRepository;
+        }
+
+        public IActionResult Orders()
+        {
+            var orders = ordersRepository.GetAll();
+            return View(orders);
+        }
+
+        public IActionResult Users()
+        {
+            return View();
+        }
+
+        public IActionResult Roles()
+        {
+            return View();
+        }
+
+        public IActionResult Products()
+        {
+            return View(productDataSource.GetAllProducts());
+        }
+
+        [HttpGet]
+        public IActionResult AddProduct()
+        {
+            return View();
+        }
+
+        [HttpPost]
+
+        public IActionResult AddProduct(Product product)
+        {
+            if (ModelState.IsValid)
+            {
+                productDataSource.AddProduct(product);
+                return RedirectToAction("Products");
+            }
+
+            return View(product);
+        }
+
+        public IActionResult RemoveProduct(int productId)
+        {
+            productDataSource.RemoveProduct(productId);
+            return RedirectToAction("Products");
+        }
+
+        [HttpGet]
+        public IActionResult EditProduct(int productId)
+        {
+            var product = productDataSource.GetProductById(productId);
+            return View(product);
+        }
+
+        [HttpPost]
+
+        public IActionResult EditProduct(Product product)
+        {
+            if (ModelState.IsValid)
+            {
+                productDataSource.EditProduct(product);
+                return RedirectToAction("Products");
+            }
+            return View(product);
+        }
+
+        public IActionResult OrderDetails(int orderId)
+        {
+            var order = ordersRepository.TryGetByUserId(orderId);
+            return View(order);
+        }
+
+        public IActionResult UpdateOrderStatus (int orderId, OrderStatus status)
+        {
+            ordersRepository.UpdateStatus(orderId, status);
+            return RedirectToAction("Orders"); 
+        }
+    }
+}
