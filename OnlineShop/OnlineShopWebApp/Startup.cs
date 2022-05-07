@@ -4,6 +4,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using OnlineShopWebApp.Services;
+using Serilog;
 
 
 namespace OnlineShopWebApp
@@ -42,6 +43,9 @@ namespace OnlineShopWebApp
                 app.UseHsts();
             }
             app.UseHttpsRedirection();
+
+            app.UseSerilogRequestLogging();
+
             app.UseStaticFiles();
 
             app.UseRouting();
