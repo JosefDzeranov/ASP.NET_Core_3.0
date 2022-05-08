@@ -2,14 +2,14 @@
 
 namespace OnlineShopWebApp.Models
 {
-    public class NewUserRegistrationForm
+    public class Registration
     {
-        public NewUserRegistrationForm()
+        public Registration()
         {
 
         }
 
-        public NewUserRegistrationForm(string userName, string phone, string password, string confirmPassword, string login)
+        public Registration(string userName, string phone, string password, string confirmPassword, string login)
         {
             UserName = userName;
             Phone = phone;
