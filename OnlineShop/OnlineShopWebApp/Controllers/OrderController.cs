@@ -5,7 +5,6 @@ namespace OnlineShopWebApp.Controllers
 {
     public class OrderController : Controller
     {
-    
         private readonly ICartsRepository cartsRepository;
         private readonly IOrdersRepository odersRepository;
 
