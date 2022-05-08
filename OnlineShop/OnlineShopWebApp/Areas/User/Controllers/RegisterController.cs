@@ -6,6 +6,11 @@ namespace OnlineShopWebApp.Areas.User.Controllers
 
     public class RegisterController : Controller
     {
+        public IActionResult RegisterSuccess()
+        {
+            return View();
+        }
+
         public IActionResult Register()
         {
             return View();
@@ -24,7 +29,7 @@ namespace OnlineShopWebApp.Areas.User.Controllers
                 return Content($"{user.Login} - not valid");
             }
 
-            return RedirectToAction("Products", "Home");
+            return RedirectToAction("RegisterSuccess");
         }
     }
 }
