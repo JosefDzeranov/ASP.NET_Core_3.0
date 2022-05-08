@@ -10,13 +10,11 @@ namespace OnlineShopWebApp.Controllers
         {
             this.productReposititory = productsRepository;
         }
-         
         public IActionResult Item(int productId)
         {
             var product = productReposititory.TryGetById(productId);
             return View(product);
         }
-
         public IActionResult Items()
         {
             var products = productReposititory.GetAll();

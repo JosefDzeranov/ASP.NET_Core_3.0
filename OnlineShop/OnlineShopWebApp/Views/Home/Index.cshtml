@@ -3,26 +3,32 @@
 @{
     ViewData["Title"] = "Home Page";
 }
+
 <div class="container-fluid">
     <div class="row">
         @foreach (var product in Model)
         {
         <div class="col-4 card">
             <div class="card-body">
+
                 <a style="color:black" 
                    asp-area=""
                    asp-controller="Product"
-                   asp-action="Item"
+                   asp-action="Index"
                    asp-route-id="@product.Id" >
                     <h3>@product.Name, @product.Cost @Constants.Rub</h3>
                 </a>
+
                 <img class="card-img-top" src=@product.ImagePath>
+
                 <a class="btn btn-outline-warning btn-sm" role="button"
                    asp-area=""
                    asp-controller="Cart"
                    asp-action="Add"
                    asp-route-productId="@product.Id">
-                Add to Cart</a>
+                   Add to Cart
+                </a>
+
             </div>
         </div>
         }

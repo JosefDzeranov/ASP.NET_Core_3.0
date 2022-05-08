@@ -14,8 +14,18 @@
 
 <div class="col-4 card">
     <img class="card-img-top" src="@Model.ImagePath" />
-    <a class="btn btn-outline-light btn-sm" href="/home/" role="button">Back to catalog</a>
-    <a class="btn btn-outline-warning btn-sm" href="/cart/add?productId=@Model.Id" role="button">Add to Cart</a>
+    <a class="btn btn-outline-light btn-sm" role="button" 
+       asp-area=""
+       asp-controller="Home">
+            Back to catalog
+    </a>
+    <a class="btn btn-outline-warning btn-sm" role="button"
+       asp-area=""
+       asp-controller="Cart"
+       asp-action="Add"
+       asp-route-productId="@Model.Id">
+            Add to Cart
+    </a>
 </div>
 
 
