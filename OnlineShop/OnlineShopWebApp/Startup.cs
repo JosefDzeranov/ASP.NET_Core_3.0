@@ -46,6 +46,13 @@ namespace OnlineShopWebApp
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllerRoute(
+                    name: "User",
+                    pattern: "{user:exists}/{controller=Home}/{action=Products}/{id?}");
+            });
+
+            app.UseEndpoints(endpoints =>
+            {
+                endpoints.MapControllerRoute(
                     name: "default",
                     pattern: "{controller=Home}/{action=Products}/{id?}");
             });

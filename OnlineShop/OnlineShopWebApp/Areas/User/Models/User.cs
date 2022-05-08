@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.ComponentModel.DataAnnotations;
 
-namespace OnlineShopWebApp.Models
+namespace OnlineShopWebApp.Areas.User.Controllers
 {
     public class User
     {
@@ -33,6 +29,5 @@ namespace OnlineShopWebApp.Models
         public string PasswordConfirm { get; set; }
 
         public bool IsRemembered { get; set; } 
-
     }
 }
