@@ -33,7 +33,7 @@ namespace OnlineShopWebApp.Areas.Admin.Controllers
                 return View();
             }
             productsRepository.Add(product);
-            return RedirectToAction("Products");
+            return RedirectToAction("Index");
         }
 
         public IActionResult Edit(int productId)
@@ -50,13 +50,13 @@ namespace OnlineShopWebApp.Areas.Admin.Controllers
                 return View();
             }
             productsRepository.Update(product);
-            return RedirectToAction("Products");
+            return RedirectToAction("Index");
         }
 
         public IActionResult Delete(int productId)
         {
             productsRepository.Delete(productId);
-            return RedirectToAction("Products");
+            return RedirectToAction("Index");
         }
     }
 }
