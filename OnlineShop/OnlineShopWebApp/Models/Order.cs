@@ -7,6 +7,7 @@ namespace OnlineShopWebApp.Models
         public Guid Id { get; set; }
         public DateTime Date { get; set; }
         public string UserId { get; set; }
+        public OrderStatus Status { get; set; }
         public Basket Basket { get; set; }
         public Delivery Delivery { get; set; }
 
@@ -16,6 +17,7 @@ namespace OnlineShopWebApp.Models
             Id = Guid.NewGuid();
             Date = DateTime.Now;
             UserId = userId;
+            Status = OrderStatus.Created;
             Basket = basket;
             Delivery = delivery;
         }

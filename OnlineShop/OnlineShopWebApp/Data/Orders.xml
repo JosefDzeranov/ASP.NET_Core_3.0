@@ -1,51 +1,16 @@
-<?xml version="1.0"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <ArrayOfOrder xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <Order>
-    <Id>3a8ec7c0-2334-444e-b1f2-6fdad0d8638d</Id>
-    <Date>2022-05-09T18:24:32.0701381+03:00</Date>
+    <Id>65b6f77a-2cfc-4a58-bdf7-19b2d49576ff</Id>
+    <Date>2022-05-09T23:43:36.813865+03:00</Date>
     <UserId>UserId</UserId>
+    <Status>Delivering</Status>
     <Basket>
-      <Id>a859b4fd-fb67-4a2f-8ea7-9aae66b1730c</Id>
+      <Id>5aaf6023-073e-451a-934e-45a72ec81496</Id>
       <UserId>UserId</UserId>
       <Items>
         <BasketItem>
-          <Id>30dbed5a-8feb-4bac-ae63-f46c13239624</Id>
-          <Product>
-            <Id>8bedfbeb-4b64-4798-90f9-45ce95844b5c</Id>
-            <ImagePath>/img/landscape.jpg</ImagePath>
-            <Name>Landscape</Name>
-            <Cost>300</Cost>
-            <Description>illustration, 
-4000x5000 px,
-5,5 Mb, Tiff</Description>
-          </Product>
-          <Quantity>1</Quantity>
-        </BasketItem>
-      </Items>
-    </Basket>
-    <Delivery>
-      <Address>
-        <ZipCode>1111</ZipCode>
-        <Country>222</Country>
-        <City>222</City>
-        <Street>222</Street>
-        <House>222</House>
-        <Apartment>222</Apartment>
-      </Address>
-      <Phone>222</Phone>
-      <Email>222@222</Email>
-    </Delivery>
-  </Order>
-  <Order>
-    <Id>9ec9eabf-a204-4314-8b4b-6ea778c43e9d</Id>
-    <Date>2022-05-09T18:24:52.8996759+03:00</Date>
-    <UserId>UserId</UserId>
-    <Basket>
-      <Id>a859b4fd-fb67-4a2f-8ea7-9aae66b1730c</Id>
-      <UserId>UserId</UserId>
-      <Items>
-        <BasketItem>
-          <Id>384ac2ea-9bb2-47e3-adf1-46ab198e5f60</Id>
+          <Id>08371d8e-ecb9-425f-a4de-e414ed00f28f</Id>
           <Product>
             <Id>8e73079c-6b70-4a3e-ae4b-39add95110a6</Id>
             <ImagePath>/img/portret.jpg</ImagePath>
@@ -61,51 +26,15 @@
     </Basket>
     <Delivery>
       <Address>
-        <ZipCode>222</ZipCode>
-        <Country>2222</Country>
-        <City>222</City>
-        <Street>222</Street>
-        <House>22</House>
-        <Apartment>222</Apartment>
+        <ZipCode>124354</ZipCode>
+        <Country>Russia</Country>
+        <City>Moscow</City>
+        <Street>Ordynka</Street>
+        <House>4</House>
+        <Apartment>12</Apartment>
       </Address>
-      <Phone>22222</Phone>
-      <Email>222@333</Email>
-    </Delivery>
-  </Order>
-  <Order>
-    <Id>5b676c79-30ba-41ff-afb0-446ec8db6023</Id>
-    <Date>2022-05-09T18:25:20.9894646+03:00</Date>
-    <UserId>UserId</UserId>
-    <Basket>
-      <Id>a859b4fd-fb67-4a2f-8ea7-9aae66b1730c</Id>
-      <UserId>UserId</UserId>
-      <Items>
-        <BasketItem>
-          <Id>1910b6eb-f099-4ec4-b7f1-6053c93914fd</Id>
-          <Product>
-            <Id>efdf7bce-d7f8-4365-bee7-db0a140bd23b</Id>
-            <ImagePath>/img/stilllife.jpg</ImagePath>
-            <Name>Still Life</Name>
-            <Cost>100</Cost>
-            <Description>Photography, 
-4000x5000 px,
-3,5 Mb, Tiff</Description>
-          </Product>
-          <Quantity>1</Quantity>
-        </BasketItem>
-      </Items>
-    </Basket>
-    <Delivery>
-      <Address>
-        <ZipCode>4444</ZipCode>
-        <Country>4444</Country>
-        <City>444</City>
-        <Street>444</Street>
-        <House>444</House>
-        <Apartment>4444</Apartment>
-      </Address>
-      <Phone>44444</Phone>
-      <Email>4444@4444</Email>
+      <Phone>+79034653721</Phone>
+      <Email>test@test.uu</Email>
     </Delivery>
   </Order>
 </ArrayOfOrder>

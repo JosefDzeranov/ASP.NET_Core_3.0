@@ -16,7 +16,24 @@ namespace OnlineShopWebApp.Controllers
         public IActionResult Orders()
         {
             var orders = _orderStorage.GetOrderData();
-            return View(orders);
+            if (orders.Count == 0)
+            {
+                return View("EmptyOrders");
+            }
+            return View (orders);
+        }
+
+        public IActionResult OrderDetails(Guid id)
+        {
+            var order = _orderStorage.TryGetById(id);
+            return View(order);
+        }
+
+        [HttpPost]
+        public IActionResult UpdateOrderStatus(Guid id, OrderStatus status)
+        {
+            _orderStorage.UpdateStatus(id, status);
+            return RedirectToAction("Orders");
         }
 
         public IActionResult Users()

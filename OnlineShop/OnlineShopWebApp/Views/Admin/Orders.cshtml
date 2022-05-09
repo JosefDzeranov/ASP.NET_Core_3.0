@@ -23,6 +23,7 @@
                         <th scope="col">User Login</th>
                         <th scope="col">Date</th>
                         <th scope="col">Time</th>
+                        <th scope="col"></th>
                     </tr>
                 </thead>
                 @for (int i = 0; i < Model.Count; i++)
@@ -33,19 +34,22 @@
                                 @(i + 1)
                             </td>
                             <td>
-                                <a href="/product/index?id=@Model[i].Id">$@Model[i].Basket.TotalCost</a>
+                                $@Model[i].Basket.TotalCost
+                            </td>
+                            <td>
+                                @Model[i].Status
                             </td>
                             <td>
                                 
                             </td>
                             <td>
-                                
+                                @Model[i].Date.ToString("dd.MM.yyyy")
                             </td>
                             <td>
-                                
+                                @Model[i].Date.ToString("HH:mm")
                             </td>
                             <td>
-                                
+                                <a href="/admin/orderdetails?id=@Model[i].Id">More detailed</a>
                             </td>
                         </tr>
                     </tbody>

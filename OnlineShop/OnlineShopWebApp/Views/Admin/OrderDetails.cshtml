@@ -1,0 +1,57 @@
+﻿@using OnlineShopWebApp.Models;
+@model Order
+
+@{
+    ViewData["Title"] = "Order";
+}
+
+<div class="container">
+    <div class="row">
+        <div class="col-2">
+            @await Html.PartialAsync("AdminMenuLeft")
+        </div>
+        <div class="col-7">
+            <h2>Orders</h2>
+            <form method="post">
+                <table class="table">
+                    <tbody>
+                        <tr>
+                            <td>Date and time</td>
+                            <td>@Model.Date.ToString("dd.MM.yyyy HH:mm")</td>
+                        </tr>
+                        <tr>
+                            <td>Customer</td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>Address</td>
+                            <td>
+                                @Model.Delivery.Address.ZipCode,
+                                @Model.Delivery.Address.Country,
+                                @Model.Delivery.Address.City,
+                                @Model.Delivery.Address.Street,
+                                @Model.Delivery.Address.House,
+                                @Model.Delivery.Address.Apartment
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Phone number</td>
+                            <td>@Model.Delivery.Phone</td>
+                        </tr>
+                        <tr>
+                            <td>Cost</td>
+                            <td>$@Model.Basket.TotalCost</td>
+                        </tr>
+                        <tr>
+                            <td>Status</td>
+                            <td>
+                                <select class="form-control" asp-for="@Model.Status" asp-items="@Html.GetEnumSelectList<OrderStatus>()"></select>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                <button class="btn btn-sm btn-outline-dark" type="submit" asp-controller="Admin" asp-action="UpdateOrderStatus" asp-route-id="@Model.Id">Update status</button>
+            </form>
+        </div>
+    </div>
+</div>

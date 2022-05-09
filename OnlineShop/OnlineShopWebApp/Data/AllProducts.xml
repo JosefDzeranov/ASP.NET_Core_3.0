@@ -24,4 +24,12 @@
 4000x5000 px,
 5,5 Mb, Tiff</description>
   </product>
+  <product id="3e91da0d-f03b-4280-8f3b-5c09ab4418cf">
+    <img>/img/abstraction.jpg</img>
+    <name>Abstraction</name>
+    <cost>500</cost>
+    <description>Illustration
+3500 x 5000 px
+4,5 Mb Tiff</description>
+  </product>
 </products>
