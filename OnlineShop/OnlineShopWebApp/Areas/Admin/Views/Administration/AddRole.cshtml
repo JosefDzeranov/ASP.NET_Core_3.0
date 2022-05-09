@@ -1,4 +1,5 @@
-﻿@model Role
+﻿@using OnlineShopWebApp
+@model Role
 <form method="post">
     <h2>Добавление роли</h2>
     <p> Введите название роли: </p><br />
@@ -6,7 +7,7 @@
     <div class="text-danger font-weight-bold" asp-validation-summary="All"></div>
 
 
-    <input class="form-control"name="Name" required />
+    <input class="form-control" name="Name" required />
 
 
 

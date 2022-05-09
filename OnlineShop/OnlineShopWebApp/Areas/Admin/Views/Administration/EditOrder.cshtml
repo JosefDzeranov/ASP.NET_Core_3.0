@@ -1,4 +1,7 @@
-﻿@model Order
+﻿@using System
+@using OnlineShopWebApp
+@using OnlineShopWebApp.Models;
+@model Order
     <form method="post">
         <div class="row">
             <div class="col-6">
@@ -23,7 +26,7 @@
                         <td>Статус заказа:</td>
                         <td>
                             <select asp-for="Status"
-                                    asp-items="@Html.GetEnumSelectList<OrderStatus>()"
+                                    asp-items="@Html.GetEnumSelectList<OrderStatus>()" 
                                     class="form-control">
                             </select>
                         </td>

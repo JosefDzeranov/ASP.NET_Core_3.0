@@ -29,8 +29,8 @@ namespace OnlineShopWebApp
         {
             services.AddControllersWithViews();
 
-            services.AddSingleton<ICartManager,CartManager>();
-            services.AddSingleton<IProductManager,ProductManager>();
+            services.AddSingleton<ICartManager, CartManager>();
+            services.AddSingleton<IProductManager, ProductManager>();
             services.AddSingleton<IOrderManager, OrderManager>();
             services.AddSingleton<IComparison, ComparisonManager>();
             services.AddSingleton<IFavorites, FavoritesManager>();
@@ -76,6 +76,10 @@ namespace OnlineShopWebApp
 
             app.UseEndpoints(endpoints =>
             {
+                endpoints.MapControllerRoute(
+                   name: "MyAreas",
+                   pattern: "{area:exists}/{controller=Home}/{action=Index}/{id?}");
+
                 endpoints.MapControllerRoute(
                     name: "default",
                     pattern: "{controller=Home}/{action=Index}/{id?}");
