@@ -21,5 +21,24 @@ namespace OnlineShopWebApp
         {
             return users.FirstOrDefault(x => x.Name == name);
         }
+
+        public void ChangePassword (string userName, string newPassword)
+        {
+            var account= TryGetByName(userName);
+            account.Password = newPassword;
+        }
+
+        public void Remove(string id)
+        {
+           users.Remove(TryGetByName(id));
+        }
+
+        public void Edit(UserAccount user)
+        {
+            var existingUser = TryGetByName(user.Name);
+            existingUser.Phone = user.Phone;
+            existingUser.Login = user.Login;
+          
+        }
     }
 }

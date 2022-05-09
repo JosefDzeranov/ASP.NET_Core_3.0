@@ -13,7 +13,7 @@ namespace OnlineShopWebApp.Controllers
             this.usersManager = usersManager;
         }
 
-        public IActionResult Index() //хочу удалить
+        public IActionResult Index() 
         {
             return View();
         }
@@ -50,7 +50,9 @@ namespace OnlineShopWebApp.Controllers
                 usersManager.Add(new UserAccount
                 {
                     Name = registration.UserName,
+                    Login = registration.Login,
                     Password = registration.Password,
+                    Phone=registration.Phone,
                 });
 
                 return RedirectToAction(nameof(HomeController.Index), "Home");

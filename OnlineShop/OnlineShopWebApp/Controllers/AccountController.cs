@@ -40,5 +40,34 @@ namespace OnlineShopWebApp.Controllers
             return RedirectToAction(nameof(HomeController.Index),"Home");
   
         }
+
+          public IActionResult Register()
+        {
+            return View();
+        }
+
+        [HttpPost]
+
+        public IActionResult Register(Registration registration)
+        {
+            if (registration.UserName == registration.Password)
+            {
+                ModelState.AddModelError("", "Логин и пароль не должны совпадать");
+            }
+
+            if (ModelState.IsValid)
+            {
+                usersManager.Add(new UserAccount
+                {
+                    Name = registration.UserName,
+                    Password = registration.Password,
+                    Phone=registration.Phone,
+                });
+
+                return RedirectToAction(nameof(HomeController.Index), "Home");
+            }
+
+            return RedirectToAction(nameof(Register));
+        }
     }
 }

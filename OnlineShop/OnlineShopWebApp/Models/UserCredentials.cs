@@ -10,6 +10,8 @@ namespace OnlineShopWebApp.Models
         public string Login { get; set; }
 
         [Required(ErrorMessage = "Не указан пароль")]
+
+        public string Phone { get; set; }
         public string Password { get; set; }
         public bool RememberMe { get; set; }
     }
