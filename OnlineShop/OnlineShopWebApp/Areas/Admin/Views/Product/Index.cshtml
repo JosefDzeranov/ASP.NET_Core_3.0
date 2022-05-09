@@ -29,12 +29,30 @@
 						asp-controller="Product"
 						asp-action="Edit"
 						asp-route-productId="@item.Id">Редактировать</a></td>
-					
-					<td><a 
-						asp-area="Admin"
-						asp-controller="Product"
-						asp-action="Remove"
-						asp-route-productId="@item.Id">Удалить</a></td>
+					<td><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">Удалить</button>
+						
+						<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+						  <div class="modal-dialog">
+							<div class="modal-content">
+							  <div class="modal-header">
+								<h5 class="modal-title" id="exampleModalLabel">Удалить продукт</h5>
+								<button type="button" class="btn-close" data-dismiss="modal" aria-label="Закрыть"></button>
+							  </div>
+							  <div class="modal-body">
+								Вы уверены, что хотите удалить?
+							  </div>
+							  <div class="modal-footer">
+								<button type="button" class="btn btn-secondary" data-dismiss="modal">Закрыть</button>
+								<a class="btn btn-primary"
+												asp-area="Admin"
+												asp-controller="Product"
+												asp-action="Remove"
+												asp-route-productId="@item.Id">Сохранить изменения</a>
+							  </div>
+							</div>
+						  </div>
+						</div>	
+					</td> 							
 				</tr>
 			}
 		</table>
@@ -42,6 +60,8 @@
 		</div>
 		</div>
 	</div>
+
+
 
 
 
