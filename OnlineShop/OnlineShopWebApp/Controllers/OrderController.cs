@@ -33,9 +33,6 @@ namespace OnlineShopWebApp.Controllers
             var delivery = orderForm.Delivery;
             _orderStorage.AddOrder(Constants.UserId, basket, delivery);
 
-            var order = _orderStorage.TryGetByUserId(Constants.UserId);
-            _orderStorage.SaveOrder(order);
-
             _basketStorage.ClearBasket(Constants.UserId);
 
             return View();

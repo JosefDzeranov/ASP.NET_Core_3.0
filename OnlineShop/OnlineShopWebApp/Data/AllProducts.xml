@@ -24,20 +24,4 @@
 4000x5000 px,
 5,5 Mb, Tiff</description>
   </product>
-  <product id="921a9f51-6676-4b80-8e9a-3feb2c02275a">
-    <img>/img/abstraction.jpg</img>
-    <name>Abstract</name>
-    <cost>250</cost>
-    <description>Digital drawing, 
-4000x5000 px,
-2,5 Mb, Tiff</description>
-  </product>
-  <product id="ab059ad8-98d2-4b3d-b8d0-c119a039c8f8">
-    <img>/img/test.jpg</img>
-    <name>Test portret</name>
-    <cost>100.2</cost>
-    <description>Photography,
-4000 x 5000 px,
-4,5 Mb Tiff</description>
-  </product>
 </products>

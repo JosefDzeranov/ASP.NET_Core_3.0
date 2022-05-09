@@ -7,13 +7,16 @@ namespace OnlineShopWebApp.Controllers
     public class AdminController : Controller
     {
         private readonly IProductStorage _productStorage;
-        public AdminController(IProductStorage productStorage)
+        private readonly IOrderStorage _orderStorage;
+        public AdminController(IProductStorage productStorage, IOrderStorage orderStorage)
         {
             _productStorage = productStorage;
+            _orderStorage = orderStorage;
         }
         public IActionResult Orders()
         {
-            return View();
+            var orders = _orderStorage.GetOrderData();
+            return View(orders);
         }
 
         public IActionResult Users()

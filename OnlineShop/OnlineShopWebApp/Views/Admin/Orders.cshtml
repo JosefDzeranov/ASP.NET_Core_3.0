@@ -1,4 +1,8 @@
-﻿@{
+﻿@using OnlineShopWebApp.Models
+@using System.Collections.Generic;
+@model List<Order>
+
+@{
     ViewData["Title"] = "Orders";
 }
 
@@ -9,6 +13,44 @@
         </div>
         <div class="col-10">
             <h2>Orders</h2>
+            <table class="table border-left border-right border-top border-bottom mt-4">
+                <caption>Order list</caption>
+                <thead class="table-light">
+                    <tr>
+                        <th scope="col">№</th>
+                        <th scope="col">Cost</th>
+                        <th scope="col">Status</th>
+                        <th scope="col">User Login</th>
+                        <th scope="col">Date</th>
+                        <th scope="col">Time</th>
+                    </tr>
+                </thead>
+                @for (int i = 0; i < Model.Count; i++)
+                {
+                    <tbody class="border-top-0">
+                        <tr>
+                            <td>
+                                @(i + 1)
+                            </td>
+                            <td>
+                                <a href="/product/index?id=@Model[i].Id">$@Model[i].Basket.TotalCost</a>
+                            </td>
+                            <td>
+                                
+                            </td>
+                            <td>
+                                
+                            </td>
+                            <td>
+                                
+                            </td>
+                            <td>
+                                
+                            </td>
+                        </tr>
+                    </tbody>
+                }
+            </table>
         </div>
     </div>
 </div>

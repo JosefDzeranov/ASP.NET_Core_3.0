@@ -1,37 +1,37 @@
-﻿using System.IO;
+﻿using System;
+using System.IO;
 using OnlineShopWebApp.Models;
 using System.Collections.Generic;
 using System.Linq;
 using System.Xml.Serialization;
+using System.Xml.Linq;
 
 namespace OnlineShopWebApp
 {
     public class OrderStorage: IOrderStorage
     {
-        private List<Order> orders = new List<Order>();
-
-        public Order TryGetByUserId(string userId)
-        {
-            return orders.FirstOrDefault(order => order.UserId == userId);
-        }
+        private List<Order> _orders = new List<Order>();
 
         public void AddOrder(string userId, Basket basket, Delivery delivery)
         {
-            var order = TryGetByUserId(userId);
-            if (order == null)
-            {
                 var newOrder = new Order(userId, basket, delivery);
-                orders.Add(newOrder);
-            }
-        }
+                _orders.Add(newOrder);
 
-        public void SaveOrder(Order order)
+                var xmlSerializer = new XmlSerializer(typeof(List<Order>));
+                using (FileStream fs = new FileStream("Data/Orders.xml", FileMode.OpenOrCreate))
+                {
+                    xmlSerializer.Serialize(fs, _orders);
+                }
+        }
+        
+        public List<Order> GetOrderData()
         {
-            var xmlSerializer = new XmlSerializer(typeof(Order));
+            var xmlSerializer = new XmlSerializer(typeof(List<Order>));
             using (FileStream fs = new FileStream("Data/Orders.xml", FileMode.OpenOrCreate))
             {
-                xmlSerializer.Serialize(fs, order);
+                _orders = xmlSerializer.Deserialize(fs) as List<Order>;
             }
+            return _orders;
         }
     }
 }

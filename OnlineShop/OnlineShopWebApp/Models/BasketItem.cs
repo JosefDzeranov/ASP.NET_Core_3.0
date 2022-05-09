@@ -19,5 +19,11 @@ namespace OnlineShopWebApp.Models
             Product = product;
             Quantity++;
         }
+        public BasketItem(Guid id, Product product, int quantity)
+        {
+            Id = id;
+            Product = product;
+            Quantity = quantity;
+        }
     }
 }
