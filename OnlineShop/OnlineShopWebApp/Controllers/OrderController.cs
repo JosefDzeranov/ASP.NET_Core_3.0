@@ -1,9 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using OnlineShopWebApp.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace OnlineShopWebApp.Controllers
 {
@@ -24,18 +20,18 @@ namespace OnlineShopWebApp.Controllers
         }
 
         [HttpPost]
-        public IActionResult Buy(User user)
+        public IActionResult Buy(DeliveryInformarion deliveryInformarion)
         {
             if (ModelState.IsValid)
             {
                 var cart = cartsRepository.TryGetByUserId(Constants.UserId);
-                ordersRepository.Add(cart, user);
+                ordersRepository.Add(cart, deliveryInformarion);
                 cartsRepository.Clear(Constants.UserId);
                 return View();
             }
             else
             {
-                return View(user);
+                return View(deliveryInformarion);
             }
         }
     }

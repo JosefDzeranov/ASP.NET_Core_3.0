@@ -1,9 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using System;
-using System.Collections.Generic;
+﻿using System;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace OnlineShopWebApp.Models
 {
@@ -13,7 +9,7 @@ namespace OnlineShopWebApp.Models
         public string Name { get; set; }
 
         [Required(ErrorMessage = "Введите возраст")]
-        [Range(18, 110, ErrorMessage ="Недопустимый возраст")]
+        [Range(18, 110, ErrorMessage = "Недопустимый возраст")]
         public string Age { get; set; }
 
         [Required(ErrorMessage = "Введите e-mail")]

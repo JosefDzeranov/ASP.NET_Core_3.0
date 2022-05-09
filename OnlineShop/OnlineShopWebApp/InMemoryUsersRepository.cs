@@ -1,32 +1,30 @@
 ﻿using OnlineShopWebApp.Models;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 
 namespace OnlineShopWebApp
 {
     public class InMemoryUsersRepository : IUsersRepository
     {
-        List<User> users = new List<User>();
+        List<UserAccount> users = new List<UserAccount>();
 
-        public List<User> GetAll()
+        public List<UserAccount> GetAll()
         {
             return users;
         }
 
-        public User TryGetByName(string name)
+        public UserAccount TryGetByLogin(string login)
         {
-            return users.FirstOrDefault(x => x.Name == name);
+            return users.FirstOrDefault(x => x.Login == login);
         }
-        public void Add(User newUser)
+        public void Add(UserAccount newUser)
         {
             users.Add(newUser);
         }
 
         public void Delete(string name)
         {
-            users.RemoveAll(x => x.Name == name);
+            users.RemoveAll(x => x.Login == name);
         }
 
     }

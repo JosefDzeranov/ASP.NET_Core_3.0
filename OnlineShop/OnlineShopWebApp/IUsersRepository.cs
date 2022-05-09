@@ -1,16 +1,13 @@
 ﻿using OnlineShopWebApp.Models;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace OnlineShopWebApp
 {
-    interface IUsersRepository
+    public interface IUsersRepository
     {
-        List<User> GetAll();
-        User TryGetByName(string name);
-        void Add(User newUser); 
-        void Delete(string name);
+        List<UserAccount> GetAll();
+        UserAccount TryGetByLogin(string login);
+        void Add(UserAccount newUser);
+        void Delete(string login);
     }
 }
