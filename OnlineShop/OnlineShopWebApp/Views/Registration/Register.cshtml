@@ -1,6 +1,6 @@
-﻿@model NewUserRegistrationForm
+﻿@model Registration
 
-<form asp-action="Index" asp-controller="NewUserRegistrationForm" method="post">
+<form asp-action="Register" asp-controller="Registration" method="post">
 	<div>
 		<div class="validation" asp-validation-summary="All"></div>
 	
@@ -36,7 +36,7 @@
 			<span asp-validation-for="ConfirmPassword"></span>
 		</div><br />
 
-		<input type="submit" value="Зарегистрироваться" class ="btn btn-outline-success" role="button"></div>
+		<input type="submit" value="Зарегистрироваться" class ="btn btn-outline-success" role="button" asp-controller="Registration" asp-action="Register"></div>
 		<div><br>
 </div>
 </form>
