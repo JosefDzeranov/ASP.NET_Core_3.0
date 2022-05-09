@@ -6,7 +6,9 @@
 		<div class="row">
 			<h3>Список ролей</h3>
 		</div>
-		<a href="/admin/addRole">Добавить новую роль</a>
+		<a asp-area="Admin"
+		asp-controller="Role"
+		asp-action="Add">Добавить новую роль</a>
 		<div class="row">
 			<table class="table">
 				<thead>
@@ -21,7 +23,11 @@
 						<tr>
 							<td>@(i+1)</td>
 							<td>@Model[i].Name</td>
-							<td><a href="/admin/removeRole?roleName=@Model[i].Name">Удалить</a></td>
+							<td><a 
+								asp-area="Admin"
+								asp-controller="Role"
+								asp-action="Remove"
+								asp-route-roleName="@Model[i].Name">Удалить</a></td>
 						</tr>
 					}
 				</tbody>

@@ -27,7 +27,11 @@
 					<td>@EnumHelper.GetDisplayName(Model[i].Status)</td>
 					<td>@Model[i].CreateDateTime.ToString("d")</td>
 					<td>@Model[i].CreateDateTime.ToString("t")</td>
-					<td><a href="/admin/orderDetails?OrderId=@Model[i].Id">Подробнее</a></td>
+					<td><a 
+						asp-area="Admin"
+						asp-controller="Order"
+						asp-action="Detail"
+						asp-route-orderId="@Model[i].Id">Подробнее</a></td>
 				</tr>
 			}
 			</tbody>

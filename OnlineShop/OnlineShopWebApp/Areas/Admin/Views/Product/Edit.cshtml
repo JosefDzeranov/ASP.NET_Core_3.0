@@ -20,8 +20,11 @@
 
 		<input type="text" asp-for="Description"/>
 		<span asp-validation-for="Description"></span><br />
-
-		<input type="submit" value="Сохранить изменения" class ="btn btn-outline-success" role="button"  />
+		<br />
+		<button type="submit" class="btn-outline-success"
+		asp-area="Admin"
+		asp-controller="Product"
+		asp-action="Edit">Сохранить изменения</button>
 	</div>
 </div>
 </form>

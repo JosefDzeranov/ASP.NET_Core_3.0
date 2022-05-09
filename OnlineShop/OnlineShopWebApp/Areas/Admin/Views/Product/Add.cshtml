@@ -34,7 +34,11 @@
 			<label><input type="file" name="file"></label></div>
 		<div><br>
 		
-		<input type="submit" value="Добавить" class ="btn btn-outline-success" role="button" href="/admin/AddProduct" asp-controller="admin" asp-action="AddProduct"/></div>
+		<input type="submit"
+		asp-area="Admin"
+		asp-controller="Product"
+		asp-action="Add"
+		value="Добавить" class ="btn btn-outline-success" role="button"/></div>
 	<div><br>
 	</div>
 	</div>

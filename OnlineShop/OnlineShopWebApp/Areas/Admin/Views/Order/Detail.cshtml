@@ -36,6 +36,10 @@
 	</div>
 	</div>
 	<br />
-	<button class="btn btn-outline-success" type="submit" asp-controller="Admin" asp-action="UpdateOrderStatus" asp-route-orderId="@Model.Id">Обновить статус заказа</button>
+	<button class="btn btn-outline-success" type="submit"
+	asp-area="Admin"
+	asp-controller="Order"
+	asp-action="UpdateOrderStatus"
+	asp-route-orderId="@Model.Id">Обновить статус заказа</button>
 
 </form>
