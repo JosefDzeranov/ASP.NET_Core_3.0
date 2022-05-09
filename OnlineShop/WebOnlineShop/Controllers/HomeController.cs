@@ -1,40 +1,28 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
-using OnlineShopWebApp.Models;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
+using WebOnlineShop.Models;
 
-
-namespace OnlineShopWebApp.Controllers
+namespace WebOnlineShop.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly IProductsRepository productsRepository;
+        private readonly ILogger<HomeController> _logger;
 
-        public HomeController(IProductsRepository productsRepository)
+        public HomeController(ILogger<HomeController> logger)
         {
-            this.productsRepository = productsRepository;
+            _logger = logger;
         }
 
         public IActionResult Index()
         {
-            var products = productsRepository.GetAll();
-
-            return View(products);
+            
+            return View();
         }
-
-        [HttpPost]
-        public IActionResult SearchByName(string searchname)
-        {
-            var findProduct = productsRepository.TryGetByName(searchname);
-            return View(findProduct);
-        }
-
-
-
 
         public IActionResult Privacy()
         {
