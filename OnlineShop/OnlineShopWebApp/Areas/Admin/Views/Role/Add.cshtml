@@ -11,7 +11,7 @@
                 <input asp-for="Name" />
                 <span asp-validation-for="Name" />
             </div><br />
-            <button class="btn btn-dark" type="submit" asp-controller="Administration" asp-action="AddRole">Сохранить</button>
+            <button class="btn btn-dark" type="submit" asp-area="admin" asp-controller="role" asp-action="add">Сохранить</button>
         </div>
     </div>
 </form>
