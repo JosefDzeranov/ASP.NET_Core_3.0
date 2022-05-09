@@ -1,18 +1,14 @@
-﻿
-using Newtonsoft.Json;
-using OnlineShopWebApp.Models;
-using System.Collections.Generic;
-using System.IO;
+﻿using System.IO;
 using System.Text;
 
 namespace OnlineShopWebApp
 {
     public static class FileProvider
     {
-        public static void Append(string fileName, string orderData)
+        public static void Write(string fileName, string value)
         {
-            var writer = new StreamWriter(fileName, true, Encoding.UTF8);
-            writer.WriteLine(orderData);
+            var writer = new StreamWriter(fileName, false, Encoding.UTF8);
+            writer.WriteLine(value);
             writer.Close();
         }
         
@@ -23,7 +19,5 @@ namespace OnlineShopWebApp
             reader.Close();
             return value;
         }
-
-       
     }
 }

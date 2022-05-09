@@ -23,8 +23,8 @@ namespace OnlineShopWebApp.Controllers
         public IActionResult Buy(Order order)
         {
             var existingCart = cartsRepository.TryGetByUserId(Constants.UserId);
-            odersRepository.AddCart(existingCart);
-            odersRepository.SaveOrderInformation(order);
+            order.Items = existingCart.Items;
+            odersRepository.Create(order);
             cartsRepository.Clear(Constants.UserId);
             return View();
         }

@@ -9,29 +9,25 @@ namespace OnlineShopWebApp
 {
     public class OrdersRepositoryJSON: IOrdersRepository
     {
-        public static string Path { get; } = "order.json";
-        public static List<Order> orders = new List<Order>();
+        private const string fileName  = "order.json";
+       
+        private readonly List<Order> orders;
 
-        private List<Cart> carts = new List<Cart>();
-
-        public void AddCart(Cart cart)
+        public OrdersRepositoryJSON()
         {
-            carts.Add(cart);
+            orders = GetAll();
         }
-
-        public void SaveOrderInformation(Order order)
+                
+        public void Create(Order order)
         {
             orders.Add(order);
             var jsonData = JsonConvert.SerializeObject(orders, Formatting.Indented);
-            FileProvider.Append(Path, jsonData);
+            FileProvider.Write(fileName, jsonData);
         }
 
-        public List<Order> TryGetOrdersInformation()
+        public List<Order> GetAll()
         {
-            var fileData = FileProvider.Get(Path);
-            var orderResults = JsonConvert.DeserializeObject<List<Order>>(fileData);
-
-            return orderResults;
+            return orders;
         }
     }
 }
