@@ -23,7 +23,7 @@ namespace OnlineShopWebApp.Areas.Admin.Controllers
             return View(orders);
         }
 
-        public IActionResult OrderDetails(Guid orderId)
+        public IActionResult Details(Guid orderId)
         {
             var order = ordersRepository.TryGetById(orderId);
             return View(order);
