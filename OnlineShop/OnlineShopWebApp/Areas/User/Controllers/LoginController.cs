@@ -6,11 +6,6 @@ namespace OnlineShopWebApp.Areas.User.Controllers
 
     public class LoginController : Controller
     {
-        public IActionResult LoginSuccess()
-        {
-            return View();
-        }
-
         public IActionResult Login()
         {
             return View();
@@ -29,7 +24,7 @@ namespace OnlineShopWebApp.Areas.User.Controllers
                 return Content($"{user.Login} - not valid");
             }
 
-            return RedirectToAction("LoginSuccess");
+            return RedirectToAction("Index", "Home", new { area = "" });
         }
     }
 }
