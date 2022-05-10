@@ -1,9 +1,6 @@
 ﻿using Newtonsoft.Json;
 using OnlineShopWebApp.Models;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace OnlineShopWebApp
 {
@@ -11,7 +8,7 @@ namespace OnlineShopWebApp
     {
         private const string fileName  = "order.json";
        
-        private readonly List<Order> orders;
+        private readonly List<Order> orders=new List<Order>();
 
         public OrdersRepositoryJSON()
         {
