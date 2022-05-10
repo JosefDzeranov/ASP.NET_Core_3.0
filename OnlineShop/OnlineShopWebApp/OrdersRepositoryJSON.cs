@@ -8,7 +8,7 @@ namespace OnlineShopWebApp
     {
         private const string fileName  = "order.json";
        
-        private readonly List<Order> orders=new List<Order>();
+        private readonly List<Order> orders;
 
         public OrdersRepositoryJSON()
         {
