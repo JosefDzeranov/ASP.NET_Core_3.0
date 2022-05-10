@@ -5,7 +5,6 @@ namespace OnlineShopWebApp.Controllers
 {
     public class OrderController : Controller
     {
-    
         private readonly ICartsRepository cartsRepository;
         private readonly IOrdersRepository odersRepository;
 
@@ -14,6 +13,7 @@ namespace OnlineShopWebApp.Controllers
             this.cartsRepository = cartsRepository;
             this.odersRepository = odersRepository;
         }
+
         public IActionResult Index()
         {
             return View();
@@ -23,8 +23,8 @@ namespace OnlineShopWebApp.Controllers
         public IActionResult Buy(Order order)
         {
             var existingCart = cartsRepository.TryGetByUserId(Constants.UserId);
-            odersRepository.AddCart(existingCart);
-            odersRepository.SaveOrderInformation(order);
+            order.Items = existingCart.Items;
+            odersRepository.Create(order);
             cartsRepository.Clear(Constants.UserId);
             return View();
         }
