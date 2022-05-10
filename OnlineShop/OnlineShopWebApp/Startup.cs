@@ -29,6 +29,7 @@ namespace OnlineShopWebApp
             services.AddSingleton<ICompareStorage, CompareStorage>();
             services.AddSingleton<IFavoritesStorage, FavoritesStorage>();
             services.AddSingleton<IUserStorage, UserStorage>();
+            services.AddSingleton<IRoleStorage, RoleStorage>();
 
             services.Configure<RequestLocalizationOptions>(options =>
             {

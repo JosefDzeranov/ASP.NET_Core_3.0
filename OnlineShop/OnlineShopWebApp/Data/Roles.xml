@@ -1,0 +1,12 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<roles>
+  <role>
+    <name>Admin</name>
+  </role>
+  <role>
+    <name>Customer</name>
+  </role>
+  <role>
+    <name>SuperAdmin</name>
+  </role>
+</roles>

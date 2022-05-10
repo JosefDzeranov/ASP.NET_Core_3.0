@@ -8,10 +8,12 @@ namespace OnlineShopWebApp.Controllers
     {
         private readonly IProductStorage _productStorage;
         private readonly IOrderStorage _orderStorage;
-        public AdminController(IProductStorage productStorage, IOrderStorage orderStorage)
+        private readonly IRoleStorage _roleStorage;
+        public AdminController(IProductStorage productStorage, IOrderStorage orderStorage, IRoleStorage roleStorage)
         {
             _productStorage = productStorage;
             _orderStorage = orderStorage;
+            _roleStorage = roleStorage;
         }
         public IActionResult Orders()
         {
@@ -43,7 +45,47 @@ namespace OnlineShopWebApp.Controllers
 
         public IActionResult Roles()
         {
+            var roles = _roleStorage.GetAll();
+            return View(roles);
+        }
+
+        public IActionResult AddRole()
+        {
             return View();
+        }
+
+        [HttpPost]
+        public IActionResult AddRole(string name)
+        {
+            if(ModelState.IsValid)
+            {
+                _roleStorage.AddRole(name);
+                return RedirectToAction("Roles");
+            }
+            return View();
+        }
+
+        public IActionResult EditRole(string name)
+        {
+            var role = _roleStorage.TryGetRoleByName(name);
+            return View(role);
+        }
+
+        [HttpPost]
+        public IActionResult SaveRole(string oldName, Role role)
+        {
+            if(ModelState.IsValid)
+            {
+                _roleStorage.EditRole(oldName, role);
+                return RedirectToAction("Roles");
+            }
+            return View();
+        }
+
+        public IActionResult RemoveRole(string name)
+        {
+            _roleStorage.RemoveRole(name);
+            return RedirectToAction("Roles");
         }
 
         public IActionResult Products()

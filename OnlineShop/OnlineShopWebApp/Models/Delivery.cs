@@ -13,6 +13,7 @@ namespace OnlineShopWebApp.Models
         [EmailAddress]
         public string Email { get; set; }
 
-        public Delivery() { } // Empty ctor for XML serializing.
+        public Delivery() { } // Empty ctor for XML serializing. 
+
     }
 }

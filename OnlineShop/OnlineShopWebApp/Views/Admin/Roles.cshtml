@@ -1,4 +1,8 @@
-﻿@{
+﻿@using OnlineShopWebApp.Models
+@using System.Collections.Generic;
+@model List<Role>
+
+@{
     ViewData["Title"] = "Roles";
 }
 
@@ -7,8 +11,31 @@
         <div class="col-2">
             @await Html.PartialAsync("AdminMenuLeft")
         </div>
-        <div class="col-10">
+        <div class="col-7">
             <h2>Roles</h2>
+            <h6><a class="nav-link" asp-controller="Admin" asp-action="AddRole">Add new Role</a></h6>
+            <table class="table mt-4">
+                <caption>Role list</caption>               
+                @for (int i = 0; i < Model.Count; i++)
+                {
+                    <tbody class="border-top-0">
+                        <tr>
+                            <td>
+                                @(i + 1)
+                            </td>
+                            <td>
+                                @Model[i].Name
+                            </td>
+                            <td>
+                                <div class="btn-group ml-2" role="group" aria-label="Edit/Remove buttons">
+                                    <a class="btn btn-outline-dark btn-sm" role="button" href="/admin/editrole?name=@Model[i].Name">Edit</a>
+                                    <a class="btn btn-outline-dark btn-sm" role="button" href="/admin/removerole?name=@Model[i].Name">Remove</a>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                }
+            </table>
         </div>
     </div>
 </div>

@@ -1,0 +1,27 @@
+﻿@using OnlineShopWebApp.Models
+
+@model Role
+
+@{
+    ViewData["Title"] = "Add role";
+}
+<div class="container align-content-center">
+    <div class="row">
+        <div class="col-2">
+            @await Html.PartialAsync("AdminMenuLeft")
+        </div>
+        <div class="col-5">
+            <h2>Add role</h2>
+            <form asp-action="AddRole" asp-controller="Admin">
+                <div class="validation" asp-validation-summary="All"></div>
+                <div class="mb-3">
+                    <input class="form-control" asp-for="Name" placeholder="Name" />
+                    <span asp-validation-for="Name"></span>
+                </div>
+                <div class="mb-3">
+                    <button type="submit" class="btn btn-outline-dark btn-sm active" asp-controller="Admin" asp-action="AddRole">Add</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
