@@ -1,37 +1,30 @@
 ﻿using Newtonsoft.Json;
 using OnlineShopWebApp.Models;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace OnlineShopWebApp
 {
-    public class OrdersRepositoryJSON: IOrdersRepository
+    public class OrdersRepositoryJSON : IOrdersRepository
     {
-        public static string Path { get; } = $"order.json";
+        private const string fileName = "order.json";
 
-        private List<Cart> orders = new List<Cart>();
+        private readonly List<Order> orders;
 
-        public void AddCart(Cart cart)
+        public OrdersRepositoryJSON()
         {
-            orders.Add(cart);
+            orders = GetAll();
         }
 
-        public void SaveOrderInformation(Order order)
+        public void Create(Order order)
         {
-            var jsonData = JsonConvert.SerializeObject(order.ToString());
-            FileProvider.Append(Path, jsonData);
+            orders.Add(order);
+            var jsonData = JsonConvert.SerializeObject(orders, Formatting.Indented);
+            FileProvider.Write(fileName, jsonData);
         }
 
-        public List<Order> GetOrdersInformation()
+        public List<Order> GetAll()
         {
-
-            var fileData = FileProvider.Get(Path);
-            var orderResults = JsonConvert.DeserializeObject<List<Order>>(fileData);
-            return orderResults;
+            return orders;
         }
-
-        
     }
 }
