@@ -17,7 +17,7 @@ namespace OnlineShopWebApp.Models
 
         [Required(ErrorMessage = "Please enter Phone Number.")]
         [StringLength(20, MinimumLength = 2, ErrorMessage = "Phone Number should have only digits.")]
-        public int Phone { get; set; }
+        public string Phone { get; set; }
 
         [Required(ErrorMessage = "Please enter E-mail.")]
         [EmailAddress(ErrorMessage = "Please enter vald E-mail.")]
