@@ -4,6 +4,7 @@ using System;
 
 namespace OnlineShopWebApp.Controllers
 {
+    [Area("Admin")]
     public class AdministrationController : Controller
     {
         private readonly IProductManager productManager;
