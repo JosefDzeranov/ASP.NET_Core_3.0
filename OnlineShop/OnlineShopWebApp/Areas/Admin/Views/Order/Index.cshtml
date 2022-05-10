@@ -1,7 +1,36 @@
-﻿<div class="row">
+﻿@model List<Order>
+
+<div class="row">
     @await Html.PartialAsync("AdminPanel")
 
     <div class="col-9">
-        <h3>Orders</h3>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Summ</th>
+                    <th>Status</th>
+                    <th>Date</th>
+                    <th>Time</th>
+                    <th></th>
+                </tr>
+            </thead>
+
+            <tbody>
+                @for (int i = 0; i < Model.Count; i++)
+                {
+                    <tr>
+                        <td>@(i+1)</td>
+                        <td>@Model[i].Cost</td>
+                        <td>@Model[i].Status</td>
+                        <td>@Model[i].CreatedDateTime.ToString("d")</td>
+                        <td>@Model[i].CreatedDateTime.ToString("t")</td>
+                        <td>
+                            <a style="color:blue" asp-controller="Admin" asp-action="orderDetails" asp-route-id="@Model[i].Id">More Details</a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
     </div>
 </div>
