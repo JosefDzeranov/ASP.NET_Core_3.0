@@ -5,8 +5,7 @@ namespace OnlineShopWebApp
 {
     public interface IOrdersRepository
     {
-        void AddCart(Cart cart);
-        void SaveOrderInformation(Order order);
-        public List<Order> GetOrdersInformation();
+        void Create(Order order);
+        List<Order> GetAll();
     }
 }
