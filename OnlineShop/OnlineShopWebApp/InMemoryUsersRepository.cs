@@ -22,6 +22,20 @@ namespace OnlineShopWebApp
             users.Add(newUser);
         }
 
+        public void ChangePassword(NewPassword newPassword)
+        {
+            var existingUser = TryGetByLogin(newPassword.Login);
+            existingUser.Password = newPassword.Password;
+        }
+
+        public void Edit (UserAccount userChange, string oldLogin)
+        {
+            var existingUser = TryGetByLogin(oldLogin);
+            existingUser.Name = userChange.Name;
+            existingUser.Login = userChange.Login;
+            existingUser.Age = userChange.Age;
+            existingUser.Email = userChange.Email;
+        }
         public void Delete(string name)
         {
             users.RemoveAll(x => x.Login == name);
