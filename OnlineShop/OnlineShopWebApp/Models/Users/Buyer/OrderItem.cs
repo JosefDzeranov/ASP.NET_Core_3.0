@@ -5,7 +5,7 @@ namespace OnlineShopWebApp.Models
 {
     public class OrderItem
     {
-        public string Id { get; set; }
+        public string Id { get; }
         public List<CartItem> CartItem { get; set; }
         public InfoBuying InfoBuying { get; set; }
         public DateTime dateTime { get; set; }
