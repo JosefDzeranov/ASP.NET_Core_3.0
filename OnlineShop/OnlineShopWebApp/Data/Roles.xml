@@ -6,7 +6,4 @@
   <role>
     <name>Customer</name>
   </role>
-  <role>
-    <name>SuperAdmin</name>
-  </role>
 </roles>

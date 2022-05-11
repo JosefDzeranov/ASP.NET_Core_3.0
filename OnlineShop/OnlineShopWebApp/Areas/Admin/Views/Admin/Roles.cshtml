@@ -13,7 +13,7 @@
         </div>
         <div class="col-7">
             <h2>Roles</h2>
-            <h6><a class="nav-link" asp-controller="Admin" asp-action="AddRole">Add new Role</a></h6>
+            <h6><a class="nav-link" asp-area="admin" asp-controller="admin" asp-action="addrole">Add new Role</a></h6>
             <table class="table mt-4">
                 <caption>Role list</caption>               
                 @for (int i = 0; i < Model.Count; i++)
@@ -28,8 +28,8 @@
                             </td>
                             <td>
                                 <div class="btn-group ml-2" role="group" aria-label="Edit/Remove buttons">
-                                    <a class="btn btn-outline-dark btn-sm" role="button" href="/admin/editrole?name=@Model[i].Name">Edit</a>
-                                    <a class="btn btn-outline-dark btn-sm" role="button" href="/admin/removerole?name=@Model[i].Name">Remove</a>
+                                    <a class="btn btn-outline-dark btn-sm" role="button" asp-area="admin" asp-controller="admin" asp-action="editrole" asp-route-name="@Model[i].Name">Edit</a>
+                                    <a class="btn btn-outline-dark btn-sm" role="button" asp-area="admin" asp-controller="admin" asp-action="removerole" asp-route-name="@Model[i].Name">Remove</a>
                                 </div>
                             </td>
                         </tr>

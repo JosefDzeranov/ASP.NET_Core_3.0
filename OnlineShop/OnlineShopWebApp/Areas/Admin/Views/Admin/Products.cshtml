@@ -13,7 +13,7 @@
         </div>
         <div class="col-10">
             <h2>Products</h2>
-            <h6><a class="nav-link" asp-controller="Admin" asp-action="Add">Add new Product</a></h6>
+            <h6><a class="nav-link" asp-area="admin" asp-controller="admin" asp-action="add">Add new Product</a></h6>
             <table class="table border-left border-right border-top border-bottom mt-4">
                 <caption>Product list</caption>
                 <thead class="table-light">
@@ -39,8 +39,8 @@
                             </td>
                             <td>
                                 <div class="btn-group ml-2" role="group" aria-label="Edit/Remove buttons">
-                                    <a class="btn btn-outline-dark btn-sm" role="button" href="/admin/edit?id=@Model[i].Id">Edit</a>
-                                    <a class="btn btn-outline-dark btn-sm" role="button" href="/admin/remove?id=@Model[i].Id">Remove</a>
+                                    <a class="btn btn-outline-dark btn-sm" role="button" asp-area="admin" asp-controller="admin" asp-action="edit" asp-route-id="@Model[i].Id">Edit</a>
+                                    <a class="btn btn-outline-dark btn-sm" role="button" asp-area="admin" asp-controller="admin" asp-action="remove" asp-route-id="@Model[i].Id">Remove</a>
                                 </div>
                             </td>
                         </tr>

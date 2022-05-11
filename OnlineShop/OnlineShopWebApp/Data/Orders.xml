@@ -4,7 +4,7 @@
     <Id>ddf7d538-fefc-4a9e-a596-15b82f7d8ef3</Id>
     <Date>2022-05-10T18:18:10.8222578+03:00</Date>
     <UserId>UserId</UserId>
-    <Status>Processed</Status>
+    <Status>Created</Status>
     <Basket>
       <Id>d5643009-be9d-48e1-8459-6b141b113419</Id>
       <UserId>UserId</UserId>
@@ -41,7 +41,7 @@
     <Id>df68a96b-c262-4869-820c-99ecaeac894f</Id>
     <Date>2022-05-10T18:23:31.8456855+03:00</Date>
     <UserId>UserId</UserId>
-    <Status>Delivered</Status>
+    <Status>Canceled</Status>
     <Basket>
       <Id>ea6db211-da2f-47e2-a161-f709b40cf59f</Id>
       <UserId>UserId</UserId>

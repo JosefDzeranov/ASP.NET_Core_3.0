@@ -38,7 +38,7 @@
                     <textarea class="form-control" rows="4" asp-for="Description">@Model.Description</textarea>
                 </div>
                 <div class="mb-3">
-                    <button type="submit" class="btn btn-outline-dark btn-sm" asp-controller="Admin" asp-action="Save">Save</button>
+                    <button type="submit" class="btn btn-outline-dark btn-sm" asp-area="admin" asp-controller="admin" asp-action="save">Save</button>
                 </div>
             </form>
         </div>

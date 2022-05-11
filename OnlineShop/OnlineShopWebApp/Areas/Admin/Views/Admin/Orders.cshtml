@@ -49,7 +49,7 @@
                                 @Model[i].Date.ToString("HH:mm")
                             </td>
                             <td>
-                                <a href="/admin/orderdetails?id=@Model[i].Id">More detailed</a>
+                                <a asp-area="admin" asp-controller="admin" asp-action="orderdetails" asp-route-id="@Model[i].Id">More detailed</a>
                             </td>
                         </tr>
                     </tbody>

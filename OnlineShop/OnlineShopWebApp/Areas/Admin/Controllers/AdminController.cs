@@ -4,6 +4,7 @@ using OnlineShopWebApp.Models;
 
 namespace OnlineShopWebApp.Controllers
 {
+    [Area("Admin")]
     public class AdminController : Controller
     {
         private readonly IProductStorage _productStorage;
