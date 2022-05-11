@@ -25,6 +25,7 @@ namespace OnlineShopWebApp.Controllers
             buyerStorage.ClearInfoBuying(buyerId);
             return RedirectToAction("Index", new { buyerId });
         }
+
         [HttpPost]
         public IActionResult BuyValid(InfoBuying infoBuying, int buyerId)
         {
@@ -40,8 +41,5 @@ namespace OnlineShopWebApp.Controllers
             buyerStorage.Buy(buyerId);
             return View(); 
         }
-
-
-
     }
 }

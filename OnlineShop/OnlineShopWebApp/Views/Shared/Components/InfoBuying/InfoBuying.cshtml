@@ -101,6 +101,12 @@ else
                 <p>@Model.Commentary</p>
             </div>
         </div>
+        <input type="hidden" value="@Model.Surname" name="surname" asp-for="Surname"/>
+        <input type="hidden" value="@Model.Secondname" name="secondname" asp-for="Secondname"/>
+        <input type="hidden" value="@Model.Email" name="email" asp-for="Email"/>
+        <input type="hidden" value="@Model.Commentary" name="commentary" asp-for="Commentary"/>
+        <input type="hidden" value="@Model.Firstname" name="firstname" asp-for="Firstname"/>
+        <input type="hidden" value="@Model.Phone" name="phone" asp-for="Phone"/>
         <button type="submit" class="btn btn-outline-dark col-3" asp-controller="Order" asp-action="RewriteInfoBuying">Заполнить новые данные</button>
     </text>
 }
