@@ -6,10 +6,10 @@ namespace OnlineShopWebApp.Models
     {
         private static int uniId = 1;
         public int Id { get; }
-        public string Name { get; }
-        public decimal Price { get; }
-        public string Description { get; }
-        public string ImagesPath { get; }
+        public string Name { get; set; }
+        public decimal Price { get; set; }
+        public string Description { get; set; }
+        public string ImagesPath { get; set; }
         public string GPU { get; }
         public string MemoryType { get; }
         public string MemoryCount { get; }
