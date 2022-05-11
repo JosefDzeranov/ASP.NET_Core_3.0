@@ -1,4 +1,5 @@
-﻿@{
+﻿@model List<OrderItem>
+@{
     ViewData["Title"] = "Панель администратора";
 }
 
@@ -6,8 +7,49 @@
     <div class="row">
         @await Html.PartialAsync("MenuAdminPanel")
         <div class="col">
-            <div class="container">
+                        <div class="container">
                 <h3 class="display-5 Title_sile text-center">Список заказов</h3>
+
+                <div class="table-responsive">
+                    <table class="table table-bordered caption-top">
+                        <thead>
+                        <tr>
+                            <th scope="col" class="align-top small">№</th>
+                            <th scope="col" class="align-top small">Сумма</th>
+                            <th scope="col" class="align-top small">Статус</th>
+                            <th scope="col" class="align-top small">Пользователь</th>
+                            <th scope="col" class="align-top small">Дата</th>
+                            <th scope="col" class="align-top small">Время</th>
+                            <th scope="col" class="align-top small"> </th>
+                        </tr>
+                        </thead>
+                        @if (Model.Count != 0)
+                        {
+                            <tbody>
+                            @for (int i = 0; i < Model.Count; i++)
+                            {
+                                <tr>
+                                    <th class="small" scope="row">@(i + 1)</th>
+                                    <td class="small">@Model[i].FullCost</td>
+                                    <td class="small">@Model[i].Status</td>
+                                    <td class="small">@Model[i].Login</td>
+                                    <td class="small">@Model[i].DataRegistration()</td>
+                                    <td class="small">@Model[i].TimeRegistration()</td>
+                                    <td class="small">
+                                    </td>
+                                    
+                                </tr>
+
+                            }
+                            </tbody>
+                        }
+                        else
+                        {
+                            <td colspan="9">Заказы отсутствуют</td>
+                        }
+
+                    </table>
+                </div>
             </div>
         </div>
     </div>

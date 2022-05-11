@@ -1,27 +1,85 @@
 [
   {
     "Comparisons": [],
-    "Cart": [
+    "Cart": [],
+    "infoBuying": {
+      "Surname": "Молостов",
+      "Firstname": "Александр",
+      "Secondname": "Николаевич",
+      "Phone": "+79530711665",
+      "Email": "odisei.arco26@gmail.com",
+      "Commentary": "sgr"
+    },
+    "Orders": [
       {
-        "Product": {
-          "Id": 5,
-          "Name": "45-64NKL",
-          "Cost": 50000.0,
-          "Square": 245.0,
-          "Width": 12.74,
-          "Length": 14.24,
-          "Description": "Проект двухэтажного дома из кирпича с терассой",
-          "Images": [
-            "5-1.jpg"
-          ]
+        "CartItem": [
+          {
+            "Product": {
+              "Id": 1,
+              "CodeNumber": "63-42",
+              "Cost": 32000.0,
+              "Square": 109.0,
+              "Width": 8.36,
+              "Length": 14.06,
+              "Description": "Проект двухэтажного дома из газабетона с терассой",
+              "Images": [
+                "1-1.jpg"
+              ]
+            },
+            "Count": 2,
+            "additionalOptions": [
+              {
+                "opcion1": 1.0
+              },
+              {
+                "opcion1": 1.0
+              }
+            ]
+          },
+          {
+            "Product": {
+              "Id": 3,
+              "CodeNumber": "57-00",
+              "Cost": 36000.0,
+              "Square": 193.0,
+              "Width": 11.75,
+              "Length": 12.5,
+              "Description": "Проект двухэтажного дома из газабетона с терассой",
+              "Images": [
+                "3-1.jpg"
+              ]
+            },
+            "Count": 1,
+            "additionalOptions": [
+              {
+                "opcion1": 1.0
+              }
+            ]
+          }
+        ],
+        "InfoBuying": {
+          "Surname": "Молостов",
+          "Firstname": "Александр",
+          "Secondname": "Николаевич",
+          "Phone": "+79530711665",
+          "Email": "odisei.arco26@gmail.com",
+          "Commentary": "sgr"
         },
-        "Count": 2
+        "dateTime": "2022-05-11T06:05:25.4438641Z",
+        "Status": "Создан",
+        "Login": "Alex1",
+        "FullCost": 100003.0,
+        "RosterStatus": [
+          "Создан",
+          "Обработан",
+          "В пути",
+          "Отменён",
+          "Доставлен"
+        ]
       }
     ],
-    "infoBuying": null,
-    "Orders": [],
     "Id": 0,
-    "Login": null,
+    "Login": "Alex1",
     "Fistname": "Александр",
     "Secondname": "Николаевич",
     "Surname": "Молостов",

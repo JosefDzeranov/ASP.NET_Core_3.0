@@ -8,6 +8,7 @@ namespace OnlineShopWebApp.Interfase
         void AddProductInCart(Product product, int buyerId);
         void DeleteProductInCart(int productId, int buyerId);
         void ReduceDuplicateProductCart(int productId, int buyerId);
+        List<OrderItem> CollectAllOrders();
         void Buy(int buyerId);
         void ClearCart(int buyerId);
         Buyer FindBuyer(int buyerId);

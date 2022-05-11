@@ -7,9 +7,11 @@ namespace OOnlineShopWebApp.Controllers
     public class AdminPanelController : Controller
     {
         private readonly IProductStorage productStorage;
-        public AdminPanelController(IProductStorage productStorage)
+        private readonly IBuyerStorage buyerStorage;
+        public AdminPanelController(IProductStorage productStorage, IBuyerStorage buyerStorage)
         {
             this.productStorage = productStorage;
+            this.buyerStorage = buyerStorage;
         }
         public IActionResult Index()
         {
@@ -17,7 +19,8 @@ namespace OOnlineShopWebApp.Controllers
         }
         public IActionResult Orders()
         {
-            return View();
+            var orders = buyerStorage.CollectAllOrders();
+            return View(orders);
         }
         public IActionResult Users()
         {
