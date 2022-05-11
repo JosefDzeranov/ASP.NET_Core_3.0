@@ -72,6 +72,20 @@ namespace OnlineShopWebApp
             return buyer;
         }
 
+        public List<OrderItem> CollectAllOrders()
+        {
+            List<OrderItem> collectAllOrders = new List<OrderItem>();
+            foreach (var buyer in buyers)
+            {
+                var orders = buyer.Orders;
+                foreach (var order in orders)
+                {
+                    collectAllOrders.Add(order);
+                }
+            }
+            return collectAllOrders;
+        }
+
         private void WriteToStorage()
         {
             var json = JsonConvert.SerializeObject(buyers, Formatting.Indented);
@@ -83,5 +97,6 @@ namespace OnlineShopWebApp
             var json = File.ReadAllText(buyersFileName);
             buyers = JsonConvert.DeserializeObject<List<Buyer>>(json);
         }
+        
     }
 }
