@@ -22,7 +22,7 @@ namespace OnlineShopWebApp.Controllers
         }
 
         [HttpPost]
-        public IActionResult Registration(Account account)
+        public IActionResult Registration(Registration register)
         {
             return RedirectToAction("Index", "Home");
         }
