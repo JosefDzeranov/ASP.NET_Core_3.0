@@ -22,9 +22,14 @@ namespace OnlineShopWebApp.Controllers
         [HttpPost]
         public IActionResult Search(string name)
         {
+            if(name == null)
+            {
+                return RedirectToAction("Index");
+            }
+
             var products = _productStorage.SearchByName(name);
 
-            if (products.Count() == 0)
+            if (!products.Any())
             {
                 return View("NotFound");
             }
