@@ -19,13 +19,13 @@ namespace OnlineShopWebApp
         {
             return orders.FirstOrDefault(x => x.Id == id);
         }
-        public void Add(Cart cart, User user)
+        public void Add(Cart cart, DeliveryInformarion deliveryInformarion)
         {
             var newOrder = new Order
             {
                 Id = new Guid(),
                 Cart = cart,
-                User = user,
+                DeliveryInformarion = deliveryInformarion,
                 Date = DateTime.Now.ToString("dd MMMM yyyy"),
                 Time = DateTime.Now.ToString("HH:mm:ss")
             };

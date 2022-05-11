@@ -27,7 +27,7 @@
                                 <td>@(i+1)</td>
                                 <td>@Model[i].Cart.FullCost.</td>
                                 <td>@EnumHelper.GetDisplayName(Model[i].State)</td>
-                                <td>@Model[i].User.Name</td>
+                                <td>@Model[i].DeliveryInformarion.Name</td>
                                 <td>@Model[i].Date</td>
                                 <td>@Model[i].Time</td>
                                 <td><a asp-area="Admin" asp-controller="order" asp-action="details" asp-route-orderId="@Model[i].Id">Подробнее</a></td>
