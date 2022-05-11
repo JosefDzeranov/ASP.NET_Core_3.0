@@ -7,24 +7,48 @@
 
 
 <div class="row">
-    @foreach (var product in Model)
-    {
-        <div class="col-3">
-            <div class="card-deck">
-                <img src="@product.ImgPath" class="card-img-top" alt="изображение книги" />
-                <div class="card-body">
-                    <h5 class="card-title">@product.Name</h5>
-                    <div>
-                        <h4>@product.Cost руб.</h4>
-                        <a href="/favorites/add?productId=@product.Id" class="btn btn-primary btn-sm">в избранное</a>
-                    </div>
+    <div class="col-3">
+        <h2>Фильтр</h2>
+        <ul>
+            <li>Фильтр1</li>
+            <li>Фильтр2</li>
+            <li>Фильтр3</li>
+            <li>Фильтр4</li>
+        </ul>
+    </div>
+    <div class="col-9">
+        <div class="row">
 
-                    <a href="/cart/add?productId=@product.Id" class="btn btn-dark btn-sm">Добавить в корзину</a>
-                    <a href="/product/index/@product.Id" class="btn btn-dark btn-sm">Подробнее</a>
+            @foreach (var product in Model)
+            {
+                <div class="col-3">                 
+                    <div class="card box-shadow">
+                        <div class="row">
+                            <div class="col-9">
+                                <a asp-controller="Product" asp-action="Index" asp-route-id="@product.Id">
+                                    <img src="@product.ImgPath" class="card-img-top" alt="изображение книги" />
+                                </a>
+                            </div>
+                            <div class="col-3">
+                                <a asp-controller="Favorites" asp-action="Add" asp-route-productId="@product.Id" class="btn btn-primary btn-sm"><i class="bi bi-heart"></i></a>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <h4 class="card-title">
+                                <a class="text-decoration-none" asp-controller="Product" asp-action="Index" asp-route-id="@product.Id">@product.Name</a>
+                            </h4>
+                            <div>
+                                <h4>@product.Cost ₽</h4>
+                            </div>
+                            <a asp-controller="Cart" asp-action="Add" asp-route-productId="@product.Id" class="btn btn-dark btn-sm">В корзину</a>
+                        </div>
+                    </div>
+                  
                 </div>
-            </div>
+            }
         </div>
-    }
+    </div>
+
 </div>
 
 
