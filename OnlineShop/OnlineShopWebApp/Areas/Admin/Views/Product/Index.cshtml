@@ -23,20 +23,36 @@
                                 <td>@product.Cost ₽</td>
                                 <td>
                                     <a asp-controller="Product" asp-action="EditProduct" asp-route-id="@product.Id" class="btn btn-primary">Изменить</a>
-                                    <a asp-controller="Product" asp-action="DeleteProduct" asp-route-id="@product.Id" class="btn btn-danger">Удалить</a>
+                                    <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#DeleteProduct">
+                                        Удалить
+                                    </button>
+                                    <div class="modal fade" id="DeleteProduct" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="DeleteProduct" aria-hidden="true">
+                                        <div class="modal-dialog">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title" id="DeleteProduct">Удаление товара</h5>
+                                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    Вы действительно хотите удалить товар?
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Отмена</button>
+                                                    <a asp-controller="Product" asp-action="DeleteProduct" asp-route-id="@product.Id" type="button" class="btn btn-danger">Удалить</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </td>
                             </tr>
                         }
                         <tr>
                             <td colspan="4"><a asp-controller="Product" asp-action="AddProduct" class="btn btn-primary">Добавить новый</a></td>
-
                         </tr>
-
                     </table>
                 </div>
             </div>
         </div>
-
-
     </div>
 </div>
+
