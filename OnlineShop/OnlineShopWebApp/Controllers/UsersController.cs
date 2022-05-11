@@ -20,13 +20,13 @@ namespace OnlineShopWebApp.Controllers
         {
             if(ModelState.IsValid)
             {
-                if (_userStorage.Authorize(signin))
+                if (_userStorage.AuthorizeUser(signin))
                 {
                     return RedirectToAction("Index", "Home");
                 }
                 else 
                 {
-                    return View("Faled");
+                    return View("Failed");
                 }
             }
             return View();

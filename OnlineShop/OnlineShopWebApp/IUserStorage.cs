@@ -9,7 +9,7 @@ namespace OnlineShopWebApp
         void AddUser(SignUp signup);
         User TryGetUserById(Guid id);
         List<User> GetAll();
-        bool Authorize(SignIn signin);
+        bool AuthorizeUser(SignIn signin);
         void EditUser(User user);
         void RemoveUser(Guid id);
     }

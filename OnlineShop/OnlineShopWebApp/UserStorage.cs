@@ -49,7 +49,7 @@ namespace OnlineShopWebApp
             return _users;
         }
 
-        public bool Authorize(SignIn signin)
+        public bool AuthorizeUser(SignIn signin)
         {
             var matchUser = GetAll().FirstOrDefault(user => user.Email == signin.Email && user.Password == signin.Password);
             if(matchUser == null)

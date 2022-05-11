@@ -1,12 +1,15 @@
 ﻿@{
-    ViewData["Title"] = "Autorization faled";
+    ViewData["Title"] = "Autorization failed";
 }
 <div class="container align-content-center">
     <div class="row text-center">
         <div class="col-6 mx-auto">
-            <h2>Authorization faled</h2>
+            <h2>Authorization failed</h2>
             <div class="mt-3">
                 Sorry! Wrong Login or Password. <a asp-controller="Users" asp-action="Signin">Try again</a>, please.
+            </div>
+            <div class="mb-3">
+                Don't have an account? <a asp-controller="Users" asp-action="Signup">Sign up</a>
             </div>
         </div>
     </div>
