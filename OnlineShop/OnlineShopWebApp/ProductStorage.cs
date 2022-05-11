@@ -11,7 +11,7 @@ namespace OnlineShopWebApp
         private List<Product> _products = new List<Product>();
         public List<Product> GetProductData()
         {
-            var xDoc = XDocument.Load("Data/AllProducts.xml");
+            var xDoc = XDocument.Load("Data/Products.xml");
             _products = xDoc.Element("products")
                                .Elements("product")
                                .Select(p => new Product(
@@ -36,7 +36,7 @@ namespace OnlineShopWebApp
         }
         public void AddProduct(Product product)
         {
-            var xDoc = XDocument.Load("Data/AllProducts.xml");
+            var xDoc = XDocument.Load("Data/Products.xml");
             var root = xDoc.Element("products");
             product.Id = Guid.NewGuid();
             root.Add(new XElement("product",
@@ -46,12 +46,12 @@ namespace OnlineShopWebApp
                          new XElement("cost", product.Cost),
                          new XElement("description", product.Description)));
 
-            xDoc.Save("Data/AllProducts.xml");
+            xDoc.Save("Data/Products.xml");
         }
 
         public void EditProduct(Product product)
         {
-            var xDoc = XDocument.Load("Data/AllProducts.xml");
+            var xDoc = XDocument.Load("Data/Products.xml");
             var editProduct = xDoc.Element("products")
                               .Elements("product")
                               .FirstOrDefault(p => Guid.Parse(p.Attribute("id").Value) == product.Id);
@@ -68,19 +68,19 @@ namespace OnlineShopWebApp
             var desc = editProduct.Element("description");
             desc.Value = product.Description;
 
-            xDoc.Save("Data/AllProducts.xml");
+            xDoc.Save("Data/Products.xml");
         }
 
         public void RemoveProduct(Guid id)
         {
-            var xDoc = XDocument.Load("Data/AllProducts.xml");
+            var xDoc = XDocument.Load("Data/Products.xml");
             var root = xDoc.Element("products");
 
             var product = root.Elements("product")
                               .FirstOrDefault(p => Guid.Parse(p.Attribute("id").Value) == id);
 
                 product.Remove();
-                xDoc.Save("Data/AllProducts.xml");
+                xDoc.Save("Data/Products.xml");
         }
     }
 }

@@ -1,0 +1,11 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<users>
+  <user id="540da2cd-1260-4041-b78f-10009ccc498c">
+    <firstname>Anton</firstname>
+    <lastname>Kuznetsov</lastname>
+    <role>Customer</role>
+    <phone>+79034562543</phone>
+    <email>ku@ku.ru</email>
+    <password>qqq</password>
+  </user>
+</users>

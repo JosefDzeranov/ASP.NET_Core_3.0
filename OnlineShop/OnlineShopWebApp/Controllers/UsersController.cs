@@ -20,8 +20,14 @@ namespace OnlineShopWebApp.Controllers
         {
             if(ModelState.IsValid)
             {
-                _userStorage.AuthorizeUser(signin);
-                return RedirectToAction("Index", "Home");
+                if (_userStorage.Authorize(signin))
+                {
+                    return RedirectToAction("Index", "Home");
+                }
+                else 
+                {
+                    return View("Faled");
+                }
             }
             return View();
         }
@@ -36,7 +42,7 @@ namespace OnlineShopWebApp.Controllers
         {
             if (ModelState.IsValid)
             {
-                _userStorage.CreateUser(signup);
+                _userStorage.AddUser(signup);
                 return RedirectToAction("Index", "Home");
             }
             return View();

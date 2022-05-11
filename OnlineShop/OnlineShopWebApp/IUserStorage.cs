@@ -1,10 +1,16 @@
-﻿using OnlineShopWebApp.Models;
+﻿using System;
+using System.Collections.Generic;
+using OnlineShopWebApp.Models;
 
 namespace OnlineShopWebApp
 {
     public interface IUserStorage
     {
-        void CreateUser(SignUp signup);
-        void AuthorizeUser(SignIn signin);
+        void AddUser(SignUp signup);
+        User TryGetUserById(Guid id);
+        List<User> GetAll();
+        bool Authorize(SignIn signin);
+        void EditUser(User user);
+        void RemoveUser(Guid id);
     }
 }
