@@ -12,7 +12,7 @@ namespace OnlineShopWebApp.Models
         public string Login { get; set; }
         public decimal FullCost { get; set; }
 
-        public List<string> RosterStatus { get; set; } = new List<string>()
+        public List<string> RosterStatus { get; } = new List<string>()
         {
             "Создан",
             "Обработан",
