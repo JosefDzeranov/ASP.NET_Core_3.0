@@ -8,6 +8,7 @@
         public string Description { get; set; }
         public string ImagePath { get; set; }
 
+        public Product() { }
         public Product(int id,string name, decimal cost, string description, string imagePath)
         {
             Id = id;

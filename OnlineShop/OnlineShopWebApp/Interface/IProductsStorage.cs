@@ -16,5 +16,7 @@ namespace OnlineShopWebApp.Interface
         void Delete(int Id);
 
         void SaveEditedProduct(Product newProduct);
+
+        void Add(Product product);
     }
 }

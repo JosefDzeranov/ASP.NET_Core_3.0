@@ -1,0 +1,22 @@
+﻿@using OnlineShopWebApp.Models
+
+@model Product
+
+<form method="post">
+    <div class="row">
+        @await Html.PartialAsync("AdminPanel")
+        <div class="col text-center">
+            <h3>Добавление новой услуги</h3>
+            <label>Название</label>
+            <input type="text" name="Name" />
+            <br />
+            <label>Цена</label>
+            <input type="text" name="Cost" />
+            <br />
+            <label>Описание</label>
+            <input type="text" name="Description" />
+            <br />
+            <button class="btn btn-dark" type="submit" asp-controller="Admin" asp-action="Add" asp-route-product="@Model">Добавить</button>
+        </div>
+    </div>
+</form>

@@ -52,5 +52,17 @@ namespace OnlineShopWebApp.Controllers
 
             return RedirectToAction("Products");
         }
+
+        public IActionResult Add()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public IActionResult Add(Product product)
+        {
+            productsStorage.Add(product);
+            return RedirectToAction("Products");
+        }
     }
 }

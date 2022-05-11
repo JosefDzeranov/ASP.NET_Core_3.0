@@ -141,11 +141,49 @@ namespace OnlineShopWebApp.Models
 
                 if (File.Exists(currentFile))
                 {
+                    GC.Collect();
+                    GC.WaitForPendingFinalizers();
                     File.Delete(currentFile);
                 }
 
-                string obj = JsonConvert.SerializeObject(products, Formatting.Indented);
-                File.WriteAllText(@"Models\Products.json", obj);
+                if (productsJson.Count != 0)
+                {
+                    string obj = JsonConvert.SerializeObject(productsJson, Formatting.Indented);
+                    File.WriteAllText(@"Models\Products.json", obj);
+                }
+            }
+            catch (Exception)
+            {
+
+            }
+        }
+
+        public void Add(Product product)
+        {
+            List<Product> productsJson;
+
+            productsJson = DeserializeJsonProducts();
+            string currentFile = @"Models\Products.json";
+
+            if (!File.Exists(currentFile))
+            {
+                GC.Collect();
+                GC.WaitForPendingFinalizers();
+                File.Delete(currentFile);
+            }
+
+            try
+            {
+                productsJson = DeserializeJsonProducts();
+
+                List<Product> newProductsJson = new List<Product>();
+                newProductsJson.Add(product);
+
+                if (productsJson.Count != 0)
+                {
+                    string obj = JsonConvert.SerializeObject(productsJson, Formatting.Indented);
+                    File.WriteAllText(@"Models\Products.json", obj);
+                }
             }
             catch (Exception)
             {
