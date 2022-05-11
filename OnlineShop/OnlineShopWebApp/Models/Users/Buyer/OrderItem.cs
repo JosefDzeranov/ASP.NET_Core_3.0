@@ -5,6 +5,7 @@ namespace OnlineShopWebApp.Models
 {
     public class OrderItem
     {
+        public string Id { get; set; }
         public List<CartItem> CartItem { get; set; }
         public InfoBuying InfoBuying { get; set; }
         public DateTime dateTime { get; set; }
@@ -23,6 +24,7 @@ namespace OnlineShopWebApp.Models
 
         public OrderItem(List<CartItem> cartItem, string login, InfoBuying infoBuying)
         {
+            Id = Guid.NewGuid().ToString("N");
             CartItem = new List<CartItem>(cartItem);
             CalculateFullCostOrder();
             dateTime = DateTime.UtcNow;
