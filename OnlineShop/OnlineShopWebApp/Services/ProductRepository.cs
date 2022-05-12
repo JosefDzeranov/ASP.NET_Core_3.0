@@ -43,7 +43,41 @@ namespace OnlineShopWebApp.Services
                Description = "Описание товара",
                ImgPath ="/images/book.png"
            },
-
+            new Product()
+           {
+               Name = "Капитанская дочка",
+               Cost = 340.50m,
+               Description = "Описание товара",
+               ImgPath ="/images/book.png"
+           },
+            new Product()
+           {
+               Name = "Преступление и наказание",
+               Cost = 570.00m,
+               Description = "Описание товара",
+               ImgPath ="/images/book.png"
+           },
+            new Product()
+           {
+               Name = "Тихий Дон",
+               Cost =1200.00m,
+               Description = "Описание товара",
+               ImgPath ="/images/book.png"
+           },
+            new Product()
+           {
+               Name = "Отцы и дети",
+               Cost = 459.99m,
+               Description = "Описание товара",
+               ImgPath ="/images/book.png"
+           },
+            new Product()
+           {
+               Name = "Богач, бедняк",
+               Cost = 1100.85m,
+               Description = "Описание товара",
+               ImgPath ="/images/book.png"
+           },
 
         };
 
