@@ -1,0 +1,36 @@
+﻿@model Role
+@{
+    ViewData["Title"] = "Создание новой роли";
+}
+
+
+<form method="post" asp-controller="AdminPanel" asp-action="AddRole">
+    <div class="was-validated" asp-validation-summary="All"></div>
+    <div class="container">
+        <div class="row">
+            @await Html.PartialAsync("MenuAdminPanel")
+            <div class="col-10 container">
+                <div class="container">
+                    <h3 class="display-5 Title_sile text-center">Создание новой роли</h3>
+
+                    <div class="card">
+                        <div class="form-group p-3">
+                            <label class="text-center">Название:</label>
+                            <input type="text" class="form-control" id="Input1" required="" name="Name" asp-for="Name"/>
+                            <span asp-validation-for="Name"></span>
+                        </div>
+                    </div>
+
+                <div class="col-3 p-3">
+                    <button class="btn btn-light text-center" type="submit" asp-controller="AdminPanel" asp-action="AddRole">Создать</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+
+
+
+
+
+

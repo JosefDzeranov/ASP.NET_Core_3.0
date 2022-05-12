@@ -10,7 +10,7 @@ namespace OnlineShopWebApp
     {
         private int instanceCounter { get; set; }
         public List<Product> Products { get; set; } = new List<Product>();
-        string nameSave = "Data/projects_for_sale.json";
+        private const string nameSave = "Data/projects_for_sale.json";
 
         public JsonProductStorage()
         {

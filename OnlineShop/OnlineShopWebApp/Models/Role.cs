@@ -1,7 +1,10 @@
-﻿namespace OnlineShopWebApp.Models
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace OnlineShopWebApp.Models
 {
     public class Role
     {
-        public string Name { get; set; };
+        [Required]
+        public string Name { get; set; }
     }
 }

@@ -1,4 +1,6 @@
-﻿@{
+﻿@model List<Role>
+
+@{
     ViewData["Title"] = "Панель администратора";
 }
 
@@ -7,8 +9,49 @@
         @await Html.PartialAsync("MenuAdminPanel")
         <div class="col">
             <div class="container">
-                <h3 class="display-5 Title_sile text-center">Управление ролями пользователей</h3>
+                <h3 class="display-5 text-center">Управление ролями пользователей</h3>
+                <a class="text-nowrap mx-1 my-1"
+                   asp-area="" asp-controller="AdminPanel"
+                   asp-action="addRole"
+                   role="button">
+                    Создать новую роль
+                </a>
+                            <div class="table-responsive">
+                                <table class="table table-bordered caption-top">
+                                    <thead>
+                                    <tr>
+                                        <th scope="col-1" class="align-top small">№</th>
+                                        <th scope="col" class="align-top small">Название</th>
+                                        <th> </th>
+                                    </tr>
+                                    </thead>
+                                    @if (Model.Count != 0)
+                                    {
+                                        <tbody>
+                                        @for (int i = 0; i < Model.Count; i++)
+                                        {
+                                            <tr>
+                                                <th class="small" scope="row">@(i + 1)</th>
+                                                <td class="small">@Model[i].Name</td>
 
+                                                <td class="small">
+                                                    <a class="text-nowrap mx-1 my-1"
+                                                       asp-area="" asp-controller="AdminPanel"
+                                                       asp-action="removeRole"
+                                                       asp-route-roleName="@Model[i].Name"
+                                                    >Удалить</a>
+                                                </td>
+                                            </tr>
+                                        }
+                                        </tbody>
+                                    }
+                                    else
+                                    {
+                                        <td colspan="9">Нет созданных ролей</td>
+                                    }
+
+                                </table>
+                            </div>
             </div>
         </div>
     </div>

@@ -9,10 +9,12 @@ namespace OOnlineShopWebApp.Controllers
     {
         private readonly IProductStorage productStorage;
         private readonly IBuyerStorage buyerStorage;
-        public AdminPanelController(IProductStorage productStorage, IBuyerStorage buyerStorage)
+        private readonly IRolesStorage rolesStorage;
+        public AdminPanelController(IProductStorage productStorage, IBuyerStorage buyerStorage, IRolesStorage rolesStorage)
         {
             this.productStorage = productStorage;
             this.buyerStorage = buyerStorage;
+            this.rolesStorage = rolesStorage;
         }
         public IActionResult Index()
         {
@@ -29,7 +31,8 @@ namespace OOnlineShopWebApp.Controllers
         }
         public IActionResult Roles()
         {
-            return View();
+            var roles = rolesStorage.GetAll();
+            return View(roles);
         }
         public IActionResult Products()
         {
@@ -83,6 +86,31 @@ namespace OOnlineShopWebApp.Controllers
             buyerStorage.UpdateOrderDetails(newOrder);
             var orderId = newOrder.Id;
             return RedirectToAction("DetailsOrder", new { orderId });
+        }
+
+        public IActionResult RemoveRole(string roleName)
+        {
+            rolesStorage.Remove(roleName);
+            return RedirectToAction("Roles");
+        }
+
+        public IActionResult AddRole()
+        {
+            return View();
+        }
+        [HttpPost]
+        public IActionResult AddRole(Role role)
+        {
+            if (rolesStorage.TryGetByName(role.Name) != null)
+            {
+                ModelState.AddModelError("", "Такая роль уже существует");
+            }
+            if (ModelState.IsValid)
+            {
+                rolesStorage.Add(role);
+                return RedirectToAction("Roles");
+            }
+            return View(role);
         }
     }
 }

@@ -7,7 +7,7 @@ namespace OnlineShopWebApp.Interfase
     {
         List<Role> GetAll();
         Role TryGetByName(string name);
-        void Add(string name);
+        void Add(Role role);
         void Remove(string name);
     }
 }
