@@ -36,10 +36,13 @@
                                     <td class="small">@Model[i].DataRegistration()</td>
                                     <td class="small">@Model[i].TimeRegistration()</td>
                                     <td class="small">
+                                        <a class="text-nowrap mx-1 my-1"
+                                            asp-area="" asp-controller="AdminPanel"
+                                            asp-action="DetailsOrder"
+                                            asp-route-orderId="@Model[i].Id"
+                                        >Подробнее</a>
                                     </td>
-                                    
                                 </tr>
-
                             }
                             </tbody>
                         }

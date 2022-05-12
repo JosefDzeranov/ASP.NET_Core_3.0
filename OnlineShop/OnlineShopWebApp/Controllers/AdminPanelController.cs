@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using System;
+using Microsoft.AspNetCore.Mvc;
 using OnlineShopWebApp.Interfase;
 using OnlineShopWebApp.Models;
 
@@ -69,8 +70,19 @@ namespace OOnlineShopWebApp.Controllers
                 productStorage.AddNewProduct(product);
                 return RedirectToAction("Products");
             }
-            else return Content("errorValid");
-            
+            return Content("errorValid");
+        }
+        public IActionResult DetailsOrder(Guid orderId)
+        {
+            var order = buyerStorage.FindOrderItem(orderId);
+            return View(order);
+        }
+        [HttpPost]
+        public IActionResult SaveDetailsOrder(OrderItem newOrder)
+        {
+            buyerStorage.UpdateOrderDetails(newOrder);
+            var orderId = newOrder.Id;
+            return RedirectToAction("DetailsOrder", new { orderId });
         }
     }
 }
