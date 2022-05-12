@@ -5,6 +5,12 @@ namespace OnlineShopWebApp.Controllers
 {
     public class AuthorizationController : Controller
     {
+        private readonly IRegAndAuthManager regAndAuthManager;
+
+        public AuthorizationController(IRegAndAuthManager regAndAuthManager)
+        {
+            this.regAndAuthManager = regAndAuthManager;
+        }
         public IActionResult Index()
         {
 
@@ -14,8 +20,9 @@ namespace OnlineShopWebApp.Controllers
         [HttpPost]
         public IActionResult Enter(Authorization authorization)
         {
-            if (ModelState.IsValid)
+            if (ModelState.IsValid && regAndAuthManager.Compare(authorization))
             {
+
                 return RedirectToAction("Index", "Home");
             }
             else
