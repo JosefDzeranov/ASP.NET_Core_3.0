@@ -23,12 +23,12 @@ namespace OnlineShopWebApp.Controllers
         public IActionResult Users()
         {
             return View();
-        }
+        } 
 
         public IActionResult Roles()
         {
             return View();
-        }
+        } 
 
         public IActionResult Products()
         {
