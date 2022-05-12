@@ -27,7 +27,7 @@ namespace OnlineShopWebApp.Controllers
             }
             else return Content("errorValid");
         }
-        
+
         public IActionResult NewUser()
         {
             return View();

@@ -15,7 +15,7 @@ namespace OnlineShopWebApp.Controllers
         public IActionResult Index(Guid productId)
         {
             var product = productStorage.FindProduct(productId);
-            return View (product);
+            return View(product);
         }
     }
 }

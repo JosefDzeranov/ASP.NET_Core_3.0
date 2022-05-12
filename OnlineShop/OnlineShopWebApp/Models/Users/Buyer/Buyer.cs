@@ -1,11 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
-using OnlineShopWebApp.Models;
 
 
 namespace OnlineShopWebApp.Models
 {
-    public class Buyer: User
+    public class Buyer : User
     {
         public List<Product> Comparisons { get; set; } = new List<Product>();
         public List<CartItem> Cart { get; set; } = new List<CartItem>();
@@ -81,7 +80,7 @@ namespace OnlineShopWebApp.Models
 
         public void SaveInfoBuying(InfoBuying infoBuying)
         {
-            this.infoBuying=infoBuying;
+            this.infoBuying = infoBuying;
         }
     }
 }

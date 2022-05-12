@@ -16,13 +16,13 @@ namespace OnlineShopWebApp
                 .UseSerilog((hostingContext, loggerConfiguration) =>
                 {
                     loggerConfiguration
-                        .ReadFrom.Configuration(hostingContext.Configuration) 
-                        .Enrich.FromLogContext() 
+                        .ReadFrom.Configuration(hostingContext.Configuration)
+                        .Enrich.FromLogContext()
                         .Enrich.WithProperty("ApplicationName", "Online Shop");
                 })
                 .ConfigureWebHostDefaults(webBuiIder =>
                 {
                     webBuiIder.UseStartup<Startup>();
                 });
-	}
+    }
 }
