@@ -1,16 +1,18 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using System;
+using Microsoft.AspNetCore.Mvc;
 using OnlineShopWebApp.Interfase;
 using OnlineShopWebApp.Models;
 
 namespace OOnlineShopWebApp.Controllers
 {
-
     public class AdminPanelController : Controller
     {
         private readonly IProductStorage productStorage;
-        public AdminPanelController(IProductStorage productStorage)
+        private readonly IBuyerStorage buyerStorage;
+        public AdminPanelController(IProductStorage productStorage, IBuyerStorage buyerStorage)
         {
             this.productStorage = productStorage;
+            this.buyerStorage = buyerStorage;
         }
         public IActionResult Index()
         {
@@ -18,7 +20,8 @@ namespace OOnlineShopWebApp.Controllers
         }
         public IActionResult Orders()
         {
-            return View();
+            var orders = buyerStorage.CollectAllOrders();
+            return View(orders);
         }
         public IActionResult Users()
         {
@@ -58,6 +61,7 @@ namespace OOnlineShopWebApp.Controllers
         {
             return View();
         }
+
         [HttpPost]
         public IActionResult AddNewProduct(Product product)
         {
@@ -66,8 +70,19 @@ namespace OOnlineShopWebApp.Controllers
                 productStorage.AddNewProduct(product);
                 return RedirectToAction("Products");
             }
-            else return Content("errorValid");
-            
+            return Content("errorValid");
+        }
+        public IActionResult DetailsOrder(Guid orderId)
+        {
+            var order = buyerStorage.FindOrderItem(orderId);
+            return View(order);
+        }
+        [HttpPost]
+        public IActionResult SaveDetailsOrder(OrderItem newOrder)
+        {
+            buyerStorage.UpdateOrderDetails(newOrder);
+            var orderId = newOrder.Id;
+            return RedirectToAction("DetailsOrder", new { orderId });
         }
     }
 }

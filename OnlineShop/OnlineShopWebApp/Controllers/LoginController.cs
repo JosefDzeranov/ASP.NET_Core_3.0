@@ -5,7 +5,6 @@ namespace OnlineShopWebApp.Controllers
 {
     public class LoginController : Controller
     {
-
         public IActionResult Index()
         {
             return View();
@@ -27,7 +26,6 @@ namespace OnlineShopWebApp.Controllers
                 return Content($"{user.Login} - {user.Password}");
             }
             else return Content("errorValid");
-
         }
         
         public IActionResult NewUser()

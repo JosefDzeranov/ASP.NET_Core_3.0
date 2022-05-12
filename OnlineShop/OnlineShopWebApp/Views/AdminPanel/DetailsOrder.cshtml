@@ -1,0 +1,119 @@
+﻿@model OrderItem;
+@{
+    ViewData["Title"] = "Подробности заказа";
+}
+
+<div class="container">
+    <div class="row">
+        @await Html.PartialAsync("MenuAdminPanel")
+        <div class="col">
+            <div class="container">
+
+                <div class="text-center">
+                    <h3 class="display-5">Заказ №@Model.Id</h3>
+                    <p></p>
+                </div>
+                <div class="container">
+                    <div class="row">
+                        <div class="text-center col-3 ">Фамилия:</div>
+                        <div class="col-9">
+                            <p>@Model.InfoBuying.Surname</p>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-3  text-center">Имя:</div>
+                        <div class="col-9">
+                            <p>@Model.InfoBuying.Firstname</p>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-3 text-center">Отчество:</div>
+                        <div class="col-9">
+                            <p>@Model.InfoBuying.Secondname</p>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-3  text-center">Контактный телефон:</div>
+                        <div class="col-9">
+                            <p>@Model.InfoBuying.Phone</p>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-3  text-center">Электронная почта:</div>
+                        <div class="col-9">
+                            <p>@Model.InfoBuying.Email</p>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-3 text-center">Комментарий:</div>
+                        <div class="col-9">
+                            <p>@Model.InfoBuying.Commentary</p>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-3 font-weight-bold">Состав заказа:</div>
+                        <div class="col-9"></div>
+                    </div>   
+                    @foreach (var cartItem in @Model.CartItem)
+                    {
+                        <div class="row">
+                            <div class="col-3"></div>
+                            <div class="col-9 ">
+                                <text>
+                                    @for (int c = 0; c < cartItem.additionalOptions.Count; c++)
+                                    {
+                                        <p></p>
+                                        <p class="font-weight-bold">Проект @cartItem.Product.CodeNumber . @cartItem.Product.Description (тип @(c+1))</p>
+                                        <p><img src="/image/@cartItem.Product.Images[0]" width="200"/></p>
+                                        <p>Цена: @cartItem.Product.Cost руб</p>
+                                        <p>Дополнительные опции: @cartItem.additionalOptions[0].TotalCost() руб</p>
+                                    }
+                                </text>
+                            </div>
+                        </div>
+                    }
+                    <div class="row">
+                        <div class="col-3  font-weight-bold">Общая стоймость заказа:</div>
+                        <div class="col-9  font-weight-bold">@Model.FullCost</div>
+                    </div> 
+                    <p></p>
+                    <div class="row">
+                        <div class="col-3 text-center  font-weight-bold">Статус:</div>
+                        <form class="form-inline" method="post" asp-controller="AdminPanel" asp-action="DetailsOrder">
+                            <div class="col-9">
+                                <div class="row">
+                                    <input type="hidden" value="@Model.Id" name="Id" asp-for="Id"/>
+                                    <select class="custom-select" name="Status" asp-for="Status">
+                                        <option selected>@Model.Status</option>
+                                        @for (int index = 0; index < 5; index++)
+                                        {
+                                            <option value="@Model.ShowUnitRegisterStatus(index)">@Model.ShowUnitRegisterStatus(index)</option>
+                                        }
+                                    </select>
+                        
+                                </div>
+                                <p></p>
+                                <div class="row">
+                                    <div>
+                                        <button type="submit"
+                                                class="btn btn-outline-dark text-nowrap"
+                                                asp-controller="AdminPanel"
+                                                asp-action="SaveDetailsOrder"
+                                                role="button">Сохранить изменения</button>
+                                    </div>
+                        
+                                </div>
+                            </div>
+
+                        </form>
+                    </div>
+                </div>
+            
+                
+            </div>
+        </div>
+    </div>
+</div>
+
+
+    

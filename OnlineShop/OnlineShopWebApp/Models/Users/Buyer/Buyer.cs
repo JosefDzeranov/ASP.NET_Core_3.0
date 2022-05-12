@@ -28,11 +28,11 @@ namespace OnlineShopWebApp.Models
             var existingCartItem = Cart.Find(x => x.Product.Id == product.Id);
             if (existingCartItem != null)
             {
-                existingCartItem.Count++;
+                existingCartItem.UpCount();
             }
             else
             {
-                Cart.Add(new CartItem(){Product = product, Count = 1});
+                Cart.Add(new CartItem(product));
             }
         }
 
@@ -59,7 +59,7 @@ namespace OnlineShopWebApp.Models
             var existingCartItem = Cart.Find(x => x.Product.Id == productId);
             if (existingCartItem != null)
             {
-                existingCartItem.Count--;
+                existingCartItem.DownCount();
             }
 
             if (existingCartItem.Count <= 0)
@@ -76,14 +76,7 @@ namespace OnlineShopWebApp.Models
 
         public void Buy()
         {
-            foreach (var cartItem in Cart)
-            {
-                Orders.Add(new OrderItem()
-                {
-                    CartItem = cartItem, 
-                    InfoBuying = infoBuying
-                });
-            }
+            Orders.Add(new OrderItem(Cart, Login, infoBuying));
             Cart.Clear();
         }
 

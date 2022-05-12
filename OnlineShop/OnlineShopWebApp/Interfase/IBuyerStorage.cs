@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using OnlineShopWebApp.Models;
 
 namespace OnlineShopWebApp.Interfase
@@ -8,6 +9,9 @@ namespace OnlineShopWebApp.Interfase
         void AddProductInCart(Product product, int buyerId);
         void DeleteProductInCart(int productId, int buyerId);
         void ReduceDuplicateProductCart(int productId, int buyerId);
+        List<OrderItem> CollectAllOrders();
+        OrderItem FindOrderItem(Guid orderId);
+        void UpdateOrderDetails(OrderItem newOrder);
         void Buy(int buyerId);
         void ClearCart(int buyerId);
         Buyer FindBuyer(int buyerId);

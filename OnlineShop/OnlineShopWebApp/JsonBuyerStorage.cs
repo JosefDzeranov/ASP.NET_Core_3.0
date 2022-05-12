@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using System;
+using Newtonsoft.Json;
 using OnlineShopWebApp.Interfase;
 using OnlineShopWebApp.Models;
 using System.Collections.Generic;
@@ -72,6 +73,43 @@ namespace OnlineShopWebApp
             return buyer;
         }
 
+        public List<OrderItem> CollectAllOrders()
+        {
+            List<OrderItem> collectAllOrders = new List<OrderItem>();
+            foreach (var buyer in buyers)
+            {
+                var orders = buyer.Orders;
+                foreach (var order in orders)
+                {
+                    collectAllOrders.Add(order);
+                }
+            }
+            return collectAllOrders;
+        }
+
+        public OrderItem FindOrderItem(Guid orderId)
+        {
+            foreach (var buyer in buyers)
+            {
+                var orders = buyer.Orders;
+                foreach (var order in orders)
+                {
+                    if (order.Id == orderId)
+                    {
+                        return order;
+                    }
+                }
+            }
+            return null;
+        }
+
+        public void UpdateOrderDetails(OrderItem newOrder)
+        {
+            var order = FindOrderItem(newOrder.Id);
+            order.Status = newOrder.Status;
+            WriteToStorage();
+        }
+
         private void WriteToStorage()
         {
             var json = JsonConvert.SerializeObject(buyers, Formatting.Indented);
@@ -83,5 +121,6 @@ namespace OnlineShopWebApp
             var json = File.ReadAllText(buyersFileName);
             buyers = JsonConvert.DeserializeObject<List<Buyer>>(json);
         }
+        
     }
 }

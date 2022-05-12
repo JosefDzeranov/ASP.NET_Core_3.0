@@ -1,110 +1,113 @@
 ﻿@model InfoBuying
 
-<form method="post" asp-controller="Order" asp-action="SaveInfoBuying">
-    <div class="was-validated" asp-validation-summary="All"></div>
-    @if (Model == null)
-    {
-        <text>
-            <p>Пожалуйста, заполните следующие данные:</p>
-            <p><font color="red">*</font> - обязательно к заполнению</p>
-            <div class="row">
-                <div class="text-center col-3 ">Фамилия<font color="red">*</font>:</div>
-                <div class="col-9">
-                    <div class="form-group">
-                        <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="Фамилия" name="surname" asp-for="Surname"/>
-                        <span asp-validation-for="Surname"></span>
-                    </div>
+
+@if (Model == null)
+{
+    <text>
+        <p>Пожалуйста, заполните следующие данные:</p>
+        <p><font color="red">*</font> - обязательно к заполнению</p>
+        <div class="row">
+            <div class="text-center col-3 ">Фамилия<font color="red">*</font>:</div>
+            <div class="col-9">
+                <div class="form-group">
+                    <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="Фамилия" name="surname" asp-for="Surname"/>
+                    <span asp-validation-for="Surname"></span>
                 </div>
             </div>
-            <div class="row">
-                <div class="col-3  text-center">Имя<font color="red">*</font>:</div>
-                <div class="col-9">
-                    <div class="form-group">
-                        <input type="text" class="form-control" id="exampleFormControlInput2" placeholder="Имя" name="firstname" asp-for="Firstname"/>
-                        <span asp-validation-for="Firstname"></span>
-                    </div>
+        </div>
+        <div class="row">
+            <div class="col-3  text-center">Имя<font color="red">*</font>:</div>
+            <div class="col-9">
+                <div class="form-group">
+                    <input type="text" class="form-control" id="exampleFormControlInput2" placeholder="Имя" name="firstname" asp-for="Firstname"/>
+                    <span asp-validation-for="Firstname"></span>
                 </div>
             </div>
-            <div class="row">
-                <div class="col-3 text-center">Отчество<font color="red">*</font>:</div>
-                <div class="col-9">
-                    <div class="form-group">
-                        <input type="text" class="form-control" id="exampleFormControlInput3" placeholder="Отчество" name="secondname" asp-for="Secondname"/>
-                        <span asp-validation-for="Secondname"></span>
-                    </div>
+        </div>
+        <div class="row">
+            <div class="col-3 text-center">Отчество<font color="red">*</font>:</div>
+            <div class="col-9">
+                <div class="form-group">
+                    <input type="text" class="form-control" id="exampleFormControlInput3" placeholder="Отчество" name="secondname" asp-for="Secondname"/>
+                    <span asp-validation-for="Secondname"></span>
                 </div>
             </div>
-            <div class="row">
-                <div class="col-3  text-center">Контактный телефон<font color="red">*</font>:</div>
-                <div class="col-9">
-                    <div class="form-group">
-                        <input type="text" class="form-control" id="exampleFormControlInput4" placeholder="+70123456789" name="phone" asp-for="Phone"/>
-                        <span asp-validation-for="Phone"></span>
-                    </div>
+        </div>
+        <div class="row">
+            <div class="col-3  text-center">Контактный телефон<font color="red">*</font>:</div>
+            <div class="col-9">
+                <div class="form-group">
+                    <input type="text" class="form-control" id="exampleFormControlInput4" placeholder="+70123456789" name="phone" asp-for="Phone"/>
+                    <span asp-validation-for="Phone"></span>
                 </div>
             </div>
-            <div class="row">
-                <div class="col-3  text-center">Электронная почта<font color="red">*</font>:</div>
-                <div class="col-9">
-                    <div class="form-group">
-                        <input type="text" class="form-control" id="exampleFormControlInput5" placeholder="email@mail.com" name="email" asp-for="Email"/>
-                        <span asp-validation-for="Email"></span>
-                    </div>
+        </div>
+        <div class="row">
+            <div class="col-3  text-center">Электронная почта<font color="red">*</font>:</div>
+            <div class="col-9">
+                <div class="form-group">
+                    <input type="text" class="form-control" id="exampleFormControlInput5" placeholder="email@mail.com" name="email" asp-for="Email"/>
+                    <span asp-validation-for="Email"></span>
                 </div>
             </div>
-            <div class="row">
-                <div class="col-3 text-center">Комментарий:</div>
-                <div class="col-9">
-                    <div class="form-group">
-                        <textarea class="form-control" id="exampleFormControlTextarea6" rows="3"  name="commentary"></textarea>
-                    </div>
+        </div>
+        <div class="row">
+            <div class="col-3 text-center">Комментарий:</div>
+            <div class="col-9">
+                <div class="form-group">
+                    <textarea class="form-control" id="exampleFormControlTextarea6" rows="3"  name="commentary"></textarea>
                 </div>
             </div>
-            <button type="submit" class="btn btn-outline-dark col-3" asp-controller="Order" asp-action="RewriteInfoBuying">Заполнить новые данные</button>
-            <button type="submit" class="btn btn-outline-dark col-3" asp-controller="Order" asp-action="SaveInfoBuying">Сохранить данные</button>
-        </text>
-    }
-    else
-    {
-        <text>
-            <p>Пожалуйста, проверьте сохраненные данные:</p>
-            <div class="row">
-                <div class="text-center col-3 ">Фамилия:</div>
-                <div class="col-9">
-                    <p>@Model.Surname</p>
-                </div>
+        </div>
+    </text>
+}
+else
+{
+    <text>
+        <p>Пожалуйста, проверьте сохраненные данные:</p>
+        <div class="row">
+            <div class="text-center col-3 ">Фамилия:</div>
+            <div class="col-9">
+                <p>@Model.Surname</p>
             </div>
-            <div class="row">
-                <div class="col-3  text-center">Имя:</div>
-                <div class="col-9">
-                    <p>@Model.Firstname</p>
-                </div>
+        </div>
+        <div class="row">
+            <div class="col-3  text-center">Имя:</div>
+            <div class="col-9">
+                <p>@Model.Firstname</p>
             </div>
-            <div class="row">
-                <div class="col-3 text-center">Отчество:</div>
-                <div class="col-9">
-                    <p>@Model.Secondname</p>
-                </div>
+        </div>
+        <div class="row">
+            <div class="col-3 text-center">Отчество:</div>
+            <div class="col-9">
+                <p>@Model.Secondname</p>
             </div>
-            <div class="row">
-                <div class="col-3  text-center">Контактный телефон:</div>
-                <div class="col-9">
-                    <p>@Model.Phone</p>
-                </div>
+        </div>
+        <div class="row">
+            <div class="col-3  text-center">Контактный телефон:</div>
+            <div class="col-9">
+                <p>@Model.Phone</p>
             </div>
-            <div class="row">
-                <div class="col-3  text-center">Электронная почта:</div>
-                <div class="col-9">
-                    <p>@Model.Email</p>
-                </div>
+        </div>
+        <div class="row">
+            <div class="col-3  text-center">Электронная почта:</div>
+            <div class="col-9">
+                <p>@Model.Email</p>
             </div>
-            <div class="row">
-                <div class="col-3 text-center">Комментарий:</div>
-                <div class="col-9">
-                    <p>@Model.Commentary</p>
-                </div>
+        </div>
+        <div class="row">
+            <div class="col-3 text-center">Комментарий:</div>
+            <div class="col-9">
+                <p>@Model.Commentary</p>
             </div>
-            <button type="submit" class="btn btn-outline-dark col-3" asp-controller="Order" asp-action="RewriteInfoBuying">Заполнить новые данные</button>
-        </text>
-    }
-</form>
+        </div>
+        <input type="hidden" value="@Model.Surname" name="surname" asp-for="Surname"/>
+        <input type="hidden" value="@Model.Secondname" name="secondname" asp-for="Secondname"/>
+        <input type="hidden" value="@Model.Email" name="email" asp-for="Email"/>
+        <input type="hidden" value="@Model.Commentary" name="commentary" asp-for="Commentary"/>
+        <input type="hidden" value="@Model.Firstname" name="firstname" asp-for="Firstname"/>
+        <input type="hidden" value="@Model.Phone" name="phone" asp-for="Phone"/>
+        <button type="submit" class="btn btn-outline-dark col-3" asp-controller="Order" asp-action="RewriteInfoBuying">Заполнить новые данные</button>
+    </text>
+}
+
