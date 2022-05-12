@@ -1,59 +1,34 @@
-﻿using Newtonsoft.Json;
+﻿using System;
+using Newtonsoft.Json;
 using OnlineShopWebApp.Interfase;
 using OnlineShopWebApp.Models;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 
 namespace OnlineShopWebApp
 {
     public class JsonProductStorage:IProductStorage
     {
-        private int instanceCounter { get; set; }
-        public List<Product> Products { get; set; } = new List<Product>();
-        private const string nameSave = "Data/projects_for_sale.json";
-
+        public List<Product> Products { get; set; }
+        private const string nameSave = "projects_for_sale";
+        public IWorkWithData JsonStorage { get; set; } = new JsonWorkWithData(nameSave);
         public JsonProductStorage()
         {
-            ReadToStorage();
+            Products = JsonStorage.ReadToStorage<Product>();
         }
 
-        public Product FindProduct(int productId)
+        public Product FindProduct(Guid productId)
         {
-            var product = Products.Find(x => x.Id == productId);
+            var product = Products.FirstOrDefault(x => x.Id == productId);
             return product;
-        }
-
-        public string WriteToStorage()
-        {
-            var json = JsonConvert.SerializeObject(Products, Formatting.Indented);
-            File.WriteAllText(nameSave, json);
-            return json;
-        }
-
-        private void ReadToStorage()
-        {
-            var json = File.ReadAllText(nameSave);
-            Products = JsonConvert.DeserializeObject<List<Product>>(json);
-
-            List<int> idProducts = new List<int>();
-            foreach (var prod in Products)
-            {
-                idProducts.Add(prod.Id);
-            }
-            idProducts.Sort();
-            if (instanceCounter <= idProducts[^1])
-            {
-                instanceCounter = idProducts[^1];
-            }
         }
 
         public void DeleteProduct(Product product)
         {
             Products.Remove(product);
-            WriteToStorage();
+            JsonStorage.WriteToStorage(Products);
         }
-
-
         public void UpdateProduct(Product newProduct)
         {
             var oldProduct = FindProduct(newProduct.Id);
@@ -64,21 +39,13 @@ namespace OnlineShopWebApp
             oldProduct.CodeNumber = newProduct.CodeNumber;
             oldProduct.Square = newProduct.Square;
             oldProduct.Width = newProduct.Width;
-            WriteToStorage();
+            JsonStorage.WriteToStorage(Products);
         }
-
         public void AddNewProduct(Product product)
         {
-            product.Id = assignId();
             Products.Add(product);
-            WriteToStorage();
+            JsonStorage.WriteToStorage(Products);
         }
         
-
-        public int assignId()
-        {
-            instanceCounter++;
-            return instanceCounter;
-        }
     }
 }

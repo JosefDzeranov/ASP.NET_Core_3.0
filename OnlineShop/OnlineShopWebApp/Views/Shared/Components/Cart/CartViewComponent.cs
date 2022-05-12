@@ -1,5 +1,7 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using System;
+using Microsoft.AspNetCore.Mvc;
 using OnlineShopWebApp.Interfase;
+using OnlineShopWebApp.Models;
 
 namespace OnlineShopWebApp.Views.Shared.Components.Cart
 {
@@ -12,10 +14,12 @@ namespace OnlineShopWebApp.Views.Shared.Components.Cart
             this.buyerStorage = buyerStorage;
         }
 
-        public IViewComponentResult Invoke(int buyerId)
+        public IViewComponentResult Invoke(Guid buyerId)
         {
+            buyerId = MyConstant.ValidNullBuyerId(buyerId);
             var sumProduct = buyerStorage.FindBuyer(buyerId).SumAllProducts();
             return View("Cart", sumProduct);
         }
+        
     }
 }

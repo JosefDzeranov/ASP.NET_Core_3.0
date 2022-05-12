@@ -9,12 +9,13 @@ namespace OnlineShopWebApp
 {
     public class JsonRoleStorage:IRolesStorage
     {
-        private List<Role> roles = new List<Role>();
-        private const string nameSave = "Data/roles.json";
+        private readonly List<Role> roles;
+        private const string nameSave = "roles";
+        public IWorkWithData JsonStorage { get; set; } = new JsonWorkWithData(nameSave);
 
         public JsonRoleStorage()
         {
-            ReadToStorage();
+            roles = JsonStorage.ReadToStorage<Role>();
         }
         public List<Role> GetAll()
         {
@@ -29,33 +30,13 @@ namespace OnlineShopWebApp
         public void Add(Role role)
         {
             roles.Add(role);
-            WriteToStorage();
+            JsonStorage.WriteToStorage(roles);
         }
 
         public void Remove(string name)
         {
             roles.RemoveAll(x=>x.Name == name);
-            WriteToStorage();
-        }
-
-        public string WriteToStorage()
-        {
-            var json = JsonConvert.SerializeObject(roles, Formatting.Indented);
-            File.WriteAllText(nameSave, json);
-            return json;
-        }
-
-        private void ReadToStorage()
-        {
-            try
-            {
-                var json = File.ReadAllText(nameSave);
-                roles = JsonConvert.DeserializeObject<List<Role>>(json);
-            }
-            catch (FileNotFoundException)
-            {
-                roles = new List<Role>();
-            }
+            JsonStorage.WriteToStorage(roles);
         }
     }
 }

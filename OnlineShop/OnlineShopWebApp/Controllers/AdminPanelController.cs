@@ -39,13 +39,13 @@ namespace OOnlineShopWebApp.Controllers
             var products = productStorage.Products;
             return View(products);
         }
-        public IActionResult DeleteProduct(int productId)
+        public IActionResult DeleteProduct(Guid productId)
         {
             var product = productStorage.FindProduct(productId);
             productStorage.DeleteProduct(product);
             return RedirectToAction("Products");
         }
-        public IActionResult CardUpdateProduct(int productId)
+        public IActionResult CardUpdateProduct(Guid productId)
         {
             var oldProduct = productStorage.FindProduct(productId);
             return View(oldProduct);

@@ -1,12 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.IO;
+using System.Runtime.Serialization.Formatters.Binary;
 
 namespace OnlineShopWebApp.Models
 {
     public class Product
     {
-        public int Id { get; set; }
+        public Guid Id { get; set; }
 
         [Required(ErrorMessage = "Не указан шифр")]
         public string CodeNumber { get; set; }
@@ -32,5 +34,7 @@ namespace OnlineShopWebApp.Models
 
         [Required(ErrorMessage = "Не указано изображение")]
         public List<string> Images { get; set; }
+
+        
     }
 }

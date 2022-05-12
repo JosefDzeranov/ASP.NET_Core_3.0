@@ -9,65 +9,65 @@ namespace OnlineShopWebApp
 {
     public class JsonBuyerStorage : IBuyerStorage
     {
-        private const string buyersFileName = "Data/list_of_buyers.json";
-
-        private List<Buyer> buyers = new List<Buyer>();
+        public IWorkWithData JsonStorage { get; set; } = new JsonWorkWithData(nameSave);
+        private const string nameSave = "list_of_buyers";
+        private List<Buyer> buyers;
 
         public JsonBuyerStorage()
         {
-            ReadToStorage();
+            buyers = JsonStorage.ReadToStorage<Buyer>();
         }
         
-        public void AddProductInCart(Product product, int buyerId)
+        public void AddProductInCart(Product product, Guid buyerId)
         {
             var buyer = FindBuyer(buyerId);
             buyer.AddProductInCart(product);
-            WriteToStorage();
+            JsonStorage.WriteToStorage(buyers);
         }
 
-        public void DeleteProductInCart(int productId, int buyerId)
+        public void DeleteProductInCart(Guid productId, Guid buyerId)
         {
             var buyer = FindBuyer(buyerId);
             buyer.DeleteProductInCart(productId);
-            WriteToStorage();
+            JsonStorage.WriteToStorage(buyers);
         }
 
-        public void ReduceDuplicateProductCart(int productId, int buyerId)
+        public void ReduceDuplicateProductCart(Guid productId, Guid buyerId)
         {
             var buyer = FindBuyer(buyerId);
             buyer.ReduceDuplicateProductCart(productId);
-            WriteToStorage();
+            JsonStorage.WriteToStorage(buyers);
         }
 
-        public void ClearCart(int buyerId)
+        public void ClearCart(Guid buyerId)
         {
             var buyer = FindBuyer(buyerId);
             buyer.ClearCart();
-            WriteToStorage();
+            JsonStorage.WriteToStorage(buyers);
         }
 
-        public void SaveInfoBuying(InfoBuying infoBuying, int buyerId)
+        public void SaveInfoBuying(InfoBuying infoBuying, Guid buyerId)
         {
             var buyer = FindBuyer(buyerId);
             buyer.SaveInfoBuying(infoBuying);
-            WriteToStorage();
+            JsonStorage.WriteToStorage(buyers);
         }
 
-        public void ClearInfoBuying(int buyerId)
+        public void ClearInfoBuying(Guid buyerId)
         {
             var buyer = FindBuyer(buyerId);
             buyer.infoBuying = null;
-            WriteToStorage();
+            JsonStorage.WriteToStorage(buyers);
         }
 
-        public void Buy(int buyerId)
+        public void Buy(Guid buyerId)
         {
             var buyer = FindBuyer(buyerId);
             buyer.Buy();
-            WriteToStorage();
+            JsonStorage.WriteToStorage(buyers);
         }
 
-        public Buyer FindBuyer(int buyerId)
+        public Buyer FindBuyer(Guid buyerId)
         {
             var buyer = buyers.Find(x => x.Id == buyerId);
             return buyer;
@@ -107,19 +107,7 @@ namespace OnlineShopWebApp
         {
             var order = FindOrderItem(newOrder.Id);
             order.Status = newOrder.Status;
-            WriteToStorage();
-        }
-
-        private void WriteToStorage()
-        {
-            var json = JsonConvert.SerializeObject(buyers, Formatting.Indented);
-            File.WriteAllText(buyersFileName, json);
-        }
-
-        private void ReadToStorage()
-        {
-            var json = File.ReadAllText(buyersFileName);
-            buyers = JsonConvert.DeserializeObject<List<Buyer>>(json);
+            JsonStorage.WriteToStorage(buyers);
         }
         
     }
