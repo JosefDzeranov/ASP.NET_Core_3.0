@@ -21,7 +21,6 @@ namespace OnlineShopWebApp
             var jsonData = JsonConvert.SerializeObject(orders, Formatting.Indented);
             FileProvider.Write(fileName, jsonData);
         }
-
         public List<Order> GetAllFromFile()
         {
             var fileData = FileProvider.Get(fileName);
