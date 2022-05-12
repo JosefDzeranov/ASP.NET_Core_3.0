@@ -14,6 +14,5 @@ namespace OnlineShopWebApp.Models
         public string Email { get; set; }
 
         public Delivery() { } // Empty ctor for XML serializing. 
-
     }
 }

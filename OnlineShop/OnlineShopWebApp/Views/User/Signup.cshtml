@@ -10,7 +10,7 @@
     <div class="row text-center">
         <div class="col-4 mx-auto">
             <h2>Sign up</h2>
-            <form asp-controller="Users" asp-action="Signup">
+            <form asp-controller="User" asp-action="Signup">
                 <div class="validation" asp-validation-summary="All"></div>
                 <div class="mb-3">
                     <input class="form-control" asp-for="FirstName" placeholder="First name">
@@ -33,11 +33,11 @@
                     <span asp-validation-for="ConfirmPassword"></span>
                 </div>
                 <div class="mb-3">
-                    <button type="submit" class="btn btn-outline-dark btn-sm active" asp-controller="Users" asp-action="Signup">Sign up</button>
+                    <button type="submit" class="btn btn-outline-dark btn-sm active" asp-controller="User" asp-action="Signup">Sign up</button>
                 </div>
             </form>
             <div class="mb-3">
-                Already have an account? <a asp-controller="Users" asp-action="Signin">Sign in</a>
+                Already have an account? <a asp-controller="User" asp-action="Signin">Sign in</a>
             </div>
         </div>
     </div>

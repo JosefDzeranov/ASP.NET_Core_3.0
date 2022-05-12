@@ -31,7 +31,7 @@ namespace OnlineShopWebApp.Controllers
 
             var basket = _basketStorage.TryGetByUserId(Constants.UserId);
             var delivery = orderForm.Delivery;
-            _orderStorage.AddOrder(Constants.UserId, basket, delivery);
+            _orderStorage.Add(Constants.UserId, basket, delivery);
 
             _basketStorage.ClearBasket(Constants.UserId);
 

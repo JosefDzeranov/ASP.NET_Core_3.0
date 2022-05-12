@@ -1,4 +1,4 @@
-﻿using OnlineShopWebApp.Models;
+﻿using OnlineShopWebApp.Areas.Admin.Models;
 using System.Collections.Generic;
 
 namespace OnlineShopWebApp
@@ -7,8 +7,8 @@ namespace OnlineShopWebApp
     {
         Role TryGetRoleByName(string name);
         List<Role> GetAll();
-        void AddRole(string name);
-        void RemoveRole(string name);
-        void EditRole(string oldName, Role role);
+        void Add(string name);
+        void Remove(string name);
+        void Edit(string oldName, Role role);
     }
 }

@@ -13,7 +13,7 @@
         </div>
         <div class="col-10 mx-auto">
             <h2>Add product</h2>
-            <form asp-action="add" asp-controller="admin">
+            <form asp-action="Add" asp-controller="Product" asp-area="Admin">
                 <div class="validation" asp-validation-summary="All"></div>
                 <div class="mb-3">
                     <input class="form-control" asp-for="ImagePath" placeholder="Use /img/test.jpg as Image path to add an image" />
@@ -32,7 +32,7 @@
                     <span asp-validation-for="Description"></span>
                 </div>
                 <div class="mb-3">
-                    <button type="submit" class="btn btn-outline-dark btn-sm active" asp-area="admin" asp-controller="admin" asp-action="add">Add</button>
+                    <button type="submit" class="btn btn-outline-dark btn-sm active" asp-area="Admin" asp-controller="Product" asp-action="Add">Add</button>
                 </div>
             </form>
         </div>

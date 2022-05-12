@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using OnlineShopWebApp.Models;
+using OnlineShopWebApp.Areas.Admin.Models;
 using System.Xml.Linq;
 
 namespace OnlineShopWebApp
@@ -26,7 +26,7 @@ namespace OnlineShopWebApp
             return _roles;
         }
 
-        public void AddRole(string name)
+        public void Add(string name)
         {
             var xDoc = XDocument.Load("Data/Roles.xml");
             var root = xDoc.Element("roles");
@@ -36,7 +36,7 @@ namespace OnlineShopWebApp
             xDoc.Save("Data/Roles.xml");
         }
 
-        public void RemoveRole(string name)
+        public void Remove(string name)
         {
             var xDoc = XDocument.Load("Data/Roles.xml");
             var root = xDoc.Element("roles");
@@ -48,7 +48,7 @@ namespace OnlineShopWebApp
             xDoc.Save("Data/Roles.xml");
         }
 
-        public void EditRole(string oldName, Role role)
+        public void Edit(string oldName, Role role)
         {
             var xDoc = XDocument.Load("Data/Roles.xml");
             var editRole = xDoc.Element("roles")

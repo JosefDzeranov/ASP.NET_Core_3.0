@@ -1,4 +1,4 @@
-﻿@using OnlineShopWebApp.Models
+﻿@using OnlineShopWebApp.Areas.Admin.Models
 @using System.Collections.Generic;
 @model List<Role>
 
@@ -13,9 +13,9 @@
         </div>
         <div class="col-7">
             <h2>Roles</h2>
-            <h6><a class="nav-link" asp-area="admin" asp-controller="admin" asp-action="addrole">Add new Role</a></h6>
+            <h6><a class="nav-link" asp-area="Admin" asp-controller="Role" asp-action="Add">Add new Role</a></h6>
             <table class="table mt-4">
-                <caption>Role list</caption>               
+                <caption>Role list</caption>
                 @for (int i = 0; i < Model.Count; i++)
                 {
                     <tbody class="border-top-0">
@@ -28,8 +28,10 @@
                             </td>
                             <td>
                                 <div class="btn-group ml-2" role="group" aria-label="Edit/Remove buttons">
-                                    <a class="btn btn-outline-dark btn-sm" role="button" asp-area="admin" asp-controller="admin" asp-action="editrole" asp-route-name="@Model[i].Name">Edit</a>
-                                    <a class="btn btn-outline-dark btn-sm" role="button" asp-area="admin" asp-controller="admin" asp-action="removerole" asp-route-name="@Model[i].Name">Remove</a>
+                                    <a class="btn btn-outline-dark btn-sm" role="button"
+                                   asp-area="Admin" asp-controller="Role" asp-action="Edit" asp-route-name="@Model[i].Name">Edit</a>
+                                    <a class="btn btn-outline-dark btn-sm" role="button"
+                                   asp-area="Admin" asp-controller="Role" asp-action="Remove" asp-route-name="@Model[i].Name">Remove</a>
                                 </div>
                             </td>
                         </tr>

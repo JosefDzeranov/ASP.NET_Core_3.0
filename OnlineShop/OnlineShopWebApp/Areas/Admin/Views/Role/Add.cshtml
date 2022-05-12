@@ -1,4 +1,4 @@
-﻿@using OnlineShopWebApp.Models
+﻿@using OnlineShopWebApp.Areas.Admin.Models
 
 @model Role
 
@@ -12,14 +12,14 @@
         </div>
         <div class="col-5">
             <h2>Add role</h2>
-            <form asp-action="AddRole" asp-controller="Admin">
+            <form asp-action="Add" asp-controller="Role" asp-area="Admin">
                 <div class="validation" asp-validation-summary="All"></div>
                 <div class="mb-3">
                     <input class="form-control" asp-for="Name" placeholder="Name" />
                     <span asp-validation-for="Name"></span>
                 </div>
                 <div class="mb-3">
-                    <button type="submit" class="btn btn-outline-dark btn-sm active" asp-area="admin" asp-controller="admin" asp-action="addrole">Add</button>
+                    <button type="submit" class="btn btn-outline-dark btn-sm active" asp-area="Admin" asp-controller="Role" asp-action="Add">Add</button>
                 </div>
             </form>
         </div>
