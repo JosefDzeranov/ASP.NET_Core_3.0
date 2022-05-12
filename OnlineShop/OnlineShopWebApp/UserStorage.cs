@@ -10,7 +10,7 @@ namespace OnlineShopWebApp
     {
         private List<User> _users = new List<User>();
 
-        public void AddUser(SignUp signup)
+        public void Add(SignUp signup)
         {
             var xDoc = XDocument.Load("Data/Users.xml");
             var root = xDoc.Element("users");
@@ -49,7 +49,7 @@ namespace OnlineShopWebApp
             return _users;
         }
 
-        public bool AuthorizeUser(SignIn signin)
+        public bool Authorize(SignIn signin)
         {
             var matchUser = GetAll().FirstOrDefault(user => user.Email == signin.Email && user.Password == signin.Password);
             if(matchUser == null)
@@ -59,7 +59,7 @@ namespace OnlineShopWebApp
             return true;
         }
 
-        public void EditUser(User user)
+        public void Edit(User user)
         {
             var xDoc = XDocument.Load("Data/Users.xml");
             var editUser = xDoc.Element("users")
@@ -87,7 +87,7 @@ namespace OnlineShopWebApp
             xDoc.Save("Data/Users.xml");
         }
 
-        public void RemoveUser(Guid id)
+        public void Remove(Guid id)
         {
             var xDoc = XDocument.Load("Data/Users.xml");
             var root = xDoc.Element("users");

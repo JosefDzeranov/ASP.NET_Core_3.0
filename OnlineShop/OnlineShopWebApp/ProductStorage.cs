@@ -11,7 +11,7 @@ namespace OnlineShopWebApp
         private List<Product> _products = new List<Product>();
         public List<Product> GetProductData()
         {
-            var xDoc = XDocument.Load("Data/Products.xml");
+             var xDoc = XDocument.Load("Data/Products.xml");
             _products = xDoc.Element("products")
                                .Elements("product")
                                .Select(p => new Product(

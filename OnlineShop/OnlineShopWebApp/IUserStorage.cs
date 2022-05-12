@@ -6,11 +6,11 @@ namespace OnlineShopWebApp
 {
     public interface IUserStorage
     {
-        void AddUser(SignUp signup);
+        void Add(SignUp signup);
         User TryGetUserById(Guid id);
         List<User> GetAll();
-        bool AuthorizeUser(SignIn signin);
-        void EditUser(User user);
-        void RemoveUser(Guid id);
+        bool Authorize(SignIn signin);
+        void Edit(User user);
+        void Remove(Guid id);
     }
 }
