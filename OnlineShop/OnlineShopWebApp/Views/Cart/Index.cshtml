@@ -11,55 +11,60 @@
 @if (Model != null)
 {
     <div class="row">
-
-        <table class="table">
-
-            <tr>
-                <th>Название</th>
-                <th>Цена руб.</th>
-                <th>Количество</th>
-                <th>Стоимость руб.</th>
-                <th></th>
-            </tr>
-
+        <div class="col my-2">
+            <p>
+                <a href="/cart/removeAll" class="btn btn-danger btn-sm">Очистить корзину</a>
+                <a href="/home/index" class="btn btn-dark btn-sm">Продолжить покупки</a>
+            </p>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-8">
             @foreach (var cartItem in Model.Items)
             {
-                <tr>
-                    <td>@cartItem.Product.Name</td>
-                    <td>@cartItem.Product.Cost</td>
-                    <td>@cartItem.Quantinity</td>
-                    <td>@cartItem.Cost</td>
-                    <td>
-                        <a href="/cart/add?productId=@cartItem.Product.Id" class="btn btn-dark btn-sm">+</a>
-                        <a href="/cart/remove?productId=@cartItem.Product.Id" class="btn btn-dark btn-sm">-</a>
-                    </td>
-                </tr>
+                <div class="row">
+                    <div class="col">
+                        <div class="card border-0">
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col-3">
+                                        <a asp-controller="Product" asp-action="Index" asp-route-id="@cartItem.Product.Id">
+                                            <img src="@cartItem.Product.ImgPath" width="100" height="175" alt="изображение книги" />
+                                        </a>
+                                    </div>
+                                    <div class="col-6">
+                                        <p><b><a class="text-decoration-none text-black" asp-controller="Product" asp-action="Index" asp-route-id="@cartItem.Product.Id">@cartItem.Product.Name</a></b></p>
+                                        <p><h6>@cartItem.Product.Cost ₽</h6></p>
+                                        <a asp-controller="Favorites" asp-action="Add" asp-route-productId="@cartItem.Product.Id" asp-route-control="@ViewContext.RouteData.Values["controller"].ToString()" asp-route-act="@ViewContext.RouteData.Values["action"].ToString()" class="btn btn-primary my-1"><i class="bi bi-bookmark"></i> в избранное</a>
+                                    </div>
+                                    <div class="col-3">
+                                        <p><h5>@cartItem.Cost ₽</h5></p>
+                                        <div class="btn-group" role="group" aria-label="Basic example">
+                                            <a asp-controller="Cart" asp-action="Add" asp-route-productId="@cartItem.Product.Id" class="btn btn-dark btn-sm">+</a>
+                                            <a class="btn btn-dark">@cartItem.Quantinity</a>
+                                            <a asp-controller="Cart" asp-action="Remove" asp-route-productId="@cartItem.Product.Id" class="btn btn-dark btn-sm">-</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             }
-
-        </table>
-
-    </div>
-
-
-
-    <div class="text-right">
-        <h3>Итоговая сумма: @Model.TotalCost руб.</h3>
-    </div>
-
-    <div class="row">
-        <div class="col">
-            <a href="/order/index" class="btn btn-success">Оформить заказ</a>
         </div>
-        <div class="col">
-            <a href="/home/index" class="btn btn-dark">Продолжить покупки</a>
+        <div class="col-4">
+            <div class="card border-0">
+                <div class="card-body">
+                    <div class="row">
+                        <a asp-controller="Order" asp-action="Index" class="btn btn-warning" my-1>Оформить заказ</a>
+                    </div>
+                </div>
+                <div class="card-body bg-light">
+                    <h3 class="text-right">Итого: @Model.TotalCost ₽</h3>
+                </div>
+            </div>
         </div>
-        <div class="col">
-            <a href="/cart/removeAll" class="btn btn-danger">Очистить корзину</a>
-        </div>
-
     </div>
-
-
 }
 
 else
@@ -68,5 +73,4 @@ else
         <h3>В корзине нет товаров</h3>
         <a class="btn btn-dark" asp-controller="Home" asp-action="Index">Перейти в каталог</a>
     </figure>
-
 }

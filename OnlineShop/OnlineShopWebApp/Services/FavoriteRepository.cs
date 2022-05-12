@@ -45,6 +45,10 @@ namespace OnlineShopWebApp.Services
             if (existingFavorite != null)
             {
                 existingFavorite.Products.Remove(product);
+                if (existingFavorite.Products.Count == 0)
+                {
+                    favorites.Remove(existingFavorite);
+                }
             }
 
         }
