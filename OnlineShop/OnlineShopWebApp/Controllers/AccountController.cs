@@ -50,7 +50,10 @@ namespace OnlineShopWebApp.Controllers
                 usersRepository.Add(new UserAccount
                 {
                     Login = registrationData.Login,
-                    Password = registrationData.Password
+                    Password = registrationData.Password,
+                    Name = registrationData.Name,
+                    Age = registrationData.Age,
+                    Email = registrationData.Email
                 });
                 return RedirectToAction(nameof(HomeController.Index), "Home");
             }
