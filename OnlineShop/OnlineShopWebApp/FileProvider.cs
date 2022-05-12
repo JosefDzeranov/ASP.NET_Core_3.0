@@ -14,10 +14,21 @@ namespace OnlineShopWebApp
         
         public static string Get(string fileName)
         {
-            var reader = new StreamReader(fileName, Encoding.UTF8);
-            var value = reader.ReadToEnd();
-            reader.Close();
-            return value;
+            try
+            {
+                var reader = new StreamReader(fileName, Encoding.UTF8);
+                var value = reader.ReadToEnd();
+                reader.Close();
+                return value;
+            }
+            catch
+            {
+                Write(fileName, string.Empty);
+                var reader = new StreamReader(fileName, Encoding.UTF8);
+                var value = reader.ReadToEnd();
+                reader.Close();
+                return value;
+            }
         }
     }
 }
