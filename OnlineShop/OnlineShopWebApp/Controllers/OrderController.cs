@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using System;
+using Microsoft.AspNetCore.Mvc;
 using OnlineShopWebApp.Interfase;
 using OnlineShopWebApp.Models;
 
@@ -13,22 +14,25 @@ namespace OnlineShopWebApp.Controllers
             this.buyerStorage = buyerStorage;
         }
 
-        public IActionResult Index(int buyerId)
+        public IActionResult Index(Guid buyerId)
         {
+            buyerId = MyConstant.DefaultBuyerIdIsNull(buyerId);
             return View(buyerStorage.FindBuyer(buyerId));
         }
 
         [HttpPost]
 
-        public IActionResult RewriteInfoBuying(int buyerId)
+        public IActionResult RewriteInfoBuying(Guid buyerId)
         {
+            buyerId = MyConstant.DefaultBuyerIdIsNull(buyerId);
             buyerStorage.ClearInfoBuying(buyerId);
             return RedirectToAction("Index", new { buyerId });
         }
 
         [HttpPost]
-        public IActionResult BuyValid(InfoBuying infoBuying, int buyerId)
+        public IActionResult BuyValid(InfoBuying infoBuying, Guid buyerId)
         {
+            buyerId = MyConstant.DefaultBuyerIdIsNull(buyerId);
             if (ModelState.IsValid)
             {
                 buyerStorage.SaveInfoBuying(infoBuying, buyerId);
@@ -36,8 +40,9 @@ namespace OnlineShopWebApp.Controllers
             }
             else return Content("errorValid");
         }
-        public IActionResult Buy(int buyerId)
+        public IActionResult Buy(Guid buyerId)
         {
+            buyerId = MyConstant.DefaultBuyerIdIsNull(buyerId);
             buyerStorage.Buy(buyerId);
             return View(); 
         }

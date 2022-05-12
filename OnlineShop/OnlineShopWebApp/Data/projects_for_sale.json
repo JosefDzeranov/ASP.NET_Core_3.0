@@ -1,6 +1,6 @@
 [
   {
-    "Id": 0,
+    "Id": "4c160be8-1200-49a7-aed8-a342bb84ed54",
     "CodeNumber": "58-70",
     "Cost": 32000.0,
     "Square": 118.0,
@@ -12,7 +12,7 @@
     ]
   },
   {
-    "Id": 1,
+    "Id": "dd204a8d-df93-4465-83ae-3e3d84fc92d3",
     "CodeNumber": "63-42",
     "Cost": 32000.0,
     "Square": 109.0,
@@ -24,7 +24,7 @@
     ]
   },
   {
-    "Id": 2,
+    "Id": "51fdc824-5cc0-4a6a-833a-e49345c63079",
     "CodeNumber": "57-07",
     "Cost": 32000.0,
     "Square": 116.0,
@@ -36,7 +36,7 @@
     ]
   },
   {
-    "Id": 3,
+    "Id": "eb19668f-4c7f-4edb-ab59-dc6d41f1e5ad",
     "CodeNumber": "57-00",
     "Cost": 36000.0,
     "Square": 193.0,
@@ -48,7 +48,7 @@
     ]
   },
   {
-    "Id": 4,
+    "Id": "d6605c7e-61d7-4470-81ae-3fc6bdad2d3d",
     "CodeNumber": "40-11",
     "Cost": 36000.0,
     "Square": 251.0,
@@ -60,7 +60,7 @@
     ]
   },
   {
-    "Id": 5,
+    "Id": "b668991b-d2e2-49e0-b9c4-5ccf7ac6846a",
     "CodeNumber": "45-64NKL",
     "Cost": 50000.0,
     "Square": 245.0,
@@ -72,7 +72,7 @@
     ]
   },
   {
-    "Id": 6,
+    "Id": "e10e5bfc-146e-4695-b27e-480a3de852c8",
     "CodeNumber": "62-71BS",
     "Cost": 42000.0,
     "Square": 201.0,
@@ -84,7 +84,7 @@
     ]
   },
   {
-    "Id": 7,
+    "Id": "6c4de82b-a3be-4592-84d6-8b0d63a46aa2",
     "CodeNumber": "58-10L",
     "Cost": 38000.0,
     "Square": 229.0,

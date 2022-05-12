@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using OnlineShopWebApp.Models;
 
 namespace OnlineShopWebApp.Interfase
@@ -6,8 +7,7 @@ namespace OnlineShopWebApp.Interfase
     public interface IProductStorage
     {
         List<Product> Products { get; set; }
-        Product FindProduct(int productIds);
-        string WriteToStorage();
+        Product FindProduct(Guid productId);
         void DeleteProduct(Product product);
         void UpdateProduct(Product product);
         void AddNewProduct(Product product);

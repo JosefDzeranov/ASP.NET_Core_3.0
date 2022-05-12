@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using System;
+using Microsoft.AspNetCore.Mvc;
 using OnlineShopWebApp.Interfase;
 
 namespace OnlineShopWebApp.Controllers
@@ -11,15 +12,10 @@ namespace OnlineShopWebApp.Controllers
             this.productStorage = productStorage;
         }
 
-        public IActionResult Index(int id)
+        public IActionResult Index(Guid productId)
         {
-            var product = productStorage.Products[id];
+            var product = productStorage.FindProduct(productId);
             return View (product);
-        }
-
-        public string Save(string name)
-        {
-            return productStorage.WriteToStorage();
         }
     }
 }

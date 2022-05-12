@@ -1,5 +1,7 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using System;
+using Microsoft.AspNetCore.Mvc;
 using OnlineShopWebApp.Interfase;
+using OnlineShopWebApp.Models;
 
 namespace OnlineShopWebApp.Views.Shared.Components.InfoBuying
 {
@@ -13,8 +15,9 @@ namespace OnlineShopWebApp.Views.Shared.Components.InfoBuying
             this.buyerStorage = buyerStorage;
         }
 
-        public IViewComponentResult Invoke(int buyerId)
+        public IViewComponentResult Invoke(Guid buyerId)
         {
+            buyerId = MyConstant.DefaultBuyerIdIsNull(buyerId);
             var infoBuying = buyerStorage.FindBuyer(buyerId).infoBuying;
             return View("InfoBuying", infoBuying);
         }

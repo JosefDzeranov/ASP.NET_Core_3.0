@@ -7,7 +7,6 @@ namespace OnlineShopWebApp.Models
 {
     public class Buyer: User
     {
-
         public List<Product> Comparisons { get; set; } = new List<Product>();
         public List<CartItem> Cart { get; set; } = new List<CartItem>();
         public InfoBuying infoBuying { get; set; } = new InfoBuying();
@@ -36,7 +35,7 @@ namespace OnlineShopWebApp.Models
             }
         }
 
-        public void DeleteProductInCart(int productId)
+        public void DeleteProductInCart(Guid productId)
         {
             Cart.RemoveAll(cartItem => cartItem.Product.Id == productId);
         }
@@ -54,7 +53,7 @@ namespace OnlineShopWebApp.Models
             return sum;
         }
 
-        public void ReduceDuplicateProductCart(int productId)
+        public void ReduceDuplicateProductCart(Guid productId)
         {
             var existingCartItem = Cart.Find(x => x.Product.Id == productId);
             if (existingCartItem != null)

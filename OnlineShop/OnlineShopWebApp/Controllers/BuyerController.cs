@@ -1,5 +1,7 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using System;
+using Microsoft.AspNetCore.Mvc;
 using OnlineShopWebApp.Interfase;
+using OnlineShopWebApp.Models;
 
 namespace OOnlineShopWebApp.Controllers
 {
@@ -11,8 +13,9 @@ namespace OOnlineShopWebApp.Controllers
         {
             this.buyerStorage = buyerStorage;
         }
-        public IActionResult Index(int personId)
+        public IActionResult Index(Guid personId)
         {
+            personId = MyConstant.DefaultBuyerIdIsNull(personId);
             return View(buyerStorage.FindBuyer(personId));
         }
     }
