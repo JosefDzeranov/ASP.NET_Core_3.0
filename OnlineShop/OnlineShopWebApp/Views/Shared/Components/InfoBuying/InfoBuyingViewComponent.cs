@@ -17,7 +17,7 @@ namespace OnlineShopWebApp.Views.Shared.Components.InfoBuying
 
         public IViewComponentResult Invoke(Guid buyerId)
         {
-            buyerId = MyConstant.ValidNullBuyerId(buyerId);
+            buyerId = MyConstant.DefaultBuyerIdIsNull(buyerId);
             var infoBuying = buyerStorage.FindBuyer(buyerId).infoBuying;
             return View("InfoBuying", infoBuying);
         }

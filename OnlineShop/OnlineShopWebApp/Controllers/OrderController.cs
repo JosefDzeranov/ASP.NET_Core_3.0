@@ -16,7 +16,7 @@ namespace OnlineShopWebApp.Controllers
 
         public IActionResult Index(Guid buyerId)
         {
-            buyerId = MyConstant.ValidNullBuyerId(buyerId);
+            buyerId = MyConstant.DefaultBuyerIdIsNull(buyerId);
             return View(buyerStorage.FindBuyer(buyerId));
         }
 
@@ -24,7 +24,7 @@ namespace OnlineShopWebApp.Controllers
 
         public IActionResult RewriteInfoBuying(Guid buyerId)
         {
-            buyerId = MyConstant.ValidNullBuyerId(buyerId);
+            buyerId = MyConstant.DefaultBuyerIdIsNull(buyerId);
             buyerStorage.ClearInfoBuying(buyerId);
             return RedirectToAction("Index", new { buyerId });
         }
@@ -32,7 +32,7 @@ namespace OnlineShopWebApp.Controllers
         [HttpPost]
         public IActionResult BuyValid(InfoBuying infoBuying, Guid buyerId)
         {
-            buyerId = MyConstant.ValidNullBuyerId(buyerId);
+            buyerId = MyConstant.DefaultBuyerIdIsNull(buyerId);
             if (ModelState.IsValid)
             {
                 buyerStorage.SaveInfoBuying(infoBuying, buyerId);
@@ -42,7 +42,7 @@ namespace OnlineShopWebApp.Controllers
         }
         public IActionResult Buy(Guid buyerId)
         {
-            buyerId = MyConstant.ValidNullBuyerId(buyerId);
+            buyerId = MyConstant.DefaultBuyerIdIsNull(buyerId);
             buyerStorage.Buy(buyerId);
             return View(); 
         }

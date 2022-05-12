@@ -16,7 +16,7 @@ namespace OnlineShopWebApp.Views.Shared.Components.Cart
 
         public IViewComponentResult Invoke(Guid buyerId)
         {
-            buyerId = MyConstant.ValidNullBuyerId(buyerId);
+            buyerId = MyConstant.DefaultBuyerIdIsNull(buyerId);
             var sumProduct = buyerStorage.FindBuyer(buyerId).SumAllProducts();
             return View("Cart", sumProduct);
         }

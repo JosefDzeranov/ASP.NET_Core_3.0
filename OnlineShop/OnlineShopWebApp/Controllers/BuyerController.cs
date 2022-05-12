@@ -15,7 +15,7 @@ namespace OOnlineShopWebApp.Controllers
         }
         public IActionResult Index(Guid personId)
         {
-            personId = MyConstant.ValidNullBuyerId(personId);
+            personId = MyConstant.DefaultBuyerIdIsNull(personId);
             return View(buyerStorage.FindBuyer(personId));
         }
     }

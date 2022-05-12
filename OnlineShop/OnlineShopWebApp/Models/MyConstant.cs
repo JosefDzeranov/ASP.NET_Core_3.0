@@ -16,14 +16,14 @@ namespace OnlineShopWebApp.Models
             "Доставлен"
         };
 
-        public static Guid buyerIdDefault = Guid.Parse("0c4de82b-a3be-4592-84d6-8b0d63a46aa0");
+        public static Guid defaultBuyerId = Guid.Parse("0c4de82b-a3be-4592-84d6-8b0d63a46aa0");
 
-        public static Guid ValidNullBuyerId(Guid buyerId)
+        public static Guid DefaultBuyerIdIsNull(Guid buyerId)
         {
             
             if (buyerId == Guid.Parse("00000000-0000-0000-0000-000000000000"))
             {
-                return buyerIdDefault;
+                return defaultBuyerId;
             }
             return buyerId;
         }
