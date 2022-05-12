@@ -12,7 +12,7 @@ namespace OnlineShopWebApp
 
         public OrdersRepositoryJSON()
         {
-            orders = GetAll();
+            orders = GetAllFromFile();
         }
                 
         public void Create(Order order)
@@ -22,9 +22,11 @@ namespace OnlineShopWebApp
             FileProvider.Write(fileName, jsonData);
         }
 
-        public List<Order> GetAll()
+        public List<Order> GetAllFromFile()
         {
-            return orders;
+            var fileData = FileProvider.Get(fileName);
+            var orderResults = JsonConvert.DeserializeObject<List<Order>>(fileData);
+            return orderResults; 
         }
     }
 }

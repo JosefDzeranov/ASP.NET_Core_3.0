@@ -24,7 +24,7 @@ namespace OnlineShopWebApp.Controllers
         }
         public IActionResult Orders()
         {
-            var orders = ordersRepository.GetAll();
+            var orders = ordersRepository.GetAllFromFile();
             return View(orders);
         }
         public IActionResult Products()

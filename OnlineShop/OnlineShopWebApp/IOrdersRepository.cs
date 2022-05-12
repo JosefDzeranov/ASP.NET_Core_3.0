@@ -6,6 +6,6 @@ namespace OnlineShopWebApp
     public interface IOrdersRepository
     {
         void Create(Order order);
-        List<Order> GetAll();
+        List<Order> GetAllFromFile();
     }
 }
