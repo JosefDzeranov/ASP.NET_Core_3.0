@@ -1,7 +1,7 @@
 ﻿@model List<Product>
 
 @{
-    ViewData["Title"] = "Home Page";
+    ViewData["Title"] = "Книжный магазин";
 }
 
 
@@ -30,7 +30,7 @@
                                 </a>
                             </div>
                             <div class="col-3">
-                                <a asp-controller="Favorites" asp-action="Add" asp-route-productId="@product.Id" class="btn btn-primary btn-sm"><i class="bi bi-heart"></i></a>
+                                <a asp-controller="Favorites" asp-action="Add" asp-route-productId="@product.Id" class="btn btn-primary btn-sm"><i class="bi bi-bookmark"></i></a>
                             </div>
                         </div>
                         <div class="card-body">
