@@ -34,7 +34,7 @@ namespace OnlineShopWebApp
             var products = GetProductData().Where(p => p.Name.ToLower().Contains(name.ToLower()));
             return products;
         }
-        public void AddProduct(Product product)
+        public void Add(Product product)
         {
             var xDoc = XDocument.Load("Data/Products.xml");
             var root = xDoc.Element("products");
@@ -49,7 +49,7 @@ namespace OnlineShopWebApp
             xDoc.Save("Data/Products.xml");
         }
 
-        public void EditProduct(Product product)
+        public void Edit(Product product)
         {
             var xDoc = XDocument.Load("Data/Products.xml");
             var editProduct = xDoc.Element("products")
@@ -71,7 +71,7 @@ namespace OnlineShopWebApp
             xDoc.Save("Data/Products.xml");
         }
 
-        public void RemoveProduct(Guid id)
+        public void Remove(Guid id)
         {
             var xDoc = XDocument.Load("Data/Products.xml");
             var root = xDoc.Element("products");

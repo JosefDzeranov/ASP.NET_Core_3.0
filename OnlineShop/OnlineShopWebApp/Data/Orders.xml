@@ -1,53 +1,16 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0"?>
 <ArrayOfOrder xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <Order>
-    <Id>ddf7d538-fefc-4a9e-a596-15b82f7d8ef3</Id>
-    <Date>2022-05-10T18:18:10.8222578+03:00</Date>
+    <Id>dbe00a1c-ceb9-4e3d-af09-1f37c3c98046</Id>
+    <Date>2022-05-12T17:11:04.3069865+03:00</Date>
     <UserId>UserId</UserId>
     <Status>Created</Status>
     <Basket>
-      <Id>d5643009-be9d-48e1-8459-6b141b113419</Id>
+      <Id>b5facf26-6be2-4d82-86d4-3106a054215f</Id>
       <UserId>UserId</UserId>
       <Items>
         <BasketItem>
-          <Id>a13ee5b9-e4c8-426a-909b-3776dc4d87ff</Id>
-          <Product>
-            <Id>efdf7bce-d7f8-4365-bee7-db0a140bd23b</Id>
-            <ImagePath>/img/stilllife.jpg</ImagePath>
-            <Name>Still Life</Name>
-            <Cost>100</Cost>
-            <Description>Photography, 
-4000x5000 px,
-3,5 Mb, Tiff</Description>
-          </Product>
-          <Quantity>1</Quantity>
-        </BasketItem>
-      </Items>
-    </Basket>
-    <Delivery>
-      <Address>
-        <ZipCode>123163</ZipCode>
-        <Country>Russia</Country>
-        <City>Saint-Petersburg</City>
-        <Street>Nevsky pr.</Street>
-        <House>64</House>
-        <Apartment>787</Apartment>
-      </Address>
-      <Phone>+79048763542</Phone>
-      <Email>test@popop.ru</Email>
-    </Delivery>
-  </Order>
-  <Order>
-    <Id>df68a96b-c262-4869-820c-99ecaeac894f</Id>
-    <Date>2022-05-10T18:23:31.8456855+03:00</Date>
-    <UserId>UserId</UserId>
-    <Status>Canceled</Status>
-    <Basket>
-      <Id>ea6db211-da2f-47e2-a161-f709b40cf59f</Id>
-      <UserId>UserId</UserId>
-      <Items>
-        <BasketItem>
-          <Id>9ed5d37e-9960-47f8-82ba-52c09fbabaaf</Id>
+          <Id>aefd4f01-f6ae-48f3-99f8-635ce59c30ad</Id>
           <Product>
             <Id>3e91da0d-f03b-4280-8f3b-5c09ab4418cf</Id>
             <ImagePath>/img/abstraction.jpg</ImagePath>
@@ -64,14 +27,14 @@
     <Delivery>
       <Address>
         <ZipCode>123456</ZipCode>
-        <Country>Ukraine</Country>
-        <City>Kiiv</City>
-        <Street>Kharkov</Street>
-        <House>32</House>
-        <Apartment>e2</Apartment>
+        <Country>Russia</Country>
+        <City>Moscow</City>
+        <Street>Ordynka</Street>
+        <House>23</House>
+        <Apartment>111</Apartment>
       </Address>
-      <Phone>+398983439834</Phone>
-      <Email>hhhh@hhhh.ry</Email>
+      <Phone>+79023456532</Phone>
+      <Email>ku@ku.ru</Email>
     </Delivery>
   </Order>
 </ArrayOfOrder>

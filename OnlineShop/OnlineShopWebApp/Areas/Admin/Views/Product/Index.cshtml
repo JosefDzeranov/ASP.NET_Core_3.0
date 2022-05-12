@@ -1,9 +1,9 @@
 ﻿@using OnlineShopWebApp.Models
 @using System.Collections.Generic;
-@model List<Order>
+@model List<Product>
 
 @{
-    ViewData["Title"] = "Orders";
+    ViewData["Title"] = "Products";
 }
 
 <div class="container">
@@ -12,17 +12,15 @@
             @await Html.PartialAsync("AdminMenuLeft")
         </div>
         <div class="col-10">
-            <h2>Orders</h2>
+            <h2>Products</h2>
+            <h6><a class="nav-link" asp-area="Admin" asp-controller="Product" asp-action="Add">Add new Product</a></h6>
             <table class="table border-left border-right border-top border-bottom mt-4">
-                <caption>Order list</caption>
+                <caption>Product list</caption>
                 <thead class="table-light">
                     <tr>
                         <th scope="col">№</th>
+                        <th scope="col">Name</th>
                         <th scope="col">Cost</th>
-                        <th scope="col">Status</th>
-                        <th scope="col">User Login</th>
-                        <th scope="col">Date</th>
-                        <th scope="col">Time</th>
                         <th scope="col"></th>
                     </tr>
                 </thead>
@@ -34,22 +32,18 @@
                                 @(i + 1)
                             </td>
                             <td>
-                                $@Model[i].Basket.TotalCost
+                                <a asp-area="" asp-controller="Product" asp-action="Index" asp-route-id="@Model[i].Id">@Model[i].Name</a>
                             </td>
                             <td>
-                                @Model[i].Status
+                                $@Model[i].Cost
                             </td>
                             <td>
-                                
-                            </td>
-                            <td>
-                                @Model[i].Date.ToString("dd.MM.yyyy")
-                            </td>
-                            <td>
-                                @Model[i].Date.ToString("HH:mm")
-                            </td>
-                            <td>
-                                <a asp-area="admin" asp-controller="admin" asp-action="orderdetails" asp-route-id="@Model[i].Id">More detailed</a>
+                                <div class="btn-group ml-2" role="group" aria-label="Edit/Remove buttons">
+                                    <a class="btn btn-outline-dark btn-sm" role="button"
+                                   asp-area="Admin" asp-controller="Product" asp-action="Edit" asp-route-id="@Model[i].Id">Edit</a>
+                                    <a class="btn btn-outline-dark btn-sm" role="button"
+                                   asp-area="Admin" asp-controller="Product" asp-action="Remove" asp-route-id="@Model[i].Id">Remove</a>
+                                </div>
                             </td>
                         </tr>
                     </tbody>

@@ -1,9 +1,9 @@
 ﻿@using OnlineShopWebApp.Models
 @using System.Collections.Generic;
-@model List<Product>
+@model List<Order>
 
 @{
-    ViewData["Title"] = "Products";
+    ViewData["Title"] = "Orders";
 }
 
 <div class="container">
@@ -12,15 +12,17 @@
             @await Html.PartialAsync("AdminMenuLeft")
         </div>
         <div class="col-10">
-            <h2>Products</h2>
-            <h6><a class="nav-link" asp-area="admin" asp-controller="admin" asp-action="add">Add new Product</a></h6>
+            <h2>Orders</h2>
             <table class="table border-left border-right border-top border-bottom mt-4">
-                <caption>Product list</caption>
+                <caption>Order list</caption>
                 <thead class="table-light">
                     <tr>
                         <th scope="col">№</th>
-                        <th scope="col">Name</th>
                         <th scope="col">Cost</th>
+                        <th scope="col">Status</th>
+                        <th scope="col">User Login</th>
+                        <th scope="col">Date</th>
+                        <th scope="col">Time</th>
                         <th scope="col"></th>
                     </tr>
                 </thead>
@@ -32,16 +34,22 @@
                                 @(i + 1)
                             </td>
                             <td>
-                                <a href="/product/index?id=@Model[i].Id">@Model[i].Name</a>
+                                $@Model[i].Basket.TotalCost
                             </td>
                             <td>
-                                $@Model[i].Cost
+                                @Model[i].Status
                             </td>
                             <td>
-                                <div class="btn-group ml-2" role="group" aria-label="Edit/Remove buttons">
-                                    <a class="btn btn-outline-dark btn-sm" role="button" asp-area="admin" asp-controller="admin" asp-action="edit" asp-route-id="@Model[i].Id">Edit</a>
-                                    <a class="btn btn-outline-dark btn-sm" role="button" asp-area="admin" asp-controller="admin" asp-action="remove" asp-route-id="@Model[i].Id">Remove</a>
-                                </div>
+                                
+                            </td>
+                            <td>
+                                @Model[i].Date.ToString("dd.MM.yyyy")
+                            </td>
+                            <td>
+                                @Model[i].Date.ToString("HH:mm")
+                            </td>
+                            <td>
+                                <a asp-area="Admin" asp-controller="Order" asp-action="Details" asp-route-id="@Model[i].Id">More detailed</a>
                             </td>
                         </tr>
                     </tbody>
