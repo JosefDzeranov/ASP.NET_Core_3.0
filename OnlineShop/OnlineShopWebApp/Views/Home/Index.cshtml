@@ -30,7 +30,7 @@
                                 </a>
                             </div>
                             <div class="col-3">
-                                <a asp-controller="Favorites" asp-action="Add" asp-route-productId="@product.Id" class="btn btn-primary btn-sm"><i class="bi bi-bookmark"></i></a>
+                                <a asp-controller="Favorites" asp-action="Add" asp-route-productId="@product.Id" asp-route-control="@ViewContext.RouteData.Values["controller"].ToString()" asp-route-act="@ViewContext.RouteData.Values["action"].ToString()" class="btn btn-primary btn-sm"><i class="bi bi-bookmark"></i></a>
                             </div>
                         </div>
                         <div class="card-body">

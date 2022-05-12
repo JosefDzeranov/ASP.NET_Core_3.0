@@ -20,7 +20,7 @@
                 <p><h3>@Model.Cost ₽</h3></p>
                 <div class="row">
                 <a asp-controller="Cart" asp-action="Add" asp-route-productId="@Model.Id" class="btn btn-dark my-1">Добавить в корзину</a>
-                <a asp-controller="Favorites" asp-action="Add" asp-route-productId="@Model.Id" class="btn btn-primary my-1"><i class="bi bi-bookmark"></i> в избранное</a>
+                <a asp-controller="Favorites" asp-action="Add" asp-route-productId="@Model.Id"asp-route-control="@ViewContext.RouteData.Values["controller"].ToString()" asp-route-act="@ViewContext.RouteData.Values["action"].ToString()" class="btn btn-primary my-1"><i class="bi bi-bookmark"></i> в избранное</a>
                 </div>
                
             </div>

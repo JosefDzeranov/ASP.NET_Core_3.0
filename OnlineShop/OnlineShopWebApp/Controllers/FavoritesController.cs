@@ -22,12 +22,12 @@ namespace OnlineShopWebApp.Controllers
         }
 
 
-        public IActionResult Add(int productId)
+        public IActionResult Add(int productId, string control, string act)
         {
             var product = productRepository.TryGetById(productId);
             favoriteRepository.Add(product, Const.UserId);
 
-            return RedirectToAction("Index", "Home");
+            return RedirectToAction(act, control);
         }
 
         public IActionResult Remove(int productId)

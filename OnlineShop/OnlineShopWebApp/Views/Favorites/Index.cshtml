@@ -1,33 +1,36 @@
-﻿
-@model List<Product>
+﻿@model List<Product>
 
 @{
     ViewData["Title"] = "Избранное";
 }
 
 <h2>Избранное</h2>
-@if(@Model != null)
+@if (@Model != null)
 {
     <div class="row">
-    @foreach (var product in Model)
-    {
-        <div class="col-3">
-            <div class="card-deck">
-                <img src="@product.ImgPath" class="card-img-top" alt="изображение книги" />
-                <div class="card-body">
-                    <h5 class="card-title">@product.Name</h5>
-                    <div>
-                        <h4>@product.Cost руб.</h4>
-                        <a href="/favorites/Remove?productId=@product.Id" class="btn btn-danger btn-sm">удалить из избранного</a>
-                    </div>
+        @foreach (var product in Model)
+        {
+            <div class="col-3">
+                <div class="card-deck">
+                    <a asp-controller="Product" asp-action="Index" asp-route-id="@product.Id">
+                        <img src="@product.ImgPath" class="card-img-top" alt="изображение книги" />
+                    </a>
+                    <div class="card-body">
+                        <a class="text-decoration-none text-black" asp-controller="Product" asp-action="Index" asp-route-id="@product.Id">
+                            <h5 class="card-title">@product.Name</h5>
+                        </a>
+                        <div>
+                            <h4>@product.Cost руб.</h4>
+                            <a href="/favorites/Remove?productId=@product.Id" class="btn btn-danger btn-sm">удалить из избранного</a>
+                        </div>
 
-                    <a href="/cart/add?productId=@product.Id" class="btn btn-dark btn-sm">Добавить в корзину</a>
-                    <a href="/product/index/@product.Id" class="btn btn-dark btn-sm">Подробнее</a>
+                        <a href="/cart/add?productId=@product.Id" class="btn btn-dark btn-sm">Добавить в корзину</a>
+                        <a href="/product/index/@product.Id" class="btn btn-dark btn-sm">Подробнее</a>
+                    </div>
                 </div>
             </div>
-        </div>
-    }
-</div>
+        }
+    </div>
 }
 else
 {

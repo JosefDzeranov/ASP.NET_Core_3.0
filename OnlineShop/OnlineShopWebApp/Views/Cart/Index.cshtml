@@ -35,7 +35,7 @@
                                     <div class="col-6">
                                         <p><b><a class="text-decoration-none text-black" asp-controller="Product" asp-action="Index" asp-route-id="@cartItem.Product.Id">@cartItem.Product.Name</a></b></p>
                                         <p><h6>@cartItem.Product.Cost ₽</h6></p>
-                                        <a asp-controller="Favorites" asp-action="Add" asp-route-productId="@cartItem.Product.Id" class="btn btn-primary my-1"><i class="bi bi-bookmark"></i> в избранное</a>
+                                        <a asp-controller="Favorites" asp-action="Add" asp-route-productId="@cartItem.Product.Id" asp-route-control="@ViewContext.RouteData.Values["controller"].ToString()" asp-route-act="@ViewContext.RouteData.Values["action"].ToString()" class="btn btn-primary my-1"><i class="bi bi-bookmark"></i> в избранное</a>
                                     </div>
                                     <div class="col-3">
                                         <p><h5>@cartItem.Cost ₽</h5></p>
