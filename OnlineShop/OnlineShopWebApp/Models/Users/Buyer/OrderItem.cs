@@ -5,7 +5,7 @@ namespace OnlineShopWebApp.Models
 {
     public class OrderItem
     {
-        public string Id { get; }
+        public Guid Id { get; set; }
         public List<CartItem> CartItem { get; set; }
         public InfoBuying InfoBuying { get; set; }
         public DateTime dateTime { get; set; }
@@ -13,24 +13,25 @@ namespace OnlineShopWebApp.Models
         public string Login { get; set; }
         public decimal FullCost { get; set; }
 
-        public List<string> RosterStatus { get; } = new List<string>()
+        public OrderItem()
         {
-            "Создан",
-            "Обработан",
-            "В пути",
-            "Отменён",
-            "Доставлен"
-        };
+
+        }
 
         public OrderItem(List<CartItem> cartItem, string login, InfoBuying infoBuying)
         {
-            Id = Guid.NewGuid().ToString("N");
+            Id = Guid.NewGuid();
             CartItem = new List<CartItem>(cartItem);
             CalculateFullCostOrder();
             dateTime = DateTime.UtcNow;
-            Status = RosterStatus[0];
+            Status = MyConstant.RosterStatus[0];
             Login = login;
             InfoBuying = infoBuying;
+        }
+
+        public string ShowUnitRegisterStatus(int index)
+        {
+            return MyConstant.RosterStatus[index];
         }
 
         public string DataRegistration()
