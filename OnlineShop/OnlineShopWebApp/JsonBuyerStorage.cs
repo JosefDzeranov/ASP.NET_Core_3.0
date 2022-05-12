@@ -103,7 +103,7 @@ namespace OnlineShopWebApp
             return null;
         }
 
-        public void UpdateOrderDetails(OrderItem newOrder)
+        public void UpdateOrderStatus(OrderItem newOrder)
         {
             var order = FindOrderItem(newOrder.Id);
             order.Status = newOrder.Status;

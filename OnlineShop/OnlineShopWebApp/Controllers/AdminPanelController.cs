@@ -83,7 +83,7 @@ namespace OOnlineShopWebApp.Controllers
         [HttpPost]
         public IActionResult SaveDetailsOrder(OrderItem newOrder)
         {
-            buyerStorage.UpdateOrderDetails(newOrder);
+            buyerStorage.UpdateOrderStatus(newOrder);
             var orderId = newOrder.Id;
             return RedirectToAction("DetailsOrder", new { orderId });
         }
