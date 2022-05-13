@@ -9,31 +9,30 @@ namespace OnlineShopWebApp.Models
     {
         private List<Order> orders = new List<Order>();
 
-        private List<Cart> carts = new List<Cart>();
-
-        public Order TryGetOrder(string userId)
+        public Order TryGet(string userId)
         {
             return orders.FirstOrDefault(x => x.UserId == userId);
         }
 
-        public List<Order> TryGetOrders(string userId)
+        public List<Order> TryGetAll(string userId)
         {
             return orders.FindAll(x => x.UserId == userId);
         }
+
+
         public void Add(Order order, Customer customer, string userId)
         {
-            int LastOrderNumber = 0;
+            int lastOrderNumber = 1;
+            
             if (orders.Count > 0)
-                LastOrderNumber = orders.FindLast(x => x.UserId == userId).OrderNumber;
-            else
-                LastOrderNumber++;
+                lastOrderNumber = orders.FindLast(x => x.UserId == userId).OrderNumber;
 
             var newOrder = new Order()
             {
                 Id = Guid.NewGuid(),
-                OrderNumber = LastOrderNumber,
+                OrderNumber = lastOrderNumber,
                 OrderDateTime = DateTime.Now,
-                UserId = Constants.UserId,
+                UserId = userId,
                 Items = new List<OrderItem>
                     {
                         new OrderItem
@@ -45,13 +44,6 @@ namespace OnlineShopWebApp.Models
             };
 
             orders.Add(newOrder);
-
-            RemoveCartUser();
-        }
-
-        public void RemoveCartUser()
-        {
-            carts.Clear();
         }
     }
 }

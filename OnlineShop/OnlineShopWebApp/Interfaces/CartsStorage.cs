@@ -42,7 +42,7 @@ namespace OnlineShopWebApp.Interfaces
 
                 if (existingCartItem != null)
                 {
-                    existingCartItem.Count += 1; ;
+                    existingCartItem.Count += 1;
                 }
                 else
                 {

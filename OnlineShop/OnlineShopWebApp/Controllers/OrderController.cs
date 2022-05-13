@@ -19,7 +19,7 @@ namespace OnlineShopWebApp.Controllers
 
         public IActionResult Index()
         {
-            var orders = ordersStorage.TryGetOrders(Constants.UserId);
+            var orders = ordersStorage.TryGetAll(Constants.UserId);
 
             return View(orders);
         }
@@ -40,7 +40,7 @@ namespace OnlineShopWebApp.Controllers
 
         public IActionResult OrderComplete()
         {
-            var order = ordersStorage.TryGetOrder(Constants.UserId);
+            var order = ordersStorage.TryGet(Constants.UserId);
 
             return View(order);
         }

@@ -1,7 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Text;
 using Newtonsoft.Json;
 using OnlineShopWebApp.Interface;
 
@@ -9,186 +9,82 @@ namespace OnlineShopWebApp.Models
 {
     public class ProductsStorage : IProductsStorage
     {
-        private readonly List<Product> products = new List<Product>()
+        private const string fileName = @"Models\Products.json";
+
+        private List<Product> products;
+
+        public ProductsStorage()
         {
-            new Product(0,"Составление документов, исков в суд", 5000, "Составление и оформление документов для подачи в суд", "/images/court.jpg"),
-            new Product(1,"Составление документов для регистрации/банкротства ЮЛ", 4000, "Составление документов для регистрации/банкротства ЮЛ","/images/bankruptcy.jpg"),
-            new Product(2,"Сопровождение и ведение гражданского дела в суде", 6000, "Сопровождение и ведение гражданского дела в суде","/images/civil_case.jpg"),
-            new Product(3,"Консультация по вопросам", 3000, "Консультация по вопросам","/images/law_consultation.jpg"),
-            new Product(4,"Анализ документов и договоров", 3000, "Правовая экспертиза документов и договоров","/images/examination_documents.jpg"),
-        };
-
-        public List<Product> GetAllFirst()
-        {
-            string currentFile = @"Models\Products.json";
-
-            if (!File.Exists(currentFile))
-            {
-                string obj = JsonConvert.SerializeObject(products, Formatting.Indented);
-                File.WriteAllText(@"Models\Products.json", obj);
-            }
-            List<Product> productsJson;
-
-            try
-            {
-                productsJson = DeserializeJsonProducts();
-            }
-            catch (Exception)
-            {
-                return null;
-            }
-
-            return productsJson;
+            products = GetFromFile();
         }
 
         public List<Product> GetAll()
         {
-            string currentFile = @"Models\Products.json";
-
-            if (!File.Exists(currentFile))
-            {
-                return null;
-            }
-            List<Product> productsJson;
-
-            try
-            {
-                productsJson = DeserializeJsonProducts();
-            }
-            catch (Exception)
-            {
-                return null;
-            }
-
-            return productsJson;
+            return products;
         }
 
         public Product TryGet(int id)
         {
-            List<Product> productsJson;
-
-            try
-            {
-                productsJson = DeserializeJsonProducts();
-            }
-            catch (Exception)
-            {
-                return null;
-            }
-
-            return productsJson.FirstOrDefault(x => x.Id == id);
-        }
-
-        public List<Product> DeserializeJsonProducts()
-        {
-            string currentFile = @"Models\Products.json";
-
-            var strFromReq = new StreamReader(currentFile).ReadToEnd();
-
-            List<Product> productsJson = JsonConvert.DeserializeObject<List<Product>>(strFromReq);
-
-            return productsJson;
+            return products.FirstOrDefault(x => x.Id == id);
         }
 
         public void Delete(int productId)
         {
-            List<Product> productsJson;
-
-            try
-            {
-                productsJson = DeserializeJsonProducts();
-
-                var product = productsJson.FirstOrDefault(x => x.Id == productId);
-
-                productsJson.Remove(product);
-
-
-                string currentFile = @"Models\Products.json";
-                
-                if (File.Exists(currentFile))
-                {
-                    GC.Collect();
-                    GC.WaitForPendingFinalizers();
-                    File.Delete(currentFile);
-                }
-
-                if (productsJson.Count != 0)
-                {
-                    string obj = JsonConvert.SerializeObject(productsJson, Formatting.Indented);
-                    File.WriteAllText(@"Models\Products.json", obj);
-                }
-            }
-            catch (Exception)
-            {
-
-            }
+            products.RemoveAll(product => product.Id == productId);
+            UpdateFile();
         }
 
         public void Edit(Product newProduct)
         {
-            List<Product> productsJson;
+            var product = products.FirstOrDefault(x => x.Id == newProduct.Id);
+            product.Name = newProduct.Name;
+            product.Cost = newProduct.Cost;
+            product.Description = newProduct.Description;
 
-            try
-            {
-                productsJson = DeserializeJsonProducts();
-
-                var product = productsJson.FirstOrDefault(x => x.Id == newProduct.Id);
-                product.Name = newProduct.Name;
-                product.Cost = newProduct.Cost;
-                product.Description = newProduct.Description;
-
-                string currentFile = @"Models\Products.json";
-
-                if (File.Exists(currentFile))
-                {
-                    GC.Collect();
-                    GC.WaitForPendingFinalizers();
-                    File.Delete(currentFile);
-                }
-
-                if (productsJson.Count != 0)
-                {
-                    string obj = JsonConvert.SerializeObject(productsJson, Formatting.Indented);
-                    File.WriteAllText(@"Models\Products.json", obj);
-                }
-            }
-            catch (Exception)
-            {
-
-            }
+            UpdateFile();
         }
 
         public void Add(Product product)
         {
-            List<Product> productsJson;
+            products.Add(product);
 
-            productsJson = DeserializeJsonProducts();
-            string currentFile = @"Models\Products.json";
+            UpdateFile();
+        }
 
-            if (!File.Exists(currentFile))
+        private List<Product> GetFromFile()
+        {
+            if (!File.Exists(fileName))
             {
-                GC.Collect();
-                GC.WaitForPendingFinalizers();
-                File.Delete(currentFile);
+                CreateFileWithDefaultProducts();
             }
 
-            try
+            var reader = new StreamReader(fileName);
+            var data = reader.ReadToEnd();
+            reader.Close();
+
+            return JsonConvert.DeserializeObject<List<Product>>(data);
+        }
+
+        private void CreateFileWithDefaultProducts()
+        {
+            products = new List<Product>()
             {
-                productsJson = DeserializeJsonProducts();
+                new Product(0,"Составление документов, исков в суд", 5000, "Составление и оформление документов для подачи в суд", "/images/court.jpg"),
+                new Product(1,"Составление документов для регистрации/банкротства ЮЛ", 4000, "Составление документов для регистрации/банкротства ЮЛ","/images/bankruptcy.jpg"),
+                new Product(2,"Сопровождение и ведение гражданского дела в суде", 6000, "Сопровождение и ведение гражданского дела в суде","/images/civil_case.jpg"),
+                new Product(3,"Консультация по вопросам", 3000, "Консультация по вопросам","/images/law_consultation.jpg"),
+                new Product(4,"Анализ документов и договоров", 3000, "Правовая экспертиза документов и договоров","/images/examination_documents.jpg"),
+            };
+            UpdateFile();
+        }
 
-                List<Product> newProductsJson = new List<Product>();
-                newProductsJson.Add(product);
+        private void UpdateFile()
+        {
+            var serializedData = JsonConvert.SerializeObject(products, Formatting.Indented);
 
-                if (productsJson.Count != 0)
-                {
-                    string obj = JsonConvert.SerializeObject(productsJson, Formatting.Indented);
-                    File.WriteAllText(@"Models\Products.json", obj);
-                }
-            }
-            catch (Exception)
-            {
-
-            }
+            var writer = new StreamWriter(fileName, false, Encoding.UTF8);
+            writer.WriteLine(serializedData);
+            writer.Close();
         }
     }
 }
