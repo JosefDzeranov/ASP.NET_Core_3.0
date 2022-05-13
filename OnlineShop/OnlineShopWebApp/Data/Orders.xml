@@ -1,10 +1,10 @@
-<?xml version="1.0"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <ArrayOfOrder xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <Order>
     <Id>dbe00a1c-ceb9-4e3d-af09-1f37c3c98046</Id>
     <Date>2022-05-12T17:11:04.3069865+03:00</Date>
     <UserId>UserId</UserId>
-    <Status>Created</Status>
+    <Status>Processed</Status>
     <Basket>
       <Id>b5facf26-6be2-4d82-86d4-3106a054215f</Id>
       <UserId>UserId</UserId>

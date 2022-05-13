@@ -29,7 +29,7 @@ namespace OnlineShopWebApp.Areas.Admin.Controllers
         }
 
         [HttpPost]
-        public IActionResult UpdateOrderStatus(Guid id, OrderStatus status)
+        public IActionResult UpdateStatus(Guid id, OrderStatus status)
         {
             _orderStorage.UpdateStatus(id, status);
             return RedirectToAction("Index");
