@@ -63,7 +63,7 @@ namespace OnlineShopWebApp.Models
             return productsJson;
         }
 
-        public Product TryGetProduct(int id)
+        public Product TryGet(int id)
         {
             List<Product> productsJson;
 
@@ -124,7 +124,7 @@ namespace OnlineShopWebApp.Models
             }
         }
 
-        public void SaveEditedProduct(Product newProduct)
+        public void Edit(Product newProduct)
         {
             List<Product> productsJson;
 

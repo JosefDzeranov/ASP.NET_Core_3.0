@@ -35,14 +35,14 @@ namespace OnlineShopWebApp.Controllers
 
         public IActionResult Edit(int productId)
         {
-            var product = productsStorage.TryGetProduct(productId);
+            var product = productsStorage.TryGet(productId);
             return View(product);
         }
 
         [HttpPost]
         public IActionResult SaveEditedProduct(Product product)
         {
-            productsStorage.SaveEditedProduct(product);
+            productsStorage.Edit(product);
             return View();
         }
 

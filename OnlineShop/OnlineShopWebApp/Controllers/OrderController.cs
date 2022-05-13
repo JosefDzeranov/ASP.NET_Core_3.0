@@ -19,9 +19,9 @@ namespace OnlineShopWebApp.Controllers
 
         public IActionResult Index()
         {
-            var order = ordersStorage.TryGetOrderAllByUserId(Constants.UserId);
+            var orders = ordersStorage.TryGetOrders(Constants.UserId);
 
-            return View(order);
+            return View(orders);
         }
 
         public IActionResult Add(Order order, Customer customer)
@@ -40,7 +40,7 @@ namespace OnlineShopWebApp.Controllers
 
         public IActionResult OrderComplete()
         {
-            var order = ordersStorage.TryGetOrderByUserId(Constants.UserId);
+            var order = ordersStorage.TryGetOrder(Constants.UserId);
 
             return View(order);
         }

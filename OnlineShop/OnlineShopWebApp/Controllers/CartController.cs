@@ -25,7 +25,7 @@ namespace OnlineShopWebApp.Controllers
 
         public IActionResult Add(int productId)
         {
-            var product = productsStorage.TryGetProduct(productId);
+            var product = productsStorage.TryGet(productId);
 
             cartsStorage.Add(product, Constants.UserId);
             return RedirectToAction("Index");
@@ -33,18 +33,16 @@ namespace OnlineShopWebApp.Controllers
 
         public IActionResult RemoveProduct(int productId)
         {
-            var product = productsStorage.TryGetProduct(productId);
-
-            cartsStorage.RemoveProduct(product, Constants.UserId);
+            cartsStorage.RemoveProduct(productId, Constants.UserId);
 
             return RedirectToAction("Index");
         }
 
         public IActionResult RemoveCountProductCart(int productId)
         {
-            var product = productsStorage.TryGetProduct(productId);
+            var product = productsStorage.TryGet(productId);
 
-            cartsStorage.RemoveCountProductCart(product, Constants.UserId);
+            cartsStorage.RemoveCountProductCart(product.Id, Constants.UserId);
 
             return RedirectToAction("Index");
         }

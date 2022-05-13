@@ -11,12 +11,12 @@ namespace OnlineShopWebApp.Models
 
         private List<Cart> carts = new List<Cart>();
 
-        public Order TryGetOrderByUserId(string userId)
+        public Order TryGetOrder(string userId)
         {
             return orders.FirstOrDefault(x => x.UserId == userId);
         }
 
-        public List<Order> TryGetOrderAllByUserId(string userId)
+        public List<Order> TryGetOrders(string userId)
         {
             return orders.FindAll(x => x.UserId == userId);
         }

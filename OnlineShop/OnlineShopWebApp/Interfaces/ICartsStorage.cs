@@ -8,10 +8,10 @@ namespace OnlineShopWebApp.Interface
 
         void Add(Product product, string userId);
 
-        void RemoveProduct(Product product, string userId);
+        void RemoveProduct(int productId, string userId);
 
         void RemoveCartUser(string userId);
 
-        void RemoveCountProductCart(Product product, string userId);
+        void RemoveCountProductCart(int productId, string userId);
     }
 }

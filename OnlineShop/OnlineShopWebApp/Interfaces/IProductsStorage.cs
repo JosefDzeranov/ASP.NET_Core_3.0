@@ -9,13 +9,13 @@ namespace OnlineShopWebApp.Interface
 
         List<Product> GetAll();
 
-        Product TryGetProduct(int id);
+        Product TryGet(int id);
 
         List<Product> DeserializeJsonProducts();
 
         void Delete(int Id);
 
-        void SaveEditedProduct(Product newProduct);
+        void Edit(Product newProduct);
 
         void Add(Product product);
     }

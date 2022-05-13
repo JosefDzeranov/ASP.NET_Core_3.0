@@ -1,9 +1,10 @@
 ﻿using OnlineShopWebApp.Interface;
+using OnlineShopWebApp.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace OnlineShopWebApp.Models
+namespace OnlineShopWebApp.Interfaces
 {
     public class CartsStorage : ICartsStorage
     {
@@ -55,25 +56,25 @@ namespace OnlineShopWebApp.Models
             }
         }
 
-        public void RemoveProduct(Product product, string userId)
+        public void RemoveProduct(int productId, string userId)
         {
             var existingCart = TryGetByUserId(userId);
-            var existingCartItem = existingCart.Items.FirstOrDefault(x => x.Product.Id == product.Id);
+            var existingCartItem = existingCart.Items.FirstOrDefault(x => x.Product.Id == productId);
             if (existingCartItem != null)
             {
                 existingCart.Items.Remove(existingCartItem);
             }
         }
 
-        public void RemoveCountProductCart(Product product, string userId)
+        public void RemoveCountProductCart(int productId, string userId)
         {
             var existingCart = TryGetByUserId(userId);
-            var existingCartItem = existingCart.Items.FirstOrDefault(x => x.Product.Id == product.Id);
+            var existingCartItem = existingCart.Items.FirstOrDefault(x => x.Product.Id == productId);
 
             if (existingCartItem != null && existingCartItem.Count > 0)
             {
                 if (existingCartItem.Count == 1)
-                    RemoveProduct(product, userId);
+                    RemoveProduct(productId, userId);
                 else
                     existingCartItem.Count -= 1;
 
@@ -82,7 +83,7 @@ namespace OnlineShopWebApp.Models
 
         public void RemoveCartUser(string userId)
         {
-            carts.Remove(carts.FirstOrDefault(x => x.UserId == userId));
+            carts.RemoveAll(x => x.UserId == userId);
         }
     }
 }

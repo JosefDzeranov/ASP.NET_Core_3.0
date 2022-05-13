@@ -5,9 +5,9 @@ namespace OnlineShopWebApp.Interface
 {
     public interface IOrdersStorage
     {
-        Order TryGetOrderByUserId(string userId);
+        Order TryGetOrder(string userId);
 
-        List<Order> TryGetOrderAllByUserId(string userId);
+        List<Order> TryGetOrders(string userId);
 
         void Add(Order order, Customer customer, string userId);
     }

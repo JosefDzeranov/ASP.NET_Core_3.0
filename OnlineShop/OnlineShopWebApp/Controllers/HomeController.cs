@@ -1,6 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using OnlineShopWebApp.Interface;
-using OnlineShopWebApp.Models;
 
 namespace OnlineShopWebApp.Controllers
 {
@@ -8,13 +7,9 @@ namespace OnlineShopWebApp.Controllers
     {
         private readonly IProductsStorage productsStorage;
 
-        private readonly ICartsStorage cartsStorage;
-
-        public HomeController(IProductsStorage productsStorage, ICartsStorage cartsStorage)
+        public HomeController(IProductsStorage productsStorage)
         {
             this.productsStorage = productsStorage;
-
-            this.cartsStorage = cartsStorage;
         }
 
         public IActionResult Index()
