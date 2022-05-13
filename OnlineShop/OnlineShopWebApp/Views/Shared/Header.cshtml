@@ -1,33 +1,86 @@
-﻿<header>
+﻿@*<header>
     <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-dark bg-dark border-bottom box-shadow mb-3">
+    <div class="container">
+    <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">Книжный магазин</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+    aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
+    <ul class="navbar-nav flex-grow-1">
+    <li class="nav-item">
+    <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+    </li>
+    <li class="nav-item">
+    <a class="nav-link" asp-area="Admin" asp-controller="Order" asp-action="Index" >Панель администратора</a>
+    </li>
+    <li class="nav-item">
+    @await Component.InvokeAsync("Favorites")
+    </li>
+    <li class="nav-item">
+    @await Component.InvokeAsync("Cart")
+    </li>
+    <li class="nav-item">
+    <a class="nav-link" asp-area="" asp-controller="Account" asp-action="Login">Войти</a>
+    </li>
+    <li class="nav-item">
+    <a class="nav-link" asp-area="" asp-controller="Account" asp-action="Register">Регистрация</a>
+    </li>
+    </ul>
+    </div>
+    </div>
+    </nav>
+    </header>*@
+
+
+<header>
+    <div class="px-3 py-2 bg-dark text-white">
         <div class="container">
-            <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">Книжный магазин</a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                    aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
-                <ul class="navbar-nav flex-grow-1">
-                    <li class="nav-item">
-                        <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
-                    </li>      
-                     <li class="nav-item">
-                        <a class="nav-link" asp-area="Admin" asp-controller="Order" asp-action="Index" >Панель администратора</a>
+            <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
+                <a asp-area="" asp-controller="Home" asp-action="Index" class="d-flex align-items-center my-2 my-lg-0 me-lg-auto text-light text-decoration-none">
+                   <h3>Книжный магазин</h3>
+                </a>
+
+                <ul class="nav col-12 col-lg-auto my-2 justify-content-center my-md-0 text-small">
+                    <li>
+                        <a class="nav-link text-light text-center" asp-area="" asp-controller="Home" asp-action="Index">
+                            <h4><i class="bi bi-house-door"></i></h4>
+                            Home
+                        </a>
                     </li>
-                    <li class="nav-item">
-                       @await Component.InvokeAsync("Favorites")
+                    <li>
+                        <a class="nav-link text-light text-center" asp-area="Admin" asp-controller="Order" asp-action="Index">
+                            <h4><i class="bi bi-gear"></i></h4>
+                            Администрирование
+                        </a>
                     </li>
-                    <li class="nav-item">
-                       @await Component.InvokeAsync("Cart")
+                    <li>
+                        @await Component.InvokeAsync("Favorites")
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" asp-area="" asp-controller="Account" asp-action="Login">Войти</a>
+                    <li>
+                        @await Component.InvokeAsync("Cart")
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" asp-area="" asp-controller="Account" asp-action="Register">Регистрация</a>
+                    <li>
+                        <a asp-area="" asp-controller="Account" asp-action="Login" class="nav-link text-light text-center">
+                            <h4><i class="bi bi-box-arrow-in-right"></i></h4>
+                            Войти
+                        </a>
+                    </li>
+                     <li>
+                        <a asp-area="" asp-controller="Account" asp-action="Register" class="nav-link text-light text-center">
+                            <h4><i class="bi bi-person-circle"></i></h4>
+                           Регистрация
+                        </a>
                     </li>
                 </ul>
             </div>
         </div>
-    </nav>
+    </div>
+    <div class="px-3 py-2 border-bottom mb-3">
+      <div class="container  d-flex flex-wrap justify-content-center">
+        <form class="w-100 me-3">
+          <input type="search" class="form-control" placeholder="Search..." aria-label="Search">
+        </form>
+      </div>
+    </div>
 </header>
