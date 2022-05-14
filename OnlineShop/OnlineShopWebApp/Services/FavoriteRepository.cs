@@ -9,7 +9,7 @@ namespace OnlineShopWebApp.Services
     {
         private List<Favorite> favorites = new List<Favorite>();
 
-        public void Add(Product product, string userId)
+        public void Add(ProductViewModel product, string userId)
         {
             var existingFavorite = TryGetByUserId(userId);
             if (existingFavorite == null)
@@ -18,7 +18,7 @@ namespace OnlineShopWebApp.Services
                 {
                     Id = Guid.NewGuid(),
                     UserId = userId,
-                    Products = new List<Product>()
+                    Products = new List<ProductViewModel>()
                     {
                         product
                     }
@@ -39,7 +39,7 @@ namespace OnlineShopWebApp.Services
 
         }
 
-        public void Remove(Product product, string userId)
+        public void Remove(ProductViewModel product, string userId)
         {
             var existingFavorite = TryGetByUserId(userId);
             if (existingFavorite != null)

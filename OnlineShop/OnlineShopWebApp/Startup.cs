@@ -5,6 +5,8 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using OnlineShop.DB;
+using OnlineShop.DB.Services;
+using OnlineShopDB.Services;
 using OnlineShopWebApp.Models;
 using OnlineShopWebApp.Services;
 using Serilog;
@@ -27,7 +29,7 @@ namespace OnlineShopWebApp
             services.AddDbContext<OnlineShopContext>(options =>
             options.UseSqlServer(connection));
             services.AddControllersWithViews();
-            services.AddSingleton<IProductRepository,ProductRepository>();
+            services.AddTransient<IProductRepository,ProductRepository>();
             services.AddSingleton<ICartRepository,CartRepository>();
             services.AddSingleton<IOrderRepository, OrderRepository>();
             services.AddSingleton<IFavoriteRepository, FavoriteRepository>();

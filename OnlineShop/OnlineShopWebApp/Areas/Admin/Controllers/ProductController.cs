@@ -1,6 +1,9 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using OnlineShop.DB.Models;
+using OnlineShop.DB.Services;
 using OnlineShopWebApp.Models;
 using OnlineShopWebApp.Services;
+using System;
 
 namespace OnlineShopWebApp.Areas.Admin.Controllers
 {
@@ -23,7 +26,7 @@ namespace OnlineShopWebApp.Areas.Admin.Controllers
         }
 
 
-        public IActionResult DeleteProduct(int id)
+        public IActionResult DeleteProduct(Guid id)
         {
             var product = productRepository.TryGetById(id);
             if (product != null)
@@ -33,18 +36,27 @@ namespace OnlineShopWebApp.Areas.Admin.Controllers
             return RedirectToAction("Index", "Product");
         }
 
-        public IActionResult EditProduct(int id)
+        public IActionResult EditProduct(Guid id)
         {
             var product = productRepository.TryGetById(id);
 
             return View(product);
         }
         [HttpPost]
-        public IActionResult EditProduct(Product changingProduct)
+        public IActionResult EditProduct(ProductViewModel product)
         {
             if (ModelState.IsValid)
             {
-                productRepository.Update(changingProduct);
+                var productDb = new Product
+                {
+                    Id = product.Id,
+                    Name = product.Name,
+                    Cost = product.Cost,
+                    Description = product.Description,
+                    ImgPath = product.ImgPath,
+
+                };
+                productRepository.Update(productDb);
             }
 
             return RedirectToAction("Index", "Product");
@@ -55,9 +67,18 @@ namespace OnlineShopWebApp.Areas.Admin.Controllers
             return View();
         }
         [HttpPost]
-        public IActionResult AddProduct(Product product)
+        public IActionResult AddProduct(ProductViewModel product)
         {
-            productRepository.Add(product);
+            var productDb = new Product
+            {
+                Id = product.Id,
+                Name = product.Name,
+                Cost = product.Cost,
+                Description = product.Description,
+                ImgPath = product.ImgPath,
+
+            };
+            productRepository.Add(productDb);
             return RedirectToAction("Index", "Product");
         }
 
