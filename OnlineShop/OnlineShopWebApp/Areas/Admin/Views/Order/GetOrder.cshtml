@@ -45,7 +45,7 @@
                     </tr>
                 </tbody>
             </table>
-            <button type="submit" class="btn btn-outline-dark" asp-controller="Admin" asp-action="UpdateStatusOrder" asp-route-orderId="@Model.Id">Обновить</button>
+            <button type="submit" class="btn btn-outline-dark" asp-area="admin" asp-controller="order" asp-action="UpdateStatusOrder" asp-route-orderId="@Model.Id">Обновить</button>
         </form>
     </div>
 </div>

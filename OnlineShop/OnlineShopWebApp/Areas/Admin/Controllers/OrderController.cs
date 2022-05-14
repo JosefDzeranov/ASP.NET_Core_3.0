@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using OnlineShopWebApp.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -30,5 +31,11 @@ namespace OnlineShopWebApp.Areas.Admin.Controllers
             return View(necessaryOrder);
         }
 
+        [HttpPost]
+        public IActionResult UpdateStatusOrder(int orderId, OrderStatus status)
+        {
+            _orderBase.UpdateOrderStatus(orderId, status);
+            return RedirectToAction("Orders");
+        }
     }
 }
