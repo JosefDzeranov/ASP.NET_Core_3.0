@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace OnlineShopWebApp.Models
+namespace OnlineShopWebApp.Models.Users.Buyer
 {
     public class InfoBuying
     {

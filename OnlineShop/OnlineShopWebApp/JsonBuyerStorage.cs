@@ -2,6 +2,7 @@
 using OnlineShopWebApp.Models;
 using System;
 using System.Collections.Generic;
+using OnlineShopWebApp.Models.Users.Buyer;
 
 namespace OnlineShopWebApp
 {

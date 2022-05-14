@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 
 
-namespace OnlineShopWebApp.Models
+namespace OnlineShopWebApp.Models.Users.Buyer
 {
     public class Buyer : User
     {

@@ -1,7 +1,7 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
 
-namespace OnlineShopWebApp.Models
+namespace OnlineShopWebApp.Models.Users
 {
     public class User
     {

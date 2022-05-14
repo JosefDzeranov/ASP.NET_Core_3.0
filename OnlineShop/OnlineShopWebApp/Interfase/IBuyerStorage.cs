@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using OnlineShopWebApp.Models;
+using OnlineShopWebApp.Models.Users.Buyer;
 
 namespace OnlineShopWebApp.Interfase
 {

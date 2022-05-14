@@ -15,7 +15,7 @@
         "ASPNETCORE_ENVIRONMENT": "Development"
       }
     },
-    "OnlineDesignBureauWebApp": {
+    "OnlineShopWebApp": {
       "commandName": "Project",
       "launchBrowser": true,
       "environmentVariables": {

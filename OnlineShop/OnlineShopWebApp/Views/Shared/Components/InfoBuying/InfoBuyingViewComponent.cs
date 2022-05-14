@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using OnlineShopWebApp.Interfase;
 using OnlineShopWebApp.Models;
 
+
 namespace OnlineShopWebApp.Views.Shared.Components.InfoBuying
 {
     // Бланк для заполнения данных покупателя для оформления заказа

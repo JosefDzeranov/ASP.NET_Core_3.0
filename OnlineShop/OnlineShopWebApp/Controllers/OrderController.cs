@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using OnlineShopWebApp.Interfase;
 using OnlineShopWebApp.Models;
+using OnlineShopWebApp.Models.Users.Buyer;
 
 namespace OnlineShopWebApp.Controllers
 {
