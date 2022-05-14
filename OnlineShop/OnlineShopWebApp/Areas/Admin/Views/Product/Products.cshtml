@@ -1,0 +1,48 @@
+﻿<div class="row text-center">
+
+    @await Html.PartialAsync("AdminMenu")
+
+    <div class="col-9">
+        <h3>Список продуктов</h3>
+        <a style="color:black" asp-area="admin" asp-controller="product" asp-action="AddNewProduct">Добавить новый продукт</a>
+        @*<a style="color:black" href="/admin/AddNewProduct">Добавить новый продукт</a>*@
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>№</th>
+                    <th>Название</th>
+                    <th>Стоимость</th>
+                    <th></th>
+                    <th></th>
+
+                </tr>
+            </thead>
+            @foreach (var p in Model)
+            {
+
+                <tbody>
+                    <tr>
+                        <td>@p.Id</td>
+                        <td>
+                            <a style="color:black" asp-area="admin" asp-controller="product" asp-action="products" asp-route-id="@p.Id">@p.Id</a>
+
+                            @*<a style="color:black" href="/product/index/@p.Id">@p.Name </a>*@
+                        </td>
+                        <td>
+                            @p.Cost руб.
+                        </td>
+                        <td>
+                            <a style="color:black" asp-area="admin" asp-controller="product" asp-action="editProduct" asp-route-productId="@p.Id">Редактировать</a>
+                            @*<a style="color:black" href="/admin/EditProduct?productId=@p.Id">Редактировать </a>*@
+                        </td>
+                        <td>
+                            <a style="color:black" asp-area="admin" asp-controller="product" asp-action="deleteProduct" asp-route-productId="@p.Id">Удалить</a>
+
+                            @*<a style="color:black" href="/admin/DeleteProduct?productId=@p.Id">Удалить</a>*@
+                        </td>
+                    </tr>
+                </tbody>
+            }
+        </table>
+    </div>
+</div>

@@ -11,7 +11,7 @@
     <div class="row text-center">
         <div class="col-4 mx-auto">
             <h2>Введите данные продукта</h2>
-            <form asp-action="AddNewProduct" asp-controller="Admin">
+            <form asp-area="admin" asp-action="addnewproduct" asp-controller="product">
                 <div class="mb-3">
                     <input class="form-control" asp-for="Name" placeholder="Введите название продукта">
                     <span asp-validation-for="Name"></span>
@@ -25,7 +25,7 @@
                     <span asp-validation-for="Description"></span>
                 </div>
                 <div class="mb-3">
-                    <button type="submit" class="btn btn-outline-dark" asp-controller="Admin" asp-action="AddNewProduct">Добавить новый продукт</button>
+                    <button type="submit" class="btn btn-outline-dark" asp-area="admin" asp-controller="product" asp-action="addnewproduct">Добавить новый продукт</button>
                 </div>
             </form>
         </div>
