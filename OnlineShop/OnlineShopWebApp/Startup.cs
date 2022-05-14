@@ -35,6 +35,7 @@ namespace OnlineShopWebApp
             services.AddSingleton<IComparison, ComparisonManager>();
             services.AddSingleton<IFavorites, FavoritesManager>();
             services.AddSingleton<IRolesManager, RolesManager>();
+            services.AddSingleton<IRegAndAuthManager, RegAndAuthManager>();
 
             services.Configure<RequestLocalizationOptions>(options =>
             {
