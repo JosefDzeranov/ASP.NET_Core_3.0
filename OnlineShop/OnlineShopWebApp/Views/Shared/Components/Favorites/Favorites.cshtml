@@ -1,9 +1,12 @@
 ﻿@model int
 
-<a type="button" class="nav-link" asp-area="" asp-controller="Favorites" asp-action="Index">
+<a type="button" class="nav-link text-light text-center" asp-area="" asp-controller="Favorites" asp-action="Index">
+    <h4><i class="bi bi-bookmark"></i></h4>
     Избранное
     @if (Model > 0)
     {
         <span class="badge bg-secondary">@Model</span>
     }
 </a>
+
+ 
