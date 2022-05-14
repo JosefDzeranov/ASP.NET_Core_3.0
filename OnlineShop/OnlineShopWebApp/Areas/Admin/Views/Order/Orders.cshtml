@@ -23,7 +23,7 @@
                 <tbody>
                     <tr>
                         <td>
-                            <a style="color:black" href="/admin/getOrder?orderId=@p.Id">@p.Id</a>
+                            <a style="color:black" asp-area="admin" asp-controller="order" asp-action="getorder" asp-route-orderId="@p.Id">@p.Id</a>
                         </td>
                         <td>@p.Cart.Cost</td>
                         <td>@p.Status</td>

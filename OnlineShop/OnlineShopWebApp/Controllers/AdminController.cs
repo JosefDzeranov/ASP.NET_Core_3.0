@@ -16,11 +16,6 @@ namespace OnlineShopWebApp.Controllers
             _orderBase = orderBase;
         }
 
-        public IActionResult Orders()
-        {
-            var orders = _orderBase.AllOrders();
-            return View(orders);
-        }
 
         public IActionResult Users()
         {
@@ -65,11 +60,7 @@ namespace OnlineShopWebApp.Controllers
             return View(product);
         }
 
-        public IActionResult GetOrder(int orderId)
-        {
-            var necessaryOrder = _orderBase.AllOrders().FirstOrDefault(x => x.Id == orderId);
-            return View(necessaryOrder);
-        }
+        
 
         [HttpPost]
         public IActionResult UpdateStatusOrder(int orderId, OrderStatus status)
