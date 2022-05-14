@@ -44,7 +44,7 @@ namespace OnlineShopWebApp.Controllers
         {
             buyerId = MyConstant.DefaultBuyerIdIsNull(buyerId);
             buyerStorage.Buy(buyerId);
-            return View(); 
+            return View();
         }
     }
 }

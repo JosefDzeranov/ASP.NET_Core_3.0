@@ -1,12 +1,11 @@
-﻿using System.Collections.Generic;
-using System.IO;
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
 using OnlineShopWebApp.Interfase;
-using OnlineShopWebApp.Models;
+using System.Collections.Generic;
+using System.IO;
 
 namespace OnlineShopWebApp
 {
-    public class JsonWorkWithData:IWorkWithData
+    public class JsonWorkWithData : IWorkWithData
     {
         public string Name { get; set; }
         private string repository = "Data";

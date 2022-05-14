@@ -1,13 +1,11 @@
-﻿using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using Newtonsoft.Json;
-using OnlineShopWebApp.Interfase;
+﻿using OnlineShopWebApp.Interfase;
 using OnlineShopWebApp.Models;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace OnlineShopWebApp
 {
-    public class JsonRoleStorage:IRolesStorage
+    public class JsonRoleStorage : IRolesStorage
     {
         private readonly List<Role> roles;
         private const string nameSave = "roles";
@@ -35,7 +33,7 @@ namespace OnlineShopWebApp
 
         public void Remove(string name)
         {
-            roles.RemoveAll(x=>x.Name == name);
+            roles.RemoveAll(x => x.Name == name);
             JsonStorage.WriteToStorage(roles);
         }
     }

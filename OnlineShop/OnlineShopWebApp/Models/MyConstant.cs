@@ -20,7 +20,7 @@ namespace OnlineShopWebApp.Models
 
         public static Guid DefaultBuyerIdIsNull(Guid buyerId)
         {
-            
+
             if (buyerId == Guid.Parse("00000000-0000-0000-0000-000000000000"))
             {
                 return defaultBuyerId;

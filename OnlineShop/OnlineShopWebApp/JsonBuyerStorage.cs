@@ -1,9 +1,7 @@
-﻿using System;
-using Newtonsoft.Json;
-using OnlineShopWebApp.Interfase;
+﻿using OnlineShopWebApp.Interfase;
 using OnlineShopWebApp.Models;
+using System;
 using System.Collections.Generic;
-using System.IO;
 
 namespace OnlineShopWebApp
 {
@@ -17,7 +15,7 @@ namespace OnlineShopWebApp
         {
             buyers = JsonStorage.ReadToStorage<Buyer>();
         }
-        
+
         public void AddProductInCart(Product product, Guid buyerId)
         {
             var buyer = FindBuyer(buyerId);
@@ -103,12 +101,12 @@ namespace OnlineShopWebApp
             return null;
         }
 
-        public void UpdateOrderDetails(OrderItem newOrder)
+        public void UpdateOrderStatus(OrderItem newOrder)
         {
             var order = FindOrderItem(newOrder.Id);
             order.Status = newOrder.Status;
             JsonStorage.WriteToStorage(buyers);
         }
-        
+
     }
 }
