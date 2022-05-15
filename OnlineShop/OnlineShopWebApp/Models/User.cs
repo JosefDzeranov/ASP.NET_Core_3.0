@@ -1,9 +1,11 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System;
+using System.ComponentModel.DataAnnotations;
 
 namespace OnlineShopWebApp.Models
 {
     public class User
     {
+        public Guid Id { get; set; } = Guid.NewGuid();
         [Required(ErrorMessage ="не указано имя")]
         public string Name { get; set; }
 
@@ -20,10 +22,13 @@ namespace OnlineShopWebApp.Models
         [Compare("Password", ErrorMessage = "пароли не совпадают")]
         public string ConfirmedPassword { get; set; }
 
+        public UserActions Actions { get; set; }
+
         public User(string login, string password)
         {
             Login = login;
             Password = password;
+            Id = Guid.NewGuid();
         }
 
         public User()

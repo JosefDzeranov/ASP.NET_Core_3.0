@@ -1,5 +1,6 @@
 ﻿using Newtonsoft.Json;
 using OnlineShopWebApp.Models;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -57,6 +58,11 @@ namespace OnlineShopWebApp
             }
 
             return registredUsers;
+        }
+
+        public User GetUserById(Guid id)
+        {
+            return registredUsers.Find(x => x.Id == id);
         }
 
         public bool Compare(Authorization authorization)

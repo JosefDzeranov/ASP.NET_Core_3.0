@@ -1,0 +1,36 @@
+﻿@model User
+
+<div class="row">
+    @await Html.PartialAsync("Menu")
+
+    <div class="column">
+        <table>
+            <tr>
+                <th><h2>Пользователь @Model.Login</h2></th>
+            </tr>
+            <tr>
+                <td>Имя</td>
+                <td>@Model.Name </td>
+            </tr>
+            <tr>
+                <td>Фамилия</td>
+                <td>@Model.LastName </td>
+            </tr>
+            <tr>
+                <td>Логин</td>
+                <td>@Model.Login </td>
+            </tr>
+
+          <tr>
+            <td>
+                <select asp-for="Actions"
+                        asp-items="@Html.GetEnumSelectList<UserActions>()"
+                        class="form-control">
+                </select>
+            </td>
+            </tr>
+
+
+        </table>
+    </div>
+</div>

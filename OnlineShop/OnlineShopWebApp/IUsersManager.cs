@@ -1,4 +1,5 @@
 ﻿using OnlineShopWebApp.Models;
+using System;
 using System.Collections.Generic;
 
 namespace OnlineShopWebApp
@@ -8,8 +9,11 @@ namespace OnlineShopWebApp
         public void RegisterUser(Registration regInfo);
 
         public void SaveNewUser(User user);
-                   
-        public  List<User> GetRegistredUsers();
+
+        public List<User> GetRegistredUsers();
         public bool Compare(Authorization authorization);
+
+        public User GetUserById(Guid id);
+
     }
 }

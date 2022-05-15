@@ -79,6 +79,21 @@ namespace OnlineShopWebApp.Controllers
            
         }
 
+        public IActionResult ShowUser(Guid id)
+        {
+            var user = usersManager.GetUserById(id);
+            if (user != null)
+            {
+                return View(user);
+            }
+            else
+            {
+                return RedirectToAction("Users");
+            }
+
+
+        }
+
         public IActionResult Roles()
         {
             var roles = rolesManager.Roles;
