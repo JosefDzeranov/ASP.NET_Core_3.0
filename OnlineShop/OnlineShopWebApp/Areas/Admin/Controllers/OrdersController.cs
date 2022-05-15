@@ -20,17 +20,17 @@ namespace OnlineShopWebApp.Areas.Admin.Controllers
             var orders = buyerStorage.CollectAllOrders();
             return View(orders);
         }
-        public IActionResult DetailsOrder(Guid orderId)
+        public IActionResult Details(Guid orderId)
         {
             var order = buyerStorage.FindOrderItem(orderId);
             return View(order);
         }
         [HttpPost]
-        public IActionResult SaveDetailsOrder(OrderItem newOrder)
+        public IActionResult SaveDetails(OrderItem newOrder)
         {
             buyerStorage.UpdateOrderStatus(newOrder);
             var orderId = newOrder.Id;
-            return RedirectToAction("DetailsOrder", new { orderId });
+            return RedirectToAction("Details", new { orderId });
         }
         
     }

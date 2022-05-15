@@ -8,37 +8,37 @@ namespace OnlineShopWebApp.Areas.Admin.Controllers
     [Area("Admin")]
     public class ProductsController : Controller
     {
-        private readonly IProductStorage productStorage;
+        private readonly IProductStorage ProductStorage;
         public ProductsController(IProductStorage productStorage)
         {
-            this.productStorage = productStorage;
+            this.ProductStorage = productStorage;
         }
 
         public IActionResult Index()
         {
-            var products = productStorage.Products;
+            var products = ProductStorage.Products;
             return View(products);
         }
 
-        public IActionResult DeleteProduct(Guid productId)
+        public IActionResult Delete(Guid productId)
         {
-            var product = productStorage.FindProduct(productId);
-            productStorage.DeleteProduct(product);
+            var product = ProductStorage.FindProduct(productId);
+            ProductStorage.DeleteProduct(product);
             return RedirectToAction("Index");
         }
 
-        public IActionResult CardUpdateProduct(Guid productId)
+        public IActionResult CardUpdate(Guid productId)
         {
-            var oldProduct = productStorage.FindProduct(productId);
+            var oldProduct = ProductStorage.FindProduct(productId);
             return View(oldProduct);
         }
 
         [HttpPost]
-        public IActionResult UpdateProduct(Product product)
+        public IActionResult Update(Product product)
         {
             if (ModelState.IsValid)
             {
-                productStorage.UpdateProduct(product);
+                ProductStorage.UpdateProduct(product);
                 return RedirectToAction("Index");
             }
             else return Content("errorValid");
@@ -49,11 +49,11 @@ namespace OnlineShopWebApp.Areas.Admin.Controllers
         }
 
         [HttpPost]
-        public IActionResult AddNewProduct(Product product)
+        public IActionResult AddNew(Product product)
         {
             if (ModelState.IsValid)
             {
-                productStorage.AddNewProduct(product);
+                ProductStorage.AddNewProduct(product);
                 return RedirectToAction("Index");
             }
             return Content("errorValid");

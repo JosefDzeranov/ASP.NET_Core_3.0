@@ -3,7 +3,7 @@
 namespace OnlineShopWebApp.Areas.Admin.Controllers
 {
     [Area("Admin")]
-    public class AdminHomeController : Controller
+    public class HomeController : Controller
     {
         public IActionResult Index()
         {

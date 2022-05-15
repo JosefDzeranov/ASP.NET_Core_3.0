@@ -18,18 +18,18 @@ namespace OnlineShopWebApp.Areas.Admin.Controllers
             var roles = rolesStorage.GetAll();
             return View(roles);
         }
-        public IActionResult RemoveRole(string roleName)
+        public IActionResult Remove(string roleName)
         {
             rolesStorage.Remove(roleName);
             return RedirectToAction("Index");
         }
 
-        public IActionResult AddRole()
+        public IActionResult Add()
         {
             return View();
         }
         [HttpPost]
-        public IActionResult AddRole(Role role)
+        public IActionResult Add(Role role)
         {
             if (rolesStorage.TryGetByName(role.Name) != null)
             {
