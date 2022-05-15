@@ -10,6 +10,12 @@ namespace OnlineShopDB.Services
     public class ProductRepository : IProductRepository
     {
         private readonly OnlineShopContext onlineShopContext;
+
+        public ProductRepository(OnlineShopContext onlineShopContext)
+        {
+            this.onlineShopContext = onlineShopContext;
+        }
+
         //private List<Product> products = new List<Product>()
         //{
         //   new Product()

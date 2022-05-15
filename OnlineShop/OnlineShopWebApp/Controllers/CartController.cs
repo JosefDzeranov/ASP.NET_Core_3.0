@@ -28,7 +28,7 @@ namespace OnlineShopWebApp.Controllers
         {
 
             var product = productRepository.TryGetById(productId);
-            cartRepository.Add(product, Const.UserId);
+            //cartRepository.Add(product, Const.UserId);
 
             return RedirectToAction("Index");
         }
@@ -38,7 +38,7 @@ namespace OnlineShopWebApp.Controllers
 
 
             var product = productRepository.TryGetById(productId);
-            cartRepository.RemoveItem(product, Const.UserId);
+            //cartRepository.RemoveItem(product, Const.UserId);
 
             return RedirectToAction("Index");
         }

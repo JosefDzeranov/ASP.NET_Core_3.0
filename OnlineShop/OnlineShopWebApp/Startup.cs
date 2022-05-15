@@ -1,14 +1,12 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-<<<<<<< HEAD
 using OnlineShop.DB;
 using OnlineShop.DB.Services;
 using OnlineShopDB.Services;
-=======
->>>>>>> parent of a1df35e (adding connection string and service to startup.cs)
 using OnlineShopWebApp.Models;
 using OnlineShopWebApp.Services;
 using Serilog;
@@ -27,6 +25,10 @@ namespace OnlineShopWebApp
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            string connection = Configuration.GetConnectionString("online_shop");
+            services.AddDbContext<OnlineShopContext>(options =>
+            options.UseSqlServer(connection));
+            
             services.AddControllersWithViews();
             services.AddTransient<IProductRepository,ProductRepository>();
             services.AddSingleton<ICartRepository,CartRepository>();
