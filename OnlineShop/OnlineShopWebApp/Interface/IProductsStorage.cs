@@ -5,8 +5,6 @@ namespace OnlineShopWebApp.Interface
 {
     public interface IProductsStorage
     {
-        List<Product> GetAllFirst();
-
         List<Product> GetAll();
 
         Product TryGetProduct(int id);

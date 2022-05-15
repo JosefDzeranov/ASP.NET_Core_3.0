@@ -9,45 +9,26 @@ namespace OnlineShopWebApp.Models
 {
     public class ProductsStorage : IProductsStorage
     {
-        private readonly List<Product> products = new List<Product>()
+        public static string FilePath { get; } = @"Models\Products.json";
+
+        private static List<Product> products;
+
+        public ProductsStorage()
         {
-            new Product(0,"Составление документов, исков в суд", 5000, "Составление и оформление документов для подачи в суд", "/images/court.jpg"),
-            new Product(1,"Составление документов для регистрации/банкротства ЮЛ", 4000, "Составление документов для регистрации/банкротства ЮЛ","/images/bankruptcy.jpg"),
-            new Product(2,"Сопровождение и ведение гражданского дела в суде", 6000, "Сопровождение и ведение гражданского дела в суде","/images/civil_case.jpg"),
-            new Product(3,"Консультация по вопросам", 3000, "Консультация по вопросам","/images/law_consultation.jpg"),
-            new Product(4,"Анализ документов и договоров", 3000, "Правовая экспертиза документов и договоров","/images/examination_documents.jpg"),
-        };
-
-        public List<Product> GetAllFirst()
-        {
-            string currentFile = @"Models\Products.json";
-
-            if (!File.Exists(currentFile))
-            {
-                string obj = JsonConvert.SerializeObject(products, Formatting.Indented);
-                File.WriteAllText(@"Models\Products.json", obj);
-            }
-            List<Product> productsJson;
-
-            try
-            {
-                productsJson = DeserializeJsonProducts();
-            }
-            catch (Exception)
-            {
-                return null;
-            }
-
-            return productsJson;
+            products = GetAll();
         }
 
         public List<Product> GetAll()
         {
-            string currentFile = @"Models\Products.json";
-
-            if (!File.Exists(currentFile))
+            if (!File.Exists(FilePath))
             {
-                return null;
+                products.Add(new Product(0, "Составление документов, исков в суд", 5000, "Составление и оформление документов для подачи в суд", "/images/court.jpg"));
+                products.Add(new Product(1, "Составление документов для регистрации/банкротства ЮЛ", 4000, "Составление документов для регистрации/банкротства ЮЛ", "/images/bankruptcy.jpg"));
+                products.Add(new Product(2, "Сопровождение и ведение гражданского дела в суде", 6000, "Сопровождение и ведение гражданского дела в суде", "/images/civil_case.jpg"));
+                products.Add(new Product(3, "Консультация по вопросам", 3000, "Консультация по вопросам", "/images/law_consultation.jpg"));
+                products.Add(new Product(4, "Анализ документов и договоров", 3000, "Правовая экспертиза документов и договоров", "/images/examination_documents.jpg"));
+
+                return products;
             }
             List<Product> productsJson;
 
@@ -81,9 +62,7 @@ namespace OnlineShopWebApp.Models
 
         public List<Product> DeserializeJsonProducts()
         {
-            string currentFile = @"Models\Products.json";
-
-            var strFromReq = new StreamReader(currentFile).ReadToEnd();
+            var strFromReq = new StreamReader(FilePath).ReadToEnd();
 
             List<Product> productsJson = JsonConvert.DeserializeObject<List<Product>>(strFromReq);
 
@@ -101,21 +80,18 @@ namespace OnlineShopWebApp.Models
                 var product = productsJson.FirstOrDefault(x => x.Id == productId);
 
                 productsJson.Remove(product);
-
-
-                string currentFile = @"Models\Products.json";
-                
-                if (File.Exists(currentFile))
+            
+                if (File.Exists(FilePath))
                 {
                     GC.Collect();
                     GC.WaitForPendingFinalizers();
-                    File.Delete(currentFile);
+                    File.Delete(FilePath);
                 }
 
                 if (productsJson.Count != 0)
                 {
                     string obj = JsonConvert.SerializeObject(productsJson, Formatting.Indented);
-                    File.WriteAllText(@"Models\Products.json", obj);
+                    File.WriteAllText(FilePath, obj);
                 }
             }
             catch (Exception)
@@ -137,19 +113,17 @@ namespace OnlineShopWebApp.Models
                 product.Cost = newProduct.Cost;
                 product.Description = newProduct.Description;
 
-                string currentFile = @"Models\Products.json";
-
-                if (File.Exists(currentFile))
+                if (File.Exists(FilePath))
                 {
                     GC.Collect();
                     GC.WaitForPendingFinalizers();
-                    File.Delete(currentFile);
+                    File.Delete(FilePath);
                 }
 
                 if (productsJson.Count != 0)
                 {
                     string obj = JsonConvert.SerializeObject(productsJson, Formatting.Indented);
-                    File.WriteAllText(@"Models\Products.json", obj);
+                    File.WriteAllText(FilePath, obj);
                 }
             }
             catch (Exception)
@@ -163,13 +137,12 @@ namespace OnlineShopWebApp.Models
             List<Product> productsJson;
 
             productsJson = DeserializeJsonProducts();
-            string currentFile = @"Models\Products.json";
 
-            if (!File.Exists(currentFile))
+            if (!File.Exists(FilePath))
             {
                 GC.Collect();
                 GC.WaitForPendingFinalizers();
-                File.Delete(currentFile);
+                File.Delete(FilePath);
             }
 
             try
@@ -182,7 +155,7 @@ namespace OnlineShopWebApp.Models
                 if (productsJson.Count != 0)
                 {
                     string obj = JsonConvert.SerializeObject(productsJson, Formatting.Indented);
-                    File.WriteAllText(@"Models\Products.json", obj);
+                    File.WriteAllText(FilePath, obj);
                 }
             }
             catch (Exception)
