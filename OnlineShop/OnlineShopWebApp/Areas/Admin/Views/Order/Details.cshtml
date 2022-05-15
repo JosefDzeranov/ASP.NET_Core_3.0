@@ -11,9 +11,9 @@
             @await Html.PartialAsync("AdminMenuLeft")
         </div>
         <div class="col-7">
-            <h2>Orders</h2>
+            <h2>Order details</h2>
             <form method="post">
-                <table class="table">
+                <table class="table mt-4">
                     <tbody>
                         <tr>
                             <td>Date and time</td>
@@ -45,7 +45,7 @@
                         <tr>
                             <td>Status</td>
                             <td>
-                                <select class="form-control" asp-for="@Model.Status" asp-items="@Html.GetEnumSelectList<OrderStatus>()"></select>
+                                <select class="form-control form-control-sm" asp-for="@Model.Status" asp-items="@Html.GetEnumSelectList<OrderStatus>()"></select>
                             </td>
                         </tr>
                     </tbody>

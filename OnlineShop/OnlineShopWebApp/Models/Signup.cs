@@ -23,9 +23,11 @@ namespace OnlineShopWebApp.Models
         public string Email { get; set; }
 
         [Required]
+        [StringLength(50, MinimumLength = 4)]
         public string Password { get; set; }
 
         [Required]
+        [StringLength(50, MinimumLength = 4)]
         [Compare("Password")]
         public string ConfirmPassword { get; set; }
     }

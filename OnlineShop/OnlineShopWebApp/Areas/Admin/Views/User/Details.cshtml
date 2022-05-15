@@ -1,0 +1,53 @@
+﻿@using OnlineShopWebApp.Models;
+@model User
+
+@{
+    ViewData["Title"] = "User";
+}
+
+<div class="container">
+    <div class="row">
+        <div class="col-2">
+            @await Html.PartialAsync("AdminMenuLeft")
+        </div>
+        <div class="col-7">
+            <h2>User @Model.Email</h2>
+            <table class="table mt-4">
+                <tbody>
+                    <tr>
+                        <td>First name</td>
+                        <td>@Model.FirstName</td>
+                    </tr>
+                    <tr>
+                        <td>Last name</td>
+                        <td>@Model.LastName</td>
+                    </tr>
+                    <tr>
+                        <td>Phone number</td>
+                        <td>@Model.Phone</td>
+                    </tr>
+                    <tr>
+                        <td>Email (login)</td>
+                        <td>@Model.Email</td>
+                    </tr>
+                    <tr>
+                        <td>Role</td>
+                        <td>@Model.Role</td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td>
+                            <button class="btn dropdown-toggle btn-sm btn-outline-dark" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Actions</button>
+                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                <a class="dropdown-item" asp-area="Admin" asp-controller="User" asp-action="ChangePassword" asp-route-id="@Model.Id">Change password</a>
+                                <a class="dropdown-item" asp-area="Admin" asp-controller="User" asp-action="Edit" asp-route-id="@Model.Id">Edit user data</a>
+                                <a class="dropdown-item" asp-area="Admin" asp-controller="User" asp-action="EditRights" asp-route-id="@Model.Id">Edit access rights</a>
+                                <a class="dropdown-item" asp-area="Admin" asp-controller="User" asp-action="Remove" asp-route-id="@Model.Id">Remove user</a>
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

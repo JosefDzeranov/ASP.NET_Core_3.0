@@ -1,5 +1,6 @@
 ﻿using System;
 using OnlineShopWebApp.Models;
+using OnlineShopWebApp.Areas.Admin.Models;
 using System.Collections.Generic;
 using System.Linq;
 using System.Xml.Linq;
@@ -27,7 +28,7 @@ namespace OnlineShopWebApp
             xDoc.Save("Data/Users.xml");
         }
 
-        public User TryGetUserById(Guid id)
+        public User TryGetById(Guid id)
         {
             var user = GetAll().FirstOrDefault(user => user.Id == id);
             return user;
@@ -57,6 +58,19 @@ namespace OnlineShopWebApp
                 return false;
             }
             return true;
+        }
+
+        public void ChangePassword(Guid id, ChangePassword data)
+        {
+            var xDoc = XDocument.Load("Data/Users.xml");
+            var editUser = xDoc.Element("users")
+                               .Elements("user")
+                               .FirstOrDefault(u => Guid.Parse(u.Attribute("id").Value) == id);
+
+            var password = editUser.Element("password");
+            password.Value = data.Signup.Password;
+
+            xDoc.Save("Data/Users.xml");
         }
 
         public void Edit(User user)
