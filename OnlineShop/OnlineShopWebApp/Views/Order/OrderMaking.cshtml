@@ -10,35 +10,38 @@
 <form method="post" asp-action="Add">
     <div class="row">
         <div class="col text-center">
+            <div class="validation" asp-validation-summary="All"></div>
             <div>
-                <label>Имя</label>
+                <label asp-for="Name">Имя</label>
                 <div>
-                    <input type="text" name="name" />
+                    <input asp-for="Name" name="name" required minlength="2" maxlength="25" />
+                    <span asp-validation-for="Name"></span>
                 </div>
 
             </div>
             <div>
-                <label>Фамилия</label>
+                <label asp-for="LastName">Фамилия</label>
                 <div>
-                    <input type="text" name="lastname" />
+                    <input asp-for="LastName" name="lastname" required minlength="2" maxlength="25" />
+                    <span asp-validation-for="LastName"></span>
                 </div>
             </div>
             <div>
                 <label>E-mail</label>
                 <div>
-                    <input type="email" name="mail" />
+                    <input type="email" name="mail" required />
                 </div>
             </div>
             <div>
                 <label>Телефон</label>
                 <div>
-                    <input type="tel" name="phone" />
+                    <input type="tel" pattern="\d{4}-\d{3}-\d{4}" name="phone" required />
                 </div>
             </div>
             <div>
                 <label>Адрес</label>
                 <div>
-                    <input type="text" name="adress" />
+                    <input type="text" name="adress" required />
                 </div>
             </div>
         </div>
@@ -47,7 +50,6 @@
         <input type="submit" class="btn btn-dark" value="Оформить заказ" />
     </div>
 </form>
-
 <div>
     @Html.ActionLink("Назад в корзину", "Index", "Cart")
 </div>
