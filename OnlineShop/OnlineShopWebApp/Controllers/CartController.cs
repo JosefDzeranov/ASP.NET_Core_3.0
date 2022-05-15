@@ -21,33 +21,36 @@ namespace OnlineShopWebApp.Controllers
         public IActionResult Index()
         {
             var cartDb = cartRepository.TryGetByUserId(Const.UserId);
-
-            var cartViewModel = new CartViewModel
+            if(cartDb != null)
             {
-                Id = cartDb.Id,
-                Items = new List<CartItemViewModel>(),
-                UserId = cartDb.UserId
-            };
-            foreach (var item in cartDb.Items)
-            {
-                var itemViewModel = new CartItemViewModel
+                var cartViewModel = new CartViewModel
                 {
-                    Id = item.Id,
-                    Product = new ProductViewModel
-                    {
-                        Id = item.Product.Id,
-                        Name = item.Product.Name,
-                        Description = item.Product.Description,
-                        Cost = item.Product.Cost,
-                        ImgPath = item.Product.ImgPath
-
-                    },
-                    Quantinity = item.Quantinity,
-
+                    Id = cartDb.Id,
+                    Items = new List<CartItemViewModel>(),
+                    UserId = cartDb.UserId
                 };
-                cartViewModel.Items.Add(itemViewModel);
+                foreach (var item in cartDb.Items)
+                {
+                    var itemViewModel = new CartItemViewModel
+                    {
+                        Id = item.Id,
+                        Product = new ProductViewModel
+                        {
+                            Id = item.Product.Id,
+                            Name = item.Product.Name,
+                            Description = item.Product.Description,
+                            Cost = item.Product.Cost,
+                            ImgPath = item.Product.ImgPath
+
+                        },
+                        Quantinity = item.Quantinity,
+
+                    };
+                    cartViewModel.Items.Add(itemViewModel);
+                }
+                return View(cartViewModel);
             }
-            return View(cartViewModel);
+            return View();
         }
 
         public IActionResult Add(Guid productId)
@@ -61,21 +64,12 @@ namespace OnlineShopWebApp.Controllers
 
         public IActionResult Remove(Guid productId)
         {
-
-
-            //var product = productRepository.TryGetById(productId);
             cartRepository.RemoveItem(productId, Const.UserId);
-
             return RedirectToAction("Index");
         }
         public IActionResult RemoveAll()
         {
-
-
-
             cartRepository.Clear(Const.UserId);
-
-
             return RedirectToAction("Index");
         }
     }

@@ -87,10 +87,10 @@ namespace OnlineShop.DB.Services
                     existingCartItem.Quantinity -= 1;
                     if (existingCartItem.Quantinity == 0)
                     {
-                        existingCart.Items.Remove(existingCartItem);
-                        onlineShopContext.Carts.Update(existingCart);
-                        onlineShopContext.SaveChanges();
+                        existingCart.Items.Remove(existingCartItem);  
                     }
+                    onlineShopContext.Carts.Update(existingCart);
+                    onlineShopContext.SaveChanges();
                 }
             }
             if (existingCart.Items.Count == 0)
