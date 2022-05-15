@@ -1,5 +1,6 @@
 ﻿[
   {
+    "ConfirmedPassword": null,
     "LastName": null,
     "Login": "asd",
     "Name": null,
@@ -9,18 +10,28 @@
     "Name": null,
     "LastName": null,
     "Login": "aaaa",
-    "Password": "aaaa"
+    "Password": "aaaa",
+    "ConfirmedPassword": null
   },
   {
     "Name": null,
     "LastName": null,
     "Login": "asd",
-    "Password": "asd"
+    "Password": "asd",
+    "ConfirmedPassword": null
   },
   {
     "Name": null,
     "LastName": null,
     "Login": "bbb",
-    "Password": "bbb"
+    "Password": "bbb",
+    "ConfirmedPassword": null
+  },
+  {
+    "Name": "Val",
+    "LastName": "asfda",
+    "Login": "asd",
+    "Password": "asd",
+    "ConfirmedPassword": "asd"
   }
 ]

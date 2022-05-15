@@ -1,0 +1,43 @@
+﻿@model User
+
+<form method="post">
+
+    <h2>Добавление нового пользователя:</h2>
+
+    <div>
+        <label asp-for="Name"></label><br />
+        <input asp-for="Name"/>
+        <span asp-validation-for="Name"></span>
+    </div>
+    <div>
+        <label asp-for="LastName"></label><br />
+        <input asp-for="LastName"/>
+        <span asp-validation-for="LastName"></span>
+    </div>
+    <div>
+        <label asp-for="Login"></label><br />
+        <input asp-for="Login"/>
+        <span asp-validation-for="Login"></span>
+    </div>
+    <div>
+        <label asp-for="Password"></label><br />
+        <input asp-for="Password"/>
+        <span asp-validation-for="Password"></span>
+    </div>
+    <div>
+        <label asp-for="ConfirmedPassword"></label><br />
+        <input asp-for="ConfirmedPassword"/>
+        <span asp-validation-for="ConfirmedPassword"></span>
+    </div><br />
+
+
+
+
+    <button class="btn btn-dark" type="submit" asp-area="Admin" asp-controller="Administration" asp-action="SaveNewUser">Добавить пользователя</button>
+
+
+</form> 
+
+@section Scripts{
+    @await Html.PartialAsync("_ValidationScriptsPartial")
+}

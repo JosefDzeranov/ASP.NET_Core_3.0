@@ -56,6 +56,28 @@ namespace OnlineShopWebApp.Controllers
             var users = usersManager.GetRegistredUsers();
             return View(users);
         }
+        public IActionResult AddNewUser()
+        {
+            
+            return View();
+        }
+
+        [HttpPost]
+        public IActionResult SaveNewUser(User user)
+        {
+            if (ModelState.IsValid)
+            {
+                usersManager.SaveNewUser(user);
+
+                return View("SaveAddedUser",user);
+            }
+            else
+            {
+                return RedirectToAction("AddNewUser");
+            }
+
+           
+        }
 
         public IActionResult Roles()
         {

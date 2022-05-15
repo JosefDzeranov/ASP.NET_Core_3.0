@@ -26,6 +26,20 @@ namespace OnlineShopWebApp
 
         }
 
+        public void SaveNewUser(User user)
+        {
+            registredUsers = GetRegistredUsers();
+            registredUsers.Add(user);
+
+            var jsonData = JsonConvert.SerializeObject(registredUsers);
+
+            using (StreamWriter sw = new StreamWriter(path, false, System.Text.Encoding.UTF8))
+            {
+                sw.WriteLine(jsonData);
+            }
+
+        }
+
         public List<User> GetRegistredUsers()
         {
             string data = string.Empty;
