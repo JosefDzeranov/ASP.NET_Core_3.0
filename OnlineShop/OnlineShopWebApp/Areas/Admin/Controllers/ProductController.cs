@@ -55,8 +55,15 @@ namespace OnlineShopWebApp.Areas.Admin.Controllers
         public IActionResult EditProduct(Guid id)
         {
             var product = productRepository.TryGetById(id);
-
-            return View(product);
+            var productViewModel = new ProductViewModel
+            {
+                Id = product.Id,
+                Name = product.Name,
+                Cost = product.Cost,
+                Description = product.Description,
+                ImgPath = product.ImgPath
+            };
+            return View(productViewModel);
         }
         [HttpPost]
         public IActionResult EditProduct(ProductViewModel product)
