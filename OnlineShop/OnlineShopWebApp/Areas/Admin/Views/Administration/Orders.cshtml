@@ -25,7 +25,7 @@
                 @for (int i = 0; i < Model.Count; i++)
                 {
                     <tr>
-                        <td><a class="text" href="/administration/EditOrder/@Model[i].Id" role="button">Заказ № @(i+1)</a> </td>
+                        <td><a class="text" href="/admin/administration/EditOrder/@Model[i].Id" role="button">Заказ № @(i+1)</a> </td>
                         <td>@Model[i].Cart.CartCost</td>
                         <td>@Model[i].Status</td>
                         <td>@Model[i].OrderData.Name</td>
