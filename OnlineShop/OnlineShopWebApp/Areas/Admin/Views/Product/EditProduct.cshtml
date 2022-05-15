@@ -12,10 +12,10 @@
     <div class="row text-center">
         <div class="col-4 mx-auto">
                 <h2>Введите данные продукта</h2>
+            <form asp-action="EditProduct" asp-area="admin" asp-controller="Product">
                 <div>
                     <input class="form-control" rows="1" name="id" hidden value="@Model.Id">
                 </div>
-            <form asp-action="EditProduct" asp-controller="Admin">
                 <div class="mb-3">
                     <input class="form-control" asp-for="Name" placeholder="Введите новое название продукта" value="@Model.Name">
                     <span asp-validation-for="Name"></span>
@@ -29,7 +29,7 @@
                     <span asp-validation-for="Description"></span>
                 </div>
                 <div class="mb-3">
-                    <button type="submit" class="btn btn-outline-dark" asp-area="admin" asp-controller="product" asp-action="editProduct">Добавить отредактированный продукт</button>
+                    <button type="submit" class="btn btn-outline-dark" asp-area="admin" asp-controller="product" asp-action="editproduct">Добавить отредактированный продукт</button>
                 </div>
             </form>
         </div>

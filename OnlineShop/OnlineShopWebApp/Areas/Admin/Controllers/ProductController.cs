@@ -47,6 +47,21 @@ namespace OnlineShopWebApp.Areas.Admin.Controllers
             return View(product);
         }
 
+        [HttpPost]
+        public IActionResult EditProduct(Product product)
+        {
+            if (ModelState.IsValid)
+            {
+                _productBase.Edit(product);
+                return RedirectToAction("products", "product");
+            }
+            else
+            {
+                return View("EditProduct", product);
+            }
+
+        }
+
         public IActionResult DeleteProduct(int productId)
         {
             _productBase.Delete(productId);
