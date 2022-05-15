@@ -16,8 +16,17 @@ namespace OnlineShopWebApp.Models
 
         public List<OrderItem> Items { get; set; }
 
-        public int CountItems { get { return Items.Sum(x => x.Count); } }
+        public int CountItems { get { return Items?.Sum(x => x.Count) ?? 0; } }
 
-        public decimal CostOrder { get { return Items.Sum(x => x.Cost); } }
+        public decimal CostOrder { get { return Items?.Sum(x => x.Cost) ?? 0; } }
+
+        public OrderState State { get; set; }
+
+        public Order()
+        {
+            Id = Guid.NewGuid();
+            State = OrderState.Created;
+            OrderDateTime = DateTime.Now;
+        }
     }
 }

@@ -16,6 +16,11 @@ namespace OnlineShopWebApp.Models
             return orders.FirstOrDefault(x => x.UserId == userId);
         }
 
+        public List<Order> TryGetAllOrders()
+        {
+            return orders;
+        }
+
         public List<Order> TryGetOrderAllByUserId(string userId)
         {
             return orders.FindAll(x => x.UserId == userId);
@@ -52,6 +57,17 @@ namespace OnlineShopWebApp.Models
         public void RemoveCartUser()
         {
             carts.Clear();
+        }
+
+        public Order GetOrder(Guid orderId)
+        {
+            return orders.FindLast(x => x.Id == orderId);
+        }
+
+        public void SaveEditedOrder(Guid orderId, OrderState state)
+        {
+            var order = orders.Find(x => x.Id == orderId);
+            order.State = state;
         }
     }
 }

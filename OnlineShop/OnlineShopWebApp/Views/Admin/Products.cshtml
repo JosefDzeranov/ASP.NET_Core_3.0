@@ -13,14 +13,14 @@
             <div class="404">
                 <h2 align="center">Услуг нет.</h2>
                 <img class="card-img-top" src="/images/404.jpg" />
-                 <a href="/Admin/add">Добавить новый продукт</a>
+                 <a href="/Admin/AddProduct">Добавить новый продукт</a>
             </div>
         }
         else
         {
             <div class="row">
                 <div class="col">
-                     <a href="/Admin/Add">Добавить новый продукт</a>
+                     <a href="/Admin/AddProduct">Добавить новый продукт</a>
                     <table class="table">
                         <thead>
                             <tr>
@@ -36,11 +36,11 @@
                             {
                                 
                                 <tr>
-                                    <td>@product.Id</td>
+                                    <td>@(product.Id + 1)</td>
                                     <td><a href="/product/index/@product.Id">@product.Name</a></td>
                                     <td>@product.Cost рублей</td>
-                                    <td><a class="btn btn-light" href="/admin/edit?productId=@product.Id" width="20px" role="button">Редактировать</a></td>
-                                    <td><a class="btn btn-light" href="/admin/delete?productId=@product.Id" width="20px" role="button">Удалить</a></td>
+                                    <td><a class="btn btn-light" asp-controller="Admin" asp-action="EditProduct" asp-route-id="@product.Id" width="20px" role="button">Редактировать</a></td>
+                                    <td><a class="btn btn-light" asp-controller="Admin" asp-action="DeleteProduct" asp-route-id="@product.Id" width="20px" role="button">Удалить</a></td>
                                 </tr>
                             }
                         </tbody>

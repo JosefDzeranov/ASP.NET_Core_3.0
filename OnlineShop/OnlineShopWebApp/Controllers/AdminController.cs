@@ -1,20 +1,27 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using OnlineShopWebApp.Interface;
 using OnlineShopWebApp.Models;
+using System;
 
 namespace OnlineShopWebApp.Controllers
 {
     public class AdminController : Controller
     {
         private readonly IProductsStorage productsStorage;
-        public AdminController(IProductsStorage productsStorage)
+        private readonly IOrdersStorage ordersStorage;
+
+        public AdminController(IProductsStorage productsStorage, IOrdersStorage ordersStorage)
         {
             this.productsStorage = productsStorage;
+
+            this.ordersStorage = ordersStorage;
         }
 
         public IActionResult Orders()
         {
-            return View();
+            var orders = ordersStorage.TryGetAllOrders();
+            return View(orders);
         }
 
         public IActionResult Customers()
@@ -33,8 +40,13 @@ namespace OnlineShopWebApp.Controllers
             return View(products);
         }
 
-        public IActionResult Edit(int productId)
+        public IActionResult EditProduct(int productId)
         {
+            if (!ModelState.IsValid)
+            {
+                return View();
+            }
+
             var product = productsStorage.TryGetProduct(productId);
             return View(product);
         }
@@ -46,23 +58,42 @@ namespace OnlineShopWebApp.Controllers
             return View();
         }
 
-        public IActionResult Delete(int productId)
+        public IActionResult DeleteProduct(int productId)
         {
             productsStorage.Delete(productId);
 
             return RedirectToAction("Products");
         }
 
-        public IActionResult Add()
+        public IActionResult AddProduct()
         {
             return View();
         }
 
         [HttpPost]
-        public IActionResult Add(Product product)
+        public IActionResult AddProduct(Product product)
         {
+            if (!ModelState.IsValid)
+            {
+                return View();
+            }
             productsStorage.Add(product);
             return RedirectToAction("Products");
+        }
+
+        public IActionResult GetOrder(Guid id)
+        {
+            //SelectList state = new SelectList(OrderState , "Order", "State");
+            //ViewBag.OrderState = state;
+            var order = ordersStorage.GetOrder(id);
+            return View(order);
+        }
+
+        [HttpPost]
+        public IActionResult SaveEditedOrder(Guid orderId, OrderState state)
+        {
+            ordersStorage.SaveEditedOrder(orderId, state);
+            return RedirectToAction("GetOrder","Admin", new { orderId });
         }
     }
 }
