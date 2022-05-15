@@ -14,7 +14,7 @@ using Serilog;
 namespace OnlineShopWebApp
 {
     public class Startup
-    { 
+    {
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
@@ -27,10 +27,15 @@ namespace OnlineShopWebApp
         {
             string connection = Configuration.GetConnectionString("online_shop");
             services.AddDbContext<OnlineShopContext>(options =>
-            options.UseSqlServer(connection));
+            {
+               options
+              .UseLazyLoadingProxies()
+              .UseSqlServer(connection);
+            });
+
             services.AddControllersWithViews();
-            services.AddTransient<IProductRepository,ProductRepository>();
-            services.AddSingleton<ICartRepository,CartRepository>();
+            services.AddTransient<IProductRepository, ProductRepository>();
+            services.AddTransient<ICartRepository, CartRepository>();
             services.AddSingleton<IOrderRepository, OrderRepository>();
             services.AddSingleton<IFavoriteRepository, FavoriteRepository>();
             services.AddSingleton<IRoleRepository, RoleRepository>();
