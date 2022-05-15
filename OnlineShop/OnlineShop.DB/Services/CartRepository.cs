@@ -40,7 +40,7 @@ namespace OnlineShop.DB.Services
                     }
                 };
                 onlineShopContext.Carts.Add(newCart);
-                onlineShopContext.SaveChanges();
+
             }
             else
             {
@@ -48,21 +48,25 @@ namespace OnlineShop.DB.Services
                 if (existingCartItem != null)
                 {
                     existingCartItem.Quantinity += 1;
+
                 }
                 else
                 {
-                    existingCart.Items.Add(new CartItem
+                    var carItem = new CartItem
                     {
                         Id = Guid.NewGuid(),
                         Product = product,
                         Quantinity = 1
-                    });
+
+                    };
+                    onlineShopContext.CartItems.Add(carItem);
+                    existingCart.Items.Add(carItem);
 
                 }
                 onlineShopContext.Carts.Update(existingCart);
-                onlineShopContext.SaveChanges();
             }
 
+            onlineShopContext.SaveChanges();
         }
 
         public void Clear(string userId)
@@ -87,7 +91,7 @@ namespace OnlineShop.DB.Services
                     existingCartItem.Quantinity -= 1;
                     if (existingCartItem.Quantinity == 0)
                     {
-                        existingCart.Items.Remove(existingCartItem);  
+                        existingCart.Items.Remove(existingCartItem);
                     }
                     onlineShopContext.Carts.Update(existingCart);
                     onlineShopContext.SaveChanges();
