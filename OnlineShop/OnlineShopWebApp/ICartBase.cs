@@ -4,9 +4,9 @@ namespace OnlineShopWebApp
 {
     public interface ICartBase
     {
-        void Add(Product product, string userId);
-        Cart TryGetByUserId(string userId);
-        void DecreaseAmount(int productId, string userId);
-        void Delete(string userId);
+        void Add(Product product, int userId);
+        Cart TryGetByUserId(int userId);
+        void DecreaseAmount(int productId, int userId);
+        void Delete(int userId);
     }
 }

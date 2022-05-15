@@ -3,7 +3,7 @@
     "Id": 3,
     "Cart": {
       "Id": "f973d115-e32f-4224-ba41-aa8653a8e632",
-      "UserId": "1",
+      "UserId": 1,
       "Items": [
         {
           "Id": "fdcc9689-b5d4-4811-ba3b-f9be26e27508",
@@ -34,7 +34,7 @@
     "Id": 4,
     "Cart": {
       "Id": "98187be1-56c2-446b-9180-3c3d254f2a73",
-      "UserId": "1",
+      "UserId": 1,
       "Items": [
         {
           "Id": "8d156533-f178-447b-a3a9-635e6d0dc1e5",
@@ -60,5 +60,36 @@
     },
     "Status": 1,
     "CreatedDate": "2022-05-05T00:06:41.5138796+03:00"
+  },
+  {
+    "Id": 5,
+    "Cart": {
+      "Id": "eabca556-d436-4c8d-88dc-00d9648533e9",
+      "UserId": 1,
+      "Items": [
+        {
+          "Id": "fc168520-220c-45cc-b560-1ee0ff4aca25",
+          "Product": {
+            "Id": 2,
+            "Name": "Кашемировый трикотаж, фиолетовый",
+            "Cost": 4200,
+            "Description": "Ширина 120 см, Состав: эластан, кашемир, Производитель - Италия",
+            "ImgPath": "/img/cashemir_vi.jpg"
+          },
+          "Amount": 6,
+          "Cost": 25200
+        }
+      ],
+      "Cost": 25200,
+      "Amount": 6
+    },
+    "DeliveryInfo": {
+      "AdressToDelivery": "2",
+      "NameOfClient": "Михаил Загрёбкин",
+      "Phone": "2",
+      "Email": "Firokikidreamtek@yandex.ru"
+    },
+    "Status": 1,
+    "CreatedDate": "2022-05-15T12:30:42.76135+03:00"
   }
 ]

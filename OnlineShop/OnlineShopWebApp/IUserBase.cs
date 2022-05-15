@@ -1,15 +1,12 @@
 ﻿using OnlineShopWebApp.Models;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace OnlineShopWebApp
 {
     public interface IUserBase
     {
+        void Add(User user);
         IEnumerable<User> AllUsers();
-
+        User TryGetById(int userId);
     }
 }

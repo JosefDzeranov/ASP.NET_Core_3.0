@@ -18,7 +18,6 @@ namespace OnlineShopWebApp
             WriteIndented = true
         };
 
-
         public int NextProductId()
         {
             var maxIdProduct = AllProducts().Select(x => x.Id).Max();
