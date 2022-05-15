@@ -9,7 +9,7 @@
     <div class="row text-center">
         <div class="col-4 mx-auto">
             <h2>Sign in</h2>
-            <form asp-action="Signin" asp-controller="User" >
+            <form asp-action="Signin" asp-controller="Account" >
                 <div class="validation" asp-validation-summary="ModelOnly"></div>
                 <div class="mb-3">
                     <input class="form-control" asp-for="Email" placeholder="Email">
@@ -26,11 +26,11 @@
                     </label>
                 </div>
                 <div class="mb-3">
-                    <button type="submit" class="btn btn-outline-dark btn-sm active" asp-controller="User" asp-action="Signin">Sign in</button>
+                    <button type="submit" class="btn btn-outline-dark btn-sm active" asp-controller="Account" asp-action="Signin">Sign in</button>
                 </div>
             </form>
             <div class="mb-3">
-                Don't have an account? <a asp-controller="User" asp-action="Signup">Sign up</a>
+                Don't have an account? <a asp-controller="Account" asp-action="Signup">Sign up</a>
             </div>
         </div>
     </div>

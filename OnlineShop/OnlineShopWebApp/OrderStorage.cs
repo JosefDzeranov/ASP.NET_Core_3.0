@@ -10,6 +10,7 @@ namespace OnlineShopWebApp
 {
     public class OrderStorage : IOrderStorage
     {
+        private const string ORDERS = @"Data/Orders.xml";
         private List<Order> _orders = new List<Order>();
 
         public Order TryGetById(Guid id)
@@ -24,7 +25,7 @@ namespace OnlineShopWebApp
             _orders.Add(newOrder);
 
             var xmlSerializer = new XmlSerializer(typeof(List<Order>));
-            using (FileStream fs = new FileStream("Data/Orders.xml", FileMode.OpenOrCreate))
+            using (FileStream fs = new FileStream(ORDERS, FileMode.OpenOrCreate))
             {
                 xmlSerializer.Serialize(fs, _orders);
             }
@@ -33,7 +34,7 @@ namespace OnlineShopWebApp
         public List<Order> GetOrderData()
         {
             var xmlSerializer = new XmlSerializer(typeof(List<Order>));
-            using (FileStream fs = new FileStream("Data/Orders.xml", FileMode.OpenOrCreate))
+            using (FileStream fs = new FileStream(ORDERS, FileMode.OpenOrCreate))
             {
                 _orders = xmlSerializer.Deserialize(fs) as List<Order>;
             }
@@ -42,7 +43,7 @@ namespace OnlineShopWebApp
 
         public void UpdateStatus(Guid id, OrderStatus newStatus)
         {
-            var xDoc = XDocument.Load("Data/Orders.xml");
+            var xDoc = XDocument.Load(ORDERS);
             var updateOrder = xDoc.Element("ArrayOfOrder")
                               .Elements("Order")
                               .FirstOrDefault(order => Guid.Parse(order.Element("Id").Value) == id);
@@ -50,7 +51,7 @@ namespace OnlineShopWebApp
             var orderStatus = updateOrder.Element("Status");
             orderStatus.Value = newStatus.ToString();
 
-            xDoc.Save("Data/Orders.xml");
+            xDoc.Save(ORDERS);
         }
     }
 }

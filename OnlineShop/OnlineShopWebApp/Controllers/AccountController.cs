@@ -3,10 +3,10 @@ using OnlineShopWebApp.Models;
 
 namespace OnlineShopWebApp.Controllers
 {
-    public class UserController : Controller
+    public class AccountController : Controller
     {
         private readonly IUserStorage _userStorage;
-        public UserController(IUserStorage userStorage)
+        public AccountController(IUserStorage userStorage)
         {
             _userStorage = userStorage;
         }

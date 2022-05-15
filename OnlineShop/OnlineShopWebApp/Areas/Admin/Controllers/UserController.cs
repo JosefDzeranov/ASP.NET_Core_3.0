@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using OnlineShopWebApp.Models;
 using OnlineShopWebApp.Areas.Admin.Models;
+using OnlineShopWebApp.Areas.Admin.Models.Attributes;
 
 namespace OnlineShopWebApp.Areas.Admin.Controllers
 {
@@ -47,7 +48,9 @@ namespace OnlineShopWebApp.Areas.Admin.Controllers
             var user = _userStorage.TryGetById(id);
             var data = new ChangePassword()
             {
-                Id = user.Id
+                Id = user.Id,
+                FirstName = user.FirstName,
+                LastName = user.LastName
             };
             return View(data);
         }
@@ -60,7 +63,7 @@ namespace OnlineShopWebApp.Areas.Admin.Controllers
                 _userStorage.ChangePassword(data);
                 return View("Success");
             }
-            return View();
+            return View(data);
         }
 
         public IActionResult Edit(Guid id)
@@ -70,7 +73,7 @@ namespace OnlineShopWebApp.Areas.Admin.Controllers
         }
 
         [HttpPost]
-        public IActionResult Save(User user)
+        public IActionResult Edit(User user)
         {
             if (ModelState.IsValid)
             {

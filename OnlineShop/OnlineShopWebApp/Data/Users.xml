@@ -6,15 +6,7 @@
     <role>Customer</role>
     <phone>+79034562543</phone>
     <email>ku@ku.ru</email>
-    <password>Anton</password>
-  </user>
-  <user id="8f0bcee5-1b89-4b02-886a-3fea468a32ae">
-    <firstname>Ivan</firstname>
-    <lastname>Ivanov</lastname>
-    <role>Customer</role>
-    <phone>+79846321321</phone>
-    <email>ii@ii.ru</email>
-    <password>123</password>
+    <password>qqqq</password>
   </user>
   <user id="a16eb24b-03c5-4d04-b22f-35b65b72e151">
     <firstname>Petr</firstname>
@@ -22,6 +14,6 @@
     <role>Customer</role>
     <phone>+79872346543</phone>
     <email>pp@pp.ru</email>
-    <password>aaaa</password>
+    <password>qqqq</password>
   </user>
 </users>

@@ -87,17 +87,11 @@ namespace OnlineShopWebApp
             var lastName = editUser.Element("lastname");
             lastName.Value = user.LastName;
 
-            var role = editUser.Element("role");
-            role.Value = user.Role;
-
             var phone = editUser.Element("phone");
             phone.Value = user.Phone;
 
             var email = editUser.Element("email");
             email.Value = user.Email;
-
-            var password = editUser.Element("password");
-            password.Value = user.Password;
 
             xDoc.Save(USERS);
         }
