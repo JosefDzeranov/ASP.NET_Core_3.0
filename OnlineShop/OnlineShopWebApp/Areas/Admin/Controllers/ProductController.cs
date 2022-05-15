@@ -4,6 +4,7 @@ using OnlineShop.DB.Services;
 using OnlineShopWebApp.Models;
 using OnlineShopWebApp.Services;
 using System;
+using System.Collections.Generic;
 
 namespace OnlineShopWebApp.Areas.Admin.Controllers
 {
@@ -22,7 +23,22 @@ namespace OnlineShopWebApp.Areas.Admin.Controllers
 
             var products = productRepository.GetAll();
 
-            return View(products);
+            var productsViewModel = new List<ProductViewModel>();
+
+            foreach (var product in products)
+            {
+                var productViewModel = new ProductViewModel
+                {
+                    Id = product.Id,
+                    Name = product.Name,
+                    Cost = product.Cost,
+                    Description = product.Description,
+                    ImgPath = product.ImgPath,
+                };
+                productsViewModel.Add(productViewModel);
+            }
+
+            return View(productsViewModel);
         }
 
 

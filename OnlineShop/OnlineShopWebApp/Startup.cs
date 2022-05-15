@@ -28,7 +28,6 @@ namespace OnlineShopWebApp
             string connection = Configuration.GetConnectionString("online_shop");
             services.AddDbContext<OnlineShopContext>(options =>
             options.UseSqlServer(connection));
-            
             services.AddControllersWithViews();
             services.AddTransient<IProductRepository,ProductRepository>();
             services.AddSingleton<ICartRepository,CartRepository>();
