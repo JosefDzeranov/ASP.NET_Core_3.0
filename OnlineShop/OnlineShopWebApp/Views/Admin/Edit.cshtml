@@ -4,16 +4,19 @@
     <div class="row">
         @await Html.PartialAsync("AdminPanel")
         <div class="col text-center">
-            <h3>Реадктировать информацию об услуге</h3>
+            <h3>Редактировать информацию об услуге</h3>
             <input type="hidden" name="id" value="@Model.Id"/>
-            <label>Название</label>
-            <input type="text" name="name" value="@Model.Name" />
+            <label asp-for="Name">Название</label>
+            <input asp-for="Name" value="@Model.Name" />
+            <span asp-validation-for="Name"></span>
             <br />
-            <label>Цена</label>
-            <input type="text" name="cost" value="@Model.Cost" />
+            <label asp-for="Cost">Цена</label>
+            <input asp-for="Cost" value="@Model.Cost" />
+            <span asp-validation-for="Cost"></span>
             <br />
-            <label>Описание</label>
-            <input type="text" name="description" value="@Model.Description" />
+            <label asp-for="Description">Описание</label>
+            <input asp-for="Description" value="@Model.Description" />
+            <span asp-validation-for="Description"></span>
             <br />
             <button class="btn btn-dark" type="submit" asp-controller="Admin" asp-action="SaveEditedProduct" asp-route-productId="@Model.Id">Сохранить</button>
         </div>
