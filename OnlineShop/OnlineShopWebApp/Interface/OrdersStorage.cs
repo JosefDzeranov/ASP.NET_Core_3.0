@@ -11,6 +11,8 @@ namespace OnlineShopWebApp.Models
 
         private List<Cart> carts = new List<Cart>();
 
+        private List<Role> roles = new List<Role>();
+
         public Order TryGetOrderByUserId(string userId)
         {
             return orders.FirstOrDefault(x => x.UserId == userId);
@@ -68,6 +70,26 @@ namespace OnlineShopWebApp.Models
         {
             var order = orders.Find(x => x.Id == orderId);
             order.State = state;
+        }
+
+        public void AddRole(Role role)
+        {
+            roles.Add(role);
+        }
+
+        public List<Role> GetAllRoles()
+        {
+            return roles;
+        }
+
+        public void RemoveRole(string Name)
+        {
+            roles.RemoveAll(x => x.Name == Name);
+        }
+
+        public Role TryGetByRole(string Name)
+        {
+            return roles.FirstOrDefault(x => x.Name == Name);
         }
     }
 }

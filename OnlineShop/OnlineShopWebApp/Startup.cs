@@ -5,6 +5,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using OnlineShopWebApp.Interface;
 using OnlineShopWebApp.Models;
+using OnlineShopWebApp.Services;
 
 namespace OnlineShopWebApp
 {
@@ -25,6 +26,8 @@ namespace OnlineShopWebApp
             services.AddSingleton<ICartsStorage, CartsStorage>();
 
             services.AddSingleton<IOrdersStorage, OrdersStorage>();
+
+            services.AddSingleton<IRoleStorage, RoleStorage>();
 
             services.AddControllersWithViews(); 
         }

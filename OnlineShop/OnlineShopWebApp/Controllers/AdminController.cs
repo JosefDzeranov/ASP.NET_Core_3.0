@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc.Rendering;
 using OnlineShopWebApp.Interface;
 using OnlineShopWebApp.Models;
+using OnlineShopWebApp.Services;
 using System;
 
 namespace OnlineShopWebApp.Controllers
@@ -9,13 +10,18 @@ namespace OnlineShopWebApp.Controllers
     public class AdminController : Controller
     {
         private readonly IProductsStorage productsStorage;
+
         private readonly IOrdersStorage ordersStorage;
 
-        public AdminController(IProductsStorage productsStorage, IOrdersStorage ordersStorage)
+        private readonly IRoleStorage roleStorage;
+
+        public AdminController(IProductsStorage productsStorage, IOrdersStorage ordersStorage, IRoleStorage roleStorage)
         {
             this.productsStorage = productsStorage;
 
             this.ordersStorage = ordersStorage;
+
+            this.roleStorage = roleStorage;
         }
 
         public IActionResult Orders()
@@ -31,7 +37,8 @@ namespace OnlineShopWebApp.Controllers
 
         public IActionResult Roles()
         {
-            return View();
+            var roles = roleStorage.GetAllRoles();
+            return View(roles);
         }
 
         public IActionResult Products()
@@ -94,6 +101,33 @@ namespace OnlineShopWebApp.Controllers
         {
             ordersStorage.SaveEditedOrder(orderId, state);
             return RedirectToAction("GetOrder","Admin", new { orderId });
+        }
+
+        public IActionResult AddRole()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public IActionResult AddRole(Role role)
+        {
+            if (roleStorage.TryGetByRole(role.Name) != null)
+            {
+                ModelState.AddModelError("", "Роль с таким именем уже имеется");
+            }
+            if (ModelState.IsValid)
+            {
+                roleStorage.AddRole(role);
+                return RedirectToAction("Roles", "Admin");
+            }
+
+            return View(role);
+        }
+        public IActionResult DeleteRole(string name)
+        {
+            roleStorage.RemoveRole(name);
+
+            return RedirectToAction("Roles", "Admin");
         }
     }
 }
