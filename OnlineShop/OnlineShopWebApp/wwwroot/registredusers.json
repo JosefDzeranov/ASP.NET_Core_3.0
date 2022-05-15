@@ -1,1 +1,26 @@
-﻿[{"Login":"asd","Password":"asd","ConfirmedPassword":"asd"}]
+﻿[
+  {
+    "LastName": null,
+    "Login": "asd",
+    "Name": null,
+    "Password": "asd"
+  },
+  {
+    "Name": null,
+    "LastName": null,
+    "Login": "aaaa",
+    "Password": "aaaa"
+  },
+  {
+    "Name": null,
+    "LastName": null,
+    "Login": "asd",
+    "Password": "asd"
+  },
+  {
+    "Name": null,
+    "LastName": null,
+    "Login": "bbb",
+    "Password": "bbb"
+  }
+]

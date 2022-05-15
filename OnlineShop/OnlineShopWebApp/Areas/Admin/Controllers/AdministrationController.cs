@@ -10,12 +10,14 @@ namespace OnlineShopWebApp.Controllers
         private readonly IProductManager productManager;
         private readonly IOrderManager orderManager;
         private readonly IRolesManager rolesManager;
+        private readonly IUsersManager usersManager;
 
-        public AdministrationController(IProductManager productManager, IOrderManager orderManager, IRolesManager rolesManager)
+        public AdministrationController(IProductManager productManager, IOrderManager orderManager, IRolesManager rolesManager, IUsersManager usersManager)
         {
             this.productManager = productManager;
             this.orderManager = orderManager;
             this.rolesManager = rolesManager;
+            this.usersManager = usersManager;
         }
 
         public IActionResult Index()
@@ -51,7 +53,8 @@ namespace OnlineShopWebApp.Controllers
 
         public IActionResult Users()
         {
-            return View();
+            var users = usersManager.GetRegistredUsers();
+            return View(users);
         }
 
         public IActionResult Roles()

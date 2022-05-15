@@ -1,12 +1,4 @@
-﻿<style>
-    table, th, td, caption, tr {
-        border: 1px solid black;
-    }
-
-    table {
-        border-collapse: collapse;
-    }
-</style>
+﻿@model List<User>
 
 <div class="row">
     @await Html.PartialAsync("Menu")
@@ -14,11 +6,28 @@
     <div class="column">
         <table>
             <tr>
-                <th>Пользователи</th>
-
+                <th>Список пользователей</th>
             </tr>
             <tr>
+
+                <th>Логин (e-mail)</th>
+                <th>Имя</th>
+                <th>Фамилия</th>
+
             </tr>
+
+
+            @if (Model != null)
+            {
+                for (int i = 0; i < Model.Count; i++)
+                {
+                    <tr>
+                    <td>@Model[i].Login</td>
+                    <td>@Model[i].Name</td>
+                    <td>@Model[i].LastName</td>
+                    </tr>
+                }
+            }
             <tr></tr>
         </table>
     </div>

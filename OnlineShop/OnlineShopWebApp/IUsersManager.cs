@@ -3,10 +3,10 @@ using System.Collections.Generic;
 
 namespace OnlineShopWebApp
 {
-    public interface IRegAndAuthManager
+    public interface IUsersManager
     {
-        public void Register(Registration regInfo);
-        public  List<Registration> GetRegistredUsers();
+        public void RegisterUser(Registration regInfo);
+        public  List<User> GetRegistredUsers();
         public bool Compare(Authorization authorization);
     }
 }

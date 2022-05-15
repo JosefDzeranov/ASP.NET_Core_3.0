@@ -5,9 +5,9 @@ namespace OnlineShopWebApp.Controllers
 {
     public class AuthorizationController : Controller
     {
-        private readonly IRegAndAuthManager regAndAuthManager;
+        private readonly IUsersManager regAndAuthManager;
 
-        public AuthorizationController(IRegAndAuthManager regAndAuthManager)
+        public AuthorizationController(IUsersManager regAndAuthManager)
         {
             this.regAndAuthManager = regAndAuthManager;
         }

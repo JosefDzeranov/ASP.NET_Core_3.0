@@ -6,16 +6,16 @@ using System.Linq;
 
 namespace OnlineShopWebApp
 {
-    public class RegAndAuthManager : IRegAndAuthManager
+    public class UsersManager : IUsersManager
     {
         string path = @"wwwroot\registredusers.json";
 
-        private List<Registration> registredUsers = new List<Registration>();
+        private List<User> registredUsers = new List<User>();
 
-        public void Register(Registration regInfo)
+        public void RegisterUser(Registration regInfo)
         {
             registredUsers = GetRegistredUsers();
-            registredUsers.Add(regInfo);
+            registredUsers.Add(new User(regInfo.Login, regInfo.Password));
 
             var jsonData = JsonConvert.SerializeObject(registredUsers);
 
@@ -26,7 +26,7 @@ namespace OnlineShopWebApp
 
         }
 
-        public List<Registration> GetRegistredUsers()
+        public List<User> GetRegistredUsers()
         {
             string data = string.Empty;
             if (File.Exists(path))
@@ -35,11 +35,11 @@ namespace OnlineShopWebApp
                 {
                     data = sr.ReadToEnd();
                 }
-                registredUsers = JsonConvert.DeserializeObject<List<Registration>>(data);
+                registredUsers = JsonConvert.DeserializeObject<List<User>>(data);
             }
             else
             {
-                registredUsers = new List<Registration>();
+                registredUsers = new List<User>();
             }
 
             return registredUsers;
