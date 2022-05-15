@@ -9,11 +9,12 @@ namespace OnlineShopWebApp
 {
     public class UserStorage : IUserStorage
     {
+        private const string USERS = @"Data/Users.xml";
         private List<User> _users = new List<User>();
 
         public void Add(SignUp signup)
         {
-            var xDoc = XDocument.Load("Data/Users.xml");
+            var xDoc = XDocument.Load(USERS);
             var root = xDoc.Element("users");
             Guid id = Guid.NewGuid();
             root.Add(new XElement("user",
@@ -25,7 +26,7 @@ namespace OnlineShopWebApp
                          new XElement("email", signup.Email),
                          new XElement("password", signup.Password)));
 
-            xDoc.Save("Data/Users.xml");
+            xDoc.Save(USERS);
         }
 
         public User TryGetById(Guid id)
@@ -36,7 +37,7 @@ namespace OnlineShopWebApp
 
         public List<User> GetAll()
         {
-            var xDoc = XDocument.Load("Data/Users.xml");
+            var xDoc = XDocument.Load(USERS);
             _users = xDoc.Element("users")
                                .Elements("user")
                                .Select(user => new User(
@@ -60,22 +61,22 @@ namespace OnlineShopWebApp
             return true;
         }
 
-        public void ChangePassword(Guid id, ChangePassword data)
+        public void ChangePassword(ChangePassword data)
         {
-            var xDoc = XDocument.Load("Data/Users.xml");
+            var xDoc = XDocument.Load(USERS);
             var editUser = xDoc.Element("users")
                                .Elements("user")
-                               .FirstOrDefault(u => Guid.Parse(u.Attribute("id").Value) == id);
+                               .FirstOrDefault(u => Guid.Parse(u.Attribute("id").Value) == data.Id);
 
             var password = editUser.Element("password");
-            password.Value = data.Signup.Password;
+            password.Value = data.Password;
 
-            xDoc.Save("Data/Users.xml");
+            xDoc.Save(USERS);
         }
 
         public void Edit(User user)
         {
-            var xDoc = XDocument.Load("Data/Users.xml");
+            var xDoc = XDocument.Load(USERS);
             var editUser = xDoc.Element("users")
                                .Elements("user")
                                .FirstOrDefault(u => Guid.Parse(u.Attribute("id").Value) == user.Id);
@@ -98,19 +99,19 @@ namespace OnlineShopWebApp
             var password = editUser.Element("password");
             password.Value = user.Password;
 
-            xDoc.Save("Data/Users.xml");
+            xDoc.Save(USERS);
         }
 
         public void Remove(Guid id)
         {
-            var xDoc = XDocument.Load("Data/Users.xml");
+            var xDoc = XDocument.Load(USERS);
             var root = xDoc.Element("users");
 
             var user = root.Elements("user")
                               .FirstOrDefault(user => Guid.Parse(user.Attribute("id").Value) == id);
 
             user.Remove();
-            xDoc.Save("Data/Users.xml");
+            xDoc.Save(USERS);
         }
     }
 }

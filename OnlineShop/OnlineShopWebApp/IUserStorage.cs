@@ -11,7 +11,7 @@ namespace OnlineShopWebApp
         User TryGetById(Guid id);
         List<User> GetAll();
         bool Authorize(SignIn signin);
-        void ChangePassword(Guid id, ChangePassword data);
+        void ChangePassword(ChangePassword data);
         void Edit(User user);
         void Remove(Guid id);
     }

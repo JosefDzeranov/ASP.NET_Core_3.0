@@ -6,7 +6,7 @@
     <role>Customer</role>
     <phone>+79034562543</phone>
     <email>ku@ku.ru</email>
-    <password>qqq</password>
+    <password>Anton</password>
   </user>
   <user id="8f0bcee5-1b89-4b02-886a-3fea468a32ae">
     <firstname>Ivan</firstname>
@@ -22,6 +22,6 @@
     <role>Customer</role>
     <phone>+79872346543</phone>
     <email>pp@pp.ru</email>
-    <password>123</password>
+    <password>aaaa</password>
   </user>
 </users>

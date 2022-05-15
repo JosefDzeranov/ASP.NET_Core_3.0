@@ -45,17 +45,20 @@ namespace OnlineShopWebApp.Areas.Admin.Controllers
         public IActionResult ChangePassword(Guid id)
         {
             var user = _userStorage.TryGetById(id);
-            var data = new ChangePassword() { User = user };
+            var data = new ChangePassword()
+            {
+                Id = user.Id
+            };
             return View(data);
         }
-        
+
         [HttpPost]
-        public IActionResult ChangePassword(Guid id, ChangePassword data)
+        public IActionResult ChangePassword(ChangePassword data)
         {
-            if(ModelState.IsValid)
+            if (ModelState.IsValid)
             {
-                _userStorage.ChangePassword(id, data);
-                return RedirectToAction("Success");
+                _userStorage.ChangePassword(data);
+                return View("Success");
             }
             return View();
         }
