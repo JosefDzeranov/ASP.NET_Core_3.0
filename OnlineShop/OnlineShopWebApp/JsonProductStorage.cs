@@ -1,14 +1,12 @@
-﻿using System;
-using Newtonsoft.Json;
-using OnlineShopWebApp.Interfase;
+﻿using OnlineShopWebApp.Interfase;
 using OnlineShopWebApp.Models;
+using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
 
 namespace OnlineShopWebApp
 {
-    public class JsonProductStorage:IProductStorage
+    public class JsonProductStorage : IProductStorage
     {
         public List<Product> Products { get; set; }
         private const string nameSave = "projects_for_sale";
@@ -46,6 +44,6 @@ namespace OnlineShopWebApp
             Products.Add(product);
             JsonStorage.WriteToStorage(Products);
         }
-        
+
     }
 }

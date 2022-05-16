@@ -1,7 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
-using Microsoft.Net.Http.Headers;
 
-namespace OnlineShopWebApp.Models
+namespace OnlineShopWebApp.Models.Users.Buyer
 {
     public class InfoBuying
     {

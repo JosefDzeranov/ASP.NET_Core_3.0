@@ -11,8 +11,8 @@
             <div class="container">
                 <h3 class="display-5 text-center">Управление ролями пользователей</h3>
                 <a class="text-nowrap mx-1 my-1"
-                   asp-area="" asp-controller="AdminPanel"
-                   asp-action="addRole"
+                   asp-area="Admin" asp-controller="Roles"  
+                   asp-action="Add"
                    role="button">
                     Создать новую роль
                 </a>
@@ -36,8 +36,8 @@
 
                                                 <td class="small">
                                                     <a class="text-nowrap mx-1 my-1"
-                                                       asp-area="" asp-controller="AdminPanel"
-                                                       asp-action="removeRole"
+                                                       asp-area="Admin" asp-controller="Roles"  
+                                                       asp-action="Remove"
                                                        asp-route-roleName="@Model[i].Name"
                                                     >Удалить</a>
                                                 </td>

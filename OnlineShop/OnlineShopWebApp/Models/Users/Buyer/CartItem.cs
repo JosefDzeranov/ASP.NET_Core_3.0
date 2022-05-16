@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
-using OnlineShopWebApp.Models.Users.Buyer;
 
-namespace OnlineShopWebApp.Models
+namespace OnlineShopWebApp.Models.Users.Buyer
 {
     public class CartItem
     {

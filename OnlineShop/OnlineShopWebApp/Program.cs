@@ -1,6 +1,6 @@
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Hosting;
-using System.Drawing.Text;
+using Serilog;
 
 namespace OnlineShopWebApp
 {
@@ -10,13 +10,18 @@ namespace OnlineShopWebApp
         {
             CreateHostBuilder(args).Build().Run();
         }
-        public static IHostBuilder CreateHostBuilder(string[] args)
-        {
-            return Host.CreateDefaultBuilder(args)
-                .ConfigureWebHostDefaults(webBuilder =>
+        public static IHostBuilder CreateHostBuilder(string[] args) =>
+            Host.CreateDefaultBuilder(args)
+                .UseSerilog((hostingContext, loggerConfiguration) =>
                 {
-                    webBuilder.UseStartup<Startup>();
+                    loggerConfiguration
+                        .ReadFrom.Configuration(hostingContext.Configuration)
+                        .Enrich.FromLogContext()
+                        .Enrich.WithProperty("ApplicationName", "Online Shop");
+                })
+                .ConfigureWebHostDefaults(webBuiIder =>
+                {
+                    webBuiIder.UseStartup<Startup>();
                 });
-        }
     }
 }

@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using OnlineShopWebApp.Interfase;
 using OnlineShopWebApp.Models;
+using OnlineShopWebApp.Models.Users.Buyer;
 
 namespace OnlineShopWebApp.Controllers
 {
@@ -44,7 +45,7 @@ namespace OnlineShopWebApp.Controllers
         {
             buyerId = MyConstant.DefaultBuyerIdIsNull(buyerId);
             buyerStorage.Buy(buyerId);
-            return View(); 
+            return View();
         }
     }
 }

@@ -1,4 +1,4 @@
-﻿@model OrderItem;
+﻿@model OrderItem
 @{
     ViewData["Title"] = "Подробности заказа";
 }
@@ -79,7 +79,7 @@
                     <p></p>
                     <div class="row">
                         <div class="col-3 text-center  font-weight-bold">Статус:</div>
-                        <form class="form-inline" method="post" asp-controller="AdminPanel" asp-action="DetailsOrder">
+                        <form class="form-inline" method="post" asp-area="Admin" asp-controller="Orders" asp-action="Details">
                             <div class="col-9">
                                 <div class="row">
                                     <input type="hidden" value="@Model.Id" name="Id" asp-for="Id"/>
@@ -97,8 +97,9 @@
                                     <div>
                                         <button type="submit"
                                                 class="btn btn-outline-dark text-nowrap"
-                                                asp-controller="AdminPanel"
-                                                asp-action="SaveDetailsOrder"
+                                                asp-area="Admin"
+                                                asp-controller="Orders"
+                                                asp-action="SaveDetails"
                                                 role="button">Сохранить изменения</button>
                                     </div>
                         

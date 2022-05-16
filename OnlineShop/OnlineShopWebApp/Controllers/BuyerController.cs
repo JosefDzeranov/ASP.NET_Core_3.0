@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using OnlineShopWebApp.Interfase;
 using OnlineShopWebApp.Models;
 
-namespace OOnlineShopWebApp.Controllers
+namespace OnlineShopWebApp.Controllers
 {
 
     public class BuyerController : Controller

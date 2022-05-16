@@ -11,7 +11,7 @@
                 <h3 class="display-5 Title_sile text-center">Список продуктов</h3>
                 <div class="d-grid gap-2">
                     <a class="text-nowrap mx-1 my-1"
-                       asp-area="" asp-controller="AdminPanel"
+                       asp-area="Admin" asp-controller="Products" 
                        asp-action="CardNewProduct"
                        role="button">
                         Добавить новый продукт
@@ -46,8 +46,8 @@
                                     <td class="small">
                                         <div class="d-grid gap-2">
                                             <a class="text-nowrap mx-1 my-1"
-                                               asp-area="" asp-controller="AdminPanel"
-                                               asp-action="CardUpdateProduct"
+                                               asp-area="Admin" asp-controller="Products" 
+                                               asp-action="CardUpdate"
                                                asp-route-productId="@Model[i].Id"
                                                role="button">
                                                 Редактировать
@@ -57,8 +57,8 @@
                                     <td class="small">
                                         <div class="d-grid gap-2">
                                             <a class="text-nowrap mx-1 my-1"
-                                               asp-area="" asp-controller="AdminPanel"
-                                               asp-action="DeleteProduct"
+                                               asp-area="Admin" asp-controller="Products" 
+                                               asp-action="Delete"
                                                asp-route-productId="@Model[i].Id"
                                                role="button">
                                                 Удалить

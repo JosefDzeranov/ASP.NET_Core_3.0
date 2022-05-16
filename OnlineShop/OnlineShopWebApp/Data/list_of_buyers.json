@@ -4,11 +4,11 @@
     "Cart": [],
     "infoBuying": {
       "Surname": "Молостов",
-      "Firstname": "Александр",
+      "Firstname": "Григорий",
       "Secondname": "Николаевич",
-      "Phone": "+77777777777",
-      "Email": "odisei.arco26@gmail.com",
-      "Commentary": "sgr"
+      "Phone": "+79530711665",
+      "Email": "archi.dnk@gmail.com",
+      "Commentary": "sff"
     },
     "Orders": [
       {
@@ -50,6 +50,43 @@
         "Status": "Отменён",
         "Login": "Alex1",
         "FullCost": 72002.0
+      },
+      {
+        "Id": "23206fc5-2757-4518-b204-d88e37d37762",
+        "CartItem": [
+          {
+            "Product": {
+              "Id": "eb19668f-4c7f-4edb-ab59-dc6d41f1e5ad",
+              "CodeNumber": "57-00",
+              "Cost": 36000.0,
+              "Square": 193.0,
+              "Width": 11.75,
+              "Length": 12.5,
+              "Description": "Проект двухэтажного дома из газабетона с терассой",
+              "Images": [
+                "3-1.jpg"
+              ]
+            },
+            "Count": 1,
+            "additionalOptions": [
+              {
+                "opcion1": 1.0
+              }
+            ]
+          }
+        ],
+        "InfoBuying": {
+          "Surname": "Молостов",
+          "Firstname": "Григорий",
+          "Secondname": "Николаевич",
+          "Phone": "+79530711665",
+          "Email": "archi.dnk@gmail.com",
+          "Commentary": "sff"
+        },
+        "dateTime": "2022-05-14T07:59:09.0401075Z",
+        "Status": "В пути",
+        "Login": "Alex1",
+        "FullCost": 36001.0
       }
     ],
     "Id": "0c4de82b-a3be-4592-84d6-8b0d63a46aa0",

@@ -1,4 +1,3 @@
-using System.Globalization;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Localization;
@@ -6,8 +5,9 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Options;
-using OnlineShopWebApp;
 using OnlineShopWebApp.Interfase;
+using Serilog;
+using System.Globalization;
 
 namespace OnlineShopWebApp
 {
@@ -49,6 +49,8 @@ namespace OnlineShopWebApp
                 app.UseExceptionHandler("/Home/Error");
                 app.UseHsts();
             }
+
+            app.UseSerilogRequestLogging(); //говорит о том, что нужно каждый запрос логировать
             app.UseStaticFiles();
             app.UseRouting();
 
@@ -58,6 +60,10 @@ namespace OnlineShopWebApp
 
             app.UseEndpoints(endpoints =>
             {
+                endpoints.MapControllerRoute(
+                    name: "MyArea",
+                    pattern: "{area:exists}/{controller=Home}/{action=Index}/{id?}");
+
                 endpoints.MapControllerRoute(
                     name: "default",
                     pattern: "{controller=Home}/{action=Index}/{id?}");

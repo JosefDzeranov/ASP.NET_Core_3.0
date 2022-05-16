@@ -1,5 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using OnlineShopWebApp.Models;
+using OnlineShopWebApp.Models.Users;
 
 namespace OnlineShopWebApp.Controllers
 {
@@ -27,7 +27,7 @@ namespace OnlineShopWebApp.Controllers
             }
             else return Content("errorValid");
         }
-        
+
         public IActionResult NewUser()
         {
             return View();
