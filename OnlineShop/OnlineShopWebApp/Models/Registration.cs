@@ -1,4 +1,5 @@
-﻿using OnlineShopWebApp.Models.Attributes;
+﻿using Microsoft.AspNetCore.Mvc;
+using OnlineShopWebApp.Models.Attributes;
 using System.ComponentModel.DataAnnotations;
 
 
@@ -8,6 +9,7 @@ namespace OnlineShopWebApp.Models
     [RegistrLengthName]
     public class Registration
     {
+        [Remote(action: "CheckName", controller: "Registration", ErrorMessage = "Это имя уже используется")]
         [Required(ErrorMessage = "Введите логин")]
         public string Name { get; set; }
         [Required(ErrorMessage = "Введите пароль")]

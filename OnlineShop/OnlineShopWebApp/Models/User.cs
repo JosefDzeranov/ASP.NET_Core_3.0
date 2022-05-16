@@ -2,7 +2,7 @@
 
 namespace OnlineShopWebApp.Models
 {
-    [NewRegistrName]
+    
     public class User
     {
         public User(int id, string name, string phone, string password)
@@ -18,6 +18,8 @@ namespace OnlineShopWebApp.Models
             Name = registration.Name;
             Password = registration.Password;
         }
+
+        public User() { }
 
         public int Id { get; set; }
         public string Name { get; set; }

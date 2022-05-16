@@ -11,7 +11,6 @@ namespace OnlineShopWebApp
 {
     public class OrdersInMemoryRepository : IOrderBase
     {
-        private List<Order> orders = new List<Order>();
 
         System.Text.Json.JsonSerializerOptions jsonOption = new System.Text.Json.JsonSerializerOptions()
         {

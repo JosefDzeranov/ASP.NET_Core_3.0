@@ -30,6 +30,15 @@ namespace OnlineShopWebApp
             }
         }
 
+        public bool Authentification(Authorization authorization)
+        {
+            if (AllUsers().Any(x => x.Name == authorization.Name && x.Password == authorization.Password))
+            {
+                return true;
+            }
+            return false;
+        }
+
         public User TryGetById(int userId)
         {
             return AllUsers().FirstOrDefault(x => x.Id == userId);
@@ -41,7 +50,7 @@ namespace OnlineShopWebApp
             user.Phone = "Please, fill this field";
             var newListOfUser = AllUsers().Append(user);
             var json = System.Text.Json.JsonSerializer.Serialize(newListOfUser, jsonOption);
-            File.WriteAllText("Models/products.json", json);
+            File.WriteAllText("Models/Users.json", json);
         }
     }
 }

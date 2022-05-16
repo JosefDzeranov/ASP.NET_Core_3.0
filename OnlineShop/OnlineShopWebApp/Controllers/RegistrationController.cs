@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using OnlineShopWebApp.Models;
+using System.Linq;
 
 namespace OnlineShopWebApp.Controllers
 {
@@ -23,13 +24,20 @@ namespace OnlineShopWebApp.Controllers
             _userBase.Add(newUser);
         }
 
+        [AcceptVerbs("Get", "Post")]
+        public IActionResult CheckName(string name)
+        {
+            var allUsers = _userBase.AllUsers();
+            if (allUsers.Any(x=>x.Name == name)) return Json(false);
+            return Json(true);
+        }
 
         [HttpPost]
         public IActionResult Registrate(Registration registration)
         {
             if (ModelState.IsValid)
             {
-
+                AddNewUser(registration);
                 return RedirectToAction("Index", "Home");
             }
             else

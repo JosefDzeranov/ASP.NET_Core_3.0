@@ -1,7 +1,20 @@
 [
-	{
-		"Id": 1,
-		"Name": "Mike",
-		"Phone": "+7-983-041-73-94"
-	}
+  {
+    "Id": 1,
+    "Name": "Mike",
+    "Phone": "7-983-041-73-94",
+    "Password": null
+  },
+  {
+    "Id": 2,
+    "Name": "Jhon",
+    "Phone": "7-989-041-73-94",
+    "Password": "11"
+  },
+  {
+    "Id": 3,
+    "Name": "Mikee",
+    "Phone": "Please, fill this field",
+    "Password": "1"
+  }
 ]

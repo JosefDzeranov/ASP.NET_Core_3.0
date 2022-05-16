@@ -7,6 +7,7 @@ namespace OnlineShopWebApp
     {
         void Add(User user);
         IEnumerable<User> AllUsers();
+        bool Authentification(Authorization authorization);
         User TryGetById(int userId);
     }
 }
