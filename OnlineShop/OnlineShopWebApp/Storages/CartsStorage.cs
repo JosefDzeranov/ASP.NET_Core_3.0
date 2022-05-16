@@ -4,7 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace OnlineShopWebApp.Interfaces
+namespace OnlineShopWebApp.Storages
 {
     public class CartsStorage : ICartsStorage
     {

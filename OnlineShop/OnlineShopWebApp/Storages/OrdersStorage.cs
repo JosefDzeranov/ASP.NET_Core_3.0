@@ -1,9 +1,10 @@
 ﻿using OnlineShopWebApp.Interface;
+using OnlineShopWebApp.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace OnlineShopWebApp.Models
+namespace OnlineShopWebApp.Storages
 {
     public class OrdersStorage : IOrdersStorage
     {
@@ -23,7 +24,7 @@ namespace OnlineShopWebApp.Models
         public void Add(Order order, Customer customer, string userId)
         {
             int lastOrderNumber = 1;
-            
+
             if (orders.Count > 0)
                 lastOrderNumber = orders.FindLast(x => x.UserId == userId).OrderNumber;
 

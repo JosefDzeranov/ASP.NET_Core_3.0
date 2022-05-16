@@ -4,8 +4,9 @@ using System.Linq;
 using System.Text;
 using Newtonsoft.Json;
 using OnlineShopWebApp.Interface;
+using OnlineShopWebApp.Models;
 
-namespace OnlineShopWebApp.Models
+namespace OnlineShopWebApp.Storages
 {
     public class ProductsStorage : IProductsStorage
     {
