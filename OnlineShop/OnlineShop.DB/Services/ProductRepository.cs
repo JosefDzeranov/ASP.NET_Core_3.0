@@ -1,4 +1,5 @@
-﻿using OnlineShop.DB;
+﻿using Microsoft.EntityFrameworkCore;
+using OnlineShop.DB;
 using OnlineShop.DB.Models;
 using OnlineShop.DB.Services;
 using System;
@@ -23,13 +24,14 @@ namespace OnlineShopDB.Services
 
         public Product TryGetById(Guid id)
         {
-            var product = onlineShopContext.Products.FirstOrDefault(product => product.Id == id);
-            return product;
+            return onlineShopContext.Products.FirstOrDefault(product => product.Id == id);    
         }
 
         public void Delete(Product product)
         {
             onlineShopContext.Products.Remove(product);
+            var productInCart = onlineShopContext.CartItems.FirstOrDefault(x => x.ProductId == product.Id);
+            onlineShopContext.CartItems.Remove(productInCart);
             onlineShopContext.SaveChanges();
         }
 
