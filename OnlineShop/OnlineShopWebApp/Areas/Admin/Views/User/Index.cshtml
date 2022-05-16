@@ -1,7 +1,41 @@
-﻿<div class="row">
+﻿@model List<UserAccount>
+<div class="row">
 	@await Html.PartialAsync("AdminMenu")
 
-	<div class="col-9">
-		<h3>Пользователи</h3>
-	</div>
-</div>
+<div class="col-9">
+		<div class="row">
+		<h3>Список пользователей</h3>
+		</div>
+
+		<div class="row">
+		<table class ="table">
+			<thead>
+
+		<tr>
+			<th>№</th>
+	        <th>Имя</th>
+			<th>Телефон</th>
+			<th>Логин</th>
+	    </tr>
+		</thead>
+		<tbody>
+		@for(int i=0; i<Model.Count; i++)
+			{
+				<tr>
+					<td>@(i+1)</td>
+					<td>@Model[i].Name</td>
+					<td>@Model[i].Phone</td>
+					<td>@Model[i].Login</td>
+				<td><a 
+						asp-area="Admin"
+						asp-controller="User"
+						asp-action="Detail"
+						asp-route-name="@Model[i].Name">Подробнее</a></td>
+				</tr>
+			}
+			</tbody>
+		</table>
+		</div>
+		</div>
+		</div>
+
