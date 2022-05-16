@@ -9,11 +9,7 @@ namespace OnlineShopWebApp.Controllers
         private readonly IProductDataSource productDataSource;
 
         private readonly ICartRepository cartRepository;
-        /// <summary>
-        /// wewewefjwkef
-        /// </summary>
-        /// <param name="cartRepository"></param>
-        /// <param name="productDataSource"></param>
+   
         public CartController(ICartRepository cartRepository, IProductDataSource productDataSource)
         {
             this.cartRepository = cartRepository;
