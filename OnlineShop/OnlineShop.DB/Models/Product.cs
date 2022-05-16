@@ -10,4 +10,8 @@ namespace OnlineShop.DB.Models
         public string Description { get; set; }
         public string ImgPath { get; set; }
     }
+
 }
+
+
+

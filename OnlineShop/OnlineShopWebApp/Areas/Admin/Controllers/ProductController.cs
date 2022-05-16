@@ -27,14 +27,7 @@ namespace OnlineShopWebApp.Areas.Admin.Controllers
 
             foreach (var product in products)
             {
-                var productViewModel = new ProductViewModel
-                {
-                    Id = product.Id,
-                    Name = product.Name,
-                    Cost = product.Cost,
-                    Description = product.Description,
-                    ImgPath = product.ImgPath,
-                };
+                var productViewModel = product.MappingProductViewModel();
                 productsViewModel.Add(productViewModel);
             }
 
@@ -55,30 +48,15 @@ namespace OnlineShopWebApp.Areas.Admin.Controllers
         public IActionResult EditProduct(Guid id)
         {
             var product = productRepository.TryGetById(id);
-            var productViewModel = new ProductViewModel
-            {
-                Id = product.Id,
-                Name = product.Name,
-                Cost = product.Cost,
-                Description = product.Description,
-                ImgPath = product.ImgPath
-            };
+            var productViewModel = product.MappingProductViewModel();
             return View(productViewModel);
         }
         [HttpPost]
-        public IActionResult EditProduct(ProductViewModel product)
+        public IActionResult EditProduct(ProductViewModel productViewModel)
         {
             if (ModelState.IsValid)
             {
-                var productDb = new Product
-                {
-                    Id = product.Id,
-                    Name = product.Name,
-                    Cost = product.Cost,
-                    Description = product.Description,
-                    ImgPath = product.ImgPath,
-
-                };
+                var productDb = productViewModel.MappingProduct();
                 productRepository.Update(productDb);
             }
 
@@ -90,17 +68,9 @@ namespace OnlineShopWebApp.Areas.Admin.Controllers
             return View();
         }
         [HttpPost]
-        public IActionResult AddProduct(ProductViewModel product)
+        public IActionResult AddProduct(ProductViewModel productViewModel)
         {
-            var productDb = new Product
-            {
-                Id = product.Id,
-                Name = product.Name,
-                Cost = product.Cost,
-                Description = product.Description,
-                ImgPath = product.ImgPath,
-
-            };
+            var productDb = productViewModel.MappingProduct();
             productRepository.Add(productDb);
             return RedirectToAction("Index", "Product");
         }

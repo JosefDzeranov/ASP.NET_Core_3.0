@@ -1,6 +1,4 @@
-﻿
-
-using OnlineShop.DB.Models;
+﻿using OnlineShop.DB.Models;
 using System;
 
 namespace OnlineShop.DB.Services

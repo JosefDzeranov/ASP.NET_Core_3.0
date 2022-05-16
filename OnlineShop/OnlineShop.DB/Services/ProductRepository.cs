@@ -23,7 +23,8 @@ namespace OnlineShopDB.Services
 
         public Product TryGetById(Guid id)
         {
-            return onlineShopContext.Products.FirstOrDefault(product => product.Id == id);
+            var product = onlineShopContext.Products.FirstOrDefault(product => product.Id == id);
+            return product;
         }
 
         public void Delete(Product product)
@@ -40,9 +41,8 @@ namespace OnlineShopDB.Services
 
         public void Update(Product product)
         {
-            var oldProduct = TryGetById(product.Id);
-            onlineShopContext.Products.Remove(oldProduct);
-            onlineShopContext.Products.Add(product);
+            
+            onlineShopContext.Products.Update(product);
             onlineShopContext.SaveChanges();
         }
     }
