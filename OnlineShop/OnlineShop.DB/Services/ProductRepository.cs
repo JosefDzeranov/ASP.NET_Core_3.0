@@ -31,7 +31,11 @@ namespace OnlineShopDB.Services
         {
             onlineShopContext.Products.Remove(product);
             var productInCart = onlineShopContext.CartItems.FirstOrDefault(x => x.ProductId == product.Id);
-            onlineShopContext.CartItems.Remove(productInCart);
+            if (productInCart != null)
+            {
+                onlineShopContext.CartItems.Remove(productInCart);
+            }
+           
             onlineShopContext.SaveChanges();
         }
 
