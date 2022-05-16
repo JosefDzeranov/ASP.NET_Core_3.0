@@ -1,6 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using OnlineShopWebApp.Models;
+using System.Collections.Generic;
 using System.Diagnostics;
+using System.Linq;
 
 namespace OnlineShopWebApp.Controllers
 {
@@ -32,6 +34,21 @@ namespace OnlineShopWebApp.Controllers
         public IActionResult Error()
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+        }
+
+        [HttpPost]
+        public IActionResult ProductSearch(string name)
+        {
+            var productSearch = new List<Product>();
+            if (name != null)
+            {
+                productSearch = productRepository.GetAllProducts().FindAll(x => x.Name == name);
+                return View(productSearch);
+            }
+            else
+            {
+                return RedirectToAction("Index");
+            }
         }
     }
 }

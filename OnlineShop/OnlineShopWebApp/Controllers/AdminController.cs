@@ -14,10 +14,7 @@ namespace OnlineShopWebApp.Controllers
 
         public IActionResult Orders()
         {
-            var products = productsRepository.GetAllProducts();
-            if (products == null || products.Count == 0)
-                return View("notFound");
-            return View(products);
+            return View();
         }
 
         public IActionResult Users()
@@ -32,7 +29,10 @@ namespace OnlineShopWebApp.Controllers
 
         public IActionResult Products()
         {
-            return View();
+            var products = productsRepository.GetAllProducts();
+            if (products == null || products.Count == 0)
+                return View("notFound");
+            return View(products);
         }
 
         public IActionResult AddProduct()
