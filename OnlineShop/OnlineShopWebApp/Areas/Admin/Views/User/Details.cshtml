@@ -42,12 +42,34 @@
                                 <a class="dropdown-item" asp-area="Admin" asp-controller="User" asp-action="ChangePassword" asp-route-id="@Model.Id">Change password</a>
                                 <a class="dropdown-item" asp-area="Admin" asp-controller="User" asp-action="Edit" asp-route-id="@Model.Id">Edit user data</a>
                                 <a class="dropdown-item" asp-area="Admin" asp-controller="User" asp-action="EditRights" asp-route-id="@Model.Id">Edit access rights</a>
-                                <a class="dropdown-item" asp-area="Admin" asp-controller="User" asp-action="Remove" asp-route-id="@Model.Id">Remove user</a>
+                                <!-- Trigger modal -->
+                                <a class="dropdown-item" href="#myModal" data-toggle="modal">Remove user</a>
                             </div>
                         </td>
                     </tr>
                 </tbody>
             </table>
+
+            <!-- Modal -->
+            <div id="myModal" class="modal fade" data-backdrop="static" tabindex="-1">
+                <div class="modal-dialog modal-dialog-centered">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title">Confirmation</h5>
+                            <button type="button" class="close" data-dismiss="modal">×</button>
+                        </div>
+                        <div class="modal-body text-center" background-color="cccccc">
+                            <p>Are you sure you want to delete this user account completely?</p>
+                            <p class="text-secondary">Recovery will be impossible.</p>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-sm btn-outline-dark" data-dismiss="modal">Cancel</button>
+                            <a role="button" class="btn btn-sm btn-outline-danger" asp-area="Admin" asp-controller="User" asp-action="Remove" asp-route-id="@Model.Id">Remove user</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
         </div>
     </div>
 </div>

@@ -1,19 +1,19 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <users>
-  <user id="540da2cd-1260-4041-b78f-10009ccc498c">
+  <user id="b445eac4-f99a-40c2-8d6f-100fa630b006">
     <firstname>Anton</firstname>
     <lastname>Kuznetsov</lastname>
     <role>Customer</role>
-    <phone>+79034562543</phone>
+    <phone>+79034656432</phone>
     <email>ku@ku.ru</email>
-    <password>qqqq</password>
+    <password>1234</password>
   </user>
-  <user id="a16eb24b-03c5-4d04-b22f-35b65b72e151">
+  <user id="ea38e3af-c720-40bd-8ce7-b7a86e262897">
     <firstname>Petr</firstname>
     <lastname>Petrov</lastname>
     <role>Customer</role>
-    <phone>+79872346543</phone>
+    <phone>+79034576432</phone>
     <email>pp@pp.ru</email>
-    <password>qqqq</password>
+    <password>qwer</password>
   </user>
 </users>
