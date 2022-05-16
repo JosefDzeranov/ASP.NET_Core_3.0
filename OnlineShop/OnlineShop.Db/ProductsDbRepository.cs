@@ -2,11 +2,11 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using OnlineShopWebApp.Models;
+using OnlineShop.Db.Models;
 
-namespace OnlineShopWebApp
+namespace OnlineShop.Db
 {
-    public class InMemoryProductsRepository : IProductsRepository
+    public class ProductsDbRepository : IProductsRepository
     {
         private List<Product> products = new List<Product>()
         {
