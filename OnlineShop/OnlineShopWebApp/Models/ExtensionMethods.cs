@@ -1,5 +1,6 @@
 ﻿using OnlineShop.DB.Models;
 using System;
+using System.Collections.Generic;
 
 namespace OnlineShopWebApp.Models
 {
@@ -33,6 +34,39 @@ namespace OnlineShopWebApp.Models
 
             return productViewModel;
         }
+
+        public static CartViewModel MappingCartViewModel(this Cart cart)
+        {
+            var cartViewModel = new CartViewModel
+            {
+                Id = cart.Id,
+                Items = new List<CartItemViewModel>(),
+                UserId = cart.UserId
+            };
+
+            foreach (var item in cart.Items)
+            {
+                var cartItemViewModel = new CartItemViewModel
+                {
+                    Id = item.Id,
+                    Product = new ProductViewModel
+                    {
+                        Id = item.Product.Id,
+                        Name = item.Product.Name,
+                        Description = item.Product.Description,
+                        Cost = item.Product.Cost,
+                        ImgPath = item.Product.ImgPath
+
+                    },
+                    Quantinity = item.Quantinity,
+
+                };
+                cartViewModel.Items.Add(cartItemViewModel);
+            }
+
+             return cartViewModel;
+        }
+
     }
 
 }

@@ -23,14 +23,7 @@ namespace OnlineShopWebApp.Controllers
 
             foreach (var product in products)
             {
-                var productViewModel = new ProductViewModel
-                {
-                    Id = product.Id,
-                    Name = product.Name,
-                    Cost = product.Cost,
-                    Description = product.Description,
-                    ImgPath = product.ImgPath,
-                };
+                var productViewModel = product.MappingProductViewModel();
                 productsViewModel.Add(productViewModel);
             }
 

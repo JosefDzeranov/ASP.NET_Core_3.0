@@ -23,31 +23,7 @@ namespace OnlineShopWebApp.Controllers
             var cartDb = cartRepository.TryGetByUserId(Const.UserId);
             if(cartDb != null)
             {
-                var cartViewModel = new CartViewModel
-                {
-                    Id = cartDb.Id,
-                    Items = new List<CartItemViewModel>(),
-                    UserId = cartDb.UserId
-                };
-                foreach (var item in cartDb.Items)
-                {
-                    var itemViewModel = new CartItemViewModel
-                    {
-                        Id = item.Id,
-                        Product = new ProductViewModel
-                        {
-                            Id = item.Product.Id,
-                            Name = item.Product.Name,
-                            Description = item.Product.Description,
-                            Cost = item.Product.Cost,
-                            ImgPath = item.Product.ImgPath
-
-                        },
-                        Quantinity = item.Quantinity,
-
-                    };
-                    cartViewModel.Items.Add(itemViewModel);
-                }
+                var cartViewModel = cartDb.MappingCartViewModel();
                 return View(cartViewModel);
             }
             return View();
