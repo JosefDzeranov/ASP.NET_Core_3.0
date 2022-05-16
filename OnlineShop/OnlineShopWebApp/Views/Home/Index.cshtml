@@ -2,12 +2,26 @@
 @{
     ViewData["Title"] = "Home Page";
 }
+<link rel="stylesheet" href="~/css/site.css" />
+@*Список*@
+<div class="row">
+<div class="col-lg-3">
+    <h2 class="my-4">Тур магазин</h2>
 
-<div class = "row">
+<ul class="list-group my-4">
+  <li class="list-group-item">Страны</li>
+  <li class="list-group-item">Туры</li>
+  <li class="list-group-item">Визы</li>
+  <li class="list-group-item">Наши менеджеры</li>
+  <li class="list-group-item">Контакты</li>
+</ul>
+</div>
+@*
+<div class = "row">*@
     @foreach(var product in Model)
     {
         <div class="col-3 card shadow">
-            <img class="card-img-top" src=@product.ImagePath alt = "Изображение товара"/>
+            <img class="card-img-top my-4" src=@product.ImagePath alt="Изображение товара" width="200" height="180"/>
 
             <div class= "card-body">
                 <a style="color:black"
@@ -17,15 +31,19 @@
                     asp-route-id="@product.Id">
                     <h5>@product.Name</h5>    
                 </a>
-                <h5>@product.Cost руб </h5>
-                <a class="btn btn-dark" 
+                <h5>@product.Cost &#8381 </h5>
+                <div class="card-body d-flex align-items-end justify-content-center">
+                <a class="btn btn-outline-success" 
                     asp-area=""
                     asp-controller="Cart"
                     asp-action="Add"
                     asp-route-productId="@product.Id"
                     role = "button">Добавить в корзину</a>
             </div>
+            </div>
         </div>
     }
 </div>
+</div>
+
 
