@@ -1,4 +1,5 @@
 ﻿using System;
+using OnlineShop.Db.Models;
 
 namespace OnlineShopWebApp.Models
 {

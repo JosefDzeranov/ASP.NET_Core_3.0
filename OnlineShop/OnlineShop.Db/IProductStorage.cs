@@ -1,8 +1,8 @@
 ﻿using System;
-using OnlineShopWebApp.Models;
+using OnlineShop.Db.Models;
 using System.Collections.Generic;
 
-namespace OnlineShopWebApp
+namespace OnlineShop.Db
 {
     public interface IProductStorage
     {

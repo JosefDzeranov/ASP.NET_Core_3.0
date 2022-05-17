@@ -1,5 +1,7 @@
 ﻿using System;
 using Microsoft.AspNetCore.Mvc;
+using OnlineShop.Db;
+using OnlineShopWebApp.Models;
 
 namespace OnlineShopWebApp.Controllers
 {
@@ -13,7 +15,15 @@ namespace OnlineShopWebApp.Controllers
         public IActionResult Index(Guid id)
         {
             var product = _productStorage.TryGetProduct(id);
-            return View(product);
+            var productViewModel = new ProductViewModel
+            {
+                Id = product.Id,
+                ImagePath = product.ImagePath,
+                Name = product.Name,
+                Cost = product.Cost,
+                Description = product.Description
+            };
+            return View(productViewModel);
         }
     }
 }

@@ -1,6 +1,8 @@
 ﻿using OnlineShopWebApp.Models;
 using System.Collections.Generic;
 using System.Linq;
+using OnlineShop.Db.Models;
+using OnlineShop.Db;
 
 namespace OnlineShopWebApp
 {

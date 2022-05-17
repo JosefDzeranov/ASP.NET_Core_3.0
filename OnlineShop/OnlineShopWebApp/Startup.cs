@@ -8,6 +8,8 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Options;
 using Serilog;
 using System.Globalization;
+using OnlineShop.Db;
+using Microsoft.EntityFrameworkCore;
 
 namespace OnlineShopWebApp
 {
@@ -23,8 +25,12 @@ namespace OnlineShopWebApp
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            string connection = Configuration.GetConnectionString("online_shop");
+            services.AddDbContext<DatabaseContext>(options =>
+                    options.UseSqlServer(connection));
+
             services.AddControllersWithViews();
-            services.AddSingleton<IProductStorage, ProductStorage>();
+            services.AddTransient<IProductStorage, ProductDbStorage>();
             services.AddSingleton<IBasketStorage, BasketStorage>();
             services.AddSingleton<IOrderStorage, OrderStorage>();
             services.AddSingleton<ICompareStorage, CompareStorage>();

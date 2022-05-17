@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace OnlineShopWebApp.Models
 {
-    public class Product
+    public class ProductViewModel
     {
         public Guid Id { get; set; }
 
@@ -18,16 +18,5 @@ namespace OnlineShopWebApp.Models
 
         [Required]
         public string Description { get; set; }
-
-        public Product () { } // Empty ctor for XML serializing.
-        
-        public Product(Guid id, string imagePath, string name, decimal cost, string description)
-        {
-            Id = id;
-            ImagePath = imagePath;
-            Name = name;
-            Cost = cost;
-            Description = description;
-        }
     }
 }
