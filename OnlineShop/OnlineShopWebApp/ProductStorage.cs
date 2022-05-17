@@ -8,11 +8,11 @@ namespace OnlineShopWebApp
 {
     public class ProductStorage : IProductStorage
     {
-        private const string PRODUCTS = @"Data/Products.xml";
+        private const string fileName = @"Data/Products.xml";
         private List<Product> _products = new List<Product>();
         public List<Product> GetProductData()
         {
-             var xDoc = XDocument.Load(PRODUCTS);
+             var xDoc = XDocument.Load(fileName);
             _products = xDoc.Element("products")
                                .Elements("product")
                                .Select(p => new Product(
@@ -37,7 +37,7 @@ namespace OnlineShopWebApp
         }
         public void Add(Product product)
         {
-            var xDoc = XDocument.Load(PRODUCTS);
+            var xDoc = XDocument.Load(fileName);
             var root = xDoc.Element("products");
             product.Id = Guid.NewGuid();
             root.Add(new XElement("product",
@@ -47,12 +47,12 @@ namespace OnlineShopWebApp
                          new XElement("cost", product.Cost),
                          new XElement("description", product.Description)));
 
-            xDoc.Save(PRODUCTS);
+            xDoc.Save(fileName);
         }
 
         public void Edit(Product product)
         {
-            var xDoc = XDocument.Load(PRODUCTS);
+            var xDoc = XDocument.Load(fileName);
             var editProduct = xDoc.Element("products")
                               .Elements("product")
                               .FirstOrDefault(p => Guid.Parse(p.Attribute("id").Value) == product.Id);
@@ -69,19 +69,19 @@ namespace OnlineShopWebApp
             var desc = editProduct.Element("description");
             desc.Value = product.Description;
 
-            xDoc.Save(PRODUCTS);
+            xDoc.Save(fileName);
         }
 
         public void Remove(Guid id)
         {
-            var xDoc = XDocument.Load(PRODUCTS);
+            var xDoc = XDocument.Load(fileName);
             var root = xDoc.Element("products");
 
             var product = root.Elements("product")
                               .FirstOrDefault(p => Guid.Parse(p.Attribute("id").Value) == id);
 
                 product.Remove();
-                xDoc.Save(PRODUCTS);
+                xDoc.Save(fileName);
         }
     }
 }
