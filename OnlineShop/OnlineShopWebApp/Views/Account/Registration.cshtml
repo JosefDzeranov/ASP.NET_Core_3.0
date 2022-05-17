@@ -6,27 +6,27 @@
 
     <div class="mb-3">
         <label asp-for="InputName" class="form-label">Имя</label>
-        <input type="text" class="form-control" name="InputName" aria-describedby="nameHelp">
+        <input type="text" class="form-control" asp-for="InputName" aria-describedby="nameHelp">
         <span asp-validation-for="InputName"></span>
     </div>
     <div class="mb-3">
         <label asp-for="InputLastName" class="form-label">Фамилия</label>
-        <input type="text" class="form-control" name="InputLastName" aria-describedby="LastNameHelp">
+        <input type="text" class="form-control" asp-for="InputLastName" aria-describedby="LastNameHelp">
         <span asp-validation-for="InputLastName"></span>
     </div>
     <div class="mb-3">
         <label asp-for="InputEmail1" class="form-label">Электронный адрес</label>
-        <input type="email" class="form-control" name="InputEmail1" aria-describedby="emailHelp">
+        <input type="email" class="form-control" asp-for="InputEmail1" aria-describedby="emailHelp">
         <span asp-validation-for="InputEmail1"></span>
     </div>
     <div class="mb-3">
         <label asp-for="InputPassword" class="form-label">Пароль</label>
-        <input type="password" class="form-control" name="InputPassword">
+        <input type="password" class="form-control" asp-for="InputPassword">
         <span asp-validation-for="InputPassword"></span>
     </div>
     <div class="mb-3">
         <label asp-for="InputConfirmPassword" class="form-label">Повторите пароль</label>
-        <input type="password" class="form-control" name="InputConfirmPassword">
+        <input type="password" class="form-control" asp-for="InputConfirmPassword">
         <span asp-validation-for="InputConfirmPassword"></span>
     </div>
     <div class="mb-3 form-check">

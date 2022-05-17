@@ -6,12 +6,12 @@
 
     <div class="mb-3">
         <label asp-for="InputEmail1" class="form-label">Электронный адрес</label>
-        <input type="email" class="form-control" name="InputEmail1" aria-describedby="emailHelp">
+        <input type="email" class="form-control" asp-for="InputEmail1" aria-describedby="emailHelp">
         <span asp-validation-for="InputEmail1"></span>
     </div>
     <div class="mb-3">
         <label asp-for="InputPassword" class="form-label">Пароль</label>
-        <input type="password" class="form-control" name="InputPassword">
+        <input type="password" class="form-control" asp-for="InputPassword">
         <div id="passwordHelp" class="form-text"><a href="#">Забыли пароль?</a></div>
         <span asp-validation-for="InputPassword"></span>
     </div>
