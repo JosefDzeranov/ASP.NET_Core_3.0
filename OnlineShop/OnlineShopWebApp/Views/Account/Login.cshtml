@@ -1,12 +1,19 @@
-﻿<form method="post">
+﻿@model Login
+
+<form method="post">
+
+    <div class="text-danger font-weight-bold" asp-validation-summary="ModelOnly"></div>
+
     <div class="mb-3">
-        <label for="exampleInputEmail1" class="form-label">Электронный адрес</label>
+        <label asp-for="InputEmail1" class="form-label">Электронный адрес</label>
         <input type="email" class="form-control" name="InputEmail1" aria-describedby="emailHelp">
+        <span asp-validation-for="InputEmail1"></span>
     </div>
     <div class="mb-3">
-        <label for="exampleInputPassword1" class="form-label">Пароль</label>
+        <label asp-for="InputPassword" class="form-label">Пароль</label>
         <input type="password" class="form-control" name="InputPassword">
         <div id="passwordHelp" class="form-text"><a href="#">Забыли пароль?</a></div>
+        <span asp-validation-for="InputPassword"></span>
     </div>
     <div class="mb-3 form-check">
         <input type="checkbox" class="form-check-input" name="exampleCheck1">
