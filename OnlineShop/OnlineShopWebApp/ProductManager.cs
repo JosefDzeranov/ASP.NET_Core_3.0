@@ -6,12 +6,12 @@ using System.Linq;
 
 namespace OnlineShopWebApp
 {
-    public class JsonProductStorage : IProductStorage
+    public class ProductManager : IProductManager
     {
         public List<Product> Products { get; set; }
         private const string nameSave = "projects_for_sale";
         public IWorkWithData JsonStorage { get; set; } = new JsonWorkWithData(nameSave);
-        public JsonProductStorage()
+        public ProductManager()
         {
             Products = JsonStorage.Read<List<Product>>();
         }

@@ -3,7 +3,7 @@ using OnlineShopWebApp.Models;
 
 namespace OnlineShopWebApp.Interfase
 {
-    public interface IRolesStorage
+    public interface IRolesManeger
     {
         List<Role> GetAll();
         Role TryGetByName(string name);

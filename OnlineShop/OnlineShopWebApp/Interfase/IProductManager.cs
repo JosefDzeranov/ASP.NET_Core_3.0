@@ -4,7 +4,7 @@ using OnlineShopWebApp.Models;
 
 namespace OnlineShopWebApp.Interfase
 {
-    public interface IProductStorage
+    public interface IProductManager
     {
         List<Product> Products { get; set; }
         Product FindProduct(Guid productId);

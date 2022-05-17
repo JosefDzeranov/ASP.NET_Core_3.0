@@ -5,13 +5,13 @@ using System.Linq;
 
 namespace OnlineShopWebApp
 {
-    public class JsonRoleStorage : IRolesStorage
+    public class RoleManeger : IRolesManeger
     {
         private readonly List<Role> roles;
         private const string nameSave = "roles";
         public IWorkWithData JsonStorage { get; set; } = new JsonWorkWithData(nameSave);
 
-        public JsonRoleStorage()
+        public RoleManeger()
         {
             roles = JsonStorage.Read<List<Role>>();
         }

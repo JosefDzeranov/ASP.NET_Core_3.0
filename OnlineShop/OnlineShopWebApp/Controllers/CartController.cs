@@ -8,11 +8,11 @@ namespace OnlineShopWebApp.Controllers
     public class CartController : Controller
     {
         private readonly IBuyerManager buyerManager;
-        private readonly IProductStorage productStorage;
-        public CartController(IBuyerManager buyerManager, IProductStorage productStorage)
+        private readonly IProductManager productManager;
+        public CartController(IBuyerManager buyerManager, IProductManager productManager)
         {
             this.buyerManager = buyerManager;
-            this.productStorage = productStorage;
+            this.productManager = productManager;
         }
         public IActionResult Index(Guid buyerId)
         {
@@ -23,7 +23,7 @@ namespace OnlineShopWebApp.Controllers
         public IActionResult AddProduct(Guid productId, Guid buyerId)
         {
             buyerId = MyConstant.DefaultBuyerIdIsNull(buyerId);
-            var product = productStorage.FindProduct(productId);
+            var product = productManager.FindProduct(productId);
             buyerManager.AddProductInCart(product, buyerId);
             return RedirectToAction("Index", new {buyerId});
         }

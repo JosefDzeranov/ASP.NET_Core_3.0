@@ -22,8 +22,8 @@ namespace OnlineShopWebApp
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddSingleton<IBuyerManager, BuyerManager>();
-            services.AddSingleton<IProductStorage, JsonProductStorage>();
-            services.AddSingleton<IRolesStorage, JsonRoleStorage>();
+            services.AddSingleton<IProductManager, ProductManager>();
+            services.AddSingleton<IRolesManeger, RoleManeger>();
             services.AddControllersWithViews();
 
             services.Configure<RequestLocalizationOptions>(options => //конфигурируем настройки локализации запроса. Решается задача валидации decimal
