@@ -1,26 +1,31 @@
-﻿<form method="post">
+﻿@model UserDeliveryInfo
+
+<form method="post">
+
+    <div class="text-danger font-weight-bold" asp-validation-summary="All"></div>
+
     <div class="form-row">
         <div class="form-group col-md-6">
-            <label for="inputName">Имя</label>
-            <input type="text" class="form-control" name="inputName" placeholder="Имя" />
+            <label asp-for="InputName">Имя</label>
+            <input type="text" class="form-control" asp-for="InputName" placeholder="Имя" />
         </div>
         <div class="form-group col-md-6">
-            <label for="inputLastName">Фамилия</label>
-            <input type="text" class="form-control" name="inputLastName" placeholder="Фамилия" />
+            <label asp-for="InputLastName">Фамилия</label>
+            <input type="text" class="form-control" asp-for="InputLastName" placeholder="Фамилия" />
         </div>
     </div>
     <div class="form-group">
-        <label for="inputCity">Город</label>
-        <input type="text" class="form-control" name="inputCity" placeholder="Город" />
+        <label asp-for="InputCity">Город</label>
+        <input type="text" class="form-control" asp-for="InputCity" placeholder="Город" />
     </div>
     <div class="form-group">
-        <label for="inputAddress2">Адрес доставки</label>
-        <input type="text" class="form-control" name="inputAddress" placeholder="Адрес" />
+        <label asp-for="InputAddress">Адрес доставки</label>
+        <input type="text" class="form-control" asp-for="InputAddress" placeholder="Адрес" />
     </div>
     <div class="form-row">
         <div class="form-group col-md-6">
-            <label for="inputEmail">Электронный адрес</label>
-            <input type="email" class="form-control" name="inputEmail" />
+            <label asp-for="InputEmail">Электронный адрес</label>
+            <input type="email" class="form-control" asp-for="InputEmail" />
         </div>
         <div class="form-group col-md-4">
             <label for="inputState">Способо доставки</label>
@@ -29,7 +34,6 @@
                 <option>Эконом</option>
                 <option>Эконом+</option>
                 <option>Стандарт+</option>
-                <option>VIP</option>
                 <option>Супер быстрый</option>
             </select>
         </div>
