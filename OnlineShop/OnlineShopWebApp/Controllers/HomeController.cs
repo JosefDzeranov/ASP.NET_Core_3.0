@@ -39,10 +39,10 @@ namespace OnlineShopWebApp.Controllers
         [HttpPost]
         public IActionResult ProductSearch(string name)
         {
-            var productSearch = new List<Product>();
             if (name != null)
             {
-                productSearch = productRepository.GetAllProducts().FindAll(x => x.Name == name);
+                var productSearch = new List<Product>();
+                productSearch = productRepository.GetAllProducts().FindAll(x => x.Name.ToLower().Contains(name.ToLower()));
                 return View(productSearch);
             }
             else
