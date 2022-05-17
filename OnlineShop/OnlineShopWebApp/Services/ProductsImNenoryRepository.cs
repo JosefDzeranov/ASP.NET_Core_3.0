@@ -56,10 +56,5 @@ namespace OnlineShopWebApp
             var product = products.FirstOrDefault(x => x.Id == id);
             products.Remove(product);
         }
-
-        public Product SearchProduct(int id)
-        {
-            return products.Find(x => x.Id == id);
-        }
     }
 }
