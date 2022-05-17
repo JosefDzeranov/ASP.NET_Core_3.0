@@ -15,5 +15,7 @@ namespace OnlineShopWebApp
 
         public User GetUserById(Guid id);
 
+        public void EditUser(User editedUser);
+
     }
 }

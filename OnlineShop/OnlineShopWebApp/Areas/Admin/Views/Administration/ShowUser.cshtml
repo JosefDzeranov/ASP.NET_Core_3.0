@@ -21,16 +21,18 @@
                 <td>@Model.Login </td>
             </tr>
 
-          <tr>
-            <td>
-                <select asp-for="Actions"
-                        asp-items="@Html.GetEnumSelectList<UserActions>()"
-                        class="form-control">
-                </select>
-            </td>
-            </tr>
+
 
 
         </table>
+        <br />
+
+        <button class="btn btn-info dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Действия</button>
+        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+            <a class="dropdown-item" asp-area="Admin" asp-controller="Administration" asp-action="ChangePassword" asp-route-id="@Model.Id"> Смена пароля</a>
+            <a class="dropdown-item" asp-area="Admin" asp-controller="Administration" asp-action="EditUser" asp-route-id="@Model.Id"> Редактирование данных</a>
+            <a class="dropdown-item" asp-area="Admin" asp-controller="Administration" asp-action="EditUserRights" asp-route-id="@Model.Id">Права доступа </a>
+            <a class="dropdown-item" asp-area="Admin" asp-controller="Administration" asp-action="DeleteUser" asp-route-id="@Model.Id">Удалить пользователя </a>
+        </div>
     </div>
 </div>

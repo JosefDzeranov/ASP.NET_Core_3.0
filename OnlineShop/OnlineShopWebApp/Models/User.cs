@@ -22,7 +22,7 @@ namespace OnlineShopWebApp.Models
         [Compare("Password", ErrorMessage = "пароли не совпадают")]
         public string ConfirmedPassword { get; set; }
 
-        public UserActions Actions { get; set; }
+     //   public UserActions Actions { get; set; }
 
         public User(string login, string password)
         {

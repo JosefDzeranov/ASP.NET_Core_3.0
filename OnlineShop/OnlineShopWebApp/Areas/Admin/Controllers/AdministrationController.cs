@@ -93,6 +93,37 @@ namespace OnlineShopWebApp.Controllers
 
 
         }
+        public IActionResult ChangePassWord(Guid id)
+        {
+            var user = usersManager.GetUserById(id);
+            if (user != null)
+            {
+                return View(user);
+            }
+            else
+            {
+                return RedirectToAction("ShowUser", id);
+            }
+
+        }
+
+        [HttpPost]
+        public IActionResult SaveEditedUser(User user)
+        {
+            if (ModelState.IsValid)
+            {
+                usersManager.EditUser(user);
+
+                return RedirectToAction("Users");
+            }
+            else
+            {
+                return RedirectToAction("ChangePassWord", user.Id);
+            }
+
+        }
+
+
 
         public IActionResult Roles()
         {

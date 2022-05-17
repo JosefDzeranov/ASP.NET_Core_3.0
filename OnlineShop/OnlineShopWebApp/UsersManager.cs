@@ -29,7 +29,15 @@ namespace OnlineShopWebApp
 
         public void SaveNewUser(User user)
         {
-            registredUsers = GetRegistredUsers();
+            if (registredUsers != null)
+            {
+                registredUsers = GetRegistredUsers();
+            }
+            else
+            {
+                registredUsers = new List<User>();
+            }
+           
             registredUsers.Add(user);
 
             var jsonData = JsonConvert.SerializeObject(registredUsers);
@@ -62,6 +70,7 @@ namespace OnlineShopWebApp
 
         public User GetUserById(Guid id)
         {
+            registredUsers = GetRegistredUsers();
             return registredUsers.Find(x => x.Id == id);
         }
 
@@ -77,5 +86,31 @@ namespace OnlineShopWebApp
                 return false;
             }
         }
+
+        public void EditUser(User editedUser)
+        {
+            registredUsers = GetRegistredUsers();
+            User user1 = GetUserById(editedUser.Id);
+            foreach (var user in registredUsers)
+            {
+                if (user.Id == editedUser.Id)
+                {
+                    user.Name = editedUser.Name;
+                    user.LastName = editedUser.LastName;
+                    user.Login = editedUser.Login;
+                    user.Password = editedUser.Password;
+                }
+            }
+            var jsonData = JsonConvert.SerializeObject(registredUsers);
+
+            using (StreamWriter sw = new StreamWriter(path, false, System.Text.Encoding.UTF8))
+            {
+                sw.WriteLine(jsonData);
+            }
+
+        }
+
     }
+
+
 }
