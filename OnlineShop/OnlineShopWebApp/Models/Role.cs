@@ -9,5 +9,10 @@ namespace OnlineShopWebApp.Models
 
         [Required]
         public string Name { get; set; }
+        public Rights Rights { get; set; } = new Rights();
+        public Role()
+        {
+            Id = Guid.NewGuid();
+        }
     }
 }

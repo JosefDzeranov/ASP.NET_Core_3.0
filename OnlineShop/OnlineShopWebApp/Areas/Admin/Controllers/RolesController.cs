@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using System;
+using Microsoft.AspNetCore.Mvc;
 using OnlineShopWebApp.Interfase;
 using OnlineShopWebApp.Models;
 
@@ -18,9 +19,9 @@ namespace OnlineShopWebApp.Areas.Admin.Controllers
             var roles = rolesManeger.GetAll();
             return View(roles);
         }
-        public IActionResult Remove(string roleName)
+        public IActionResult Remove(Guid roleId)
         {
-            rolesManeger.Remove(roleName);
+            rolesManeger.Remove(roleId);
             return RedirectToAction("Index");
         }
 
@@ -31,7 +32,7 @@ namespace OnlineShopWebApp.Areas.Admin.Controllers
         [HttpPost]
         public IActionResult Add(Role role)
         {
-            if (rolesManeger.TryGetByName(role.Name) != null)
+            if (rolesManeger.TryGetByName(role.Id) != null)
             {
                 ModelState.AddModelError("", "Такая роль уже существует");
             }

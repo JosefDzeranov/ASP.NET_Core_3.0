@@ -10,11 +10,11 @@ namespace OnlineShopWebApp
     {
         public IWorkWithData JsonStorage { get; set; } = new JsonWorkWithData(nameSave);
         private const string nameSave = "list_of_buyers";
-        private List<Buyer> buyers;
+        private List<UserBuyer> buyers;
 
         public BuyerManager()
         {
-            buyers = JsonStorage.Read<List<Buyer>>();
+            buyers = JsonStorage.Read<List<UserBuyer>>();
         }
 
         public void AddProductInCart(Product product, Guid buyerId)
@@ -66,7 +66,7 @@ namespace OnlineShopWebApp
             JsonStorage.Write(buyers);
         }
 
-        public Buyer FindBuyer(Guid buyerId)
+        public UserBuyer FindBuyer(Guid buyerId)
         {
             var buyer = buyers.Find(x => x.Id == buyerId);
             return buyer;

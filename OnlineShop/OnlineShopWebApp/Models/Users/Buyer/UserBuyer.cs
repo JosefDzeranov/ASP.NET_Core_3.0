@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 namespace OnlineShopWebApp.Models.Users.Buyer
 {
-    public class Buyer : User
+    public class UserBuyer : User
     {
         public List<Product> Comparisons { get; set; } = new List<Product>();
         public List<CartItem> Cart { get; set; } = new List<CartItem>();

@@ -20,6 +20,19 @@
                                 <span asp-validation-for="Name"></span>
                             </div>
                         </div>
+                        <div>Присвоить права:</div>
+                        <div class="row mx-auto">
+                            <div class="form-check col-1">
+                                <input type="checkbox" class="form-check-input" id="defaultCheck1" name="Rights.BeAdmin" value="true" asp-for="Rights.BeAdmin">
+                            </div>
+                            <div class="col">Администратор</div>
+                        </div>
+                        <div class="row mx-auto">
+                            <div class="form-check col-1">
+                                <input type="checkbox" class="form-check-input" id="defaultCheck2"  name="Rights.BeAdmin" value="true"  asp-for="Rights.BeBuyer">
+                            </div>
+                            <div class="col">Покупатель</div>
+                        </div>
 
                         <div class="col-3 p-3">
                             <button class="btn btn-light text-center" type="submit"  asp-area="Admin" asp-controller="Roles" asp-action="Add">Создать</button>
@@ -28,7 +41,7 @@
                 </div>
             </div>
         </div>
-    </div>
+    
 </form>
 
 

@@ -82,7 +82,7 @@
                         <form class="form-inline" method="post" asp-area="Admin" asp-controller="Orders" asp-action="Details">
                             <div class="col-9">
                                 <div class="row">
-                                    <input type="hidden" value="@Model.Id" name="Id" asp-for="Id"/>
+                                    <input type="hidden" value="@Model.Id" name="roleId" asp-for="Id"/>
                                     <select class="custom-select" name="Status" asp-for="Status">
                                         <option selected>@Model.Status</option>
                                         @for (int index = 0; index < 5; index++)

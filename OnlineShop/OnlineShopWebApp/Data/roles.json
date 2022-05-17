@@ -1,6 +1,18 @@
 [
   {
-    "Id": "00000000-0000-0000-0000-000000000000",
-    "Name": "Admin"
+    "Id": "b0f1e30b-ad99-44bd-a34f-3c0912c24bee",
+    "Name": "Администратор",
+    "Rights": {
+      "BeAdmin": true,
+      "BeBuyer": true
+    }
+  },
+  {
+    "Id": "2f8b4804-c2f8-4315-8072-bdf2c66ded40",
+    "Name": "Покупатель",
+    "Rights": {
+      "BeAdmin": false,
+      "BeBuyer": true
+    }
   }
 ]

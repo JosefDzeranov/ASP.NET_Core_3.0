@@ -15,7 +15,7 @@ namespace OnlineShopWebApp.Interfase
         void UpdateOrderStatus(OrderItem newOrder);
         void Buy(Guid buyerId);
         void ClearCart(Guid buyerId);
-        Buyer FindBuyer(Guid buyerId);
+        UserBuyer FindBuyer(Guid buyerId);
         void SaveInfoBuying(InfoBuying infoBuying, Guid buyerId);
         void ClearInfoBuying(Guid buyerId);
     }

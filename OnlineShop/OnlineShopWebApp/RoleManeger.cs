@@ -1,4 +1,5 @@
-﻿using OnlineShopWebApp.Interfase;
+﻿using System;
+using OnlineShopWebApp.Interfase;
 using OnlineShopWebApp.Models;
 using System.Collections.Generic;
 using System.Linq;
@@ -20,9 +21,9 @@ namespace OnlineShopWebApp
             return roles;
         }
 
-        public Role TryGetByName(string name)
+        public Role TryGetByName(Guid roleId)
         {
-            return roles.FirstOrDefault(x => x.Name == name);
+            return roles.FirstOrDefault(x => x.Id == roleId);
         }
 
         public void Add(Role role)
@@ -31,9 +32,9 @@ namespace OnlineShopWebApp
             JsonStorage.Write(roles);
         }
 
-        public void Remove(string name)
+        public void Remove(Guid Id)
         {
-            roles.RemoveAll(x => x.Name == name);
+            roles.RemoveAll(x => x.Id == Id);
             JsonStorage.Write(roles);
         }
     }
