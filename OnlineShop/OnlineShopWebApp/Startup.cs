@@ -37,7 +37,7 @@ namespace OnlineShopWebApp
             services.AddTransient<IProductRepository, ProductRepository>();
             services.AddTransient<ICartRepository, CartRepository>();
             services.AddSingleton<IOrderRepository, OrderRepository>();
-            services.AddSingleton<IFavoriteRepository, FavoriteRepository>();
+            services.AddTransient<IFavoriteRepository, FavoriteRepository>();
             services.AddSingleton<IRoleRepository, RoleRepository>();
             services.AddSingleton<IUserRepository, UserRepository>();
         }

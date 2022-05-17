@@ -9,6 +9,7 @@ namespace OnlineShop.DB.Models
         public decimal Cost { get; set; }
         public string Description { get; set; }
         public string ImgPath { get; set; }
+       
     }
 
 }

@@ -1,7 +1,9 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using OnlineShop.DB.Services;
+using OnlineShopWebApp.Models;
 using OnlineShopWebApp.Services;
 using System;
+using System.Collections.Generic;
 
 namespace OnlineShopWebApp.Controllers
 {
@@ -20,22 +22,34 @@ namespace OnlineShopWebApp.Controllers
         {
             var favorite = favoriteRepository.TryGetByUserId(Const.UserId);
             var products = favorite?.Products;
-            return View(products);
+            if(products != null)
+            {
+                var productsViewModel = new List<ProductViewModel>();
+
+                foreach (var product in products)
+                {
+                    var productViewModel = product.MappingProductViewModel();
+                    productsViewModel.Add(productViewModel);
+                }
+                return View(productsViewModel);
+            }
+
+            return View();
         }
 
 
         public IActionResult Add(Guid productId, string control, string act)
         {
             var product = productRepository.TryGetById(productId);
-           // favoriteRepository.Add(product, Const.UserId);
+            favoriteRepository.Add(product, Const.UserId);
 
-            return RedirectToAction(act, control);
+            return RedirectToAction(act, control, new{ id = productId });
         }
 
         public IActionResult Remove(Guid productId)
         {
             var product = productRepository.TryGetById(productId);
-           // favoriteRepository.Remove(product, Const.UserId);
+            favoriteRepository.Remove(product, Const.UserId);
             
             return RedirectToAction("Index");
         }

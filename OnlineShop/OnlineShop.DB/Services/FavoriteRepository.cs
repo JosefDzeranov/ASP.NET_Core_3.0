@@ -1,15 +1,20 @@
-﻿using OnlineShopWebApp.Models;
+﻿using OnlineShop.DB.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace OnlineShopWebApp.Services
+namespace OnlineShop.DB.Services
 {
     public class FavoriteRepository : IFavoriteRepository
     {
-        private List<Favorite> favorites = new List<Favorite>();
+        private readonly OnlineShopContext onlineShopContext;
 
-        public void Add(ProductViewModel product, string userId)
+        public FavoriteRepository(OnlineShopContext onlineShopContext)
+        {
+            this.onlineShopContext = onlineShopContext;
+        }
+
+        public void Add(Product product, string userId)
         {
             var existingFavorite = TryGetByUserId(userId);
             if (existingFavorite == null)
@@ -18,12 +23,13 @@ namespace OnlineShopWebApp.Services
                 {
                     Id = Guid.NewGuid(),
                     UserId = userId,
-                    Products = new List<ProductViewModel>()
+                    Products = new List<Product>()
                     {
                         product
                     }
                 };
-                favorites.Add(newFavorite);
+                onlineShopContext.Favorites.Add(newFavorite);
+
             }
             else
             {
@@ -33,29 +39,32 @@ namespace OnlineShopWebApp.Services
                 if (existingProduct == null)
                 {
                     existingFavorite.Products.Add(product);
+                    onlineShopContext.Favorites.Update(existingFavorite);
                 }
 
             }
 
+            onlineShopContext.SaveChanges();
         }
 
-        public void Remove(ProductViewModel product, string userId)
+        public void Remove(Product product, string userId)
         {
             var existingFavorite = TryGetByUserId(userId);
             if (existingFavorite != null)
             {
                 existingFavorite.Products.Remove(product);
+                onlineShopContext.Favorites.Update(existingFavorite);
                 if (existingFavorite.Products.Count == 0)
                 {
-                    favorites.Remove(existingFavorite);
+                    onlineShopContext.Favorites.Remove(existingFavorite);
                 }
             }
-
+            onlineShopContext.SaveChanges();
         }
 
         public Favorite TryGetByUserId(string userId)
         {
-            return favorites.FirstOrDefault(x => x.UserId == userId);
+            return onlineShopContext.Favorites.FirstOrDefault(x => x.UserId == userId);
         }
 
 
