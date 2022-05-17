@@ -37,5 +37,7 @@ namespace OnlineShopWebApp.Models.Users
         [Compare("Password", ErrorMessage = "Проверочный пароль должен совпадать с паролем")]
         public string PasswordConfirm { get; set; }
 
+        public string RoleUser { get; set; }
+
     }
 }
