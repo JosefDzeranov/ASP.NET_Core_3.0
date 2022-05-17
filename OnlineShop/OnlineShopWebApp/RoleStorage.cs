@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using OnlineShopWebApp.Areas.Admin.Models;
 using System.Xml.Linq;
@@ -8,7 +7,7 @@ namespace OnlineShopWebApp
 {
     public class RoleStorage : IRoleStorage
     {
-        private const string ROLES = @"Data/Roles.xml";
+        private const string fileName = @"Data/Roles.xml";
         private List<Role> _roles = new List<Role>();
 
         public Role TryGetRoleByName(string name)
@@ -19,7 +18,7 @@ namespace OnlineShopWebApp
 
         public List<Role> GetAll()
         {
-            var xDoc = XDocument.Load(ROLES);
+            var xDoc = XDocument.Load(fileName);
             _roles = xDoc.Element("roles")
                                .Elements("role")
                                .Select(role => new Role(
@@ -29,29 +28,29 @@ namespace OnlineShopWebApp
 
         public void Add(string name)
         {
-            var xDoc = XDocument.Load(ROLES);
+            var xDoc = XDocument.Load(fileName);
             var root = xDoc.Element("roles");
             root.Add(new XElement("role",
                          new XElement("name", name)));
 
-            xDoc.Save(ROLES);
+            xDoc.Save(fileName);
         }
 
         public void Remove(string name)
         {
-            var xDoc = XDocument.Load(ROLES);
+            var xDoc = XDocument.Load(fileName);
             var root = xDoc.Element("roles");
 
             var role = root.Elements("role")
                               .FirstOrDefault(role => role.Element("name").Value == name);
 
             role.Remove();
-            xDoc.Save(ROLES);
+            xDoc.Save(fileName);
         }
 
         public void Edit(string oldName, Role role)
         {
-            var xDoc = XDocument.Load(ROLES);
+            var xDoc = XDocument.Load(fileName);
             var editRole = xDoc.Element("roles")
                               .Elements("role")
                               .FirstOrDefault(role => role.Element("name").Value == oldName);
@@ -59,7 +58,7 @@ namespace OnlineShopWebApp
             var name = editRole.Element("name");
             name.Value = role.Name;
 
-            xDoc.Save(ROLES);
+            xDoc.Save(fileName);
         }
     }
 }
