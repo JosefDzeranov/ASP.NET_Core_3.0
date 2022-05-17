@@ -8,15 +8,15 @@ namespace OnlineShopWebApp.Controllers
 
     public class BuyerController : Controller
     {
-        private readonly IBuyerStorage buyerStorage;
-        public BuyerController(IBuyerStorage buyerStorage)
+        private readonly IBuyerManager buyerManager;
+        public BuyerController(IBuyerManager buyerManager)
         {
-            this.buyerStorage = buyerStorage;
+            this.buyerManager = buyerManager;
         }
         public IActionResult Index(Guid personId)
         {
             personId = MyConstant.DefaultBuyerIdIsNull(personId);
-            return View(buyerStorage.FindBuyer(personId));
+            return View(buyerManager.FindBuyer(personId));
         }
     }
 }

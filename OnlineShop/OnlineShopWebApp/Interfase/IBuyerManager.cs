@@ -5,7 +5,7 @@ using OnlineShopWebApp.Models.Users.Buyer;
 
 namespace OnlineShopWebApp.Interfase
 {
-    public interface IBuyerStorage
+    public interface IBuyerManager
     {
         void AddProductInCart(Product product, Guid buyerId);
         void DeleteProductInCart(Guid productId, Guid buyerId);

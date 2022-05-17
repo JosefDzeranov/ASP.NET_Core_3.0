@@ -21,7 +21,7 @@ namespace OnlineShopWebApp
         public IConfiguration Configuration { get; }
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddSingleton<IBuyerStorage, JsonBuyerStorage>();
+            services.AddSingleton<IBuyerManager, BuyerManager>();
             services.AddSingleton<IProductStorage, JsonProductStorage>();
             services.AddSingleton<IRolesStorage, JsonRoleStorage>();
             services.AddControllersWithViews();

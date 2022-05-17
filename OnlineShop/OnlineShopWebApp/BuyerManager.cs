@@ -6,13 +6,13 @@ using OnlineShopWebApp.Models.Users.Buyer;
 
 namespace OnlineShopWebApp
 {
-    public class JsonBuyerStorage : IBuyerStorage
+    public class BuyerManager : IBuyerManager
     {
         public IWorkWithData JsonStorage { get; set; } = new JsonWorkWithData(nameSave);
         private const string nameSave = "list_of_buyers";
         private List<Buyer> buyers;
 
-        public JsonBuyerStorage()
+        public BuyerManager()
         {
             buyers = JsonStorage.Read<List<Buyer>>();
         }
@@ -55,7 +55,7 @@ namespace OnlineShopWebApp
         public void ClearInfoBuying(Guid buyerId)
         {
             var buyer = FindBuyer(buyerId);
-            buyer.infoBuying = null;
+            buyer.InfoBuying = null;
             JsonStorage.Write(buyers);
         }
 

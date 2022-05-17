@@ -7,17 +7,17 @@ namespace OnlineShopWebApp.Views.Shared.Components.Cart
 {
     public class CartViewComponent : ViewComponent
     {
-        private readonly IBuyerStorage buyerStorage;
+        private readonly IBuyerManager buyerManager;
 
-        public CartViewComponent(IBuyerStorage buyerStorage)
+        public CartViewComponent(IBuyerManager buyerManager)
         {
-            this.buyerStorage = buyerStorage;
+            this.buyerManager = buyerManager;
         }
 
         public IViewComponentResult Invoke(Guid buyerId)
         {
             buyerId = MyConstant.DefaultBuyerIdIsNull(buyerId);
-            var sumProduct = buyerStorage.FindBuyer(buyerId).SumAllProducts();
+            var sumProduct = buyerManager.FindBuyer(buyerId).SumAllProducts();
             return View("Cart", sumProduct);
         }
         

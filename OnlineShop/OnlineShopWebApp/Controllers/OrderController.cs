@@ -9,16 +9,16 @@ namespace OnlineShopWebApp.Controllers
 
     public class OrderController : Controller
     {
-        private readonly IBuyerStorage buyerStorage;
-        public OrderController(IBuyerStorage buyerStorage)
+        private readonly IBuyerManager buyerManager;
+        public OrderController(IBuyerManager buyerManager)
         {
-            this.buyerStorage = buyerStorage;
+            this.buyerManager = buyerManager;
         }
 
         public IActionResult Index(Guid buyerId)
         {
             buyerId = MyConstant.DefaultBuyerIdIsNull(buyerId);
-            return View(buyerStorage.FindBuyer(buyerId));
+            return View(buyerManager.FindBuyer(buyerId));
         }
 
         [HttpPost]
@@ -26,7 +26,7 @@ namespace OnlineShopWebApp.Controllers
         public IActionResult RewriteInfoBuying(Guid buyerId)
         {
             buyerId = MyConstant.DefaultBuyerIdIsNull(buyerId);
-            buyerStorage.ClearInfoBuying(buyerId);
+            buyerManager.ClearInfoBuying(buyerId);
             return RedirectToAction("Index", new { buyerId });
         }
 
@@ -36,7 +36,7 @@ namespace OnlineShopWebApp.Controllers
             buyerId = MyConstant.DefaultBuyerIdIsNull(buyerId);
             if (ModelState.IsValid)
             {
-                buyerStorage.SaveInfoBuying(infoBuying, buyerId);
+                buyerManager.SaveInfoBuying(infoBuying, buyerId);
                 return RedirectToAction("Buy", new { buyerId });
             }
             else return Content("errorValid");
@@ -44,7 +44,7 @@ namespace OnlineShopWebApp.Controllers
         public IActionResult Buy(Guid buyerId)
         {
             buyerId = MyConstant.DefaultBuyerIdIsNull(buyerId);
-            buyerStorage.Buy(buyerId);
+            buyerManager.Buy(buyerId);
             return View();
         }
     }
