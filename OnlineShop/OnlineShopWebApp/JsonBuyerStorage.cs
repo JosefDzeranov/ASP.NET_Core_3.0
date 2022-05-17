@@ -14,56 +14,56 @@ namespace OnlineShopWebApp
 
         public JsonBuyerStorage()
         {
-            buyers = JsonStorage.ReadToStorage<Buyer>();
+            buyers = JsonStorage.Read<List<Buyer>>();
         }
 
         public void AddProductInCart(Product product, Guid buyerId)
         {
             var buyer = FindBuyer(buyerId);
             buyer.AddProductInCart(product);
-            JsonStorage.WriteToStorage(buyers);
+            JsonStorage.Write(buyers);
         }
 
         public void DeleteProductInCart(Guid productId, Guid buyerId)
         {
             var buyer = FindBuyer(buyerId);
             buyer.DeleteProductInCart(productId);
-            JsonStorage.WriteToStorage(buyers);
+            JsonStorage.Write(buyers);
         }
 
         public void ReduceDuplicateProductCart(Guid productId, Guid buyerId)
         {
             var buyer = FindBuyer(buyerId);
             buyer.ReduceDuplicateProductCart(productId);
-            JsonStorage.WriteToStorage(buyers);
+            JsonStorage.Write(buyers);
         }
 
         public void ClearCart(Guid buyerId)
         {
             var buyer = FindBuyer(buyerId);
             buyer.ClearCart();
-            JsonStorage.WriteToStorage(buyers);
+            JsonStorage.Write(buyers);
         }
 
         public void SaveInfoBuying(InfoBuying infoBuying, Guid buyerId)
         {
             var buyer = FindBuyer(buyerId);
             buyer.SaveInfoBuying(infoBuying);
-            JsonStorage.WriteToStorage(buyers);
+            JsonStorage.Write(buyers);
         }
 
         public void ClearInfoBuying(Guid buyerId)
         {
             var buyer = FindBuyer(buyerId);
             buyer.infoBuying = null;
-            JsonStorage.WriteToStorage(buyers);
+            JsonStorage.Write(buyers);
         }
 
         public void Buy(Guid buyerId)
         {
             var buyer = FindBuyer(buyerId);
             buyer.Buy();
-            JsonStorage.WriteToStorage(buyers);
+            JsonStorage.Write(buyers);
         }
 
         public Buyer FindBuyer(Guid buyerId)
@@ -106,7 +106,7 @@ namespace OnlineShopWebApp
         {
             var order = FindOrderItem(newOrder.Id);
             order.Status = newOrder.Status;
-            JsonStorage.WriteToStorage(buyers);
+            JsonStorage.Write(buyers);
         }
 
     }

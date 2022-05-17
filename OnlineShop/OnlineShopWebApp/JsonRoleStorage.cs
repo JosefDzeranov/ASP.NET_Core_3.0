@@ -13,7 +13,7 @@ namespace OnlineShopWebApp
 
         public JsonRoleStorage()
         {
-            roles = JsonStorage.ReadToStorage<Role>();
+            roles = JsonStorage.Read<List<Role>>();
         }
         public List<Role> GetAll()
         {
@@ -28,13 +28,13 @@ namespace OnlineShopWebApp
         public void Add(Role role)
         {
             roles.Add(role);
-            JsonStorage.WriteToStorage(roles);
+            JsonStorage.Write(roles);
         }
 
         public void Remove(string name)
         {
             roles.RemoveAll(x => x.Name == name);
-            JsonStorage.WriteToStorage(roles);
+            JsonStorage.Write(roles);
         }
     }
 }

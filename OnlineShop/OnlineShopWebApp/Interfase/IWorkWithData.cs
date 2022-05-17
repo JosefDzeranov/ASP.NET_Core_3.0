@@ -1,11 +1,9 @@
-﻿using System.Collections.Generic;
-
-namespace OnlineShopWebApp.Interfase
+﻿namespace OnlineShopWebApp.Interfase
 {
     public interface IWorkWithData
     {
-        public string WriteToStorage<T>(List<T> TlistObjects);
+        public void Write<T>(T TObject);
 
-        public List<T> ReadToStorage<T>();
+        public T Read<T>() where T : new();
     }
 }

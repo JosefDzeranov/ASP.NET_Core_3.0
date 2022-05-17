@@ -13,7 +13,7 @@ namespace OnlineShopWebApp
         public IWorkWithData JsonStorage { get; set; } = new JsonWorkWithData(nameSave);
         public JsonProductStorage()
         {
-            Products = JsonStorage.ReadToStorage<Product>();
+            Products = JsonStorage.Read<List<Product>>();
         }
 
         public Product FindProduct(Guid productId)
@@ -25,7 +25,7 @@ namespace OnlineShopWebApp
         public void DeleteProduct(Product product)
         {
             Products.Remove(product);
-            JsonStorage.WriteToStorage(Products);
+            JsonStorage.Write(Products);
         }
         public void UpdateProduct(Product newProduct)
         {
@@ -37,12 +37,12 @@ namespace OnlineShopWebApp
             oldProduct.CodeNumber = newProduct.CodeNumber;
             oldProduct.Square = newProduct.Square;
             oldProduct.Width = newProduct.Width;
-            JsonStorage.WriteToStorage(Products);
+            JsonStorage.Write(Products);
         }
         public void AddNewProduct(Product product)
         {
             Products.Add(product);
-            JsonStorage.WriteToStorage(Products);
+            JsonStorage.Write(Products);
         }
 
     }

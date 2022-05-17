@@ -6,7 +6,7 @@
       "Surname": "Молостов",
       "Firstname": "Григорий",
       "Secondname": "Николаевич",
-      "Phone": "+79530711665",
+      "Phone": "\u002B79530711665",
       "Email": "archi.dnk@gmail.com",
       "Commentary": "sff"
     },
@@ -19,7 +19,7 @@
               "Id": "eb19668f-4c7f-4edb-ab59-dc6d41f1e5ad",
               "CodeNumber": "57-00",
               "Cost": 36000.0,
-              "Square": 193.0,
+              "Square": 193,
               "Width": 11.75,
               "Length": 12.5,
               "Description": "Проект двухэтажного дома из газабетона с терассой",
@@ -29,12 +29,8 @@
             },
             "Count": 2,
             "additionalOptions": [
-              {
-                "opcion1": 1.0
-              },
-              {
-                "opcion1": 1.0
-              }
+              {},
+              {}
             ]
           }
         ],
@@ -42,7 +38,7 @@
           "Surname": "Молостов",
           "Firstname": "Александр",
           "Secondname": "Николаевич",
-          "Phone": "+77777777777",
+          "Phone": "\u002B77777777777",
           "Email": "odisei.arco26@gmail.com",
           "Commentary": "sgr"
         },
@@ -59,7 +55,7 @@
               "Id": "eb19668f-4c7f-4edb-ab59-dc6d41f1e5ad",
               "CodeNumber": "57-00",
               "Cost": 36000.0,
-              "Square": 193.0,
+              "Square": 193,
               "Width": 11.75,
               "Length": 12.5,
               "Description": "Проект двухэтажного дома из газабетона с терассой",
@@ -69,9 +65,7 @@
             },
             "Count": 1,
             "additionalOptions": [
-              {
-                "opcion1": 1.0
-              }
+              {}
             ]
           }
         ],
@@ -79,7 +73,7 @@
           "Surname": "Молостов",
           "Firstname": "Григорий",
           "Secondname": "Николаевич",
-          "Phone": "+79530711665",
+          "Phone": "\u002B79530711665",
           "Email": "archi.dnk@gmail.com",
           "Commentary": "sff"
         },
@@ -87,6 +81,41 @@
         "Status": "В пути",
         "Login": "Alex1",
         "FullCost": 36001.0
+      },
+      {
+        "Id": "0f4616b2-b47d-4152-84ef-f737464d36a4",
+        "CartItem": [
+          {
+            "Product": {
+              "Id": "dd204a8d-df93-4465-83ae-3e3d84fc92d3",
+              "CodeNumber": "63-42",
+              "Cost": 32000.0,
+              "Square": 109,
+              "Width": 8.36,
+              "Length": 14.06,
+              "Description": "Проект двухэтажного дома из газабетона с терассой",
+              "Images": [
+                "1-1.jpg"
+              ]
+            },
+            "Count": 1,
+            "additionalOptions": [
+              {}
+            ]
+          }
+        ],
+        "InfoBuying": {
+          "Surname": "Молостов",
+          "Firstname": "Григорий",
+          "Secondname": "Николаевич",
+          "Phone": "\u002B79530711665",
+          "Email": "archi.dnk@gmail.com",
+          "Commentary": "sff"
+        },
+        "dateTime": "2022-05-17T08:40:23.3782704Z",
+        "Status": "Создан",
+        "Login": "Alex1",
+        "FullCost": 32001.0
       }
     ],
     "Id": "0c4de82b-a3be-4592-84d6-8b0d63a46aa0",
@@ -97,6 +126,7 @@
     "Age": 30,
     "Email": "email@email.com",
     "Password": null,
-    "PasswordConfirm": null
+    "PasswordConfirm": null,
+    "RoleUser": null
   }
 ]
