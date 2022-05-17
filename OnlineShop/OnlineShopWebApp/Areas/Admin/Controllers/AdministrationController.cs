@@ -137,6 +137,21 @@ namespace OnlineShopWebApp.Controllers
 
         }
 
+        public IActionResult DeleteUser(Guid id)
+        {
+            var user = usersManager.GetUserById(id);
+            if (user != null)
+            {
+                usersManager.DeleteUser(user);
+                return RedirectToAction("Users");
+            }
+            else
+            {
+                return RedirectToAction("ShowUser", id);
+            }
+
+        }
+
 
 
         public IActionResult Roles()

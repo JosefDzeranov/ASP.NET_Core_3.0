@@ -37,7 +37,7 @@ namespace OnlineShopWebApp
             {
                 registredUsers = new List<User>();
             }
-           
+
             registredUsers.Add(user);
 
             var jsonData = JsonConvert.SerializeObject(registredUsers);
@@ -90,7 +90,7 @@ namespace OnlineShopWebApp
         public void EditUser(User editedUser)
         {
             registredUsers = GetRegistredUsers();
-            User user1 = GetUserById(editedUser.Id);
+
             foreach (var user in registredUsers)
             {
                 if (user.Id == editedUser.Id)
@@ -109,6 +109,21 @@ namespace OnlineShopWebApp
             }
 
         }
+
+        public void DeleteUser(User deletedUser)
+        {
+            registredUsers = GetRegistredUsers();
+
+            registredUsers.Remove(registredUsers.Find(x => x.Id == deletedUser.Id));
+
+            var jsonData = JsonConvert.SerializeObject(registredUsers);
+
+            using (StreamWriter sw = new StreamWriter(path, false, System.Text.Encoding.UTF8))
+            {
+                sw.WriteLine(jsonData);
+            }
+        }
+
 
     }
 
