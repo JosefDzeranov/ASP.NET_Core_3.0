@@ -9,14 +9,13 @@ namespace OnlineShopWebApp
     public class JsonWorkWithData : IWorkWithData
     {
         public string Name { get; set; }
-        private string rootDirectory = "Data";
         private string dataFormat = "json";
         private string nameSave;
 
         public JsonWorkWithData(string name)
         {
             Name = name;
-            nameSave = string.Format($"{rootDirectory}/{name}.{dataFormat}");
+            nameSave = string.Format($"Data/{name}.{dataFormat}");
         }
         public void Write<T>(T TObject)
         {
