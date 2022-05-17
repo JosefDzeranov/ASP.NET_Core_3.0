@@ -3,7 +3,7 @@
 <form method="post">
 
     <h2>Редактирование пользователя:</h2>
-
+     <input type="hidden" value=@Model.Id name="Id" />
     <div>
         <label asp-for="Name"></label><br />
         <input asp-for="Name"/>

@@ -107,6 +107,20 @@ namespace OnlineShopWebApp.Controllers
 
         }
 
+        public IActionResult EditUser(Guid id)
+        {
+            var user = usersManager.GetUserById(id);
+            if (user != null)
+            {
+                return View(user);
+            }
+            else
+            {
+                return RedirectToAction("ShowUser", id);
+            }
+
+        }
+
         [HttpPost]
         public IActionResult SaveEditedUser(User user)
         {
