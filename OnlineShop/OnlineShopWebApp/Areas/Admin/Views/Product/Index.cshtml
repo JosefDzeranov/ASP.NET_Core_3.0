@@ -1,4 +1,4 @@
-﻿@model List<Product>
+﻿@model List<ProductViewModel>
 <div class="row">
 
     @await Html.PartialAsync("AdminLeftPanel")
@@ -21,8 +21,7 @@
                                 <td>@product.Id</td>
                                 <td>@product.Name</td>
                                 <td>@product.Cost ₽</td>
-                                <td>
-                                    <a asp-controller="Product" asp-action="EditProduct" asp-route-id="@product.Id" class="btn btn-primary">Изменить</a>
+                                <td> <a asp-controller="Product" asp-action="EditProduct" asp-route-id="@product.Id" class="btn btn-primary">Изменить</a>
                                     <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#DeleteProduct">
                                         Удалить
                                     </button>
@@ -38,7 +37,7 @@
                                                 </div>
                                                 <div class="modal-footer">
                                                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Отмена</button>
-                                                    <a asp-controller="Product" asp-action="DeleteProduct" asp-route-id="@product.Id" type="button" class="btn btn-danger">Удалить</a>
+                                                    <a asp-controller="Product" asp-action="DeleteProduct" asp-route-id="@product.Id" class="btn btn-danger">Удалить</a>
                                                 </div>
                                             </div>
                                         </div>

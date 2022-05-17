@@ -1,4 +1,4 @@
-﻿@model Cart
+﻿@model CartViewModel
 
 @{
     ViewData["Title"] = "Корзина";
@@ -13,8 +13,8 @@
     <div class="row">
         <div class="col my-2">
             <p>
-                <a href="/cart/removeAll" class="btn btn-danger btn-sm">Очистить корзину</a>
-                <a href="/home/index" class="btn btn-dark btn-sm">Продолжить покупки</a>
+                <a asp-controller="Cart" asp-action="RemoveAll" class="btn btn-danger btn-sm">Очистить корзину</a>
+                <a asp-controller="Home" asp-action="Index" class="btn btn-dark btn-sm">Продолжить покупки</a>
             </p>
         </div>
     </div>

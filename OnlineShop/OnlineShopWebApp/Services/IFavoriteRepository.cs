@@ -7,7 +7,7 @@ namespace OnlineShopWebApp.Services
     {
         Favorite TryGetByUserId(string userId);
 
-        void Add(Product product, string userId);
-        void Remove(Product product, string userId);
+        void Add(ProductViewModel product, string userId);
+        void Remove(ProductViewModel product, string userId);
     }
 }

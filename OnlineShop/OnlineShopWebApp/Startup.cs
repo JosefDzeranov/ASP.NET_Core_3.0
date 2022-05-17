@@ -1,8 +1,12 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using OnlineShop.DB;
+using OnlineShop.DB.Services;
+using OnlineShopDB.Services;
 using OnlineShopWebApp.Models;
 using OnlineShopWebApp.Services;
 using Serilog;
@@ -10,7 +14,7 @@ using Serilog;
 namespace OnlineShopWebApp
 {
     public class Startup
-    { 
+    {
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
@@ -21,9 +25,17 @@ namespace OnlineShopWebApp
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            string connection = Configuration.GetConnectionString("online_shop");
+            services.AddDbContext<OnlineShopContext>(options =>
+            {
+               options
+              .UseLazyLoadingProxies()
+              .UseSqlServer(connection);
+            });
+
             services.AddControllersWithViews();
-            services.AddSingleton<IProductRepository,ProductRepository>();
-            services.AddSingleton<ICartRepository,CartRepository>();
+            services.AddTransient<IProductRepository, ProductRepository>();
+            services.AddTransient<ICartRepository, CartRepository>();
             services.AddSingleton<IOrderRepository, OrderRepository>();
             services.AddSingleton<IFavoriteRepository, FavoriteRepository>();
             services.AddSingleton<IRoleRepository, RoleRepository>();

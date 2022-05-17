@@ -1,6 +1,10 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using OnlineShopWebApp.Services;
 using OnlineShopWebApp.Models;
+using OnlineShop.DB.Services;
+using System;
+using System.Collections.Generic;
+
 namespace OnlineShopWebApp.Controllers
 {
     public class CartController : Controller
@@ -16,12 +20,16 @@ namespace OnlineShopWebApp.Controllers
         }
         public IActionResult Index()
         {
-            var cart = cartRepository.TryGetByUserId(Const.UserId);
-
-            return View(cart);
+            var cartDb = cartRepository.TryGetByUserId(Const.UserId);
+            if(cartDb != null)
+            {
+                var cartViewModel = cartDb.MappingCartViewModel();
+                return View(cartViewModel);
+            }
+            return View();
         }
 
-        public IActionResult Add(int productId)
+        public IActionResult Add(Guid productId)
         {
 
             var product = productRepository.TryGetById(productId);
@@ -30,23 +38,14 @@ namespace OnlineShopWebApp.Controllers
             return RedirectToAction("Index");
         }
 
-        public IActionResult Remove(int productId)
+        public IActionResult Remove(Guid productId)
         {
-
-
-            var product = productRepository.TryGetById(productId);
-            cartRepository.RemoveItem(product, Const.UserId);
-
+            cartRepository.RemoveItem(productId, Const.UserId);
             return RedirectToAction("Index");
         }
         public IActionResult RemoveAll()
         {
-
-           
-
             cartRepository.Clear(Const.UserId);
-
-
             return RedirectToAction("Index");
         }
     }

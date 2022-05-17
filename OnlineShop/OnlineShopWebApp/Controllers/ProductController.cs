@@ -1,6 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using OnlineShopWebApp.Services;
 using OnlineShopWebApp.Models;
+using System;
+using OnlineShop.DB.Services;
 
 namespace OnlineShopWebApp.Controllers
 {
@@ -12,7 +14,7 @@ namespace OnlineShopWebApp.Controllers
         {
             this.productRepository = productRepository;
         }
-        public IActionResult Index(int id)
+        public IActionResult Index(Guid id)
         {
 
             var product = productRepository.TryGetById(id);
@@ -20,8 +22,15 @@ namespace OnlineShopWebApp.Controllers
             {
                 return NotFound();
             }
-
-            return View(product);
+            var productViewModel = new ProductViewModel
+            {
+                Id = product.Id,
+                Name = product.Name,
+                Cost = product.Cost,
+                Description = product.Description,
+                ImgPath = product.ImgPath
+            };
+            return View(productViewModel);
         }
     }
 }
