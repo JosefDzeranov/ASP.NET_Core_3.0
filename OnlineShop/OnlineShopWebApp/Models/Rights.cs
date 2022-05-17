@@ -2,7 +2,8 @@
 {
     public class Rights
     {
-        public bool BeAdmin;
-        public bool BeBuyer;
+        public bool BeAdmin { get; set; }
+        public bool BeBuyer { get; set; }
+
     }
 }

@@ -1,6 +1,6 @@
 [
   {
-    "Id": "b0f1e30b-ad99-44bd-a34f-3c0912c24bee",
+    "Id": "65e9707a-0091-43c9-ad0f-bf340901c29e",
     "Name": "Администратор",
     "Rights": {
       "BeAdmin": true,
@@ -8,7 +8,7 @@
     }
   },
   {
-    "Id": "2f8b4804-c2f8-4315-8072-bdf2c66ded40",
+    "Id": "674b2f41-3173-4a0c-8f7e-4043876b8ee3",
     "Name": "Покупатель",
     "Rights": {
       "BeAdmin": false,
