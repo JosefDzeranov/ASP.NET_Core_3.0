@@ -2,7 +2,6 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 
 namespace OnlineShopWebApp
 {
@@ -15,7 +14,7 @@ namespace OnlineShopWebApp
             return Carts.FirstOrDefault(x => x.UserId == userId);
         }
 
-        public void Add(Product product, string userId)
+        public void Add(ProductViewModel product, string userId)
         {
             var existingCart = TryGetByUserId(userId);
             if (existingCart == null)
@@ -57,7 +56,7 @@ namespace OnlineShopWebApp
             }
         }
 
-        public void Remove(Product product, string userId)
+        public void Remove(ProductViewModel product, string userId)
         {
             var existingCart = TryGetByUserId(userId);
             var existingCartItem = existingCart.Items.FirstOrDefault(x => x.Product.Id == product.Id);
@@ -70,7 +69,6 @@ namespace OnlineShopWebApp
             {
                 existingCart.Items.Remove(existingCartItem);
             }
-            
         }
 
         public void Clear(string userId)

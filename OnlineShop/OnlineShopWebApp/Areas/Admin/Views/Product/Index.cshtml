@@ -1,4 +1,4 @@
-﻿@model List<Product>
+﻿@model List<ProductViewModel>
 
 <div class="row">
     @await Html.PartialAsync("AdminPanel")
@@ -18,25 +18,25 @@
             </thead>
 
             <tbody>
-            @foreach (var item in Model)
-            {
+                @for (int i = 0; i < Model.Count; i++)
+			{
                 <tr>
-                    <td>@(item.Id+1)</td>
+                    <td>@(i+1)</td>
                     <td>
                         <a style="color:black" 
                            asp-area=""
                            asp-controller="Product"
                            asp-action="Index"
-                           asp-route-Id="@item.Id">@item.Name </a>
+                           asp-route-Id="@Model[i].Id">@Model[i].Name </a>
                     </td>
 
-                    <td>@item.Cost</td>
+                    <td>@Model[i].Cost</td>
                     <td>
                         <a style="color:blue" 
                            asp-area = "Admin" 
                            asp-controller="Product" 
                            asp-action="Edit" 
-                           asp-route-productId="@item.Id">Edit</a>
+                           asp-route-productId="@Model[i].Id">Edit</a>
                     </td>
 
                     <td>
@@ -44,10 +44,10 @@
                            asp-area = "Admin" 
                            asp-controller="Product" 
                            asp-action="Delete" 
-                           asp-route-productId="@item.Id" role="button">Delete</a>
+                           asp-route-productId="@Model[i].Id" role="button">Delete</a>
                     <td>
                 </tr>
-            }
+                }
             </tbody>
         </table>
     </div>

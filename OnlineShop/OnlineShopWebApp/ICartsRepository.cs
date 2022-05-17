@@ -1,12 +1,13 @@
-﻿using OnlineShopWebApp.Models;
+﻿using OnlineShop.Db.Models;
+using OnlineShopWebApp.Models;
 
 namespace OnlineShopWebApp
 {
         public interface ICartsRepository
         {
             Cart TryGetByUserId(string userId);
-            void Add(Product product, string userId);
-            void Remove(Product product, string userId);
+            void Add(ProductViewModel product, string userId);
+            void Remove(ProductViewModel product, string userId);
             void Clear(string userId);
     }
     
