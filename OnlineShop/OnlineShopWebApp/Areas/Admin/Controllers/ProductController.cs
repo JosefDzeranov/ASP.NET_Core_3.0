@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using OnlineShop.Db;
 using OnlineShopWebApp.Models;
 using System;
 using System.Collections.Generic;
@@ -29,11 +30,19 @@ namespace OnlineShopWebApp.Areas.Admin.Controllers
         }
 
         [HttpPost]
-        public IActionResult Add(Product product)
+        public IActionResult Add(ProductViewModel product)
         {
+            var productDb = new ProductViewModel
+            {
+                Name = product.Name,
+                Cost = product.Cost,
+                Description = product.Description,
+                Pages = product.Pages
+            };
+
             if (ModelState.IsValid)
             {
-                productsRepository.Add(product);
+                productsRepository.Add(productDb);
                 return RedirectToAction("Products");
             }
             else
@@ -41,17 +50,25 @@ namespace OnlineShopWebApp.Areas.Admin.Controllers
                 return View(product);
             }
         }
-        public IActionResult Edit(int productId)
+        public IActionResult Edit(Guid productId)
         {
             var product = productsRepository.TryGetById(productId);
             return View(product);
         }
         [HttpPost]
-        public IActionResult Edit(Product product)
+        public IActionResult Edit(ProductViewModel product)
         {
+            var productDb = new ProductViewModel
+            {
+                Name = product.Name,
+                Cost = product.Cost,
+                Description = product.Description,
+                Pages = product.Pages
+            };
+
             if (ModelState.IsValid)
             {
-                productsRepository.Edit(product);
+                productsRepository.Edit(productDb);
                 return RedirectToAction("Products");
             }
             else
@@ -59,7 +76,7 @@ namespace OnlineShopWebApp.Areas.Admin.Controllers
                 return View(product);
             }
         }
-        public IActionResult Delete(int productId)
+        public IActionResult Delete(Guid productId)
         {
             productsRepository.Delete(productId);
             return RedirectToAction("Products");

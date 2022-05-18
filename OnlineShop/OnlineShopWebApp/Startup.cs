@@ -30,7 +30,7 @@ namespace OnlineShopWebApp
             services.AddSingleton<IFavouritesRepository, InMemoryFavouritesRepository>();
             services.AddSingleton<IOrdersRepository, InMemoryOrdersRepository>();
             services.AddSingleton<ICartsRepository, InMemoryCartsRepository>();
-            services.AddSingleton<IProductsRepository, ProductsDbRepository>();
+            services.AddTransient<IProductsRepository, ProductsDbRepository>();
             services.AddSingleton<IDeliveryRepository, InMemoryDeliveryRepository>();
             services.AddSingleton<IUsersRepository, InMemoryUsersRepository>();
             services.AddControllersWithViews();

@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using OnlineShopWebApp.Models;
+using OnlineShop.Db;
 
 namespace OnlineShopWebApp.Controllers
 {
@@ -23,14 +24,14 @@ namespace OnlineShopWebApp.Controllers
             var cart = cartsRepository.TryGetByUserId(Constants.UserId);
             return View(cart);
         }
-        public IActionResult Add(int productId)
+        public IActionResult Add(Guid productId)
         {
             var product = productsRepository.TryGetById(productId);
             cartsRepository.Add(product, Constants.UserId);
             return RedirectToAction("Index");
         }
 
-        public IActionResult Delete(int itemId)
+        public IActionResult Delete(Guid itemId)
         {
             var product = productsRepository.TryGetById(itemId);
             cartsRepository.Delete(product, Constants.UserId);

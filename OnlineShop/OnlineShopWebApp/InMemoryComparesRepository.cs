@@ -8,9 +8,9 @@ namespace OnlineShopWebApp
 {
     public class InMemoryComparesRepository : IComparesRepository
     {
-        private List<Product> productsToCompare = new List<Product>();
+        private List<ProductViewModel> productsToCompare = new List<ProductViewModel>();
 
-        public void Add(Product product)
+        public void Add(ProductViewModel product)
         {
 
             var existingProductToCompare = productsToCompare.FirstOrDefault(x => x.Id == product.Id);
@@ -20,7 +20,7 @@ namespace OnlineShopWebApp
             }
         }
 
-        public List<Product> GetCompare()
+        public List<ProductViewModel> GetCompare()
         {
             return productsToCompare;
         }
@@ -29,7 +29,7 @@ namespace OnlineShopWebApp
         {
             productsToCompare.Clear();
         }
-        public void Delete(Product product)
+        public void Delete(ProductViewModel product)
         {
             productsToCompare.Remove(product);
         }
