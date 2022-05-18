@@ -23,6 +23,12 @@ namespace OnlineShopWebApp
                 ),
         };
 
+        public void Add(Product product)
+        {
+            product.ImagesPath = "/images/RT3080.png";
+            products.Add(product);
+        }
+
         public List<Product> GetAllProducts()
         {
             return products;
@@ -38,14 +44,12 @@ namespace OnlineShopWebApp
             return null;
         }
 
-        public void Add(Product product)
-        {
-            products.Add(product);
-        }
-
         public void Edit(Product newProduct)
         {
             var product = products.FirstOrDefault(x => x.Id == newProduct.Id);
+            if (product == null)
+                return;
+
             product.Name = newProduct.Name;
             product.Price = newProduct.Price;
             product.Description = newProduct.Description;

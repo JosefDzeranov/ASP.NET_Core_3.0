@@ -41,8 +41,7 @@ namespace OnlineShopWebApp.Controllers
         {
             if (name != null)
             {
-                var productSearch = new List<Product>();
-                productSearch = productRepository.GetAllProducts().FindAll(x => x.Name.ToLower().Contains(name.ToLower()));
+                var productSearch = productRepository.GetAllProducts().FindAll(x => x.Name.ToLower().Contains(name.ToLower()));
                 return View(productSearch);
             }
             else

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.ComponentModel.DataAnnotations;
 
 namespace OnlineShopWebApp.Models
 {
@@ -6,8 +7,11 @@ namespace OnlineShopWebApp.Models
     {
         private static int uniId = 1;
         public int Id { get; }
+        [Required(ErrorMessage = "Поле названия незаполнено!")]
         public string Name { get; set; }
+        [Required(ErrorMessage = "Поле цены незаполнено!")]
         public decimal Price { get; set; }
+        [Required(ErrorMessage = "Поле описания незаполнено!")]
         public string Description { get; set; }
         public string ImagesPath { get; set; }
         public string GPU { get; }
@@ -16,10 +20,15 @@ namespace OnlineShopWebApp.Models
         public string GpuGhz { get; }
         public string TurboGpuGhz { get; }
 
-        public Product(string name, decimal price, string description, string gpu, string memorytype, string memorycount,
-            string gpughz, string turgpughz, string imagespath = null)
+        public Product()
         {
             Id = uniId;
+            uniId += 1;
+        }
+
+        public Product(string name, decimal price, string description, string gpu, string memorytype, string memorycount,
+            string gpughz, string turgpughz, string imagespath = null): this()
+        {
             Name = name;
             Price = price;
             Description = description;
@@ -29,7 +38,6 @@ namespace OnlineShopWebApp.Models
             GpuGhz = gpughz;
             TurboGpuGhz = turgpughz;
 
-            uniId += 1;
             ImagesPath = imagespath;
         }
 

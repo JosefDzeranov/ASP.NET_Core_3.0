@@ -41,10 +41,12 @@ namespace OnlineShopWebApp.Controllers
         }
 
         [HttpPost]
-        public IActionResult Add(Product product)
+        public IActionResult AddProduct(Product product)
         {
+            if (ModelState.IsValid)
+                return View(product);
             productsRepository.Add(product);
-            return View();
+            return RedirectToAction("Products");
         }
 
         public IActionResult Edit(int productId)
@@ -56,8 +58,10 @@ namespace OnlineShopWebApp.Controllers
         [HttpPost]
         public IActionResult EditProduct(Product product)
         {
+            if (ModelState.IsValid)
+                return View(product);
             productsRepository.Edit(product);
-            return View();
+            return RedirectToAction("Products");
         }
 
         public IActionResult Clear(int productId)
