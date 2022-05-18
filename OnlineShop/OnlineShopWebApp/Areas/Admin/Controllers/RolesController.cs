@@ -8,20 +8,20 @@ namespace OnlineShopWebApp.Areas.Admin.Controllers
     [Area("Admin")]
     public class RolesController : Controller
     {
-        private readonly IRolesManeger rolesManeger;
-        public RolesController(IRolesManeger rolesManeger)
+        private readonly IRoleManager roleManager;
+        public RolesController(IRoleManager roleManager)
         {
-            this.rolesManeger = rolesManeger;
+            this.roleManager = roleManager;
         }
 
         public IActionResult Index()
         {
-            var roles = rolesManeger.GetAll();
+            var roles = roleManager.GetAll();
             return View(roles);
         }
         public IActionResult Remove(Guid roleId)
         {
-            rolesManeger.Remove(roleId);
+            roleManager.Remove(roleId);
             return RedirectToAction("Index");
         }
 
@@ -32,13 +32,13 @@ namespace OnlineShopWebApp.Areas.Admin.Controllers
         [HttpPost]
         public IActionResult Add(Role role)
         {
-            if (rolesManeger.TryGetByName(role.Id) != null)
+            if (roleManager.Find(role.Id) != null)
             {
                 ModelState.AddModelError("", "Такая роль уже существует");
             }
             if (ModelState.IsValid)
             {
-                rolesManeger.Add(role);
+                roleManager.Add(role);
                 return RedirectToAction("Index");
             }
             return View(role);

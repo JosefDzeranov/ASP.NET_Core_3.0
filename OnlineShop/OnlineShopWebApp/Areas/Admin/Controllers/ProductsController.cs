@@ -22,14 +22,14 @@ namespace OnlineShopWebApp.Areas.Admin.Controllers
 
         public IActionResult Delete(Guid productId)
         {
-            var product = productManager.FindProduct(productId);
-            productManager.DeleteProduct(product);
+            var product = productManager.Find(productId);
+            productManager.Delete(product);
             return RedirectToAction("Index");
         }
 
         public IActionResult CardUpdate(Guid productId)
         {
-            var oldProduct = productManager.FindProduct(productId);
+            var oldProduct = productManager.Find(productId);
             return View(oldProduct);
         }
 
@@ -53,7 +53,7 @@ namespace OnlineShopWebApp.Areas.Admin.Controllers
         {
             if (ModelState.IsValid)
             {
-                productManager.AddNewProduct(product);
+                productManager.AddNew(product);
                 return RedirectToAction("Index");
             }
             return Content("errorValid");

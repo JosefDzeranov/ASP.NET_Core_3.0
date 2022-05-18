@@ -14,10 +14,17 @@ namespace OnlineShopWebApp.Views.Shared.Components.Cart
             this.buyerManager = buyerManager;
         }
 
-        public IViewComponentResult Invoke(Guid buyerId)
+        public IViewComponentResult Invoke(string userLogin)
         {
-            buyerId = MyConstant.DefaultBuyerIdIsNull(buyerId);
-            var sumProduct = buyerManager.FindBuyer(buyerId).SumAllProducts();
+            int sumProduct;
+            if (buyerManager.FindBuyer(userLogin) == null)
+            {
+                sumProduct = 0;
+            }
+            else
+            {
+                sumProduct = buyerManager.FindBuyer(userLogin).SumAllProducts();
+            }
             return View("Cart", sumProduct);
         }
         

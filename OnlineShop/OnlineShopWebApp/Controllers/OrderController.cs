@@ -15,36 +15,32 @@ namespace OnlineShopWebApp.Controllers
             this.buyerManager = buyerManager;
         }
 
-        public IActionResult Index(Guid buyerId)
+        public IActionResult Index(string buyerLogin)
         {
-            buyerId = MyConstant.DefaultBuyerIdIsNull(buyerId);
-            return View(buyerManager.FindBuyer(buyerId));
+            return View(buyerManager.FindBuyer(buyerLogin));
         }
 
         [HttpPost]
 
-        public IActionResult RewriteInfoBuying(Guid buyerId)
+        public IActionResult RewriteInfoBuying(string buyerLogin)
         {
-            buyerId = MyConstant.DefaultBuyerIdIsNull(buyerId);
-            buyerManager.ClearInfoBuying(buyerId);
-            return RedirectToAction("Index", new { buyerId });
+            buyerManager.ClearInfoBuying(buyerLogin);
+            return RedirectToAction("Index", new {buyerId = buyerLogin });
         }
 
         [HttpPost]
-        public IActionResult BuyValid(InfoBuying infoBuying, Guid buyerId)
+        public IActionResult BuyValid(InfoBuying infoBuying, string buyerLogin)
         {
-            buyerId = MyConstant.DefaultBuyerIdIsNull(buyerId);
             if (ModelState.IsValid)
             {
-                buyerManager.SaveInfoBuying(infoBuying, buyerId);
-                return RedirectToAction("Buy", new { buyerId });
+                buyerManager.SaveInfoBuying(infoBuying, buyerLogin);
+                return RedirectToAction("Buy", new {buyerId = buyerLogin });
             }
             else return Content("errorValid");
         }
-        public IActionResult Buy(Guid buyerId)
+        public IActionResult Buy(string buyerLogin)
         {
-            buyerId = MyConstant.DefaultBuyerIdIsNull(buyerId);
-            buyerManager.Buy(buyerId);
+            buyerManager.Buy(buyerLogin);
             return View();
         }
     }

@@ -4,10 +4,10 @@ using OnlineShopWebApp.Models;
 
 namespace OnlineShopWebApp.Interfase
 {
-    public interface IRolesManeger
+    public interface IRoleManager
     {
         List<Role> GetAll();
-        Role TryGetByName(Guid roleId);
+        Role Find(Guid roleId);
         void Add(Role role);
         void Remove(Guid Id);
     }

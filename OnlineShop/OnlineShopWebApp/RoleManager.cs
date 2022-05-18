@@ -6,13 +6,13 @@ using System.Linq;
 
 namespace OnlineShopWebApp
 {
-    public class RoleManeger : IRolesManeger
+    public class RoleManager : IRoleManager
     {
         private readonly List<Role> roles;
         private const string nameSave = "roles";
-        public IWorkWithData JsonStorage { get; set; } = new JsonWorkWithData(nameSave);
+        private IWorkWithData JsonStorage { get; } = new JsonWorkWithData(nameSave);
 
-        public RoleManeger()
+        public RoleManager()
         {
             roles = JsonStorage.Read<List<Role>>();
         }
@@ -21,7 +21,7 @@ namespace OnlineShopWebApp
             return roles;
         }
 
-        public Role TryGetByName(Guid roleId)
+        public Role Find(Guid roleId)
         {
             return roles.FirstOrDefault(x => x.Id == roleId);
         }

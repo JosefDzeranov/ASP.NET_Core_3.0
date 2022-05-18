@@ -16,10 +16,9 @@ namespace OnlineShopWebApp.Views.Shared.Components.InfoBuying
             this.buyerManager = buyerManager;
         }
 
-        public IViewComponentResult Invoke(Guid buyerId)
+        public IViewComponentResult Invoke(string userLogin)
         {
-            buyerId = MyConstant.DefaultBuyerIdIsNull(buyerId);
-            var infoBuying = buyerManager.FindBuyer(buyerId).InfoBuying;
+            var infoBuying = buyerManager.FindBuyer(userLogin).InfoBuying;
             return View("InfoBuying", infoBuying);
         }
     }

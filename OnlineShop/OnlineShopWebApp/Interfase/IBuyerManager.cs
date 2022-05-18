@@ -7,16 +7,16 @@ namespace OnlineShopWebApp.Interfase
 {
     public interface IBuyerManager
     {
-        void AddProductInCart(Product product, Guid buyerId);
-        void DeleteProductInCart(Guid productId, Guid buyerId);
-        void ReduceDuplicateProductCart(Guid productId, Guid buyerId);
+        void AddProductInCart(Product product, string buyerLogin);
+        void DeleteProductInCart(Guid productId, string buyerLogin);
+        void ReduceDuplicateProductCart(Guid productId, string buyerLogin);
         List<OrderItem> CollectAllOrders();
         OrderItem FindOrderItem(Guid orderId);
         void UpdateOrderStatus(OrderItem newOrder);
-        void Buy(Guid buyerId);
-        void ClearCart(Guid buyerId);
-        UserBuyer FindBuyer(Guid buyerId);
-        void SaveInfoBuying(InfoBuying infoBuying, Guid buyerId);
-        void ClearInfoBuying(Guid buyerId);
+        void Buy(string buyerLogin);
+        void ClearCart(string buyerLogin);
+        UserBuyer FindBuyer(string buyerLogin);
+        void SaveInfoBuying(InfoBuying infoBuying, string buyerLogin);
+        void ClearInfoBuying(string buyerLogin);
     }
 }

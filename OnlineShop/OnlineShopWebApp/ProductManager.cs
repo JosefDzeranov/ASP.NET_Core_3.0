@@ -10,26 +10,26 @@ namespace OnlineShopWebApp
     {
         public List<Product> Products { get; set; }
         private const string nameSave = "projects_for_sale";
-        public IWorkWithData JsonStorage { get; set; } = new JsonWorkWithData(nameSave);
+        private IWorkWithData JsonStorage { get; } = new JsonWorkWithData(nameSave);
         public ProductManager()
         {
             Products = JsonStorage.Read<List<Product>>();
         }
 
-        public Product FindProduct(Guid productId)
+        public Product Find(Guid productId)
         {
             var product = Products.FirstOrDefault(x => x.Id == productId);
             return product;
         }
 
-        public void DeleteProduct(Product product)
+        public void Delete(Product product)
         {
             Products.Remove(product);
             JsonStorage.Write(Products);
         }
         public void UpdateProduct(Product newProduct)
         {
-            var oldProduct = FindProduct(newProduct.Id);
+            var oldProduct = Find(newProduct.Id);
             oldProduct.Cost = newProduct.Cost;
             oldProduct.Description = newProduct.Description;
             oldProduct.Images[0] = newProduct.Images[0];
@@ -39,7 +39,7 @@ namespace OnlineShopWebApp
             oldProduct.Width = newProduct.Width;
             JsonStorage.Write(Products);
         }
-        public void AddNewProduct(Product product)
+        public void AddNew(Product product)
         {
             Products.Add(product);
             JsonStorage.Write(Products);
