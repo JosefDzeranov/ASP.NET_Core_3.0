@@ -1,12 +1,13 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
+using OnlineShopWebApp.Interfase;
 
 namespace OnlineShopWebApp.Models.Users
 {
     public class User
     {
-        public Guid Id { get; set; }
-
+        private readonly IRoleManager roleManager;
+        
         [Required(ErrorMessage = "Не указан логин")]
         [StringLength(50, MinimumLength = 3, ErrorMessage = "Длина строки должна быть от 3 до 50 символов")]
         public string Login { get; set; }
@@ -37,7 +38,14 @@ namespace OnlineShopWebApp.Models.Users
         [Compare("Password", ErrorMessage = "Проверочный пароль должен совпадать с паролем")]
         public string PasswordConfirm { get; set; }
 
-        public string RoleUser { get; set; }
+        public Role RoleUser { get; set; }
+
+        public User(IRoleManager roleManager)
+        {
+            Guid rolesId = Guid.Parse("674b2f41-3173-4a0c-8f7e-4043876b8ee3"); //Покупатель
+            this.roleManager = roleManager;
+            RoleUser = roleManager.Find(rolesId);
+        }
 
     }
 }

@@ -9,44 +9,67 @@ namespace OnlineShopWebApp.Controllers
     {
         private readonly IBuyerManager buyerManager;
         private readonly IProductManager productManager;
-        public CartController(IBuyerManager buyerManager, IProductManager productManager)
+        private readonly IUserManager userManager;
+        public CartController(IBuyerManager buyerManager, IProductManager productManager, IUserManager userManager)
         {
             this.buyerManager = buyerManager;
             this.productManager = productManager;
+            this.userManager = userManager;
         }
-        public IActionResult Index(Guid buyerId)
+        public IActionResult Index(string buyerLogin)
         {
-            buyerId = MyConstant.DefaultBuyerIdIsNull(buyerId);
-            return View(buyerManager.FindBuyer(buyerId));
+            var buyer = buyerManager.FindBuyer(buyerLogin);
+            if (buyer == null)
+            {
+                return RedirectToAction("Index", "Login");
+            }
+            else
+            {
+
+            }
+            return View();
         }
 
-        public IActionResult AddProduct(Guid productId, Guid buyerId)
+        public IActionResult AddProduct(Guid productId, string buyerLogin)
         {
-            buyerId = MyConstant.DefaultBuyerIdIsNull(buyerId);
-            var product = productManager.FindProduct(productId);
-            buyerManager.AddProductInCart(product, buyerId);
-            return RedirectToAction("Index", new {buyerId});
+            var product = productManager.Find(productId);
+            var user = userManager.FindByLogin(buyerLogin);
+            object routeValues = new { buyerLogin, Index = "Index", controller = "Cart", area = "" };
+            if (user == null)
+            {
+                return RedirectToAction("Index", "Login", routeValues);
+            }
+            else
+            {
+                if (userManager.GettingAccess(buyerLogin, "Index", "Cart", ""))
+                {
+                    buyerManager.AddProductInCart(product, buyerLogin);
+                }
+                else
+                {
+                    return RedirectToAction("TabooAccess", "Login", routeValues);
+                }
+
+            }
+            return RedirectToAction("Index", new { buyerLogin });
         }
 
-        public IActionResult DeleteProduct(Guid productId, Guid buyerId)
+        public IActionResult DeleteProduct(Guid productId, string buyerLogin)
         {
-            buyerId = MyConstant.DefaultBuyerIdIsNull(buyerId);
-            buyerManager.DeleteProductInCart(productId, buyerId);
-            return RedirectToAction("Index", new { buyerId });
+            buyerManager.DeleteProductInCart(productId, buyerLogin);
+            return RedirectToAction("Index", new { buyerLogin });
         }
 
-        public IActionResult ReduceDuplicateProduct(Guid productId, Guid buyerId)
+        public IActionResult ReduceDuplicateProduct(Guid productId, string buyerLogin)
         {
-            buyerId = MyConstant.DefaultBuyerIdIsNull(buyerId);
-            buyerManager.ReduceDuplicateProductCart(productId, buyerId);
-            return RedirectToAction("Index", new { buyerId });
+            buyerManager.ReduceDuplicateProductCart(productId, buyerLogin);
+            return RedirectToAction("Index", new { buyerLogin });
         }
 
-        public IActionResult Clear(Guid buyerId)
+        public IActionResult Clear(string buyerLogin)
         {
-            buyerId = MyConstant.DefaultBuyerIdIsNull(buyerId);
-            buyerManager.ClearCart(buyerId);
-            return RedirectToAction("Index", new { buyerId });
+            buyerManager.ClearCart(buyerLogin);
+            return RedirectToAction("Index", new { buyerLogin });
         }
     }
 

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using OnlineShopWebApp.Interfase;
 
 
 namespace OnlineShopWebApp.Models.Users.Buyer
@@ -81,6 +82,10 @@ namespace OnlineShopWebApp.Models.Users.Buyer
         public void SaveInfoBuying(InfoBuying infoBuying)
         {
             this.InfoBuying = infoBuying;
+        }
+
+        public UserBuyer(IRoleManager roleManager) : base(roleManager)
+        {
         }
     }
 }

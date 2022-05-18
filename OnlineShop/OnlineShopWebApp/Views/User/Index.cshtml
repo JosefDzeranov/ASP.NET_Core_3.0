@@ -1,4 +1,4 @@
-﻿@model UserBuyer
+﻿@model User
 @{
     ViewData["Title"] = "Личный кабинет";
 }
@@ -16,13 +16,13 @@
         </div>
 
         <div class="col">
-            <p>roleId: @Model.Id</p>
             <p>Логин: @Model.Login</p>
             <p>Фамилия: @Model.Surname</p>
             <p>Имя: @Model.Fistname</p>
             <p>Отчество: @Model.Secondname</p>
             <p>Возраст: @Model.Age</p>
             <p>Email: @Model.Email</p>
+            <p>Роль: @Model.RoleUser</p>
         </div>
     </div>
 
