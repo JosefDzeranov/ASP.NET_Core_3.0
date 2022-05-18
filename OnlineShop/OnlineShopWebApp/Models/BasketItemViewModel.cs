@@ -3,7 +3,7 @@ using OnlineShop.Db.Models;
 
 namespace OnlineShopWebApp.Models
 {
-    public class BasketItem
+    public class BasketItemViewModel
     {
         public Guid Id { get; set; }
         public Product Product { get; set; }
@@ -13,14 +13,14 @@ namespace OnlineShopWebApp.Models
             get { return Product.Cost * Quantity; }
         }
 
-        public BasketItem () { } // Empty ctor for XML serializing.
-        public BasketItem (Product product)
+        public BasketItemViewModel () { } // Empty ctor for XML serializing.
+        public BasketItemViewModel (Product product)
         {
             Id = Guid.NewGuid();
             Product = product;
             Quantity++;
         }
-        public BasketItem(Guid id, Product product, int quantity)
+        public BasketItemViewModel(Guid id, Product product, int quantity)
         {
             Id = id;
             Product = product;

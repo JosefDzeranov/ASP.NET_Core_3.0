@@ -1,17 +1,24 @@
-﻿using OnlineShopWebApp.Models;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using OnlineShop.Db.Models;
 
-namespace OnlineShopWebApp
+namespace OnlineShop.Db
 {
-    public class BasketStorage: IBasketStorage
+    public class BasketDbStorage: IBasketStorage
     {
-        private List<BasketViewModel> baskets = new List<BasketViewModel>();
+        private readonly DatabaseContext _databaseContext;
 
-        public BasketViewModel TryGetByUserId(string userId)
+        public BasketDbStorage(DatabaseContext databaseContext)
         {
-            return baskets.FirstOrDefault(b => b.UserId == userId);
+            _databaseContext = databaseContext;
+        }
+
+
+        //private List<Basket> baskets = new List<Basket>();
+
+        public Basket TryGetByUserId(string userId)
+        {
+            return _databaseContext.Baskets.FirstOrDefault(b => b.UserId == userId);
         }
 
         public void AddProduct(string userId, Product product)
@@ -20,8 +27,11 @@ namespace OnlineShopWebApp
 
             if(basket == null)
             {
-                var newBasket = new BasketViewModel(userId);
-                newBasket.Items.Add(new BasketItemViewModel(product));
+                _databaseContext.Baskets.Add(basket);
+                _databaseContext.SaveChanges();
+
+                var newBasket = new Basket(userId);
+                newBasket.Items.Add(new BasketItem(product));
                 baskets.Add(newBasket);
             }
             else
@@ -33,7 +43,7 @@ namespace OnlineShopWebApp
                 }
                 else 
                 {
-                    basket.Items.Add(new BasketItemViewModel(product));
+                    basket.Items.Add(new Basket(product));
                 }
             }
         }

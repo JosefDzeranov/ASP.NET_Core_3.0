@@ -19,7 +19,7 @@ namespace OnlineShopWebApp
             return order;
         }
 
-        public void Add(string userId, Basket basket, Delivery delivery)
+        public void Add(string userId, BasketViewModel basket, Delivery delivery)
         {
             var newOrder = new Order(userId, basket, delivery);
             _orders.Add(newOrder);

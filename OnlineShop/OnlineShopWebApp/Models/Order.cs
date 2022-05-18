@@ -8,11 +8,11 @@ namespace OnlineShopWebApp.Models
         public DateTime Date { get; set; }
         public string UserId { get; set; }
         public OrderStatus Status { get; set; }
-        public Basket Basket { get; set; }
+        public BasketViewModel Basket { get; set; }
         public Delivery Delivery { get; set; }
 
         public Order () { } // Empty ctor for XML serializing.
-        public Order(string userId, Basket basket, Delivery delivery)
+        public Order(string userId, BasketViewModel basket, Delivery delivery)
         {
             Id = Guid.NewGuid();
             Date = DateTime.Now;

@@ -4,11 +4,11 @@ using System.Linq;
 
 namespace OnlineShopWebApp.Models
 {
-    public class Basket
+    public class BasketViewModel
     {
         public Guid Id { get; set; }
         public string UserId { get; set; }
-        public List<BasketItem> Items { get; set; }
+        public List<BasketItemViewModel> Items { get; set; }
         public decimal TotalCost
         {
             get
@@ -24,12 +24,12 @@ namespace OnlineShopWebApp.Models
             }
         }
 
-        public Basket() { } //Empty ctor for XML serializing.
-        public Basket(string userId)
+        public BasketViewModel() { } //Empty ctor for XML serializing.
+        public BasketViewModel(string userId)
         {
             Id = Guid.NewGuid();
             UserId = userId;
-            Items = new List<BasketItem>();
+            Items = new List<BasketItemViewModel>();
         }
     }
 }
