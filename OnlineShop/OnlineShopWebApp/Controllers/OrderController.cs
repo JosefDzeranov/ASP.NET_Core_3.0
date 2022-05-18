@@ -22,26 +22,26 @@ namespace OnlineShopWebApp.Controllers
         {
             var existingCart = cartRepository.TryGetByUserId(Const.UserId);
 
-            var orderVM = new OrderCartViewModel();
-           // orderVM.Cart = existingCart;
-
+            var orderVM = new OrderViewModel();
+            orderVM.Cart = existingCart.MappingCartViewModel();
             return View(orderVM);
         }
 
         [HttpPost]
-        public IActionResult Create(OrderViewModel order)
+        public IActionResult Create(OrderViewModel orderViewModel)
         {
-
-            //if (ModelState.IsValid)
-            //{
-            //    var existingCart = cartRepository.TryGetByUserId(Const.UserId);
-            //    order.Cart = existingCart;
-            //    order.UserId = Const.UserId;
-            //    order.TotalCost = existingCart.TotalCost;
-            //    orderRepository.Add(order);
-            //    cartRepository.Clear(Const.UserId);
-            //    return View();
-            //}
+            if (ModelState.IsValid)
+            {
+                var existingCart = cartRepository.TryGetByUserId(Const.UserId);
+                var cartView = existingCart.MappingCartViewModel();
+                orderViewModel.Cart = cartView;
+                orderViewModel.UserId = Const.UserId;
+                orderViewModel.TotalCost = cartView.TotalCost;
+                var order = orderViewModel.MappingOrder();
+                orderRepository.Add(order);
+                cartRepository.Clear(Const.UserId);
+                return View();
+            }
             return RedirectToAction("Index", "Order");
         }
 

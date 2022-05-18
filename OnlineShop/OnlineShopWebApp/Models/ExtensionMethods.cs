@@ -17,7 +17,7 @@ namespace OnlineShopWebApp.Models
                 ImgPath = productViewModel.ImgPath,
 
             };
-            
+
             return productDb;
         }
         public static ProductViewModel MappingProductViewModel(this Product product)
@@ -35,7 +35,7 @@ namespace OnlineShopWebApp.Models
             return productViewModel;
         }
 
-        public static List<ProductViewModel> ListProductViewModel(this List<Product> products)
+        public static List<ProductViewModel> MappingListProductViewModel(this List<Product> products)
         {
             var productsViewModel = new List<ProductViewModel>();
 
@@ -76,12 +76,49 @@ namespace OnlineShopWebApp.Models
                 cartViewModel.Items.Add(cartItemViewModel);
             }
 
-             return cartViewModel;
+            return cartViewModel;
+        }
+        public static List<OrderItem> MappingListOrderItem(this List<CartItemViewModel> cartItemsViewModel, Guid orderViewModelId)
+        {
+
+            var orderItems = new List<OrderItem>();
+            foreach (var item in cartItemsViewModel)
+            {
+
+                var orderItem = new OrderItem
+                {
+                    Id = item.Id,
+                    Product = item.Product.MappingProduct(),
+                    Quantinity = item.Quantinity,
+                    OrderId = orderViewModelId
+                };
+                orderItems.Add(orderItem);   
+            }
+            return orderItems;
+        }
+            public static Order MappingOrder(this OrderViewModel orderViewModel)
+            {
+                var order = new Order()
+                {
+                    Id = orderViewModel.Id == null ? Guid.NewGuid() : orderViewModel.Id,
+                    FirstName = orderViewModel.FirstName,
+                    LastName = orderViewModel.LastName,
+                    Address = orderViewModel.Address,
+                    Email = orderViewModel.Email,
+                    Created = orderViewModel.Created,
+                    OrderItems = orderViewModel.Cart.Items.MappingListOrderItem(orderViewModel.Id),
+                    Phone = orderViewModel.Phone,
+                    Status = OrderStatus.New,
+                    TotalCost = orderViewModel.TotalCost,
+                    UserId = orderViewModel.UserId,
+
+                };
+                return order;
+            }
+
         }
 
     }
-
-}
 
 
 

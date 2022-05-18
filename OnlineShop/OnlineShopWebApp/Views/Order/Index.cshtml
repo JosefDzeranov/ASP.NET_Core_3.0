@@ -1,6 +1,6 @@
 ﻿@using OnlineShopWebApp.ViewModels
 
-@model OrderCartViewModel
+@model OrderViewModel
 @{
     ViewData["Title"] = "Оформление заказа";
 }
@@ -13,45 +13,45 @@
                 <div>
                     <label>Имя</label>
                     <div class="mb-3">
-                        <input asp-for=Order.FirstName type="text" />
+                        <input asp-for=FirstName type="text" />
                         <div>
-                            <span asp-validation-for="Order.FirstName"></span>
+                            <span asp-validation-for="FirstName"></span>
                         </div>
                     </div>
                 </div>
                 <div>
                     <label>Фамилия</label>
                     <div class="mb-3">
-                        <input asp-for=Order.LastName type="text" />
+                        <input asp-for=LastName type="text" />
                         <div>
-                            <span asp-validation-for="Order.LastName"></span>
+                            <span asp-validation-for="LastName"></span>
                         </div>
                     </div>
                 </div>
                 <div>
                     <label>E-mail</label>
                     <div class="mb-3">
-                        <input asp-for=Order.Email type="email" />
+                        <input asp-for=Email type="email" />
                         <div>
-                            <span asp-validation-for="Order.Email"></span>
+                            <span asp-validation-for="Email"></span>
                         </div>
                     </div>
                 </div>
                 <div>
                     <label>Телефон</label>
                     <div class="mb-3">
-                        <input asp-for=Order.Phone type="tel" />
+                        <input asp-for=Phone type="tel" />
                         <div>
-                            <span asp-validation-for="Order.Phone"></span>
+                            <span asp-validation-for="Phone"></span>
                         </div>
                     </div>
                 </div>
                 <div>
                     <label>Адрес</label>
                     <div class="mb-3">
-                        <input asp-for=Order.Address type="text" />
+                        <input asp-for=Address type="text" />
                         <div>
-                            <span asp-validation-for="Order.Address"></span>
+                            <span asp-validation-for="Address"></span>
                         </div>
                     </div>
                 </div>

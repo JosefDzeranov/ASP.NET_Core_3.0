@@ -21,7 +21,7 @@ namespace OnlineShopWebApp.Areas.Admin.Controllers
         public IActionResult Index()
         {
             var products = productRepository.GetAll();
-            var productsViewModel = products.ListProductViewModel();
+            var productsViewModel = products.MappingListProductViewModel();
             return View(productsViewModel);
         }
 
