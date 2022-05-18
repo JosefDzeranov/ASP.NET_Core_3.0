@@ -18,6 +18,7 @@
             <label asp-for="Password" class="text-center">Пароль</label>
             <input type="password" class="form-control" id="Input2" placeholder="Пароль" name="Password" required="" asp-for="Password"/>
             <span asp-validation-for="Password"></span>
+
         </div>
         <div class="row  col-md-3 mx-auto">
             <div class="form-check col-1">
@@ -27,7 +28,7 @@
         </div>
         <p></p>
         <div class="col-md-1 mx-auto">
-            <button type="submit" class="btn btn-outline-dark text-center" asp-controller="Login" asp-action="Enter">Войти</button>
+            <button type="submit" class="btn btn-outline-dark text-center"  asp-controller="Login" asp-action="Enter" asp-route-userInput="@Model">Войти</button>
         </div>
     </div>
 </form>

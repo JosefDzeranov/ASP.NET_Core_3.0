@@ -84,8 +84,5 @@ namespace OnlineShopWebApp.Models.Users.Buyer
             this.InfoBuying = infoBuying;
         }
 
-        public UserBuyer(IRoleManager roleManager) : base(roleManager)
-        {
-        }
     }
 }

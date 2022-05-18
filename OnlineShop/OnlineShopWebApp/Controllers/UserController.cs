@@ -1,7 +1,5 @@
-﻿using System;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using OnlineShopWebApp.Interfase;
-using OnlineShopWebApp.Models;
 
 namespace OnlineShopWebApp.Controllers
 {
@@ -13,9 +11,13 @@ namespace OnlineShopWebApp.Controllers
         {
             this.userManager = buyerManager;
         }
-        public IActionResult Index(string userLigin)
+        public IActionResult Index()
         {
-            var user = userManager.FindByLogin(userLigin);
+            if (userManager.GetLoginAuthorizedUser() == null)
+            {
+                return RedirectToAction("Index", "Login");
+            }
+            var user = userManager.FindByLogin(userManager.GetLoginAuthorizedUser());
             return View(user);
         }
     }

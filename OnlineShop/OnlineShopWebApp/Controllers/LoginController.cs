@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using OnlineShopWebApp.Models.Users;
 using OnlineShopWebApp.Interfase;
+using OnlineShopWebApp.Models.Users;
+using System;
 
 namespace OnlineShopWebApp.Controllers
 {
@@ -24,23 +25,38 @@ namespace OnlineShopWebApp.Controllers
             {
                 ModelState.AddModelError("", "Такой аккаунт уже существует");
             }
-            if (ModelState.IsValid)
+            if (user.Password != user.PasswordConfirm)
             {
-                userManager.Add(user);
-                return RedirectToAction("Index");
+                ModelState.AddModelError("", "Проверочный пароль должен совпадать с паролем");
             }
-            return Content("errorValid");
-            
+            if (!ModelState.IsValid)
+            {
+                return Content("errorValid");
+            }
+            userManager.Add(user);
+            userManager.AssignRole(user.Login, Guid.Parse("674b2f41-3173-4a0c-8f7e-4043876b8ee3")); //Покупатель
+            return RedirectToAction("Index");
         }
         [HttpPost]
-        public IActionResult Enter(User user)
+        public IActionResult Enter(User userInput)
         {
-            if (ModelState.IsValid)
+            var user = userManager.FindByLogin(userInput.Login);
+            if (userManager.FindByLogin(userInput.Login) == null)
             {
-                return Content($"{user.Login} - {user.Password}");
+                ModelState.AddModelError("", "Такого аккаунта не существует");
             }
-            else return Content("errorValid");
+            if (userInput.Password != user.Password)
+            {
+                ModelState.AddModelError("", "Пароль введён неверно");
+            }
+            if (!ModelState.IsValid)
+            {
+                return Content("errorValid");
+            }
+            userManager.Authorized(userInput);
+            return RedirectToAction("Index", "User");
         }
+
 
         public IActionResult NewUser()
         {

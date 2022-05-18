@@ -12,6 +12,7 @@ namespace OnlineShopWebApp
         private readonly IRoleManager roleManager;
 
         private readonly List<User> users;
+        public AuthorizedUser AuthorizedUser { get; set; }
         private const string nameSave = "users";
         private IWorkWithData JsonStorage { get; } = new JsonWorkWithData(nameSave);
 
@@ -20,7 +21,14 @@ namespace OnlineShopWebApp
             this.roleManager = roleManager;
             users = JsonStorage.Read<List<User>>();
         }
-
+        public string GetLoginAuthorizedUser()
+        {
+            return AuthorizedUser?.Login;
+        }
+        public void Authorized(User user)
+        {
+            AuthorizedUser = new AuthorizedUser(user.Login, user.Password);
+        }
         public bool GettingAccess(string userLogin, string action, string controller, string area)
         {
             bool permission = true;
@@ -67,6 +75,15 @@ namespace OnlineShopWebApp
             }
             return permission;
         }
+
+        public void AssignRole(string userLogin, Guid roleId)
+        {
+            var user = FindByLogin(userLogin);
+            var role = roleManager.Find(roleId);
+            user.RoleUser = role;
+            JsonStorage.Write(users);
+        }
+
 
         public List<User> GetAll()
         {
