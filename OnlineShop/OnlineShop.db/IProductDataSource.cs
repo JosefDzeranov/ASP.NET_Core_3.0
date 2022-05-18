@@ -1,8 +1,8 @@
-﻿using OnlineShopWebApp.Models;
+﻿using OnlineShop.db.Models;
 using System.Collections.Generic;
 
-namespace OnlineShopWebApp.Services
-{
+namespace OnlineShop.Db
+{ 
     public interface IProductDataSource
     {
         IEnumerable<Product> GetAllProducts();

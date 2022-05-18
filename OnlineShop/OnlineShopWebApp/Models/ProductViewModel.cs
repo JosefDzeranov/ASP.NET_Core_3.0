@@ -1,7 +1,8 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using OnlineShop.db.Models;
+using System.ComponentModel.DataAnnotations;
 namespace OnlineShopWebApp.Models
 {
-    public class Product
+    public class ProductViewModel
     {
         private static int instanceCounter =0;
 
@@ -19,31 +20,24 @@ namespace OnlineShopWebApp.Models
 
         public string ImagePath { get; set; }
 
-		public Product()
-		{
-        }
-
-		public Product(string name, decimal cost, string description, string imagePath)
-		{
-            Id = GetNextId();
-			Name = name;
-			Cost = cost;
-			Description = description;
-            ImagePath = imagePath;
-		}
-
-		public override string ToString()
-        {
-            return $"Id {this.Id}\nName {this.Name}\nCost {this.Cost}\nDescription {this.Description}\n\n";
-        }
-
         public static int GetNextId()
         {
             instanceCounter += 1;
 
             return instanceCounter;
         }
-    }
 
+        public static ProductViewModel ConvertFromDbProduct(Product product)
+        {
+            return new ProductViewModel()
+            {
+                Id = product.Id,
+                Name = product.Name,
+                Cost = product.Cost,
+                Description = product.Description,
+                ImagePath = product.ImagePath,
+            };
+        }
+    }
     
 }

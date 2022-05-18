@@ -1,4 +1,6 @@
-﻿using OnlineShopWebApp.Models;
+﻿using OnlineShop.db.Models;
+using OnlineShop.Db;
+using OnlineShopWebApp.Models;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -8,52 +10,85 @@ namespace OnlineShopWebApp.Services
     {
         private readonly IProductDataSource productDataSource;
 
+        private readonly List<Cart> carts = new List<Cart>();
+
         public InMemoryCartRepository(IProductDataSource productDataSource)
         {
             this.productDataSource = productDataSource;
         }
 
-        public void Add(Product product)
+        public void Add(Product product, string userId)
         {
-            if (CartItems.ContainsKey(product))
+            var cart = TryGetByUserId(userId);
+
+            if (cart == null)
             {
-                CartItems[product] += 1;
+                cart = new Cart()
+                {
+                    UserId = userId,
+                };
+
+                carts.Add(cart);
+            }
+
+            var existingItem = cart.Items.Where(x=>x.Product.Id == product.Id).FirstOrDefault();
+
+            if (existingItem == null)
+            {
+                cart.Items.Add(new CartItem()
+                {
+                    Product = product,
+                    Amount = 1
+                });
             }
             else
             {
-                CartItems.Add(product, 1);
+                existingItem.Amount += 1;
             }
-
         }
 
-
-        public void Add(int id)
+        public void Add(int id, string userId)
         {
             var product = productDataSource.GetProductById(id);
-            Add(product);
+            Add(product, userId);
         }
 
-        public void Remove(int id)
+        public void Remove(int id, string userId)
         {
             var product = productDataSource.GetProductById(id);
-            Remove(product);
+            Remove(product, userId);
         }
 
-        public void Remove(Product product)
+        public void Remove(Product product, string userId)
         {
-            if (CartItems.ContainsKey(product))
+            var cart = TryGetByUserId(userId);
+
+            var existingItem = cart.Items.Where(x => x.Product.Id == product.Id).First();
+
+            if (existingItem.Amount > 1)
             {
-                if (CartItems[product] > 1)
-                    CartItems[product] -= 1;
-                else
-                    CartItems.Remove(product);
+                existingItem.Amount -= 1;
             }
-
+            else
+            {
+                cart.Items.Remove(existingItem);
+            }
         }
 
-        public void RemoveAll()
+        public void RemoveAll(string userId)
         {
-            CartItems.Clear();
+            var cart = TryGetByUserId(userId);
+            cart.Items.Clear();
+        }
+
+        public Cart TryGetByUserId(string userId)
+        {
+            return carts.FirstOrDefault(x => x.UserId == userId);
+        }
+
+        public void GetAllProduct()
+        {
+            throw new System.NotImplementedException();
         }
 
         public Dictionary<Product, int> CartItems { get; set; } = new Dictionary<Product, int>();

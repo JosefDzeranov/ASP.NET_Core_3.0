@@ -1,6 +1,7 @@
 ﻿using System.Linq;
 using System.Collections.Generic;
 using System;
+using OnlineShop.db.Models;
 
 namespace OnlineShopWebApp.Models
 {
@@ -16,7 +17,7 @@ namespace OnlineShopWebApp.Models
 
         public DateTime CreateDateTime { get; set; }
 
-        public Dictionary<Product, int> CartItems { get; set; }
+        public List<CartItem> CartItems { get; set; }
 
         public Order()
         {
@@ -24,17 +25,9 @@ namespace OnlineShopWebApp.Models
             Id = idSequence;
             Status = OrderStatus.Created;
             CreateDateTime = DateTime.Now;
-            CartItems = new Dictionary<Product, int>();
+            CartItems = new List<CartItem>();
         }
 
-    
-        public decimal Cost
-        {
-            get
-            {
-                return CartItems.Sum(item => item.Key.Cost * item.Value);
-            }
-        }
-     
+        public decimal Cost => CartItems.Sum(x => x.Cost);
     }
 }
