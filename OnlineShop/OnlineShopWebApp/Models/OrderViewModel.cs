@@ -1,10 +1,11 @@
-﻿using System;
+﻿using OnlineShop.DB.Models;
+using System;
 using System.ComponentModel.DataAnnotations;
 
 namespace OnlineShopWebApp.Models
 {
 
-    public class Order
+    public class OrderViewModel
     {
         public Guid Id { get; set; } = Guid.NewGuid();
         public string UserId { get; set; }

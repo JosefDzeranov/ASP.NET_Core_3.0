@@ -36,7 +36,7 @@ namespace OnlineShopWebApp
             services.AddControllersWithViews();
             services.AddTransient<IProductRepository, ProductRepository>();
             services.AddTransient<ICartRepository, CartRepository>();
-            services.AddSingleton<IOrderRepository, OrderRepository>();
+            services.AddTransient<IOrderRepository, OrderRepository >();
             services.AddTransient<IFavoriteRepository, FavoriteRepository>();
             services.AddSingleton<IRoleRepository, RoleRepository>();
             services.AddSingleton<IUserRepository, UserRepository>();

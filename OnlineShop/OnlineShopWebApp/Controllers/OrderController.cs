@@ -22,14 +22,14 @@ namespace OnlineShopWebApp.Controllers
         {
             var existingCart = cartRepository.TryGetByUserId(Const.UserId);
 
-            var orderVM = new OrderViewModel();
+            var orderVM = new OrderCartViewModel();
            // orderVM.Cart = existingCart;
 
             return View(orderVM);
         }
 
         [HttpPost]
-        public IActionResult Create(Order order)
+        public IActionResult Create(OrderViewModel order)
         {
 
             //if (ModelState.IsValid)

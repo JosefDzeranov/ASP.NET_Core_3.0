@@ -1,4 +1,4 @@
-﻿namespace OnlineShopWebApp.Models
+﻿namespace OnlineShop.DB.Models
 {
     public enum OrderStatus
     {
