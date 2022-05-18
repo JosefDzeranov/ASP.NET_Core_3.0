@@ -35,6 +35,18 @@ namespace OnlineShopWebApp.Models
             return productViewModel;
         }
 
+        public static List<ProductViewModel> ListProductViewModel(this List<Product> products)
+        {
+            var productsViewModel = new List<ProductViewModel>();
+
+            foreach (var product in products)
+            {
+                var productViewModel = product.MappingProductViewModel();
+                productsViewModel.Add(productViewModel);
+            }
+            return productsViewModel;
+        }
+
         public static CartViewModel MappingCartViewModel(this Cart cart)
         {
             var cartViewModel = new CartViewModel
