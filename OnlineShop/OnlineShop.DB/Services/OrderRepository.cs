@@ -40,6 +40,7 @@ namespace OnlineShopWebApp.Services
         {
 
             var order = TryGetById(orderId);
+            order.Status = status;
             onlineShopContext.Orders.Update(order);
             onlineShopContext.SaveChanges();
         }

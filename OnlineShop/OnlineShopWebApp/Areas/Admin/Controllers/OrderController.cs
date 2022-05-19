@@ -28,7 +28,7 @@ namespace OnlineShopWebApp.Areas.Admin.Controllers
             var order = orderRepository.TryGetById(orderId);
             if (order!= null)
             {
-                return View(order);
+                return View(order.MappingOrderViewModel());
             }
             return RedirectToAction("Index", "Order");
         }
