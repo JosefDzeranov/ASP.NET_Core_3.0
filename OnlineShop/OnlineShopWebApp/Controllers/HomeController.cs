@@ -1,11 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
 using OnlineShop.Db;
+using OnlineShopWebApp.Helpers;
 using OnlineShopWebApp.Models;
 
 
@@ -23,8 +19,7 @@ namespace OnlineShopWebApp.Controllers
         public IActionResult Index()
         {
             var products = productsRepository.GetAll();
-
-            return View(products);
+            return View(Mapping.ToProductViewModels(products));
         }
 
         [HttpPost]

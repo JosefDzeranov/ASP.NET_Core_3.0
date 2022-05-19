@@ -19,7 +19,7 @@ namespace OnlineShopWebApp
         {
             return orders.FirstOrDefault(x => x.Id == id);
         }
-        public void Add(Cart cart, DeliveryInformarion deliveryInformarion)
+        public void Add(CartViewModel cart, DeliveryInformarion deliveryInformarion)
         {
             var newOrder = new Order
             {

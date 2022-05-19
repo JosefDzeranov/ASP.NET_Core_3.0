@@ -1,10 +1,9 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using OnlineShop.Db;
+using OnlineShop.Db.Models;
+using OnlineShopWebApp.Helpers;
 using OnlineShopWebApp.Models;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace OnlineShopWebApp.Areas.Admin.Controllers
 {
@@ -21,7 +20,7 @@ namespace OnlineShopWebApp.Areas.Admin.Controllers
         public IActionResult Products()
         {
             var products = productsRepository.GetAll();
-            return View(products);
+            return View(Mapping.ToProductViewModels(products));
         }
 
         public IActionResult Add()
@@ -32,7 +31,12 @@ namespace OnlineShopWebApp.Areas.Admin.Controllers
         [HttpPost]
         public IActionResult Add(ProductViewModel product)
         {
-            var productDb = new ProductViewModel
+            if (!ModelState.IsValid)
+            {
+                return View(product);
+            }
+
+            var productDb = new Product
             {
                 Name = product.Name,
                 Cost = product.Cost,
@@ -40,15 +44,9 @@ namespace OnlineShopWebApp.Areas.Admin.Controllers
                 Pages = product.Pages
             };
 
-            if (ModelState.IsValid)
-            {
-                productsRepository.Add(productDb);
-                return RedirectToAction("Products");
-            }
-            else
-            {
-                return View(product);
-            }
+            productsRepository.Add(productDb);
+            return RedirectToAction("Products");
+
         }
         public IActionResult Edit(Guid productId)
         {

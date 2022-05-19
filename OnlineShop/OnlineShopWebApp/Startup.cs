@@ -21,7 +21,7 @@ namespace OnlineShopWebApp
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            string connection = Configuration.GetConnectionString("online_shop");
+            string connection = Configuration.GetConnectionString("online_shop_rybakova");
             services.AddDbContext<DatabaseContext>(options =>
             options.UseSqlServer(connection));
 
@@ -29,7 +29,7 @@ namespace OnlineShopWebApp
             services.AddSingleton<IComparesRepository, InMemoryComparesRepository>();
             services.AddSingleton<IFavouritesRepository, InMemoryFavouritesRepository>();
             services.AddSingleton<IOrdersRepository, InMemoryOrdersRepository>();
-            services.AddSingleton<ICartsRepository, InMemoryCartsRepository>();
+            services.AddTransient<ICartsRepository, CartsDbRepository>();
             services.AddTransient<IProductsRepository, ProductsDbRepository>();
             services.AddSingleton<IDeliveryRepository, InMemoryDeliveryRepository>();
             services.AddSingleton<IUsersRepository, InMemoryUsersRepository>();

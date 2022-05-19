@@ -12,35 +12,7 @@ namespace OnlineShop.Db
         public ProductsDbRepository(DatabaseContext databaseContext)
         {
             this.databaseContext = databaseContext;
-        }
-
-        //private List<Product> products = new List<Product>()
-        //{
-        //    new Product
-        //    { Name = "Оно",
-        //      Cost = 450,
-        //      Description = "Автор: Стивен Кинг Жанр: мистика, ужасы",
-        //      Pages = 1025,
-        //    },
-        //    new Product
-        //    { Name = "Мрачный жнец",
-        //      Cost = 350,
-        //      Description = "Автор: Терри Пратчетт Жанр: фэнтези",
-        //      Pages = 356
-        //    },
-        //    new Product
-        //    { Name = "Странник по звездам",
-        //      Cost = 300,
-        //      Description = "Автор: Джек Лондон Жанр: роман",
-        //      Pages = 332
-        //    },
-        //    new Product
-        //    { Name = "Крутые наследнички",
-        //      Cost = 350,
-        //      Description = "Автор: Дарья Донцова Жанр: детектив",
-        //      Pages = 425
-        //    },
-        //};
+        }        
         public List<Product> GetAll()
         {
             return databaseContext.Products.ToList();
