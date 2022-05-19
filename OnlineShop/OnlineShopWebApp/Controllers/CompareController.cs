@@ -28,7 +28,7 @@ namespace OnlineShopWebApp.Controllers
         public IActionResult Add(Guid productId)
         {
             var product = productsRepository.TryGetById(productId);
-            comparesRepository.Add(Mapping.ToProductViewModel(product));
+            comparesRepository.Add(product);
             return RedirectToAction("Index");
         }
 
@@ -40,7 +40,7 @@ namespace OnlineShopWebApp.Controllers
         public IActionResult Delete(Guid productId)
         {
             var product = productsRepository.TryGetById(productId);
-            comparesRepository.Delete(Mapping.ToProductViewModel(product));
+            comparesRepository.Delete(product);
             return RedirectToAction("Index");
         }
     }
