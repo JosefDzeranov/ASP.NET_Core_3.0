@@ -1,0 +1,38 @@
+﻿@model User
+
+<div class="row">
+    @await Html.PartialAsync("Menu")
+
+    <div class="column">
+        <table>
+            <tr>
+                <th><h2>Пользователь @Model.Login</h2></th>
+            </tr>
+            <tr>
+                <td>Имя</td>
+                <td>@Model.Name </td>
+            </tr>
+            <tr>
+                <td>Фамилия</td>
+                <td>@Model.LastName </td>
+            </tr>
+            <tr>
+                <td>Логин</td>
+                <td>@Model.Login </td>
+            </tr>
+
+
+
+
+        </table>
+        <br />
+
+        <button class="btn btn-info dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Действия</button>
+        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+            <a class="dropdown-item" asp-area="Admin" asp-controller="Administration" asp-action="ChangePassword" asp-route-id="@Model.Id"> Смена пароля</a>
+            <a class="dropdown-item" asp-area="Admin" asp-controller="Administration" asp-action="EditUser" asp-route-id="@Model.Id"> Редактирование данных</a>
+            <a class="dropdown-item" asp-area="Admin" asp-controller="Administration" asp-action="EditUserRights" asp-route-id="@Model.Id">Права доступа </a>
+            <a class="dropdown-item" asp-area="Admin" asp-controller="Administration" asp-action="DeleteUser" asp-route-id="@Model.Id">Удалить пользователя </a>
+        </div>
+    </div>
+</div>

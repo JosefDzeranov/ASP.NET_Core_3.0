@@ -5,9 +5,9 @@ namespace OnlineShopWebApp.Controllers
 {
     public class RegistrationController : Controller
     {
-        private readonly IRegAndAuthManager regAndAuthManager;
+        private readonly IUsersManager regAndAuthManager;
 
-        public RegistrationController(IRegAndAuthManager regAndAuthManager)
+        public RegistrationController(IUsersManager regAndAuthManager)
         {
             this.regAndAuthManager = regAndAuthManager;
         }
@@ -22,7 +22,7 @@ namespace OnlineShopWebApp.Controllers
         {
             if (ModelState.IsValid)
             {
-                regAndAuthManager.Register(registration);
+                regAndAuthManager.RegisterUser(registration);
                 return RedirectToAction("Index", "Home");
             }
             else

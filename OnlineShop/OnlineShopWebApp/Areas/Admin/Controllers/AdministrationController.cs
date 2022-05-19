@@ -10,12 +10,14 @@ namespace OnlineShopWebApp.Controllers
         private readonly IProductManager productManager;
         private readonly IOrderManager orderManager;
         private readonly IRolesManager rolesManager;
+        private readonly IUsersManager usersManager;
 
-        public AdministrationController(IProductManager productManager, IOrderManager orderManager, IRolesManager rolesManager)
+        public AdministrationController(IProductManager productManager, IOrderManager orderManager, IRolesManager rolesManager, IUsersManager usersManager)
         {
             this.productManager = productManager;
             this.orderManager = orderManager;
             this.rolesManager = rolesManager;
+            this.usersManager = usersManager;
         }
 
         public IActionResult Index()
@@ -51,8 +53,106 @@ namespace OnlineShopWebApp.Controllers
 
         public IActionResult Users()
         {
+            var users = usersManager.GetRegistredUsers();
+            return View(users);
+        }
+        public IActionResult AddNewUser()
+        {
+            
             return View();
         }
+
+        [HttpPost]
+        public IActionResult SaveNewUser(User user)
+        {
+            if (ModelState.IsValid)
+            {
+                usersManager.SaveNewUser(user);
+
+                return View("SaveAddedUser",user);
+            }
+            else
+            {
+                return RedirectToAction("AddNewUser");
+            }
+
+           
+        }
+
+        public IActionResult ShowUser(Guid id)
+        {
+            var user = usersManager.GetUserById(id);
+            if (user != null)
+            {
+                return View(user);
+            }
+            else
+            {
+                return RedirectToAction("Users");
+            }
+
+
+        }
+        public IActionResult ChangePassWord(Guid id)
+        {
+            var user = usersManager.GetUserById(id);
+            if (user != null)
+            {
+                return View(user);
+            }
+            else
+            {
+                return RedirectToAction("ShowUser", id);
+            }
+
+        }
+
+        public IActionResult EditUser(Guid id)
+        {
+            var user = usersManager.GetUserById(id);
+            if (user != null)
+            {
+                return View(user);
+            }
+            else
+            {
+                return RedirectToAction("ShowUser", id);
+            }
+
+        }
+
+        [HttpPost]
+        public IActionResult SaveEditedUser(User user)
+        {
+            if (ModelState.IsValid)
+            {
+                usersManager.EditUser(user);
+
+                return RedirectToAction("Users");
+            }
+            else
+            {
+                return RedirectToAction("ChangePassWord", user.Id);
+            }
+
+        }
+
+        public IActionResult DeleteUser(Guid id)
+        {
+            var user = usersManager.GetUserById(id);
+            if (user != null)
+            {
+                usersManager.DeleteUser(user);
+                return RedirectToAction("Users");
+            }
+            else
+            {
+                return RedirectToAction("ShowUser", id);
+            }
+
+        }
+
+
 
         public IActionResult Roles()
         {
