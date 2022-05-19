@@ -99,6 +99,7 @@ namespace OnlineShopWebApp
                     user.LastName = editedUser.LastName;
                     user.Login = editedUser.Login;
                     user.Password = editedUser.Password;
+                    user.ConfirmedPassword = editedUser.ConfirmedPassword;
                 }
             }
             var jsonData = JsonConvert.SerializeObject(registredUsers);
