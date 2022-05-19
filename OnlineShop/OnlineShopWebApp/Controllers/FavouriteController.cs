@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using OnlineShop.Db;
+using OnlineShopWebApp.Helpers;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -25,7 +26,7 @@ namespace OnlineShopWebApp.Controllers
         public IActionResult Add(Guid productId)
         {
             var product = productsRepository.TryGetById(productId);
-            favouritesRepository.Add(product);
+            //favouritesRepository.Add(product);
             return RedirectToAction("Index");
         }
 
@@ -37,7 +38,7 @@ namespace OnlineShopWebApp.Controllers
         public IActionResult Delete(Guid productId)
         {
             var product = productsRepository.TryGetById(productId);
-            favouritesRepository.Delete(product);
+            favouritesRepository.Delete(Mapping.ToProductViewModel(product));
             return RedirectToAction("Index");
         }
     }

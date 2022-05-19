@@ -5,6 +5,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using OnlineShopWebApp.Models;
 using OnlineShop.Db;
+using OnlineShopWebApp.Helpers;
 
 namespace OnlineShopWebApp.Controllers
 {
@@ -22,7 +23,7 @@ namespace OnlineShopWebApp.Controllers
         public IActionResult Index()
         {
             var cart = cartsRepository.TryGetByUserId(Constants.UserId);
-            return View(cart);
+            return View(Mapping.ToCartViewModel(cart));
         }
         public IActionResult Add(Guid productId)
         {

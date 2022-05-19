@@ -56,7 +56,7 @@ namespace OnlineShopWebApp.Areas.Admin.Controllers
         [HttpPost]
         public IActionResult Edit(ProductViewModel product)
         {
-            var productDb = new ProductViewModel
+            var productDb = new Product
             {
                 Name = product.Name,
                 Cost = product.Cost,

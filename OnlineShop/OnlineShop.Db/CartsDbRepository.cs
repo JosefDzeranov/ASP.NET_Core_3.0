@@ -1,4 +1,5 @@
-﻿using OnlineShop.Db.Models;
+﻿using Microsoft.EntityFrameworkCore;
+using OnlineShop.Db.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,7 +18,7 @@ namespace OnlineShop.Db
         //private List<Cart> carts = new List<Cart>();
         public Cart TryGetByUserId(string userId)
         {
-            return databaseContext.Carts.FirstOrDefault(x => x.UserId == userId);
+            return databaseContext.Carts.Include(x=>x.Items).ThenInclude(x=>x.Product).FirstOrDefault(x => x.UserId == userId);
         }
 
         public void Add(Product product, string userId)
@@ -28,16 +29,16 @@ namespace OnlineShop.Db
                 var newCart = new Cart
                 {
                     UserId = userId,
-                    Items = new List<CartItem>
+                };
+                newCart.Items = new List<CartItem>
                     {
                         new CartItem
-                        {                            
+                        {
                             Amount =1,
-                            Product = product
+                            Product = product,
+                            Cart = newCart
                         }
-                    }
-
-                };
+                    };
 
                 databaseContext.Carts.Add(newCart);
             }
@@ -51,13 +52,14 @@ namespace OnlineShop.Db
                 else
                 {
                     existingCart.Items.Add(new CartItem
-                    {                        
+                    {
                         Amount = 1,
-                        Product = product
+                        Product = product,
+                        Cart = existingCart
                     });
                 }
             }
-            databaseContext.SaveChanges(); 
+            databaseContext.SaveChanges();
         }
 
         public void Delete(Product product, string userId)
@@ -76,7 +78,7 @@ namespace OnlineShop.Db
         }
 
 
-        public void Clear (string userId)
+        public void Clear(string userId)
         {
             var cart = TryGetByUserId(userId);
             databaseContext.Carts.Remove(cart);

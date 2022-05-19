@@ -31,6 +31,10 @@ namespace OnlineShopWebApp.Helpers
 
         public static CartViewModel ToCartViewModel(Cart cart)
         {
+            if (cart==null)
+            {
+                return null;
+            }
             return new CartViewModel
             {
                 UserId = cart.UserId,
