@@ -99,7 +99,52 @@ namespace OnlineShopWebApp.Models
             return order;
         }
 
+        public static OrderViewModel MappingOrderViewModel(this Order order)
+        {
+            var orderViewModel = new OrderViewModel
+            {
+                Id = order.Id,
+                Email = order.Email,
+                Address = order.Address,
+                Cart = new CartViewModel
+                {
+                    Items = new List<CartItemViewModel>(),
+                },
+                Created = order.Created,
+                FirstName = order.FirstName,
+                LastName = order.LastName,
+                Phone = order.Phone,
+                Status = order.Status,
+                TotalCost = order.TotalCost,
+                UserId = order.UserId
+            };
+
+            foreach (var item in order.CartItems)
+            {
+                var cartItemViewModel = new CartItemViewModel
+                {
+                    Id = item.Id,
+                    Product = item.Product.MappingProductViewModel(),
+                    Quantinity = item.Quantinity,
+                };
+                orderViewModel.Cart.Items.Add(cartItemViewModel);
+            }
+            return orderViewModel;
+        }
+        public static List<OrderViewModel> MappingListOrderViewModel(this List<Order> orders)
+        {
+            var ordersViewModel = new List<OrderViewModel>();
+
+            foreach (var order in orders)
+            {
+                var orderViewModel = order.MappingOrderViewModel();
+                ordersViewModel.Add(orderViewModel);
+            }
+            return ordersViewModel;
+        }
+
     }
+
 
 }
 

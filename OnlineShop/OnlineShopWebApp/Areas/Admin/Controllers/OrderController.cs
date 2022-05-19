@@ -18,9 +18,9 @@ namespace OnlineShopWebApp.Areas.Admin.Controllers
 
         public IActionResult Index()
         {
-            var existingOrders = orderRepository.TryGetAll();
-
-            return View(existingOrders);
+            var ordersDb = orderRepository.TryGetAll();
+            var ordersViewModel = ordersDb.MappingListOrderViewModel();
+            return View(ordersViewModel);
         }
 
         public IActionResult OrderDetails(Guid orderId)
