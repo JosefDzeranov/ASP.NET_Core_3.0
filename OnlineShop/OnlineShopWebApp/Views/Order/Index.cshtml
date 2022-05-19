@@ -89,10 +89,9 @@
 
         <div>
             <button type="submit" class="btn btn-warning">Оформить заказ</button>
-
-
         </div>
-
+        <input type="hidden" asp-for=TotalCost value="@Model.Cart.TotalCost"/>
+        <input type="hidden" asp-for=UserId value="@Model.Cart.UserId"/>
     </form>
 }
 else

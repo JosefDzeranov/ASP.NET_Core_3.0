@@ -33,11 +33,7 @@ namespace OnlineShopWebApp.Controllers
             if (ModelState.IsValid)
             {
                 var existingCart = cartRepository.TryGetByUserId(Const.UserId);
-                var cartView = existingCart.MappingCartViewModel();
-                orderViewModel.Cart = cartView;
-                orderViewModel.UserId = Const.UserId;
-                orderViewModel.TotalCost = cartView.TotalCost;
-                var order = orderViewModel.MappingOrder();
+                var order = orderViewModel.MappingOrder(existingCart);
                 orderRepository.Add(order);
                 cartRepository.Clear(Const.UserId);
                 return View();

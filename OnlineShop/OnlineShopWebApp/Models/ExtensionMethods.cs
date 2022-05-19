@@ -78,47 +78,30 @@ namespace OnlineShopWebApp.Models
 
             return cartViewModel;
         }
-        public static List<OrderItem> MappingListOrderItem(this List<CartItemViewModel> cartItemsViewModel, Guid orderViewModelId)
+
+        public static Order MappingOrder(this OrderViewModel orderViewModel, Cart existingCart)
         {
-
-            var orderItems = new List<OrderItem>();
-            foreach (var item in cartItemsViewModel)
+            var order = new Order
             {
+                Id = orderViewModel.Id,
+                Email = orderViewModel.Email,
+                Address = orderViewModel.Address,
+                CartItems = existingCart.Items,
+                Created = orderViewModel.Created,
+                FirstName = orderViewModel.FirstName,
+                LastName = orderViewModel.LastName,
+                Phone = orderViewModel.Phone,
+                Status = orderViewModel.Status,
+                TotalCost = orderViewModel.TotalCost,
+                UserId = orderViewModel.UserId
 
-                var orderItem = new OrderItem
-                {
-                    Id = item.Id,
-                    Product = item.Product.MappingProduct(),
-                    Quantinity = item.Quantinity,
-                    OrderId = orderViewModelId
-                };
-                orderItems.Add(orderItem);   
-            }
-            return orderItems;
-        }
-            public static Order MappingOrder(this OrderViewModel orderViewModel)
-            {
-                var order = new Order()
-                {
-                    Id = orderViewModel.Id == null ? Guid.NewGuid() : orderViewModel.Id,
-                    FirstName = orderViewModel.FirstName,
-                    LastName = orderViewModel.LastName,
-                    Address = orderViewModel.Address,
-                    Email = orderViewModel.Email,
-                    Created = orderViewModel.Created,
-                    OrderItems = orderViewModel.Cart.Items.MappingListOrderItem(orderViewModel.Id),
-                    Phone = orderViewModel.Phone,
-                    Status = OrderStatus.New,
-                    TotalCost = orderViewModel.TotalCost,
-                    UserId = orderViewModel.UserId,
-
-                };
-                return order;
-            }
-
+            };
+            return order;
         }
 
     }
+
+}
 
 
 

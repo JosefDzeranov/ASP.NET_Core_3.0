@@ -30,7 +30,7 @@ namespace OnlineShopDB.Services
         public void Delete(Product product)
         {
             onlineShopContext.Products.Remove(product);
-            var productInCart = onlineShopContext.CartItems.FirstOrDefault(x => x.ProductId == product.Id);
+            var productInCart = onlineShopContext.CartItems.FirstOrDefault(x => x.Product.Id == product.Id);
             if (productInCart != null)
             {
                 onlineShopContext.CartItems.Remove(productInCart);
