@@ -7,7 +7,7 @@ using OnlineShopWebApp.Services;
 using Serilog;
 using Microsoft.EntityFrameworkCore;
 using OnlineShop.Db;
-
+using OnlineShop.db;
 
 namespace OnlineShopWebApp
 {
@@ -27,8 +27,7 @@ namespace OnlineShopWebApp
                 options.UseSqlServer(connection), ServiceLifetime.Singleton);
 
             services.AddControllersWithViews();
-            //services.AddTransient<ICartRepository, CartsDbRepository>();
-            services.AddSingleton<ICartRepository, InMemoryCartRepository>();
+            services.AddTransient<ICartRepository, CartsDbRepository>();
             services.AddSingleton<IProductDataSource, ProductsDbRepository>();
             services.AddSingleton<ICustomerProfile, InMemoryCustomerProfile>();
             services.AddSingleton<IOrdersRepository, InMemoryOrdersRepository>();

@@ -24,8 +24,6 @@ namespace OnlineShopWebApp.Views.Shared.Components.Cart
                 productCount = null;
 
             return View("Cart", productCount);
-
         }
-
     }
 }
