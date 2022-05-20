@@ -36,24 +36,20 @@ namespace OnlineShopWebApp
 
         public Product TryGetByid(int id)
         {
-            foreach (var product in products)
-            {
-                if (product.Id == id)
-                    return product;
-            }
-            return null;
+            return products.FirstOrDefault(product => product.Id == id);
         }
 
-        public void Edit(Product newProduct)
+        public void Edit(Product product)
         {
-            var product = products.FirstOrDefault(x => x.Id == newProduct.Id);
-            if (product == null)
+            var existingProduct = products.FirstOrDefault(x => x.Id == product.Id);
+            if (existingProduct == null)
+            {
                 return;
+            }
 
-            product.Name = newProduct.Name;
-            product.Price = newProduct.Price;
-            product.Description = newProduct.Description;
-            product.ImagesPath = newProduct.ImagesPath;
+            existingProduct.Name = product.Name;
+            existingProduct.Price = product.Price;
+            existingProduct.Description = product.Description;
         }
         public void Clear(int id)
         {

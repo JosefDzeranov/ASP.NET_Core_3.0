@@ -49,7 +49,7 @@ namespace OnlineShopWebApp.Controllers
             return RedirectToAction("Products");
         }
 
-        public IActionResult Edit(int productId)
+        public IActionResult EditProduct(int productId)
         {
             var product = productsRepository.TryGetByid(productId);
             return View(product);
@@ -58,7 +58,7 @@ namespace OnlineShopWebApp.Controllers
         [HttpPost]
         public IActionResult EditProduct(Product product)
         {
-            if (ModelState.IsValid)
+            if (ModelState.IsValid == false)
                 return View(product);
             productsRepository.Edit(product);
             return RedirectToAction("Products");
@@ -67,7 +67,7 @@ namespace OnlineShopWebApp.Controllers
         public IActionResult Clear(int productId)
         {
             productsRepository.Clear(productId);
-            return RedirectToAction("Index");
+            return RedirectToAction("Products");
         }
     }
 }
