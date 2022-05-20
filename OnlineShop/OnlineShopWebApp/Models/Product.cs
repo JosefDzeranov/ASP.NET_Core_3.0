@@ -6,7 +6,7 @@ namespace OnlineShopWebApp.Models
     public class Product
     {
         private static int uniId = 1;
-        public int Id { get; }
+        public int Id { get; set; }
         [Required(ErrorMessage = "Поле названия незаполнено!")]
         public string Name { get; set; }
         [Required(ErrorMessage = "Поле цены незаполнено!")]
@@ -14,11 +14,11 @@ namespace OnlineShopWebApp.Models
         [Required(ErrorMessage = "Поле описания незаполнено!")]
         public string Description { get; set; }
         public string ImagesPath { get; set; }
-        public string GPU { get; }
-        public string MemoryType { get; }
-        public string MemoryCount { get; }
-        public string GpuGhz { get; }
-        public string TurboGpuGhz { get; }
+        public string GPU { get; set; }
+        public string MemoryType { get; set; }
+        public string MemoryCount { get; set; }
+        public string GpuGhz { get; set; }
+        public string TurboGpuGhz { get; set; }
 
         public Product()
         {
