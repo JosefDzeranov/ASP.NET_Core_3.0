@@ -43,7 +43,7 @@ namespace OnlineShopWebApp.Controllers
         [HttpPost]
         public IActionResult AddProduct(Product product)
         {
-            if (ModelState.IsValid)
+            if (ModelState.IsValid == false)
                 return View(product);
             productsRepository.Add(product);
             return RedirectToAction("Products");
