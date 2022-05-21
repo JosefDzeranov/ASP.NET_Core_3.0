@@ -143,7 +143,7 @@ namespace OnlineShopWebApp.Controllers
             if (user != null)
             {
                 usersManager.DeleteUser(user);
-                return View();
+                return RedirectToAction("Users");
             }
             else
             {
