@@ -2,6 +2,8 @@
 using OnlineShopWebApp.Services;
 using OnlineShopWebApp.Models;
 using System.Collections.Generic;
+using OnlineShop.Db;
+using OnlineShop.db.Models;
 
 namespace OnlineShopWebApp.Controllers
 {
@@ -24,9 +26,9 @@ namespace OnlineShopWebApp.Controllers
 
         public IActionResult Buy(Order order)
         {
-            order.CartItems =  new Dictionary<Product, int>(cartRepository.CartItems);
+            order.CartItems = new List<CartItem>(cartRepository.TryGetByUserId(Const.UserId).Items);
             ordersRepository.Add(order);
-            cartRepository.RemoveAll();
+            cartRepository.RemoveAll(Const.UserId);
             return View();
         }
 

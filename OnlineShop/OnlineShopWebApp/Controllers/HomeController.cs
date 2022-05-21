@@ -1,5 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using OnlineShopWebApp.Services;
+using OnlineShop.Db;
+using OnlineShopWebApp.Helpers;
+using OnlineShopWebApp.Models;
+using System.Diagnostics; 
 
 namespace OnlineShopWebApp.Controllers
 {
@@ -14,7 +17,8 @@ namespace OnlineShopWebApp.Controllers
         public IActionResult Index()
         {
             var products = productDataSource.GetAllProducts();
-            return View(products);
+
+            return View(Mapping.ToProductViewModels(products));    
         }
     }
 }
