@@ -2,6 +2,7 @@
 using OnlineShopWebApp.Models;
 using OnlineShop.db.Models;
 using System.Linq;
+using System;
 
 namespace OnlineShopWebApp.Helpers
 {
@@ -38,7 +39,6 @@ namespace OnlineShopWebApp.Helpers
         }
         public static IEnumerable<CartItemViewModel> ToCartItemsViewModels(IEnumerable<CartItem> cartDbItems)
         {
-            //var cartItems = new List<CartItemViewModel>();
             foreach (var cartDbItem in cartDbItems)
             {
                 yield return new CartItemViewModel
@@ -47,9 +47,17 @@ namespace OnlineShopWebApp.Helpers
                     Amount = cartDbItem.Amount,
                     Product = ToProductViewModel(cartDbItem.Product)
                 };
-                //cartItems.Add(cartItem);
+         
             }
-            //return cartItems;
+        }
+        public static FavoriteProductViewModel ToFavoriteProductViewModel(FavoriteProduct favoriteProduct)
+        {
+            return new FavoriteProductViewModel
+            {
+                Id = favoriteProduct.Id,
+                UserId = favoriteProduct.UserId,
+                FavoriteProducts = ToProductViewModels(favoriteProduct.Products).ToList()
+            };
         }
     }
 }

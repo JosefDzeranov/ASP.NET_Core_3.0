@@ -28,12 +28,14 @@ namespace OnlineShopWebApp
 
             services.AddControllersWithViews();
             services.AddTransient<ICartRepository, CartsDbRepository>();
-            services.AddSingleton<IProductDataSource, ProductsDbRepository>();
+            services.AddTransient<IProductDataSource, ProductsDbRepository>();
             services.AddSingleton<ICustomerProfile, InMemoryCustomerProfile>();
             services.AddSingleton<IOrdersRepository, InMemoryOrdersRepository>();
             services.AddSingleton<IRolesRepository, InMemoryRolesRepository>();
             services.AddSingleton<IUsersManager, UsersManager>();
-        
+            services.AddTransient<IFavoriteRepository, FavoriteDbRepository>();
+
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
