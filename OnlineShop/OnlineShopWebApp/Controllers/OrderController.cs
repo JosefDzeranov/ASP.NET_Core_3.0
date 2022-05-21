@@ -9,27 +9,32 @@ namespace OnlineShopWebApp.Controllers
     public class OrderController : Controller
     {
         private readonly IBuyerManager buyerManager;
-        public OrderController(IBuyerManager buyerManager)
+        private readonly IUserManager userManager;
+        public OrderController(IBuyerManager buyerManager, IUserManager userManager)
         {
             this.buyerManager = buyerManager;
+            this.userManager = userManager;
         }
 
-        public IActionResult Index(string buyerLogin)
+        public IActionResult Index()
         {
+            var buyerLogin = userManager.GetLoginAuthorizedUser();
             return View(buyerManager.FindBuyer(buyerLogin));
         }
 
         [HttpPost]
 
-        public IActionResult RewriteInfoBuying(string buyerLogin)
+        public IActionResult RewriteInfoBuying()
         {
+            var buyerLogin = userManager.GetLoginAuthorizedUser();
             buyerManager.ClearInfoBuying(buyerLogin);
             return RedirectToAction("Index", new {buyerId = buyerLogin });
         }
 
         [HttpPost]
-        public IActionResult BuyValid(InfoBuying infoBuying, string buyerLogin)
+        public IActionResult BuyValid(InfoBuying infoBuying)
         {
+            var buyerLogin = userManager.GetLoginAuthorizedUser();
             if (ModelState.IsValid)
             {
                 buyerManager.SaveInfoBuying(infoBuying, buyerLogin);
@@ -37,8 +42,9 @@ namespace OnlineShopWebApp.Controllers
             }
             else return Content("errorValid");
         }
-        public IActionResult Buy(string buyerLogin)
+        public IActionResult Buy()
         {
+            var buyerLogin = userManager.GetLoginAuthorizedUser();
             buyerManager.Buy(buyerLogin);
             return View();
         }

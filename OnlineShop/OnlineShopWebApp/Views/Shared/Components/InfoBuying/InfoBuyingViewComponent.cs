@@ -10,15 +10,18 @@ namespace OnlineShopWebApp.Views.Shared.Components.InfoBuying
     public class InfoBuyingViewComponent:ViewComponent
     {
         private readonly IBuyerManager buyerManager;
+        private readonly IUserManager userManager;
 
-        public InfoBuyingViewComponent(IBuyerManager buyerManager)
+        public InfoBuyingViewComponent(IBuyerManager buyerManager, IUserManager userManager)
         {
             this.buyerManager = buyerManager;
+            this.userManager = userManager;
         }
 
-        public IViewComponentResult Invoke(string userLogin)
+        public IViewComponentResult Invoke()
         {
-            var infoBuying = buyerManager.FindBuyer(userLogin).InfoBuying;
+            var buyerLogin = userManager.GetLoginAuthorizedUser();
+            var infoBuying = buyerManager.FindBuyer(buyerLogin).InfoBuying;
             return View("InfoBuying", infoBuying);
         }
     }

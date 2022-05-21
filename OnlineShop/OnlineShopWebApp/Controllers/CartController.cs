@@ -17,24 +17,20 @@ namespace OnlineShopWebApp.Controllers
             this.productManager = productManager;
             this.userManager = userManager;
         }
-        public IActionResult Index(string buyerLogin)
+        public IActionResult Index()
         {
-            var buyer = buyerManager.FindBuyer(buyerLogin);
+            var buyer = buyerManager.FindBuyer(userManager.GetLoginAuthorizedUser());
             if (buyer == null)
             {
                 return RedirectToAction("Index", "Login");
             }
-            else
-            {
-
-            }
-            return View();
+            return View(buyer);
         }
 
-        public IActionResult AddProduct(Guid productId, string buyerLogin)
+        public IActionResult AddProduct(Guid productId)
         {
+            var buyerLogin = userManager.GetLoginAuthorizedUser();
             var product = productManager.Find(productId);
-            var user = userManager.FindByLogin(buyerLogin);
             object routeValues = new { buyerLogin, Index = "Index", controller = "Cart", area = "" };
 
             if (userManager.GettingAccess(buyerLogin, "Index", "Cart", ""))
@@ -49,20 +45,23 @@ namespace OnlineShopWebApp.Controllers
             return RedirectToAction("Index", new { buyerLogin });
         }
 
-        public IActionResult DeleteProduct(Guid productId, string buyerLogin)
+        public IActionResult DeleteProduct(Guid productId)
         {
+            var buyerLogin = userManager.GetLoginAuthorizedUser();
             buyerManager.DeleteProductInCart(productId, buyerLogin);
             return RedirectToAction("Index", new { buyerLogin });
         }
 
-        public IActionResult ReduceDuplicateProduct(Guid productId, string buyerLogin)
+        public IActionResult ReduceDuplicateProduct(Guid productId)
         {
+            var buyerLogin = userManager.GetLoginAuthorizedUser();
             buyerManager.ReduceDuplicateProductCart(productId, buyerLogin);
             return RedirectToAction("Index", new { buyerLogin });
         }
 
-        public IActionResult Clear(string buyerLogin)
+        public IActionResult Clear()
         {
+            var buyerLogin = userManager.GetLoginAuthorizedUser();
             buyerManager.ClearCart(buyerLogin);
             return RedirectToAction("Index", new { buyerLogin });
         }
