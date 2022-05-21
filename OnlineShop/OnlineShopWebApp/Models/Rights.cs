@@ -14,6 +14,5 @@ namespace OnlineShopWebApp.Models
             new Route() {Area = "Admin"}
         };
 
-
     }
 }

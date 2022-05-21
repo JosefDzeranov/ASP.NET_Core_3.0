@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using OnlineShopWebApp.Interfase;
-using OnlineShopWebApp.Models;
 using OnlineShopWebApp.Models.Users;
 
 namespace OnlineShopWebApp
@@ -12,7 +11,7 @@ namespace OnlineShopWebApp
         private readonly IRoleManager roleManager;
 
         private readonly List<User> users;
-        public AuthorizedUser AuthorizedUser { get; set; }
+        public UserAutorized UserAutorized { get; set; }
         private const string nameSave = "users";
         private IWorkWithData JsonStorage { get; } = new JsonWorkWithData(nameSave);
 
@@ -23,11 +22,11 @@ namespace OnlineShopWebApp
         }
         public string GetLoginAuthorizedUser()
         {
-            return AuthorizedUser?.Login;
+            return UserAutorized?.Login;
         }
-        public void Authorized(User user)
+        public void Authorized(UserAutorized user)
         {
-            AuthorizedUser = new AuthorizedUser(user.Login, user.Password);
+            UserAutorized = user;
         }
         public bool GettingAccess(string userLogin, string action, string controller, string area)
         {
@@ -95,9 +94,14 @@ namespace OnlineShopWebApp
             return users.FirstOrDefault(x => x.Login == userLogin);
         }
 
-        public void Add(User user)
+        public void Add(UserRegistration userInput)
         {
-            users.Add(user);
+            User newUser = new User()
+            {
+                Login = userInput.Login,
+                Password = userInput.Password
+            };
+            users.Add(newUser);
             JsonStorage.Write(users);
         }
 

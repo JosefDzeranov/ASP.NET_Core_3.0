@@ -2,6 +2,7 @@
 using OnlineShopWebApp.Interfase;
 using OnlineShopWebApp.Models.Users;
 using System;
+using OnlineShopWebApp.Models;
 
 namespace OnlineShopWebApp.Controllers
 {
@@ -17,46 +18,41 @@ namespace OnlineShopWebApp.Controllers
             return View();
         }
 
-
         [HttpPost]
-        public IActionResult Registration(User user)
+        public IActionResult Index(UserAutorized userInput)
         {
-            if (userManager.FindByLogin(user.Login) != null)
-            {
-                ModelState.AddModelError("", "Такой аккаунт уже существует");
-            }
-            if (user.Password != user.PasswordConfirm)
-            {
-                ModelState.AddModelError("", "Проверочный пароль должен совпадать с паролем");
-            }
-            if (!ModelState.IsValid)
-            {
-                return Content("errorValid");
-            }
-            userManager.Add(user);
-            userManager.AssignRole(user.Login, Guid.Parse("674b2f41-3173-4a0c-8f7e-4043876b8ee3")); //Покупатель
-            return RedirectToAction("Index");
-        }
-        [HttpPost]
-        public IActionResult Enter(User userInput)
-        {
-            var user = userManager.FindByLogin(userInput.Login);
-            if (userManager.FindByLogin(userInput.Login) == null)
+            var user = userManager?.FindByLogin(userInput.Login);
+            if (user == null)
             {
                 ModelState.AddModelError("", "Такого аккаунта не существует");
             }
-            if (userInput.Password != user.Password)
+            else if (userInput?.Password != user?.Password)
             {
-                ModelState.AddModelError("", "Пароль введён неверно");
+                ModelState.AddModelError("", "Логин или пароль введён неверно");
             }
-            if (!ModelState.IsValid)
+            if (ModelState.IsValid)
             {
-                return Content("errorValid");
+                userManager.Authorized(userInput);
+                return RedirectToAction("Index", "User");
             }
-            userManager.Authorized(userInput);
-            return RedirectToAction("Index", "User");
+            return View();
         }
 
+        [HttpPost]
+        public IActionResult NewUser(UserRegistration userInput)
+        {
+            if (userManager.FindByLogin(userInput.Login) != null)
+            {
+                ModelState.AddModelError("", "Такой аккаунт уже существует");
+            }
+            if (ModelState.IsValid)
+            {
+                userManager.Add(userInput);
+                userManager.AssignRole(userInput.Login, MyConstant.RoleDefaultId); //Покупатель
+                return RedirectToAction("Index", "User");
+            }
+            return View();
+        }
 
         public IActionResult NewUser()
         {

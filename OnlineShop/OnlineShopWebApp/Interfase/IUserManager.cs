@@ -8,13 +8,13 @@ namespace OnlineShopWebApp.Interfase
     public interface IUserManager
     {
         List<User> GetAll();
-        void Authorized(User user);
+        void Authorized(UserAutorized user);
         string GetLoginAuthorizedUser();
         bool GettingAccess(string userLogin, string action, string controller, string area);
 
         User FindByLogin(string userLogin);
 
-        void Add(User user);
+        void Add(UserRegistration userInput);
 
         void Remove(string userLogin);
         void AssignRole(string userLogin, Guid roleId);
