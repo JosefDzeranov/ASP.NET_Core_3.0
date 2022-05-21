@@ -1,20 +1,20 @@
 ﻿using OnlineShop.db.Models;
 using OnlineShop.Db;
-using OnlineShopWebApp.Models;
 using System.Collections.Generic;
 using System.Linq;
+using Microsoft.EntityFrameworkCore;
 
-namespace OnlineShopWebApp.Services
-{
-    public class InMemoryCartRepository : ICartRepository
+namespace OnlineShop.db
+{ 
+    public class CartsDbRepository : ICartRepository
     {
         private readonly IProductDataSource productDataSource;
+        private readonly DatabaseContext databaseContext;
 
-        private readonly List<Cart> carts = new List<Cart>();
-
-        public InMemoryCartRepository(IProductDataSource productDataSource)
+        public CartsDbRepository(IProductDataSource productDataSource, DatabaseContext databaseContext)
         {
             this.productDataSource = productDataSource;
+            this.databaseContext = databaseContext;
         }
 
         public void Add(Product product, string userId)
@@ -28,35 +28,39 @@ namespace OnlineShopWebApp.Services
                     UserId = userId,
                 };
 
-                carts.Add(cart);
-            }
+                databaseContext.Carts.Add(cart);
+             }
 
             var existingItem = cart.Items.Where(x=>x.Product.Id == product.Id).FirstOrDefault();
 
             if (existingItem == null)
             {
-                cart.Items.Add(new CartItem()
+                existingItem= new CartItem()
                 {
                     Product = product,
                     Amount = 1
-                });
+                };
+                cart.Items.Add(existingItem);
             }
             else
             {
                 existingItem.Amount += 1;
             }
+  
+            databaseContext.SaveChanges();
         }
 
         public void Add(int id, string userId)
         {
             var product = productDataSource.GetProductById(id);
-            Add(product, userId);
+            Add(product, userId);     
         }
 
         public void Remove(int id, string userId)
         {
             var product = productDataSource.GetProductById(id);
             Remove(product, userId);
+
         }
 
         public void Remove(Product product, string userId)
@@ -73,17 +77,20 @@ namespace OnlineShopWebApp.Services
             {
                 cart.Items.Remove(existingItem);
             }
+            databaseContext.CartItems.Remove(existingItem);
+            databaseContext.SaveChanges();
         }
 
         public void RemoveAll(string userId)
         {
             var cart = TryGetByUserId(userId);
-            cart.Items.Clear();
+            databaseContext.Carts.Remove(cart);
+            databaseContext.SaveChanges();
         }
 
         public Cart TryGetByUserId(string userId)
         {
-            return carts.FirstOrDefault(x => x.UserId == userId);
+            return databaseContext.Carts.FirstOrDefault(x => x.UserId == userId);
         }
 
         public void GetAllProduct()
@@ -91,21 +98,21 @@ namespace OnlineShopWebApp.Services
             throw new System.NotImplementedException();
         }
 
-        public Dictionary<Product, int> CartItems { get; set; } = new Dictionary<Product, int>();
+        //public Dictionary<Product, int> CartItems { get; set; } = new Dictionary<Product, int>();
 
-        public decimal Cost
-        {
-            get
-            {
-                return CartItems.Sum(item => item.Key.Cost * item.Value);
-            }
-        }
-        public int Amount
-        {
-            get
-            {
-                return CartItems.Sum(item => item.Value);
-            }
-        }
+        //public decimal Cost
+        //{
+        //    get
+        //    {
+        //        return CartItems.Sum(item => item.Key.Cost * item.Value);
+        //    }
+        //}
+        //public int Amount
+        //{
+        //    get
+        //    {
+        //        return CartItems.Sum(item => item.Value);
+        //    }
+        //}
     }
 }

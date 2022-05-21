@@ -1,6 +1,6 @@
-﻿@model (Dictionary<Product, int> products, decimal total)
+﻿@model CartViewModel
 
-@if (Model.products == null|| Model.products.Count==0)
+@if (Model == null || Model.Items.Count == 0)
 {
 	<h3>Пустая корзина</h3>
 }
@@ -20,22 +20,22 @@ else
 					</tr>
 			</thead>
 			<tbody>
-			@foreach(var item in Model.products)
+			@foreach(var item in Model.Items)
 			{
 				<tr>
-					<td>@item.Key.Name</td>
-					<td>@item.Key.Cost</td>
-					<td>@item.Value</td>
-					<td>@(item.Key.Cost * item.Value)</td>
-					<td><a class ="btn btn-outline-success" href="/cart/add?productId=@item.Key.Id" role="button">+</a></td>
-					<td><a class ="btn btn-outline-success" href="/cart/removeProduct?productId=@item.Key.Id" role="button">-</a></td>
+					<td>@item.Product.Name</td>
+					<td>@item.Product.Cost</td>
+					<td>@item.Amount</td>
+					<td>@item.Cost</td>
+					<td><a class ="btn btn-outline-success" href="/cart/add?productId=@item.Product.Id" role="button">+</a></td>
+					<td><a class ="btn btn-outline-success" href="/cart/removeProduct?productId=@item.Product.Id" role="button">-</a></td>
 			    </tr>
 			}
 		</tbody>
 		</table>
 		<div class="text-right">
 	<h3>Итого</h3>
-	<h3>@Model.total</h3>
+	<h3>@Model.Cost</h3>
 </div>
 <div class ="text-center">
 	<a class ="btn btn-outline-success" href="/home/index" role="button">Продолжить покупки</a>

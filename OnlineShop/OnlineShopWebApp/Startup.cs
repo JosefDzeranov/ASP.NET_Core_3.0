@@ -5,11 +5,13 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using OnlineShopWebApp.Services;
 using Serilog;
-
+using Microsoft.EntityFrameworkCore;
+using OnlineShop.Db;
+using OnlineShop.db;
 
 namespace OnlineShopWebApp
 {
-	public class Startup
+    public class Startup
     {
         public Startup(IConfiguration configuration)
         {
@@ -20,9 +22,13 @@ namespace OnlineShopWebApp
 
         public void ConfigureServices(IServiceCollection services)
         {
+            string connection = Configuration.GetConnectionString("online_shop");
+            services.AddDbContext<DatabaseContext>(options =>
+                options.UseSqlServer(connection), ServiceLifetime.Singleton);
+
             services.AddControllersWithViews();
-            services.AddSingleton<ICartRepository, InMemoryCartRepository>();
-            services.AddSingleton<IProductDataSource, InMemoryProductDataSource>();
+            services.AddTransient<ICartRepository, CartsDbRepository>();
+            services.AddSingleton<IProductDataSource, ProductsDbRepository>();
             services.AddSingleton<ICustomerProfile, InMemoryCustomerProfile>();
             services.AddSingleton<IOrdersRepository, InMemoryOrdersRepository>();
             services.AddSingleton<IRolesRepository, InMemoryRolesRepository>();

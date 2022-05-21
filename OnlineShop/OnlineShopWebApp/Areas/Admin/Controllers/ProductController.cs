@@ -1,6 +1,10 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using OnlineShopWebApp.Services;
 using OnlineShopWebApp.Models;
+using OnlineShopWebApp.Helpers;
+using OnlineShop.Db;
+using System.Collections.Generic;
+using OnlineShop.db.Models;
 
 namespace OnlineShopWebApp.Areas.Admin.Controllers
 {
@@ -16,7 +20,8 @@ namespace OnlineShopWebApp.Areas.Admin.Controllers
 
         public IActionResult Index()
         {
-            return View(productDataSource.GetAllProducts());
+            var products = productDataSource.GetAllProducts();
+            return View(Mapping.ToProductViewModels(products));
         }
 
         [HttpGet]
@@ -26,15 +31,23 @@ namespace OnlineShopWebApp.Areas.Admin.Controllers
         }
 
         [HttpPost]
-        public IActionResult Add(Product product)
+        public IActionResult Add(ProductViewModel product)
         {
-            if (ModelState.IsValid)
+            if (!ModelState.IsValid)
             {
-                productDataSource.AddProduct(product);
-                return RedirectToAction(nameof(Index));
+                return View(product);
             }
+            var productDb = new Product
 
-            return View(product);
+            {
+                Name = product.Name,
+                Cost = product.Cost,
+                Description = product.Description
+            };
+
+            productDataSource.AddProduct(productDb);
+            return RedirectToAction(nameof(Index));
+
         }
 
         public IActionResult Remove(int productId)
@@ -51,14 +64,22 @@ namespace OnlineShopWebApp.Areas.Admin.Controllers
         }
 
         [HttpPost]
-        public IActionResult Edit(Product product)
+        public IActionResult Edit(ProductViewModel product)
         {
-            if (ModelState.IsValid)
+            if (!ModelState.IsValid)
             {
-                productDataSource.EditProduct(product);
-                return RedirectToAction(nameof(Index));
+                return View (product);
+               
             }
-            return View(product);
+            var productDb = new Product
+            {
+                Name = product.Name,
+                Cost = product.Cost,
+                Description = product.Description
+            };
+
+            productDataSource.EditProduct(productDb);
+            return RedirectToAction(nameof(Index));
         }
 
     }

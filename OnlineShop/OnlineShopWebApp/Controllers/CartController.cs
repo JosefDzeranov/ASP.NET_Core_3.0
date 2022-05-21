@@ -1,5 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using OnlineShop.Db;
 using OnlineShopWebApp.Services;
+using OnlineShopWebApp.Helpers;
+using System.Linq;
 
 
 namespace OnlineShopWebApp.Controllers
@@ -17,25 +20,25 @@ namespace OnlineShopWebApp.Controllers
         }
         public IActionResult Index()
         {
-
-            return View((cartRepository.CartItems, cartRepository.Cost));
+            //var viewModelDict = cartRepository.CartItems.ToDictionary(k => Mapping.ToProductViewModel(k.Key), v=>v.Value);
+            return View(Mapping.ToCartViewModel(cartRepository.TryGetByUserId(Const.UserId)));
         }
 
         public IActionResult Add(int productId)
         {
-            cartRepository.Add(productId);
+            cartRepository.Add(productId, Const.UserId);
             return RedirectToAction("Index");
         }
 
         public IActionResult RemoveProduct(int productId)
         {
-            cartRepository.Remove(productId);
+            cartRepository.Remove(productId, Const.UserId);
             return RedirectToAction("Index");
         }
 
-        public IActionResult RemoveAll()
+        public IActionResult RemoveAll(string userId)
         {
-            cartRepository.RemoveAll();
+            cartRepository.RemoveAll(userId);
             return RedirectToAction("Index");
         }
 
