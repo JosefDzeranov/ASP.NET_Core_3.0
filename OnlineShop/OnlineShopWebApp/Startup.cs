@@ -5,6 +5,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Options;
+using OnlineShopWebApp.Filters;
 using OnlineShopWebApp.Interfase;
 using Serilog;
 using System.Globalization;
@@ -26,6 +27,7 @@ namespace OnlineShopWebApp
             services.AddSingleton<IRoleManager, RoleManager>();
             services.AddSingleton<IUserManager, UserManager>();
             services.AddControllersWithViews();
+            services.AddScoped<CheckingForAuthorization>();
 
             services.Configure<RequestLocalizationOptions>(options => //конфигурируем настройки локализации запроса. Решается задача валидации decimal
             {

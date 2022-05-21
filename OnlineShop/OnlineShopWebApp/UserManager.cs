@@ -11,7 +11,7 @@ namespace OnlineShopWebApp
         private readonly IRoleManager roleManager;
 
         private readonly List<User> users;
-        public UserAutorized UserAutorized { get; set; }
+        private UserAutorized UserAutorized { get; set; }
         private const string nameSave = "users";
         private IWorkWithData JsonStorage { get; } = new JsonWorkWithData(nameSave);
 
@@ -27,6 +27,12 @@ namespace OnlineShopWebApp
         public void Authorized(UserAutorized user)
         {
             UserAutorized = user;
+        }
+
+        public bool CheckingForAuthorization()
+        {
+            if (UserAutorized == null) return false;
+            return true;
         }
         public bool GettingAccess(string userLogin, string action, string controller, string area)
         {

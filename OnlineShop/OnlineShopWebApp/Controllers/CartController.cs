@@ -1,9 +1,11 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using OnlineShopWebApp.Interfase;
 using System;
+using OnlineShopWebApp.Filters;
 
 namespace OnlineShopWebApp.Controllers
 {
+    [ServiceFilter(typeof(CheckingForAuthorization))]
     public class CartController : Controller
     {
         private readonly IBuyerManager buyerManager;

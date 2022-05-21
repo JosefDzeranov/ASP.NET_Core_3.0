@@ -1,9 +1,10 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using OnlineShopWebApp.Filters;
 using OnlineShopWebApp.Interfase;
 
 namespace OnlineShopWebApp.Controllers
 {
-
+    [ServiceFilter(typeof(CheckingForAuthorization))]
     public class UserController : Controller
     {
         private readonly IUserManager userManager;
@@ -20,5 +21,6 @@ namespace OnlineShopWebApp.Controllers
             var user = userManager.FindByLogin(userManager.GetLoginAuthorizedUser());
             return View(user);
         }
+
     }
 }

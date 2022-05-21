@@ -1,10 +1,11 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using OnlineShopWebApp.Filters;
 using OnlineShopWebApp.Interfase;
 using OnlineShopWebApp.Models.Users.Buyer;
 
 namespace OnlineShopWebApp.Controllers
 {
-
+    [ServiceFilter(typeof(CheckingForAuthorization))]
     public class OrderController : Controller
     {
         private readonly IBuyerManager buyerManager;

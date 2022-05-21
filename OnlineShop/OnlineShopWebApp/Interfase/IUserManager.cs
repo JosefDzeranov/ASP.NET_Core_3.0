@@ -10,6 +10,7 @@ namespace OnlineShopWebApp.Interfase
         List<User> GetAll();
         void Authorized(UserAutorized user);
         string GetLoginAuthorizedUser();
+        bool CheckingForAuthorization();
         bool GettingAccess(string userLogin, string action, string controller, string area);
 
         User FindByLogin(string userLogin);
