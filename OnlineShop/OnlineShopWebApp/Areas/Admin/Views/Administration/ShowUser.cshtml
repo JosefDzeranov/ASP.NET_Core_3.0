@@ -32,7 +32,8 @@
             <a class="dropdown-item" asp-area="Admin" asp-controller="Administration" asp-action="ChangePassword" asp-route-id="@Model.Id"> Смена пароля</a>
             <a class="dropdown-item" asp-area="Admin" asp-controller="Administration" asp-action="EditUser" asp-route-id="@Model.Id"> Редактирование данных</a>
             <a class="dropdown-item" asp-area="Admin" asp-controller="Administration" asp-action="EditUserRights" asp-route-id="@Model.Id">Права доступа </a>
-            <a class="dropdown-item" asp-area="Admin" asp-controller="Administration" asp-action="DeleteUser" asp-route-id="@Model.Id">Удалить пользователя </a>
+            <a class="dropdown-item" asp-area="Admin" asp-controller="Administration" asp-action="DeleteUser" asp-route-id="@Model.Id" data-toggle="modal" data-target="#exampleModal">Удалить пользователя </a>
         </div>
+        @await Html.PartialAsync("DeleteUser")
     </div>
 </div>
