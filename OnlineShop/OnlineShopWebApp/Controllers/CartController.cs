@@ -36,22 +36,16 @@ namespace OnlineShopWebApp.Controllers
             var product = productManager.Find(productId);
             var user = userManager.FindByLogin(buyerLogin);
             object routeValues = new { buyerLogin, Index = "Index", controller = "Cart", area = "" };
-            if (user == null)
+
+            if (userManager.GettingAccess(buyerLogin, "Index", "Cart", ""))
             {
-                return RedirectToAction("Index", "Login", routeValues);
+                buyerManager.AddProductInCart(product, buyerLogin);
             }
             else
             {
-                if (userManager.GettingAccess(buyerLogin, "Index", "Cart", ""))
-                {
-                    buyerManager.AddProductInCart(product, buyerLogin);
-                }
-                else
-                {
-                    return RedirectToAction("TabooAccess", "Login", routeValues);
-                }
-
+                return RedirectToAction("TabooAccess", "Login", routeValues);
             }
+
             return RedirectToAction("Index", new { buyerLogin });
         }
 

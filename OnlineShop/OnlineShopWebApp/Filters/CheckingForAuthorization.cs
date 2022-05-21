@@ -23,10 +23,20 @@ namespace OnlineShopWebApp.Filters
                 context.Result =
                     new RedirectToRouteResult(new RouteValueDictionary(new
                     {
+                        Area = "",
                         controller = "Login",
                         action = "Index"
                     }));
             }
+            //else if (!userManager.GettingAccess(userManager.GetLoginAuthorizedUser(), "Index", "Cart", ""))
+            //{
+            //    context.Result =
+            //        new RedirectToRouteResult(new RouteValueDictionary(new
+            //        {
+            //            controller = "Login",
+            //            action = "TabooAccess"
+            //        }));
+            //}
             base.OnActionExecuting(context);
         }
 

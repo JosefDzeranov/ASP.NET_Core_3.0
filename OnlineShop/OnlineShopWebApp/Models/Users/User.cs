@@ -28,7 +28,7 @@ namespace OnlineShopWebApp.Models.Users
         [Required(ErrorMessage = "Не указан пароль")]
         public string Password { get; set; }
         
-        public Role RoleUser { get; set; }
+        public Guid RoleId { get; set; }
         
     }
 }

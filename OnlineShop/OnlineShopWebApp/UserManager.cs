@@ -38,7 +38,7 @@ namespace OnlineShopWebApp
         {
             bool permission = true;
             var user = FindByLogin(userLogin);
-            var role = roleManager.Find(user.RoleUser.Id);
+            var role = roleManager.Find(user.RoleId);
             if (role.Rights.BeAdmin == false)
             {
                 foreach (var v in role.Rights.tabooAdmin)
@@ -84,8 +84,7 @@ namespace OnlineShopWebApp
         public void AssignRole(string userLogin, Guid roleId)
         {
             var user = FindByLogin(userLogin);
-            var role = roleManager.Find(roleId);
-            user.RoleUser = role;
+            user.RoleId = roleId;
             JsonStorage.Write(users);
         }
 
