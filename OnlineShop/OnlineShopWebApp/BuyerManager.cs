@@ -2,6 +2,7 @@
 using OnlineShopWebApp.Models;
 using System;
 using System.Collections.Generic;
+using OnlineShopWebApp.Models.Users;
 using OnlineShopWebApp.Models.Users.Buyer;
 
 namespace OnlineShopWebApp
@@ -15,6 +16,13 @@ namespace OnlineShopWebApp
         public BuyerManager()
         {
             buyers = JsonStorage.Read<List<UserBuyer>>();
+        }
+
+        public void AddBuyer(User user)
+        {
+            UserBuyer buyer = new UserBuyer() {Login = user.Login};
+            buyers.Add(buyer);
+            JsonStorage.Write(buyers);
         }
 
         public void AddProductInCart(Product product, string buyerLogin)

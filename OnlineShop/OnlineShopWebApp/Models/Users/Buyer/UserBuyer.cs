@@ -5,8 +5,9 @@ using OnlineShopWebApp.Interfase;
 
 namespace OnlineShopWebApp.Models.Users.Buyer
 {
-    public class UserBuyer : User
+    public class UserBuyer
     {
+        public string Login { get; set; }
         public List<Product> Comparisons { get; set; } = new List<Product>();
         public List<CartItem> Cart { get; set; } = new List<CartItem>();
         public InfoBuying InfoBuying { get; set; } = new InfoBuying();

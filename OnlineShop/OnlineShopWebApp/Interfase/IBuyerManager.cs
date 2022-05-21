@@ -1,12 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 using OnlineShopWebApp.Models;
+using OnlineShopWebApp.Models.Users;
 using OnlineShopWebApp.Models.Users.Buyer;
 
 namespace OnlineShopWebApp.Interfase
 {
     public interface IBuyerManager
     {
+        void AddBuyer(User user);
         void AddProductInCart(Product product, string buyerLogin);
         void DeleteProductInCart(Guid productId, string buyerLogin);
         void ReduceDuplicateProductCart(Guid productId, string buyerLogin);

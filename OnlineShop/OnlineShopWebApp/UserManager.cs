@@ -9,15 +9,17 @@ namespace OnlineShopWebApp
     public class UserManager : IUserManager
     {
         private readonly IRoleManager roleManager;
+        private readonly IBuyerManager buyerManager;
 
         private readonly List<User> users;
         private UserAutorized UserAutorized { get; set; }
         private const string nameSave = "users";
         private IWorkWithData JsonStorage { get; } = new JsonWorkWithData(nameSave);
 
-        public UserManager(IRoleManager roleManager)
+        public UserManager(IRoleManager roleManager, IBuyerManager buyerManager)
         {
             this.roleManager = roleManager;
+            this.buyerManager = buyerManager;
             users = JsonStorage.Read<List<User>>();
         }
         public string GetLoginAuthorizedUser()
@@ -86,6 +88,8 @@ namespace OnlineShopWebApp
             var user = FindByLogin(userLogin);
             user.RoleId = roleId;
             JsonStorage.Write(users);
+            if (roleManager.Find(roleId).Rights.BeBuyer) buyerManager.AddBuyer(user);
+            
         }
 
 

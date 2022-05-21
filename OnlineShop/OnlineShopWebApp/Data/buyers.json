@@ -1,0 +1,16 @@
+[
+  {
+    "Login": "Alex",
+    "Comparisons": [],
+    "Cart": [],
+    "InfoBuying": {
+      "Surname": null,
+      "Firstname": null,
+      "Secondname": null,
+      "Phone": null,
+      "Email": null,
+      "Commentary": null
+    },
+    "Orders": []
+  }
+]
