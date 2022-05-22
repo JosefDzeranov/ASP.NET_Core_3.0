@@ -76,7 +76,6 @@ namespace OnlineShopWebApp.Controllers
                 return RedirectToAction("AddNewUser");
             }
 
-           
         }
 
         public IActionResult ShowUser(Guid id)
@@ -90,7 +89,6 @@ namespace OnlineShopWebApp.Controllers
             {
                 return RedirectToAction("Users");
             }
-
 
         }
         public IActionResult ChangePassWord(Guid id)
@@ -151,7 +149,6 @@ namespace OnlineShopWebApp.Controllers
             }
 
         }
-
 
 
         public IActionResult Roles()

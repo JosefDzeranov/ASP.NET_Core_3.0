@@ -7,9 +7,11 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Localization;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using OnlineShop.Db;
 using OnlineShopWebApp.Models;
 using Serilog;
 
@@ -27,7 +29,10 @@ namespace OnlineShopWebApp
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddControllersWithViews();
+            //получаем строку подключения из файла конфигурации
+            string connection = Configuration.GetConnectionString("online_shop");
+            services.AddDbContext<DataBaseContext>(options => options.UseSqlServer(connection));
+           
 
             services.AddSingleton<ICartManager, CartManager>();
             services.AddSingleton<IProductManager, ProductManager>();
@@ -36,6 +41,7 @@ namespace OnlineShopWebApp
             services.AddSingleton<IFavorites, FavoritesManager>();
             services.AddSingleton<IRolesManager, RolesManager>();
             services.AddSingleton<IUsersManager, UsersManager>();
+            services.AddControllersWithViews();
 
             services.Configure<RequestLocalizationOptions>(options =>
             {
