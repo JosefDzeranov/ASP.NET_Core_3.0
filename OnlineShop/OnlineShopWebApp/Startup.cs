@@ -12,6 +12,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using OnlineShop.Db;
+
 using OnlineShopWebApp.Models;
 using Serilog;
 
@@ -35,7 +36,7 @@ namespace OnlineShopWebApp
            
 
             services.AddSingleton<ICartManager, CartManager>();
-            services.AddSingleton<IProductManager, ProductManager>();
+            services.AddSingleton<IProductManager, ProductManagerDB>();
             services.AddSingleton<IOrderManager, OrderManager>();
             services.AddSingleton<IComparison, ComparisonManager>();
             services.AddSingleton<IFavorites, FavoritesManager>();

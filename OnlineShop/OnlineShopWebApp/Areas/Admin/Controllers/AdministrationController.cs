@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
+using OnlineShopWebApp.Db;
 using OnlineShopWebApp.Models;
 using System;
 
@@ -196,18 +197,18 @@ namespace OnlineShopWebApp.Controllers
 
         public IActionResult Products()
         {
-            var productList = productManager.ProductList;
+            var productList = productManager.GetAll();
             return View(productList);
         }
 
-        public IActionResult EditProduct(int id)
+        public IActionResult EditProduct(Guid id)
         {
-            var product = productManager.FindProduct(id);
+            var product = productManager.TryGetById(id);
             return View(product);
         }
 
         [HttpPost]
-        public IActionResult SaveEditedProduct(Product product)
+        public IActionResult SaveEditedProduct(OnlineShop.Db.Models.Product product)
         {
 
             if (ModelState.IsValid)
@@ -223,10 +224,10 @@ namespace OnlineShopWebApp.Controllers
 
         }
 
-        public IActionResult RemoveProduct(int id)
+        public IActionResult RemoveProduct(Guid id)
         {
-            var product = productManager.FindProduct(id);
-            productManager.ProductList.Remove(product);
+            var product = productManager.TryGetById(id);
+            productManager.GetAll().Remove(product);
             return View(product);
         }
 
@@ -237,11 +238,11 @@ namespace OnlineShopWebApp.Controllers
         }
 
         [HttpPost]
-        public IActionResult SaveAddedProduct(Product product)
+        public IActionResult SaveAddedProduct(OnlineShop.Db.Models.Product product)
         {
             if (ModelState.IsValid)
             {
-                productManager.ProductList.Add(product);
+                productManager.AddProduct(product);
 
                 return View(product);
             }
