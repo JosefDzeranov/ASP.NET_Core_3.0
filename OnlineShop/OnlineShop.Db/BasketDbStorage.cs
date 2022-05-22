@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Linq;
+﻿using System.Linq;
 using OnlineShop.Db.Models;
 
 namespace OnlineShop.Db
@@ -13,12 +12,10 @@ namespace OnlineShop.Db
             _databaseContext = databaseContext;
         }
 
-
-        //private List<Basket> baskets = new List<Basket>();
-
         public Basket TryGetByUserId(string userId)
         {
-            return _databaseContext.Baskets.FirstOrDefault(b => b.UserId == userId);
+            var basket = _databaseContext.Baskets.FirstOrDefault(b => b.UserId == userId);
+            return basket;
         }
 
         public void AddProduct(string userId, Product product)
@@ -29,10 +26,6 @@ namespace OnlineShop.Db
             {
                 _databaseContext.Baskets.Add(basket);
                 _databaseContext.SaveChanges();
-
-                var newBasket = new Basket(userId);
-                newBasket.Items.Add(new BasketItem(product));
-                baskets.Add(newBasket);
             }
             else
             {
@@ -43,7 +36,8 @@ namespace OnlineShop.Db
                 }
                 else 
                 {
-                    basket.Items.Add(new Basket(product));
+                    basket.Items.Add(basketItem);
+                    _databaseContext.SaveChanges();
                 }
             }
         }
@@ -62,6 +56,7 @@ namespace OnlineShop.Db
                     if (basketItem.Quantity == 0)
                     {
                         basket.Items.Remove(basketItem);
+                        _databaseContext.SaveChanges();
                     }
                 }
             }
@@ -70,6 +65,7 @@ namespace OnlineShop.Db
         {
             var basket = TryGetByUserId(userId);
             basket.Items.Clear();
+            _databaseContext.SaveChanges();
         }
     }
 }

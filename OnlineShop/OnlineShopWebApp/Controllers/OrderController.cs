@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using OnlineShopWebApp.Models;
+using OnlineShop.Db;
 
 namespace OnlineShopWebApp.Controllers
 {
@@ -13,29 +14,29 @@ namespace OnlineShopWebApp.Controllers
             _orderStorage = orderStorage;
             _basketStorage = basketStorage;
         }
-        public IActionResult Index()
-        {
-            var basket = _basketStorage.TryGetByUserId(Constants.UserId);
-            var orderForm = new OrderForm() { Basket = basket };
+        //public IActionResult Index()
+        //{
+        //    var basket = _basketStorage.TryGetByUserId(Constants.UserId);
+        //    var orderForm = new OrderForm() { Basket = basket };
 
-            return View(orderForm);
-        }
+        //    return View(orderForm);
+        //}
 
-        [HttpPost]
-        public IActionResult Buy(OrderForm orderForm)
-        {
-            if(!ModelState.IsValid)
-            {
-                return RedirectToAction("Index");
-            }
+        //[HttpPost]
+        //public IActionResult Buy(OrderForm orderForm)
+        //{
+        //    if(!ModelState.IsValid)
+        //    {
+        //        return RedirectToAction("Index");
+        //    }
 
-            var basket = _basketStorage.TryGetByUserId(Constants.UserId);
-            var delivery = orderForm.Delivery;
-            _orderStorage.Add(Constants.UserId, basket, delivery);
+        //    var basket = _basketStorage.TryGetByUserId(Constants.UserId);
+        //    var delivery = orderForm.Delivery;
+        //    _orderStorage.Add(Constants.UserId, basket, delivery);
 
-            _basketStorage.ClearBasket(Constants.UserId);
+        //    _basketStorage.ClearBasket(Constants.UserId);
 
-            return View();
-        }
+        //    return View();
+        //}
     }
 }
