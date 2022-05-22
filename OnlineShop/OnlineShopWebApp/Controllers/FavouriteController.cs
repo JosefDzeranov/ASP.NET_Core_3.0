@@ -2,9 +2,6 @@
 using OnlineShop.Db;
 using OnlineShopWebApp.Helpers;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace OnlineShopWebApp.Controllers
 {
@@ -20,25 +17,25 @@ namespace OnlineShopWebApp.Controllers
         }
         public IActionResult Index()
         {
-            return View(favouritesRepository.GetFavourites());
+            var products = favouritesRepository.GetFavourites(Constants.UserId);
+            return View(Mapping.ToProductViewModels(products));
         }
 
         public IActionResult Add(Guid productId)
         {
             var product = productsRepository.TryGetById(productId);
-            //favouritesRepository.Add(product);
+            favouritesRepository.Add(Constants.UserId, product);
             return RedirectToAction("Index");
         }
 
         public IActionResult Clear()
         {
-            favouritesRepository.Clear();
+            favouritesRepository.Clear(Constants.UserId);
             return RedirectToAction("Index");
         }
         public IActionResult Delete(Guid productId)
-        {
-            var product = productsRepository.TryGetById(productId);
-            favouritesRepository.Delete(Mapping.ToProductViewModel(product));
+        {            
+            favouritesRepository.Delete(Constants.UserId, productId);
             return RedirectToAction("Index");
         }
     }

@@ -1,4 +1,6 @@
-﻿using OnlineShop.Db.Models;
+﻿using Microsoft.EntityFrameworkCore;
+using OnlineShop.Db.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -12,29 +14,35 @@ namespace OnlineShop.Db
         {
             this.databaseContext = databaseContext;
         }
-        public void Add(Product product)
+        public void Add(string userId, Product product)
         {
-
-            var existingProductToCompare = databaseContext.ComparingProducts.FirstOrDefault(x => x.Id == product.Id);
-            if (existingProductToCompare == null)
+            var existingProduct = databaseContext.ComparingProducts.FirstOrDefault(x => x.UserId == userId && x.Product.Id == product.Id);
+            if (existingProduct == null)
             {
-                databaseContext.Add(product);
+                databaseContext.ComparingProducts.Add(new ComparingProduct { UserId = userId, Product = product });
                 databaseContext.SaveChanges();
             }         
         }
 
-        public List<ComparingProduct> GetCompare()
+        public List<Product> GetCompare(string userId)
         {
-            return databaseContext.ComparingProducts.ToList();
+            return databaseContext.ComparingProducts.Where(x => x.UserId == userId)
+                .Include(x => x.Product)
+                .Select(x => x.Product)
+                .ToList();
         }
 
-        public void Clear()
+        public void Clear(string userId)
         {
-            databaseContext.ComparingProducts.RemoveRange();
+            var existingProductsToCompare = databaseContext.ComparingProducts.Where(x => x.UserId == userId).ToList();
+            databaseContext.ComparingProducts.RemoveRange(existingProductsToCompare);
+            databaseContext.SaveChanges();
         }
-        public void Delete(ComparingProduct product)
+        public void Delete(string userId, Guid productId)
         {
-            databaseContext.ComparingProducts.Remove(product);
+
+            var existingProductToCompare = databaseContext.ComparingProducts.FirstOrDefault(x => x.UserId == userId && x.Product.Id == productId);
+            databaseContext.Remove(existingProductToCompare);
             databaseContext.SaveChanges();
         }
     }

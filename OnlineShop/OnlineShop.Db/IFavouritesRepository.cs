@@ -4,12 +4,11 @@ using System.Collections.Generic;
 
 namespace OnlineShop.Db
 {
-    public interface IComparesRepository
+    public interface IFavouritesRepository
     {
-        List<Product> GetCompare(string userId);
+        List<Product> GetFavourites(string userId);
         void Add(string userId, Product product);
         void Clear(string userId);
         void Delete(string userId, Guid productId);
-
     }
 }

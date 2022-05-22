@@ -21,26 +21,25 @@ namespace OnlineShopWebApp.Controllers
             this.comparesRepository = comparesRepository;
         }
         public IActionResult Index()
-        {
-            
-            return View(comparesRepository.GetCompare());
+        {            
+            var products = comparesRepository.GetCompare(Constants.UserId);
+            return View(Mapping.ToProductViewModels(products));
         }
         public IActionResult Add(Guid productId)
         {
             var product = productsRepository.TryGetById(productId);
-            comparesRepository.Add(product);
+            comparesRepository.Add(Constants.UserId, product);
             return RedirectToAction("Index");
         }
 
         public IActionResult Clear()
         {
-            comparesRepository.Clear();
+            comparesRepository.Clear(Constants.UserId);
             return RedirectToAction("Index");
         }
         public IActionResult Delete(Guid productId)
         {
-            var product = productsRepository.TryGetById(productId);
-            comparesRepository.Delete(product);
+            comparesRepository.Delete(Constants.UserId, productId);
             return RedirectToAction("Index");
         }
     }

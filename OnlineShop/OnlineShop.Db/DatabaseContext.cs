@@ -10,7 +10,8 @@ namespace OnlineShop.Db
         public DbSet<Cart> Carts { get; set; }
         public DbSet<CartItem> Items { get; set; }
         public DbSet<ComparingProduct> ComparingProducts { get; set; }
-        
+        public DbSet<FavouriteProduct> FavouriteProducts { get; set; }
+
         public DatabaseContext(DbContextOptions<DatabaseContext> options)
             :base(options)
         {
