@@ -1,12 +1,11 @@
-﻿using OnlineShop.Db;
-using OnlineShop.Db.Models;
+﻿using OnlineShop.Db.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace OnlineShopWebApp.Db
+namespace OnlineShop.Db
 {
-    public class ProductManager : IProductManager
+    public class ProductManagerDB : IProductManager
     {
         private readonly DataBaseContext dataBaseContext;
         //public List<Product> ProductList { get; set; } = new List<Product>

@@ -1,5 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
-using OnlineShopWebApp.Db;
+using OnlineShop.Db;
 using OnlineShopWebApp.Models;
 using System;
 

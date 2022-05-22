@@ -2,7 +2,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace OnlineShopWebApp.Db
+namespace OnlineShop.Db
 {
     public interface IProductManager
     {
