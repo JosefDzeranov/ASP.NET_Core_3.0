@@ -1,9 +1,11 @@
-﻿using System.Linq;
+﻿using Microsoft.EntityFrameworkCore;
 using OnlineShop.Db.Models;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace OnlineShop.Db
 {
-    public class BasketDbStorage: IBasketStorage
+    public class BasketDbStorage : IBasketStorage
     {
         private readonly DatabaseContext _databaseContext;
 
@@ -14,7 +16,9 @@ namespace OnlineShop.Db
 
         public Basket TryGetByUserId(string userId)
         {
-            var basket = _databaseContext.Baskets.FirstOrDefault(b => b.UserId == userId);
+            var basket = _databaseContext.Baskets.Include(basket => basket.Items)
+                                                 .ThenInclude(item => item.Product)
+                                                 .FirstOrDefault(basket => basket.UserId == userId);
             return basket;
         }
 
@@ -22,49 +26,69 @@ namespace OnlineShop.Db
         {
             var basket = TryGetByUserId(userId);
 
-            if(basket == null)
+            if (basket == null)
             {
-                _databaseContext.Baskets.Add(basket);
-                _databaseContext.SaveChanges();
+                var newBasket = new Basket
+                {
+                    UserId = userId
+                };
+
+                newBasket.Items = new List<BasketItem>
+                {
+                    new BasketItem
+                    {
+                        Product = product,
+                        Quantity = 1,
+                        Basket = newBasket
+                    }
+                };
+                _databaseContext.Baskets.Add(newBasket);
             }
+
             else
             {
                 var basketItem = basket.Items.FirstOrDefault(item => item.Product.Id == product.Id);
-                if(basketItem != null)
+                if (basketItem != null)
                 {
                     basketItem.Quantity++;
                 }
-                else 
+                else
                 {
-                    basket.Items.Add(basketItem);
-                    _databaseContext.SaveChanges();
+                    basket.Items.Add(new BasketItem
+                    {
+                        Product = product,
+                        Quantity = 1,
+                        Basket = basket
+                    });
                 }
             }
+            _databaseContext.SaveChanges();
         }
 
         public void RemoveProduct(string userId, Product product)
         {
             var basket = TryGetByUserId(userId);
 
-            if(basket != null)
+            if (basket != null)
             {
                 var basketItem = basket.Items.FirstOrDefault(item => item.Product.Id == product.Id);
-                
+
                 if (basketItem != null)
                 {
                     basketItem.Quantity--;
                     if (basketItem.Quantity == 0)
                     {
                         basket.Items.Remove(basketItem);
-                        _databaseContext.SaveChanges();
                     }
                 }
             }
+            _databaseContext.SaveChanges();
         }
+
         public void ClearBasket(string userId)
         {
             var basket = TryGetByUserId(userId);
-            basket.Items.Clear();
+            _databaseContext.Baskets.Remove(basket);
             _databaseContext.SaveChanges();
         }
     }

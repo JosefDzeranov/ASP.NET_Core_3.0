@@ -63,6 +63,11 @@ namespace OnlineShopWebApp.Helpers
 
         public static BasketViewModel ToBasketViewModel(this Basket basket)
         {
+            if(basket == null)
+            {
+                return null;
+            }
+
             var items = new List<BasketItemViewModel>();
 
             foreach(var item in basket.Items)
