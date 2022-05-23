@@ -1,16 +1,17 @@
-﻿using OnlineShopWebApp.Models;
+﻿using OnlineShop.Db.Models;
+using System;
 using System.Collections.Generic;
 
 
-namespace OnlineShopWebApp
+namespace OnlineShop.Db
 {
     public interface IProductsRepository
     {
         List<Product> GetAll();
-        Product TryGetById(int id);
+        Product TryGetById(Guid id);
         List<Product> TryGetByName(string name);
         void Add(Product product);
         void Edit(Product newProduct);
-        void Delete(int id);
+        void Delete(Guid id);
     }
 }

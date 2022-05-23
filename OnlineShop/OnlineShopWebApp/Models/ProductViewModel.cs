@@ -7,11 +7,10 @@ using System.Threading.Tasks;
 
 namespace OnlineShopWebApp.Models
 {
-    public class Product
+    public class ProductViewModel
     {
-        private static int constantCounter = 0;
-        public int Id { get; set; }
-
+        public Guid Id { get; set; }
+            
         [Required(ErrorMessage = "Введите название книги")]
         public string Name { get; set; }
 
@@ -22,12 +21,6 @@ namespace OnlineShopWebApp.Models
         public string Description { get; set; }
 
         [Required(ErrorMessage = "Введите количество страниц")]
-        public int Pages { get; set; }
-
-        public Product()
-        {
-            Id = constantCounter;
-            constantCounter++;        
-        }
+        public int Pages { get; set; }        
     }
 }

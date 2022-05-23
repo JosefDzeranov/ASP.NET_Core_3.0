@@ -1,11 +1,13 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using OnlineShop.Db;
+using OnlineShopWebApp.Helpers;
 using OnlineShopWebApp.Models;
 
 namespace OnlineShopWebApp.Controllers
 {
     public class OrderController : Controller
     {
-        private readonly ICartsRepository cartsRepository;
+        private readonly OnlineShop.Db.ICartsRepository cartsRepository;
         private readonly IOrdersRepository ordersRepository;
 
         public OrderController(ICartsRepository cartsRepository, IOrdersRepository ordersRepository)
@@ -25,7 +27,7 @@ namespace OnlineShopWebApp.Controllers
             if (ModelState.IsValid)
             {
                 var cart = cartsRepository.TryGetByUserId(Constants.UserId);
-                ordersRepository.Add(cart, deliveryInformarion);
+                ordersRepository.Add(Mapping.ToCartViewModel(cart), deliveryInformarion);
                 cartsRepository.Clear(Constants.UserId);
                 return View();
             }

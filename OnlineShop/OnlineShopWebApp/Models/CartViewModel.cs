@@ -5,11 +5,11 @@ using System.Threading.Tasks;
 
 namespace OnlineShopWebApp.Models
 {
-    public class Cart
+    public class CartViewModel
     {
         public Guid Id { get; set; }
         public string UserId { get; set; }
-        public List<CartItem> Items { get; set; }
+        public List<CartItemViewModel> Items { get; set; }
         public decimal FullCost
         {
             get

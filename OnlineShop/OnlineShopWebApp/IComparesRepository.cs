@@ -5,11 +5,11 @@ namespace OnlineShopWebApp
 {
     public interface IComparesRepository
     {
-        List<Product> GetCompare();
-        void Add(Product product);
+        List<ProductViewModel> GetCompare();
+        void Add(ProductViewModel product);
 
         void Clear();
-        void Delete(Product product);
+        void Delete(ProductViewModel product);
 
     }
 }

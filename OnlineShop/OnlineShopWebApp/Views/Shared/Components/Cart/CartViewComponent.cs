@@ -1,8 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using OnlineShop.Db;
+using OnlineShopWebApp.Helpers;
 
 namespace OnlineShopWebApp.Views.Shared.Components.Cart
 {
@@ -18,7 +16,10 @@ namespace OnlineShopWebApp.Views.Shared.Components.Cart
         public IViewComponentResult Invoke()
         {
             var cart = cartsRepository.TryGetByUserId(Constants.UserId);
-            var productsCount = cart?.Amount ?? 0;
+
+            var cartViewModel = Mapping.ToCartViewModel(cart);
+            
+            var productsCount = cartViewModel?.Amount ?? 0;
             return View("Cart", productsCount); 
         }
     }

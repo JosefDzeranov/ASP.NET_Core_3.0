@@ -8,14 +8,14 @@ namespace OnlineShopWebApp
 {
     public class InMemoryFavouritesRepository : IFavouritesRepository
     {
-        private List<Product> favourites = new List<Product>();
+        private List<ProductViewModel> favourites = new List<ProductViewModel>();
 
-        public List<Product> GetFavourites()
+        public List<ProductViewModel> GetFavourites()
         {
             return favourites;
         }
 
-        public void Add(Product product)
+        public void Add(ProductViewModel product)
         {
             var existingProduct = favourites.FirstOrDefault(x => x.Id == product.Id);
             if (existingProduct == null)
@@ -29,7 +29,7 @@ namespace OnlineShopWebApp
         {
             favourites.Clear();
         }
-        public void Delete(Product product)
+        public void Delete(ProductViewModel product)
         {
             favourites.Remove(product);
         }

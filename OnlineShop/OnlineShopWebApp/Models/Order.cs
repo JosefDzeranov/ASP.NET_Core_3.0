@@ -9,7 +9,7 @@ namespace OnlineShopWebApp.Models
     {
         public Guid Id { get; set; }
         public DeliveryInformarion DeliveryInformarion { get; set; }
-        public Cart Cart { get; set; }
+        public CartViewModel Cart { get; set; }
         public OrderState State { get; set; }
         public string Date { get; set; }
         public string Time { get; set; }
