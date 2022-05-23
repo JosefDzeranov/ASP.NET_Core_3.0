@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using OnlineShop.Db;
 using OnlineShopWebApp.Models;
+using OnlineShopWebApp.Helpers;
 
 namespace OnlineShopWebApp.Controllers
 {
@@ -15,14 +16,7 @@ namespace OnlineShopWebApp.Controllers
         public IActionResult Index(Guid id)
         {
             var product = _productStorage.TryGetProduct(id);
-            var productViewModel = new ProductViewModel
-            {
-                Id = product.Id,
-                ImagePath = product.ImagePath,
-                Name = product.Name,
-                Cost = product.Cost,
-                Description = product.Description
-            };
+            var productViewModel = product.ToProductViewModel();
             return View(productViewModel);
         }
     }

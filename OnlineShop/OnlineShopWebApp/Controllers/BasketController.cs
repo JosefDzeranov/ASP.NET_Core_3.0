@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using OnlineShop.Db;
 using OnlineShopWebApp.Models;
+using OnlineShopWebApp.Helpers;
 using System.Collections.Generic;
 
 namespace OnlineShopWebApp.Controllers
@@ -25,24 +26,7 @@ namespace OnlineShopWebApp.Controllers
                 return View("Empty");
             }
 
-            var basketItemViewModels = new List<BasketItemViewModel>();
-            foreach(var item in basket.Items)
-            {
-                var basketItemViewModel = new BasketItemViewModel
-                {
-                    Id = item.Id,
-                    Product = item.Product,
-                    Quantity = item.Quantity
-                };
-                basketItemViewModels.Add(basketItemViewModel);
-            }
-
-            var basketViewModel = new BasketViewModel
-            {
-                Id = basket.Id,
-                UserId = basket.UserId,
-                Items = basketItemViewModels
-            };
+            var basketViewModel = basket.ToBasketViewModel();
 
             return View(basketViewModel);
         }

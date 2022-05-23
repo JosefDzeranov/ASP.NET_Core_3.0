@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using OnlineShop.Db;
 using OnlineShop.Db.Models;
-using OnlineShopWebApp.Models;
+using OnlineShopWebApp.Helpers;
 using System.Collections.Generic;
 
 
@@ -19,7 +19,7 @@ namespace OnlineShopWebApp.Views.Components.Basket
         public IViewComponentResult Invoke()
         {
             var basket = _basketStorage.TryGetByUserId(Constants.UserId);
-            var basketViewModel = basket.ToBasket
+            var basketViewModel = basket.ToBasketViewModel();
             return View("Basket", basketViewModel);
         }
     }

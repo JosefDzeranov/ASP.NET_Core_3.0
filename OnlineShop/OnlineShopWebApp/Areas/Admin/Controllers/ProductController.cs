@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using OnlineShop.Db;
 using OnlineShop.Db.Models;
 using OnlineShopWebApp.Models;
+using OnlineShopWebApp.Helpers;
 using System.Collections.Generic;
 
 namespace OnlineShopWebApp.Areas.Admin.Controllers
@@ -15,23 +16,11 @@ namespace OnlineShopWebApp.Areas.Admin.Controllers
         {
             _productStorage = productStorage;
         }
- 
+
         public IActionResult Index()
         {
             var products = _productStorage.GetProductData();
-            var productViewModels = new List<ProductViewModel>();
-            foreach (var product in products)
-            {
-                var productViewModel = new ProductViewModel
-                {
-                    Id = product.Id,
-                    ImagePath = product.ImagePath,
-                    Name = product.Name,
-                    Cost = product.Cost,
-                    Description = product.Description
-                };
-                productViewModels.Add(productViewModel);
-            }
+            var productViewModels = products.ToProductViewModels();
             return View(productViewModels);
         }
 
@@ -41,19 +30,12 @@ namespace OnlineShopWebApp.Areas.Admin.Controllers
         }
 
         [HttpPost]
-        public IActionResult Add(ProductViewModel product)
+        public IActionResult Add(ProductViewModel productViewModel)
         {
             if (ModelState.IsValid)
             {
-                var productDb = new Product
-                {
-                    ImagePath = product.ImagePath,
-                    Name = product.Name,
-                    Cost = product.Cost,
-                    Description = product.Description
-                };
-
-                _productStorage.Add(productDb);
+                var product = productViewModel.ToProduct();
+                _productStorage.Add(product);
                 return RedirectToAction("Index");
             }
             return View();
@@ -62,32 +44,17 @@ namespace OnlineShopWebApp.Areas.Admin.Controllers
         public IActionResult Edit(Guid id)
         {
             var product = _productStorage.TryGetProduct(id);
-            var productViewModel = new ProductViewModel
-            {
-                Id = product.Id,
-                ImagePath = product.ImagePath,
-                Name = product.Name,
-                Cost = product.Cost,
-                Description = product.Description
-            };
+            var productViewModel = product.ToProductViewModel();
             return View(productViewModel);
         }
 
         [HttpPost]
-        public IActionResult Save(ProductViewModel product)
+        public IActionResult Save(ProductViewModel productViewModel)
         {
             if (ModelState.IsValid)
             {
-                var productDb = new Product
-                {
-                    Id = product.Id,
-                    ImagePath = product.ImagePath,
-                    Name = product.Name,
-                    Cost = product.Cost,
-                    Description = product.Description
-                };
-
-                _productStorage.Edit(productDb);
+                var product = productViewModel.ToProduct();
+                _productStorage.Edit(product);
                 return RedirectToAction("Index");
             }
             return View();
