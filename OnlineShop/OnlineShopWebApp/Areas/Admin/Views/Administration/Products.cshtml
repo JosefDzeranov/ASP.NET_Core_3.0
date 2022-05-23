@@ -10,7 +10,7 @@
                 <th><h2>Список продуктов</h2></th>
             </tr>
             <tr>
-                <td><a class="text" href="/administration/AddNewProduct" role="button">Добавить новый продукт </a></td>
+                <td><a class="text" href="/admin/administration/AddNewProduct" role="button">Добавить новый продукт </a></td>
             </tr>
             <tr>
                 <th>N</th>
@@ -24,12 +24,16 @@
                     <td>@(i+1)</td>
                     <td><a class="text-dark" href="/product/index/@Model[i].Id" role="button">@Model[i].Name</a></td>
                     <td>@Model[i].Cost</td>
-                    <td><a class="text" href="/administration/EditProduct/@Model[i].Id" role="button">Редактировать</a></td>
-                    <td><a class="text" href="/administration/RemoveProduct/@Model[i].Id" role="button">Удалить</a></td>
+                    <td><a class="text" href="/admin/administration/EditProduct/@Model[i].Id" role="button">Редактировать</a></td>
+
+                    <td><button type="button" class="btn btn-link" data-toggle="modal" data-target="#removeProductModal">Удалить</button></td>
+                    @await Html.PartialAsync("RemoveProductModal", Model[i])
+
                 </tr>
             }
 
 
         </table>
+
     </div>
 </div>
