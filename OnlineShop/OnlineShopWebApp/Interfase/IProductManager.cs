@@ -4,12 +4,12 @@ using OnlineShopWebApp.Models;
 
 namespace OnlineShopWebApp.Interfase
 {
-    public interface IProductStorage
+    public interface IProductManager
     {
         List<Product> Products { get; set; }
-        Product FindProduct(Guid productId);
-        void DeleteProduct(Product product);
+        Product Find(Guid productId);
+        void Delete(Product product);
         void UpdateProduct(Product product);
-        void AddNewProduct(Product product);
+        void AddNew(Product product);
     }
 }

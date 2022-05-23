@@ -5,15 +5,15 @@ namespace OnlineShopWebApp.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly IProductStorage productStorage;
-        public HomeController(IProductStorage productStorage)
+        private readonly IProductManager productManager;
+        public HomeController(IProductManager productManager)
         {
-            this.productStorage = productStorage;
+            this.productManager = productManager;
         }
 
         public IActionResult Index()
         {
-            return View(productStorage.Products);
+            return View(productManager.Products);
         }
     }
 }

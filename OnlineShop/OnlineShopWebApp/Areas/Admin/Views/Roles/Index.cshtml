@@ -22,6 +22,7 @@
                                     <tr>
                                         <th scope="col-1" class="align-top small">№</th>
                                         <th scope="col" class="align-top small">Название</th>
+                                        <th scope="col" class="align-top small">Права</th>
                                         <th> </th>
                                     </tr>
                                     </thead>
@@ -33,12 +34,31 @@
                                             <tr>
                                                 <th class="small" scope="row">@(i + 1)</th>
                                                 <td class="small">@Model[i].Name</td>
+                                                <td class="small">
+                                                    Права администратора: @if (Model[i].Rights.BeAdmin)
+                                                                          {
+                                                                              <nobr>да</nobr>
+                                                                          }
+                                                                          else
+                                                                          {
+                                                                              <nobr>нет</nobr>
+                                                                          }<br/>
+                                                    Права покупателя: @if (Model[i].Rights.BeBuyer)
+                                                               {
+                                                                   <nobr>да</nobr>
+                                                               }
+                                                               else
+                                                               {
+                                                                    <nobr>нет</nobr>
+
+                                                               }<br/>
+                                                </td>
 
                                                 <td class="small">
                                                     <a class="text-nowrap mx-1 my-1"
                                                        asp-area="Admin" asp-controller="Roles"  
                                                        asp-action="Remove"
-                                                       asp-route-roleName="@Model[i].Name"
+                                                       asp-route-roleId="@Model[i].Id"
                                                     >Удалить</a>
                                                 </td>
                                             </tr>

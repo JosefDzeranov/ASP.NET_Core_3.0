@@ -1,14 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
+using OnlineShopWebApp.Interfase;
 
 
 namespace OnlineShopWebApp.Models.Users.Buyer
 {
-    public class Buyer : User
+    public class UserBuyer
     {
+        public string Login { get; set; }
         public List<Product> Comparisons { get; set; } = new List<Product>();
         public List<CartItem> Cart { get; set; } = new List<CartItem>();
-        public InfoBuying infoBuying { get; set; } = new InfoBuying();
+        public InfoBuying InfoBuying { get; set; } = new InfoBuying();
         public List<OrderItem> Orders { get; set; } = new List<OrderItem>();
 
         public decimal SumCost(List<CartItem> listProducts)
@@ -74,13 +76,14 @@ namespace OnlineShopWebApp.Models.Users.Buyer
 
         public void Buy()
         {
-            Orders.Add(new OrderItem(Cart, Login, infoBuying));
+            Orders.Add(new OrderItem(Cart, Login, InfoBuying));
             Cart.Clear();
         }
 
         public void SaveInfoBuying(InfoBuying infoBuying)
         {
-            this.infoBuying = infoBuying;
+            this.InfoBuying = infoBuying;
         }
+
     }
 }

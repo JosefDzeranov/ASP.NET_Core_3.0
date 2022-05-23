@@ -1,26 +1,29 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using System;
+using Microsoft.AspNetCore.Mvc;
+using OnlineShopWebApp.Filters;
 using OnlineShopWebApp.Interfase;
 using OnlineShopWebApp.Models;
 
 namespace OnlineShopWebApp.Areas.Admin.Controllers
 {
     [Area("Admin")]
+    [ServiceFilter(typeof(CheckingForAuthorization))]
     public class RolesController : Controller
     {
-        private readonly IRolesStorage rolesStorage;
-        public RolesController(IRolesStorage rolesStorage)
+        private readonly IRoleManager roleManager;
+        public RolesController(IRoleManager roleManager)
         {
-            this.rolesStorage = rolesStorage;
+            this.roleManager = roleManager;
         }
 
         public IActionResult Index()
         {
-            var roles = rolesStorage.GetAll();
+            var roles = roleManager.GetAll();
             return View(roles);
         }
-        public IActionResult Remove(string roleName)
+        public IActionResult Remove(Guid roleId)
         {
-            rolesStorage.Remove(roleName);
+            roleManager.Remove(roleId);
             return RedirectToAction("Index");
         }
 
@@ -31,13 +34,13 @@ namespace OnlineShopWebApp.Areas.Admin.Controllers
         [HttpPost]
         public IActionResult Add(Role role)
         {
-            if (rolesStorage.TryGetByName(role.Name) != null)
+            if (roleManager.Find(role.Id) != null)
             {
                 ModelState.AddModelError("", "Такая роль уже существует");
             }
             if (ModelState.IsValid)
             {
-                rolesStorage.Add(role);
+                roleManager.Add(role);
                 return RedirectToAction("Index");
             }
             return View(role);

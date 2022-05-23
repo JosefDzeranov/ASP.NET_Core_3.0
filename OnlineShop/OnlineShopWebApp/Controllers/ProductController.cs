@@ -6,15 +6,15 @@ namespace OnlineShopWebApp.Controllers
 {
     public class ProductController : Controller
     {
-        private readonly IProductStorage productStorage;
-        public ProductController(IProductStorage productStorage)
+        private readonly IProductManager productManager;
+        public ProductController(IProductManager productManager)
         {
-            this.productStorage = productStorage;
+            this.productManager = productManager;
         }
 
         public IActionResult Index(Guid productId)
         {
-            var product = productStorage.FindProduct(productId);
+            var product = productManager.Find(productId);
             return View(product);
         }
     }

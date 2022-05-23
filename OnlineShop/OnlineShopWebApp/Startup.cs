@@ -5,6 +5,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Options;
+using OnlineShopWebApp.Filters;
 using OnlineShopWebApp.Interfase;
 using Serilog;
 using System.Globalization;
@@ -21,10 +22,12 @@ namespace OnlineShopWebApp
         public IConfiguration Configuration { get; }
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddSingleton<IBuyerStorage, JsonBuyerStorage>();
-            services.AddSingleton<IProductStorage, JsonProductStorage>();
-            services.AddSingleton<IRolesStorage, JsonRoleStorage>();
+            services.AddSingleton<IBuyerManager, BuyerManager>();
+            services.AddSingleton<IProductManager, ProductManager>();
+            services.AddSingleton<IRoleManager, RoleManager>();
+            services.AddSingleton<IUserManager, UserManager>();
             services.AddControllersWithViews();
+            services.AddScoped<CheckingForAuthorization>();
 
             services.Configure<RequestLocalizationOptions>(options => //конфигурируем настройки локализации запроса. Решается задача валидации decimal
             {
@@ -62,11 +65,11 @@ namespace OnlineShopWebApp
             {
                 endpoints.MapControllerRoute(
                     name: "MyArea",
-                    pattern: "{area:exists}/{controller=Home}/{action=Index}/{id?}");
+                    pattern: "{area:exists}/{controller=Home}/{action=Index}/{roleId?}");
 
                 endpoints.MapControllerRoute(
                     name: "default",
-                    pattern: "{controller=Home}/{action=Index}/{id?}");
+                    pattern: "{controller=Home}/{action=Index}/{roleId?}");
             });
         }
     }

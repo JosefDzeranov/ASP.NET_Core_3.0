@@ -8,6 +8,10 @@ namespace OnlineShopWebApp.Models.Users.Buyer
         public int Count { get; set; }
         public List<AdditionalOptions> additionalOptions { get; set; } = new List<AdditionalOptions> { };
 
+        public CartItem()
+        {
+
+        }
         public CartItem(Product product)
         {
             Product = product;

@@ -1,41 +1,45 @@
-﻿using Newtonsoft.Json;
+﻿using System.IO;
+using System.Text.Encodings.Web;
+using System.Text.Json;
+using System.Text.Unicode;
 using OnlineShopWebApp.Interfase;
-using System.Collections.Generic;
-using System.IO;
 
 namespace OnlineShopWebApp
 {
     public class JsonWorkWithData : IWorkWithData
     {
         public string Name { get; set; }
-        private string repository = "Data";
         private string dataFormat = "json";
         private string nameSave;
 
         public JsonWorkWithData(string name)
         {
             Name = name;
-            nameSave = string.Format($"{repository}/{name}.{dataFormat}"); // repository + "/" + name + dataFormat;
+            nameSave = string.Format($"Data/{name}.{dataFormat}");
         }
-        public string WriteToStorage<T>(List<T> TlistObjects)
+        public void Write<T>(T TObject)
         {
-            var json = JsonConvert.SerializeObject(TlistObjects, Formatting.Indented);
+            var options = new JsonSerializerOptions
+            {
+                Encoder = JavaScriptEncoder.Create(UnicodeRanges.BasicLatin, UnicodeRanges.Cyrillic),
+                WriteIndented = true
+            };
+            var json = JsonSerializer.Serialize(TObject, options);
             File.WriteAllText(nameSave, json);
-            return json;
         }
 
-        public List<T> ReadToStorage<T>()
+        public T Read<T>() where T : new()
         {
-            List<T> TListObjects = new List<T>();
+            T TObject = new T();
             try
             {
                 var json = File.ReadAllText(nameSave);
-                TListObjects = JsonConvert.DeserializeObject<List<T>>(json);
+                TObject = JsonSerializer.Deserialize<T>(json);
             }
             catch (FileNotFoundException)
             {
             }
-            return TListObjects;
+            return TObject;
         }
     }
 }

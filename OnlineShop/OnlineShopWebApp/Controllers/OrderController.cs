@@ -1,50 +1,51 @@
-﻿using System;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
+using OnlineShopWebApp.Filters;
 using OnlineShopWebApp.Interfase;
-using OnlineShopWebApp.Models;
 using OnlineShopWebApp.Models.Users.Buyer;
 
 namespace OnlineShopWebApp.Controllers
 {
-
+    [ServiceFilter(typeof(CheckingForAuthorization))]
     public class OrderController : Controller
     {
-        private readonly IBuyerStorage buyerStorage;
-        public OrderController(IBuyerStorage buyerStorage)
+        private readonly IBuyerManager buyerManager;
+        private readonly IUserManager userManager;
+        public OrderController(IBuyerManager buyerManager, IUserManager userManager)
         {
-            this.buyerStorage = buyerStorage;
+            this.buyerManager = buyerManager;
+            this.userManager = userManager;
         }
 
-        public IActionResult Index(Guid buyerId)
+        public IActionResult Index()
         {
-            buyerId = MyConstant.DefaultBuyerIdIsNull(buyerId);
-            return View(buyerStorage.FindBuyer(buyerId));
-        }
-
-        [HttpPost]
-
-        public IActionResult RewriteInfoBuying(Guid buyerId)
-        {
-            buyerId = MyConstant.DefaultBuyerIdIsNull(buyerId);
-            buyerStorage.ClearInfoBuying(buyerId);
-            return RedirectToAction("Index", new { buyerId });
+            var buyerLogin = userManager.GetLoginAuthorizedUser();
+            return View(buyerManager.FindBuyer(buyerLogin));
         }
 
         [HttpPost]
-        public IActionResult BuyValid(InfoBuying infoBuying, Guid buyerId)
+
+        public IActionResult RewriteInfoBuying()
         {
-            buyerId = MyConstant.DefaultBuyerIdIsNull(buyerId);
+            var buyerLogin = userManager.GetLoginAuthorizedUser();
+            buyerManager.ClearInfoBuying(buyerLogin);
+            return RedirectToAction("Index", new {buyerId = buyerLogin });
+        }
+
+        [HttpPost]
+        public IActionResult BuyValid(InfoBuying infoBuying)
+        {
+            var buyerLogin = userManager.GetLoginAuthorizedUser();
             if (ModelState.IsValid)
             {
-                buyerStorage.SaveInfoBuying(infoBuying, buyerId);
-                return RedirectToAction("Buy", new { buyerId });
+                buyerManager.SaveInfoBuying(infoBuying, buyerLogin);
+                return RedirectToAction("Buy", new {buyerId = buyerLogin });
             }
             else return Content("errorValid");
         }
-        public IActionResult Buy(Guid buyerId)
+        public IActionResult Buy()
         {
-            buyerId = MyConstant.DefaultBuyerIdIsNull(buyerId);
-            buyerStorage.Buy(buyerId);
+            var buyerLogin = userManager.GetLoginAuthorizedUser();
+            buyerManager.Buy(buyerLogin);
             return View();
         }
     }

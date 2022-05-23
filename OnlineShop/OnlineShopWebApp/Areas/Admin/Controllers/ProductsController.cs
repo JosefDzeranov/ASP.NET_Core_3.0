@@ -1,35 +1,37 @@
 ﻿using System;
 using Microsoft.AspNetCore.Mvc;
+using OnlineShopWebApp.Filters;
 using OnlineShopWebApp.Interfase;
 using OnlineShopWebApp.Models;
 
 namespace OnlineShopWebApp.Areas.Admin.Controllers
 {
     [Area("Admin")]
+    [ServiceFilter(typeof(CheckingForAuthorization))]
     public class ProductsController : Controller
     {
-        private readonly IProductStorage ProductStorage;
-        public ProductsController(IProductStorage productStorage)
+        private readonly IProductManager productManager;
+        public ProductsController(IProductManager productManager)
         {
-            this.ProductStorage = productStorage;
+            this.productManager = productManager;
         }
 
         public IActionResult Index()
         {
-            var products = ProductStorage.Products;
+            var products = productManager.Products;
             return View(products);
         }
 
         public IActionResult Delete(Guid productId)
         {
-            var product = ProductStorage.FindProduct(productId);
-            ProductStorage.DeleteProduct(product);
+            var product = productManager.Find(productId);
+            productManager.Delete(product);
             return RedirectToAction("Index");
         }
 
         public IActionResult CardUpdate(Guid productId)
         {
-            var oldProduct = ProductStorage.FindProduct(productId);
+            var oldProduct = productManager.Find(productId);
             return View(oldProduct);
         }
 
@@ -38,7 +40,7 @@ namespace OnlineShopWebApp.Areas.Admin.Controllers
         {
             if (ModelState.IsValid)
             {
-                ProductStorage.UpdateProduct(product);
+                productManager.UpdateProduct(product);
                 return RedirectToAction("Index");
             }
             else return Content("errorValid");
@@ -53,7 +55,7 @@ namespace OnlineShopWebApp.Areas.Admin.Controllers
         {
             if (ModelState.IsValid)
             {
-                ProductStorage.AddNewProduct(product);
+                productManager.AddNew(product);
                 return RedirectToAction("Index");
             }
             return Content("errorValid");
