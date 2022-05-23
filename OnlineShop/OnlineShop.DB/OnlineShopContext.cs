@@ -12,7 +12,7 @@ namespace OnlineShop.DB
         public DbSet<Order> Orders { get; set; }
         public OnlineShopContext(DbContextOptions<OnlineShopContext> options) : base(options)
         {
-            Database.EnsureCreated();
+            Database.Migrate();
         }
     }
 }
