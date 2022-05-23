@@ -92,7 +92,6 @@ namespace OnlineShopWebApp.Models
                 LastName = orderViewModel.LastName,
                 Phone = orderViewModel.Phone,
                 Status = orderViewModel.Status,
-                TotalCost = orderViewModel.TotalCost,
                 UserId = orderViewModel.UserId
 
             };
@@ -114,8 +113,7 @@ namespace OnlineShopWebApp.Models
                 FirstName = order.FirstName,
                 LastName = order.LastName,
                 Phone = order.Phone,
-                Status = order.Status,
-                TotalCost = order.TotalCost,
+                Status = order.Status, 
                 UserId = order.UserId
             };
 

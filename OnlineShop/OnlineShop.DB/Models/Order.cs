@@ -15,7 +15,6 @@ namespace OnlineShop.DB.Models
         public string Email { get; set; }
         public string Phone { get; set; }
         public string Address { get; set; }
-        public decimal TotalCost { get; set; }
         public virtual List<CartItem> CartItems { get; set; }
     }
 
