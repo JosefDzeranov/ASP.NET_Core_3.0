@@ -1,0 +1,34 @@
+﻿@model Order
+
+<div class="row">
+    <div class="col-6">
+        <table class="table">
+            <tr>
+                <td>Дата и время</td>
+          @*      <td>@Model.CreateDateTime.ToString("g")</td>*@
+            </tr>
+            <tr>
+                <td>Адрес доставки</td>
+                <td>@Model.User.InputAddress</td>
+            </tr>
+            <tr>   
+                <td>Получатель</td>
+                <td>@Model.User.InputLastName</td>
+            </tr>
+            <tr>
+                <td>Почта</td>
+                <td>@Model.User.InputEmail</td>
+            </tr>
+            <tr>
+                <td>Сумма заказа</td>
+                <td>@Model.Cost</td>
+            </tr>
+            <tr>
+                <td>Статус заказа</td>
+                <td>
+                    <select asp-for="@Model.Status" asp-items="@Html.GetEnumSelectList<OrderStatus>()" class="form-control"></select>
+                </td>
+            </tr>
+        </table>
+    </div>
+</div>

@@ -23,8 +23,8 @@ namespace OnlineShopWebApp.Controllers
         [HttpPost]
         public IActionResult Buy(UserDeliveryInfo user)
         {
-            if (ModelState.IsValid)
-                return View("Index", user);
+            //if (ModelState.IsValid)
+            //    return View("Index", user);
 
             var existingCart = cartRepository.TryGetByUserId(Constants.UserId);
             var order = new Order
@@ -34,7 +34,7 @@ namespace OnlineShopWebApp.Controllers
             };
             ordersRepository.Add(order);
             cartRepository.Clear(Constants.UserId);
-            return View();
+            return RedirectToAction("Index");
         }
     }
 }

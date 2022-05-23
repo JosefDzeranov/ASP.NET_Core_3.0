@@ -13,5 +13,15 @@ namespace OnlineShopWebApp
         {
             orders.Add(order);
         }
+
+        public List<Order> GetAll()
+        {
+            return orders;
+        }
+
+        public Order TryGetById(Guid id)
+        {
+            return orders.FirstOrDefault(x => x.Id == id);
+        }
     }
 }

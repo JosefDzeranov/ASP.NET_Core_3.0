@@ -1,6 +1,10 @@
-﻿<div class="row">
-    <div class="col text-center">
+﻿
+<div class="row">
+    @await Html.PartialAsync("AdminLeftPanel")
+    <div class="col-9">
+        <div class="col text-left">
         <h4>Страница пуста</h4>
-        <a href="/admin/addproduct">Добавить новый продукт</a>
+        <a href="/home/index">На главную</a>
+        </div>
     </div>
 </div>
