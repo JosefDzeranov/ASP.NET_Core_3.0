@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 using OnlineShop.Db;
+using OnlineShop.Db.Models;
 using OnlineShopWebApp.Models;
 using System;
 
@@ -208,12 +209,18 @@ namespace OnlineShopWebApp.Controllers
         }
 
         [HttpPost]
-        public IActionResult SaveEditedProduct(OnlineShop.Db.Models.Product product)
+        public IActionResult SaveEditedProduct(ProductViewModel product)
         {
+            var productDb = new Product
+            {
+                Name = product.Name,
+                Cost = product.Cost,
+                Description = product.Description,
+            };
 
             if (ModelState.IsValid)
             {
-                productManager.EditProduct(product);
+                productManager.EditProduct(productDb);
 
                 return View();
             }
@@ -238,11 +245,20 @@ namespace OnlineShopWebApp.Controllers
         }
 
         [HttpPost]
-        public IActionResult SaveAddedProduct(OnlineShop.Db.Models.Product product)
+        public IActionResult SaveAddedProduct(ProductViewModel product)
         {
+            var productDb = new Product
+            {
+                Name = product.Name,
+                Cost = product.Cost,
+                Description = product.Description
+
+            };
+
+
             if (ModelState.IsValid)
             {
-                productManager.AddProduct(product);
+                productManager.AddProduct(productDb);
 
                 return View(product);
             }

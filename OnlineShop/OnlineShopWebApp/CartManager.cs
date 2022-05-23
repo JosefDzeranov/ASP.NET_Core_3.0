@@ -31,7 +31,7 @@ namespace OnlineShopWebApp
             return cartList;
         }
 
-        public void AddProductToCart(string userId, Product product)
+        public void AddProductToCart(string userId, ProductViewModel product)
         {
             var cart = cartList.FirstOrDefault(x => x.UserId == userId);
 
@@ -66,7 +66,7 @@ namespace OnlineShopWebApp
 
         }
 
-        public void RemoveProductFromCart(string userId, int productId)
+        public void RemoveProductFromCart(string userId, Guid productId)
         {
             var cart = cartList.FirstOrDefault(x => x.UserId == userId);
             var cartLine = cart.CartLines.FirstOrDefault(x => x.Product.Id == productId);

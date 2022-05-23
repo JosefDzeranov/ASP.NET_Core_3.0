@@ -5,9 +5,9 @@ namespace OnlineShopWebApp.Models
     public interface IComparison
     {
         public string UserId { get; set; }
-        public List<Product> Products { get; }
-        public void AddProduct(Product product);
-        public List<Product> GetProducts();
+        public List<ProductViewModel> Products { get; }
+        public void AddProduct(ProductViewModel product);
+        public List<ProductViewModel> GetProducts();
                 
     }
 }

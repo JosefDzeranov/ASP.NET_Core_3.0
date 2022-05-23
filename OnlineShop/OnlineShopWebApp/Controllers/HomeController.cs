@@ -1,6 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using OnlineShop.Db;
 using OnlineShopWebApp.Models;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace OnlineShopWebApp.Controllers
 {
@@ -17,7 +19,7 @@ namespace OnlineShopWebApp.Controllers
         public IActionResult Index()
         {
            
-            var products = _productManager.ProductList;
+            var products = _productManager.GetAll();
            
 
             return View(products);
@@ -27,11 +29,19 @@ namespace OnlineShopWebApp.Controllers
         public IActionResult SearchByName(string name)
         {
 
-            var productByPartName = new List<Product>();
+           // var productByPartName = new List<ProductViewModel>();
             if (name != null)
             {
-                productByPartName = _productManager.ProductList.FindAll(x => x.Name.ToLower().Contains(name.ToLower()));
-                return View(productByPartName);
+               var productByPartName = _productManager.GetAll().FirstOrDefault(x => x.Name.ToLower().Contains(name.ToLower()));
+
+                var productView = new ProductViewModel
+                {
+                    Name = productByPartName.Name,
+                    Cost = productByPartName.Cost,
+                    Description = productByPartName.Description,
+
+                };
+                return View(productView);
 
             }
             else

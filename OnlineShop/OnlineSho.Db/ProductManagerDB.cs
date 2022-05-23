@@ -8,6 +8,11 @@ namespace OnlineShop.Db
     public class ProductManagerDB : IProductManager
     {
         private readonly DataBaseContext dataBaseContext;
+        public ProductManagerDB(DataBaseContext dataBaseContext)
+        {
+            this.dataBaseContext = dataBaseContext;
+        }
+
         //public List<Product> ProductList { get; set; } = new List<Product>
         //{
 

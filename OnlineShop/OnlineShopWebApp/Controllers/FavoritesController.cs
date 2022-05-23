@@ -1,5 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
+using OnlineShop.Db;
 using OnlineShopWebApp.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -27,14 +29,22 @@ namespace OnlineShopWebApp.Controllers
         }
 
 
-        public IActionResult AddToFavorites(int id)
+        public IActionResult AddToFavorites(Guid id)
         {
-            var foundProduct = productManager.FindProduct(id);
+            var foundProduct = productManager.TryGetById(id);
+
+            var productView = new ProductViewModel
+            {
+                Name = foundProduct.Name,
+                Cost = foundProduct.Cost,
+                Description = foundProduct.Description,
+
+            };
 
 
             if (favoritesManager.Products.FirstOrDefault(x => x.Id == id) == null)
             {
-                favoritesManager.AddProduct(foundProduct);
+                favoritesManager.AddProduct(productView);
                 var favoritesList = favoritesManager.Products;
                 return RedirectToAction("Index");
             }

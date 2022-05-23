@@ -7,16 +7,16 @@ namespace OnlineShopWebApp.Models
     {
         public string UserId { get; set; } 
     
-        public List<Product> Products { get; } = new List<Product>();
+        public List<ProductViewModel> Products { get; } = new List<ProductViewModel>();
 
         
      
-        public void AddProduct(Product product)
+        public void AddProduct(ProductViewModel product)
         {
             Products.Add(product);
         }
 
-        public List<Product> GetProducts()
+        public List<ProductViewModel> GetProducts()
         {
             return Products;
         }

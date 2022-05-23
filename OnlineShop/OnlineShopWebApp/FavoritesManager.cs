@@ -6,20 +6,20 @@ namespace OnlineShopWebApp.Models
     public class FavoritesManager : IFavorites
     {
 
-        public List<Product> products = new List<Product>();
-        public List<Product> Products
+        public List<ProductViewModel> products = new List<ProductViewModel>();
+        public List<ProductViewModel> Products
         {
             get
             {
                 return products;
             }
         }
-        public void AddProduct(Product product)
+        public void AddProduct(ProductViewModel product)
         {
             Products.Add(product);
         }
 
-        public List<Product> GetProducts()
+        public List<ProductViewModel> GetProducts()
         {
             return Products;
         }

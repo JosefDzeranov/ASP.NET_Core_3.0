@@ -3,7 +3,7 @@
     public class CartLine
     {
         int Id;
-        public Product Product { get; set; }
+        public ProductViewModel Product { get; set; }
 
         public int Amount { get; set; }
 
@@ -15,7 +15,7 @@
                 return Amount * Product.Cost;
             }
         }
-        public CartLine(Product product)
+        public CartLine(ProductViewModel product)
         {
             Product = product;
         }

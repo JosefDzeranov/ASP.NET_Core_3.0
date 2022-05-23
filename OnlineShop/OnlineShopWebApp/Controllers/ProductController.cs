@@ -1,4 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using OnlineShop.Db;
+using System;
 
 namespace OnlineShopWebApp.Controllers
 {
@@ -11,9 +13,16 @@ namespace OnlineShopWebApp.Controllers
             this.productManager = productManager;
         }
 
-        public IActionResult Index(int id)
+        public IActionResult Index(Guid id)
         {
-            var foundProduct = productManager.FindProduct(id);
+            var foundProduct = productManager.TryGetById(id);
+
+            var productView = new ProductViewModel
+            {
+                Name = foundProduct.Name,
+                Cost = foundProduct.Cost,
+                Description = foundProduct.Description,
+            };
             return View(foundProduct);
         }
 

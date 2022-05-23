@@ -4,12 +4,12 @@ namespace OnlineShopWebApp.Models
 {
     public interface IFavorites
     {
-        public List<Product> Products { get; }
+        public List<ProductViewModel> Products { get; }
 
-        public void AddProduct(Product product);
+        public void AddProduct(ProductViewModel product);
 
 
-        public List<Product> GetProducts();
+        public List<ProductViewModel> GetProducts();
         
 
     }
