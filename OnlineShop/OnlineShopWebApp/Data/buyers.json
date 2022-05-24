@@ -4,13 +4,49 @@
     "Comparisons": [],
     "Cart": [],
     "InfoBuying": {
-      "Surname": null,
-      "Firstname": null,
-      "Secondname": null,
-      "Phone": null,
-      "Email": null,
+      "Surname": "Молостов",
+      "Firstname": "Григорий",
+      "Secondname": "Николаевич",
+      "Phone": "\u002B79530711665",
+      "Email": "archi.dnk@gmail.com",
       "Commentary": null
     },
-    "Orders": []
+    "Orders": [
+      {
+        "Id": "746992ba-7b51-4737-8469-1b2bbb96b5af",
+        "CartItem": [
+          {
+            "Product": {
+              "Id": "dd204a8d-df93-4465-83ae-3e3d84fc92d3",
+              "CodeNumber": "63-42",
+              "Cost": 32000.0,
+              "Square": 109,
+              "Width": 8.36,
+              "Length": 14.06,
+              "Description": "Проект двухэтажного дома из газабетона с терассой",
+              "Images": [
+                "1-1.jpg"
+              ]
+            },
+            "Count": 1,
+            "additionalOptions": [
+              {}
+            ]
+          }
+        ],
+        "InfoBuying": {
+          "Surname": "Молостов",
+          "Firstname": "Григорий",
+          "Secondname": "Николаевич",
+          "Phone": "\u002B79530711665",
+          "Email": "archi.dnk@gmail.com",
+          "Commentary": null
+        },
+        "DateTime": "2022-05-24T18:32:40.361947Z",
+        "Status": "Создан",
+        "Login": "Gregory",
+        "FullCost": 32001.0
+      }
+    ]
   }
 ]

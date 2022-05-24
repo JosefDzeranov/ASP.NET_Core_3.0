@@ -138,5 +138,12 @@ namespace OnlineShopWebApp
             JsonStorage.Write(users);
         }
 
+        public void Delite(string login)
+        {
+            var user = FindByLogin(login);
+            users.Remove(user);
+            JsonStorage.Write(users);
+        }
+
     }
 }

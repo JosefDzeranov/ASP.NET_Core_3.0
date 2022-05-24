@@ -1,12 +1,12 @@
 [
   {
     "Login": "Gregory",
-    "Fistname": null,
-    "Secondname": null,
-    "Surname": null,
-    "Phone": null,
-    "Age": 0,
-    "Email": null,
+    "Firstname": "Григорий",
+    "Secondname": "Николаевич",
+    "Surname": "Молостов",
+    "Phone": "\u002B79530711665",
+    "Age": 16,
+    "Email": "archi.dnk@gmail.com",
     "Password": "22222222",
     "RoleName": "Покупатель",
     "RoleId": "674b2f41-3173-4a0c-8f7e-4043876b8ee3"

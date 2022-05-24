@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using OnlineShopWebApp.Filters;
 using OnlineShopWebApp.Interfase;
+using OnlineShopWebApp.Models;
 using OnlineShopWebApp.Models.Users;
 
 namespace OnlineShopWebApp.Areas.Admin.Controllers
@@ -11,10 +12,12 @@ namespace OnlineShopWebApp.Areas.Admin.Controllers
     public class UsersController : Controller
     {
         private readonly IUserManager userManager;
+        private readonly IRoleManager roleManager;
 
-        public UsersController(IUserManager userManager)
+        public UsersController(IUserManager userManager, IRoleManager roleManager)
         {
-             this.userManager = userManager;
+            this.userManager = userManager;
+            this.roleManager = roleManager;
         }
         public IActionResult Index()
         {
@@ -81,14 +84,30 @@ namespace OnlineShopWebApp.Areas.Admin.Controllers
             return View(userInfo);
         }
 
-        public IActionResult EditRights()
+        public IActionResult EditRights(string login)
         {
-            throw new NotImplementedException();
+            var user = userManager.FindByLogin(login);
+            ChangeRoleUser roleInfo = new ChangeRoleUser
+            {
+                Login = user.Login,
+                Id = user.RoleId,
+                RoleName = user.RoleName,
+                OtherRoles = roleManager.GetAll()
+            };
+            return View(roleInfo);
         }
 
-        public IActionResult Delite()
+        [HttpPost]
+        public IActionResult EditRights(ChangeRoleUser roleInfo)
         {
-            throw new NotImplementedException();
+            return RedirectToAction("Index", "Users");
         }
+
+        public IActionResult Delite(string login)
+        {
+            userManager.Delite(login);
+            return RedirectToAction("Index", "Users");
+        }
+
     }
 }
