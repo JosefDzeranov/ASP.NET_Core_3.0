@@ -20,9 +20,20 @@ namespace OnlineShopWebApp.Controllers
         {
            
             var products = _productManager.GetAll();
+            var productsViews = new List<ProductViewModel>();
+            foreach (var product in products)
+            {
+                var productView = new ProductViewModel
+                {
+                    Name = product.Name,
+                    Cost = product.Cost,
+                    Description = product.Description,
+                };
+                productsViews.Add(productView);
+            }
            
 
-            return View(products);
+            return View(productsViews);
         }
 
         [HttpPost]
