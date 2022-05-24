@@ -2,7 +2,6 @@
 using OnlineShopWebApp.Models;
 using OnlineShopWebApp.Helpers;
 using OnlineShop.Db;
-using OnlineShop.Db.Models;
 
 namespace OnlineShopWebApp.Controllers
 {
@@ -20,7 +19,7 @@ namespace OnlineShopWebApp.Controllers
         {
             var basket = _basketStorage.TryGetByUserId(Constants.UserId);
             var basketViewModel = basket.ToBasketViewModel();
-            var orderForm = new OrderForm
+            var orderForm = new OrderFormViewModel
             {
                 Basket = basketViewModel
             };
@@ -29,7 +28,7 @@ namespace OnlineShopWebApp.Controllers
         }
 
         [HttpPost]
-        public IActionResult Buy(OrderForm orderForm)
+        public IActionResult Buy(OrderFormViewModel orderForm)
         {
             if (!ModelState.IsValid)
             {
@@ -37,12 +36,9 @@ namespace OnlineShopWebApp.Controllers
             }
 
             var basket = _basketStorage.TryGetByUserId(Constants.UserId);
-            var basketViewModel = basket.ToBasketViewModel();
-            var delivery = orderForm.Delivery;
-            _orderStorage.Add(Constants.UserId, basketViewModel, delivery);
-
+            var deliveryInfo = orderForm.DeliveryInfo.ToDeliveryInfo();
+            _orderStorage.Add(Constants.UserId, basket, deliveryInfo);
             _basketStorage.ClearBasket(Constants.UserId);
-
             return View();
         }
     }

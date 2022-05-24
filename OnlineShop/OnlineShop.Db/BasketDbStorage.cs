@@ -38,8 +38,7 @@ namespace OnlineShop.Db
                     new BasketItem
                     {
                         Product = product,
-                        Quantity = 1,
-                        Basket = newBasket
+                        Quantity = 1
                     }
                 };
                 _databaseContext.Baskets.Add(newBasket);
@@ -57,8 +56,7 @@ namespace OnlineShop.Db
                     basket.Items.Add(new BasketItem
                     {
                         Product = product,
-                        Quantity = 1,
-                        Basket = basket
+                        Quantity = 1
                     });
                 }
             }

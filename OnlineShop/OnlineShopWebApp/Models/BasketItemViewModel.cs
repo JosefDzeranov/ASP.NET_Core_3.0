@@ -13,18 +13,5 @@ namespace OnlineShopWebApp.Models
             get { return Product.Cost * Quantity; }
         }
 
-        public BasketItemViewModel () { } // Empty ctor for XML serializing.
-        public BasketItemViewModel (Product product)
-        {
-            Id = Guid.NewGuid();
-            Product = product;
-            Quantity++;
-        }
-        public BasketItemViewModel(Guid id, Product product, int quantity)
-        {
-            Id = id;
-            Product = product;
-            Quantity = quantity;
-        }
     }
 }

@@ -2,9 +2,9 @@
 
 namespace OnlineShopWebApp.Models
 {
-    public class Delivery
+    public class DeliveryInfoViewModel
     {
-        public Address Address { get; set; }
+        public AddressViewModel Address { get; set; }
 
         [Required]
         public string Phone { get; set; }
@@ -13,6 +13,6 @@ namespace OnlineShopWebApp.Models
         [EmailAddress]
         public string Email { get; set; }
 
-        public Delivery() { } // Empty ctor for XML serializing. 
+        public DeliveryInfoViewModel() { } // Empty ctor for XML serializing. 
     }
 }

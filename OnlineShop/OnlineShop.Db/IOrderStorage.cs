@@ -1,14 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
-using OnlineShopWebApp.Models;
+using OnlineShop.Db.Models;
 
-namespace OnlineShopWebApp
+namespace OnlineShop.Db
 {
     public interface IOrderStorage
     {
         Order TryGetById(Guid id);
-        void Add(string userId, BasketViewModel basket, Delivery delivery);
-        List<Order> GetOrderData();
+        void Add(string userId, Basket basket, DeliveryInfo  deliveryInfo);
+        List<Order> GetAll();
         void UpdateStatus(Guid id, OrderStatus newStatus);
     }
 }

@@ -1,8 +1,8 @@
 ﻿namespace OnlineShopWebApp.Models
 {
-    public class OrderForm
+    public class OrderFormViewModel
     {
         public BasketViewModel Basket { get; set; }
-        public Delivery Delivery { get; set; }
+        public DeliveryInfoViewModel DeliveryInfo { get; set; }
     }
 }

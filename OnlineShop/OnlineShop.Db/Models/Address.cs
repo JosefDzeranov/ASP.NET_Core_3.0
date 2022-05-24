@@ -1,27 +1,15 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System;
 
-namespace OnlineShopWebApp.Models
+namespace OnlineShop.Db.Models
 {
     public class Address
     {
-        [Required]
+        public Guid Id { get; set; }
         public string ZipCode { get; set; }
-
-        [Required]
         public string Country { get; set; }
-
-        [Required]
         public string City { get; set; }
-
-        [Required]
         public string Street { get; set; }
-
-        [Required]
         public string House { get; set; }
-
-        [Required]
         public string Apartment { get; set; }
-
-        public Address() { } // Empty ctor for XML serializing.
     }
 }

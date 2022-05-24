@@ -1,6 +1,6 @@
 ﻿@using OnlineShopWebApp.Models
 @using System.Collections.Generic;
-@model List<Order>
+@model List<OrderViewModel>
 
 @{
     ViewData["Title"] = "Orders";
@@ -34,7 +34,7 @@
                                 @(i + 1)
                             </td>
                             <td>
-                                $@Model[i].Basket.TotalCost
+                                $@Model[i].TotalCost
                             </td>
                             <td>
                                 @Model[i].Status

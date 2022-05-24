@@ -1,6 +1,6 @@
 ﻿namespace OnlineShopWebApp.Models
 {
-    public enum OrderStatus
+    public enum OrderStatusViewModel
     {
         Created,
         Processed,

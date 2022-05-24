@@ -32,7 +32,7 @@ namespace OnlineShopWebApp
             services.AddControllersWithViews();
             services.AddTransient<IProductStorage, ProductDbStorage>();
             services.AddTransient<IBasketStorage, BasketDbStorage>();
-            services.AddSingleton<IOrderStorage, OrderStorage>();
+            services.AddTransient<IOrderStorage, OrderDbStorage>();
             services.AddTransient<ICompareStorage, CompareDbStorage>();
             services.AddTransient<IFavoritesStorage, FavoritesDbStorage>();
             services.AddSingleton<IUserStorage, UserStorage>();

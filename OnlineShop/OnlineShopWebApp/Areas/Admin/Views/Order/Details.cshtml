@@ -1,5 +1,5 @@
-﻿@using OnlineShopWebApp.Models;
-@model Order
+﻿@using OnlineShopWebApp.Models
+@model OrderViewModel
 
 @{
     ViewData["Title"] = "Order";
@@ -26,26 +26,26 @@
                         <tr>
                             <td>Address</td>
                             <td>
-                                @Model.Delivery.Address.ZipCode,
-                                @Model.Delivery.Address.Country,
-                                @Model.Delivery.Address.City,
-                                @Model.Delivery.Address.Street,
-                                @Model.Delivery.Address.House,
-                                @Model.Delivery.Address.Apartment
+                                @Model.DeliveryInfo.Address.ZipCode,
+                                @Model.DeliveryInfo.Address.Country,
+                                @Model.DeliveryInfo.Address.City,
+                                @Model.DeliveryInfo.Address.Street,
+                                @Model.DeliveryInfo.Address.House,
+                                @Model.DeliveryInfo.Address.Apartment
                             </td>
                         </tr>
                         <tr>
                             <td>Phone number</td>
-                            <td>@Model.Delivery.Phone</td>
+                            <td>@Model.DeliveryInfo.Phone</td>
                         </tr>
                         <tr>
                             <td>Cost</td>
-                            <td>$@Model.Basket.TotalCost</td>
+                            <td>$@Model.TotalCost</td>
                         </tr>
                         <tr>
                             <td>Status</td>
                             <td>
-                                <select class="form-control form-control-sm" asp-for="@Model.Status" asp-items="@Html.GetEnumSelectList<OrderStatus>()"></select>
+                                <select class="form-control form-control-sm" asp-for="@Model.Status" asp-items="@Html.GetEnumSelectList<OrderStatusViewModel>()"></select>
                             </td>
                         </tr>
                     </tbody>
