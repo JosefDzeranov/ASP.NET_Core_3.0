@@ -1,5 +1,5 @@
-﻿@using OnlineShopWebApp.Models
-@model Favorites
+﻿@using OnlineShop.Db.Models
+@model List<Product>
 
 @{
     ViewData["Title"] = "Favorites";
@@ -10,7 +10,7 @@
         <div class="col-12 mb-4">
             <h2>Favorites</h2>
         </div>
-        @foreach (var item in Model.Products)
+        @foreach (var item in Model)
         {
             <div class="col-4 mb-4">
                 <img class="img-thumbnail mb-2" src="@item.ImagePath" alt="@item.Name">

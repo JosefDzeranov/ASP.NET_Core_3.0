@@ -1,7 +1,6 @@
 ﻿using System;
 using Microsoft.AspNetCore.Mvc;
 using OnlineShop.Db;
-using OnlineShop.Db.Models;
 
 namespace OnlineShopWebApp.Controllers
 {
@@ -17,25 +16,25 @@ namespace OnlineShopWebApp.Controllers
         }
         public IActionResult Index()
         {
-            var favoritesList = _favoritesStorage.TryGetByUserId(Constants.UserId);
-            if (favoritesList == null || favoritesList.Products.Count == 0)
+            var favoriteProducts= _favoritesStorage.GetAllByUserId(Constants.UserId);
+            if (favoriteProducts == null || favoriteProducts.Count == 0)
             {
                 return View("Empty");
             }
-            return View(favoritesList);
+            return View(favoriteProducts);
         }
 
         public IActionResult Add(Guid id)
         {
             var product = _productStorage.TryGetProduct(id);
-            _favoritesStorage.AddProduct(Constants.UserId, product);
+            _favoritesStorage.Add(Constants.UserId, product);
             return RedirectToAction("Index");
         }
 
         public IActionResult Remove(Guid id)
         {
             var product = _productStorage.TryGetProduct(id);
-            _favoritesStorage.RemoveProduct(Constants.UserId, product);
+            _favoritesStorage.Remove(Constants.UserId, product);
             return RedirectToAction("Index");
         }
 

@@ -16,25 +16,25 @@ namespace OnlineShopWebApp.Controllers
         }
         public IActionResult Index()
         {
-            var compareList = _compareStorage.TryGetByUserId(Constants.UserId);
-            if (compareList == null || compareList.Products.Count == 0)
+            var compareProducts = _compareStorage.GetAllByUserId(Constants.UserId);
+            if (compareProducts == null || compareProducts.Count == 0)
             {
                 return View("Empty");
             }
-            return View(compareList);
+            return View(compareProducts);
         }
 
         public IActionResult Add(Guid id)
         {
             var product = _productStorage.TryGetProduct(id);
-            _compareStorage.AddProduct(Constants.UserId, product);
+            _compareStorage.Add(Constants.UserId, product);
             return RedirectToAction("Index");
         }
 
         public IActionResult Remove(Guid id)
         {
             var product = _productStorage.TryGetProduct(id);
-            _compareStorage.RemoveProduct(Constants.UserId, product);
+            _compareStorage.Remove(Constants.UserId, product);
             return RedirectToAction("Index");
         }
 

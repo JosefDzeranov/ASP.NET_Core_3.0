@@ -33,8 +33,8 @@ namespace OnlineShopWebApp
             services.AddTransient<IProductStorage, ProductDbStorage>();
             services.AddTransient<IBasketStorage, BasketDbStorage>();
             services.AddSingleton<IOrderStorage, OrderStorage>();
-            services.AddSingleton<ICompareStorage, CompareStorage>();
-            services.AddSingleton<IFavoritesStorage, FavoritesStorage>();
+            services.AddTransient<ICompareStorage, CompareDbStorage>();
+            services.AddTransient<IFavoritesStorage, FavoritesDbStorage>();
             services.AddSingleton<IUserStorage, UserStorage>();
             services.AddSingleton<IRoleStorage, RoleStorage>();
 
