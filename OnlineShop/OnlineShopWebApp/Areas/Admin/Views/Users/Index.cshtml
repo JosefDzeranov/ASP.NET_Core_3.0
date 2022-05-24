@@ -19,7 +19,7 @@
                             <th scope="col" class="align-top small">Имя</th>
                             <th scope="col" class="align-top small">Фамилия</th>
                             <th scope="col" class="align-top small">Телефон</th>
-                            <th scope="col" class="align-top small">Пароль</th>
+                            <th scope="col" class="align-top small">Роль</th>
                         </tr>
                         </thead>
                         @if (Model.Count != 0)
@@ -40,7 +40,7 @@
                                     <td class="small">@Model[i].Fistname</td>
                                     <td class="small">@Model[i].Surname</td>
                                     <td class="small">@Model[i].Phone</td>
-                                    <td class="small">@Model[i].Password</td>
+                                    <td class="small">@Model[i].RoleName</td>
 
                                 </tr>
                             }

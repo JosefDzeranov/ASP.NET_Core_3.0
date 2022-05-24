@@ -86,12 +86,10 @@ namespace OnlineShopWebApp
         public void AssignRole(string userLogin, Guid roleId)
         {
             var user = FindByLogin(userLogin);
-            user.RoleId = roleId;
+            user.SetRole(roleId);
             JsonStorage.Write(users);
             if (roleManager.Find(roleId).Rights.BeBuyer) buyerManager.AddBuyer(user);
-            
         }
-
 
         public List<User> GetAll()
         {
