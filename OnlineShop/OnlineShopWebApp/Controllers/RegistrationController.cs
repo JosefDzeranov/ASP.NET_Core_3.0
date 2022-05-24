@@ -25,10 +25,10 @@ namespace OnlineShopWebApp.Controllers
         }
 
         [AcceptVerbs("Get", "Post")]
-        public IActionResult CheckName(string name)
+        public IActionResult CheckName(string login)
         {
             var allUsers = _userBase.AllUsers();
-            if (allUsers.Any(x=>x.Name == name)) return Json(false);
+            if (allUsers.Any(x=>x.Login == login)) return Json(false);
             return Json(true);
         }
 

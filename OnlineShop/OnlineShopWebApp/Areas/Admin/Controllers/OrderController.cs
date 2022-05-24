@@ -9,7 +9,6 @@ namespace OnlineShopWebApp.Areas.Admin.Controllers
     {
         private readonly IOrderBase _orderBase;
 
-
         public OrderController(IOrderBase orderBase)
         {
             _orderBase = orderBase;

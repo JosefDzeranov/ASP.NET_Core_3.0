@@ -1,8 +1,43 @@
-﻿<div class="row text-center">
+﻿@using OnlineShopWebApp.Models
+
+<div class="row text-center">
 
     @await Html.PartialAsync("AdminMenu")
 
     <div class="col-9">
         <h3>Список пользователей</h3>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>№</th>
+                    <th>Логин</th>
+                    <th>Имя</th>
+                    <th>Фамилия</th>
+                    <th>Телефон</th>
+                </tr>
+            </thead>
+            @foreach (var p in Model)
+            {
+                <tbody>
+                    <tr>
+                        <td>
+                            @p.Id
+                        </td>
+                        <td>
+                            <a asp-area="admin" asp-controller="user" asp-action="GetUser" asp-route-userId="@p.Id">@p.Login</a>
+                        </td>
+                        <td>
+                            @p.FirstName
+                        </td>
+                        <td>
+                            @p.LastName
+                        </td>
+                        <td>
+                            @p.Phone
+                        </td>
+                    </tr>
+                </tbody>
+            }
+        </table>
     </div>
 </div>

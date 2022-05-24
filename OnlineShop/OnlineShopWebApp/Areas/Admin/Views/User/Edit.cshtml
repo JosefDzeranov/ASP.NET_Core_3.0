@@ -1,0 +1,44 @@
+﻿@using OnlineShopWebApp.Areas.Admin.Models
+
+@model User
+
+@{
+    ViewData["Title"] = "Отредактировать данные пользователя";
+}
+<div class="container align-content-center">
+    <div class="row text-center">
+        <div class="col-4 mx-auto">
+            <h2>Edit user data</h2>
+            <form asp-area="dmin" asp-controller="User" asp-action="Edit">
+                <div class="validation" asp-validation-summary="All"></div>
+                <div class="mb-3">
+                    <input name="Id" hidden value="@Model.Id" />
+                    <input name="Password" hidden value="@Model.Password" />
+                </div>
+                <div class="mb-3">
+                    <label class="form-label text-muted" asp-for="FirstName">First name</label>
+                    <input class="form-control form-control-sm" asp-for="FirstName" value="@Model.FirstName" />
+                    <span asp-validation-for="FirstName"></span>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label text-muted" asp-for="LastName">Last Name</label>
+                    <input class="form-control form-control-sm" asp-for="LastName" value="@Model.LastName" />
+                    <span asp-validation-for="LastName"></span>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label text-muted" asp-for="Phone">Phone</label>
+                    <input class="form-control form-control-sm" asp-for="Phone" value="@Model.Phone" />
+                    <span asp-validation-for="Phone"></span>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label text-muted" asp-for="Login">Login</label>
+                    <input class="form-control form-control-sm" asp-for="Login" value="@Model.Login" />
+                    <span asp-validation-for="Login"></span>
+                </div>
+                <div class="mb-3">
+                    <button class="btn btn-outline-dark btn-sm" type="submit" asp-area="Admin" asp-controller="User" asp-action="Edit">Сохранить?</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

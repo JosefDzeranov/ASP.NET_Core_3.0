@@ -9,7 +9,7 @@ namespace OnlineShopWebApp.Models.Attributes
         {
             Registration data = (Registration)value;
 
-            if (data.Name.Length < 4)
+            if (data.Login.Length < 4)
             {
                 ErrorMessage = "Имя должно быть не короче 4-х символов";
                 return false;

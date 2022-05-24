@@ -1,0 +1,44 @@
+﻿@using OnlineShopWebApp.Models
+
+@model User
+<div class="row text-center">
+
+    @await Html.PartialAsync("AdminMenu")
+
+    <div class="col-9">
+        <h3>Пользователь №@Model.Id</h3>
+        <table class="table">
+            <thead></thead>
+            <tbody>
+                <tr>
+                    <th>Имя</th>
+                    <td>@Model.FirstName</td>
+                </tr>
+                <tr>
+                    <th>Фамилия</th>
+                    <td>@Model.LastName</td>
+                </tr>
+                <tr>
+                    <th>Логин</th>
+                    <td>@Model.Login</td>
+                </tr>
+                <tr>
+                    <th>Телефон</th>
+                    <td>@Model.Phone</td>
+                </tr>
+                <tr>
+                    <
+                    <td></td>
+                    <td>
+                        <button class="btn dropdown-toggle btn-sm btn-outline-dark" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Что сделать?</button>
+                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                            <a class="dropdown-item" asp-area="Admin" asp-controller="User" asp-action="ChangePassword" asp-route-userId="@Model.Id">Изменить пароль</a>
+                            <a class="dropdown-item" asp-area="Admin" asp-controller="User" asp-action="Edit" asp-route-userId="@Model.Id">Отредактировать</a>
+                            <a class="dropdown-item" asp-area="Admin" asp-controller="User" asp-action="Delete" asp-route-userId="@Model.Id">Удалить</a>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

@@ -1,19 +1,25 @@
 [
   {
     "Id": 1,
-    "Name": "Mike",
+    "Login": "Mike",
+    "FirstName": "Lana",
+    "LastName": "Vachovski",
     "Phone": "7-983-041-73-94",
-    "Password": null
+    "Password": "321421"
   },
   {
     "Id": 2,
-    "Name": "Jhon",
+    "Login": "Jhon",
+    "FirstName": null,
+    "LastName": null,
     "Phone": "7-989-041-73-94",
     "Password": "11"
   },
   {
     "Id": 3,
-    "Name": "Mikee",
+    "Login": "Mikee",
+    "FirstName": null,
+    "LastName": null,
     "Phone": "Please, fill this field",
     "Password": "1"
   }

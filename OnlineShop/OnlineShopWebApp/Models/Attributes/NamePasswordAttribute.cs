@@ -8,7 +8,7 @@ namespace OnlineShopWebApp.Models.Attributes
         {
             Registration data = (Registration)value;
 
-            if (data.Name == data.Password)
+            if (data.Login == data.Password)
             {
                 ErrorMessage = "Пароль и логин не должны совпадать";
                 return false;

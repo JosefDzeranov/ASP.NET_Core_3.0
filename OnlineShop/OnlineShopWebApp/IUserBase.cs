@@ -1,4 +1,5 @@
-﻿using OnlineShopWebApp.Models;
+﻿using OnlineShopWebApp.Areas.Admin.Models;
+using OnlineShopWebApp.Models;
 using System.Collections.Generic;
 
 namespace OnlineShopWebApp
@@ -6,8 +7,11 @@ namespace OnlineShopWebApp
     public interface IUserBase
     {
         void Add(User user);
-        IEnumerable<User> AllUsers();
+        List<User> AllUsers();
         bool Authentification(Authorization authorization);
+        void Delete(int userId);
+        void Edit(User user);
+        void NewPassword(NewPassword newPassword);
         User TryGetById(int userId);
     }
 }

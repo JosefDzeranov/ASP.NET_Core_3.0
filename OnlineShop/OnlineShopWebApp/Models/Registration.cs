@@ -11,7 +11,7 @@ namespace OnlineShopWebApp.Models
     {
         [Remote(action: "CheckName", controller: "Registration", ErrorMessage = "Это имя уже используется")]
         [Required(ErrorMessage = "Введите логин")]
-        public string Name { get; set; }
+        public string Login { get; set; }
         [Required(ErrorMessage = "Введите пароль")]
         public string Password { get; set; }
 
