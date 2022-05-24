@@ -13,7 +13,7 @@ namespace OnlineShopWebApp.Models.Users
         public string Login { get; set; }
 
         [StringLength(50, MinimumLength = 3, ErrorMessage = "Длина строки должна быть от 3 до 50 символов")]
-        public string Fistname { get; set; }
+        public string Firstname { get; set; }
         
         public string Secondname { get; set; }
         

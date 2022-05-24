@@ -118,10 +118,23 @@ namespace OnlineShopWebApp
             JsonStorage.Write(users);
         }
 
-        public void ChangePassword(string userName, string password)
+        public void ChangePassword(string login, string password)
         {
-            var user = FindByLogin(userName);
+            var user = FindByLogin(login);
             user.Password = password;
+            JsonStorage.Write(users);
+        }
+
+        public void ChangeInfo(UserInfo userInfo)
+        {
+            var user = FindByLogin(userInfo.Login);
+            user.Firstname ??= userInfo.Firstname ;
+            user.Secondname ??= userInfo.Secondname;
+            user.Surname ??= userInfo.Surname;
+            user.Surname ??= userInfo.Surname;
+            if(userInfo.Age!=0) user.Age = userInfo.Age;
+            user.Phone ??= userInfo.Phone;
+            user.Email ??= userInfo.Email;
             JsonStorage.Write(users);
         }
 

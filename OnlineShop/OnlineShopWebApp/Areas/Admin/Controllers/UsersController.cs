@@ -55,24 +55,30 @@ namespace OnlineShopWebApp.Areas.Admin.Controllers
             }
             return View(changePassword);
         }
-
-        public IActionResult Edit()
+        public IActionResult Edit(string login)
         {
-            if (changePassword.Login == changePassword.Password)
+            var user = userManager.FindByLogin(login);
+            UserInfo userInfo = new UserInfo()
             {
-                ModelState.AddModelError("", "Логин и пароль не должны совпадать!");
-            }
-            var user = userManager.FindByLogin(changePassword.Login);
-            if (user.Password == changePassword.Password)
-            {
-                ModelState.AddModelError("", "Вы ввели существующий пароль!");
-            }
+                Login = user.Login,
+                Firstname = user.Firstname,
+                Secondname = user.Secondname,
+                Surname = user.Surname,
+                Age = user.Age,
+                Phone = user.Phone,
+                Email = user.Email
+            };
+            return View(userInfo);
+        }
+        [HttpPost]
+        public IActionResult Edit(UserInfo userInfo)
+        {
             if (ModelState.IsValid)
             {
-                userManager.ChangePassword(changePassword.Login, changePassword.Password);
+                userManager.ChangeInfo(userInfo);
                 return RedirectToAction("Index", "Users");
             }
-            return View(changePassword);
+            return View(userInfo);
         }
 
         public IActionResult EditRights()
