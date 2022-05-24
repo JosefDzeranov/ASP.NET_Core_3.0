@@ -29,7 +29,13 @@
                             {
                                 <tr>
                                     <th class="col-1" scope="row">@(i + 1)</th>
-                                    <td class="small">@Model[i].Login</td>
+                                    <td class="small"> <a  asp-area="Admin"
+                                                           asp-controller="Users"
+                                                           asp-action="Details"
+                                                           asp-route-login="@Model[i].Login"
+                                                           role="button">
+                                        @Model[i].Login
+                                    </a></td>
                                     <td class="small">@Model[i].Email</td>
                                     <td class="small">@Model[i].Fistname</td>
                                     <td class="small">@Model[i].Surname</td>

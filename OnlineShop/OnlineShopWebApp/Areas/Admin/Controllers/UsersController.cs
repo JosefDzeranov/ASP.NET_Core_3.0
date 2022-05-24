@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using System;
+using Microsoft.AspNetCore.Mvc;
 using OnlineShopWebApp.Filters;
 using OnlineShopWebApp.Interfase;
 
@@ -18,6 +19,12 @@ namespace OnlineShopWebApp.Areas.Admin.Controllers
         {
             var users = userManager.GetAll();
             return View(users);
+        }
+
+        public IActionResult Details(string login)
+        {
+            var user = userManager.FindByLogin(login);
+            return View(user);
         }
     }
 }
