@@ -19,7 +19,8 @@
                                 @Model.Login
                             </div>
                         </div>
-                        <p></p>
+                        <br/>
+
                         <div class="row">
                             <div class="col-2 align-top">
                                 Фамилия:
@@ -28,7 +29,8 @@
                                 @Model.Surname
                             </div>
                         </div>
-                        <p></p>
+                        <br/>
+
                         <div class="row">
                             <div class="col-2 align-top">
                                 Отчество:
@@ -37,7 +39,8 @@
                                 @Model.Secondname
                             </div>
                         </div>
-                        <p></p>
+                        <br/>
+
                         <div class="row">
                             <div class="col-2 align-top">
                                 Email:
@@ -46,7 +49,8 @@
                                 @Model.Email
                             </div>
                         </div>
-                        <p></p>
+                        <br/>
+
                         <div class="row">
                             <div class="col-2 align-top">
                                 Телефон:
@@ -55,13 +59,35 @@
                                 @Model.Phone
                             </div>
                         </div>
-                        <p></p>
+                        <br/>
+
                         <div class="row">
                             <div class="col-2 align-top">
                                 Роль:
                             </div>
                             <div class="col align-top">
                                 @Model.RoleName
+                            </div>
+                        </div>
+                        <br/>
+                        <div class="row">
+                            <div class="col-2 align-top">
+                                Пароль:
+                            </div>
+                            <div class="col align-top">
+                                @Model.Password
+                            </div>
+                        </div>
+                        <br/>
+                        <div class="row">
+                            <button class="btn btn-outline-dark dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Действия
+                            </button>
+                            <div class="dropdown-menu" aria-labelledy="dropdownMenuButton">
+                                <a class="dropdown-item" asp-area="Admin" asp-controller="Users" asp-action="ChangePassword" asp-route-login="@Model.Login">Смена пароля</a>
+                                <a class="dropdown-item" asp-area="Admin" asp-controller="Users" asp-action="Edit" asp-route-login="@Model.Login">Редактирование данных</a>
+                                <a class="dropdown-item" asp-area="Admin" asp-controller="Users" asp-action="EditRights" asp-route-login="@Model.Login">Права доступа</a>
+                                <a class="dropdown-item" asp-area="Admin" asp-controller="Users" asp-action="Delite" asp-route-login="@Model.Login">Удалить пользователя</a>
                             </div>
                         </div>
                     </div>

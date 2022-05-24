@@ -117,5 +117,13 @@ namespace OnlineShopWebApp
             users.RemoveAll(x => x.Login == userLogin);
             JsonStorage.Write(users);
         }
+
+        public void ChangePassword(string userName, string password)
+        {
+            var user = FindByLogin(userName);
+            user.Password = password;
+            JsonStorage.Write(users);
+        }
+
     }
 }

@@ -4,7 +4,7 @@
     ViewData["Title"] = "Регистрация";
 }
 
-<form method="post" asp-controller="Login" asp-action="NewUser">
+<form method="post" asp-controller="Login" asp-action="Register">
     <div class="container">
         <div class="was-validated" asp-validation-summary="All"></div>
         <h3 class="display-5 text-center">Регистрация</h3>
@@ -27,7 +27,7 @@
         </div>
         <p></p>
         <div class="col-md-3 mx-auto">
-            <button type="submit" class="btn btn-outline-dark text-center" asp-controller="Login" asp-action="NewUser">Зарегестрироваться</button>
+            <button type="submit" class="btn btn-outline-dark text-center" asp-controller="Login" asp-action="Register">Зарегестрироваться</button>
         </div>
     </div>
 </form>
