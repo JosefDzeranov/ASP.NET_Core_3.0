@@ -17,6 +17,8 @@ namespace OnlineShopWebApp.Models.Users
         
         public string Surname { get; set; }
 
+        public string Phone { get; set; }
+
 
         [Range(16, 110, ErrorMessage = "Возраст должен быть от 16 до 110")]
         public int Age { get; set; }

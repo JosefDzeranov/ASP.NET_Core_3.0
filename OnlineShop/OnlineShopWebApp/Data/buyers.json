@@ -67,5 +67,19 @@
         "FullCost": 100003.0
       }
     ]
+  },
+  {
+    "Login": "Gregory",
+    "Comparisons": [],
+    "Cart": [],
+    "InfoBuying": {
+      "Surname": null,
+      "Firstname": null,
+      "Secondname": null,
+      "Phone": null,
+      "Email": null,
+      "Commentary": null
+    },
+    "Orders": []
   }
 ]
