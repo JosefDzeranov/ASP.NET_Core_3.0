@@ -43,10 +43,24 @@
           "Commentary": null
         },
         "DateTime": "2022-05-24T18:32:40.361947Z",
-        "Status": "Создан",
+        "Status": "Доставлен",
         "Login": "Gregory",
         "FullCost": 32001.0
       }
     ]
+  },
+  {
+    "Login": "Gregory",
+    "Comparisons": [],
+    "Cart": [],
+    "InfoBuying": {
+      "Surname": null,
+      "Firstname": null,
+      "Secondname": null,
+      "Phone": null,
+      "Email": null,
+      "Commentary": null
+    },
+    "Orders": []
   }
 ]

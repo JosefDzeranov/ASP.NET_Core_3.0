@@ -23,19 +23,6 @@
                                 </div>
                             </div>
                             <br/>
-                            <div class="row">
-                                <select class="custom-select" name="Status" asp-for="Id">
-                                    <option selected>Назначить</option>
-                                    @for (int i = 0; i < Model.OtherRoles.Count; i++)
-                                    {
-                                        <option value="@Model.OtherRoles[i].Id">@Model.OtherRoles[i].Name</option>
-                                    }
-                                </select>
-                            </div>
-                            <br/>
-                            <div class="col-md-3 mx-auto">
-                                <button type="submit" class="btn btn-outline-dark text-center" asp-area="Admin" asp-controller="Users" asp-action="EditRights">Сменить</button>
-                            </div>
 
                             <form class="form-inline" method="post" asp-area="Admin" asp-controller="Users" asp-action="EditRights">
                                 <input type="hidden"  name="Login" asp-for="Login" value="@Model.Login"/>
@@ -57,7 +44,7 @@
                                                     asp-area="Admin"
                                                     asp-controller="Users"
                                                     asp-action="EditRights"
-                                                    role="button">Сохранить изменения</button>
+                                                    role="button">Сменить</button>
                                         </div>
                                     </div>
                                 </div>

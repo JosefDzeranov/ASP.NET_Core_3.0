@@ -100,6 +100,7 @@ namespace OnlineShopWebApp.Areas.Admin.Controllers
         [HttpPost]
         public IActionResult EditRights(ChangeRoleUser roleInfo)
         {
+            userManager.AssignRole(roleInfo.Login, roleInfo.Id);
             return RedirectToAction("Index", "Users");
         }
 
