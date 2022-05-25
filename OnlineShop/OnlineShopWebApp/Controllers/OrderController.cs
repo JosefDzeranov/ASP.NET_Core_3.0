@@ -23,6 +23,9 @@ namespace OnlineShopWebApp.Controllers
         [HttpPost]
         public IActionResult Buy(UserDeliveryInfo user)
         {
+            if (ModelState.IsValid)
+                return View("Index", user);
+
             var existingCart = cartRepository.TryGetByUserId(Constants.UserId);
             var order = new Order
             {
