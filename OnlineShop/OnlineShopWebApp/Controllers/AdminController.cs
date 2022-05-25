@@ -1,20 +1,38 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using OnlineShopWebApp.Models;
+using System;
 
 namespace OnlineShopWebApp.Controllers
 {
     public class AdminController : Controller
     {
         private readonly IProductsRepository productsRepository;
+        private readonly IOrderRepository orderRepository;
 
-        public AdminController(IProductsRepository productsRepository)
+        public AdminController(IProductsRepository productsRepository, IOrderRepository orderRepository)
         {
             this.productsRepository = productsRepository;
+            this.orderRepository = orderRepository;
         }
 
         public IActionResult Orders()
         {
-            return View();
+            var orders = orderRepository.GetAll();
+            if (orders == null || orders.Count == 0)
+                return View("notFound");
+            return View(orders);
+        }
+
+        public IActionResult OrderDetails(Guid orderId)
+        {
+            var order = orderRepository.TryGetById(orderId);
+            return View(order);
+        }
+
+        public IActionResult UpdateOrderStatus(Guid orderId, OrderStatus status)
+        {
+            orderRepository.UpdateStatus(orderId, status);
+            return RedirectToAction("Orders");
         }
 
         public IActionResult Users()
