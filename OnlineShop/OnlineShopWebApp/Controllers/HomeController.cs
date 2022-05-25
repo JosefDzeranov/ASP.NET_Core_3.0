@@ -1,5 +1,4 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
 using OnlineShopWebApp.Models;
 using System.Diagnostics;
 
@@ -13,16 +12,10 @@ namespace OnlineShopWebApp.Controllers
             productRepository = new ProductRepository();
         }
 
-        public string Index()
+        public IActionResult Index()
         {
             var products = productRepository.GetAllProducts();
-            var result = "";
-
-            foreach (var product in products)
-            {
-                result += product + "\n\n";
-            }
-            return result;
+            return View(products);
         }
 
         public IActionResult Privacy()
