@@ -17,5 +17,13 @@ namespace OnlineShopWebApp
                 return Items.Sum(x => x.Cost);
             }
         }
+
+        public decimal Amout
+        {
+            get
+            {
+                return Items.Sum(x => x.Amout);
+            }
+        }
     }
 }
