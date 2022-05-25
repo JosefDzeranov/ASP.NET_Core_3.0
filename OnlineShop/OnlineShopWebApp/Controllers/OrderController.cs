@@ -1,13 +1,14 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using System;
 
 namespace OnlineShopWebApp.Controllers
 {
     public class OrderController : Controller
     {
         private readonly ICartsRepository cartRepository;
-        private readonly IOrdersRepository ordersRepository;
+        private readonly IOrderRepository ordersRepository;
 
-        public OrderController(ICartsRepository cartRepository, IOrdersRepository ordersRepository)
+        public OrderController(ICartsRepository cartRepository, IOrderRepository ordersRepository)
         {
             this.cartRepository = cartRepository;
             this.ordersRepository = ordersRepository;
