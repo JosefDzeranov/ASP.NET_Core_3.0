@@ -3,12 +3,11 @@
 @if (Model == null || Model.Items.Count == 0)
 {
     <div class="text-center">
-        <h5>В корзине еще нет товаров, перейдите на <a href="/home/index">главную страницу</a> для добавления товара</h5>
+        <h5>На странице сравнения еще нет товаров, перейдите на <a href="/home/index">главную страницу</a> для добавления товаров</h5>
     </div>
 }
-else
-{
-    <div class="row">
+
+<div class="row">
         <div class="col">
             <table class="table table-striped">
                 <thead>
@@ -17,8 +16,6 @@ else
                         <th>Цена</th> 
                         <th>Количество</th>
                         <th>Стоимость</th>
-                        <th></th>
-                        <th></th>
                     </tr>
                 </thead>
                 <tbody>
@@ -29,12 +26,6 @@ else
                             <td>@item.Product.Price</td>
                             <td>@item.Amout</td>
                             <td>@item.Cost</td>
-                            <td>
-                                <a class="btn btn-primary" href="/cart/add?productId=@item.Product.Id" role="button">+</a>
-                            </td>
-                            <td>
-                                <a class="btn btn-primary" href="/cart/decreaseAmount?productId=@item.Product.Id" role="button">-</a>
-                            </td>
                         </tr>
                     }
                 </tbody>
@@ -45,9 +36,6 @@ else
             </div>
             <div class="text-left">  
                 <a class="btn btn-outline-success" href="/home/index" role="button">Продолжить покупки</a>
-                <a class="btn btn-success" href="/order/index" role="button">Перейти к оплате</a>
-                <a class="btn btn-danger" href="/cart/clear" role="button">Очистить корзину</a>
             </div>
         </div>
     </div>
-}

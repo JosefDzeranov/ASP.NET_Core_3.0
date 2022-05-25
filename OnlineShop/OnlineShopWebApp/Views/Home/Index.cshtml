@@ -1,9 +1,30 @@
-﻿@*@{
+﻿@model List<Product>
+@{
     ViewData["Title"] = "Home Page";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Index</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+<div class="row">
+    @foreach (var product in Model)
+    {
+        @*<div class="col-3 card shadow">
+            <img class="card-img-top" src=@product.ImagesPath alt="Изображение товара" />
+
+            <div class="card-body">
+                <a style="color:black" href="/product/index/@product.Id"><h5>@product.Name</h5></a>
+                <h5>@product.Price руб</h5>
+                <a class="btn btn-dark" href="/cart/add?productId=@product.Id" role="button">Добавить в корзину</a>
+            </div>
+        </div>*@
+
+        <article class="card">
+            <img src="@product.ImagesPath" alt="Изображение товара" class="card__img">
+
+            @*<h2 class="card__name" href="/product/index/@product.Id">@product.Name</h2>*@
+            <a class="card__name" href="/product/index/@product.Id"><h5>@product.Name</h5></a>
+
+            <p class="card__price">@product.Price <span class="card__currency">Руб.</span></p>
+            <a class="card__btn" href="/cart/add?productId=@product.Id" role="button">В корзину</a>
+            @*<button class="card__btn" href="/cart/add?productId=@product.Id">В корзину</button>*@
+        </article>
+    }
 </div>
-*@

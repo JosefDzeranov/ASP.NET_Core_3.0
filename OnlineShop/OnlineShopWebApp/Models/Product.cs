@@ -10,13 +10,25 @@ namespace OnlineShopWebApp.Models
         public decimal Price { get; }
         public string Description { get; }
         public string ImagesPath { get; }
+        public string GPU { get; }
+        public string MemoryType { get; }
+        public string MemoryCount { get; }
+        public string GpuGhz { get; }
+        public string TurboGpuGhz { get; }
 
-        public Product(string name, decimal price, string description, string imagespath = null)
+
+        public Product(string name, decimal price, string description, string gpu, string memorytype, string memorycount, 
+            string gpughz, string turgpughz, string imagespath = null)
         {
             Id = uniId;
             Name = name;
             Price = price;
             Description = description;
+            GPU = gpu;
+            MemoryType = memorytype;
+            MemoryCount = memorycount;
+            GpuGhz = gpughz;
+            TurboGpuGhz = turgpughz;
 
             uniId += 1;
             ImagesPath = imagespath;
