@@ -18,9 +18,18 @@ namespace WebOnlineShop.Controllers
             _logger = logger;
         }
 
-        public string Index(double a, double b)
+        public string Index(double a, double b, string c)
         {
-            return $"{a}+{b} = {a + b}"; 
+            if (c == "+")
+            {
+                return $"{a}+{b} = {a + b}";
+            }
+            else if (c == "-")
+            {
+                return $"{a}-{b} = {a - b}";
+            }
+            return $"{a}*{b} = {a * b}"; 
+            
         }
 
         //public IActionResult Index()
