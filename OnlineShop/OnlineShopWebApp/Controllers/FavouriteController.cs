@@ -20,26 +20,26 @@ namespace OnlineShopWebApp.Controllers
         }
         public IActionResult Index()
         {
-            return View(favouritesRepository.GetFavourites());
+            return View(favouritesRepository.GetFavourites(Constants.UserId));
         }
 
         public IActionResult Add(Guid productId)
         {
             var product = productsRepository.TryGetById(productId);
-            //favouritesRepository.Add(product);
+            favouritesRepository.Add(Constants.UserId, product);
             return RedirectToAction("Index");
         }
 
-        public IActionResult Clear()
-        {
-            favouritesRepository.Clear();
-            return RedirectToAction("Index");
-        }
-        public IActionResult Delete(Guid productId)
-        {
-            var product = productsRepository.TryGetById(productId);
-            favouritesRepository.Delete(Mapping.ToProductViewModel(product));
-            return RedirectToAction("Index");
-        }
+        //public IActionResult Clear()
+        //{
+        //    favouritesRepository.Clear();
+        //    return RedirectToAction("Index");
+        //}
+        //public IActionResult Delete(Guid productId)
+        //{
+        //    var product = productsRepository.TryGetById(productId);
+        //    favouritesRepository.Delete(Mapping.ToProductViewModel(product));
+        //    return RedirectToAction("Index");
+        //}
     }
 }
