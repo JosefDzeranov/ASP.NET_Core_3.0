@@ -15,10 +15,6 @@ namespace OnlineShopWebApp.Controllers
         {
             var product = productRepository.TryGetByid(id);
             return View(product);
-
-            //if (product == null)
-            //    return $"Продукта с таким id = {id} не существует!";
-            //return $"{product}";
         }
     }
 }

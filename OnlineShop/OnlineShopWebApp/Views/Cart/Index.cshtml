@@ -1,0 +1,44 @@
+﻿@model Cart
+
+@if (Model == null)
+{
+    <div class="text-center">
+        <h5>В корзине еще нет товаров, перейдите на <a href="/home/index">главную страницу</a> для добавления товаров</h5>
+    </div>
+}
+else
+{
+    <div class="row">
+        <div class="col">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Название</th>
+                        <th>Цена</th>
+                        <th>Количество</th>
+                        <th>Стоимость</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model.Items)
+                    {
+                        <tr>
+                            <td>@item.Product.Name</td>
+                            <td>@item.Product.Price</td>
+                            <td>@item.Amout</td>
+                            <td>@item.Cost</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+            <div class="text-left">
+                <h4>Итого:</h4>
+                <h4>@Model.Cost</h4>
+            </div>
+            <div class="text-left">  
+                <a class="btn btn-outline-success" href="/home/index" role="button">Продолжить покупки</a>
+                <a class="btn btn-success" href="#" role="button">Перейти к оплате</a>
+            </div>
+        </div>
+    </div>
+}
