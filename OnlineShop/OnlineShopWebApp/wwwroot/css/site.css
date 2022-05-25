@@ -90,13 +90,4 @@ body {
   line-height: 60px; /* Vertically center the text there */
 }
 
-a1 {
-    color: #B2AB81;
-}
-a1:hover {
-    color: #B2AB81;
-    
-    text-decoration: underline;
-}
-
 
