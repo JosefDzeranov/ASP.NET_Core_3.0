@@ -20,13 +20,19 @@ namespace OnlineShopWebApp.Controllers
             var orders = orderRepository.GetAll();
             if (orders == null || orders.Count == 0)
                 return View("notFound");
-            return View();
+            return View(orders);
         }
 
         public IActionResult OrderDetails(Guid orderId)
         {
             var order = orderRepository.TryGetById(orderId);
             return View(order);
+        }
+
+        public IActionResult UpdateOrderStatus(Guid orderId, OrderStatus status)
+        {
+            orderRepository.UpdateStatus(orderId, status);
+            return RedirectToAction("Orders");
         }
 
         public IActionResult Users()

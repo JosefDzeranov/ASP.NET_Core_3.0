@@ -23,5 +23,14 @@ namespace OnlineShopWebApp
         {
             return orders.FirstOrDefault(x => x.Id == id);
         }
+
+        public void UpdateStatus(Guid orderId, OrderStatus newStatus)
+        {
+            var order = TryGetById(orderId);
+            if (order != null)
+            {
+                order.Status = newStatus;
+            }
+        }
     }
 }
