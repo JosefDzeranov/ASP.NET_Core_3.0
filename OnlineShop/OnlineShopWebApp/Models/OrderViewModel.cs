@@ -1,13 +1,14 @@
-﻿using System;
+﻿using OnlineShop.DB.Models;
+using System;
 using System.ComponentModel.DataAnnotations;
 
 namespace OnlineShopWebApp.Models
 {
 
-    public class Order
+    public class OrderViewModel
     {
         public Guid Id { get; set; } = Guid.NewGuid();
-        public string UserId { get; set; }
+        public Guid UserId { get; set; }
         public CartViewModel Cart { get; set; }
         public DateTime Created { get; set; } = DateTime.Now;
 
@@ -26,8 +27,7 @@ namespace OnlineShopWebApp.Models
         [Required(ErrorMessage = "не указан адрес")]
         public string Address { get; set; }
         public decimal TotalCost { get; set; }
-
-        
+     
 
     }
 }

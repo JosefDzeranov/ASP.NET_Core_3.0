@@ -19,13 +19,7 @@ namespace OnlineShopWebApp.Controllers
         {
             var products = productRepository.GetAll();
 
-            var productsViewModel = new List<ProductViewModel>();
-
-            foreach (var product in products)
-            {
-                var productViewModel = product.MappingProductViewModel();
-                productsViewModel.Add(productViewModel);
-            }
+            var productsViewModel = products.MappingListProductViewModel();
 
             return View(productsViewModel);
         }

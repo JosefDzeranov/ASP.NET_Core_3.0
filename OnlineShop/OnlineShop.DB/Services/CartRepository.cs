@@ -15,12 +15,15 @@ namespace OnlineShop.DB.Services
             this.onlineShopContext = onlineShopContext;
         }
 
-        public Cart TryGetByUserId(string userId)
+        public Cart TryGetByUserId(Guid userId)
         {
             return onlineShopContext.Carts.FirstOrDefault(x => x.UserId == userId);
         }
-
-        public void Add(Product product, string userId)
+        public Cart TryGetById(Guid Id)
+        {
+            return onlineShopContext.Carts.FirstOrDefault(x => x.Id == Id);
+        }
+        public void Add(Product product, Guid userId)
         {
             var existingCart = TryGetByUserId(userId);
             if (existingCart == null)
@@ -69,7 +72,7 @@ namespace OnlineShop.DB.Services
             onlineShopContext.SaveChanges();
         }
 
-        public void Clear(string userId)
+        public void Clear(Guid userId)
         {
             var existingCart = TryGetByUserId(userId);
             if (existingCart != null)
@@ -80,7 +83,7 @@ namespace OnlineShop.DB.Services
 
         }
 
-        public void RemoveItem(Guid productId, string userId)
+        public void RemoveItem(Guid productId, Guid userId)
         {
             var existingCart = TryGetByUserId(userId);
             if (existingCart != null)

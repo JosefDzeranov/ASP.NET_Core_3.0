@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using OnlineShop.DB.Models;
 using OnlineShopWebApp.Models;
 using OnlineShopWebApp.Services;
 using System;
@@ -17,9 +18,9 @@ namespace OnlineShopWebApp.Areas.Admin.Controllers
 
         public IActionResult Index()
         {
-            var existingOrders = orderRepository.TryGetAll();
-
-            return View(existingOrders);
+            var ordersDb = orderRepository.TryGetAll();
+            var ordersViewModel = ordersDb.MappingListOrderViewModel();
+            return View(ordersViewModel);
         }
 
         public IActionResult OrderDetails(Guid orderId)
@@ -27,7 +28,7 @@ namespace OnlineShopWebApp.Areas.Admin.Controllers
             var order = orderRepository.TryGetById(orderId);
             if (order!= null)
             {
-                return View(order);
+                return View(order.MappingOrderViewModel());
             }
             return RedirectToAction("Index", "Order");
         }

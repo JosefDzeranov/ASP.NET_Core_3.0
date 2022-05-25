@@ -17,7 +17,7 @@ namespace OnlineShopWebApp.Models
                 ImgPath = productViewModel.ImgPath,
 
             };
-            
+
             return productDb;
         }
         public static ProductViewModel MappingProductViewModel(this Product product)
@@ -33,6 +33,18 @@ namespace OnlineShopWebApp.Models
             };
 
             return productViewModel;
+        }
+
+        public static List<ProductViewModel> MappingListProductViewModel(this List<Product> products)
+        {
+            var productsViewModel = new List<ProductViewModel>();
+
+            foreach (var product in products)
+            {
+                var productViewModel = product.MappingProductViewModel();
+                productsViewModel.Add(productViewModel);
+            }
+            return productsViewModel;
         }
 
         public static CartViewModel MappingCartViewModel(this Cart cart)
@@ -64,10 +76,73 @@ namespace OnlineShopWebApp.Models
                 cartViewModel.Items.Add(cartItemViewModel);
             }
 
-             return cartViewModel;
+            return cartViewModel;
+        }
+
+        public static Order MappingOrder(this OrderViewModel orderViewModel, Cart existingCart)
+        {
+            var order = new Order
+            {
+                Id = orderViewModel.Id,
+                Email = orderViewModel.Email,
+                Address = orderViewModel.Address,
+                CartItems = existingCart.Items,
+                Created = orderViewModel.Created,
+                FirstName = orderViewModel.FirstName,
+                LastName = orderViewModel.LastName,
+                Phone = orderViewModel.Phone,
+                Status = orderViewModel.Status,
+                UserId = orderViewModel.UserId
+
+            };
+            return order;
+        }
+
+        public static OrderViewModel MappingOrderViewModel(this Order order)
+        {
+            var orderViewModel = new OrderViewModel
+            {
+                Id = order.Id,
+                Email = order.Email,
+                Address = order.Address,
+                Cart = new CartViewModel
+                {
+                    Items = new List<CartItemViewModel>(),
+                },
+                Created = order.Created,
+                FirstName = order.FirstName,
+                LastName = order.LastName,
+                Phone = order.Phone,
+                Status = order.Status, 
+                UserId = order.UserId
+            };
+
+            foreach (var item in order.CartItems)
+            {
+                var cartItemViewModel = new CartItemViewModel
+                {
+                    Id = item.Id,
+                    Product = item.Product.MappingProductViewModel(),
+                    Quantinity = item.Quantinity,
+                };
+                orderViewModel.Cart.Items.Add(cartItemViewModel);
+            }
+            return orderViewModel;
+        }
+        public static List<OrderViewModel> MappingListOrderViewModel(this List<Order> orders)
+        {
+            var ordersViewModel = new List<OrderViewModel>();
+
+            foreach (var order in orders)
+            {
+                var orderViewModel = order.MappingOrderViewModel();
+                ordersViewModel.Add(orderViewModel);
+            }
+            return ordersViewModel;
         }
 
     }
+
 
 }
 
