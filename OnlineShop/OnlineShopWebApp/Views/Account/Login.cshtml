@@ -1,0 +1,17 @@
+﻿<form method="post">
+    <div class="mb-3">
+        <label for="exampleInputEmail1" class="form-label">Электронный адрес</label>
+        <input type="email" class="form-control" name="InputEmail1" aria-describedby="emailHelp">
+    </div>
+    <div class="mb-3">
+        <label for="exampleInputPassword1" class="form-label">Пароль</label>
+        <input type="password" class="form-control" name="InputPassword">
+        <div id="passwordHelp" class="form-text"><a href="#">Забыли пароль?</a></div>
+    </div>
+    <div class="mb-3 form-check">
+        <input type="checkbox" class="form-check-input" name="exampleCheck1">
+        <label class="form-check-label" for="exampleCheck1">Запомнить данные входа</label>
+    </div>
+    <button type="submit" class="btn btn-outline-primary" asp-controller="Account" asp-action="Registration">Регистрация</button>
+    <button type="submit" class="btn btn-primary">Продолжить</button>
+</form>
