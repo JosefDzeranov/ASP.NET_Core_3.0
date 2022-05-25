@@ -20,5 +20,6 @@ namespace OnlineShopWebApp.Interfase
         UserBuyer FindBuyer(string buyerLogin);
         void SaveInfoBuying(InfoBuying infoBuying, string buyerLogin);
         void ClearInfoBuying(string buyerLogin);
+        void Remove(string login);
     }
 }

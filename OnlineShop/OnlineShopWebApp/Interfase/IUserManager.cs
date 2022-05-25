@@ -17,11 +17,10 @@ namespace OnlineShopWebApp.Interfase
 
         void Add(UserRegistration userInput);
 
-        void Remove(string userLogin);
+        void Remove(string login);
         void AssignRole(string userLogin, Guid roleId);
 
         void ChangePassword(string login, string password);
         void ChangeInfo(UserInfo userInfo);
-        void Delite(string login);
     }
 }
