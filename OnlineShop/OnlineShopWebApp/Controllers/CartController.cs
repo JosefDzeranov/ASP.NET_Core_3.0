@@ -5,22 +5,24 @@ namespace OnlineShopWebApp.Controllers
     public class CartController : Controller
     {
         private readonly ProductRepository productRepository;
+        private readonly CartsRepository carsRepository;
 
-        public CartController()
+        public CartController(ProductRepository productRepository, CartsRepository carsRepository)
         {
-            productRepository = new ProductRepository();
+            this.productRepository = productRepository;
+            this.carsRepository = carsRepository;
         }
 
         public IActionResult Index()
         {
-            var cart = CartsRepository.TryGetByUserId(Constants.UserId);
+            var cart = carsRepository.TryGetByUserId(Constants.UserId);
             return View(cart);
         }
 
         public IActionResult Add(int productId)
         {
             var product = productRepository.TryGetByid(productId);
-            CartsRepository.Add(product, Constants.UserId);
+            carsRepository.Add(product, Constants.UserId);
             return RedirectToAction("Index"); 
         }
     }
