@@ -18,11 +18,15 @@ namespace WebOnlineShop.Controllers
             _logger = logger;
         }
 
-        public IActionResult Index()
+        public string Index(double a, double b)
         {
-            
-            return View();
+            return $"{a}+{b} = {a + b}"; 
         }
+
+        //public IActionResult Index()
+        //{
+        //    return View();
+        //}
 
         public IActionResult Privacy()
         {
@@ -35,4 +39,4 @@ namespace WebOnlineShop.Controllers
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
     }
-} 
+}
