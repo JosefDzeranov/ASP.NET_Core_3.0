@@ -124,6 +124,7 @@ namespace OnlineShop.DB.Migrations
                 name: "IX_Products_FavoriteId",
                 table: "Products",
                 column: "FavoriteId");
+     
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
