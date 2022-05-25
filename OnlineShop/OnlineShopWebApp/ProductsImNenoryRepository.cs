@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 namespace OnlineShopWebApp
 {
-    public class ProductRepository
+    public class ProductsInMemoryRepository : IProductsRepository
     {
         private List<Product> products = new List<Product>()
         {
@@ -18,7 +18,7 @@ namespace OnlineShopWebApp
                 "Sony PS 5", 900000, "Новинка Sony", "/images/PS5.png"
                 ),
         };
-               
+
         public List<Product> GetAllProducts()
         {
             return products;
@@ -28,7 +28,7 @@ namespace OnlineShopWebApp
         {
             foreach (var product in products)
             {
-                if(product.Id == id)
+                if (product.Id == id)
                     return product;
             }
             return null;

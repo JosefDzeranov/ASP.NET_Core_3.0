@@ -5,7 +5,7 @@ using System.Linq;
 
 namespace OnlineShopWebApp
 {
-    public class CartsRepository
+    public class CartsInMemoryRepository : ICartsRepository
     {
         private List<Cart> carts = new List<Cart>();
 
@@ -14,7 +14,7 @@ namespace OnlineShopWebApp
             return carts.FirstOrDefault(x => x.UserId == userId);
         }
 
-        internal void Add(Product product, string userId)
+        public void Add(Product product, string userId)
         {
             var existingCart = TryGetByUserId(userId);
             if (existingCart == null)
@@ -48,7 +48,7 @@ namespace OnlineShopWebApp
                     existingCart.Items.Add(new CartItem
                     {
                         Id = Guid.NewGuid(),
-                        Amout= 1,
+                        Amout = 1,
                         Product = product,
                     });
                 }
