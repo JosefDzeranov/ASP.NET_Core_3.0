@@ -4,13 +4,19 @@ namespace OnlineShopWebApp.Models
 {
     public class Registration
     {
+        [Required(ErrorMessage = "Не указано имя")]
+        [StringLength(25, MinimumLength = 3, ErrorMessage = "Введите коректные данные")]
         public string InputName { get; set; }
+        [StringLength(25, MinimumLength = 3, ErrorMessage = "Введите коректные данные")]
+        [Required(ErrorMessage = "Не указана фамилия")]
         public string InputLastName { get; set; }
+        [Required(ErrorMessage = "Не указана почта")]
+        [EmailAddress(ErrorMessage = "Введите коректный адрес электронной почты")]
         public string InputEmail1 { get; set; }
+        [Required(ErrorMessage = "Не указан пароль")]
         public string InputPassword { get; set; }
-        //[Required]
-        //[Compare("InputPassword", ErrorMessage = "Пароль не совпадают!")]
-        //[DataType(DataType.Password)]
+        [Required(ErrorMessage = "Укажите повторно пароль")]
+        [Compare("InputPassword", ErrorMessage = "Пароли не совпадают")]
         public bool InputConfirmPassword { get; set; }
         public bool exampleCheck1 { get; set; }
     }

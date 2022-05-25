@@ -1,28 +1,39 @@
-﻿<form method="post">
+﻿@model Registration
+
+<form method="post">
+
+    <div class="text-danger font-weight-bold" asp-validation-summary="All"></div>
+
     <div class="mb-3">
-        <label for="exampleInputName" class="form-label">Имя</label>
-        <input type="text" class="form-control" name="InputName" aria-describedby="nameHelp">
+        <label asp-for="InputName" class="form-label">Имя</label>
+        <input type="text" class="form-control" asp-for="InputName" aria-describedby="nameHelp">
+        <span asp-validation-for="InputName"></span>
     </div>
     <div class="mb-3">
-        <label for="exampleInputLastName" class="form-label">Фамилия</label>
-        <input type="text" class="form-control" name="InputLastName" aria-describedby="LastNameHelp">
+        <label asp-for="InputLastName" class="form-label">Фамилия</label>
+        <input type="text" class="form-control" asp-for="InputLastName" aria-describedby="LastNameHelp">
+        <span asp-validation-for="InputLastName"></span>
     </div>
     <div class="mb-3">
-        <label for="exampleInputEmail1" class="form-label">Электронный адрес</label>
-        <input type="email" class="form-control" name="InputEmail1" aria-describedby="emailHelp">
+        <label asp-for="InputEmail1" class="form-label">Электронный адрес</label>
+        <input type="email" class="form-control" asp-for="InputEmail1" aria-describedby="emailHelp">
+        <span asp-validation-for="InputEmail1"></span>
     </div>
     <div class="mb-3">
-        <label for="exampleInputPassword1" class="form-label">Пароль</label>
-        <input type="password" class="form-control" name="InputPassword">
+        <label asp-for="InputPassword" class="form-label">Пароль</label>
+        <input type="password" class="form-control" asp-for="InputPassword">
+        <span asp-validation-for="InputPassword"></span>
     </div>
     <div class="mb-3">
-        <label for="exampleInputConfirmPassword1" class="form-label">Повторите пароль</label>
-        <input type="password" class="form-control" name="InputConfirmPassword">
+        <label asp-for="InputConfirmPassword" class="form-label">Повторите пароль</label>
+        <input type="password" class="form-control" asp-for="InputConfirmPassword">
+        <span asp-validation-for="InputConfirmPassword"></span>
     </div>
     <div class="mb-3 form-check">
         <input type="checkbox" class="form-check-input" name="exampleCheck1">
         <label class="form-check-label" for="exampleCheck1">Запомнить данные входа</label>
     </div>
+    
     <button type="submit" class="btn btn-outline-primary" asp-controller="Account" asp-action="Login">Уже есть аккаунт?</button>
     <button type="submit" class="btn btn-primary">Создать аккаунт</button>
 </form>

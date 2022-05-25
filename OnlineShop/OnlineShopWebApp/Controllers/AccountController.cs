@@ -13,7 +13,9 @@ namespace OnlineShopWebApp.Controllers
         [HttpPost]
         public IActionResult Login(Login login)
         {
-            return RedirectToAction("Index", "Home");
+            if (ModelState.IsValid)
+                return RedirectToAction("Index", "Home");
+            return RedirectToAction("login");
         }
 
         public IActionResult Registration()
@@ -24,7 +26,9 @@ namespace OnlineShopWebApp.Controllers
         [HttpPost]
         public IActionResult Registration(Registration registration)
         {
-            return RedirectToAction("Index", "Home");
+            if(ModelState.IsValid)
+                return RedirectToAction("Index", "Home");
+            return RedirectToAction("registration");
         }
     }
 }
