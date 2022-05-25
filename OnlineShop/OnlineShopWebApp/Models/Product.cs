@@ -16,8 +16,7 @@ namespace OnlineShopWebApp.Models
         public string GpuGhz { get; }
         public string TurboGpuGhz { get; }
 
-        public Product(string name, decimal price, string description, string gpu, string memorytype, string memorycount,
-            string gpughz, string turgpughz, string imagespath = null)
+        public Product(string name, decimal price, string description, string imagespath = null)
         {
             Id = uniId;
             Name = name;

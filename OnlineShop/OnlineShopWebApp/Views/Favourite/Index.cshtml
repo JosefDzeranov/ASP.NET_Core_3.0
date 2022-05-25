@@ -1,32 +1,23 @@
 ﻿@model List<Product>
 
 <div class="row">
-    <div class="col">
-        <table class="table table-striped">
-            <thead>
-                <tr>
-                    <th>Название</th>
-                    <th>Цена</th>
-                    <th>Количество</th>
-                    <th>Стоимость</th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach (var product in Model)
-                {
-                    <tr>
-                        <td>@product.Id</td>
-                        <td>@product.Name</td>
-                        <td>@product.Description</td>
-                        <td>@product.Price</td>
-                    </tr>
-                }
-            </tbody>
-        </table>
-        <div class="text-left">
-            <a class="btn btn-outline-success" href="/home/index" role="button">Продолжить покупки</a>
-            <a class="btn btn-success" href="/cart/add?productId=Id" role="button">Добавить в корзину</a>
-            <a class="btn btn-danger" href="/cart/clear" role="button">Очистить избранное</a>
+    @foreach (var product in Model)
+    {
+        <div class="col-3 card shadow">
+            <img class="card-img-top" src="@product.ImagesPath" alr="Image Picture" />
+
+            <div class="card-body">
+                <a style="color:black" href="/product/index/@product.Id">
+                    <h5>@product.Name</h5>
+                </a>
+                <h5>@product.Price РУБ</h5>
+                <a class="btn btn-primary btn-sm text-nowrap" href="/cart/add?productId=@product.Id"><h5>Добавить в корзину</h5></a>
+            </div>
         </div>
-    </div>
+    }
+
+</div>
+
+<div class="text-left">
+    <a class="btn btn-danger text-left" href="/favourite/clear"><h5>Очистить все</h5></a>
 </div>

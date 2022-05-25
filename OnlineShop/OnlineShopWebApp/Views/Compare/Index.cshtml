@@ -1,0 +1,35 @@
+﻿@model Compare
+
+@{
+    ViewData["Title"] = "Compare Page";
+}
+
+<div class="container">
+    <div class="row">
+        <div class="col-12 mb-4">
+            <h2>Страница сравнения товара</h2>
+        </div>
+        @foreach (var item in Model.Products)
+        {
+            <div class="col-4 mb-4">
+                <img class="img-thumbnail mb-2" src="@item.ImagesPath" alt="@item.Name">
+                <a style="color: darkblue" href="/product/index/@item.Id"><h5>@item.Name</h5></a>
+                <h6>$@item.Price</h6>
+                <p>@item.Description</p>
+                <div class="row justify-content-between">
+                    <div class="col-auto text-left">
+                        <a class="btn btn-outline-primary btn-sm text-nowrap" href="/cart/add?productId=@item.Id" role="button">Добавить в корзину</a>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+    <div class="row mt-4">
+        <div class="col-6 text-right">
+            <a class="btn btn-danger btn-sm text-nowrap" href="/compare/clear" role="button">Очистить все</a>
+        </div>
+        <div class="col-6 text-left">
+            <a class="btn btn-primary btn-sm text-nowrap" href="/home/index" role="button">Продолжить покупки</a>
+        </div>
+    </div>
+</div>
