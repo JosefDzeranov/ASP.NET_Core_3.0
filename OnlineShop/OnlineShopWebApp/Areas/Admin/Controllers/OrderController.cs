@@ -34,10 +34,10 @@ namespace OnlineShopWebApp.Areas.Admin.Controllers
         }
 
         [HttpPost]
-        public IActionResult UpdateStatus(Guid id, OrderStatusViewModel statusViewModel)
+        public IActionResult UpdateStatus(Guid id, OrderStatusViewModel status)
         {
-            var status = (OrderStatus)statusViewModel;
-            _orderStorage.UpdateStatus(id, status);
+            var newStatus = (OrderStatus)status;
+            _orderStorage.UpdateStatus(id, newStatus);
             return RedirectToAction("Index");
         }
     }
