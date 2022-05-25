@@ -34,6 +34,7 @@ namespace OnlineShopWebApp.Helpers
         {
             var product = new Product
             {
+                Id = productViewModel.Id,
                 ImagePath = productViewModel.ImagePath,
                 Name = productViewModel.Name,
                 Cost = productViewModel.Cost,

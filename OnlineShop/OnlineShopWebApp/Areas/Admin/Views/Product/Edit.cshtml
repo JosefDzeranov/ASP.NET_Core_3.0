@@ -13,7 +13,7 @@
         <div class="col-10 mx-auto">
             <h2>Edit product data</h2>
             <div class="validation" asp-validation-summary="All"></div>
-            <form asp-controller="Product" asp-action="Save" asp-area="Admin">
+            <form asp-controller="Product" asp-action="Edit" asp-area="Admin">
                 <div class="validation" asp-validation-summary="All"></div>
                 <div class="mb-3">
                     <input class="form-control" name="id" hidden value="@Model.Id">
@@ -37,7 +37,7 @@
                     <textarea class="form-control" rows="4" asp-for="Description">@Model.Description</textarea>
                 </div>
                 <div class="mb-3">
-                    <button type="submit" class="btn btn-outline-dark btn-sm" asp-area="Admin" asp-controller="Product" asp-action="Save">Save</button>
+                    <button type="submit" class="btn btn-outline-dark btn-sm" asp-area="Admin" asp-controller="Product" asp-action="Edit">Save</button>
                 </div>
             </form>
         </div>
