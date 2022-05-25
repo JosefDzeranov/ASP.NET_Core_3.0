@@ -14,6 +14,8 @@ a {
     color: #B2AB81;
 }
 
+
+
 @font-face {
     font-family: "gost_2.304";
     src: url('gost_2.304.ttf');
@@ -86,6 +88,15 @@ body {
   width: 100%;
   white-space: nowrap;
   line-height: 60px; /* Vertically center the text there */
+}
+
+a1 {
+    color: #B2AB81;
+}
+a1:hover {
+    color: #B2AB81;
+    
+    text-decoration: underline;
 }
 
 
