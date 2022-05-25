@@ -4,7 +4,7 @@
     @await Html.PartialAsync("AdminLeftPanel")
 
     <div class="col-9">
-        <h3>Список заказов</h3>
+        <h3>Список продуктов</h3>
 
         <div class="row">
             <div class="col">
@@ -30,7 +30,7 @@
                                     </a>
                                 </td>
                                 <td>@product.Price</td>
-                                <td><a href="/admin/edit?productId=@product.Id">Редактировать</a></td>
+                                <td><a href="/admin/editproduct?productId=@product.Id">Редактировать</a></td>
                                 <td><a href="/admin/clear?productId=@product.Id">Удалить</a></td>
                             </tr>
                         }
