@@ -4,6 +4,14 @@
 }
 <script src="https://kit.fontawesome.com/54e7759827.js" crossorigin="anonymous"></script>
 
+<form method="post">
+    <div class="col">
+      <input type="text" class="form-control" name="name" placeholder="Поиск товара">
+      <br />
+      <button class="btn-primary" type="submit" asp-controller="Home" asp-action="ProductSearch">Искать</button>  
+    </div>
+</form>
+
 <section class="main-content">
     <div class="container">
         <div class="row">
