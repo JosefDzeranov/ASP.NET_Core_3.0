@@ -1,12 +1,14 @@
 [
   {
-    "Login": "Alex",
-    "Fistname": null,
-    "Secondname": null,
-    "Surname": null,
-    "Age": 0,
-    "Email": null,
-    "Password": "11111111",
-    "RoleId": "674b2f41-3173-4a0c-8f7e-4043876b8ee3"
+    "Login": "Gregory",
+    "Firstname": "Григорий",
+    "Secondname": "Николаевич",
+    "Surname": "Молостов",
+    "Phone": "\u002B79530711665",
+    "Age": 16,
+    "Email": "archi.dnk@gmail.com",
+    "Password": "22222222",
+    "RoleName": "Администратор",
+    "RoleId": "65e9707a-0091-43c9-ad0f-bf340901c29e"
   }
 ]

@@ -5,7 +5,7 @@
 
 <form method="post">
     <div class="text-danger font-weight-bold" asp-validation-summary="All"></div>
-    <input type="hidden" name="roleId" value="@Model.Id"/>
+    <input type="hidden" name="Id" value="@Model.Id"/>
     <div class="container">
         <div class="row">
             @await Html.PartialAsync("MenuAdminPanel")
@@ -51,14 +51,14 @@
                     <div class="card">
                         <div class="form-group p-3">
                             <label class="text-center">Ширина: @Model.Width</label>
-                            <input type="text" class="form-control" id="Input5" placeholder="Ширина" required="" name="Width" asp-for="Width"/>
+                            <input type="text" class="form-control" id="Input6" placeholder="Ширина" required="" name="Width" asp-for="Width"/>
                             <span asp-validation-for="Width"></span>
                         </div>
                     </div>
                     <div class="card">
                         <div class="form-group p-3">
                             <label class="text-center">Площадь: @Model.Square</label>
-                            <input type="text" class="form-control" id="Input5" placeholder="Площадь" required="" name="Square" asp-for="Square"/>
+                            <input type="text" class="form-control" id="Input7" placeholder="Площадь" required="" name="Square" asp-for="Square"/>
                             <span asp-validation-for="Square"></span>
                         </div>
                     </div>

@@ -86,12 +86,10 @@ namespace OnlineShopWebApp
         public void AssignRole(string userLogin, Guid roleId)
         {
             var user = FindByLogin(userLogin);
-            user.RoleId = roleId;
+            user.SetRole(roleId);
             JsonStorage.Write(users);
             if (roleManager.Find(roleId).Rights.BeBuyer) buyerManager.AddBuyer(user);
-            
         }
-
 
         public List<User> GetAll()
         {
@@ -119,5 +117,33 @@ namespace OnlineShopWebApp
             users.RemoveAll(x => x.Login == userLogin);
             JsonStorage.Write(users);
         }
+
+        public void ChangePassword(string login, string password)
+        {
+            var user = FindByLogin(login);
+            user.Password = password;
+            JsonStorage.Write(users);
+        }
+
+        public void ChangeInfo(UserInfo userInfo)
+        {
+            var user = FindByLogin(userInfo.Login);
+            user.Firstname ??= userInfo.Firstname ;
+            user.Secondname ??= userInfo.Secondname;
+            user.Surname ??= userInfo.Surname;
+            user.Surname ??= userInfo.Surname;
+            if(userInfo.Age!=0) user.Age = userInfo.Age;
+            user.Phone ??= userInfo.Phone;
+            user.Email ??= userInfo.Email;
+            JsonStorage.Write(users);
+        }
+
+        public void Delite(string login)
+        {
+            var user = FindByLogin(login);
+            users.Remove(user);
+            JsonStorage.Write(users);
+        }
+
     }
 }

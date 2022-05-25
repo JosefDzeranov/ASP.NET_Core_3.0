@@ -1,0 +1,61 @@
+﻿@model ChangeRoleUser
+@{
+    ViewData["Title"] = "Замена роли пользователя " + @Model.Login;
+}
+
+<div class="container">
+    <div class="row">
+        @await Html.PartialAsync("MenuAdminPanel")
+        <div class="col">
+            <div class="container">
+                <div class="col-10 container">
+                    
+                        <div class="container">
+                            
+                            <h3 class="display-5 Title_sile text-center">Редактирование данных пользователя: @Model.Login</h3>
+                            <br/>
+                            <div class="row">
+                                <div class="col-3 align-top">
+                                    Текущая роль:
+                                </div>
+                                <div class="col-2 align-top">
+                                    @Model.RoleName
+                                </div>
+                            </div>
+                            <br/>
+
+                            <form class="form-inline" method="post" asp-area="Admin" asp-controller="Users" asp-action="EditRights">
+                                <input type="hidden"  name="Login" asp-for="Login" value="@Model.Login"/>
+                                <div class="col-9">
+                                    <div class="row">
+                                        <select class="custom-select" name="Id" asp-for="Id">
+                                            <option selected></option>
+                                            @for (int i = 0; i < Model.OtherRoles.Count; i++)
+                                            {
+                                                <option value="@Model.OtherRoles[i].Id">@Model.OtherRoles[i].Name</option>
+                                            }
+                                        </select>
+                                    </div>
+                                    <p></p>
+                                    <div class="row">
+                                        <div>
+                                            <button type="submit"
+                                                    class="btn btn-outline-dark text-nowrap"
+                                                    asp-area="Admin"
+                                                    asp-controller="Users"
+                                                    asp-action="EditRights"
+                                                    role="button">Сменить</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+    

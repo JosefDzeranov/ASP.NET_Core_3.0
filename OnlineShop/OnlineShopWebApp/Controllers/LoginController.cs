@@ -39,8 +39,12 @@ namespace OnlineShopWebApp.Controllers
         }
 
         [HttpPost]
-        public IActionResult NewUser(UserRegistration userInput)
+        public IActionResult Register(UserRegistration userInput)
         {
+            if (userInput.Login == userInput.Password)
+            {
+                ModelState.AddModelError("", "Логин и пароль не должны совпадать!");
+            }
             if (userManager.FindByLogin(userInput.Login) != null)
             {
                 ModelState.AddModelError("", "Такой аккаунт уже существует");
@@ -54,7 +58,7 @@ namespace OnlineShopWebApp.Controllers
             return View();
         }
 
-        public IActionResult NewUser()
+        public IActionResult Register()
         {
             return View();
         }

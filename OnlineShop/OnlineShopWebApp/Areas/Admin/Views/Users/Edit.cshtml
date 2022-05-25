@@ -1,0 +1,93 @@
+﻿@model UserInfo
+@{
+    ViewData["Title"] = "Пользователь " + @Model.Login;
+}
+
+<div class="container">
+    <div class="row">
+        @await Html.PartialAsync("MenuAdminPanel")
+        <div class="col">
+            <div class="container">
+                <div class="col-10 container">
+                    <form method="post"  asp-area="Admin" asp-controller="Users" asp-action="Edit">
+                        <div class="container">
+                            <input type="hidden"  name="Login" asp-for="Login" value="@Model.Login"/>
+                            <h3 class="display-5 Title_sile text-center">Редактирование данных пользователя: @Model.Login</h3>
+                            <br/>
+                            <div class="row">
+                                <div class="col-2 align-top">
+                                    Имя:
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <input type="text" class="form-control" placeholder="@Model.Firstname" name="Firstname" asp-for="Firstname"/>
+                                <span asp-validation-for="Firstname"></span>
+                            </div>
+                            <br/>
+                            <div class="row">
+                                <div class="col-2 align-top">
+                                    Фамилия:
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <input type="text" class="form-control" placeholder=" @Model.Surname" name="surname" asp-for="Surname"/>
+                                <span asp-validation-for="Surname"></span>
+                            </div>
+                            <br/>
+
+                            <div class="row">
+                                <div class="col-2 align-top">
+                                    Отчество:
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <input type="text" class="form-control" placeholder="@Model.Secondname" name="Secondname" asp-for="Secondname"/>
+                                <span asp-validation-for="Secondname"></span>
+                            </div>
+                            <br/>
+
+                            <div class="row">
+                                <div class="col-2 float-lg-right">
+                                    Возраст:
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <input type="text" class="form-control" placeholder="@Model.Age" name="Age" asp-for="Age"/>
+                                <span asp-validation-for="Age"></span>
+                            </div>
+                            <br/>
+
+                            <div class="row">
+                                <div class="col-2 align-top">
+                                    Email:
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <input type="text" class="form-control" placeholder="@Model.Email" name="Email" asp-for="Email"/>
+                                <span asp-validation-for="Email"></span>
+                            </div>
+                            <br/>
+
+                            <div class="row">
+                                <div class="col-2 align-top">
+                                    Телефон:
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <input type="text" class="form-control" placeholder="@Model.Phone" name="Phone" asp-for="Phone"/>
+                                <span asp-validation-for="Phone"></span>
+                            </div>
+                            <br/>
+                            <div class="col-md-3 mx-auto">
+                                <button type="submit" class="btn btn-outline-dark text-center" asp-area="Admin" asp-controller="Users" asp-action="Edit">Сохранить</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+    

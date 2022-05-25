@@ -8,7 +8,7 @@ namespace OnlineShopWebApp.Models.Users.Buyer
         public Guid Id { get; set; }
         public List<CartItem> CartItem { get; set; }
         public InfoBuying InfoBuying { get; set; }
-        public DateTime dateTime { get; set; }
+        public DateTime DateTime { get; set; }
         public string Status { get; set; }
         public string Login { get; set; }
         public decimal FullCost { get; set; }
@@ -23,7 +23,7 @@ namespace OnlineShopWebApp.Models.Users.Buyer
             Id = Guid.NewGuid();
             CartItem = new List<CartItem>(cartItem);
             CalculateFullCostOrder();
-            dateTime = DateTime.UtcNow;
+            DateTime = DateTime.UtcNow;
             Status = MyConstant.RosterStatus[0];
             Login = login;
             InfoBuying = infoBuying;
@@ -36,12 +36,12 @@ namespace OnlineShopWebApp.Models.Users.Buyer
 
         public string DataRegistration()
         {
-            string data = string.Format("{0:00}.{1:00}.{2:0000}", dateTime.Day, dateTime.Month, dateTime.Year);
+            string data = string.Format("{0:00}.{1:00}.{2:0000}", DateTime.Day, DateTime.Month, DateTime.Year);
             return data;
         }
         public string TimeRegistration()
         { //По Гринвичу
-            string data = string.Format("{0:00}:{1:00}:{2:00}", dateTime.Hour, dateTime.Minute, dateTime.Second);
+            string data = string.Format("{0:00}:{1:00}:{2:00}", DateTime.Hour, DateTime.Minute, DateTime.Second);
             return data;
         }
         public void CalculateFullCostOrder()

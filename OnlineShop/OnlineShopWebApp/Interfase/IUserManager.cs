@@ -19,5 +19,9 @@ namespace OnlineShopWebApp.Interfase
 
         void Remove(string userLogin);
         void AssignRole(string userLogin, Guid roleId);
+
+        void ChangePassword(string login, string password);
+        void ChangeInfo(UserInfo userInfo);
+        void Delite(string login);
     }
 }

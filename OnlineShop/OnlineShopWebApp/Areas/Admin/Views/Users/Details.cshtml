@@ -1,0 +1,110 @@
+﻿@model User
+@{
+    ViewData["Title"] = "Пользователь " + @Model.Login;
+}
+
+<div class="container">
+    <div class="row">
+        @await Html.PartialAsync("MenuAdminPanel")
+        <div class="col">
+            <div class="container">
+                <div class="col-10 container">
+                    <div class="container">
+                        <h3 class="display-5 Title_sile text-center">Пользователь: @Model.Login</h3>
+                        <div class="row">
+                            <div class="col-2 align-top">
+                                Логин:
+                            </div>
+                            <div class="col align-top">
+                                @Model.Login
+                            </div>
+                        </div>
+                        <br/>
+
+                        <div class="row">
+                            <div class="col-2 align-top">
+                                Фамилия:
+                            </div>
+                            <div class="col align-top">
+                                @Model.Surname
+                            </div>
+                        </div>
+                        <br/>
+
+                        <div class="row">
+                            <div class="col-2 align-top">
+                                Отчество:
+                            </div>
+                            <div class="col align-top">
+                                @Model.Secondname
+                            </div>
+                        </div>
+                        <br/>
+
+                        <div class="row">
+                            <div class="col-2 align-top">
+                                Возраст:
+                            </div>
+                            <div class="col align-top">
+                                @Model.Age 
+                            </div>
+                        </div>
+                        <br/>
+                        <div class="row">
+                            <div class="col-2 align-top">
+                                Email:
+                            </div>
+                            <div class="col align-top">
+                                @Model.Email
+                            </div>
+                        </div>
+                        <br/>
+
+                        <div class="row">
+                            <div class="col-2 align-top">
+                                Телефон:
+                            </div>
+                            <div class="col align-top">
+                                @Model.Phone
+                            </div>
+                        </div>
+                        <br/>
+
+                        <div class="row">
+                            <div class="col-2 align-top">
+                                Роль:
+                            </div>
+                            <div class="col align-top">
+                                @Model.RoleName
+                            </div>
+                        </div>
+                        <br/>
+                        <div class="row">
+                            <div class="col-2 align-top">
+                                Пароль:
+                            </div>
+                            <div class="col align-top">
+                                @Model.Password
+                            </div>
+                        </div>
+                        <br/>
+                        <div class="row">
+                            <button class="btn btn-outline-dark dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Действия
+                            </button>
+                            <div class="dropdown-menu" aria-labelledy="dropdownMenuButton">
+                                <a class="dropdown-item" asp-area="Admin" asp-controller="Users" asp-action="ChangePassword" asp-route-login="@Model.Login">Смена пароля</a>
+                                <a class="dropdown-item" asp-area="Admin" asp-controller="Users" asp-action="Edit" asp-route-login="@Model.Login">Редактирование данных</a>
+                                <a class="dropdown-item" asp-area="Admin" asp-controller="Users" asp-action="EditRights" asp-route-login="@Model.Login">Права доступа</a>
+                                <a class="dropdown-item" asp-area="Admin" asp-controller="Users" asp-action="Delite" asp-route-login="@Model.Login">Удалить пользователя</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+    
