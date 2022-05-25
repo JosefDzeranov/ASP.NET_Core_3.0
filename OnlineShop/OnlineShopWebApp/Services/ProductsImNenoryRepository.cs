@@ -1,6 +1,7 @@
 ﻿using OnlineShopWebApp.Models;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace OnlineShopWebApp
 {
@@ -35,6 +36,25 @@ namespace OnlineShopWebApp
                     return product;
             }
             return null;
+        }
+
+        public void Add(Product product)
+        {
+            products.Add(product);
+        }
+
+        public void Edit(Product newProduct)
+        {
+            var product = products.FirstOrDefault(x => x.Id == newProduct.Id);
+            product.Name = newProduct.Name;
+            product.Price = newProduct.Price;
+            product.Description = newProduct.Description;
+            product.ImagesPath = newProduct.ImagesPath;
+        }
+        public void Clear(int id)
+        {
+            var product = products.FirstOrDefault(x => x.Id == id);
+            products.Remove(product);
         }
     }
 }

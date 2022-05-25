@@ -1,0 +1,18 @@
+﻿<form method="post">
+    <div class="row">
+        @await Html.PartialAsync("AdminLeftPanel")
+        <div class="col text-center">
+            <h3>Добавление нового продукта</h3>
+            <label>Название</label>
+            <input type="text" name="name" />
+            <br />
+            <label>Цена</label>
+            <input type="text" name="price" />
+            <br />
+            <label>Описание</label>
+            <input type="text" name="description" />
+            <br />
+            <button class="btn btn-dark" type="submit" asp-controller="Admin" asp-action="Orders">Добавить</button>
+        </div>
+    </div>
+</form>
