@@ -117,5 +117,11 @@ namespace OnlineShopWebApp
             order.Status = newOrder.Status;
             JsonStorage.Write(buyers);
         }
+
+        public void Remove(string login)
+        {
+            buyers?.RemoveAll(x => x.Login == login);
+            JsonStorage.Write(buyers);
+        }
     }
 }

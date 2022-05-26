@@ -55,15 +55,40 @@
                                         </div>
                                     </td>
                                     <td class="small">
+
                                         <div class="d-grid gap-2">
-                                            <a class="text-nowrap mx-1 my-1"
-                                               asp-area="Admin" asp-controller="Products" 
-                                               asp-action="Delete"
-                                               asp-route-productId="@Model[i].Id"
-                                               role="button">
-                                                Удалить
+                                            <a class="text-nowrap mx-1 my-1 "  data-toggle="modal" data-target="#removeModal_@i" href="removeModal_@i">
+                                                <a1>Удалить</a1>
                                             </a>
                                         </div>
+
+                                        <!-- Modal -->
+                                        <div class="modal fade" id="removeModal_@i" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle_@i" aria-hidden="true">
+                                            <div class="modal-dialog modal-dialog-centered" role="document">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <h5 class="modal-title" id="exampleModalCenterTitle_@i">Удаление продукта</h5>
+                                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                            <span aria-hidden="true">&times;</span>
+                                                        </button>
+                                                    </div>
+                                                        <div class="modal-body">
+                                                            Вы действительно хотите удалить данный проект?
+                                                        </div>
+                                                    <div class="modal-footer">
+                                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Нет</button>
+                                                        <a type="button" class="btn btn-outline-dark"
+                                                           asp-area="Admin" asp-controller="Products"
+                                                           asp-action="Delete"
+                                                           asp-route-productId="@Model[i].Id"
+                                                           role="button">
+                                                            Да, удалить
+                                                        </a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
                                     </td>
                                 </tr>
 

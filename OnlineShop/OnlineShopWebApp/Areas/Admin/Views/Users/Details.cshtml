@@ -96,8 +96,37 @@
                                 <a class="dropdown-item" asp-area="Admin" asp-controller="Users" asp-action="ChangePassword" asp-route-login="@Model.Login">Смена пароля</a>
                                 <a class="dropdown-item" asp-area="Admin" asp-controller="Users" asp-action="Edit" asp-route-login="@Model.Login">Редактирование данных</a>
                                 <a class="dropdown-item" asp-area="Admin" asp-controller="Users" asp-action="EditRights" asp-route-login="@Model.Login">Права доступа</a>
-                                <a class="dropdown-item" asp-area="Admin" asp-controller="Users" asp-action="Delite" asp-route-login="@Model.Login">Удалить пользователя</a>
+                                <a class="dropdown-item" data-toggle="modal" data-target="#exampleModalCenter" href="#">Удалить пользователя</a>
                             </div>
+
+                            <!-- Modal -->
+                            <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                                <div class="modal-dialog modal-dialog-centered" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="exampleModalLongTitle">Удаление пользователя</h5>
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                            </button>
+                                        </div>
+                                        <div class="modal-body">
+                                            Вы действительно хотите удалить данного пользователя?
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Нет</button>
+                                            <a type="button" class="btn btn-outline-dark"
+                                               asp-area="Admin" asp-controller="Users"
+                                               asp-action="Remove"
+                                               asp-route-login="@Model.Login"
+                                               role="button">
+                                                Да, удалить
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- End Modal -->
+
                         </div>
                     </div>
                 </div>
