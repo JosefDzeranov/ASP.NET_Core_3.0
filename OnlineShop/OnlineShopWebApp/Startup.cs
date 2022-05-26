@@ -9,6 +9,9 @@ using OnlineShopWebApp.Filters;
 using OnlineShopWebApp.Interfase;
 using Serilog;
 using System.Globalization;
+using Microsoft.EntityFrameworkCore;
+using OnlineShop.Db;
+
 
 namespace OnlineShopWebApp
 {
@@ -22,6 +25,11 @@ namespace OnlineShopWebApp
         public IConfiguration Configuration { get; }
         public void ConfigureServices(IServiceCollection services)
         {
+            //получаем строку подключения из файла конфигурации
+            string connection = Configuration.GetConnectionString("online_shop_molostov");
+            //добавляем контекст DatabaseContext в качестве сервиса в приложение
+            services.AddDbContext<DatabaseContext>(options =>
+                options.UseSqlServer(connection));
             services.AddSingleton<IBuyerManager, BuyerManager>();
             services.AddSingleton<IProductManager, ProductManager>();
             services.AddSingleton<IRoleManager, RoleManager>();
