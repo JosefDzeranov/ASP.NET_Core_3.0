@@ -174,10 +174,7 @@ namespace OnlineShopWebApp.Models
 
             try
             {
-                productsJson = DeserializeJsonProducts();
-
-                List<Product> newProductsJson = new List<Product>();
-                newProductsJson.Add(product);
+                productsJson.Add(product);
 
                 if (productsJson.Count != 0)
                 {

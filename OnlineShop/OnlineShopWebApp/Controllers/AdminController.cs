@@ -42,7 +42,11 @@ namespace OnlineShopWebApp.Controllers
         [HttpPost]
         public IActionResult SaveEditedProduct(Product product)
         {
-            productsStorage.SaveEditedProduct(product);
+            if (ModelState.IsValid)
+            {
+                productsStorage.SaveEditedProduct(product);
+            }
+
             return View();
         }
 
@@ -61,8 +65,18 @@ namespace OnlineShopWebApp.Controllers
         [HttpPost]
         public IActionResult Add(Product product)
         {
-            productsStorage.Add(product);
-            return RedirectToAction("Products");
+            if (ModelState.IsValid)
+            {
+                productsStorage.Add(product);
+                return RedirectToAction("Products");
+            }
+            else
+                return View();
+        }
+
+        public IActionResult AdminPanel()
+        {
+            return View();
         }
     }
 }
