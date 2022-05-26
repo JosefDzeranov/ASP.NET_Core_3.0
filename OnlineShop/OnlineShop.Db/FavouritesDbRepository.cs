@@ -30,17 +30,7 @@ namespace OnlineShop.Db
         public void Add(string userId, Guid productId)
         {
             var existingFavourite = GetFavourite(userId);
-            var favouriteId = existingFavourite.FavouriteId;
-            //if (existingFavourite == null)
-            //{
-            //    Favourite newFavourite = new Favourite { Id = Guid.NewGuid(), UserId = userId };
-            //    newFavourite.Products.Add(product);
-            //    databaseContext.Favourites.Add(newFavourite);
-            //}
-            //else
-            //{
-            //    existingFavourite.Add(product);                
-            //}
+            var favouriteId = existingFavourite.FavouriteId;            
             databaseContext.FavouriteProducts.Add(new FavouriteProducts() { FavouriteId = favouriteId, ProductId = productId });
             databaseContext.SaveChanges();
         }
