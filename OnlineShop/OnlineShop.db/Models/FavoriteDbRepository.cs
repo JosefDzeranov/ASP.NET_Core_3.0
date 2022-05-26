@@ -39,8 +39,8 @@ namespace OnlineShop.db
         public void Remove(string userId, int productId)
         {
             var fav = GetForUser(userId);
-            var product = fav?.Products.First(x=>x.Id == productId);
-            fav?.Products.Remove(product);
+            var product = fav.Products.First(x=>x.Id == productId);
+            fav.Products.Remove(product);
             databaseContext.SaveChanges();
         }
 
