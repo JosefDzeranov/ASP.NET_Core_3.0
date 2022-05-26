@@ -6,9 +6,10 @@ namespace OnlineShop.Db.Models
 {
     public class Favourite
     {
-        public Guid Id { get; set; }
+        public Guid FavouriteId { get; set; }
         public string UserId { get; set; }
-        public List<Product> Products { get; set; }
+        public ICollection<Product> Products { get; set; }
+        public List<FavouriteProducts> FavouriteProducts { get; set; } = new List<FavouriteProducts>();
 
         public Favourite()
         {

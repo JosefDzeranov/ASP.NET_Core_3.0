@@ -20,13 +20,13 @@ namespace OnlineShopWebApp.Controllers
         }
         public IActionResult Index()
         {
-            return View(favouritesRepository.GetFavourites(Constants.UserId));
+            return View(favouritesRepository.GetAll(Constants.UserId));
         }
 
         public IActionResult Add(Guid productId)
         {
-            var product = productsRepository.TryGetById(productId);
-            favouritesRepository.Add(Constants.UserId, product);
+            //var product = productsRepository.TryGetById(productId);
+            favouritesRepository.Add(Constants.UserId, productId);
             return RedirectToAction("Index");
         }
 

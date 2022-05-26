@@ -11,7 +11,8 @@ namespace OnlineShop.Db.Models
         public string Description { get; set; }
         public int Pages { get; set; }
         public List<CartItem> CartItems { get; set; }
-        public List<Favourite> Favourites { get; set; }
+        public ICollection<Favourite> Favourites { get; set; }
+        public List<FavouriteProducts> FavouriteProducts { get; set; } = new List<FavouriteProducts>();
         public Product()
         {
             CartItems = new List<CartItem>();
