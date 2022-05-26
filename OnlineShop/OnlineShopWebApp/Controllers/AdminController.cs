@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using OnlineShopWebApp.Models;
+using OnlineShopWebApp.Services;
 using System;
 
 namespace OnlineShopWebApp.Controllers
@@ -8,11 +9,13 @@ namespace OnlineShopWebApp.Controllers
     {
         private readonly IProductsRepository productsRepository;
         private readonly IOrderRepository orderRepository;
+        private readonly IRolesRepository rolesRepository;
 
-        public AdminController(IProductsRepository productsRepository, IOrderRepository orderRepository)
+        public AdminController(IProductsRepository productsRepository, IOrderRepository orderRepository, IRolesRepository rolesRepository)
         {
             this.productsRepository = productsRepository;
             this.orderRepository = orderRepository;
+            this.rolesRepository = rolesRepository;
         }
 
         public IActionResult Orders()
@@ -42,7 +45,32 @@ namespace OnlineShopWebApp.Controllers
 
         public IActionResult Roles()
         {
+            var roles = productsRepository.GetAllProducts();
+            return View(roles);
+        }
+
+        public IActionResult RemoveRole(string roleName)
+        {
+            //productsRepository.Remove(roleName);
+            return RedirectToAction("Roles");
+        }
+
+        public IActionResult AddRole()
+        {
             return View();
+        }
+
+        public IActionResult AddRole(Role role)
+        {
+            if (rolesRepository.TryGetByName(role.Name) != null)
+            {
+                ModelState.AddModelError("", "Такая роль уже существует");
+            }
+            if (ModelState.IsValid)
+            {
+                return RedirectToAction("Roles");
+            }
+            return View(role);
         }
 
         public IActionResult Products()
@@ -71,6 +99,7 @@ namespace OnlineShopWebApp.Controllers
         {
             var product = productsRepository.TryGetByid(productId);
             return View(product);
+    
         }
 
         [HttpPost]

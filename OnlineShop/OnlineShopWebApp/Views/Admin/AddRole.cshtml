@@ -1,0 +1,13 @@
+﻿@model Role
+
+<form method="post">
+
+    <div class="text-danger font-weight-bold" asp-validation-summary="All"></div>
+
+    <div class="mb-3">
+        <label asp-for="Name" class="form-label">Название</label>
+        <input class="form-control" asp-for="Name"/>
+        <span asp-validation-for="Name"></span>
+    </div>
+    <button type="submit" class="btn btn-outline-primary" asp-controller="Admin" asp-action="AddRole">Создать</button>
+</form>

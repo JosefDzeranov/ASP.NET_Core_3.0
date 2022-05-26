@@ -10,5 +10,6 @@ namespace OnlineShopWebApp
         void Edit(Product newProduct);
         List<Product> GetAllProducts();
         Product TryGetByid(int id);
+        //void Remove(string roleName);
     }
 }
