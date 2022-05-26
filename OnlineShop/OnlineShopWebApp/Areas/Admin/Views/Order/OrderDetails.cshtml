@@ -32,13 +32,13 @@
                         
                             <div class="dropdown">
                                 <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
-                                    @Model.Status
+                                    @Model.Status.GetEnumDisplayName()
                                 </button>
                                 <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                                    <li><a class="dropdown-item" asp-controller="Order" asp-action="UpdateOrderStatus" asp-route-orderId="@Model.Id" asp-route-status="@OrderStatus.New">@OrderStatus.New</a></li>
-                                    <li><a class="dropdown-item" asp-controller="Order" asp-action="UpdateOrderStatus" asp-route-orderId="@Model.Id" asp-route-status="@OrderStatus.Confirmed">@OrderStatus.Confirmed</a></li>
-                                    <li><a class="dropdown-item" asp-controller="Order" asp-action="UpdateOrderStatus" asp-route-orderId="@Model.Id" asp-route-status="@OrderStatus.Paid">@OrderStatus.Paid</a></li>
-                                    <li><a class="dropdown-item" asp-controller="Order" asp-action="UpdateOrderStatus" asp-route-orderId="@Model.Id" asp-route-status="@OrderStatus.Delivered">@OrderStatus.Delivered</a></li>
+                                    <li><a class="dropdown-item" asp-controller="Order" asp-action="UpdateOrderStatus" asp-route-orderId="@Model.Id" asp-route-status="@OrderStatus.New">@OrderStatus.New.GetEnumDisplayName()</a></li>
+                                    <li><a class="dropdown-item" asp-controller="Order" asp-action="UpdateOrderStatus" asp-route-orderId="@Model.Id" asp-route-status="@OrderStatus.Confirmed">@OrderStatus.Confirmed.GetEnumDisplayName()</a></li>
+                                    <li><a class="dropdown-item" asp-controller="Order" asp-action="UpdateOrderStatus" asp-route-orderId="@Model.Id" asp-route-status="@OrderStatus.Paid">@OrderStatus.Paid.GetEnumDisplayName()</a></li>
+                                    <li><a class="dropdown-item" asp-controller="Order" asp-action="UpdateOrderStatus" asp-route-orderId="@Model.Id" asp-route-status="@OrderStatus.Delivered">@OrderStatus.Delivered.GetEnumDisplayName()</a></li>
                                 </ul>
                             </div>
                        

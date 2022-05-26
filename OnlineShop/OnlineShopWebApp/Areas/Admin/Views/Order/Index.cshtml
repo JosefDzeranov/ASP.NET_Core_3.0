@@ -27,7 +27,7 @@
                             <tr>
                                 <td>@order.Id</td>
                                 <td>@order.Cart.TotalCost ₽</td>
-                                <td>@order.Status</td>
+                                <td>@order.Status.GetEnumDisplayName()</td>
                                  <td>@order.Email</td>
                                 <td>@order.Created.ToString("d")</td>
                                 <td>@order.Created.ToString("t")</td>

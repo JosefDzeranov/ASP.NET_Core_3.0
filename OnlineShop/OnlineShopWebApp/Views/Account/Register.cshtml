@@ -3,7 +3,7 @@
 @{
     ViewData["Title"] = "Регистрация";
 }
-<div class="card shadow">
+@*<div class="card shadow">
     <div class="card-body">
         <form asp-controller="Account" asp-action="Register">
             <div class="validation" asp-validation-summary=ModelOnly></div>
@@ -35,6 +35,35 @@
 
             </div>
 
+        </form>
+    </div>
+</div>*@
+
+<div class=row>
+    <div class="col-md-10 mx-auto col-lg-5">
+        <form class="p-4 p-md-5 border rounded-3 bg-light" asp-controller="Account" asp-action="Register">
+            <div class="validation" asp-validation-summary=ModelOnly></div>
+            <div class="form-floating mb-3">
+                <input type="text" class="form-control" asp-for="Name" id="floatingInput" placeholder="Имя">
+                <span asp-validation-for="Name"></span>
+                <label for="floatingInput">Имя</label>
+            </div>
+            <div class="form-floating mb-3">
+                <input type="email" class="form-control" asp-for="Email" id="floatingInput" placeholder="name@example.com">
+                <span asp-validation-for="Email"></span>
+                <label for="floatingInput">Email-адрес</label>
+            </div>
+            <div class="form-floating mb-3">
+                <input type="password" class="form-control" asp-for="Password" id="floatingPassword" placeholder="Пароль">
+                <span asp-validation-for="Password"></span>
+                <label for="floatingPassword">Пароль</label>
+            </div>
+            <div class="form-floating mb-3">
+                <input type="password" class="form-control" asp-for="ConfirmPassword" id="floatingPassword" placeholder="Повтор пароля">
+                <span asp-validation-for="ConfirmPassword"></span>
+                <label for="floatingPassword">Повтор пароля</label>
+            </div>
+            <button class="w-100 btn btn-lg btn-primary" type="submit">Зарегистрироваться</button>
         </form>
     </div>
 </div>

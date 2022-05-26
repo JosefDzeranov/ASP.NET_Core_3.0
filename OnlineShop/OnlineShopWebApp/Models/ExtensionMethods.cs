@@ -1,6 +1,9 @@
 ﻿using OnlineShop.DB.Models;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.Linq;
+using System.Reflection;
 
 namespace OnlineShopWebApp.Models
 {
@@ -140,7 +143,14 @@ namespace OnlineShopWebApp.Models
             }
             return ordersViewModel;
         }
-
+        public static string GetEnumDisplayName(this Enum enumValue)
+        {
+            return enumValue.GetType()
+                            .GetMember(enumValue.ToString())
+                            .First()
+                            .GetCustomAttribute<DisplayAttribute>()
+                            .GetName();
+        }
     }
 
 
