@@ -112,9 +112,10 @@ namespace OnlineShopWebApp
             JsonStorage.Write(users);
         }
 
-        public void Remove(string userLogin)
+        public void Remove(string login)
         {
-            users.RemoveAll(x => x.Login == userLogin);
+            users?.RemoveAll(x => x.Login == login);
+            buyerManager.Remove(login);
             JsonStorage.Write(users);
         }
 
@@ -137,13 +138,5 @@ namespace OnlineShopWebApp
             user.Email ??= userInfo.Email;
             JsonStorage.Write(users);
         }
-
-        public void Delite(string login)
-        {
-            var user = FindByLogin(login);
-            users.Remove(user);
-            JsonStorage.Write(users);
-        }
-
     }
 }

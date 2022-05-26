@@ -104,9 +104,9 @@ namespace OnlineShopWebApp.Areas.Admin.Controllers
             return RedirectToAction("Index", "Users");
         }
 
-        public IActionResult Delite(string login)
+        public IActionResult Remove(string login)
         {
-            userManager.Delite(login);
+            userManager.Remove(login);
             return RedirectToAction("Index", "Users");
         }
 
