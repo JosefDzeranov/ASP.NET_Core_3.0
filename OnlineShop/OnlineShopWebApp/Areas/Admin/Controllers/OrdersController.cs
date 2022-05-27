@@ -10,25 +10,25 @@ namespace OnlineShopWebApp.Areas.Admin.Controllers
     [ServiceFilter(typeof(CheckingForAuthorization))]
     public class OrdersController : Controller
     {
-        private readonly IBuyerManager buyerManager;
+        private readonly IBuyerManager _buyerManager;
         public OrdersController(IBuyerManager buyerManager)
         {
-            this.buyerManager = buyerManager;
+            _buyerManager = buyerManager;
         }
         public IActionResult Index()
         {
-            var orders = buyerManager.CollectAllOrders();
+            var orders = _buyerManager.CollectAllOrders();
             return View(orders);
         }
         public IActionResult Details(Guid orderId)
         {
-            var order = buyerManager.FindOrderItem(orderId);
+            var order = _buyerManager.FindOrderItem(orderId);
             return View(order);
         }
         [HttpPost]
         public IActionResult SaveDetails(OrderItem newOrder)
         {
-            buyerManager.UpdateOrderStatus(newOrder);
+            _buyerManager.UpdateOrderStatus(newOrder);
             var orderId = newOrder.Id;
             return RedirectToAction("Details", new { orderId });
         }

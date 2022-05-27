@@ -7,15 +7,15 @@ namespace OnlineShopWebApp.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly IProductManager productManager;
+        private readonly IProductManager _productManager;
         public HomeController(IProductManager productManager)
         {
-            this.productManager = productManager;
+            _productManager = productManager;
         }
 
         public IActionResult Index()
         {
-            var productsDb = productManager.GetAll();
+            var productsDb = _productManager.GetAll();
             var productsViewModels = new List<ProductViewModel>();
             foreach (var product in productsDb)
             {

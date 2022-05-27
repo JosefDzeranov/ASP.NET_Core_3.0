@@ -12,15 +12,15 @@ namespace OnlineShopWebApp.Areas.Admin.Controllers
     [ServiceFilter(typeof(CheckingForAuthorization))]
     public class ProductsController : Controller
     {
-        private readonly IProductManager productManager;
+        private readonly IProductManager _productManager;
         public ProductsController(IProductManager productManager)
         {
-            this.productManager = productManager;
+            _productManager = productManager;
         }
 
         public IActionResult Index()
         {
-            var productsDb = productManager.GetAll();
+            var productsDb = _productManager.GetAll();
             var productsViewModels = new List<ProductViewModel>();
             foreach (var product in productsDb)
             {
@@ -43,14 +43,14 @@ namespace OnlineShopWebApp.Areas.Admin.Controllers
 
         public IActionResult Delete(Guid productId)
         {
-            var product = productManager.Find(productId);
-            productManager.Delete(product);
+            var product = _productManager.Find(productId);
+            _productManager.Delete(product);
             return RedirectToAction("Index");
         }
 
         public IActionResult CardUpdate(Guid productId)
         {
-            var product = productManager.Find(productId);;
+            var product = _productManager.Find(productId);;
 
             var productViewModels = new ProductViewModel
             {
@@ -85,7 +85,7 @@ namespace OnlineShopWebApp.Areas.Admin.Controllers
                 Square = productViewModel.Square,
                 Width = productViewModel.Width
             };
-            productManager.UpdateProduct(productDb);
+            _productManager.UpdateProduct(productDb);
             return RedirectToAction("Index");
         }
         public IActionResult CardNewProduct()
@@ -113,7 +113,7 @@ namespace OnlineShopWebApp.Areas.Admin.Controllers
                 Width = productViewModel.Width
             };
 
-            productManager.AddNew(productDb);
+            _productManager.AddNew(productDb);
             return RedirectToAction("Index");
         }
     }

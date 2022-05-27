@@ -7,16 +7,16 @@ namespace OnlineShopWebApp.Controllers
 {
     public class ProductController : Controller
     {
-        private readonly IProductManager productManager;
+        private readonly IProductManager _productManager;
         public ProductController(IProductManager productManager)
         {
-            this.productManager = productManager;
+            _productManager = productManager;
         }
 
         public IActionResult Index(Guid productId)
         {
 
-            var product = productManager.Find(productId);
+            var product = _productManager.Find(productId);
             var productViewModels = new ProductViewModel
             {
                 Id = product.Id,

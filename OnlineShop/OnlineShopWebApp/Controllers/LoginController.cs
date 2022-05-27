@@ -7,10 +7,10 @@ namespace OnlineShopWebApp.Controllers
 {
     public class LoginController : Controller
     {
-        private readonly IUserManager userManager;
+        private readonly IUserManager _userManager;
         public LoginController(IUserManager userManager)
         {
-            this.userManager = userManager;
+            _userManager = userManager;
         }
         public IActionResult Index()
         {
@@ -20,7 +20,7 @@ namespace OnlineShopWebApp.Controllers
         [HttpPost]
         public IActionResult Index(UserAutorized userInput)
         {
-            var user = userManager?.FindByLogin(userInput.Login);
+            var user = _userManager?.FindByLogin(userInput.Login);
             if (user == null)
             {
                 ModelState.AddModelError("", "Такого аккаунта не существует");
@@ -31,7 +31,7 @@ namespace OnlineShopWebApp.Controllers
             }
             if (ModelState.IsValid)
             {
-                userManager.Authorized(userInput);
+                _userManager.Authorized(userInput);
                 return RedirectToAction("Index", "User");
             }
             return View();
@@ -44,14 +44,14 @@ namespace OnlineShopWebApp.Controllers
             {
                 ModelState.AddModelError("", "Логин и пароль не должны совпадать!");
             }
-            if (userManager.FindByLogin(userInput.Login) != null)
+            if (_userManager.FindByLogin(userInput.Login) != null)
             {
                 ModelState.AddModelError("", "Такой аккаунт уже существует");
             }
             if (ModelState.IsValid)
             {
-                userManager.Add(userInput);
-                userManager.AssignRole(userInput.Login, MyConstant.RoleDefaultId); //Покупатель
+                _userManager.Add(userInput);
+                _userManager.AssignRole(userInput.Login, MyConstant.RoleDefaultId); //Покупатель
                 return RedirectToAction("Index", "User");
             }
             return View();

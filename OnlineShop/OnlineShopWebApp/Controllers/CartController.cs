@@ -9,18 +9,16 @@ namespace OnlineShopWebApp.Controllers
     [ServiceFilter(typeof(CheckingForAuthorization))]
     public class CartController : Controller
     {
-        private readonly IBuyerManager buyerManager;
-        private readonly IProductManager productManager;
-        private readonly IUserManager userManager;
+        private readonly IBuyerManager _buyerManager;
+        private readonly IUserManager _userManager;
         public CartController(IBuyerManager buyerManager, IProductManager productManager, IUserManager userManager)
         {
-            this.buyerManager = buyerManager;
-            this.productManager = productManager;
-            this.userManager = userManager;
+            _buyerManager = buyerManager;
+            _userManager = userManager;
         }
         public IActionResult Index()
         {
-            var buyer = buyerManager.FindBuyer(userManager.GetLoginAuthorizedUser());
+            var buyer = _buyerManager.FindBuyer(_userManager.GetLoginAuthorizedUser());
             if (buyer == null)
             {
                 return RedirectToAction("Index", "Login");
@@ -30,13 +28,13 @@ namespace OnlineShopWebApp.Controllers
 
         public IActionResult AddProduct(Guid productId)
         {
-            var buyerLogin = userManager.GetLoginAuthorizedUser();
+            var buyerLogin = _userManager.GetLoginAuthorizedUser();
             
             object routeValues = new { buyerLogin, Index = "Index", controller = "Cart", area = "" };
 
-            if (userManager.GettingAccess(buyerLogin, "Index", "Cart", ""))
+            if (_userManager.GettingAccess(buyerLogin, "Index", "Cart", ""))
             {
-                buyerManager.AddProductInCart(productId, buyerLogin);
+                _buyerManager.AddProductInCart(productId, buyerLogin);
             }
             else
             {
@@ -48,22 +46,22 @@ namespace OnlineShopWebApp.Controllers
 
         public IActionResult DeleteProduct(Guid productId)
         {
-            var buyerLogin = userManager.GetLoginAuthorizedUser();
-            buyerManager.DeleteProductInCart(productId, buyerLogin);
+            var buyerLogin = _userManager.GetLoginAuthorizedUser();
+            _buyerManager.DeleteProductInCart(productId, buyerLogin);
             return RedirectToAction("Index", new { buyerLogin });
         }
 
         public IActionResult ReduceDuplicateProduct(Guid productId)
         {
-            var buyerLogin = userManager.GetLoginAuthorizedUser();
-            buyerManager.ReduceDuplicateProductCart(productId, buyerLogin);
+            var buyerLogin = _userManager.GetLoginAuthorizedUser();
+            _buyerManager.ReduceDuplicateProductCart(productId, buyerLogin);
             return RedirectToAction("Index", new { buyerLogin });
         }
 
         public IActionResult Clear()
         {
-            var buyerLogin = userManager.GetLoginAuthorizedUser();
-            buyerManager.ClearCart(buyerLogin);
+            var buyerLogin = _userManager.GetLoginAuthorizedUser();
+            _buyerManager.ClearCart(buyerLogin);
             return RedirectToAction("Index", new { buyerLogin });
         }
     }

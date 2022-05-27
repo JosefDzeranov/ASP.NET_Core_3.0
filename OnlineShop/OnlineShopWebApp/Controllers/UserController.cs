@@ -7,18 +7,18 @@ namespace OnlineShopWebApp.Controllers
     [ServiceFilter(typeof(CheckingForAuthorization))]
     public class UserController : Controller
     {
-        private readonly IUserManager userManager;
+        private readonly IUserManager _userManager;
         public UserController(IUserManager buyerManager)
         {
-            this.userManager = buyerManager;
+            _userManager = buyerManager;
         }
         public IActionResult Index()
         {
-            if (userManager.GetLoginAuthorizedUser() == null)
+            if (_userManager.GetLoginAuthorizedUser() == null)
             {
                 return RedirectToAction("Index", "Login");
             }
-            var user = userManager.FindByLogin(userManager.GetLoginAuthorizedUser());
+            var user = _userManager.FindByLogin(_userManager.GetLoginAuthorizedUser());
             return View(user);
         }
 

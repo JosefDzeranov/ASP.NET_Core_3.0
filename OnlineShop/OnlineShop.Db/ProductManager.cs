@@ -8,25 +8,25 @@ namespace OnlineShop.Db
 {
     public class ProductManager : IProductManager
     {
-        private readonly DatabaseContext databaseContext;
+        private readonly DatabaseContext _databaseContext;
         public ProductManager(DatabaseContext databaseContext)
         {
-            this.databaseContext = databaseContext;
+            _databaseContext = databaseContext;
         }
 
         public Product Find(Guid id)
         {
-            return databaseContext.Products.FirstOrDefault(product => product.Id == id);
+            return _databaseContext.Products.FirstOrDefault(product => product.Id == id);
         }
 
         public void Delete(Product product)
         {
-            databaseContext.Products.Remove(product);
-            databaseContext.SaveChanges();
+            _databaseContext.Products.Remove(product);
+            _databaseContext.SaveChanges();
         }
         public void UpdateProduct(Product newProduct)
         {
-            var oldProduct = databaseContext.Products.FirstOrDefault(product => product.Id == newProduct.Id);
+            var oldProduct = _databaseContext.Products.FirstOrDefault(product => product.Id == newProduct.Id);
             if (oldProduct != null)
             {
                 return;
@@ -38,17 +38,17 @@ namespace OnlineShop.Db
             oldProduct.CodeNumber = newProduct.CodeNumber;
             oldProduct.Square = newProduct.Square;
             oldProduct.Width = newProduct.Width;
-            databaseContext.SaveChanges();
+            _databaseContext.SaveChanges();
         }
         public void AddNew(Product product)
         {
-            databaseContext.Products.Add(product);
-            databaseContext.SaveChanges();
+            _databaseContext.Products.Add(product);
+            _databaseContext.SaveChanges();
         }
 
         public List<Product> GetAll()
         {
-            return databaseContext.Products.ToList();
+            return _databaseContext.Products.ToList();
         }
     }
 }
