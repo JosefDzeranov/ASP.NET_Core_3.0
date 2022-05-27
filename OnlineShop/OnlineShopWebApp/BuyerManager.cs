@@ -3,6 +3,7 @@ using OnlineShopWebApp.Models;
 using System;
 using System.Collections.Generic;
 using OnlineShop.Db.Interfase;
+using OnlineShop.Db.Models;
 using OnlineShopWebApp.Models.Users;
 using OnlineShopWebApp.Models.Users.Buyer;
 
@@ -32,7 +33,20 @@ namespace OnlineShopWebApp
         {
             var product = productManager.Find(productId);
             var buyer = FindBuyer(buyerLogin);
-            buyer.AddProductInCart(product);
+
+            var productViewModels = new Product
+            {
+                Id = product.Id,
+                CodeNumber = product.CodeNumber,
+                Cost = product.Cost,
+                Description = product.Description,
+                Images = product.Images,
+                Length = product.Length,
+                Square = product.Square,
+                Width = product.Width
+            };
+
+            buyer.AddProductInCart(productViewModels);
             JsonStorage.Write(buyers);
         }
 

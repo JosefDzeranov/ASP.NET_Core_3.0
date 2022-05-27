@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using Microsoft.AspNetCore.Mvc;
 using OnlineShop.Db.Interfase;
 using OnlineShop.Db.Models;
@@ -20,8 +21,24 @@ namespace OnlineShopWebApp.Areas.Admin.Controllers
         public IActionResult Index()
         {
             var productsDb = productManager.GetAll();
-            
-            return View(productsDb);
+            var productsViewModels = new List<ProductViewModel>();
+            foreach (var product in productsDb)
+            {
+                var productViewModels = new ProductViewModel
+                {
+                    Id = product.Id,
+                    CodeNumber = product.CodeNumber,
+                    Cost = product.Cost,
+                    Description = product.Description,
+                    Images = product.Images,
+                    Length = product.Length,
+                    Square = product.Square,
+                    Width = product.Width
+                };
+                productsViewModels.Add(productViewModels);
+            }
+
+            return View(productsViewModels);
         }
 
         public IActionResult Delete(Guid productId)
@@ -33,8 +50,20 @@ namespace OnlineShopWebApp.Areas.Admin.Controllers
 
         public IActionResult CardUpdate(Guid productId)
         {
-            var oldProduct = productManager.Find(productId);
-            return View(oldProduct);
+            var product = productManager.Find(productId);;
+
+            var productViewModels = new ProductViewModel
+            {
+                Id = product.Id,
+                CodeNumber = product.CodeNumber,
+                Cost = product.Cost,
+                Description = product.Description,
+                Images = product.Images,
+                Length = product.Length,
+                Square = product.Square,
+                Width = product.Width
+            };
+            return View(productViewModels);
         }
 
         [HttpPost]
