@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using OnlineShopWebApp.Interfase;
+using OnlineShop.Db.Models;
 
 
 namespace OnlineShopWebApp.Models.Users.Buyer
@@ -8,7 +8,7 @@ namespace OnlineShopWebApp.Models.Users.Buyer
     public class UserBuyer
     {
         public string Login { get; set; }
-        public List<Product> Comparisons { get; set; } = new List<Product>();
+        public List<ProductViewModel> Comparisons { get; set; } = new List<ProductViewModel>();
         public List<CartItem> Cart { get; set; } = new List<CartItem>();
         public InfoBuying InfoBuying { get; set; } = new InfoBuying();
         public List<OrderItem> Orders { get; set; } = new List<OrderItem>();
@@ -36,7 +36,7 @@ namespace OnlineShopWebApp.Models.Users.Buyer
             }
         }
 
-        public void DeleteProductInCart(Guid productId)
+        public void RemoveProductInCart(Guid productId)
         {
             Cart.RemoveAll(cartItem => cartItem.Product.Id == productId);
         }

@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using OnlineShopWebApp.Interfase;
 using System;
+using OnlineShop.Db.Interfase;
 using OnlineShopWebApp.Filters;
 
 namespace OnlineShopWebApp.Controllers
@@ -30,12 +31,12 @@ namespace OnlineShopWebApp.Controllers
         public IActionResult AddProduct(Guid productId)
         {
             var buyerLogin = userManager.GetLoginAuthorizedUser();
-            var product = productManager.Find(productId);
+            
             object routeValues = new { buyerLogin, Index = "Index", controller = "Cart", area = "" };
 
             if (userManager.GettingAccess(buyerLogin, "Index", "Cart", ""))
             {
-                buyerManager.AddProductInCart(product, buyerLogin);
+                buyerManager.AddProductInCart(productId, buyerLogin);
             }
             else
             {

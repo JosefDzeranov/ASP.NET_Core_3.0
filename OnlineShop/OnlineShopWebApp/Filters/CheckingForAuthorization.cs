@@ -1,8 +1,4 @@
-﻿
-
-using System;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
 using Microsoft.AspNetCore.Routing;
 using OnlineShopWebApp.Interfase;
@@ -28,15 +24,7 @@ namespace OnlineShopWebApp.Filters
                         action = "Index"
                     }));
             }
-            //else if (!userManager.GettingAccess(userManager.GetLoginAuthorizedUser(), "Index", "Cart", ""))
-            //{
-            //    context.Result =
-            //        new RedirectToRouteResult(new RouteValueDictionary(new
-            //        {
-            //            controller = "Login",
-            //            action = "TabooAccess"
-            //        }));
-            //}
+
             base.OnActionExecuting(context);
         }
 

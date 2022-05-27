@@ -1,15 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
-using OnlineShopWebApp.Models;
+using OnlineShop.Db.Models;
 
-namespace OnlineShopWebApp.Interfase
+namespace OnlineShop.Db.Interfase
 {
     public interface IProductManager
     {
-        List<Product> Products { get; set; }
         Product Find(Guid productId);
         void Delete(Product product);
         void UpdateProduct(Product product);
         void AddNew(Product product);
+        List<Product> GetAll();
     }
 }

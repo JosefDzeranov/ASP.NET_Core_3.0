@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using OnlineShop.Db.Models;
 
 namespace OnlineShopWebApp.Models.Users.Buyer
 {

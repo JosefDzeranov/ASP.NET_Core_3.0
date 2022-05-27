@@ -1,6 +1,6 @@
 ﻿using System;
 using Microsoft.AspNetCore.Mvc;
-using OnlineShopWebApp.Interfase;
+using OnlineShop.Db.Interfase;
 
 namespace OnlineShopWebApp.Controllers
 {

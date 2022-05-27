@@ -6,7 +6,7 @@ using OnlineShop.Db.Models;
 
 namespace OnlineShop.Db
 {
-    public class DatabaseContext:DbContext
+    public sealed class DatabaseContext:DbContext
     {
         //доступ к таблицам
         public DbSet<Product> Products { get; set; }

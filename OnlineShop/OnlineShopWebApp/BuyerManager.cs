@@ -2,6 +2,7 @@
 using OnlineShopWebApp.Models;
 using System;
 using System.Collections.Generic;
+using OnlineShop.Db.Interfase;
 using OnlineShopWebApp.Models.Users;
 using OnlineShopWebApp.Models.Users.Buyer;
 
@@ -9,12 +10,14 @@ namespace OnlineShopWebApp
 {
     public class BuyerManager : IBuyerManager
     {
+        private readonly IProductManager productManager;
         private IWorkWithData JsonStorage { get; } = new JsonWorkWithData(nameSave);
         private const string nameSave = "buyers";
         private List<UserBuyer> buyers;
 
-        public BuyerManager()
+        public BuyerManager(IProductManager productManager)
         {
+            this.productManager = productManager;
             buyers = JsonStorage.Read<List<UserBuyer>>();
         }
 
@@ -25,18 +28,18 @@ namespace OnlineShopWebApp
             JsonStorage.Write(buyers);
         }
 
-        public void AddProductInCart(Product product, string buyerLogin)
+        public void AddProductInCart(Guid productId, string buyerLogin)
         {
+            var product = productManager.Find(productId);
             var buyer = FindBuyer(buyerLogin);
             buyer.AddProductInCart(product);
             JsonStorage.Write(buyers);
-            
         }
 
         public void DeleteProductInCart(Guid productId, string buyerLogin)
         {
             var buyer = FindBuyer(buyerLogin);
-            buyer.DeleteProductInCart(productId);
+            buyer.RemoveProductInCart(productId);
             JsonStorage.Write(buyers);
         }
 

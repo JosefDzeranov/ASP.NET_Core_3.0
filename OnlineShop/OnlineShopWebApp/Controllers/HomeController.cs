@@ -1,5 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using OnlineShopWebApp.Interfase;
+using OnlineShop.Db.Interfase;
 
 namespace OnlineShopWebApp.Controllers
 {
@@ -13,7 +13,7 @@ namespace OnlineShopWebApp.Controllers
 
         public IActionResult Index()
         {
-            return View(productManager.Products);
+            return View(productManager.GetAll());
         }
     }
 }

@@ -11,6 +11,7 @@ using Serilog;
 using System.Globalization;
 using Microsoft.EntityFrameworkCore;
 using OnlineShop.Db;
+using OnlineShop.Db.Interfase;
 
 
 namespace OnlineShopWebApp
@@ -31,7 +32,7 @@ namespace OnlineShopWebApp
             services.AddDbContext<DatabaseContext>(options =>
                 options.UseSqlServer(connection));
             services.AddSingleton<IBuyerManager, BuyerManager>();
-            services.AddSingleton<IProductManager, ProductManager>();
+            services.AddTransient<IProductManager, ProductManager>();
             services.AddSingleton<IRoleManager, RoleManager>();
             services.AddSingleton<IUserManager, UserManager>();
             services.AddControllersWithViews();

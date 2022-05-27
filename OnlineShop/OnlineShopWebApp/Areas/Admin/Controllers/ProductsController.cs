@@ -1,7 +1,8 @@
 ﻿using System;
 using Microsoft.AspNetCore.Mvc;
+using OnlineShop.Db.Interfase;
+using OnlineShop.Db.Models;
 using OnlineShopWebApp.Filters;
-using OnlineShopWebApp.Interfase;
 using OnlineShopWebApp.Models;
 
 namespace OnlineShopWebApp.Areas.Admin.Controllers
@@ -18,8 +19,9 @@ namespace OnlineShopWebApp.Areas.Admin.Controllers
 
         public IActionResult Index()
         {
-            var products = productManager.Products;
-            return View(products);
+            var productsDb = productManager.GetAll();
+            
+            return View(productsDb);
         }
 
         public IActionResult Delete(Guid productId)
@@ -36,14 +38,26 @@ namespace OnlineShopWebApp.Areas.Admin.Controllers
         }
 
         [HttpPost]
-        public IActionResult Update(Product product)
+        public IActionResult Update(ProductViewModel productViewModel)
         {
-            if (ModelState.IsValid)
+            if (!ModelState.IsValid)
             {
-                productManager.UpdateProduct(product);
-                return RedirectToAction("Index");
+                return Content("errorValid");
+
             }
-            else return Content("errorValid");
+            var productDb = new Product
+            {
+                Cost = productViewModel.Cost,
+                Description = productViewModel.Description,
+                CodeNumber = productViewModel.CodeNumber,
+                Id = productViewModel.Id,
+                Images = productViewModel.Images,
+                Length = productViewModel.Length,
+                Square = productViewModel.Square,
+                Width = productViewModel.Width
+            };
+            productManager.UpdateProduct(productDb);
+            return RedirectToAction("Index");
         }
         public IActionResult CardNewProduct()
         {
@@ -51,14 +65,27 @@ namespace OnlineShopWebApp.Areas.Admin.Controllers
         }
 
         [HttpPost]
-        public IActionResult AddNew(Product product)
+        public IActionResult AddNew(ProductViewModel productViewModel)
         {
-            if (ModelState.IsValid)
+            if (!ModelState.IsValid)
             {
-                productManager.AddNew(product);
-                return RedirectToAction("Index");
+                return Content("errorValid");
             }
-            return Content("errorValid");
+
+            var productDb = new Product
+            {
+                Cost = productViewModel.Cost,
+                Description = productViewModel.Description,
+                CodeNumber = productViewModel.CodeNumber,
+                Id = productViewModel.Id,
+                Images = productViewModel.Images,
+                Length = productViewModel.Length,
+                Square = productViewModel.Square,
+                Width = productViewModel.Width
+            };
+
+            productManager.AddNew(productDb);
+            return RedirectToAction("Index");
         }
     }
 }
