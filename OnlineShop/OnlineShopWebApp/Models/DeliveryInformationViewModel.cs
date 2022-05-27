@@ -2,7 +2,7 @@
 
 namespace OnlineShopWebApp.Models
 {
-    public class DeliveryInformarion
+    public class DeliveryInformationViewModel
     {
         [Required(ErrorMessage = "Введите имя")]
         public string Name { get; set; }

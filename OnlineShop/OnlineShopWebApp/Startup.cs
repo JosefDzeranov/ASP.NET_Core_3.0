@@ -28,10 +28,10 @@ namespace OnlineShopWebApp
             services.AddSingleton<IRolesRepository, InMemoryRolesRepository>();
             services.AddTransient<IComparesRepository, ComparesDbRepository>();
             services.AddTransient<IFavouritesRepository, FavouritesDbRepository>();
-            services.AddSingleton<IOrdersRepository, InMemoryOrdersRepository>();
+            services.AddTransient<IOrdersRepository, OrdersDbRepository>();
             services.AddTransient<ICartsRepository, CartsDbRepository>();
             services.AddTransient<IProductsRepository, ProductsDbRepository>();
-            services.AddSingleton<IDeliveryRepository, InMemoryDeliveryRepository>();
+            //services.AddTransient<IDeliveryRepository, DeliveryDbRepository>();
             services.AddSingleton<IUsersRepository, InMemoryUsersRepository>();
             services.AddControllersWithViews();
         }

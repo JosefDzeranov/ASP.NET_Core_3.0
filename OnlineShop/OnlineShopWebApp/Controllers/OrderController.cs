@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using OnlineShop.Db;
+using OnlineShop.Db.Models;
 using OnlineShopWebApp.Helpers;
 using OnlineShopWebApp.Models;
 
@@ -7,7 +8,7 @@ namespace OnlineShopWebApp.Controllers
 {
     public class OrderController : Controller
     {
-        private readonly OnlineShop.Db.ICartsRepository cartsRepository;
+        private readonly ICartsRepository cartsRepository;
         private readonly IOrdersRepository ordersRepository;
 
         public OrderController(ICartsRepository cartsRepository, IOrdersRepository ordersRepository)
@@ -22,18 +23,18 @@ namespace OnlineShopWebApp.Controllers
         }
 
         [HttpPost]
-        public IActionResult Buy(DeliveryInformarion deliveryInformarion)
+        public IActionResult Buy(DeliveryInformationViewModel deliveryInformation)
         {
             if (ModelState.IsValid)
             {
                 var cart = cartsRepository.TryGetByUserId(Constants.UserId);
-                ordersRepository.Add(Mapping.ToCartViewModel(cart), deliveryInformarion);
+                ordersRepository.Add(cart, Mapping.ToDbDelivery(deliveryInformation));
                 cartsRepository.Clear(Constants.UserId);
                 return View();
             }
             else
             {
-                return View(deliveryInformarion);
+                return View(deliveryInformation);
             }
         }
     }

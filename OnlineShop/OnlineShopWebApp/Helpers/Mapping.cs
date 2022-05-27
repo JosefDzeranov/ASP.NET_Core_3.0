@@ -5,7 +5,7 @@ using System.Collections.Generic;
 
 namespace OnlineShopWebApp.Helpers
 {
-    public class Mapping
+    public static class Mapping
     {
         public static List<ProductViewModel> ToProductViewModels(List<Product> products)
         {
@@ -59,5 +59,49 @@ namespace OnlineShopWebApp.Helpers
             return cartItems;
         }
 
+        public static List<OrderViewModel> ToOrderViewModels(this List<Order> orders)
+        {
+            var ordersViewModels = new List<OrderViewModel>();
+            foreach (var order in orders)
+            {
+                ordersViewModels.Add(ToOrderViewModel(order));
+            }
+            return ordersViewModels;
+        }
+
+       public static OrderViewModel ToOrderViewModel(Order order)
+        {
+            return new OrderViewModel
+            {
+                Id = order.Id,
+                Date = order.Date,
+                Time = order.Time,
+                Cart = ToCartViewModel(order.Cart),
+                DeliveryInformarion = ToDeliveryInformationViewModel(order.DeliveryInformation),
+                State = (OrderStateViewModel)(int)order.State
+            };
+        }
+
+        public static DeliveryInformationViewModel ToDeliveryInformationViewModel(DeliveryInformation deliveryInformation)
+        {
+            return new DeliveryInformationViewModel
+            {
+                Name = deliveryInformation.Name,
+                Adress = deliveryInformation.Adress,
+                Phone = deliveryInformation.Phone,
+                Email = deliveryInformation.Email
+            };
+        }
+
+        public static DeliveryInformation ToDbDelivery(DeliveryInformationViewModel deliveryInformation)
+        {
+            return new DeliveryInformation
+            {
+                Name = deliveryInformation.Name,
+                Adress = deliveryInformation.Adress,
+                Phone = deliveryInformation.Phone,
+                Email = deliveryInformation.Email
+            };
+        }
     }
 }
