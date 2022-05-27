@@ -1,6 +1,7 @@
 ﻿@using OnlineShopWebApp
 @model List<Product>
 
+
 <div class="row">
     @await Html.PartialAsync("Menu")
 
@@ -20,18 +21,39 @@
 
             @for (int i = 0; i < Model.Count; i++)
             {
+                
                 <tr>
                     <td>@(i+1)</td>
                     <td><a class="text-dark" href="/product/index/@Model[i].Id" role="button">@Model[i].Name</a></td>
                     <td>@Model[i].Cost</td>
                     <td><a class="text" href="/admin/administration/EditProduct/@Model[i].Id" role="button">Редактировать</a></td>
 
-                    <td><button type="button" class="btn btn-link" data-toggle="modal" data-target="#removeProductModal">Удалить</button></td>
-                    @await Html.PartialAsync("RemoveProductModal", Model[i])
+                    <td><button type="button" class="btn btn-link" data-toggle="modal" href="removeProductId_@i" data-target="#removeProductId_@i">Удалить</button></td>
+
 
                 </tr>
-            }
 
+
+                <div class="modal fade" id="removeProductId_@i" tabindex="-1" role="dialog" aria-labelledby="headerId_@i" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="headerId_@i">Modal title</h5>
+
+                            </div>
+                            <div class="modal-body">
+                                <p>Удалить продукт @Model[i].Name ?</p>
+                            </div>
+                            <div class="modal-footer">
+                                <a class="btn btn-secondary" href="/admin/administration/RemoveProduct/@Model[i].Id/" role="button">Да</a>
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Нет</button>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            }
 
         </table>
 
