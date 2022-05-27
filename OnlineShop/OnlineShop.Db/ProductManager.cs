@@ -9,14 +9,13 @@ namespace OnlineShop.Db
     public class ProductManager : IProductManager
     {
         private readonly DatabaseContext databaseContext;
-        public ProductManager()
+        public ProductManager(DatabaseContext databaseContext)
         {
             this.databaseContext = databaseContext;
         }
 
         public Product Find(Guid id)
         {
-            
             return databaseContext.Products.FirstOrDefault(product => product.Id == id);
         }
 
@@ -27,7 +26,6 @@ namespace OnlineShop.Db
         }
         public void UpdateProduct(Product newProduct)
         {
-
             var oldProduct = databaseContext.Products.FirstOrDefault(product => product.Id == newProduct.Id);
             if (oldProduct != null)
             {
@@ -52,6 +50,5 @@ namespace OnlineShop.Db
         {
             return databaseContext.Products.ToList();
         }
-
     }
 }
