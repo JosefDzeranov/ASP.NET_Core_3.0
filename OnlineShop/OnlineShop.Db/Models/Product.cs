@@ -19,7 +19,7 @@ namespace OnlineShop.Db.Models
         
         public string Description { get; set; }
         
-        public List<string> Images { get; set; }
+        public string Images { get; set; }
 
         
     }

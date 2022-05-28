@@ -33,7 +33,7 @@ namespace OnlineShop.Db
             }
             oldProduct.Cost = newProduct.Cost;
             oldProduct.Description = newProduct.Description;
-            oldProduct.Images[0] = newProduct.Images[0];
+            oldProduct.Images = newProduct.Images;
             oldProduct.Length = newProduct.Length;
             oldProduct.CodeNumber = newProduct.CodeNumber;
             oldProduct.Square = newProduct.Square;

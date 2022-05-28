@@ -11,14 +11,14 @@ namespace OnlineShopWebApp
 {
     public class BuyerManager : IBuyerManager
     {
-        private readonly IProductManager productManager;
+        private readonly IProductManager _productManager;
         private IWorkWithData JsonStorage { get; } = new JsonWorkWithData(nameSave);
         private const string nameSave = "buyers";
         private List<UserBuyer> buyers;
 
         public BuyerManager(IProductManager productManager)
         {
-            this.productManager = productManager;
+            this._productManager = productManager;
             buyers = JsonStorage.Read<List<UserBuyer>>();
         }
 
@@ -31,7 +31,7 @@ namespace OnlineShopWebApp
 
         public void AddProductInCart(Guid productId, string buyerLogin)
         {
-            var product = productManager.Find(productId);
+            var product = _productManager.Find(productId);
             var buyer = FindBuyer(buyerLogin);
 
             var productViewModels = new Product

@@ -27,16 +27,17 @@ namespace OnlineShopWebApp
         public void ConfigureServices(IServiceCollection services)
         {
             //получаем строку подключения из файла конфигурации
-            string connection = Configuration.GetConnectionString("online_shop_molostov");
+            string connection = Configuration.GetConnectionString("online_shop");
             //добавляем контекст DatabaseContext в качестве сервиса в приложение
             services.AddDbContext<DatabaseContext>(options =>
                 options.UseSqlServer(connection));
-            services.AddSingleton<IBuyerManager, BuyerManager>();
+            services.AddTransient<IBuyerManager, BuyerManager>();
             services.AddTransient<IProductManager, ProductManager>();
-            services.AddSingleton<IRoleManager, RoleManager>();
-            services.AddSingleton<IUserManager, UserManager>();
+            services.AddTransient<IRoleManager, RoleManager>();
+            services.AddTransient<IUserManager, UserManager>();
+            services.AddTransient<CheckingForAuthorization>();
             services.AddControllersWithViews();
-            services.AddScoped<CheckingForAuthorization>();
+            
 
             services.Configure<RequestLocalizationOptions>(options => //конфигурируем настройки локализации запроса. Решается задача валидации decimal
             {
@@ -67,7 +68,7 @@ namespace OnlineShopWebApp
             app.UseRouting();
 
             //Решается задача валидации decimal
-            var localizationOptions = app.ApplicationServices.GetService<IOptions<RequestLocalizationOptions>>().Value;
+            var localizationOptions = app.ApplicationServices.GetService<IOptions<RequestLocalizationOptions>>()?.Value;
             app.UseRequestLocalization(localizationOptions);
 
             app.UseEndpoints(endpoints =>

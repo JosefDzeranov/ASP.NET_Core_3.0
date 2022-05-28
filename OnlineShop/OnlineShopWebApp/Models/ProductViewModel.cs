@@ -31,7 +31,7 @@ namespace OnlineShopWebApp.Models
         public string Description { get; set; }
 
         [Required(ErrorMessage = "Не указано изображение")]
-        public List<string> Images { get; set; }
+        public string Images { get; set; }
 
         
     }

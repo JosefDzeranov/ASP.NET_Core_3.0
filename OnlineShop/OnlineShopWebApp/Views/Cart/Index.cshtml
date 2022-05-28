@@ -32,7 +32,7 @@
                         <tr>
                             <th scope="row">@(i+1)</th>
                             <td>№ @Model.Cart[i].Product.CodeNumber @Model.Cart[i].Product.Description</td>
-                            <td> <img class="card-img-top " src="/image/@Model.Cart[i].Product.Images[0]" width="200" /></td>
+                            <td> <img class="card-img-top " src="/image/@Model.Cart[i].Product.Images" width="200" /></td>
                             <td>@Model.Cart[i].Product.Length х @Model.Cart[i].Product.Width</td>
                             <td>@Model.Cart[i].Product.Square</td>
                             <td>@Model.Cart[i].Product.Cost</td>
