@@ -17,19 +17,19 @@ namespace OnlineShop.Db
 
         public List<Order> GetAll()
         {
-            return databaseContext.Orders.Include(x=>x.DeliveryInformation).ToList();
+            return databaseContext.Orders.Include(x=>x.DeliveryInformation).Include(x=>x.Items).ThenInclude(x => x.Product).ToList();
         }
 
         public Order TryGetById(Guid id)
         {
-            return databaseContext.Orders.Include(x => x.DeliveryInformation).FirstOrDefault(x => x.Id == id);
+            return databaseContext.Orders.Include(x => x.DeliveryInformation).Include(x => x.Items).ThenInclude(x => x.Product).FirstOrDefault(x => x.Id == id);
         }
-        public void Add(Cart cart, DeliveryInformation deliveryInformation)
+        public void Add(List<CartItem> items, DeliveryInformation deliveryInformation)
         {
             var newOrder = new Order
             {
                 Id = new Guid(),
-                Cart = cart,
+                Items = items,
                 DeliveryInformation = deliveryInformation,
                 Date = DateTime.Now.ToString("dd MMMM yyyy"),
                 Time = DateTime.Now.ToString("HH:mm:ss")
@@ -45,6 +45,7 @@ namespace OnlineShop.Db
             if (existingOrder != null)
             {
                 existingOrder.State = newState;
+                databaseContext.SaveChanges();
             }
         }
     }

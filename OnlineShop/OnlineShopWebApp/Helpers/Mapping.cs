@@ -76,7 +76,7 @@ namespace OnlineShopWebApp.Helpers
                 Id = order.Id,
                 Date = order.Date,
                 Time = order.Time,
-                Cart = ToCartViewModel(order.Cart),
+                Items = ToCartItemViewModels(order.Items),
                 DeliveryInformation = ToDeliveryInformationViewModel(order.DeliveryInformation),
                 State = (OrderStateViewModel)(int)order.State
             };

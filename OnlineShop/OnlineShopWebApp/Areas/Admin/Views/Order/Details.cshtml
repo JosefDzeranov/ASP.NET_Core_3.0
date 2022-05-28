@@ -14,7 +14,26 @@
                                 <th>Дата и время</th>
                                 <td>@Model.Date в @Model.Time</td>
                             </tr>
-                            
+                            <tr>
+                                <th>Адрес доставки</th>
+                                <td>@Model.DeliveryInformation.Adress</td>
+                            </tr>
+                            <tr>
+                                <th>Получатель</th>
+                                <td>@Model.DeliveryInformation.Name</td>
+                            </tr>
+                            <tr>
+                                <th>Телефон</th>
+                                <td>@Model.DeliveryInformation.Phone</td>
+                            </tr>
+                            <tr>
+                                <th>E-mail</th>
+                                <td>@Model.DeliveryInformation.Email</td>
+                            </tr>
+                            <tr>
+                                <th>Сумма</th>
+                                <td>@Model.FullCost</td>
+                            </tr>
                             <tr>
                                 <th>Статус</th>
                                 <td>

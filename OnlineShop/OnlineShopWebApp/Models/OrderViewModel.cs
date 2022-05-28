@@ -13,6 +13,22 @@ namespace OnlineShopWebApp.Models
         public OrderStateViewModel State { get; set; }
         public string Date { get; set; }
         public string Time { get; set; }
+        public List<CartItemViewModel> Items { get; set; }
+        public decimal FullCost
+        {
+            get
+            {
+                return Items?.Sum(x => x.Cost) ?? 0;
+            }
+        }
+
+        public decimal Amount
+        {
+            get
+            {
+                return Items?.Sum(x => x.Amount) ?? 0;
+            }
+        }
 
         public OrderViewModel()
         {

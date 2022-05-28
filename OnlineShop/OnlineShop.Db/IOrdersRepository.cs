@@ -7,7 +7,7 @@ namespace OnlineShop.Db
     public interface IOrdersRepository
     {
         List<Order> GetAll();
-        void Add(Cart cart, DeliveryInformation deliveryInformarion);
+        void Add(List<CartItem> items, DeliveryInformation deliveryInformarion);
         Order TryGetById(Guid id);
         void UpdateState(Guid orderId, OrderState state);
     }
