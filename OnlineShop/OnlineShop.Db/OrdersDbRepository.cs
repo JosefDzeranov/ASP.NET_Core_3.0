@@ -22,15 +22,15 @@ namespace OnlineShop.Db
 
         public Order TryGetById(Guid id)
         {
-            return databaseContext.Orders.FirstOrDefault(x => x.Id == id);
+            return databaseContext.Orders.Include(x => x.DeliveryInformation).FirstOrDefault(x => x.Id == id);
         }
-        public void Add(Cart cart, DeliveryInformation deliveryInformarion)
+        public void Add(Cart cart, DeliveryInformation deliveryInformation)
         {
             var newOrder = new Order
             {
                 Id = new Guid(),
                 Cart = cart,
-                DeliveryInformation = (deliveryInformarion),
+                DeliveryInformation = deliveryInformation,
                 Date = DateTime.Now.ToString("dd MMMM yyyy"),
                 Time = DateTime.Now.ToString("HH:mm:ss")
             };

@@ -1,8 +1,4 @@
-﻿using OnlineShop.Db.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System;
 
 namespace OnlineShop.Db.Models
 {
@@ -13,11 +9,6 @@ namespace OnlineShop.Db.Models
         public Cart Cart { get; set; }
         public OrderState State { get; set; }
         public string Date { get; set; }
-        public string Time { get; set; }
-
-        public Order()
-        {
-            State = OrderState.Created;
-        }
+        public string Time { get; set; }        
     }
 }

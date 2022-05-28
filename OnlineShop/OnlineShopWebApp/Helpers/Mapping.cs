@@ -69,7 +69,7 @@ namespace OnlineShopWebApp.Helpers
             return ordersViewModels;
         }
 
-       public static OrderViewModel ToOrderViewModel(Order order)
+       public static OrderViewModel ToOrderViewModel(this Order order)
         {
             return new OrderViewModel
             {
@@ -77,7 +77,7 @@ namespace OnlineShopWebApp.Helpers
                 Date = order.Date,
                 Time = order.Time,
                 Cart = ToCartViewModel(order.Cart),
-                DeliveryInformarion = ToDeliveryInformationViewModel(order.DeliveryInformation),
+                DeliveryInformation = ToDeliveryInformationViewModel(order.DeliveryInformation),
                 State = (OrderStateViewModel)(int)order.State
             };
         }

@@ -29,7 +29,7 @@ namespace OnlineShopWebApp.Areas.Admin.Controllers
         public IActionResult Details(Guid orderId)
         {
             var order = ordersRepository.TryGetById(orderId);
-            return View(Mapping.ToOrderViewModel(order));
+            return View(order.ToOrderViewModel());
         }
 
         [HttpPost]
