@@ -1,15 +1,18 @@
-﻿using OnlineShopWebApp.Models;
+﻿
+using OnlineShop.Db.Models;
 using System;
 using System.Collections.Generic;
 
-namespace OnlineShopWebApp
+namespace OnlineShop.Db
+
+
 {
     public interface ICartManager
     {
-        Cart CreateCart();
+        
         List<Cart> GetCarts();
 
-        void AddProductToCart(string userId, ProductViewModel product);
+        void AddProductToCart(string userId, Product product);
 
         Cart TryGetCartByUserID(string userId);
 

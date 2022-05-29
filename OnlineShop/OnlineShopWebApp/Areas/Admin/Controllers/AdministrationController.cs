@@ -1,8 +1,10 @@
 using Microsoft.AspNetCore.Mvc;
 using OnlineShop.Db;
 using OnlineShop.Db.Models;
+using OnlineShopWebApp.Helpers;
 using OnlineShopWebApp.Models;
 using System;
+using System.Collections.Generic;
 
 namespace OnlineShopWebApp.Controllers
 {
@@ -60,7 +62,7 @@ namespace OnlineShopWebApp.Controllers
         }
         public IActionResult AddNewUser()
         {
-            
+
             return View();
         }
 
@@ -71,7 +73,7 @@ namespace OnlineShopWebApp.Controllers
             {
                 usersManager.SaveNewUser(user);
 
-                return View("SaveAddedUser",user);
+                return View("SaveAddedUser", user);
             }
             else
             {
@@ -199,13 +201,26 @@ namespace OnlineShopWebApp.Controllers
         public IActionResult Products()
         {
             var productList = productManager.GetAll();
-            return View(productList);
+            var pruductsViewModels = new List<ProductViewModel>();
+            foreach (var product in productList)
+            {
+                var productViewModel = Mapping.ToProductViewModel(product);
+                pruductsViewModels.Add(productViewModel);
+            }
+            return View(pruductsViewModels);
         }
 
         public IActionResult EditProduct(Guid id)
         {
             var product = productManager.TryGetById(id);
-            return View(product);
+            var productViewModel = new ProductViewModel
+            {
+                Id = product.Id,
+                Name = product.Name,
+                Cost = product.Cost
+
+            };
+            return View(productViewModel);
         }
 
         [HttpPost]
@@ -213,6 +228,7 @@ namespace OnlineShopWebApp.Controllers
         {
             var productDb = new Product
             {
+                Id = product.Id,
                 Name = product.Name,
                 Cost = product.Cost,
                 Description = product.Description,

@@ -6,7 +6,7 @@ namespace OnlineShopWebApp.Models
 {
     public class OrderData
     {
-         public  Cart Cart { get; set; }
+         public  CartViewModel Cart { get; set; }
 
         [Required(ErrorMessage ="Не указано имя") ]
         public string Name { get; set; }

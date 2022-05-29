@@ -23,7 +23,7 @@ namespace OnlineShopWebApp.Controllers
                 Cost = foundProduct.Cost,
                 Description = foundProduct.Description,
             };
-            return View(foundProduct);
+            return View(productView);
         }
 
     }

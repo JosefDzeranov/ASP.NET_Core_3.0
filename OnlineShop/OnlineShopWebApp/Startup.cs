@@ -25,11 +25,11 @@ namespace OnlineShopWebApp
         public void ConfigureServices(IServiceCollection services)
         {
             //получаем строку подключения из файла конфигурации
-            string connection = Configuration.GetConnectionString("online_shop");
+            string connection = Configuration.GetConnectionString("online_shop_bilonenko");
             services.AddDbContext<DataBaseContext>(options => options.UseSqlServer(connection));
            
 
-            services.AddSingleton<ICartManager, CartManager>();
+            services.AddTransient<ICartManager, CartManagerDB>();
             services.AddTransient<IProductManager, ProductManagerDB>();
             services.AddSingleton<IOrderManager, OrderManager>();
             services.AddSingleton<IComparison, ComparisonManager>();

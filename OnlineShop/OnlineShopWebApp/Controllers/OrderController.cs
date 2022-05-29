@@ -1,4 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
+using OnlineShop.Db;
+using OnlineShopWebApp.Helpers;
 using OnlineShopWebApp.Models;
 
 namespace OnlineShopWebApp.Controllers
@@ -20,7 +22,7 @@ namespace OnlineShopWebApp.Controllers
             var cart = cartManager.TryGetCartByUserID(Constants.UserId);
             var orderData = new OrderData
             {
-                Cart = cart
+                Cart = Mapping.ToCartViewModel(cart)
             };
 
             return View(orderData);
@@ -33,7 +35,7 @@ namespace OnlineShopWebApp.Controllers
             if (ModelState.IsValid)
             {
                 var cart = cartManager.TryGetCartByUserID(Constants.UserId);
-                var order = new Order(cart, orderData, Constants.UserId);
+                var order = new Order(Mapping.ToCartViewModel(cart), orderData, Constants.UserId);
 
 
                 orderManager.SaveOrder(order);

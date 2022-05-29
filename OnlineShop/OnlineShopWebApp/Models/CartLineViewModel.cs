@@ -1,8 +1,10 @@
-﻿namespace OnlineShopWebApp.Models
+﻿using System;
+
+namespace OnlineShopWebApp.Models
 {
-    public class CartLine
+    public class CartLineViewModel
     {
-        int Id;
+        public Guid Id { get; set; }
         public ProductViewModel Product { get; set; }
 
         public int Amount { get; set; }
@@ -15,10 +17,10 @@
                 return Amount * Product.Cost;
             }
         }
-        public CartLine(ProductViewModel product)
-        {
-            Product = product;
-        }
+        //public CartLineViewModel(ProductViewModel product)
+        //{
+        //    Product = product;
+        //}
 
     }
 }

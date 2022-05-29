@@ -47,19 +47,19 @@ namespace OnlineShopWebApp
 
         public List<Order> GetOrders()
         {
-            string data = string.Empty;
-            if (File.Exists(path))
-            {
-                using (StreamReader sr = new StreamReader(path))
-                {
-                    data = sr.ReadToEnd();
-                }
-                ordersList = JsonConvert.DeserializeObject<List<Order>>(data);
-            }
-            else
-            {
-                ordersList = new List<Order>();
-            }
+            //string data = string.Empty;
+            //if (File.Exists(path))
+            //{
+            //    using (StreamReader sr = new StreamReader(path))
+            //    {
+            //        data = sr.ReadToEnd();
+            //    }
+            //    ordersList = JsonConvert.DeserializeObject<List<Order>>(data);
+            //}
+            //else
+            //{
+            //    ordersList = new List<Order>();
+            //}
             
             return ordersList;
         }

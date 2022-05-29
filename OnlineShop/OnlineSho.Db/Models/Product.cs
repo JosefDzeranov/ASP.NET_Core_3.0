@@ -14,6 +14,13 @@ namespace OnlineShop.Db.Models
 
         public string Description { get; set; }
 
+        public List<CartLine> CartLines { get; set; }
+
+        public Product()
+        {
+            CartLines = new List<CartLine>();
+        }
+
 
     }
 }

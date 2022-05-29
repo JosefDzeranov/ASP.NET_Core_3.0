@@ -1,7 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
-using System;
-using System.Collections.Generic;
-using System.Linq;
+using OnlineShop.Db;
+using OnlineShopWebApp.Helpers;
 
 namespace OnlineShopWebApp.Models
 {
@@ -16,7 +15,10 @@ namespace OnlineShopWebApp.Models
         public IViewComponentResult Invoke()
         {
             var cart = cartManager.TryGetCartByUserID(Constants.UserId);
-            var productCount = cart?.Amount ?? 0;
+
+            var cartViewModel = Mapping.ToCartViewModel(cart);
+
+            var productCount = cartViewModel?.Amount ?? 0;
 
             if (cart == null || cart.CartLines.Count == 0)
             {
@@ -26,7 +28,6 @@ namespace OnlineShopWebApp.Models
             {
                 return View("Cart", productCount);
             }
-
 
         }
 
