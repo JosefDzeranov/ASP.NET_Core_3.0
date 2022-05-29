@@ -21,5 +21,14 @@ namespace OnlineShop.Db.Models
         {
             BasketItems = new List<BasketItem>();
         }
+
+        public Product(string imagePath, string name, decimal cost, string description)
+        {
+            Id = Guid.NewGuid();
+            ImagePath = imagePath;
+            Name = name;
+            Cost = cost;
+            Description = description;
+        }
     }
 }
