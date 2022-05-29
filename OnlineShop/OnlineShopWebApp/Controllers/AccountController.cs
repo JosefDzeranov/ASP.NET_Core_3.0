@@ -51,7 +51,7 @@ namespace OnlineShopWebApp.Controllers
 
             if (ModelState.IsValid)
             {
-                var user = new User
+                var user = new UserViewModel
                 {
                     Name = registerVM.Name,
                     Email = registerVM.Email,

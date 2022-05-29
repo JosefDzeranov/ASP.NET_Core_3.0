@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Localization;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -7,6 +8,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Options;
 using OnlineShop.DB;
+using OnlineShop.DB.Models;
 using OnlineShop.DB.Services;
 using OnlineShopDB.Services;
 using OnlineShopWebApp.Models;
@@ -35,6 +37,12 @@ namespace OnlineShopWebApp
               .UseLazyLoadingProxies()
               .UseSqlServer(connection);
             });
+
+            services.AddDbContext<IdentityContext>(options =>
+            options.UseSqlServer(connection));
+
+            services.AddIdentity<User, IdentityRole>()
+                .AddEntityFrameworkStores<IdentityContext>();
 
             services.AddControllersWithViews();
             services.AddTransient<IProductRepository, ProductRepository>();
@@ -75,6 +83,7 @@ namespace OnlineShopWebApp
 
             app.UseRouting();
 
+            app.UseAuthentication();
             app.UseAuthorization();
 
             var localizationOptions = app.ApplicationServices.GetService<IOptions<RequestLocalizationOptions>>().Value;
