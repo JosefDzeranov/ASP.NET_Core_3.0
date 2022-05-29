@@ -1,9 +1,6 @@
 ﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using OnlineShop.DB.Models;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace OnlineShop.DB
 {
