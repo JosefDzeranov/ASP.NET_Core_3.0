@@ -17,6 +17,8 @@ namespace OnlineShop.Db.Models
 
         public List<BasketItem> BasketItems { get; set; }
 
+        public bool Available { get; set; }
+
         public  Product ()
         {
             BasketItems = new List<BasketItem>();
@@ -29,6 +31,7 @@ namespace OnlineShop.Db.Models
             Name = name;
             Cost = cost;
             Description = description;
+            Available = true;
         }
     }
 }

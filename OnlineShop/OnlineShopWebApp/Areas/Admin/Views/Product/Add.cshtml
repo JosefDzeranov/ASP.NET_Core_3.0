@@ -10,11 +10,12 @@
     <div class="row">
         <div class="col-2">
             @await Html.PartialAsync("AdminMenuLeft")
-        </div>
+        </div> 
         <div class="col-10 mx-auto">
             <h2>Add product</h2>
             <form asp-action="Add" asp-controller="Product" asp-area="Admin">
                 <div class="validation" asp-validation-summary="All"></div>
+                <input name="Available" hidden value="true"/>
                 <div class="mb-3">
                     <input class="form-control" asp-for="ImagePath" placeholder="Use /img/test.jpg as Image path to add an image" />
                     <span asp-validation-for="ImagePath"></span>

@@ -18,5 +18,7 @@ namespace OnlineShopWebApp.Models
 
         [Required]
         public string Description { get; set; }
+
+        public bool Available { get; set; }
     }
 }

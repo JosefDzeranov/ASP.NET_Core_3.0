@@ -14,7 +14,8 @@ namespace OnlineShopWebApp.Helpers
                 ImagePath = product.ImagePath,
                 Name = product.Name,
                 Cost = product.Cost,
-                Description = product.Description
+                Description = product.Description,
+                Available = product.Available
             };
             return productViewModel;
         }
@@ -38,7 +39,8 @@ namespace OnlineShopWebApp.Helpers
                 ImagePath = productViewModel.ImagePath,
                 Name = productViewModel.Name,
                 Cost = productViewModel.Cost,
-                Description = productViewModel.Description
+                Description = productViewModel.Description,
+                Available = productViewModel.Available
             };
             return product;
         }

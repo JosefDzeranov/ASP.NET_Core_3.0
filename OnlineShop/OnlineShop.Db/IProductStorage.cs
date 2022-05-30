@@ -6,7 +6,8 @@ namespace OnlineShop.Db
 {
     public interface IProductStorage
     {
-        List<Product> GetProductData();
+        List<Product> GetAll();
+        List<Product> GetAllAvailable();
         Product TryGetProduct(Guid id);
         IEnumerable<Product> SearchByName(string name);
         void Add(Product product);

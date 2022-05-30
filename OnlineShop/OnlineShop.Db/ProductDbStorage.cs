@@ -14,9 +14,14 @@ namespace OnlineShop.Db
             _databaseContext = databaseContext;
         }
 
-        public List<Product> GetProductData()
+        public List<Product> GetAll()
         {
             return _databaseContext.Products.ToList();
+        }
+
+        public List<Product> GetAllAvailable()
+        {
+            return _databaseContext.Products.Where(p => p.Available == true).ToList();
         }
 
         public Product TryGetProduct(Guid id)
@@ -40,7 +45,7 @@ namespace OnlineShop.Db
         {
             var editProduct = _databaseContext.Products.FirstOrDefault(p => p.Id == product.Id);
 
-            if(editProduct == null)
+            if (editProduct == null)
             {
                 return;
             }
@@ -49,6 +54,7 @@ namespace OnlineShop.Db
             editProduct.Name = product.Name;
             editProduct.Cost = product.Cost;
             editProduct.Description = product.Description;
+            editProduct.Available = product.Available;
 
             _databaseContext.SaveChanges();
         }
@@ -56,6 +62,7 @@ namespace OnlineShop.Db
         public void Remove(Guid id)
         {
             var product = _databaseContext.Products.FirstOrDefault(p => p.Id == id);
+           // product.Available = false;
             _databaseContext.Products.Remove(product);
             _databaseContext.SaveChanges();
         }
