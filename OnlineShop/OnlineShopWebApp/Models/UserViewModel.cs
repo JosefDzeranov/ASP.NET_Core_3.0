@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace OnlineShopWebApp.Models
 {
-    public class User
+    public class UserViewModel
     {
         [Required]
         public Guid Id { get; set; } = Guid.NewGuid();

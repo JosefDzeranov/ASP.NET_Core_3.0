@@ -6,12 +6,12 @@ namespace OnlineShopWebApp.Services
 {
     public interface IUserRepository
     {
-        bool Add(User user);
-        void Update(User user);
+        bool Add(UserViewModel user);
+        void Update(UserViewModel user);
         void Delete(Guid id);
-        User TryGetById(Guid id);
-        User TryGetByEmail(string email);
+        UserViewModel TryGetById(Guid id);
+        UserViewModel TryGetByEmail(string email);
         bool Auth(string username, string password, bool rememberMe);
-        List<User> GetAll();
+        List<UserViewModel> GetAll();
     }
 }

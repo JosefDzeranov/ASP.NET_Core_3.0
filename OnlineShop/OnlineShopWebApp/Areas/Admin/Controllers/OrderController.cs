@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
+using OnlineShop.DB;
 using OnlineShop.DB.Models;
 using OnlineShopWebApp.Models;
 using OnlineShopWebApp.Services;
@@ -6,7 +8,8 @@ using System;
 
 namespace OnlineShopWebApp.Areas.Admin.Controllers
 {
-    [Area("Admin")]
+    [Area(Const.AdminRoleName)]
+    [Authorize(Roles=Const.AdminRoleName)]
     public class OrderController : Controller
     {
         private readonly IOrderRepository orderRepository;

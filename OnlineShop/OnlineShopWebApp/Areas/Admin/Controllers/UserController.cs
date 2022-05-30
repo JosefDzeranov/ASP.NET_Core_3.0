@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
+using OnlineShop.DB;
 using OnlineShopWebApp.Models;
 using OnlineShopWebApp.Services;
 using OnlineShopWebApp.ViewModels;
@@ -7,7 +9,8 @@ using System.Collections.Generic;
 
 namespace OnlineShopWebApp.Areas.Admin.Controllers
 {
-    [Area("Admin")]
+    [Area(Const.AdminRoleName)]
+    [Authorize(Roles = Const.AdminRoleName)]
     public class UserController : Controller
     {
         private readonly IUserRepository userRepository;
@@ -46,7 +49,7 @@ namespace OnlineShopWebApp.Areas.Admin.Controllers
 
             if (ModelState.IsValid)
             {
-                var user = new User
+                var user = new UserViewModel
                 {
                     Name = registerVM.Name,
                     Email = registerVM.Email,

@@ -1,9 +1,14 @@
 ﻿@model int
+
 <a type="button" class="nav-link text-light text-center" asp-area="" asp-controller="Cart" asp-action="Index">
     <h4><i class="bi bi-cart4"></i></h4>
     Корзина
-    @if (Model > 0)
+    @if (User.Identity.IsAuthenticated)
     {
-        <span class="badge bg-secondary">@Model</span>
+        @if (Model > 0)
+        {
+            <span class="badge bg-secondary">@Model</span>
+        }
     }
+
 </a>

@@ -7,8 +7,8 @@ namespace OnlineShopWebApp.Services
 {
     public class UserRepository : IUserRepository
     {
-        private List<User> users = new List<User>();
-        public bool Add(User user)
+        private List<UserViewModel> users = new List<UserViewModel>();
+        public bool Add(UserViewModel user)
         {
             if (TryGetByEmail(user.Email) != null)
             {
@@ -48,22 +48,22 @@ namespace OnlineShopWebApp.Services
 
         }
 
-        public List<User> GetAll()
+        public List<UserViewModel> GetAll()
         {
             return users;
         }
 
-        public User TryGetByEmail(string email)
+        public UserViewModel TryGetByEmail(string email)
         {
             return users.FirstOrDefault(x => x.Email == email);
         }
 
-        public User TryGetById(Guid id)
+        public UserViewModel TryGetById(Guid id)
         {
             return users.FirstOrDefault(x => x.Id == id);
         }
 
-        public void Update(User user)
+        public void Update(UserViewModel user)
         {
             var oldUser = TryGetById(user.Id);
             users.Remove(oldUser);
