@@ -45,13 +45,13 @@ namespace OnlineShopWebApp.Controllers
 
         public IActionResult Roles()
         {
-            var roles = productsRepository.GetAllProducts();
+            var roles = rolesRepository.GetAllProducts();
             return View(roles);
         }
 
         public IActionResult RemoveRole(string roleName)
         {
-            //productsRepository.Remove(roleName);
+            rolesRepository.Remove(roleName);
             return RedirectToAction("Roles");
         }
 
@@ -60,6 +60,7 @@ namespace OnlineShopWebApp.Controllers
             return View();
         }
 
+        [HttpPost]
         public IActionResult AddRole(Role role)
         {
             if (rolesRepository.TryGetByName(role.Name) != null)
@@ -68,6 +69,7 @@ namespace OnlineShopWebApp.Controllers
             }
             if (ModelState.IsValid)
             {
+                rolesRepository.Add(role);
                 return RedirectToAction("Roles");
             }
             return View(role);

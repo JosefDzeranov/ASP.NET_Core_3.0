@@ -17,11 +17,11 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach (var product in Model)
+                        @foreach (var roles in Model)
                         {
                             <tr>
-                                <td>@product.Name</td>
-                                <td><a href="/admin/removerole?roleName=@product.Name">Удалить</a></td>
+                                <td>@roles.Name</td>
+                                <td><a href="/admin/removerole?roleName=@roles.Name">Удалить</a></td>
                             </tr>
                         }
                     </tbody>
