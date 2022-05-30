@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Localization;
 using Microsoft.EntityFrameworkCore;
@@ -14,6 +15,7 @@ using OnlineShopDB.Services;
 using OnlineShopWebApp.Models;
 using OnlineShopWebApp.Services;
 using Serilog;
+using System;
 using System.Globalization;
 
 namespace OnlineShopWebApp
@@ -43,6 +45,18 @@ namespace OnlineShopWebApp
 
             services.AddIdentity<User, IdentityRole>()
                 .AddEntityFrameworkStores<IdentityContext>();
+
+            services.ConfigureApplicationCookie(options =>
+            {
+                options.ExpireTimeSpan = TimeSpan.FromHours(8);
+                options.LoginPath = "/Account/Login";
+                options.LogoutPath = "/Account/Logout";
+                options.Cookie = new CookieBuilder()
+                {
+                    IsEssential = true,
+                };
+            });
+           
 
             services.AddControllersWithViews();
             services.AddTransient<IProductRepository, ProductRepository>();
