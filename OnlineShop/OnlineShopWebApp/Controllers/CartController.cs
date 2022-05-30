@@ -5,9 +5,11 @@ using OnlineShop.DB.Services;
 using System;
 using System.Collections.Generic;
 using OnlineShop.DB;
+using Microsoft.AspNetCore.Authorization;
 
 namespace OnlineShopWebApp.Controllers
 {
+    [Authorize]
     public class CartController : Controller
     {
         private readonly IProductRepository productRepository;

@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using OnlineShop.DB.Models;
 using OnlineShopWebApp.Models;
@@ -44,7 +45,7 @@ namespace OnlineShopWebApp.Controllers
             }
             return View();
         }
-       
+        [Authorize]
         public IActionResult Logout()
         {
             signInManager.SignOutAsync().Wait();
