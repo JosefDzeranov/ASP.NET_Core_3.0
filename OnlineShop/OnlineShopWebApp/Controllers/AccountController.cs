@@ -23,9 +23,9 @@ namespace OnlineShopWebApp.Controllers
         }
 
         [HttpGet]
-        public IActionResult Login()
+        public IActionResult Login(string returnUrl)
         {
-            return View();
+            return View(new LoginViewModel(){ ReturnUrl = returnUrl});
         }
         [HttpPost]
         public IActionResult Login(LoginViewModel loginVM)
@@ -35,6 +35,10 @@ namespace OnlineShopWebApp.Controllers
                 var result = signInManager.PasswordSignInAsync(loginVM.UserName, loginVM.Password, loginVM.RememberMe,false).Result;
                 if (result.Succeeded)
                 {
+                    if (loginVM.ReturnUrl != null)
+                    {
+                        return Redirect(loginVM.ReturnUrl);
+                    }
                     return RedirectToAction("Index", "Home");
                 }
                 else

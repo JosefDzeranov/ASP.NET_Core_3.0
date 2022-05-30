@@ -9,6 +9,7 @@ namespace OnlineShopWebApp.ViewModels
         [Required(ErrorMessage = "не указан пароль")]
         public string Password { get; set; }
        
+        public string ReturnUrl { get; set; }
         public bool RememberMe { get; set; }
     }
 }
