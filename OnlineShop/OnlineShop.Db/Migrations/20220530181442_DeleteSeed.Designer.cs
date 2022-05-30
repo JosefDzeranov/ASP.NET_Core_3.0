@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using OnlineShop.Db;
 
 namespace OnlineShop.Db.Migrations
 {
     [DbContext(typeof(DatabaseContext))]
-    partial class DatabaseContextModelSnapshot : ModelSnapshot
+    [Migration("20220530181442_DeleteSeed")]
+    partial class DeleteSeed
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -169,40 +171,6 @@ namespace OnlineShop.Db.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Products");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = new Guid("97bd9a12-edc8-4be1-b9f3-3a5f798d7196"),
-                            Cost = 450m,
-                            Description = "Автор: Стивен Кинг Жанр: мистика, ужасы",
-                            Name = "Оно",
-                            Pages = 1025
-                        },
-                        new
-                        {
-                            Id = new Guid("8f4c292f-325c-4d5c-9173-eaabbe8883ee"),
-                            Cost = 350m,
-                            Description = "Автор: Терри Пратчетт Жанр: фэнтези",
-                            Name = "Мрачный жнец",
-                            Pages = 356
-                        },
-                        new
-                        {
-                            Id = new Guid("181082ae-c474-46f8-87fd-8ddecb38889f"),
-                            Cost = 300m,
-                            Description = "Автор: Джек Лондон Жанр: роман",
-                            Name = "Странник по звездам",
-                            Pages = 332
-                        },
-                        new
-                        {
-                            Id = new Guid("56869478-f60a-4223-93df-15c46464275f"),
-                            Cost = 350m,
-                            Description = "Автор: Дарья Донцова Жанр: детектив",
-                            Name = "Крутые наследнички",
-                            Pages = 425
-                        });
                 });
 
             modelBuilder.Entity("OnlineShop.Db.Models.CartItem", b =>

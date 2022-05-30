@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using OnlineShop.Db;
 
 namespace OnlineShop.Db.Migrations
 {
     [DbContext(typeof(DatabaseContext))]
-    partial class DatabaseContextModelSnapshot : ModelSnapshot
+    [Migration("20220530155456_AddExistProducts")]
+    partial class AddExistProducts
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -173,7 +175,7 @@ namespace OnlineShop.Db.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("97bd9a12-edc8-4be1-b9f3-3a5f798d7196"),
+                            Id = new Guid("08d693cf-c709-4c7f-b1f1-9ff167417d43"),
                             Cost = 450m,
                             Description = "Автор: Стивен Кинг Жанр: мистика, ужасы",
                             Name = "Оно",
@@ -181,7 +183,7 @@ namespace OnlineShop.Db.Migrations
                         },
                         new
                         {
-                            Id = new Guid("8f4c292f-325c-4d5c-9173-eaabbe8883ee"),
+                            Id = new Guid("47a30d03-3745-4aec-96bd-1adf80db3c51"),
                             Cost = 350m,
                             Description = "Автор: Терри Пратчетт Жанр: фэнтези",
                             Name = "Мрачный жнец",
@@ -189,7 +191,7 @@ namespace OnlineShop.Db.Migrations
                         },
                         new
                         {
-                            Id = new Guid("181082ae-c474-46f8-87fd-8ddecb38889f"),
+                            Id = new Guid("e626ea9a-b00c-4547-8fec-233e7d2da34d"),
                             Cost = 300m,
                             Description = "Автор: Джек Лондон Жанр: роман",
                             Name = "Странник по звездам",
@@ -197,7 +199,7 @@ namespace OnlineShop.Db.Migrations
                         },
                         new
                         {
-                            Id = new Guid("56869478-f60a-4223-93df-15c46464275f"),
+                            Id = new Guid("20a82b8b-dcc0-4282-a162-edc898ed6ed1"),
                             Cost = 350m,
                             Description = "Автор: Дарья Донцова Жанр: детектив",
                             Name = "Крутые наследнички",
