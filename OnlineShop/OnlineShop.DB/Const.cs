@@ -5,8 +5,8 @@ namespace OnlineShop.DB
     public static class Const
     {
         public static Guid UserId;
-        public static string AdminRole = "Admin";
-        public static string UserRole = "User";
+        public const string AdminRoleName = "Admin";
+        public const string UserRoleName = "User";
         static Const()
         {
             UserId = Guid.NewGuid();

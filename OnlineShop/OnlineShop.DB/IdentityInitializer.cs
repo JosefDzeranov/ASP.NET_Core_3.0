@@ -11,13 +11,13 @@ namespace OnlineShop.DB
         {
             var adminEmail = "admin@mail.ru";
             var adminPassword = "FghTsEwQ74@";
-            if(roleManager.FindByNameAsync(Const.AdminRole).Result == null)
+            if(roleManager.FindByNameAsync(Const.AdminRoleName).Result == null)
             {
-                roleManager.CreateAsync(new IdentityRole(Const.AdminRole)).Wait();
+                roleManager.CreateAsync(new IdentityRole(Const.AdminRoleName)).Wait();
             }
-            if(roleManager.FindByNameAsync(Const.UserRole).Result == null)
+            if(roleManager.FindByNameAsync(Const.UserRoleName).Result == null)
             {
-                roleManager.CreateAsync(new IdentityRole(Const.UserRole)).Wait();
+                roleManager.CreateAsync(new IdentityRole(Const.UserRoleName)).Wait();
             }
             if( userManager.FindByNameAsync(adminEmail).Result == null)
             {
@@ -25,7 +25,7 @@ namespace OnlineShop.DB
                 var result = userManager.CreateAsync(admin, adminPassword).Result;
                 if (result.Succeeded)
                 {
-                    userManager.AddToRoleAsync(admin, Const.AdminRole).Wait();
+                    userManager.AddToRoleAsync(admin, Const.AdminRoleName).Wait();
                 }
             }
         }
