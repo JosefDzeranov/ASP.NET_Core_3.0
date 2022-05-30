@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc;
+using OnlineShop.DB.Models;
 using OnlineShopWebApp.Models;
 using OnlineShopWebApp.Services;
 using OnlineShopWebApp.ViewModels;
@@ -9,9 +11,14 @@ namespace OnlineShopWebApp.Controllers
     {
         private readonly IUserRepository userRepository;
 
-        public AccountController(IUserRepository userRepository)
+        private readonly UserManager<User> userManager;
+        private readonly SignInManager<User> signInManager;
+       
+        public AccountController(IUserRepository userRepository, UserManager<User> userManager, SignInManager<User> signInManager)
         {
             this.userRepository = userRepository;
+            this.userManager = userManager;
+            this.signInManager = signInManager;
         }
 
         [HttpGet]
@@ -24,15 +31,16 @@ namespace OnlineShopWebApp.Controllers
         {
             if (ModelState.IsValid)
             {
-                if (userRepository.Auth(loginVM.Login, loginVM.Password, loginVM.RememberMe))
+                var result = signInManager.PasswordSignInAsync(loginVM.UserName, loginVM.Password, loginVM.RememberMe,false).Result;
+                if (result.Succeeded)
                 {
-                   return RedirectToAction("Index", "Home");
+                    return RedirectToAction("Index", "Home");
                 }
                 else
                 {
                     ModelState.AddModelError("", "Неверный логин или пароль");
                 }
-               
+
             }
             return View();
         }
@@ -51,16 +59,18 @@ namespace OnlineShopWebApp.Controllers
 
             if (ModelState.IsValid)
             {
-                var user = new UserViewModel
+                var user = new User
                 {
-                    Name = registerVM.Name,
+                    UserName = registerVM.Name,
                     Email = registerVM.Email,
-                    Password = registerVM.Password,
-
                 };
-                if (userRepository.Add(user))
+
+                var result = userManager.CreateAsync(user, registerVM.Password).Result;
+
+                if (result.Succeeded)
                 {
-                   return RedirectToAction("Index", "Home");
+                    signInManager.SignInAsync(user, false).Wait();
+                    return RedirectToAction("Index", "Home");
                 }
                 else
                 {

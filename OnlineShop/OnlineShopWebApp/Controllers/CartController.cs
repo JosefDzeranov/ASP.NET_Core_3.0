@@ -4,6 +4,7 @@ using OnlineShopWebApp.Models;
 using OnlineShop.DB.Services;
 using System;
 using System.Collections.Generic;
+using OnlineShop.DB;
 
 namespace OnlineShopWebApp.Controllers
 {

@@ -116,7 +116,7 @@ namespace OnlineShopWebApp.Models
                 FirstName = order.FirstName,
                 LastName = order.LastName,
                 Phone = order.Phone,
-                Status = order.Status, 
+                Status = order.Status,
                 UserId = order.UserId
             };
 
@@ -151,6 +151,9 @@ namespace OnlineShopWebApp.Models
                             .GetCustomAttribute<DisplayAttribute>()
                             .GetName();
         }
+
+
+      
     }
 
 
