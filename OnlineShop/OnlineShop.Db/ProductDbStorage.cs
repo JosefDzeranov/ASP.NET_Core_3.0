@@ -62,8 +62,8 @@ namespace OnlineShop.Db
         public void Remove(Guid id)
         {
             var product = _databaseContext.Products.FirstOrDefault(p => p.Id == id);
-           // product.Available = false;
-            _databaseContext.Products.Remove(product);
+            product.Available = false;
+            //_databaseContext.Products.Remove(product);
             _databaseContext.SaveChanges();
         }
     }
