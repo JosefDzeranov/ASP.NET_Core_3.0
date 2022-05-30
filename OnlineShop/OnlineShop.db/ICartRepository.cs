@@ -2,7 +2,8 @@
 using System.Collections.Generic;
 using System; 
 
-namespace OnlineShop.Db
+namespace OnlineShop.db
+
 {
 	public interface ICartRepository
 	{

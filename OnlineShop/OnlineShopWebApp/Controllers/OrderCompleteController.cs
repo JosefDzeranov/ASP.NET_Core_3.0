@@ -2,8 +2,9 @@
 using OnlineShopWebApp.Services;
 using OnlineShopWebApp.Models;
 using System.Collections.Generic;
-using OnlineShop.Db;
+using OnlineShop.db;
 using OnlineShop.db.Models;
+using OnlineShopWebApp.Helpers;
 
 namespace OnlineShopWebApp.Controllers
 {
@@ -24,13 +25,16 @@ namespace OnlineShopWebApp.Controllers
             return View();
         }
 
-        public IActionResult Buy(Order order)
+        public IActionResult Buy(OrderViewModel orderViewModel)
         {
-            order.CartItems = new List<CartItem>(cartRepository.TryGetByUserId(Const.UserId).Items);
+            var cartItems = cartRepository.TryGetByUserId(Const.UserId).Items;
+            //orderViewModel.CartItems = new List<CartItemViewModel>(Mapping.ToCartItemsViewModels(cartRepository.TryGetByUserId(Const.UserId).Items));
+            var order = Mapping.ToOrder(orderViewModel);
+            order.Items.AddRange(cartItems);
             ordersRepository.Add(order);
             cartRepository.RemoveAll(Const.UserId);
             return View();
         }
-
+        
     }
 }

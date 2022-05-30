@@ -8,7 +8,9 @@ namespace OnlineShop.db.Models
 
         public Product Product { get; set; }
 
-        public Cart Cart { get; set; }
+        public virtual Cart? Cart { get; set; }
+
+        public virtual Order? Order { get; set; }
 
         public int Amount { get; set; }
 

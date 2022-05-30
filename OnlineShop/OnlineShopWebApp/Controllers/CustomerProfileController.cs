@@ -18,11 +18,11 @@ namespace OnlineShopWebApp.Controllers
         }
 
         [HttpPost]
-        public IActionResult Create(Customer customer)
+        public IActionResult Create(CustomerViewModel customer)
         {
             if (ModelState.IsValid)
             {
-                var order = new Order();
+                var order = new OrderViewModel();
                 order.Name = customer.Name;
                 order.Phone = customer.Phone;
                 order.Email = customer.Email;

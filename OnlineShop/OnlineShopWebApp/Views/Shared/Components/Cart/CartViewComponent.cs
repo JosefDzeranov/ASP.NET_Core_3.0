@@ -1,5 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using OnlineShop.Db;
+using OnlineShop.db;
 using System.Collections.Generic;
 using OnlineShopWebApp.Helpers;
 using System.Linq;
