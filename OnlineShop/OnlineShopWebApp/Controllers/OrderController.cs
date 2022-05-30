@@ -24,9 +24,9 @@ namespace OnlineShopWebApp.Controllers
             return View(order);
         }
 
-        public IActionResult Add(Order order, Customer customer)
+        public IActionResult Add(Order order, Customer customer, CartItem cartItem)
         {
-            ordersStorage.Add(order, customer, Constants.UserId);
+            ordersStorage.Add(order, customer, Constants.UserId, cartItem);
 
             cartsStorage.RemoveCartUser(Constants.UserId);
 

@@ -29,7 +29,8 @@ namespace OnlineShopWebApp.Models
                         {
                             ItemId = Guid.NewGuid(),
                             Count = 1,
-                            Product = product
+                            Product = product,
+                            Cost = product.Cost
                         }
                     }
                 };

@@ -25,7 +25,7 @@ namespace OnlineShopWebApp.Models
         {
             return orders.FindAll(x => x.UserId == userId);
         }
-        public void Add(Order order, Customer customer, string userId)
+        public void Add(Order order, Customer customer, string userId, CartItem cartItem)
         {
             int LastOrderNumber = 0;
             if (orders.Count > 0)
@@ -38,15 +38,25 @@ namespace OnlineShopWebApp.Models
                 Id = Guid.NewGuid(),
                 OrderNumber = LastOrderNumber,
                 OrderDateTime = DateTime.Now,
+                //                CostOrder = order.CostOrder,
                 UserId = Constants.UserId,
-                Items = new List<OrderItem>
+                Items = new List<CartItem>
+                {
+                    new CartItem
                     {
-                        new OrderItem
-                        {
-                            Id = Guid.NewGuid(),
-                            Count = 1,
-                        }
+                        ItemId = Guid.NewGuid(),
+                        Product = cartItem.Product,
+                        Count = cartItem.Count + 1
                     }
+                },
+                Customer = new Customer()
+                {
+                    LastName = customer.LastName,
+                    Name = customer.Name,
+                    Phone = customer.Phone,
+                    Mail = customer.Mail,
+                    Address = customer.Address,
+                }
             };
 
             orders.Add(newOrder);
