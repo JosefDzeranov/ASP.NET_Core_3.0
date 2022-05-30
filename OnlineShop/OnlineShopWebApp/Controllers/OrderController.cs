@@ -38,7 +38,7 @@ namespace OnlineShopWebApp.Controllers
             var basket = _basketStorage.TryGetByUserId(Constants.UserId);
             var deliveryInfo = orderForm.DeliveryInfo.ToDeliveryInfo();
             _orderStorage.Add(Constants.UserId, basket, deliveryInfo);
-            _basketStorage.ClearBasket(Constants.UserId);
+            _basketStorage.Clear(Constants.UserId);
             return View();
         }
     }

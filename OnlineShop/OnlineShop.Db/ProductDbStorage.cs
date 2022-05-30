@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using OnlineShop.Db.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace OnlineShop.Db
 {
@@ -62,8 +63,21 @@ namespace OnlineShop.Db
         public void Remove(Guid id)
         {
             var product = _databaseContext.Products.FirstOrDefault(p => p.Id == id);
-            product.Available = false;
-            //_databaseContext.Products.Remove(product);
+
+            var orderWithProduct = _databaseContext.Orders.Include(order => order.Items)
+                                                 .ThenInclude(item => item.Product)
+                                                 .FirstOrDefault(p => p.Id == product.Id);
+
+            var basketItemWithProduct = _databaseContext.BasketItems.FirstOrDefault(bi => bi.Product.Id == product.Id);
+
+            if (orderWithProduct != null || basketItemWithProduct != null)
+            {
+                product.Available = false;
+            }
+            else
+            {
+                _databaseContext.Products.Remove(product);
+            }
             _databaseContext.SaveChanges();
         }
     }

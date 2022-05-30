@@ -34,20 +34,20 @@ namespace OnlineShopWebApp.Controllers
         public IActionResult Add(Guid id)
         {
             var product = _productStorage.TryGetProduct(id);
-            _basketStorage.AddProduct(Constants.UserId, product);
+            _basketStorage.Add(Constants.UserId, product);
             return RedirectToAction("Index");
         }
 
         public IActionResult Remove(Guid id)
         {
             var product = _productStorage.TryGetProduct(id);
-            _basketStorage.RemoveProduct(Constants.UserId, product);
+            _basketStorage.Remove(Constants.UserId, product);
             return RedirectToAction("Index");
         }
 
         public IActionResult Clear()
         {
-            _basketStorage.ClearBasket(Constants.UserId);
+            _basketStorage.Clear(Constants.UserId);
             return RedirectToAction("Index");
         }
     }

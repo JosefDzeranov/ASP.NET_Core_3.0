@@ -22,7 +22,7 @@ namespace OnlineShop.Db
             return basket;
         }
 
-        public void AddProduct(string userId, Product product)
+        public void Add(string userId, Product product)
         {
             var basket = TryGetByUserId(userId);
 
@@ -63,7 +63,7 @@ namespace OnlineShop.Db
             _databaseContext.SaveChanges();
         }
 
-        public void RemoveProduct(string userId, Product product)
+        public void Remove(string userId, Product product)
         {
             var basket = TryGetByUserId(userId);
 
@@ -83,7 +83,7 @@ namespace OnlineShop.Db
             _databaseContext.SaveChanges();
         }
 
-        public void ClearBasket(string userId)
+        public void Clear(string userId)
         {
             var basket = TryGetByUserId(userId);
             _databaseContext.Baskets.Remove(basket);

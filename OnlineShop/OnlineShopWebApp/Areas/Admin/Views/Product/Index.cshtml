@@ -46,17 +46,18 @@
                                     <a class="btn btn-outline-dark btn-sm" role="button"
                                        asp-area="Admin" asp-controller="Product" asp-action="Edit" asp-route-id="@Model[i].Id">Edit</a>
                                     <!-- Trigger modal -->
-                                    <a class="btn btn-outline-dark btn-sm" role="button" href="#@modalId" data-toggle="modal">Remove from sale</a>
+                                    <a class="btn btn-outline-dark btn-sm" role="button" href="#@modalId" data-toggle="modal">Remove</a>
                                     <!-- Modal -->
                                     <div class="modal fade" id="@modalId" data-backdrop="static" tabindex="-1" aria-labelledby="@headerId" aria-hidden="true">
                                         <div class="modal-dialog modal-dialog-centered">
                                             <div class="modal-content">
                                                 <div class="modal-header">
-                                                    <h5 class="modal-title" id="@headerId">Removing product from sale...</h5>
+                                                    <h5 class="modal-title" id="@headerId">Removing product...</h5>
                                                     <button type="button" class="close" data-dismiss="modal" aria-label="close">x</button>
                                                 </div>
                                                 <div class="modal-body text-center">
-                                                    <p>Are you sure you want to withdraw this product from sale?</p>
+                                                    <p>Are you sure you want to remove this product?</p>
+                                                    <p>If the product has already been added to the order, it will be marked as "not available" and will not be removed from the database.</p>
                                                 </div>
                                                 <div class="modal-footer">
                                                     <button type="button" class="btn btn-sm btn-outline-dark" data-dismiss="modal">Cancel</button>
