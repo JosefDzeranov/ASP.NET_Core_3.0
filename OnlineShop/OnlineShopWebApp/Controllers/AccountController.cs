@@ -44,6 +44,14 @@ namespace OnlineShopWebApp.Controllers
             }
             return View();
         }
+       
+        public IActionResult Logout()
+        {
+            signInManager.SignOutAsync().Wait();
+
+            return RedirectToAction("Index", "Home");
+        }
+
         [HttpGet]
         public IActionResult Register()
         {
