@@ -15,7 +15,8 @@ namespace OnlineShopWebApp.Models
         public string Address { get; set; }
         
         public CustomerViewModel User { get; set; }
-        public OrderStatus Status { get; set; }
+
+        public OrderStatusViewModel Status { get; set; }
 
         public DateTime CreateDateTime { get; set; }
 
@@ -23,7 +24,7 @@ namespace OnlineShopWebApp.Models
 
         public OrderViewModel()
         {
-            Status = OrderStatus.Created;
+            Status = OrderStatusViewModel.Created;
             CreateDateTime = DateTime.Now;
             CartItems = new List<CartItemViewModel>();
         }

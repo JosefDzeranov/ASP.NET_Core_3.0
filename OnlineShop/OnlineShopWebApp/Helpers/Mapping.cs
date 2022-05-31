@@ -92,7 +92,7 @@ namespace OnlineShopWebApp.Helpers
             {
                 Id = order.Id,
                 CreateDateTime = order.CreateDateTime,
-                Status = order.Status,
+                Status = (OrderStatusViewModel)order.Status,
                 User = ToCustomerViewModel(order.User),
                 CartItems = ToCartItemsViewModels(order.Items).ToList()
             };
@@ -111,7 +111,7 @@ namespace OnlineShopWebApp.Helpers
             {
                 Id = order.Id,
                 CreateDateTime = order.CreateDateTime,
-                Status = order.Status,
+                Status = (OrderStatus)order.Status,
                 //Items = ToCartItems(order.CartItems).ToList(),
                 User = new Customer()
                 {
