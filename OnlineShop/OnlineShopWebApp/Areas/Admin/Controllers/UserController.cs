@@ -28,13 +28,13 @@ namespace OnlineShopWebApp.Areas.Admin.Controllers
 
         public IActionResult Index()
         {
-            //var users = userRepository.GetAll();
             var users = userManager.Users.ToList();
+            var usersViewModel = users.MappingToListUserViewModel();
 
-            return View(users);
+            return View(usersViewModel);
         }
 
-        public IActionResult UserDetails(Guid id)
+        public IActionResult UserDetails(string id)
         {
             var user = userRepository.TryGetById(id);
 
@@ -77,13 +77,13 @@ namespace OnlineShopWebApp.Areas.Admin.Controllers
             return View();
         }
         
-        public IActionResult Delete(Guid id)
+        public IActionResult Delete(string id)
         {
             userRepository.Delete(id);
 
             return RedirectToAction("Index", "User");
         }
-        public IActionResult ChangePassword(Guid id)
+        public IActionResult ChangePassword(string id)
         {
             var user = userRepository.TryGetById(id);
             var userPasswordViewModel = new UserPasswordViewModel
@@ -102,7 +102,7 @@ namespace OnlineShopWebApp.Areas.Admin.Controllers
             userRepository.Update(user);
             return RedirectToAction("Index", "User");
         }
-        public IActionResult ChangeInfo(Guid id)
+        public IActionResult ChangeInfo(string id)
         {
             var user = userRepository.TryGetById(id);
             var userInfoViewModel = new UserInfoViewModel

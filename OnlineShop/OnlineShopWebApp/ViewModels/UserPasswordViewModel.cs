@@ -13,6 +13,6 @@ namespace OnlineShopWebApp.ViewModels
         public string ConfirmPassword { get; set; }
 
         [Required]
-        public Guid UserId { get; set; }
+        public string UserId { get; set; }
     }
 }

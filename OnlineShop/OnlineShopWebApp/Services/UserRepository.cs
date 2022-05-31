@@ -38,7 +38,7 @@ namespace OnlineShopWebApp.Services
 
         }
 
-        public void Delete(Guid id)
+        public void Delete(string id)
         {
             var user = TryGetById(id);
             if (user != null)
@@ -58,7 +58,7 @@ namespace OnlineShopWebApp.Services
             return users.FirstOrDefault(x => x.Email == email);
         }
 
-        public UserViewModel TryGetById(Guid id)
+        public UserViewModel TryGetById(string id)
         {
             return users.FirstOrDefault(x => x.Id == id);
         }

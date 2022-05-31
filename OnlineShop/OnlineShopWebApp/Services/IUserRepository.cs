@@ -8,8 +8,8 @@ namespace OnlineShopWebApp.Services
     {
         bool Add(UserViewModel user);
         void Update(UserViewModel user);
-        void Delete(Guid id);
-        UserViewModel TryGetById(Guid id);
+        void Delete(string id);
+        UserViewModel TryGetById(string id);
         UserViewModel TryGetByEmail(string email);
         bool Auth(string username, string password, bool rememberMe);
         List<UserViewModel> GetAll();

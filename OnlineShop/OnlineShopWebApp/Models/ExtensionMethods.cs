@@ -153,20 +153,31 @@ namespace OnlineShopWebApp.Models
         }
 
 
-        public static UserViewModel MappingToUserViewModel(User user)
+        public static UserViewModel MappingToUserViewModel(this User user)
         {
             var userViewModel = new UserViewModel
             {
-                //Id = user.Id,
+                Id = user.Id,
                 Email = user.Email,
                 FirstName = user.FirstName,
                 LastName = user.LastName,
                 Phone = user.PhoneNumber
 
             };
-
+            return userViewModel;
         }
 
+        public static List<UserViewModel> MappingToListUserViewModel(this List<User> users)
+        {
+            var usersViewModel = new List<UserViewModel>();
+
+            foreach(var user in users)
+            {
+                usersViewModel.Add(MappingToUserViewModel(user));
+            }
+           
+            return usersViewModel;
+        }
 
     }
 
