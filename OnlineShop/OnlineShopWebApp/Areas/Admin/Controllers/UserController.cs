@@ -36,9 +36,10 @@ namespace OnlineShopWebApp.Areas.Admin.Controllers
 
         public IActionResult UserDetails(string id)
         {
-            var user = userRepository.TryGetById(id);
+            var user = userManager.FindByIdAsync(id).Result;
+            var userViewModel = user.MappingToUserViewModel();
 
-            return View(user);
+            return View(userViewModel);
         }
         public IActionResult AddUser()
         {
