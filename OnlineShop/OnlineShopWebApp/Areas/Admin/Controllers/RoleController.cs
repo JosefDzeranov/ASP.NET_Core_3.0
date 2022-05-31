@@ -1,9 +1,12 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using OnlineShopWebApp.Areas.Admin.Models;
+using Microsoft.AspNetCore.Authorization;
+using OnlineShop.Db;
 
 namespace OnlineShopWebApp.Areas.Admin.Controllers
 {
-    [Area("Admin")]
+    [Area(Constants.AdminRoleName)]
+    [Authorize(Constants.AdminRoleName)]
     public class RoleController : Controller
     {
         private readonly IRoleStorage _roleStorage;

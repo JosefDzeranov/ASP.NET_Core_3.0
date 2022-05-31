@@ -3,10 +3,13 @@ using Microsoft.AspNetCore.Mvc;
 using OnlineShopWebApp.Models;
 using OnlineShopWebApp.Areas.Admin.Models;
 using OnlineShopWebApp.Areas.Admin.Models.Attributes;
+using OnlineShop.Db;
+using Microsoft.AspNetCore.Authorization;
 
 namespace OnlineShopWebApp.Areas.Admin.Controllers
 {
-    [Area("Admin")]
+    [Area(Constants.AdminRoleName)]
+    [Authorize(Constants.AdminRoleName)]
     public class UserController : Controller
     {
         private readonly IUserStorage _userStorage;

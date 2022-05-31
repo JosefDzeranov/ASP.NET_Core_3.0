@@ -2,9 +2,11 @@
 using OnlineShopWebApp.Models;
 using OnlineShopWebApp.Helpers;
 using OnlineShop.Db;
+using Microsoft.AspNetCore.Authorization;
 
 namespace OnlineShopWebApp.Controllers
 {
+    [Authorize]
     public class OrderController : Controller
     {
         private readonly IOrderStorage _orderStorage;

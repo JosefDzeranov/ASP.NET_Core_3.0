@@ -4,10 +4,12 @@ using OnlineShopWebApp.Models;
 using OnlineShop.Db;
 using OnlineShop.Db.Models;
 using OnlineShopWebApp.Helpers;
+using Microsoft.AspNetCore.Authorization;
 
 namespace OnlineShopWebApp.Areas.Admin.Controllers
 {
-    [Area("Admin")]
+    [Area(Constants.AdminRoleName)]
+    [Authorize(Constants.AdminRoleName)]
     public class OrderController : Controller
     {
         private readonly IOrderStorage _orderStorage;
