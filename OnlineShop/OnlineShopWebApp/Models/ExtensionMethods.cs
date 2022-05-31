@@ -9,7 +9,7 @@ namespace OnlineShopWebApp.Models
 {
     public static class ExtensionMethods
     {
-        public static Product MappingProduct(this ProductViewModel productViewModel)
+        public static Product MappingToProduct(this ProductViewModel productViewModel)
         {
             var productDb = new Product
             {
@@ -23,7 +23,7 @@ namespace OnlineShopWebApp.Models
 
             return productDb;
         }
-        public static ProductViewModel MappingProductViewModel(this Product product)
+        public static ProductViewModel MappingToProductViewModel(this Product product)
         {
             var productViewModel = new ProductViewModel
             {
@@ -38,19 +38,19 @@ namespace OnlineShopWebApp.Models
             return productViewModel;
         }
 
-        public static List<ProductViewModel> MappingListProductViewModel(this List<Product> products)
+        public static List<ProductViewModel> MappingToListProductViewModel(this List<Product> products)
         {
             var productsViewModel = new List<ProductViewModel>();
 
             foreach (var product in products)
             {
-                var productViewModel = product.MappingProductViewModel();
+                var productViewModel = product.MappingToProductViewModel();
                 productsViewModel.Add(productViewModel);
             }
             return productsViewModel;
         }
 
-        public static CartViewModel MappingCartViewModel(this Cart cart)
+        public static CartViewModel MappingToCartViewModel(this Cart cart)
         {
             var cartViewModel = new CartViewModel
             {
@@ -82,7 +82,7 @@ namespace OnlineShopWebApp.Models
             return cartViewModel;
         }
 
-        public static Order MappingOrder(this OrderViewModel orderViewModel, Cart existingCart)
+        public static Order MappingToOrder(this OrderViewModel orderViewModel, Cart existingCart)
         {
             var order = new Order
             {
@@ -101,7 +101,7 @@ namespace OnlineShopWebApp.Models
             return order;
         }
 
-        public static OrderViewModel MappingOrderViewModel(this Order order)
+        public static OrderViewModel MappingToOrderViewModel(this Order order)
         {
             var orderViewModel = new OrderViewModel
             {
@@ -125,7 +125,7 @@ namespace OnlineShopWebApp.Models
                 var cartItemViewModel = new CartItemViewModel
                 {
                     Id = item.Id,
-                    Product = item.Product.MappingProductViewModel(),
+                    Product = item.Product.MappingToProductViewModel(),
                     Quantinity = item.Quantinity,
                 };
                 orderViewModel.Cart.Items.Add(cartItemViewModel);
@@ -138,7 +138,7 @@ namespace OnlineShopWebApp.Models
 
             foreach (var order in orders)
             {
-                var orderViewModel = order.MappingOrderViewModel();
+                var orderViewModel = order.MappingToOrderViewModel();
                 ordersViewModel.Add(orderViewModel);
             }
             return ordersViewModel;
@@ -153,7 +153,21 @@ namespace OnlineShopWebApp.Models
         }
 
 
-      
+        public static UserViewModel MappingToUserViewModel(User user)
+        {
+            var userViewModel = new UserViewModel
+            {
+                //Id = user.Id,
+                Email = user.Email,
+                FirstName = user.FirstName,
+                LastName = user.LastName,
+                Phone = user.PhoneNumber
+
+            };
+
+        }
+
+
     }
 
 

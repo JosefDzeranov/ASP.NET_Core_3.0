@@ -6,9 +6,9 @@ namespace OnlineShopWebApp.Models
     public class UserViewModel
     {
         [Required]
-        public Guid Id { get; set; } = Guid.NewGuid();
+        public Guid Id { get; set; }
         [Required]
-        public string Name { get; set; }
+        public string FirstName { get; set; }
         [Required]
         public string Password { get; set; }
         [Required]

@@ -1,11 +1,14 @@
 ﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using OnlineShop.DB;
+using OnlineShop.DB.Models;
 using OnlineShopWebApp.Models;
 using OnlineShopWebApp.Services;
 using OnlineShopWebApp.ViewModels;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace OnlineShopWebApp.Areas.Admin.Controllers
 {
@@ -14,15 +17,19 @@ namespace OnlineShopWebApp.Areas.Admin.Controllers
     public class UserController : Controller
     {
         private readonly IUserRepository userRepository;
+        private readonly UserManager<User> userManager;
 
-        public UserController(IUserRepository userRepository)
+
+        public UserController(IUserRepository userRepository, UserManager<User> userManager)
         {
             this.userRepository = userRepository;
+            this.userManager = userManager;
         }
 
         public IActionResult Index()
         {
-            var users = userRepository.GetAll();
+            //var users = userRepository.GetAll();
+            var users = userManager.Users.ToList();
 
             return View(users);
         }
@@ -51,7 +58,7 @@ namespace OnlineShopWebApp.Areas.Admin.Controllers
             {
                 var user = new UserViewModel
                 {
-                    Name = registerVM.Name,
+                    FirstName = registerVM.Name,
                     Email = registerVM.Email,
                     Password = registerVM.Password,
 
@@ -100,7 +107,7 @@ namespace OnlineShopWebApp.Areas.Admin.Controllers
             var user = userRepository.TryGetById(id);
             var userInfoViewModel = new UserInfoViewModel
             {
-                Name = user.Name,
+                Name = user.FirstName,
                 Email = user.Email,
                 LastName = user.LastName,
                 UserId = user.Id,
@@ -111,8 +118,8 @@ namespace OnlineShopWebApp.Areas.Admin.Controllers
         [HttpPost]
         public IActionResult ChangeInfo(UserInfoViewModel userInfoViewModel)
         {
-            var user = userRepository.TryGetById(userInfoViewModel.UserId);
-            user.Name = userInfoViewModel.Name;
+           var user = userRepository.TryGetById(userInfoViewModel.UserId);
+            user.FirstName = userInfoViewModel.Name;
             user.LastName = userInfoViewModel.LastName;
             user.Phone = userInfoViewModel.Phone;
             user.Email = userInfoViewModel.Email;
