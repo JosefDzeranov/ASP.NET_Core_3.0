@@ -69,7 +69,10 @@ namespace OnlineShopWebApp.Areas.Admin.Controllers
                 }
                 else
                 {
-                    ModelState.AddModelError("Email", "Пользователь с таким email уже зарегистрирован");
+                    foreach (var error in result.Errors)
+                    {
+                        ModelState.AddModelError("", error.Description);
+                    }
                 }
             }
             return View();
@@ -93,9 +96,19 @@ namespace OnlineShopWebApp.Areas.Admin.Controllers
         public IActionResult ChangePassword(UserPasswordViewModel userPasswordViewModel)
         {
             var user = userManager.FindByIdAsync(userPasswordViewModel.Id).Result;
-            userManager.ChangePasswordAsync(user, userPasswordViewModel.OldPassword, userPasswordViewModel.Password);
-            userManager.UpdateAsync(user).Wait();
-            return RedirectToAction("Index", "User");
+            var result =  userManager.ChangePasswordAsync(user, userPasswordViewModel.OldPassword, userPasswordViewModel.Password).Result;
+            if (result.Succeeded)
+            {
+                return RedirectToAction("Index", "User");
+            }
+            else
+            {
+                foreach (var error in result.Errors)
+                {
+                    ModelState.AddModelError("", error.Description);
+                }
+            }
+            return View(userPasswordViewModel);
         }
         public IActionResult ChangeInfo(string id)
         {
@@ -108,7 +121,8 @@ namespace OnlineShopWebApp.Areas.Admin.Controllers
         [HttpPost]
         public IActionResult ChangeInfo(UserInfoViewModel userInfoViewModel)
         {
-            var user = userInfoViewModel.MappingToUserFromUserInfoViewModel();
+            var result = userManager.FindByIdAsync(userInfoViewModel.Id).Result;
+            var user = userInfoViewModel.MappingToUserFromUserInfoViewModel(result);
             userManager.UpdateAsync(user).Wait();
             return RedirectToAction("Index", "User");
         }
