@@ -12,12 +12,20 @@
                     <div class="row justify-content-center">
                         <div class="col">
                             <div class="mb-3">
-                                <input type="text" asp-for="Name" class="form-control" placeholder="имя" />
-                                <span asp-validation-for="Name"></span>
+                                <input type="text" asp-for="FirstName" class="form-control" placeholder="имя" />
+                                <span asp-validation-for="FirstName"></span>
+                            </div>
+                            <div class="mb-3">
+                                <input type="text" asp-for="LastName" class="form-control" placeholder="фамилия" />
+                                <span asp-validation-for="LastName"></span>
                             </div>
                             <div class="mb-3">
                                 <input type="email" asp-for="Email" class="form-control" placeholder="email" />
                                 <span asp-validation-for="Email"></span>
+                            </div>
+                            <div class="mb-3">
+                                <input type="text" asp-for="PhoneNumber" class="form-control" placeholder="телефон" />
+                                <span asp-validation-for="PhoneNumber"></span>
                             </div>
                             <div class="mb-3">
                                 <input type="password" asp-for="Password" class="form-control" placeholder="пароль" />

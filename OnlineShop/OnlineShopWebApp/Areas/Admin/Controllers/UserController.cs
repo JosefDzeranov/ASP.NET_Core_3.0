@@ -48,23 +48,19 @@ namespace OnlineShopWebApp.Areas.Admin.Controllers
         }
 
         [HttpPost]
-        public IActionResult AddUser(RegisterViewModel registerVM)
+        public IActionResult AddUser(RegisterViewModel registerViewModel)
         {
-            if (registerVM.Password == registerVM.Name)
+            if (registerViewModel.Password == registerViewModel.FirstName)
             {
                 ModelState.AddModelError("Name", "Имя и пароль не должны совпадать");
             }
 
             if (ModelState.IsValid)
             {
-                var user = new UserViewModel
-                {
-                    FirstName = registerVM.Name,
-                    Email = registerVM.Email,
-                    Password = registerVM.Password,
-
-                };
-                if (userRepository.Add(user))
+                var user = registerViewModel.MappingToUserFromRegisterViewModel();
+               
+                   var result = userManager.CreateAsync(user, registerViewModel.Password).Result;
+                if (result.Succeeded)
                 {
                     return RedirectToAction("Index", "User");
                 }
@@ -72,8 +68,6 @@ namespace OnlineShopWebApp.Areas.Admin.Controllers
                 {
                     ModelState.AddModelError("Email", "Пользователь с таким email уже зарегистрирован");
                 }
-
-
             }
             return View();
         }
@@ -112,7 +106,7 @@ namespace OnlineShopWebApp.Areas.Admin.Controllers
                 Email = user.Email,
                 LastName = user.LastName,
                 UserId = user.Id,
-                Phone = user.Phone
+                PhoneNumber = user.Phone
             };
             return View(userInfoViewModel);
         }
@@ -122,7 +116,7 @@ namespace OnlineShopWebApp.Areas.Admin.Controllers
            var user = userRepository.TryGetById(userInfoViewModel.UserId);
             user.FirstName = userInfoViewModel.Name;
             user.LastName = userInfoViewModel.LastName;
-            user.Phone = userInfoViewModel.Phone;
+            user.Phone = userInfoViewModel.PhoneNumber;
             user.Email = userInfoViewModel.Email;
             userRepository.Update(user);
             return RedirectToAction("Index", "User");

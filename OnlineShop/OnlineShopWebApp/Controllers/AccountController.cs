@@ -65,7 +65,7 @@ namespace OnlineShopWebApp.Controllers
         [HttpPost]
         public IActionResult Register(RegisterViewModel registerVM)
         {
-            if (registerVM.Password == registerVM.Name)
+            if (registerVM.Password == registerVM.FirstName)
             {
                 ModelState.AddModelError("Name", "Имя и пароль не должны совпадать");
             }
@@ -74,7 +74,7 @@ namespace OnlineShopWebApp.Controllers
             {
                 var user = new User
                 {
-                    UserName = registerVM.Name,
+                    UserName = registerVM.FirstName,
                     Email = registerVM.Email,
                 };
 

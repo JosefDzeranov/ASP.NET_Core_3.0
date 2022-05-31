@@ -14,6 +14,6 @@ namespace OnlineShopWebApp.ViewModels
         public string LastName { get; set; }
         [Required]
         public string UserId { get; set; }
-        public string Phone { get; set; }
+        public string PhoneNumber { get; set; }
     }
 }

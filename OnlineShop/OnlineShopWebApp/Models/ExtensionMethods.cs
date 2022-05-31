@@ -1,4 +1,5 @@
 ﻿using OnlineShop.DB.Models;
+using OnlineShopWebApp.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -179,6 +180,18 @@ namespace OnlineShopWebApp.Models
             return usersViewModel;
         }
 
+        public static User MappingToUserFromRegisterViewModel(this RegisterViewModel regiserViewModel)
+        {
+            var user = new User
+            {
+                Email = regiserViewModel.Email,
+                UserName = regiserViewModel.Email,
+                FirstName = regiserViewModel.FirstName,
+                LastName = regiserViewModel.LastName,
+                PhoneNumber = regiserViewModel.PhoneNumber,
+            };
+            return user;
+        }
     }
 
 
