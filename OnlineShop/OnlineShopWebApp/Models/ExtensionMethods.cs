@@ -192,8 +192,36 @@ namespace OnlineShopWebApp.Models
             };
             return user;
         }
+
+        public static UserInfoViewModel MappingToUserInfoViewModel(this User user)
+        {
+            var userInfoViewModel = new UserInfoViewModel
+            {
+                Id = user.Id,
+                FirstName = user.FirstName,
+                LastName = user.LastName,
+                Email = user.Email,
+                PhoneNumber = user.PhoneNumber,
+            };
+            return userInfoViewModel;
+        }
+
+        public static User MappingToUserFromUserInfoViewModel(this UserInfoViewModel userInfoViewModel)
+        {
+            var user = new User
+            {
+                Id = userInfoViewModel.Id,
+                UserName = userInfoViewModel.Email,
+                FirstName = userInfoViewModel.FirstName,
+                LastName = userInfoViewModel.LastName,
+                Email = userInfoViewModel.Email,
+                PhoneNumber = userInfoViewModel.PhoneNumber,
+            };
+            return user;
+        }
     }
 
+   
 
 }
 

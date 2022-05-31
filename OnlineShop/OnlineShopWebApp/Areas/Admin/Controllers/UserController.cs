@@ -99,26 +99,15 @@ namespace OnlineShopWebApp.Areas.Admin.Controllers
         }
         public IActionResult ChangeInfo(string id)
         {
-            var user = userRepository.TryGetById(id);
-            var userInfoViewModel = new UserInfoViewModel
-            {
-                Name = user.FirstName,
-                Email = user.Email,
-                LastName = user.LastName,
-                UserId = user.Id,
-                PhoneNumber = user.Phone
-            };
+            var result = userManager.FindByIdAsync(id).Result;
+            var userInfoViewModel = result.MappingToUserInfoViewModel();
             return View(userInfoViewModel);
         }
         [HttpPost]
         public IActionResult ChangeInfo(UserInfoViewModel userInfoViewModel)
         {
-           var user = userRepository.TryGetById(userInfoViewModel.UserId);
-            user.FirstName = userInfoViewModel.Name;
-            user.LastName = userInfoViewModel.LastName;
-            user.Phone = userInfoViewModel.PhoneNumber;
-            user.Email = userInfoViewModel.Email;
-            userRepository.Update(user);
+            var user = userInfoViewModel.MappingToUserFromUserInfoViewModel();
+            userManager.UpdateAsync(user).Wait();
             return RedirectToAction("Index", "User");
         }
     }
