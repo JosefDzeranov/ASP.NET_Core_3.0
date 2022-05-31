@@ -5,6 +5,9 @@ namespace OnlineShopWebApp.ViewModels
 {
     public class UserPasswordViewModel
     {
+        [Required(ErrorMessage = "Не указан старый пароль")]
+        public string OldPassword { get; set; }
+       
         [Required(ErrorMessage = "Не указан пароль")]
         public string Password { get; set; }
 
@@ -13,6 +16,6 @@ namespace OnlineShopWebApp.ViewModels
         public string ConfirmPassword { get; set; }
 
         [Required]
-        public string UserId { get; set; }
+        public string Id { get; set; }
     }
 }

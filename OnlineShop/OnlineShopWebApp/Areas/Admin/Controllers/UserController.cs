@@ -83,21 +83,18 @@ namespace OnlineShopWebApp.Areas.Admin.Controllers
         }
         public IActionResult ChangePassword(string id)
         {
-            var user = userRepository.TryGetById(id);
-            var userPasswordViewModel = new UserPasswordViewModel
-            {
-                Password = user.Password,
-                ConfirmPassword = user.Password,
-                UserId = user.Id,
-            };
+            var user = userManager.FindByIdAsync(id).Result;
+            var userPasswordViewModel = new UserPasswordViewModel();
+            userPasswordViewModel.Id = user.Id;
+            
             return View(userPasswordViewModel);
         }
         [HttpPost]
         public IActionResult ChangePassword(UserPasswordViewModel userPasswordViewModel)
         {
-            var user = userRepository.TryGetById(userPasswordViewModel.UserId);
-            user.Password = userPasswordViewModel.Password;
-            userRepository.Update(user);
+            var user = userManager.FindByIdAsync(userPasswordViewModel.Id).Result;
+            userManager.ChangePasswordAsync(user, userPasswordViewModel.OldPassword, userPasswordViewModel.Password);
+            userManager.UpdateAsync(user).Wait();
             return RedirectToAction("Index", "User");
         }
         public IActionResult ChangeInfo(string id)
