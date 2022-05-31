@@ -10,6 +10,8 @@ using Serilog;
 using System.Globalization;
 using OnlineShop.Db;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Identity;
+using OnlineShop.Db.Models;
 
 namespace OnlineShopWebApp
 {
@@ -28,6 +30,12 @@ namespace OnlineShopWebApp
             string connection = Configuration.GetConnectionString("online_shop");
             services.AddDbContext<DatabaseContext>(options =>
                     options.UseSqlServer(connection));
+
+            services.AddDbContext<IdentityContext>(options =>
+                    options.UseSqlServer(connection));
+
+            services.AddIdentity<User, IdentityRole>()
+                    .AddEntityFrameworkStores<IdentityContext>();
 
             services.AddControllersWithViews();
             services.AddTransient<IProductStorage, ProductDbStorage>();
@@ -71,6 +79,7 @@ namespace OnlineShopWebApp
 
             app.UseRouting();
 
+            app.UseAuthentication();
             app.UseAuthorization();
 
             var localizationOptions = app.ApplicationServices.GetService<IOptions<RequestLocalizationOptions>>().Value;
