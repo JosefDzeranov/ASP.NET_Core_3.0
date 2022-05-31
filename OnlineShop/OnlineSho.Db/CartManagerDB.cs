@@ -75,7 +75,7 @@ namespace OnlineShop.Db
 
         public void RemoveProductFromCart(string userId, Guid productId)
         {
-            var cart = dataBaseContext.Carts.FirstOrDefault(x => x.UserId == userId);
+            var cart = TryGetCartByUserID(userId);
             var cartLine = cart.CartLines.FirstOrDefault(x => x.Product.Id == productId);
             cartLine.Amount--;
 
