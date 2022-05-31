@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using OnlineShop.Db.Models;
 using OnlineShopWebApp.Models.Users;
 using OnlineShopWebApp.Models.Users.Buyer;
 
@@ -8,7 +9,7 @@ namespace OnlineShopWebApp.Interfase
     public interface IBuyerManager
     {
         void AddBuyer(User user);
-        void AddProductInCart(Guid productId, string buyerLogin);
+        void AddProductInCart(Product product, string buyerLogin);
         void DeleteProductInCart(Guid productId, string buyerLogin);
         void ReduceDuplicateProductCart(Guid productId, string buyerLogin);
         List<OrderItem> CollectAllOrders();

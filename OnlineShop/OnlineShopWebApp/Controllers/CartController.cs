@@ -11,10 +11,12 @@ namespace OnlineShopWebApp.Controllers
     {
         private readonly IBuyerManager _buyerManager;
         private readonly IUserManager _userManager;
+        private readonly IProductManager _productManager;
         public CartController(IBuyerManager buyerManager, IProductManager productManager, IUserManager userManager)
         {
             _buyerManager = buyerManager;
             _userManager = userManager;
+            _productManager = productManager;
         }
         public IActionResult Index()
         {
@@ -34,7 +36,8 @@ namespace OnlineShopWebApp.Controllers
 
             if (_userManager.GettingAccess(buyerLogin, "Index", "Cart", ""))
             {
-                _buyerManager.AddProductInCart(productId, buyerLogin);
+                var product = _productManager.Find(productId);
+                _buyerManager.AddProductInCart(product, buyerLogin);
             }
             else
             {

@@ -4,13 +4,48 @@
     "Comparisons": [],
     "Cart": [],
     "InfoBuying": {
-      "Surname": null,
-      "Firstname": null,
-      "Secondname": null,
-      "Phone": null,
-      "Email": null,
-      "Commentary": null
+      "Surname": "Молостов",
+      "Firstname": "Григорий",
+      "Secondname": "Николаевич",
+      "Phone": "\u002B79530711665",
+      "Email": "archi.dnk@gmail.com",
+      "Commentary": " nmbmn"
     },
-    "Orders": []
+    "Orders": [
+      {
+        "Id": "74d36078-af70-4694-8e0d-92af2cc95bf5",
+        "CartItem": [
+          {
+            "Product": {
+              "Id": "4c160be8-1200-49a7-aed8-a342bb84ed54",
+              "CodeNumber": "58-70",
+              "Cost": 32000.00,
+              "Square": 118,
+              "Width": 11.9,
+              "Length": 13.9,
+              "Description": "Проект одноэтажного дома из газабетона",
+              "Images": "0-1.jpg"
+            },
+            "Count": 2,
+            "additionalOptions": [
+              {},
+              {}
+            ]
+          }
+        ],
+        "InfoBuying": {
+          "Surname": "Молостов",
+          "Firstname": "Григорий",
+          "Secondname": "Николаевич",
+          "Phone": "\u002B79530711665",
+          "Email": "archi.dnk@gmail.com",
+          "Commentary": " nmbmn"
+        },
+        "DateTime": "2022-05-31T15:04:12.9214963Z",
+        "Status": "Создан",
+        "Login": "Gregory",
+        "FullCost": 64002.00
+      }
+    ]
   }
 ]

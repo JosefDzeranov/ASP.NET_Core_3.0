@@ -8,39 +8,42 @@ namespace OnlineShopWebApp
 {
     public class UserManager : IUserManager
     {
-        private readonly IRoleManager roleManager;
-        private readonly IBuyerManager buyerManager;
+        
+        private readonly IRoleManager _roleManager;
+        private readonly IBuyerManager _buyerManager;
 
         private readonly List<User> users;
-        private UserAutorized UserAutorized { get; set; }
+        private UserAutorized userAutorized { get; set; }
         private const string nameSave = "users";
         private IWorkWithData JsonStorage { get; } = new JsonWorkWithData(nameSave);
-
+        private IWorkWithData AutorizedData { get; } = new JsonWorkWithData("autorization");
         public UserManager(IRoleManager roleManager, IBuyerManager buyerManager)
         {
-            this.roleManager = roleManager;
-            this.buyerManager = buyerManager;
+            _roleManager = roleManager;
+            _buyerManager = buyerManager;
             users = JsonStorage.Read<List<User>>();
+            userAutorized = AutorizedData.Read<UserAutorized>();
         }
         public string GetLoginAuthorizedUser()
         {
-            return UserAutorized?.Login;
+            return userAutorized.Login;
         }
         public void Authorized(UserAutorized user)
         {
-            UserAutorized = user;
+            userAutorized = user;
+            AutorizedData.Write(userAutorized);
         }
 
         public bool CheckingForAuthorization()
         {
-            if (UserAutorized == null) return false;
+            if (userAutorized == null) return false;
             return true;
         }
         public bool GettingAccess(string userLogin, string action, string controller, string area)
         {
             bool permission = true;
             var user = FindByLogin(userLogin);
-            var role = roleManager.Find(user.RoleId);
+            var role = _roleManager.Find(user.RoleId);
             if (role.Rights.BeAdmin == false)
             {
                 foreach (var v in role.Rights.tabooAdmin)
@@ -88,7 +91,7 @@ namespace OnlineShopWebApp
             var user = FindByLogin(userLogin);
             user.SetRole(roleId);
             JsonStorage.Write(users);
-            if (roleManager.Find(roleId).Rights.BeBuyer) buyerManager.AddBuyer(user);
+            if (_roleManager.Find(roleId).Rights.BeBuyer) _buyerManager.AddBuyer(user);
         }
 
         public List<User> GetAll()
@@ -115,7 +118,7 @@ namespace OnlineShopWebApp
         public void Remove(string login)
         {
             users?.RemoveAll(x => x.Login == login);
-            buyerManager.Remove(login);
+            _buyerManager.Remove(login);
             JsonStorage.Write(users);
         }
 
@@ -137,6 +140,12 @@ namespace OnlineShopWebApp
             user.Phone ??= userInfo.Phone;
             user.Email ??= userInfo.Email;
             JsonStorage.Write(users);
+        }
+
+        public void Exit()
+        {
+            userAutorized = null;
+            AutorizedData.Write(userAutorized);
         }
     }
 }

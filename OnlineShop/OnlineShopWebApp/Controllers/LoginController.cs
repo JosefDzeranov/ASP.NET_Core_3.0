@@ -32,7 +32,7 @@ namespace OnlineShopWebApp.Controllers
             if (ModelState.IsValid)
             {
                 _userManager.Authorized(userInput);
-                return RedirectToAction("Index", "User");
+                return RedirectToAction(actionName:"Index",controllerName: "User");
             }
             return View();
         }
@@ -65,6 +65,12 @@ namespace OnlineShopWebApp.Controllers
         public IActionResult TabooAccess()
         {
             return View();
+        }
+
+        public IActionResult Exit()
+        {
+            _userManager.Exit();
+            return RedirectToAction("Index");
         }
     }
 }

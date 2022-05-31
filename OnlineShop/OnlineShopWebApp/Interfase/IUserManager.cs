@@ -21,5 +21,6 @@ namespace OnlineShopWebApp.Interfase
 
         void ChangePassword(string login, string password);
         void ChangeInfo(UserInfo userInfo);
+        void Exit();
     }
 }

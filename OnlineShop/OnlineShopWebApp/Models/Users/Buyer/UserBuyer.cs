@@ -23,24 +23,6 @@ namespace OnlineShopWebApp.Models.Users.Buyer
             return sum;
         }
 
-        public void AddProductInCart(Product product)
-        {
-            var existingCartItem = Cart.Find(x => x.Product.Id == product.Id);
-            if (existingCartItem != null)
-            {
-                existingCartItem.UpCount();
-            }
-            else
-            {
-                Cart.Add(new CartItem(product));
-            }
-        }
-
-        public void RemoveProductInCart(Guid productId)
-        {
-            Cart.RemoveAll(cartItem => cartItem.Product.Id == productId);
-        }
-
         public int SumAllProducts()
         {
             int sum = 0;
@@ -52,37 +34,6 @@ namespace OnlineShopWebApp.Models.Users.Buyer
                 }
             }
             return sum;
-        }
-
-        public void ReduceDuplicateProductCart(Guid productId)
-        {
-            var existingCartItem = Cart.Find(x => x.Product.Id == productId);
-            if (existingCartItem != null)
-            {
-                existingCartItem.DownCount();
-            }
-
-            if (existingCartItem.Count <= 0)
-            {
-                Cart.Remove(existingCartItem);
-            }
-
-        }
-
-        public void ClearCart()
-        {
-            Cart.Clear();
-        }
-
-        public void Buy()
-        {
-            Orders.Add(new OrderItem(Cart, Login, InfoBuying));
-            Cart.Clear();
-        }
-
-        public void SaveInfoBuying(InfoBuying infoBuying)
-        {
-            this.InfoBuying = infoBuying;
         }
 
     }
