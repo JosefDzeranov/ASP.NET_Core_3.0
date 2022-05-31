@@ -1,6 +1,7 @@
-﻿using OnlineShopWebApp.Models;
+﻿using OnlineShop.DB.Models;
+using System.Collections.Generic;
 
-namespace OnlineShopWebApp
+namespace OnlineShop.DB
 {
     public interface ICartBase
     {
@@ -8,5 +9,6 @@ namespace OnlineShopWebApp
         Cart TryGetByUserId(int userId);
         void DecreaseAmount(int productId, int userId);
         void Delete(int userId);
+        List<Cart> AllCarts();
     }
 }

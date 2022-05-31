@@ -1,6 +1,6 @@
 ﻿@using OnlineShopWebApp.Models
 
-@model List<Order>
+@model IEnumerable<OrderViewModel>
 <div class="row text-center">
 
     @await Html.PartialAsync("AdminMenu")
@@ -25,7 +25,7 @@
                         <td>
                             <a style="color:black" asp-area="admin" asp-controller="order" asp-action="getorder" asp-route-orderId="@p.Id">@p.Id</a>
                         </td>
-                        <td>@p.Cart.Cost</td>
+                        <td>@p.Carts.First().Cost</td>
                         <td>@p.Status</td>
                         <td>@p.DeliveryInfo.Email</td>
                         <td>@p.CreatedDate.ToShortDateString()</td>

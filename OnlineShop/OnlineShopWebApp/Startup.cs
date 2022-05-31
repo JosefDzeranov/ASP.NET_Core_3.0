@@ -1,7 +1,10 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using OnlineShop.Db;
+using OnlineShop.DB;
 using Serilog;
 
 namespace OnlineShopWebApp
@@ -19,10 +22,17 @@ namespace OnlineShopWebApp
         public void ConfigureServices(IServiceCollection services)
         {
 
-            services.AddSingleton<IProductBase,ProductsInMemoryRepository>();
-            services.AddSingleton<ICartBase,CartsInMemoryRepository>();
-            services.AddSingleton<IOrderBase, OrdersInMemoryRepository>();
-            services.AddSingleton<IUserBase, UsersInMemoryRepository>();
+            string connection = Configuration.GetConnectionString("online_shop");
+            services.AddDbContext<DatabaseContext>(options =>
+            {
+                options.UseSqlServer(connection);
+                options.EnableSensitiveDataLogging(true);
+            });
+
+            services.AddTransient<IProductBase, ProductsDBRepository>();
+            services.AddTransient<ICartBase,CartsDBRepository>();
+            services.AddTransient<IOrderBase, OrdersDBRepository>();
+            services.AddTransient<IUserBase, UsersDBRepository>();
 
 
             services.AddControllersWithViews();

@@ -1,17 +1,29 @@
-﻿using OnlineShopWebApp.Models;
+﻿using Microsoft.EntityFrameworkCore;
+using OnlineShop.Db;
+using OnlineShop.DB.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace OnlineShopWebApp
+namespace OnlineShop.DB
 {
-    public class CartsInMemoryRepository : ICartBase
+    public class CartsDBRepository : ICartBase
     {
-        private List<Cart> carts = new List<Cart>();
+        private readonly DatabaseContext _databaseContext;
+
+        public CartsDBRepository(DatabaseContext databaseContext)
+        {
+            _databaseContext = databaseContext;
+        }
+
+        public List<Cart> AllCarts()
+        {
+            return _databaseContext.Carts.Include(x => x.Items).ThenInclude(x => x.Product).AsNoTracking().ToList();
+        }
 
         public Cart TryGetByUserId(int userId)
         {
-            return carts.FirstOrDefault(x => x.UserId == userId);
+            return _databaseContext.Carts.Include(x => x.Items).ThenInclude(x => x.Product).AsNoTracking().FirstOrDefault(x => x.UserId == userId);
         }
 
         public void Add(Product product, int userId)
@@ -48,14 +60,11 @@ namespace OnlineShopWebApp
                             Amount = 1,
                             Product = product
                         }
-
-
                     }
                 };
-                carts.Add(newCart);
-
+                _databaseContext.Carts.Add(newCart);
             }
-
+            _databaseContext.SaveChanges();
         }
 
         public void DecreaseAmount(int productId, int userId)
@@ -69,18 +78,19 @@ namespace OnlineShopWebApp
                 {
                     existingCart.Items.Remove(existingCartItem);
                 }
-                if( !existingCart.Items.Any())
+                _databaseContext.SaveChanges();
+                if (!existingCart.Items.Any())
                 {
-                    carts.Remove(existingCart);
+                    Delete(userId);
                 }
-                
             }
         }
 
         public void Delete(int userId)
         {
             var existingCart = TryGetByUserId(userId);
-            carts.Remove(existingCart);
+            //_databaseContext.Carts.Remove(existingCart);
+            _databaseContext.SaveChanges();
         }
     }
 }

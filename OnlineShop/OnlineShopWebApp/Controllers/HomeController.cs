@@ -1,4 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using OnlineShop.DB;
+using OnlineShopWebApp.Helpers;
 using OnlineShopWebApp.Models;
 using System;
 using System.Diagnostics;
@@ -18,7 +20,7 @@ namespace OnlineShopWebApp.Controllers
         public IActionResult Index()
         {
             var products = _productBase.AllProducts();
-            return View(products);
+            return View(products.ToProductViewModels());
         }
 
         public IActionResult SearchByName(string rawSearchName)
@@ -29,8 +31,8 @@ namespace OnlineShopWebApp.Controllers
             {
                 searchName = rawSearchName.ToLower();
             }
-            var products = _productBase.AllProducts().Where(x => x.Name.ToLower().Contains(searchName));
-            return View(products);
+            var Products = _productBase.AllProducts().Where(x => x.Name.ToLower().Contains(searchName));
+            return View(Products.ToProductViewModels());
         }
 
         public IActionResult Privacy()

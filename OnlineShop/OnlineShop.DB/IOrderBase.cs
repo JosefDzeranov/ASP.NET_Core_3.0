@@ -1,12 +1,12 @@
-﻿using OnlineShopWebApp.Models;
+﻿using OnlineShop.DB.Models;
 using System.Collections.Generic;
 
-namespace OnlineShopWebApp
+namespace OnlineShop.DB
 {
     public interface IOrderBase
     {
         void Add(Order order);
-        IEnumerable<Order> AllOrders();
+        List<Order> AllOrders();
         void UpdateOrderStatus(int orderId, OrderStatus status);
     }
 }

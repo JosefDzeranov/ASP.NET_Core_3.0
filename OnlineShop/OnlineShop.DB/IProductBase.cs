@@ -1,7 +1,7 @@
-﻿using OnlineShopWebApp.Models;
+﻿using OnlineShop.DB.Models;
 using System.Collections.Generic;
 
-namespace OnlineShopWebApp
+namespace OnlineShop.DB
 {
     public interface IProductBase
     {

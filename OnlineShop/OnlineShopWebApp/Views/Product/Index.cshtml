@@ -1,5 +1,5 @@
 ﻿@using OnlineShopWebApp.Models
-@model Product
+@model ProductViewModel
 
 
 
@@ -18,7 +18,7 @@
                 </a>
                 <h6>Цена за 1 м.п. @Model.Cost руб.</h6>
                 <h6>@Model.Description</h6>
-                <a class="btn btn-danger" href="/cart/add?productId=@Model.Id" role="button">Добавить в корзину</a>
+                <a class="btn btn-danger" href="/cart/add?ProductViewModelId=@Model.Id" role="button">Добавить в корзину</a>
                 <a class="btn btn-dark" href="https://localhost:5001/Home/index" role="button">Вернуться на главную страницу</a>
             </div>
         </div>

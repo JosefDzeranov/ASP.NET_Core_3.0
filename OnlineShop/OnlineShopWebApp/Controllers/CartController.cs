@@ -1,4 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using OnlineShop.DB;
+using OnlineShopWebApp.Helpers;
 using System.Linq;
 
 namespace OnlineShopWebApp.Controllers
@@ -14,7 +16,7 @@ namespace OnlineShopWebApp.Controllers
         {
             var existingUser = _userBase.AllUsers().First();
             var cart = _cartBase.TryGetByUserId(existingUser.Id);
-            return View(cart);
+            return View(cart.ToCartViewModel());
         }
 
         public CartController(IProductBase productBase, ICartBase cartBase, IUserBase userBase)

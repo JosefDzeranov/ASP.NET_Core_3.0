@@ -6,7 +6,7 @@ namespace OnlineShopWebApp.Models.Attributes
     {
         public override bool IsValid(object value)
         {
-            Product data = (Product)value;
+            ProductViewModel data = (ProductViewModel)value;
 
             if (data.Description.Length < 4)
             {

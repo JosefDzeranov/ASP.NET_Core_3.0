@@ -22,4 +22,8 @@
     <Folder Include="Areas\Admin\Models\Attributes\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\OnlineShop.DB\OnlineShop.DB.csproj" />
+  </ItemGroup>
+
 </Project>

@@ -1,4 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using OnlineShop.DB;
+using OnlineShopWebApp.Helpers;
 using OnlineShopWebApp.Models;
 using System.Linq;
 
@@ -20,8 +22,8 @@ namespace OnlineShopWebApp.Controllers
 
         private void AddNewUser(Registration registration)
         {
-            var newUser = new User(registration);
-            _userBase.Add(newUser);
+            var newUser = new UserViewModel(registration);
+            _userBase.Add(newUser.ToUser());
         }
 
         [AcceptVerbs("Get", "Post")]

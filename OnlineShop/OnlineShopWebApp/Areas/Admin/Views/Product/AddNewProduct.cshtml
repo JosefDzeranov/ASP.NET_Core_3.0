@@ -1,6 +1,6 @@
 ﻿@using OnlineShopWebApp.Models
 
-@model Product
+@model ProductViewModel
 
 @{
     ViewData["Title"] = "Добавление нового продукта";
@@ -17,7 +17,7 @@
                     <span asp-validation-for="Name"></span>
                 </div>
                 <div class="mb-3">
-                    <input class="form-control" asp-for="Cost" placeholder="Введите название продукта">
+                    <input class="form-control" asp-for="Cost" placeholder="Введите стоимость продукта">
                     <span asp-validation-for="Cost"></span>
                 </div>
                 <div class="mb-3">

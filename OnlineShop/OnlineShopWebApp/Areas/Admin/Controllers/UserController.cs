@@ -1,5 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using OnlineShop.DB;
 using OnlineShopWebApp.Areas.Admin.Models;
+using OnlineShopWebApp.Helpers;
 using OnlineShopWebApp.Models;
 using System.Linq;
 
@@ -22,33 +24,35 @@ namespace OnlineShopWebApp.Areas.Admin.Controllers
             return View(users);
         }
 
-        public IActionResult GetUser(int userId)
+        public IActionResult Get(int userId)
         {
             var necessaryUser = _userBase.AllUsers().FirstOrDefault(x => x.Id == userId);
             return View(necessaryUser);
         }
 
-        public IActionResult ChangePassword(int userId)
-        {
-            var necessaryUser = _userBase.AllUsers().FirstOrDefault(x => x.Id == userId);
-            var newPassword = new NewPassword();
-            newPassword.UserId = userId;
-            return View(newPassword);
-        }
+        //public IActionResult ChangePassword(int userId)
+        //{
+        //    var necessaryUser = _userBase.AllUsers().FirstOrDefault(x => x.Id == userId);
+        //    var newPassword = new NewPassword
+        //    {
+        //        UserId = userId
+        //    };
+        //    return View(newPassword);
+        //}
 
-        [HttpPost]
-        public IActionResult ChangePassword(NewPassword newPassword)
-        {
-            if (ModelState.IsValid)
-            {
-                _userBase.NewPassword(newPassword);
-                return RedirectToAction("GetUser", "User", new { userId = newPassword.UserId });
-            }
-            else
-            {
-                return View("Users");
-            }
-        }
+        //[HttpPost]
+        //public IActionResult ChangePassword(NewPassword newPassword)
+        //{
+        //    if (ModelState.IsValid)
+        //    {
+        //        _userBase.NewPassword(newPassword);
+        //        return RedirectToAction("GetUser", "User", new { userId = newPassword.UserId });
+        //    }
+        //    else
+        //    {
+        //        return View("Users");
+        //    }
+        //}
 
         public IActionResult Edit(int userId)
         {
@@ -57,11 +61,11 @@ namespace OnlineShopWebApp.Areas.Admin.Controllers
         }
 
         [HttpPost]
-        public IActionResult Edit(User user)
+        public IActionResult Edit(UserViewModel user)
         {
             if (ModelState.IsValid)
             {
-                _userBase.Edit(user);
+                _userBase.Edit(user.ToUser());
                 return RedirectToAction("GetUser", "User", new { userId = user.Id });
             }
             else
@@ -74,25 +78,6 @@ namespace OnlineShopWebApp.Areas.Admin.Controllers
         {
             _userBase.Delete(userId);
             return RedirectToAction("Users", "User");
-        }
-
-        public IActionResult AddNewUser()
-        {
-            return View();
-        }
-
-        [HttpPost]
-        public IActionResult AddNewUser(User user)
-        {
-            if (ModelState.IsValid)
-            {
-                _userBase.Add(user);
-                return RedirectToAction("Users", "User");
-            }
-            else
-            {
-                return View("AddNewUser");
-            }
         }
     }
 }

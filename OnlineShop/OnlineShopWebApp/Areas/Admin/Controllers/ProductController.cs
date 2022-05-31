@@ -1,4 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using OnlineShop.DB;
+using OnlineShop.DB.Models;
+using OnlineShopWebApp.Helpers;
 using OnlineShopWebApp.Models;
 
 namespace OnlineShopWebApp.Areas.Admin.Controllers
@@ -17,7 +20,7 @@ namespace OnlineShopWebApp.Areas.Admin.Controllers
         public IActionResult Products()
         {
             var products = _productBase.AllProducts();
-            return View(products);
+            return View(products.ToProductViewModels());
         }
 
         public IActionResult AddNewProduct()
@@ -26,11 +29,11 @@ namespace OnlineShopWebApp.Areas.Admin.Controllers
         }
 
         [HttpPost]
-        public IActionResult AddNewProduct(Product product)
+        public IActionResult AddNewProduct(ProductViewModel product)
         {
             if (ModelState.IsValid)
             {
-                _productBase.Add(product);
+                _productBase.Add(product.ToProduct());
                 return RedirectToAction("Products", "Product");
             }
             else

@@ -2,7 +2,8 @@
 
 namespace OnlineShopWebApp
 {
-    public class DeliveryInfo
+    public class DeliveryInfoModelView
+
     {
         [Required(ErrorMessage = "Введите адрес доставки")]
         public string AdressToDelivery { get; set; }

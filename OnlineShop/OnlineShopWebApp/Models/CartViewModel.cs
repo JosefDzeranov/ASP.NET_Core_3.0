@@ -4,11 +4,11 @@ using System.Linq;
 
 namespace OnlineShopWebApp.Models
 {
-    public class Cart
+    public class CartViewModel
     {
         public Guid Id { get; set; }
         public int UserId { get; set; }
-        public List<CartItem> Items { get; set; }
+        public List<CartItemViewModel> Items { get; set; }
 
         public decimal Cost
         {

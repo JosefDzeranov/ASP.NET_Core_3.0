@@ -1,4 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using OnlineShop.DB;
+using OnlineShopWebApp.Helpers;
 using System.Linq;
 
 namespace OnlineShopWebApp.Controllers
@@ -15,7 +17,7 @@ namespace OnlineShopWebApp.Controllers
         public IActionResult Index(int id)
         {
             var products = _productBase.AllProducts().FirstOrDefault(p => p.Id == id);
-            return View(products);
+            return View(products.ToProductViewModel());
         }
 
         public IActionResult Privacy()

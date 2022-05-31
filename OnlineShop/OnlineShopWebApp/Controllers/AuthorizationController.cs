@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using OnlineShop.DB;
 using OnlineShopWebApp.Models;
 using System.Linq;
 
@@ -18,6 +19,14 @@ namespace OnlineShopWebApp.Controllers
             return View();
         }
 
+        public bool Authentification(Authorization authorization)
+        {
+            if (_userBase.AllUsers().Any(x => x.Login == authorization.Name && x.Password == authorization.Password))
+            {
+                return true;
+            }
+            return false;
+        }
 
         [HttpPost]
         public IActionResult Authorize(Authorization authorization)
@@ -25,7 +34,7 @@ namespace OnlineShopWebApp.Controllers
 
             if (ModelState.IsValid)
             {
-                var result = _userBase.Authentification(authorization);
+                var result = Authentification(authorization);
                 if (result == true)
                 {
                     return RedirectToAction("Index", "Home");

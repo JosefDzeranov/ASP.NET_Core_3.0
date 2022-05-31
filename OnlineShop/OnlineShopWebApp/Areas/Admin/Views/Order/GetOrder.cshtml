@@ -1,6 +1,7 @@
-﻿@using OnlineShopWebApp.Models
+﻿@using OnlineShop.DB.Models
+@using OnlineShopWebApp.Models
 
-@model Order
+@model OrderViewModel
 <div class="row text-center">
 
     @await Html.PartialAsync("AdminMenu")
@@ -33,7 +34,7 @@
                     </tr>
                     <tr>
                         <th>Сумма руб.</th>
-                        <td>@Model.Cart.Cost</td>
+                        <td>@Model.Carts.First().Cost</td>
                     </tr>
                     <tr>
                         <th>Статус</th>

@@ -1,5 +1,5 @@
 ﻿@using OnlineShopWebApp.Models
-@model Cart
+@model CartViewModel
 
 
 
@@ -20,18 +20,18 @@
 
             </tr>
         </thead>
-        @foreach (CartItem p in Model.Items)
+        @foreach (CartItemViewModel p in Model.Items)
         {
 
             <tbody>
                 <tr>
-                    <td>@p.Product.Name</td>
-                    <td>@p.Product.Cost руб.</td>
+                    <td>@p.ProductViewModel.Name</td>
+                    <td>@p.ProductViewModel.Cost руб.</td>
                     <td>@p.Cost руб.</td>
                     <td>
-                        <a class="btn btn-primary" href="/Cart/Add?productId=@p.Product.Id" role="button">+</a>
-                        <a class="btn btn-danger" href="#" role="button">@p.Amount</a>
-                        <a class="btn btn-primary" href="/Cart/DecreaseAmount?productId=@p.Product.Id" role="button">-</a>
+                        <a class="btn btn-primary" asp-area="" asp-controller="Cart" asp-action="Add" asp-route-productId="@p.ProductViewModel.Id" role="button">+</a>
+                        <a class="btn btn-danger" role="button">@p.Amount</a>
+                        <a class="btn btn-primary" asp-area="" asp-controller="Cart" asp-action="DecreaseAmount" asp-route-productId="@p.ProductViewModel.Id" role="button">-</a>
                     </td>
                 </tr>
             </tbody>

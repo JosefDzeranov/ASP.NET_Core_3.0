@@ -1,4 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using OnlineShop.DB;
+using OnlineShop.DB.Models;
+using OnlineShopWebApp.Helpers;
 using OnlineShopWebApp.Models;
 using System.Linq;
 
@@ -17,11 +20,12 @@ namespace OnlineShopWebApp.Controllers
             _userBase = userBase;
         }
 
-        private void AddNewOrder(DeliveryInfo deliveryInfo)
+        private void AddNewOrder(DeliveryInfoModelView deliveryInfo)
         {
             var existingUser = _userBase.AllUsers().First();
-            var cart = _cartBase.TryGetByUserId(existingUser.Id);
-            var order = new Order(cart, deliveryInfo);
+            //var cart = _cartBase.AllCarts().FirstOrDefault(x => x.UserId == existingUser.Id).ToCartViewModel();
+            var cart = _cartBase.TryGetByUserId(existingUser.Id).ToCartViewModel();
+            var order = new OrderViewModel(cart, deliveryInfo).ToOrder();
             _orderBase.Add(order);
         }
 
@@ -31,7 +35,7 @@ namespace OnlineShopWebApp.Controllers
         }
 
         [HttpPost]
-        public IActionResult Buy(DeliveryInfo deliveryInfo)
+        public IActionResult Buy(DeliveryInfoModelView deliveryInfo)
         {
             if (ModelState.IsValid)
             {
