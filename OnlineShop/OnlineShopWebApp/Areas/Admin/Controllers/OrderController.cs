@@ -32,7 +32,7 @@ namespace OnlineShopWebApp.Areas.Admin.Controllers
         public IActionResult Detail(int orderId)
         {
             var order = ordersRepository.TryGetByUserId(orderId);
-            return View(order);
+            return View(Mapping.ToOrderViewModel(order));
         }
 
         public IActionResult UpdateOrderStatus(int orderId, OrderStatus status)

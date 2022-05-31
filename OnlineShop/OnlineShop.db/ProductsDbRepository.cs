@@ -31,19 +31,19 @@ namespace OnlineShop.Db
 		//};
 
 		public IEnumerable<Product> GetAllProducts()
-		{
-			return databaseContext.Products;
-		}
+        {
+            return databaseContext.Products.Where(p => p.IsActive);
+        }
 
 		public Product GetProductById(int id)
 		{
 			return databaseContext.Products.FirstOrDefault(p => p.Id == id);
-		
-		}
+        }
 
 		public void AddProduct(Product product)
         {
 			//product.Id = databaseContext.Product.GetNextId();
+			product.IsActive = true;
 			product.ImagePath = "/images/Aruba.jpg";
 			databaseContext.Products.Add(product);
 			databaseContext.SaveChanges();
@@ -53,7 +53,7 @@ namespace OnlineShop.Db
 		public void RemoveProduct (int Id)
         {
 			var product = databaseContext.Products.FirstOrDefault(x => x.Id == Id);
-			databaseContext.Remove(product);
+			product.IsActive = false;
 			databaseContext.SaveChanges();
 			
         }
