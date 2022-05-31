@@ -14,9 +14,9 @@ namespace OnlineShopWebApp.ViewModels
         [Required(ErrorMessage = "Не указан повтор пароля")]
         [Compare("Password", ErrorMessage ="пароли не совпадают")]
         public string ConfirmPassword{ get; set; }
-        
-        
-        
+
+        public string ReturnUrl { get; set; }
+
         [Required(ErrorMessage = "не указан email")]
         [EmailAddress(ErrorMessage ="некорректный формат email")]
         public string Email { get; set; }

@@ -47,7 +47,7 @@ namespace OnlineShopWebApp.Controllers
                 }
 
             }
-            return View();
+            return View(loginVM);
         }
         [Authorize]
         public IActionResult Logout()
@@ -58,9 +58,9 @@ namespace OnlineShopWebApp.Controllers
         }
 
         [HttpGet]
-        public IActionResult Register()
+        public IActionResult Register(string returnUrl)
         {
-            return View();
+            return View(new RegisterViewModel() { ReturnUrl = returnUrl});
         }
         [HttpPost]
         public IActionResult Register(RegisterViewModel registerVM)
@@ -83,7 +83,7 @@ namespace OnlineShopWebApp.Controllers
                 if (result.Succeeded)
                 {
                     signInManager.SignInAsync(user, false).Wait();
-                    return RedirectToAction("Index", "Home");
+                    return Redirect(registerVM.ReturnUrl);
                 }
                 else
                 {
@@ -92,7 +92,7 @@ namespace OnlineShopWebApp.Controllers
 
 
             }
-            return View();
+            return View(registerVM);
         }
     }
 }

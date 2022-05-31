@@ -28,6 +28,7 @@
                 <span asp-validation-for="ConfirmPassword"></span>
                 <label for="floatingPassword">Повтор пароля</label>
             </div>
+            <input type="hidden" asp-for="ReturnUrl" value="@Model.ReturnUrl" />
             <button class="w-100 btn btn-lg btn-primary" type="submit">Зарегистрироваться</button>
         </form>
     </div>

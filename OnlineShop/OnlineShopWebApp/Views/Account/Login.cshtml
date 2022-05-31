@@ -26,9 +26,9 @@
             </div>
             <button class="w-100 btn btn-lg btn-primary" type="submit">Войти</button>
             <div class="mb-3 p-3 text-center">
-                <a class="card-link text-dark" asp-controller="Account" asp-action="Register">Регистрация нового пользователя</a>
+                <a class="card-link text-dark" asp-controller="Account" asp-action="Register" asp-route-returnUrl="@Model.ReturnUrl">Регистрация нового пользователя</a>
             </div>
-            <input type="hidden" name="returnUrl" value="@Model.ReturnUrl" />
+            <input type="hidden" asp-for="ReturnUrl" value="@Model.ReturnUrl" />
         </form>
     </div>
 </div>
