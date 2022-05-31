@@ -13,17 +13,5 @@ namespace OnlineShopWebApp.Models
         {
             get { return ProductViewModel.Cost*Amount; }
         }
-
-        public ProductViewModel ToDto(Product product)
-        {
-            ProductViewModel newProduct = new ProductViewModel();
-
-            product.Cost = product.Cost;
-            product.Description = product.Description;
-            product.ImgPath = product.ImgPath;
-            product.Name = product.Name;
-            product.Id = product.Id;
-            return newProduct;
-        }
     }
 }

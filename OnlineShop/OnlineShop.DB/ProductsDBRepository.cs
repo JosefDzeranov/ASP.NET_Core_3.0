@@ -1,12 +1,7 @@
-﻿using Newtonsoft.Json;
-using OnlineShop.Db;
+﻿using OnlineShop.Db;
 using OnlineShop.DB.Models;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
-using System.Text;
-using System.Text.Encodings.Web;
-using System.Text.Unicode;
 
 namespace OnlineShop.DB
 {

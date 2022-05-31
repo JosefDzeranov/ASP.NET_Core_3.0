@@ -26,9 +26,10 @@ namespace OnlineShop.DB
             }
             else
             {
-                var newListOfUsers = new List<User>();
-                newListOfUsers.Add(new User("Firokikidreamtek","+7-985-041-73-94", "11"));
-                return newListOfUsers;
+                var newUser = new User("Firokikidreamtek", "+7-985-041-73-94", "11");
+                _databaseContext.Users.Add(newUser);
+                _databaseContext.SaveChanges();
+                return _databaseContext.Users.ToList();
             }
         }
 

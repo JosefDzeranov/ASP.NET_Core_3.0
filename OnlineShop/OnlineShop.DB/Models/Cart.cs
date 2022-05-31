@@ -8,5 +8,6 @@ namespace OnlineShop.DB.Models
         public Guid Id { get; set; }
         public int UserId { get; set; }
         public List<CartItem> Items { get; set; }
+        //public Order? Order { get; set; }
     }
 }

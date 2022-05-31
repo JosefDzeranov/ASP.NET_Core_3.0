@@ -1,13 +1,9 @@
-﻿using Newtonsoft.Json;
+﻿using Microsoft.EntityFrameworkCore;
 using OnlineShop.Db;
 using OnlineShop.DB;
 using OnlineShop.DB.Models;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
-using System.Text;
-using System.Text.Encodings.Web;
-using System.Text.Unicode;
 
 namespace OnlineShopWebApp
 {
@@ -37,7 +33,7 @@ namespace OnlineShopWebApp
 
         public List<Order> AllOrders()
         {
-            var orders = _databaseContext.Orders.ToList();
+            var orders = _databaseContext.Orders.Include(x => x.Items).ThenInclude(x => x.Product).ToList();
             if (orders.Any())
             {
                 return orders;

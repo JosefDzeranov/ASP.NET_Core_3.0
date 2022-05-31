@@ -82,7 +82,7 @@ namespace OnlineShopWebApp.Helpers
         {
             var viewOrder = new OrderViewModel
             {
-                Carts = order.Carts.ToCartViewModels(),
+                Items = order.Items.Select(x => x.ToCartItemViewModel()).ToList(),
                 CreatedDate = order.CreatedDate,
                 DeliveryInfo = order.DeliveryInfo.ToDeliveryInfModView(),
                 Status = order.Status,
@@ -96,7 +96,7 @@ namespace OnlineShopWebApp.Helpers
         {
             var orderDB = new Order
             {
-                Carts = order.Carts.ToCarts(),
+                Items = order.Items.ToCartItems(),
                 CreatedDate = order.CreatedDate,
                 DeliveryInfo = order.DeliveryInfo.ToDeliveryInfo(),
                 Status = order.Status,
@@ -116,6 +116,17 @@ namespace OnlineShopWebApp.Helpers
                 Amount = сartItem.Amount
             };
             return CartItemViewModel;
+        }
+
+        public static CartItem ToCartItem(this CartItemViewModel сartItem)
+        {
+            var CartItemDB = new CartItem
+            {
+                Id = сartItem.Id,
+                Product = сartItem.ProductViewModel.ToProduct(),
+                Amount = сartItem.Amount
+            };
+            return CartItemDB;
         }
 
         public static List<CartItem> ToCartItems(this List<CartItemViewModel> cartItems)

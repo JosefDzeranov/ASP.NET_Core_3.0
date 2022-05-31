@@ -7,14 +7,14 @@ namespace OnlineShop.DB.Models
     {
         public int Id { get; set; }
         public DeliveryInfo DeliveryInfo { get; set; }
-        public List<Cart> Carts { get; set; } = new List<Cart>();
+        public List<CartItem> Items { get; set; }
         public OrderStatus Status { get; set; }
         public DateTime CreatedDate { get; set; }
 
-        public Order(Cart cart, DeliveryInfo deliveryInfo)
+        public Order(List<CartItem> items, DeliveryInfo deliveryInfo)
         {
             CreatedDate = DateTime.Now;
-            Carts.Add(cart);
+            Items = items;
             DeliveryInfo = deliveryInfo;
             Status = OrderStatus.Processing;
         }

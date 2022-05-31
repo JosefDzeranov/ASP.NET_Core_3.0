@@ -8,16 +8,16 @@ namespace OnlineShopWebApp.Models
     public class OrderViewModel
     {
         public int Id { get; set; }
-        public List<CartViewModel> Carts { get; set; } = new List<CartViewModel>();
+        public List<CartItemViewModel> Items { get; set; }
         public DeliveryInfoModelView DeliveryInfo { get; set; }
         public OrderStatus Status { get; set; }
         public DateTime CreatedDate { get; set; }
 
-        public OrderViewModel(CartViewModel cart, DeliveryInfoModelView deliveryInfo)
+        public OrderViewModel(List<CartItemViewModel> items, DeliveryInfoModelView deliveryInfo)
         {
             
             CreatedDate = DateTime.Now;
-            Carts.Add(cart);
+            Items = items;
             DeliveryInfo = deliveryInfo;
             Status = OrderStatus.Processing;
         }

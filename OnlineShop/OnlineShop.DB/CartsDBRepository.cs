@@ -23,7 +23,7 @@ namespace OnlineShop.DB
 
         public Cart TryGetByUserId(int userId)
         {
-            return _databaseContext.Carts.Include(x => x.Items).ThenInclude(x => x.Product).AsNoTracking().FirstOrDefault(x => x.UserId == userId);
+            return _databaseContext.Carts.Include(x => x.Items).ThenInclude(x => x.Product).FirstOrDefault(x => x.UserId == userId);
         }
 
         public void Add(Product product, int userId)

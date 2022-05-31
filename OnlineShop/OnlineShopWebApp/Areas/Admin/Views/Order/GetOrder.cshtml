@@ -34,7 +34,7 @@
                     </tr>
                     <tr>
                         <th>Сумма руб.</th>
-                        <td>@Model.Carts.First().Cost</td>
+                        <td>@Model.Items.Select(x => x.Cost).Sum()</td>
                     </tr>
                     <tr>
                         <th>Статус</th>
