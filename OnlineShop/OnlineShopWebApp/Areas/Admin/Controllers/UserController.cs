@@ -18,12 +18,13 @@ namespace OnlineShopWebApp.Areas.Admin.Controllers
     {
         private readonly IUserRepository userRepository;
         private readonly UserManager<User> userManager;
+        private readonly RoleManager<IdentityRole> roleManager;
 
-
-        public UserController(IUserRepository userRepository, UserManager<User> userManager)
+        public UserController(IUserRepository userRepository, UserManager<User> userManager, RoleManager<IdentityRole> roleManager)
         {
             this.userRepository = userRepository;
             this.userManager = userManager;
+            this.roleManager = roleManager;
         }
 
         public IActionResult Index()
@@ -43,8 +44,9 @@ namespace OnlineShopWebApp.Areas.Admin.Controllers
         }
         public IActionResult AddUser()
         {
+            var roles = roleManager.Roles.ToList();
 
-            return View();
+            return View(new RegisterViewModel() {Roles = roles});
         }
 
         [HttpPost]
@@ -62,6 +64,7 @@ namespace OnlineShopWebApp.Areas.Admin.Controllers
                    var result = userManager.CreateAsync(user, registerViewModel.Password).Result;
                 if (result.Succeeded)
                 {
+                    userManager.AddToRoleAsync(user, registerViewModel.Role).Wait();
                     return RedirectToAction("Index", "User");
                 }
                 else
@@ -101,6 +104,8 @@ namespace OnlineShopWebApp.Areas.Admin.Controllers
         {
             var result = userManager.FindByIdAsync(id).Result;
             var userInfoViewModel = result.MappingToUserInfoViewModel();
+            userInfoViewModel.Roles =  roleManager.Roles.ToList();
+
             return View(userInfoViewModel);
         }
         [HttpPost]

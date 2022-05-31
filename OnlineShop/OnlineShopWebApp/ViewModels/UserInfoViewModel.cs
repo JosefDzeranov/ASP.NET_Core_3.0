@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Identity;
+using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 namespace OnlineShopWebApp.ViewModels
@@ -19,5 +21,9 @@ namespace OnlineShopWebApp.ViewModels
         [Required]
         public string Id { get; set; }
         public string PhoneNumber { get; set; }
+
+        [Required]
+        public string Role { get; set; }
+        public List<IdentityRole> Roles { get; set; } = new List<IdentityRole>();
     }
 }

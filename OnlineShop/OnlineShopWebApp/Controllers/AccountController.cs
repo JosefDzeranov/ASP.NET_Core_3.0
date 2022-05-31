@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using OnlineShop.DB;
 using OnlineShop.DB.Models;
 using OnlineShopWebApp.Models;
 using OnlineShopWebApp.Services;
@@ -10,14 +11,12 @@ namespace OnlineShopWebApp.Controllers
 {
     public class AccountController : Controller
     {
-        private readonly IUserRepository userRepository;
 
         private readonly UserManager<User> userManager;
         private readonly SignInManager<User> signInManager;
        
-        public AccountController(IUserRepository userRepository, UserManager<User> userManager, SignInManager<User> signInManager)
+        public AccountController( UserManager<User> userManager, SignInManager<User> signInManager)
         {
-            this.userRepository = userRepository;
             this.userManager = userManager;
             this.signInManager = signInManager;
         }
@@ -82,6 +81,7 @@ namespace OnlineShopWebApp.Controllers
 
                 if (result.Succeeded)
                 {
+                    userManager.AddToRoleAsync(user, Const.UserRoleName).Wait();
                     signInManager.SignInAsync(user, false).Wait();
                     return Redirect(registerVM.ReturnUrl);
                 }

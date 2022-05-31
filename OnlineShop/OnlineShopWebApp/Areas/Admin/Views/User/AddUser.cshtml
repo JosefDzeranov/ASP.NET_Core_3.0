@@ -35,13 +35,23 @@
                                 <input type="password" asp-for="ConfirmPassword" class="form-control" placeholder="повторить пароль" />
                                 <span asp-validation-for="ConfirmPassword"></span>
                             </div>
+                            <div class="mb-3">
+                                <select asp-for="Role" class="form-select" aria-label="Default select example">
+                                    <option selected>Выбрать роль</option>
+                                    @foreach (var item in @Model.Roles)
+                                    {
+                                        <option value="@item.Name">@item.Name</option>
+                                    }
+                                </select>
+                                <span asp-validation-for="Role"></span>
+                            </div>
                             <div class="mb-3 text-center">
                                 <button type="submit" class="btn btn-dark">Добавить</button>
-                                <a class="btn btn-dark" asp-controller="User" asp-action="Index">Отмена</a> 
+                                <a class="btn btn-dark" asp-controller="User" asp-action="Index">Отмена</a>
                             </div>
                         </div>
                     </div>
-                </form>       
+                </form>
             </div>
         </div>
 

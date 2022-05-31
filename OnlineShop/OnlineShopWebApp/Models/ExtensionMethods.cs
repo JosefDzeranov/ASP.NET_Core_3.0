@@ -208,15 +208,16 @@ namespace OnlineShopWebApp.Models
 
         public static User MappingToUserFromUserInfoViewModel(this UserInfoViewModel userInfoViewModel)
         {
-            var user = new User
-            {
-                Id = userInfoViewModel.Id,
-                UserName = userInfoViewModel.Email,
-                FirstName = userInfoViewModel.FirstName,
-                LastName = userInfoViewModel.LastName,
-                Email = userInfoViewModel.Email,
-                PhoneNumber = userInfoViewModel.PhoneNumber,
-            };
+                var user = new User
+                {
+                    Id = userInfoViewModel.Id,
+                    UserName = userInfoViewModel.Email,
+                    FirstName = userInfoViewModel.FirstName,
+                    LastName = userInfoViewModel.LastName,
+                    Email = userInfoViewModel.Email,
+                    PhoneNumber = userInfoViewModel.PhoneNumber,
+                };
+            
             return user;
         }
     }
