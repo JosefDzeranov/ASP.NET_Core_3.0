@@ -64,7 +64,7 @@ namespace OnlineShopWebApp
             services.AddTransient<IOrderRepository, OrderRepository >();
             services.AddTransient<IFavoriteRepository, FavoriteRepository>();
             services.AddSingleton<IRoleRepository, RoleRepository>();
-            services.AddSingleton<IUserRepository, UserRepository>();
+            
 
             services.Configure<RequestLocalizationOptions>(options =>
             {

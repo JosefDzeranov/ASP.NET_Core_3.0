@@ -16,13 +16,12 @@ namespace OnlineShopWebApp.Areas.Admin.Controllers
     [Authorize(Roles = Const.AdminRoleName)]
     public class UserController : Controller
     {
-        private readonly IUserRepository userRepository;
+        
         private readonly UserManager<User> userManager;
         private readonly RoleManager<IdentityRole> roleManager;
 
-        public UserController(IUserRepository userRepository, UserManager<User> userManager, RoleManager<IdentityRole> roleManager)
+        public UserController(UserManager<User> userManager, RoleManager<IdentityRole> roleManager)
         {
-            this.userRepository = userRepository;
             this.userManager = userManager;
             this.roleManager = roleManager;
         }
@@ -80,8 +79,8 @@ namespace OnlineShopWebApp.Areas.Admin.Controllers
         
         public IActionResult Delete(string id)
         {
-            userRepository.Delete(id);
-
+            var user = userManager.FindByIdAsync(id).Result;
+            userManager.DeleteAsync(user).Wait();
             return RedirectToAction("Index", "User");
         }
         public IActionResult ChangePassword(string id)
