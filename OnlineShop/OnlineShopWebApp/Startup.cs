@@ -12,6 +12,8 @@ using OnlineShop.Db;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Identity;
 using OnlineShop.Db.Models;
+using System;
+using Microsoft.AspNetCore.Http;
 
 namespace OnlineShopWebApp
 {
@@ -36,6 +38,17 @@ namespace OnlineShopWebApp
 
             services.AddIdentity<User, IdentityRole>()
                     .AddEntityFrameworkStores<IdentityContext>();
+
+            services.ConfigureApplicationCookie(options =>
+            {
+                options.ExpireTimeSpan = TimeSpan.FromHours(24);
+                options.LoginPath = "/Account/SignIn";
+                options.LogoutPath = "/Account/SignOut";
+                options.Cookie = new CookieBuilder
+                {
+                    IsEssential = true
+                };
+            });
 
             services.AddControllersWithViews();
             services.AddTransient<IProductStorage, ProductDbStorage>();
