@@ -114,7 +114,8 @@ namespace OnlineShopWebApp.Areas.Admin.Controllers
         {
             var result = userManager.FindByIdAsync(id).Result;
             var userInfoViewModel = result.MappingToUserInfoViewModel();
-            userInfoViewModel.Roles =  roleManager.Roles.ToList();
+            userInfoViewModel.AllRoles = roleManager.Roles.ToList();
+            userInfoViewModel.UserRoles = userManager.GetRolesAsync(result).Result.ToList();
 
             return View(userInfoViewModel);
         }
@@ -122,9 +123,27 @@ namespace OnlineShopWebApp.Areas.Admin.Controllers
         public IActionResult ChangeInfo(UserInfoViewModel userInfoViewModel)
         {
             var result = userManager.FindByIdAsync(userInfoViewModel.Id).Result;
-            var user = userInfoViewModel.MappingToUserFromUserInfoViewModel(result);
-            userManager.UpdateAsync(user).Wait();
-            return RedirectToAction("Index", "User");
+            if(result != null)
+            {
+                var user = userInfoViewModel.MappingToUserFromUserInfoViewModel(result);
+                userManager.UpdateAsync(user).Wait();
+                var userRoles = userManager.GetRolesAsync(user).Result.ToList();
+                var addedRoles = userInfoViewModel.UserRoles.Except(userRoles);
+                var removedRoles = userRoles.Except(userInfoViewModel.UserRoles);
+                foreach(var role in addedRoles)
+                {
+                    userManager.AddToRoleAsync(user, role).Wait();
+                }
+                foreach (var role in removedRoles)
+                {
+                    userManager.RemoveFromRoleAsync(user, role).Wait();
+                }
+
+                return RedirectToAction("Index", "User");
+                
+            }
+
+            return NotFound();
         }
     }
 }

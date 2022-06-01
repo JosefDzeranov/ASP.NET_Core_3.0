@@ -17,13 +17,20 @@ namespace OnlineShopWebApp.ViewModels
 
         [Required(ErrorMessage = "не указан email")]
         [EmailAddress(ErrorMessage = "некорректный формат email")]
-        public string Email { get; set; }   
+        public string Email { get; set; }
         [Required]
         public string Id { get; set; }
         public string PhoneNumber { get; set; }
 
         [Required]
-        public string Role { get; set; }
-        public List<IdentityRole> Roles { get; set; } = new List<IdentityRole>();
+        public List<string> UserRoles { get; set; }
+
+        public List<IdentityRole> AllRoles { get; set; }
+
+        public UserInfoViewModel()
+        {
+            AllRoles = new List<IdentityRole>();
+            UserRoles = new List<string>();
+        }
     }
 }

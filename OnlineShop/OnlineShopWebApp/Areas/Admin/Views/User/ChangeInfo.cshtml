@@ -20,7 +20,7 @@
                                 <input type="text" asp-for="LastName" class="form-control" placeholder="фамилия" value="@Model.LastName" />
                                 <span asp-validation-for="LastName"></span>
                             </div>
-                             <div class="mb-3">
+                            <div class="mb-3">
                                 <input type="email" asp-for="Email" class="form-control" placeholder="email" value="@Model.Email" />
                                 <span asp-validation-for="Email"></span>
                             </div>
@@ -28,15 +28,15 @@
                                 <input type="tel" asp-for="PhoneNumber" class="form-control" placeholder="телефон" value="@Model.PhoneNumber" />
                                 <span asp-validation-for="PhoneNumber"></span>
                             </div>
-                            <div class="mb-3">
-                                <select asp-for="Role" class="form-select" aria-label="Default select example">
-                                    <option selected>Выбрать роль</option>
-                                    @foreach (var item in @Model.Roles)
-                                    {
-                                        <option value="@item.Name">@item.Name</option>
-                                    }
-                                </select>
-                                <span asp-validation-for="Role"></span>
+                            <div class="col mb-3 form-group">
+
+                                Роли:
+
+                                @foreach (var role in Model.AllRoles)
+                                {
+                                    <input type="checkbox" name="UserRoles" value="@role.Name" checked="@(Model.UserRoles.Contains(role.Name) ? true : false)" />
+                                    @role.Name <br />
+                                }
                             </div>
                             <input type="hidden" asp-for="Id" value="@Model.Id" />
                             <div class="mb-3 text-center">
