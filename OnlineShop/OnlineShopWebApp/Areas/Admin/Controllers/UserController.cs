@@ -96,18 +96,29 @@ namespace OnlineShopWebApp.Areas.Admin.Controllers
         public IActionResult ChangePassword(UserPasswordViewModel userPasswordViewModel)
         {
             var user = userManager.FindByIdAsync(userPasswordViewModel.Id).Result;
-            var result =  userManager.ChangePasswordAsync(user, userPasswordViewModel.OldPassword, userPasswordViewModel.Password).Result;
-            if (result.Succeeded)
+            if(user != null)
             {
-                return RedirectToAction("Index", "User");
-            }
-            else
-            {
-                foreach (var error in result.Errors)
+                var passwordValidator =
+               HttpContext.RequestServices.GetService(typeof(IPasswordValidator<User>)) as IPasswordValidator<User>;
+                var passwordHasher =
+                    HttpContext.RequestServices.GetService(typeof(IPasswordHasher<User>)) as IPasswordHasher<User>;
+                var result = passwordValidator.ValidateAsync(userManager, user, userPasswordViewModel.NewPassword).Result;
+                if (result.Succeeded)
                 {
-                    ModelState.AddModelError("", error.Description);
+                    user.PasswordHash = passwordHasher.HashPassword(user, userPasswordViewModel.NewPassword);
+                    userManager.UpdateAsync(user).Wait();
+                    return RedirectToAction("Index", "User");
                 }
+                else
+                {
+                    foreach (var error in result.Errors)
+                    {
+                        ModelState.AddModelError("", error.Description);
+                    }
+                }
+
             }
+            
             return View(userPasswordViewModel);
         }
         public IActionResult ChangeInfo(string id)

@@ -9,11 +9,11 @@ namespace OnlineShopWebApp.ViewModels
         public string OldPassword { get; set; }
        
         [Required(ErrorMessage = "Не указан пароль")]
-        public string Password { get; set; }
+        public string NewPassword { get; set; }
 
         [Required(ErrorMessage = "Не указан повтор пароля")]
-        [Compare("Password", ErrorMessage = "пароли не совпадают")]
-        public string ConfirmPassword { get; set; }
+        [Compare("NewPassword", ErrorMessage = "пароли не совпадают")]
+        public string ConfirmNewPassword { get; set; }
 
         [Required]
         public string Id { get; set; }
