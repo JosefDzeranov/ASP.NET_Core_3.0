@@ -2,7 +2,7 @@
 
 namespace OnlineShopWebApp.Models
 {
-    public class SignIn
+    public class SigninViewModel
     {
         [Required]
         [EmailAddress]

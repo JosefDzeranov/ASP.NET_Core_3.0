@@ -7,10 +7,10 @@ namespace OnlineShopWebApp
 {
     public interface IUserStorage
     {
-        void Add(SignUp signup);
+        void Add(SignupViewModel signup);
         User TryGetById(Guid id);
         List<User> GetAll();
-        bool Authorize(SignIn signin);
+        bool Authorize(SigninViewModel signin);
         void ChangePassword(ChangePassword data);
         void Edit(User user);
         void Remove(Guid id);

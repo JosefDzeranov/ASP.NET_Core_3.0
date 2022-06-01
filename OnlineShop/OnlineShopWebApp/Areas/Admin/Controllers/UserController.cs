@@ -30,7 +30,7 @@ namespace OnlineShopWebApp.Areas.Admin.Controllers
         }
 
         [HttpPost]
-        public IActionResult Add(SignUp signup)
+        public IActionResult Add(SignupViewModel signup)
         {
             if (ModelState.IsValid)
             {

@@ -4,7 +4,7 @@ using OnlineShopWebApp.Models.Attributes;
 namespace OnlineShopWebApp.Models
 {
     [NamePasswordEqual]
-    public class SignUp
+    public class SignupViewModel
     {
         [Required]
         [StringLength(25, MinimumLength = 2)]
