@@ -111,6 +111,7 @@ namespace OnlineShopWebApp.Helpers
         {
             var CartItemViewModel = new CartItemViewModel
             {
+                //Cart = сartItem.Cart,
                 Id = сartItem.Id,
                 ProductViewModel = сartItem.Product.ToProductViewModel(),
                 Amount = сartItem.Amount
@@ -122,6 +123,7 @@ namespace OnlineShopWebApp.Helpers
         {
             var CartItemDB = new CartItem
             {
+                //Cart = сartItem.Cart,
                 Id = сartItem.Id,
                 Product = сartItem.ProductViewModel.ToProduct(),
                 Amount = сartItem.Amount

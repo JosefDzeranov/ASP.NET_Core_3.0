@@ -26,7 +26,7 @@ namespace OnlineShopWebApp.Areas.Admin.Controllers
 
         public IActionResult GetOrder(int orderId)
         {
-            var necessaryOrder = _orderBase.AllOrders().FirstOrDefault(x => x.Id == orderId);
+            var necessaryOrder = _orderBase.AllOrders().FirstOrDefault(x => x.Id == orderId).ToOrderViewModel();
             return View(necessaryOrder);
         }
 

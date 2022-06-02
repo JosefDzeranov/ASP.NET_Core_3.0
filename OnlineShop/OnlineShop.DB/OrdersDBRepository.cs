@@ -21,7 +21,7 @@ namespace OnlineShopWebApp
         {
             var allOrders = AllOrders();
 
-            if(allOrders.Any())
+            if (allOrders.Any())
             {
                 return allOrders.Select(x => x.Id).Max() + 1;
             }
@@ -33,7 +33,7 @@ namespace OnlineShopWebApp
 
         public List<Order> AllOrders()
         {
-            var orders = _databaseContext.Orders.Include(x => x.Items).ThenInclude(x => x.Product).ToList();
+            var orders = _databaseContext.Orders.Include(x => x.Items).ThenInclude(x => x.Product).Include(x => x.DeliveryInfo).ToList();
             if (orders.Any())
             {
                 return orders;
@@ -54,7 +54,8 @@ namespace OnlineShopWebApp
 
         public void Add(Order order)
         {
-            //_databaseContext.Carts.Remove(order.Cart);
+            _databaseContext.Entry(order.Items.FirstOrDefault()).State = EntityState.Detached;
+            _databaseContext.Entry(order.Items.FirstOrDefault()).State = EntityState.Modified;
             _databaseContext.Orders.Add(order);
             _databaseContext.SaveChanges();
         }

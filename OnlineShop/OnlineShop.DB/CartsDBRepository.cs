@@ -23,7 +23,12 @@ namespace OnlineShop.DB
 
         public Cart TryGetByUserId(int userId)
         {
-            return _databaseContext.Carts.Include(x => x.Items).ThenInclude(x => x.Product).FirstOrDefault(x => x.UserId == userId);
+            return _databaseContext.Carts
+                .Where(x =>x.IsDeleted == false)
+                .Include(x => x.Items)
+                .ThenInclude(x => x.Product)
+                .AsNoTracking()
+                .FirstOrDefault(x => x.UserId == userId);
         }
 
         public void Add(Product product, int userId)
@@ -89,7 +94,9 @@ namespace OnlineShop.DB
         public void Delete(int userId)
         {
             var existingCart = TryGetByUserId(userId);
-            //_databaseContext.Carts.Remove(existingCart);
+            _databaseContext.Entry(existingCart).State = EntityState.Detached;
+            _databaseContext.Entry(existingCart).State = EntityState.Modified;
+            existingCart.IsDeleted = true;
             _databaseContext.SaveChanges();
         }
     }

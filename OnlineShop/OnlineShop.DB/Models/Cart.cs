@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace OnlineShop.DB.Models
 {
@@ -8,6 +9,10 @@ namespace OnlineShop.DB.Models
         public Guid Id { get; set; }
         public int UserId { get; set; }
         public List<CartItem> Items { get; set; }
-        //public Order? Order { get; set; }
+        public bool IsDeleted { get; set; }
+        public int Amount
+        {
+            get { return Items?.Sum(x => x.Amount) ?? 0; }
+        }
     }
 }

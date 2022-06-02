@@ -22,8 +22,7 @@ namespace OnlineShopWebApp.Controllers
         private void AddNewOrder(DeliveryInfoModelView deliveryInfo)
         {
             var existingUser = _userBase.AllUsers().First();
-            var cart = _cartBase.AllCarts().FirstOrDefault(x => x.UserId == existingUser.Id).ToCartViewModel();
-            //var cart = _cartBase.TryGetByUserId(existingUser.Id).ToCartViewModel();
+            var cart = _cartBase.TryGetByUserId(existingUser.Id).ToCartViewModel();
             var order = new Order(cart.Items.Select(x => x.ToCartItem()).ToList(), deliveryInfo.ToDeliveryInfo());
             _orderBase.Add(order);
         }

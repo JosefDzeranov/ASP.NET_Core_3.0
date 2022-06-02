@@ -1,4 +1,6 @@
-﻿namespace OnlineShop.DB.Models
+﻿using System.Collections.Generic;
+
+namespace OnlineShop.DB.Models
 {
     public class Product
     {
@@ -7,6 +9,8 @@
         public decimal Cost { get; set; }
         public string Description { get; set; }
         public string ImgPath { get; set; }
+        public List<CartItem> CartItems { get; set; }
+
 
     }
 }

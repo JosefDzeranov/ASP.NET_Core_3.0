@@ -8,6 +8,8 @@ namespace OnlineShopWebApp.Models
         public Guid Id { get; set; }
         public ProductViewModel ProductViewModel { get; set; }
         public int Amount { get; set; }
+        public Cart Cart { get; set; }
+
 
         public decimal Cost
         {
