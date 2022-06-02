@@ -8,6 +8,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using OnlineShop.Db;
 using OnlineShopWebApp.Models;
+using OOnlineShop.Db;
 using Serilog;
 
 namespace OnlineShopWebApp
@@ -33,7 +34,7 @@ namespace OnlineShopWebApp
             services.AddTransient<IProductManager, ProductManagerDB>();
             services.AddSingleton<IOrderManager, OrderManager>();
             services.AddSingleton<IComparison, ComparisonManager>();
-            services.AddSingleton<IFavorites, FavoritesManager>();
+            services.AddTransient<IFavoritesManager, FavoritesManager>();
             services.AddSingleton<IRolesManager, RolesManager>();
             services.AddSingleton<IUsersManager, UsersManager>();
             services.AddControllersWithViews();
