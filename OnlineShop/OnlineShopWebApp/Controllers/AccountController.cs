@@ -1,7 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using OnlineShopWebApp.Areas.Admin.Models;
 using OnlineShopWebApp.Models;
 
-namespace OnlineShopWebApp.Controllers
+namespace OnlineShopWebApp.Areas.Admin.Controllers
 {
     public class AccountController : Controller
     {
@@ -26,7 +27,7 @@ namespace OnlineShopWebApp.Controllers
         [HttpPost]
         public IActionResult Registration(Registration registration)
         {
-            if(ModelState.IsValid)
+            if (ModelState.IsValid)
                 return RedirectToAction("Index", "Home");
             return RedirectToAction("registration");
         }

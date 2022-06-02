@@ -1,4 +1,5 @@
-﻿@model List<Order>
+﻿@using OnlineShopWebApp.Models
+@model List<Order>
 
 <div class="row">
     @await Html.PartialAsync("AdminLeftPanel")
@@ -30,7 +31,7 @@
                                 <td>Admin</td>
                                 <td>@product.CreatedDateTime.ToString("d")</td>
                                 <td>@product.CreatedDateTime.ToString("t")</td>
-                                <td><a href="/admin/orderDetails?orderId=@product.Id">Подробнее</a></td>
+                                <td><a href="/admin/admin/orderDetails?orderId=@product.Id">Подробнее</a></td>
                             </tr>
                         }
                     </tbody>
