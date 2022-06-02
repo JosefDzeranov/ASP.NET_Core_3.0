@@ -26,7 +26,7 @@ namespace OnlineShopWebApp.Controllers
             var cartDb = cartRepository.TryGetByUserId(Const.UserId);
             if(cartDb != null)
             {
-                var cartViewModel = cartDb.MappingCartViewModel();
+                var cartViewModel = cartDb.MappingToCartViewModel();
                 return View(cartViewModel);
             }
             return View();

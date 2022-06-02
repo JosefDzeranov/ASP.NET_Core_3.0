@@ -26,7 +26,7 @@ namespace OnlineShopWebApp.Controllers
             var existingCart = cartRepository.TryGetByUserId(Const.UserId);
 
             var orderVM = new OrderViewModel();
-            orderVM.Cart = existingCart.MappingCartViewModel();
+            orderVM.Cart = existingCart.MappingToCartViewModel();
             return View(orderVM);
         }
 
@@ -36,7 +36,7 @@ namespace OnlineShopWebApp.Controllers
             if (ModelState.IsValid)
             {
                 var existingCart = cartRepository.TryGetByUserId(Const.UserId);
-                var order = orderViewModel.MappingOrder(existingCart);
+                var order = orderViewModel.MappingToOrder(existingCart);
                 orderRepository.Add(order);
                 cartRepository.Clear(Const.UserId);
                 return View();
