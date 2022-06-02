@@ -143,15 +143,8 @@ namespace OnlineShopWebApp.Helpers
 
         public static Product ToProduct (ProductViewModel product)
         {
-            return new Product
-            {
-                Id = product.Id,
-                Name = product.Name,
-                Cost = product.Cost,
-                Description = product.Description,
-                ImagePath = product.ImagePath
-
-            };
+            return new Product(id: product.Id, name: product.Name, cost: product.Cost, description: product.Description,
+                imagePath: product.ImagePath);
         }
 
         public static Customer ToCustomer (CustomerViewModel customer)

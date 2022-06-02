@@ -13,15 +13,17 @@
 
 		<table class ="table">
 
-		<tr>
-			<th>№</th>
-	        <th>Название</th>
-			<th>Цена</th>
-	    </tr>
-		@foreach(var item in Model)
+			<tr>
+				<th>Название</th>
+				<th>Цена</th>
+			</tr>
+
+			@foreach(var item in Model)
 			{
+				string modalId = "exampleModal" + item.Id;
+				string headerId = "removeModalLabel" + item.Id;
 				<tr>
-					<td>@item.Id</td>
+					
 					<td><a href="/product/index/@item.Id">@item.Name</a></td>
 					<td>@item.Cost</td>
 					<td><a 
@@ -29,13 +31,13 @@
 						asp-controller="Product"
 						asp-action="Edit"
 						asp-route-productId="@item.Id">Редактировать</a></td>
-					<td><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">Удалить</button>
+					<td><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#@modalId">Удалить</button>
 						
-						<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+						<div class="modal fade" id="@modalId" tabindex="-1" aria-labelledby="@headerId" aria-hidden="true">
 						  <div class="modal-dialog">
 							<div class="modal-content">
 							  <div class="modal-header">
-								<h5 class="modal-title" id="exampleModalLabel">Удалить продукт</h5>
+								<h5 class="modal-title" id="@modalId">Удалить продукт</h5>
 								<button type="button" class="btn-close" data-dismiss="modal" aria-label="Закрыть"></button>
 							  </div>
 							  <div class="modal-body">

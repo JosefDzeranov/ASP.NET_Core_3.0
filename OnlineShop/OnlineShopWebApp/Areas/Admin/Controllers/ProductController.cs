@@ -37,13 +37,7 @@ namespace OnlineShopWebApp.Areas.Admin.Controllers
             {
                 return View(product);
             }
-            var productDb = new Product
-
-            {
-                Name = product.Name,
-                Cost = product.Cost,
-                Description = product.Description
-            };
+            var productDb = new Product(name: product.Name, cost: product.Cost, description: product.Description);
 
             productDataSource.AddProduct(productDb);
             return RedirectToAction(nameof(Index));
@@ -60,7 +54,7 @@ namespace OnlineShopWebApp.Areas.Admin.Controllers
         public IActionResult Edit(int productId)
         {
             var product = productDataSource.GetProductById(productId);
-            return View(product);
+            return View(Mapping.ToProductViewModel(product));
         }
 
         [HttpPost]
@@ -71,12 +65,8 @@ namespace OnlineShopWebApp.Areas.Admin.Controllers
                 return View (product);
                
             }
-            var productDb = new Product
-            {
-                Name = product.Name,
-                Cost = product.Cost,
-                Description = product.Description
-            };
+            
+            var productDb = Mapping.ToProduct(product);
 
             productDataSource.EditProduct(productDb);
             return RedirectToAction(nameof(Index));
