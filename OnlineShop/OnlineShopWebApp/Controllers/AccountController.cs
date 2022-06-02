@@ -45,9 +45,9 @@ namespace OnlineShopWebApp.Controllers
             return View(signin);
         }
 
-        public IActionResult Signup()
+        public IActionResult Signup(string returnUrl)
         {
-            return View();
+            return View(new SignupViewModel() { ReturnUrl = returnUrl });
         }
 
         [HttpPost]
@@ -69,7 +69,7 @@ namespace OnlineShopWebApp.Controllers
                 if (result.Succeeded)
                 {
                     _signInManager.SignInAsync(user, false).Wait();
-                    return RedirectToAction("Index", "Home");
+                    return Redirect(signup.ReturnUrl);
                 }
                 else
                 {

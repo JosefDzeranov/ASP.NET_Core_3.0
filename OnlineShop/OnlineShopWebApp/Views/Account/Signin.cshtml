@@ -31,7 +31,7 @@
                 </div>
             </form>
             <div class="mb-3">
-                Don't have an account? <a asp-controller="Account" asp-action="Signup">Sign up</a>
+                Don't have an account? <a asp-controller="Account" asp-action="Signup" asp-route-returnUrl="@Model.ReturnUrl">Sign up</a>
             </div>
         </div>
     </div>

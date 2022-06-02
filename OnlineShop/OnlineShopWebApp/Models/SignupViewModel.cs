@@ -30,5 +30,7 @@ namespace OnlineShopWebApp.Models
         [StringLength(50, MinimumLength = 4)]
         [Compare("Password")]
         public string ConfirmPassword { get; set; }
+
+        public string ReturnUrl { get; set; }
     }
 }
