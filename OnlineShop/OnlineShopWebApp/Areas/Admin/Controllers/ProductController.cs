@@ -24,7 +24,7 @@ namespace OnlineShopWebApp.Areas.Admin.Controllers
         public IActionResult Index()
         {
             var products = productRepository.GetAll();
-            var productsViewModel = products.MappingListProductViewModel();
+            var productsViewModel = products.MappingToListProductViewModel();
             return View(productsViewModel);
         }
 
@@ -42,7 +42,7 @@ namespace OnlineShopWebApp.Areas.Admin.Controllers
         public IActionResult EditProduct(Guid id)
         {
             var product = productRepository.TryGetById(id);
-            var productViewModel = product.MappingProductViewModel();
+            var productViewModel = product.MappingToProductViewModel();
             return View(productViewModel);
         }
         [HttpPost]
@@ -50,7 +50,7 @@ namespace OnlineShopWebApp.Areas.Admin.Controllers
         {
             if (ModelState.IsValid)
             {
-                var productDb = productViewModel.MappingProduct();
+                var productDb = productViewModel.MappingToProduct();
                 productRepository.Update(productDb);
             }
 
@@ -64,7 +64,7 @@ namespace OnlineShopWebApp.Areas.Admin.Controllers
         [HttpPost]
         public IActionResult AddProduct(ProductViewModel productViewModel)
         {
-            var productDb = productViewModel.MappingProduct();
+            var productDb = productViewModel.MappingToProduct();
             productRepository.Add(productDb);
             return RedirectToAction("Index", "Product");
         }

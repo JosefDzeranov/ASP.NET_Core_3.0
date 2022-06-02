@@ -1,11 +1,14 @@
 ﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using OnlineShop.DB;
+using OnlineShop.DB.Models;
 using OnlineShopWebApp.Models;
 using OnlineShopWebApp.Services;
 using OnlineShopWebApp.ViewModels;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace OnlineShopWebApp.Areas.Admin.Controllers
 {
@@ -13,111 +16,144 @@ namespace OnlineShopWebApp.Areas.Admin.Controllers
     [Authorize(Roles = Const.AdminRoleName)]
     public class UserController : Controller
     {
-        private readonly IUserRepository userRepository;
+        
+        private readonly UserManager<User> userManager;
+        private readonly RoleManager<IdentityRole> roleManager;
 
-        public UserController(IUserRepository userRepository)
+        public UserController(UserManager<User> userManager, RoleManager<IdentityRole> roleManager)
         {
-            this.userRepository = userRepository;
+            this.userManager = userManager;
+            this.roleManager = roleManager;
         }
 
         public IActionResult Index()
         {
-            var users = userRepository.GetAll();
+            var users = userManager.Users.ToList();
+            var usersViewModel = users.MappingToListUserViewModel();
 
-            return View(users);
+            return View(usersViewModel);
         }
 
-        public IActionResult UserDetails(Guid id)
+        public IActionResult UserDetails(string id)
         {
-            var user = userRepository.TryGetById(id);
+            var user = userManager.FindByIdAsync(id).Result;
+            var userViewModel = user.MappingToUserViewModel();
 
-            return View(user);
+            return View(userViewModel);
         }
         public IActionResult AddUser()
         {
+            var roles = roleManager.Roles.ToList();
 
-            return View();
+            return View(new RegisterViewModel() {Roles = roles});
         }
 
         [HttpPost]
-        public IActionResult AddUser(RegisterViewModel registerVM)
+        public IActionResult AddUser(RegisterViewModel registerViewModel)
         {
-            if (registerVM.Password == registerVM.Name)
+            if (registerViewModel.Password == registerViewModel.FirstName)
             {
                 ModelState.AddModelError("Name", "Имя и пароль не должны совпадать");
             }
 
             if (ModelState.IsValid)
             {
-                var user = new UserViewModel
+                var user = registerViewModel.MappingToUserFromRegisterViewModel();
+               
+                   var result = userManager.CreateAsync(user, registerViewModel.Password).Result;
+                if (result.Succeeded)
                 {
-                    Name = registerVM.Name,
-                    Email = registerVM.Email,
-                    Password = registerVM.Password,
-
-                };
-                if (userRepository.Add(user))
-                {
+                    userManager.AddToRoleAsync(user, registerViewModel.Role).Wait();
                     return RedirectToAction("Index", "User");
                 }
                 else
                 {
-                    ModelState.AddModelError("Email", "Пользователь с таким email уже зарегистрирован");
+                    foreach (var error in result.Errors)
+                    {
+                        ModelState.AddModelError("", error.Description);
+                    }
                 }
-
-
             }
             return View();
         }
         
-        public IActionResult Delete(Guid id)
+        public IActionResult Delete(string id)
         {
-            userRepository.Delete(id);
-
+            var user = userManager.FindByIdAsync(id).Result;
+            userManager.DeleteAsync(user).Wait();
             return RedirectToAction("Index", "User");
         }
-        public IActionResult ChangePassword(Guid id)
+        public IActionResult ChangePassword(string id)
         {
-            var user = userRepository.TryGetById(id);
-            var userPasswordViewModel = new UserPasswordViewModel
-            {
-                Password = user.Password,
-                ConfirmPassword = user.Password,
-                UserId = user.Id,
-            };
+            var user = userManager.FindByIdAsync(id).Result;
+            var userPasswordViewModel = new UserPasswordViewModel();
+            userPasswordViewModel.Id = user.Id;
+            
             return View(userPasswordViewModel);
         }
         [HttpPost]
         public IActionResult ChangePassword(UserPasswordViewModel userPasswordViewModel)
         {
-            var user = userRepository.TryGetById(userPasswordViewModel.UserId);
-            user.Password = userPasswordViewModel.Password;
-            userRepository.Update(user);
-            return RedirectToAction("Index", "User");
-        }
-        public IActionResult ChangeInfo(Guid id)
-        {
-            var user = userRepository.TryGetById(id);
-            var userInfoViewModel = new UserInfoViewModel
+            var user = userManager.FindByIdAsync(userPasswordViewModel.Id).Result;
+            if(user != null)
             {
-                Name = user.Name,
-                Email = user.Email,
-                LastName = user.LastName,
-                UserId = user.Id,
-                Phone = user.Phone
-            };
+                var passwordValidator =
+               HttpContext.RequestServices.GetService(typeof(IPasswordValidator<User>)) as IPasswordValidator<User>;
+                var passwordHasher =
+                    HttpContext.RequestServices.GetService(typeof(IPasswordHasher<User>)) as IPasswordHasher<User>;
+                var result = passwordValidator.ValidateAsync(userManager, user, userPasswordViewModel.NewPassword).Result;
+                if (result.Succeeded)
+                {
+                    user.PasswordHash = passwordHasher.HashPassword(user, userPasswordViewModel.NewPassword);
+                    userManager.UpdateAsync(user).Wait();
+                    return RedirectToAction("Index", "User");
+                }
+                else
+                {
+                    foreach (var error in result.Errors)
+                    {
+                        ModelState.AddModelError("", error.Description);
+                    }
+                }
+
+            }
+            
+            return View(userPasswordViewModel);
+        }
+        public IActionResult ChangeInfo(string id)
+        {
+            var result = userManager.FindByIdAsync(id).Result;
+            var userInfoViewModel = result.MappingToUserInfoViewModel();
+            userInfoViewModel.AllRoles = roleManager.Roles.ToList();
+            userInfoViewModel.UserRoles = userManager.GetRolesAsync(result).Result.ToList();
+
             return View(userInfoViewModel);
         }
         [HttpPost]
         public IActionResult ChangeInfo(UserInfoViewModel userInfoViewModel)
         {
-            var user = userRepository.TryGetById(userInfoViewModel.UserId);
-            user.Name = userInfoViewModel.Name;
-            user.LastName = userInfoViewModel.LastName;
-            user.Phone = userInfoViewModel.Phone;
-            user.Email = userInfoViewModel.Email;
-            userRepository.Update(user);
-            return RedirectToAction("Index", "User");
+            var result = userManager.FindByIdAsync(userInfoViewModel.Id).Result;
+            if(result != null)
+            {
+                var user = userInfoViewModel.MappingToUserFromUserInfoViewModel(result);
+                userManager.UpdateAsync(user).Wait();
+                var userRoles = userManager.GetRolesAsync(user).Result.ToList();
+                var addedRoles = userInfoViewModel.UserRoles.Except(userRoles);
+                var removedRoles = userRoles.Except(userInfoViewModel.UserRoles);
+                foreach(var role in addedRoles)
+                {
+                    userManager.AddToRoleAsync(user, role).Wait();
+                }
+                foreach (var role in removedRoles)
+                {
+                    userManager.RemoveFromRoleAsync(user, role).Wait();
+                }
+
+                return RedirectToAction("Index", "User");
+                
+            }
+
+            return NotFound();
         }
     }
 }

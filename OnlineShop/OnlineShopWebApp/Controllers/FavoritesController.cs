@@ -31,7 +31,7 @@ namespace OnlineShopWebApp.Controllers
 
                 foreach (var product in products)
                 {
-                    var productViewModel = product.MappingProductViewModel();
+                    var productViewModel = product.MappingToProductViewModel();
                     productsViewModel.Add(productViewModel);
                 }
                 return View(productsViewModel);

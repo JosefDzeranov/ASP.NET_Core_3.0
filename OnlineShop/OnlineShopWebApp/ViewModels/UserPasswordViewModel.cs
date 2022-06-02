@@ -5,14 +5,17 @@ namespace OnlineShopWebApp.ViewModels
 {
     public class UserPasswordViewModel
     {
+        [Required(ErrorMessage = "Не указан старый пароль")]
+        public string OldPassword { get; set; }
+       
         [Required(ErrorMessage = "Не указан пароль")]
-        public string Password { get; set; }
+        public string NewPassword { get; set; }
 
         [Required(ErrorMessage = "Не указан повтор пароля")]
-        [Compare("Password", ErrorMessage = "пароли не совпадают")]
-        public string ConfirmPassword { get; set; }
+        [Compare("NewPassword", ErrorMessage = "пароли не совпадают")]
+        public string ConfirmNewPassword { get; set; }
 
         [Required]
-        public Guid UserId { get; set; }
+        public string Id { get; set; }
     }
 }

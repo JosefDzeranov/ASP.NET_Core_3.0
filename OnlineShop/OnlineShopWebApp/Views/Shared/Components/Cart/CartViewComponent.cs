@@ -19,7 +19,7 @@ namespace OnlineShopWebApp.Views.Shared.Components.Cart
             var cartDb = cartRepository.TryGetByUserId(Const.UserId);
             if(cartDb != null)
             {
-                var cartViewModel = cartDb.MappingCartViewModel();
+                var cartViewModel = cartDb.MappingToCartViewModel();
                 var productCount = cartViewModel?.Count ?? 0;
                 return View("Cart", productCount);
             }
