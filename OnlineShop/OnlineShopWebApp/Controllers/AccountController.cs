@@ -1,5 +1,4 @@
 ﻿using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Authorization;
 using OnlineShop.Db.Models;
@@ -9,12 +8,10 @@ namespace OnlineShopWebApp.Controllers
 {
     public class AccountController : Controller
     {
-        private readonly IUserStorage _userStorage;
         private readonly UserManager<User> _userManager;
         private readonly SignInManager<User> _signInManager;
-        public AccountController(IUserStorage userStorage, UserManager<User> userManager, SignInManager<User> signInManager)
+        public AccountController(UserManager<User> userManager, SignInManager<User> signInManager)
         {
-            _userStorage = userStorage;
             _userManager = userManager;
             _signInManager = signInManager;
         }
@@ -31,7 +28,14 @@ namespace OnlineShopWebApp.Controllers
                 var result = _signInManager.PasswordSignInAsync(signin.Email, signin.Password, signin.RememberMe, false).Result;
                 if (result.Succeeded)
                 {
-                    return Redirect(signin.ReturnUrl);
+                    if (signin.ReturnUrl != null)
+                    {
+                        return Redirect(signin.ReturnUrl);
+                    }
+                    else
+                    {
+                        return RedirectToAction("Index", "Home");
+                    }
                 }
                 else 
                 {
@@ -53,7 +57,11 @@ namespace OnlineShopWebApp.Controllers
             {
                 var user = new User
                 {
-                    UserName = signup.Email
+                    FirstName = signup.FirstName,
+                    LastName = signup.LastName,
+                    UserName = signup.Email,
+                    Email = signup.Email,
+                    PhoneNumber = signup.Phone
                 };
 
                 var result = _userManager.CreateAsync(user, signup.Password).Result;

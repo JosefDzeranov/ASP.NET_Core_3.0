@@ -9,7 +9,7 @@ using Microsoft.AspNetCore.Authorization;
 namespace OnlineShopWebApp.Areas.Admin.Controllers
 {
     [Area(Constants.AdminRoleName)]
-    [Authorize(Constants.AdminRoleName)]
+    [Authorize(Roles = Constants.AdminRoleName)]
     public class OrderController : Controller
     {
         private readonly IOrderStorage _orderStorage;
