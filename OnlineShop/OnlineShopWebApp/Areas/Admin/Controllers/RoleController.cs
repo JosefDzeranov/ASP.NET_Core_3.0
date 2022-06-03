@@ -1,8 +1,9 @@
 ﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using OnlineShop.DB;
-using OnlineShopWebApp.Models;
 using OnlineShopWebApp.Services;
+using System.Linq;
 
 namespace OnlineShopWebApp.Areas.Admin.Controllers
 {
@@ -10,16 +11,16 @@ namespace OnlineShopWebApp.Areas.Admin.Controllers
     [Authorize(Roles = Const.AdminRoleName)]
     public class RoleController : Controller
     {
-        private readonly IRoleRepository roleRepository;
+        private readonly RoleManager<IdentityRole> roleManager;
 
-        public RoleController(IRoleRepository roleRepository)
+        public RoleController(RoleManager<IdentityRole> roleManager)
         {
-            this.roleRepository = roleRepository;
+            this.roleManager = roleManager;
         }
 
         public IActionResult Index()
         {
-            var roles = roleRepository.GetAll();
+            var roles = roleManager.Roles.ToList();
             return View(roles);
         }
 
@@ -29,15 +30,21 @@ namespace OnlineShopWebApp.Areas.Admin.Controllers
         }
 
         [HttpPost]
-        public IActionResult AddRole(Role role)
+        public IActionResult AddRole(IdentityRole role)
         {
-            if (roleRepository.TryGetByName(role.Name) != null)
+
+
+            if (role != null)
             {
-                ModelState.AddModelError("", "Роль с таким именем уже существует");
-            }
-            if (ModelState.IsValid)
-            {
-                roleRepository.Add(role);
+                if (roleManager.FindByNameAsync(role.Name).Result != null)
+                {
+                    ModelState.AddModelError("", "Роль с таким именем уже существует");
+                }
+                else
+                {
+                    roleManager.CreateAsync(new IdentityRole(role.Name)).Wait();
+                }
+
                 return RedirectToAction("Index", "Role");
             }
 
@@ -46,7 +53,12 @@ namespace OnlineShopWebApp.Areas.Admin.Controllers
 
         public IActionResult DeleteRole(string name)
         {
-            roleRepository.Remove(name);
+            var role = roleManager.FindByNameAsync(name).Result;
+            if (role != null)
+            {
+                roleManager.DeleteAsync(role).Wait();
+
+            }
 
             return RedirectToAction("Index", "Role");
         }
