@@ -1,6 +1,6 @@
 ﻿using OnlineShop.DB.Models;
 using System;
-
+using System.Linq;
 
 namespace OnlineShop.DB.Services
 {
@@ -19,9 +19,11 @@ namespace OnlineShop.DB.Services
             onlineShopContext.SaveChanges();
         }
 
-        public void Delete(Guid id)
+        public void Delete(string id)
         {
-            throw new NotImplementedException();
+            var tempUser = onlineShopContext.TempUsers.FirstOrDefault(x => x.Id == new Guid(id));
+            onlineShopContext.TempUsers.Remove(tempUser);
+            onlineShopContext.SaveChanges();
         }
     }
 }

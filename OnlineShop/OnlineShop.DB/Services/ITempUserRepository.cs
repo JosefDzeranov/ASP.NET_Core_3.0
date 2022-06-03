@@ -5,7 +5,7 @@ namespace OnlineShop.DB.Services
 {
     public interface ITempUserRepository
     {
-        void Delete(Guid id);
+        void Delete(string id);
         void Add(TempUser tempUser);
     }
 }

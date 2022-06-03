@@ -31,7 +31,7 @@ namespace OnlineShopWebApp.Services
             return onlineShopContext.Orders.ToList();
         }
 
-        public Order TryGetByUserId(Guid userId)
+        public Order TryGetByUserId(string userId)
         {
             return onlineShopContext.Orders.FirstOrDefault(x => x.UserId == userId);
         }

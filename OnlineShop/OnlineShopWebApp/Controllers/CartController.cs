@@ -66,7 +66,7 @@ namespace OnlineShopWebApp.Controllers
         private string GetUserId()
         {
             string userId;
-            if (HttpContext.User.Identity.IsAuthenticated)
+            if (IsAuthenticated())
             {
                 userId = userManager.GetUserAsync(HttpContext.User).Result.Id;
             }
@@ -80,11 +80,20 @@ namespace OnlineShopWebApp.Controllers
                 {
                     var TempUser = new TempUser();
                     tempUserRepository.Add(TempUser);
-                    userId = TempUser.Id;
+                    userId = TempUser.Id.ToString();
                     HttpContext.Response.Cookies.Append("tempId", userId);
                 }
             }
             return userId;
+        }
+
+        private bool IsAuthenticated()
+        {
+            if (HttpContext.User.Identity.IsAuthenticated)
+            {
+                return true;
+            }
+            return false;
         }
     }
 }

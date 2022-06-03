@@ -6,7 +6,7 @@ namespace OnlineShopWebApp.Services
 {
     public interface IOrderRepository
     {
-        Order TryGetByUserId(Guid userId);
+        Order TryGetByUserId(string userId);
         List<Order> TryGetAll();
         void Add(Order order);
         void UpdateStatus(Guid orderId, OrderStatus status);
