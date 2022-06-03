@@ -29,12 +29,20 @@ namespace OnlineShopWebApp.Controllers
 
         public IActionResult Index()
         {
-            var userId = GetUserId();
-            var existingCart = cartRepository.TryGetByUserId(userId);
-            var orderVM = new OrderViewModel();
-            orderVM.Cart = existingCart.MappingToCartViewModel();
+            if (IsAuthenticated())
+            {
+                var userId = GetUserId();
+                var existingCart = cartRepository.TryGetByUserId(userId);
+                var orderVM = new OrderViewModel();
+                orderVM.Cart = existingCart.MappingToCartViewModel();
+                return View(orderVM);
+            }
+            else
+            {
+                return RedirectToAction("Login", "Account");
+            }
 
-            return View(orderVM);
+           
         }
 
         [HttpPost]
@@ -42,20 +50,13 @@ namespace OnlineShopWebApp.Controllers
         {
             if (ModelState.IsValid)
             {
-                if (IsAuthenticated())
-                {
-                    var userId = GetUserId();
-                    var existingCart = cartRepository.TryGetByUserId(userId);
-                    var order = orderViewModel.MappingToOrder(existingCart);
-                    orderRepository.Add(order);
-                    cartRepository.Clear(userId);
-                }
-                else
-                {
-                    return RedirectToAction("Login", "Account");
 
-                }
-               
+                var userId = GetUserId();
+                var existingCart = cartRepository.TryGetByUserId(userId);
+                var order = orderViewModel.MappingToOrder(existingCart);
+                orderRepository.Add(order);
+                cartRepository.Clear(userId);
+
                 return View();
             }
             return RedirectToAction("Index", "Order");

@@ -39,12 +39,17 @@ namespace OnlineShopWebApp.Controllers
                 var result = signInManager.PasswordSignInAsync(loginVM.UserName, loginVM.Password, loginVM.RememberMe, false).Result;
                 if (result.Succeeded)
                 {
-                    CopyDataFromTempUser(loginVM.UserName);
+                    if (CopyDataFromTempUser(loginVM.UserName))
+                    {
+                        return RedirectToAction("Index", "Order");
+                    }
 
                     if (loginVM.ReturnUrl != null)
                     {
                         return Redirect(loginVM.ReturnUrl);
                     }
+
+
                     return RedirectToAction("Index", "Home");
                 }
                 else
@@ -90,8 +95,13 @@ namespace OnlineShopWebApp.Controllers
                 {
                     userManager.AddToRoleAsync(user, Const.UserRoleName).Wait();
                     signInManager.SignInAsync(user, false).Wait();
-                    return Redirect(registerVM.ReturnUrl);
+                    if (registerVM.ReturnUrl != null)
+                    {
+                        return Redirect(registerVM.ReturnUrl);
+                    }
+                    return RedirectToAction("Index", "Home");
                 }
+               
                 else
                 {
                     ModelState.AddModelError("Email", "Пользователь с таким email уже зарегистрирован");
@@ -103,7 +113,7 @@ namespace OnlineShopWebApp.Controllers
         }
 
 
-        private void CopyDataFromTempUser(string userName)
+        private bool CopyDataFromTempUser(string userName)
         {
             var tempUserId = HttpContext.Request.Cookies["tempId"];
             if (tempUserId != null)
@@ -112,11 +122,12 @@ namespace OnlineShopWebApp.Controllers
 
                 if (cartRepository.UpdateUserId(tempUserId, user.Id))
                 {
-                    tempUserRepository.Delete(tempUserId);
+                    //tempUserRepository.Delete(tempUserId);
+                    return true;
                 }
 
             }
-
+            return false;
         }
 
 
