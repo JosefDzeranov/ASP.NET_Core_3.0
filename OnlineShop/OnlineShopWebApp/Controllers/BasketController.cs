@@ -1,10 +1,7 @@
 ﻿using System;
 using Microsoft.AspNetCore.Mvc;
 using OnlineShop.Db;
-using OnlineShopWebApp.Models;
 using OnlineShopWebApp.Helpers;
-using System.Collections.Generic;
-using OnlineShop.Db;
 using Microsoft.AspNetCore.Authorization;
 
 namespace OnlineShopWebApp.Controllers

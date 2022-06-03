@@ -108,5 +108,50 @@ namespace OnlineShopWebApp.Areas.Admin.Controllers
             _userManager.DeleteAsync(user).Wait();
             return RedirectToAction("Index");
         }
+
+
+        //public IActionResult Edit(string userId)
+        //{
+        //    var user = _userManager.FindByIdAsync(userId).Result;
+
+        //    if (user != null)
+        //    {
+        //        var userRoles = _userManager.GetRolesAsync(user).Result;
+        //        var allRoles = _roleManager.Roles.ToList();
+        //        var roleViewModel = new RoleViewModel
+        //        {
+        //            UserId = user.Id,
+        //            UserEmail = user.Email,
+        //            UserRoles = userRoles,
+        //            AllRoles = allRoles
+        //        };
+        //        return View(roleViewModel);
+        //    }
+        //    return View();
+        //}
+
+        //[HttpPost]
+        //public IActionResult Edit(string userId, List<string> roles)
+        //{
+        //    if (ModelState.IsValid)
+        //    {
+        //        var user = _userManager.FindByIdAsync(userId).Result;
+        //        if (user != null)
+        //        {
+        //            var userRoles = _userManager.GetRolesAsync(user).Result;
+        //            var allRoles = _roleManager.Roles.ToList();
+        //            var addedRoles = roles.Except(userRoles);
+        //            var removedRoles = userRoles.Except(roles);
+
+        //            _userManager.AddToRolesAsync(user, addedRoles).Wait();
+        //            _userManager.RemoveFromRolesAsync(user, removedRoles).Wait();
+        //            return RedirectToAction("Index");
+        //        }
+        //    }
+        //    return View();
+        //}
+
+
+
     }
 }

@@ -2,6 +2,11 @@
 using OnlineShopWebApp.Areas.Admin.Models;
 using Microsoft.AspNetCore.Authorization;
 using OnlineShop.Db;
+using Microsoft.AspNetCore.Identity;
+using OnlineShop.Db.Models;
+using System.Linq;
+using System.Collections.Generic;
+using OnlineShopWebApp.Helpers;
 
 namespace OnlineShopWebApp.Areas.Admin.Controllers
 {
@@ -9,16 +14,18 @@ namespace OnlineShopWebApp.Areas.Admin.Controllers
     [Authorize(Roles = Constants.AdminRoleName)]
     public class RoleController : Controller
     {
-        private readonly IRoleStorage _roleStorage;
-        public RoleController(IRoleStorage roleStorage)
+        RoleManager<IdentityRole> _roleManager;
+
+        public RoleController(RoleManager<IdentityRole> roleManager)
         {
-            _roleStorage = roleStorage;
+            _roleManager = roleManager;
         }
 
         public IActionResult Index()
         {
-            var roles = _roleStorage.GetAll();
-            return View(roles);
+            var roles = _roleManager.Roles.ToList();
+            var roleViewModels = roles.ToRoleViewModels();
+            return View(roleViewModels);
         }
 
         public IActionResult Add()
@@ -29,34 +36,40 @@ namespace OnlineShopWebApp.Areas.Admin.Controllers
         [HttpPost]
         public IActionResult Add(string name)
         {
-            if(ModelState.IsValid)
+            if (ModelState.IsValid)
             {
-                _roleStorage.Add(name);
+                _roleManager.CreateAsync(new IdentityRole(name)).Wait();
                 return RedirectToAction("Index");
             }
             return View();
         }
 
-        public IActionResult Edit(string name)
+        public IActionResult Edit(string id)
         {
-            var role = _roleStorage.TryGetRoleByName(name);
-            return View(role);
+            var role = _roleManager.FindByIdAsync(id).Result;
+            var roleViewModel = role.ToRoleViewModel();
+            return View(roleViewModel);
         }
 
         [HttpPost]
-        public IActionResult Save(string oldName, Role role)
+        public IActionResult Edit(RoleViewModel model)
         {
-            if(ModelState.IsValid)
+            if (ModelState.IsValid)
             {
-                _roleStorage.Edit(oldName, role);
+                var role = _roleManager.FindByIdAsync(model.Id).Result;
+
+                role.Name = model.Name;
+
+                _roleManager.UpdateAsync(role).Wait();
                 return RedirectToAction("Index");
             }
-            return View();
+            return View(model);
         }
 
-        public IActionResult Remove(string name)
+        public IActionResult Remove(string id)
         {
-            _roleStorage.Remove(name);
+            var role = _roleManager.FindByIdAsync(id).Result;
+            _roleManager.DeleteAsync(role).Wait();
             return RedirectToAction("Index");
         }
     }

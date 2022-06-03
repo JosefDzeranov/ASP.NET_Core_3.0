@@ -1,6 +1,6 @@
 ﻿@using OnlineShopWebApp.Areas.Admin.Models
 @using System.Collections.Generic;
-@model List<Role>
+@model List<RoleViewModel>
 
 @{
     ViewData["Title"] = "Roles";
@@ -29,9 +29,9 @@
                             <td>
                                 <div class="btn-group ml-2" role="group" aria-label="Edit/Remove buttons">
                                     <a class="btn btn-outline-dark btn-sm" role="button"
-                                   asp-area="Admin" asp-controller="Role" asp-action="Edit" asp-route-name="@Model[i].Name">Edit</a>
+                                   asp-area="Admin" asp-controller="Role" asp-action="Edit" asp-route-id="@Model[i].Id">Edit</a>
                                     <a class="btn btn-outline-dark btn-sm" role="button"
-                                   asp-area="Admin" asp-controller="Role" asp-action="Remove" asp-route-name="@Model[i].Name">Remove</a>
+                                   asp-area="Admin" asp-controller="Role" asp-action="Remove" asp-route-id="@Model[i].Id">Remove</a>
                                 </div>
                             </td>
                         </tr>

@@ -3,6 +3,7 @@ using OnlineShop.Db.Models;
 using OnlineShopWebApp.Areas.Admin.Models;
 using OnlineShopWebApp.Models;
 using System.Collections.Generic;
+using Microsoft.AspNetCore.Identity;
 
 namespace OnlineShopWebApp.Helpers
 {
@@ -208,6 +209,27 @@ namespace OnlineShopWebApp.Helpers
                 PhoneNumber = signup.Phone
             };
             return user;
+        }
+
+        public static RoleViewModel ToRoleViewModel(this IdentityRole role)
+        {
+            var roleViewModel = new RoleViewModel
+            {
+                Id = role.Id,
+                Name = role.Name
+            };
+            return roleViewModel;
+        }
+
+        public static List<RoleViewModel> ToRoleViewModels(this List<IdentityRole> roles)
+        {
+            var roleViewModels = new List<RoleViewModel>();
+            foreach(var role in roles)
+            {
+                var roleViewModel = role.ToRoleViewModel();
+                roleViewModels.Add(roleViewModel);
+            }
+            return roleViewModels;
         }
     }
 }

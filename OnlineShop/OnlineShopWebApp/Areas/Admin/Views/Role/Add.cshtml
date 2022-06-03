@@ -1,6 +1,6 @@
 ﻿@using OnlineShopWebApp.Areas.Admin.Models
 
-@model Role
+@model RoleViewModel
 
 @{
     ViewData["Title"] = "Add role";
@@ -15,7 +15,7 @@
             <form asp-action="Add" asp-controller="Role" asp-area="Admin">
                 <div class="validation" asp-validation-summary="All"></div>
                 <div class="mb-3">
-                    <input class="form-control" asp-for="Name" placeholder="Name" />
+                    <input class="form-control form-control-sm" asp-for="Name" placeholder="Name" />
                     <span asp-validation-for="Name"></span>
                 </div>
                 <div class="mb-3">
