@@ -17,27 +17,20 @@ namespace OnlineShopWebApp.Controllers
         }
         public IActionResult Signin(string returnUrl)
         {
-            return View(new SigninViewModel() { ReturnUrl = returnUrl});
+            return View(new SigninViewModel() { ReturnUrl = returnUrl });
         }
 
         [HttpPost]
         public IActionResult Signin(SigninViewModel signin)
         {
-            if(ModelState.IsValid)
+            if (ModelState.IsValid)
             {
                 var result = _signInManager.PasswordSignInAsync(signin.Email, signin.Password, signin.RememberMe, false).Result;
                 if (result.Succeeded)
                 {
-                    if (signin.ReturnUrl != null)
-                    {
-                        return Redirect(signin.ReturnUrl);
-                    }
-                    else
-                    {
-                        return RedirectToAction("Index", "Home");
-                    }
+                    return Redirect(signin.ReturnUrl ?? "/Home");
                 }
-                else 
+                else
                 {
                     return View("Failed");
                 }
@@ -69,11 +62,14 @@ namespace OnlineShopWebApp.Controllers
                 if (result.Succeeded)
                 {
                     _signInManager.SignInAsync(user, false).Wait();
-                    return Redirect(signup.ReturnUrl);
+                    return Redirect(signup.ReturnUrl ?? "/Home");
                 }
                 else
                 {
-                    ModelState.AddModelError("Email", "The user with this email is already registered.");
+                    foreach (var error in result.Errors)
+                    {
+                        ModelState.AddModelError(string.Empty, error.Description);
+                    }
                 }
             }
             return View();
