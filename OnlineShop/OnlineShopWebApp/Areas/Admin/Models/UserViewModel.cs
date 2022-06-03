@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace OnlineShopWebApp.Areas.Admin.Models
 {
-    public class User
+    public class UserViewModel
     {
         public Guid Id { get; set; }
 
@@ -26,9 +26,9 @@ namespace OnlineShopWebApp.Areas.Admin.Models
         public string Email { get; set; }
         public string Password { get; set; }
 
-        public User() { } // Empty ctor for XML serializing.
+        public UserViewModel() { } // Empty ctor for XML serializing.
 
-        public User(Guid id, string firstname, string lastname, string role, string phone, string email, string password)
+        public UserViewModel(Guid id, string firstname, string lastname, string role, string phone, string email, string password)
         {
             Id = id;
             FirstName = firstname;

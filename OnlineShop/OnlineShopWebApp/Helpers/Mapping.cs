@@ -1,4 +1,6 @@
-﻿using OnlineShop.Db.Models;
+﻿using System;
+using OnlineShop.Db.Models;
+using OnlineShopWebApp.Areas.Admin.Models;
 using OnlineShopWebApp.Models;
 using System.Collections.Generic;
 
@@ -169,6 +171,43 @@ namespace OnlineShopWebApp.Helpers
                 Email = deliveryInfoViewModel.Email
             };
             return deliveryInfo;
+        }
+
+        public static UserViewModel ToUserViewModel(this User user)
+        {
+            var userViewModel = new UserViewModel
+            {
+                Id = Guid.Parse(user.Id),
+                FirstName = user.FirstName,
+                LastName = user.LastName,
+                Phone = user.PhoneNumber,
+                Email = user.Email
+            };
+            return userViewModel;
+        }
+
+        public static List<UserViewModel> ToUserViewModels(this List<User> users)
+        {
+            var userViewModels = new List<UserViewModel>();
+            foreach(var user in users)
+            {
+                var userViewModel = user.ToUserViewModel();
+                userViewModels.Add(userViewModel);
+            }
+            return userViewModels;
+        }
+
+        public static User ToUser(this SignupViewModel signup)
+        {
+            var user = new User
+            {
+                FirstName = signup.FirstName,
+                LastName = signup.LastName,
+                UserName = signup.Email,
+                Email = signup.Email,
+                PhoneNumber = signup.Phone
+            };
+            return user;
         }
     }
 }

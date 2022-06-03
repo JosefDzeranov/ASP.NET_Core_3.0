@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Authorization;
 using OnlineShop.Db.Models;
 using OnlineShopWebApp.Models;
+using OnlineShopWebApp.Helpers;
 
 namespace OnlineShopWebApp.Controllers
 {
@@ -55,15 +56,7 @@ namespace OnlineShopWebApp.Controllers
         {
             if (ModelState.IsValid)
             {
-                var user = new User
-                {
-                    FirstName = signup.FirstName,
-                    LastName = signup.LastName,
-                    UserName = signup.Email,
-                    Email = signup.Email,
-                    PhoneNumber = signup.Phone
-                };
-
+                var user = signup.ToUser();
                 var result = _userManager.CreateAsync(user, signup.Password).Result;
 
                 if (result.Succeeded)

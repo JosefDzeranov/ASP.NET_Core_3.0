@@ -17,15 +17,16 @@ namespace OnlineShopWebApp.Areas.Admin.Models
         [StringLength(25, MinimumLength = 2)]
         public string LastName { get; set; }
 
-       // public string OldPassword { get; set; }
+        [Required]
+        public string CurrentPassword { get; set; }
 
         [Required]
         [StringLength(50, MinimumLength = 4)]
-        public string Password { get; set; }
+        public string NewPassword { get; set; }
 
         [Required]
         [StringLength(50, MinimumLength = 4)]
-        [Compare("Password")]
-        public string ConfirmPassword { get; set; }
+        [Compare("NewPassword")]
+        public string ConfirmNewPassword { get; set; }
     }
 }

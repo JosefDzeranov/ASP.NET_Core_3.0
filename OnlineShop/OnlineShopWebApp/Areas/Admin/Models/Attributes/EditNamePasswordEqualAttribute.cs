@@ -11,13 +11,13 @@ namespace OnlineShopWebApp.Areas.Admin.Models.Attributes
         {
             ChangePassword data = (ChangePassword)value;
 
-            if (data.FirstName == data.Password)
+            if (data.FirstName == data.NewPassword)
             {
                 ErrorMessage = "The FirstName and password cannot be the same.";
                 return false;
             }
 
-            if (data.LastName == data.Password)
+            if (data.LastName == data.NewPassword)
             {
                 ErrorMessage = "The LastName and password cannot be the same.";
                 return false;
