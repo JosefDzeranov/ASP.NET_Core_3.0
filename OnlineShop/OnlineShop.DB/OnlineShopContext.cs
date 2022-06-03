@@ -10,6 +10,7 @@ namespace OnlineShop.DB
         public DbSet<CartItem> CartItems { get; set; }
         public DbSet<Favorite> Favorites { get; set; }
         public DbSet<Order> Orders { get; set; }
+        public DbSet<TempUser> TempUsers { get; set; }
         public OnlineShopContext(DbContextOptions<OnlineShopContext> options) : base(options)
         {
             Database.Migrate();
