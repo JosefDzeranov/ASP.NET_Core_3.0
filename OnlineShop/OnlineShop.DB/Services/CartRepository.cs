@@ -107,17 +107,28 @@ namespace OnlineShop.DB.Services
             }
         }
 
-        public bool UpdateUserId(string tempUserId, string userId)
+        public void UpdateUserId(string tempUserId, string userId)
         {
-            var existingCart = TryGetByUserId(tempUserId);
-            if(existingCart != null)
+            var tempExistingCart = TryGetByUserId(tempUserId);
+            var existingCart = TryGetByUserId(userId);
+            if (existingCart != null)
             {
-                existingCart.UserId = userId;
+                foreach (var item in tempExistingCart.Items)
+                {
+                    existingCart.Items.Add(item);
+                }
+
                 onlineShopContext.Carts.Update(existingCart);
-                onlineShopContext.SaveChanges();
-                return true;
+                onlineShopContext.Carts.Remove(tempExistingCart);
             }
-            return false;
+
+            else if(tempExistingCart != null)
+            {
+                tempExistingCart.UserId = userId;
+                onlineShopContext.Carts.Update(tempExistingCart);
+ 
+            }
+            onlineShopContext.SaveChanges();
         }
     }
 }

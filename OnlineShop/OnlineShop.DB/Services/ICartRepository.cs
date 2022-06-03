@@ -11,7 +11,7 @@ namespace OnlineShop.DB.Services
         void RemoveItem(Guid productId, string userId);
         void Clear(string userId);
         Cart TryGetById(Guid Id);
-        bool UpdateUserId(string tempUserId, string userId);
+        void UpdateUserId(string tempUserId, string userId);
 
     }
 }

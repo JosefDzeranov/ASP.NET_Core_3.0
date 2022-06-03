@@ -119,13 +119,8 @@ namespace OnlineShopWebApp.Controllers
             if (tempUserId != null)
             {
                 var user = userManager.FindByNameAsync(userName).Result;
-
-                if (cartRepository.UpdateUserId(tempUserId, user.Id))
-                {
-                    //tempUserRepository.Delete(tempUserId);
-                    return true;
-                }
-
+                cartRepository.UpdateUserId(tempUserId, user.Id);
+                return true;
             }
             return false;
         }
