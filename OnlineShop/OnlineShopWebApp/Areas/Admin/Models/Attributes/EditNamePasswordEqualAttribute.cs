@@ -9,7 +9,7 @@ namespace OnlineShopWebApp.Areas.Admin.Models.Attributes
     {
         public override bool IsValid(object value)
         {
-            ChangePassword data = (ChangePassword)value;
+            ChangePasswordViewModel data = (ChangePasswordViewModel)value;
 
             if (data.FirstName == data.NewPassword)
             {

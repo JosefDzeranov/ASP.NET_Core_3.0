@@ -34,12 +34,12 @@ namespace OnlineShopWebApp.Areas.Admin.Controllers
         }
 
         [HttpPost]
-        public IActionResult Add(SignupViewModel signup)
+        public IActionResult Add(SignupViewModel model)
         {
             if (ModelState.IsValid)
             {
-                var user = signup.ToUser();
-                _userManager.CreateAsync(user, signup.Password).Wait();
+                var user = model.ToUser();
+                _userManager.CreateAsync(user, model.Password).Wait();
                 return RedirectToAction("Index");
             }
             return View();
@@ -55,7 +55,7 @@ namespace OnlineShopWebApp.Areas.Admin.Controllers
         public IActionResult ChangePassword(Guid id)
         {
             var user = _userManager.FindByIdAsync(id.ToString()).Result;
-            var data = new ChangePassword()
+            var data = new ChangePasswordViewModel()
             {
                 Id = Guid.Parse(user.Id),
                 FirstName = user.FirstName,
@@ -65,15 +65,15 @@ namespace OnlineShopWebApp.Areas.Admin.Controllers
         }
 
         [HttpPost]
-        public IActionResult ChangePassword(ChangePassword data)
+        public IActionResult ChangePassword(ChangePasswordViewModel model)
         {
             if (ModelState.IsValid)
             {
-                var user = _userManager.FindByIdAsync(data.Id.ToString()).Result;
-                _userManager.ChangePasswordAsync(user, data.CurrentPassword, data.NewPassword).Wait();
+                var user = _userManager.FindByIdAsync(model.Id.ToString()).Result;
+                _userManager.ChangePasswordAsync(user, model.CurrentPassword, model.NewPassword).Wait();
                 return View("Success");
             }
-            return View(data);
+            return View(model);
         }
 
         public IActionResult Edit(Guid id)
@@ -84,22 +84,22 @@ namespace OnlineShopWebApp.Areas.Admin.Controllers
         }
 
         [HttpPost]
-        public IActionResult Edit(UserViewModel userViewModel)
+        public IActionResult Edit(UserViewModel model)
         {
             if (ModelState.IsValid)
             {
-                var user = _userManager.FindByIdAsync(userViewModel.Id.ToString()).Result;
+                var user = _userManager.FindByIdAsync(model.Id.ToString()).Result;
 
-                user.FirstName = userViewModel.FirstName;
-                user.LastName = userViewModel.LastName;
-                user.UserName = userViewModel.Email;
-                user.Email = userViewModel.Email;
-                user.PhoneNumber = userViewModel.Phone;
+                user.FirstName = model.FirstName;
+                user.LastName = model.LastName;
+                user.UserName = model.Email;
+                user.Email = model.Email;
+                user.PhoneNumber = model.Phone;
 
                 _userManager.UpdateAsync(user).Wait();
                 return RedirectToAction("Index");
             }
-            return View(userViewModel);
+            return View(model);
         }
 
         public IActionResult Remove(Guid id)

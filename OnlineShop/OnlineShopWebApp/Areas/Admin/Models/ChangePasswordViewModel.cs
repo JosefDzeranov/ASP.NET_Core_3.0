@@ -5,7 +5,7 @@ using OnlineShopWebApp.Areas.Admin.Models.Attributes;
 namespace OnlineShopWebApp.Areas.Admin.Models
 {
     [EditNamePasswordEqual]
-    public class ChangePassword
+    public class ChangePasswordViewModel
     {
         public Guid Id { get; set; }
 
