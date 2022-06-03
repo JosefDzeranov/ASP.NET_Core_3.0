@@ -23,10 +23,10 @@ namespace OnlineShopWebApp.Controllers
 
         public IActionResult Index()
         {
-            var existingCart = cartRepository.TryGetByUserId(Const.UserId);
+          //  var existingCart = cartRepository.TryGetByUserId();
 
             var orderVM = new OrderViewModel();
-            orderVM.Cart = existingCart.MappingToCartViewModel();
+            //orderVM.Cart = existingCart.MappingToCartViewModel();
             return View(orderVM);
         }
 
@@ -35,10 +35,10 @@ namespace OnlineShopWebApp.Controllers
         {
             if (ModelState.IsValid)
             {
-                var existingCart = cartRepository.TryGetByUserId(Const.UserId);
-                var order = orderViewModel.MappingToOrder(existingCart);
-                orderRepository.Add(order);
-                cartRepository.Clear(Const.UserId);
+                //var existingCart = cartRepository.TryGetByUserId(Const.UserId);
+                //var order = orderViewModel.MappingToOrder(existingCart);
+                //orderRepository.Add(order);
+               // cartRepository.Clear(Const.UserId);
                 return View();
             }
             return RedirectToAction("Index", "Order");

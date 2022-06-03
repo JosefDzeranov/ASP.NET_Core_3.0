@@ -4,6 +4,7 @@ namespace OnlineShop.DB.Models
 {
     public class TempUser
     {
-        public Guid Id { get; set; }
+        public string Id { get; set; } = Guid.NewGuid().ToString();
+     
     }
 }

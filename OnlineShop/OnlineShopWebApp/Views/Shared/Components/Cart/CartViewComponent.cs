@@ -16,13 +16,13 @@ namespace OnlineShopWebApp.Views.Shared.Components.Cart
 
         public IViewComponentResult Invoke()
         {
-            var cartDb = cartRepository.TryGetByUserId(Const.UserId);
-            if(cartDb != null)
-            {
-                var cartViewModel = cartDb.MappingToCartViewModel();
-                var productCount = cartViewModel?.Count ?? 0;
-                return View("Cart", productCount);
-            }
+           // var cartDb = cartRepository.TryGetByUserId(Const.UserId);
+            //if(cartDb != null)
+            //{
+            //    var cartViewModel = cartDb.MappingToCartViewModel();
+            //    var productCount = cartViewModel?.Count ?? 0;
+            //    return View("Cart", productCount);
+            //}
 
             return View("Cart", 0);
         }

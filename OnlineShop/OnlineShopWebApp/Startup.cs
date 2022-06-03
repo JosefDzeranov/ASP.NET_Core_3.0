@@ -63,6 +63,7 @@ namespace OnlineShopWebApp
             services.AddTransient<ICartRepository, CartRepository>();
             services.AddTransient<IOrderRepository, OrderRepository >();
             services.AddTransient<IFavoriteRepository, FavoriteRepository>();
+            services.AddTransient<ITempUserRepository, TempUserRepository>();
             
 
             services.Configure<RequestLocalizationOptions>(options =>
