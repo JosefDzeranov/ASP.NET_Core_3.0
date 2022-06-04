@@ -8,7 +8,7 @@ namespace OnlineShop.Db
         //public List<Product> Products { get; }
         public List<Product> GetProducts(string userId);
         public void AddProduct(Product product, string userId);
-        public Favorite TryGetByUserId(string userId);
+        public Favorite TryGetFavoriteByUserId(string userId);
 
 
         //public List<Product> GetProducts();

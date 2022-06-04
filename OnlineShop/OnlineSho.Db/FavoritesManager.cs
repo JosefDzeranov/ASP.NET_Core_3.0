@@ -1,3 +1,4 @@
+using Microsoft.EntityFrameworkCore;
 using OnlineShop.Db;
 using OnlineShop.Db.Models;
 using System.Collections.Generic;
@@ -13,36 +14,49 @@ namespace OOnlineShop.Db
             this.dataBaseContext = dataBaseContext;
         }
 
-        //public List<Product> products = new List<Product>();
-        //public List<Product> Products
-        //{
-        //    get
-        //    {
-        //        return products;
-        //    }
-        //}
+     
         public List<Product> GetProducts(string userId)
         {
-            return TryGetByUserId(userId).Products;
+            var favorite = TryGetFavoriteByUserId(userId);
+       
+            return favorite.Products;
         }
 
         public void AddProduct(Product product, string userId)
         {
-           
 
-            TryGetByUserId(userId).Products.ToList().Add(product);
+            var favorite = TryGetFavoriteByUserId(userId);
+            if (favorite == null)
+            {
+                favorite = new Favorite
+                {
+                    UserId = userId,
+
+                };
+                favorite.Products.Add(product);
+                dataBaseContext.Favorites.Add(favorite);
+
+            }
+            else
+            {
+
+                if (favorite.Products.FirstOrDefault(x => x.Id == product.Id) == null)
+                {
+                    favorite.Products.Add(product);
+                }
+            }
+          
+
             dataBaseContext.SaveChanges();
         }
 
-        public Favorite TryGetByUserId(string userId)
+        public Favorite TryGetFavoriteByUserId(string userId)
         {
-            return dataBaseContext.Favorites.FirstOrDefault(f => f.UserId == userId);
+            return dataBaseContext.Favorites.Include(x => x.Products).FirstOrDefault(f => f.UserId == userId);
+
+            
         }
 
-        //public List<Product> GetProducts()
-        //{
-        //    return Products;
-        //}
-
+       
     }
 }

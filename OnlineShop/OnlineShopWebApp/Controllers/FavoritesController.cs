@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 using OnlineShop.Db;
+using OnlineShop.Db.Models;
 using OnlineShopWebApp.Helpers;
 using OnlineShopWebApp.Models;
 using System;
@@ -36,26 +37,18 @@ namespace OnlineShopWebApp.Controllers
             var userId = Constants.UserId;
             var foundProduct = productManager.TryGetById(id);
 
-            //var productView = new ProductViewModel
-            //{
-            //    Name = foundProduct.Name,
-            //    Cost = foundProduct.Cost,
-            //    Description = foundProduct.Description,
+   
 
-            //};
-
-
-            if (favoritesManager.GetProducts(userId).FirstOrDefault(x => x.Id == id) == null)
-            {
+          
                 favoritesManager.AddProduct(foundProduct,userId);
-                //var favoritesList = favoritesManager.Products;
-                return RedirectToAction("Index");
-            }
-            else
-            {
-                return RedirectToAction("Index");
-            }
+            //var favoritesList = favoritesManager.Products;
+            //  return RedirectToAction("Index");
+            var favoritesList = favoritesManager.GetProducts(Constants.UserId);
+            var favoritesListView = Mapping.ToProductsViewModels(favoritesList);
+            return View(favoritesListView);
 
+            
+          
         }
 
     }
