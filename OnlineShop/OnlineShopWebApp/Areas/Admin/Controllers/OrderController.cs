@@ -20,7 +20,7 @@ namespace OnlineShopWebApp.Areas.Admin.Controllers
 
         public IActionResult Orders()
         {
-            var orders = _orderBase.AllOrders().ToList().Select(x => x.ToOrderViewModel());
+            var orders = _orderBase.AllOrders().Select(x => x.ToOrderViewModel());
             return View(orders);
         }
 
