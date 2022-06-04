@@ -11,6 +11,8 @@ namespace OnlineShop.Db
         public DbSet<CartLine> CartLines { get; set; }
         public DbSet<Favorite> Favorites { get; set; }
 
+        public DbSet<Comparison> Comparisons { get; set; }
+
         
         public DataBaseContext(DbContextOptions<DataBaseContext> options) : base(options)
         {
