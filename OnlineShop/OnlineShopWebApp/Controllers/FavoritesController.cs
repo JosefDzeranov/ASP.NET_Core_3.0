@@ -34,22 +34,22 @@ namespace OnlineShopWebApp.Controllers
 
         public IActionResult AddToFavorites(Guid id)
         {
-            var userId = Constants.UserId;
+           
             var foundProduct = productManager.TryGetById(id);
+            favoritesManager.AddProduct(foundProduct, Constants.UserId);
+            return RedirectToAction("Index");
 
-   
-
-          
-                favoritesManager.AddProduct(foundProduct,userId);
-            //var favoritesList = favoritesManager.Products;
-            //  return RedirectToAction("Index");
-            var favoritesList = favoritesManager.GetProducts(Constants.UserId);
-            var favoritesListView = Mapping.ToProductsViewModels(favoritesList);
-            return View(favoritesListView);
-
-            
-          
         }
+
+        public IActionResult Remove(Guid id)
+        {
+           
+          
+            favoritesManager.RemoveProduct(Constants.UserId, id);
+            return RedirectToAction("Index");
+
+        }
+
 
     }
 }

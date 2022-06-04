@@ -1,6 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using OnlineShop.Db;
 using OnlineShop.Db.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -14,11 +15,11 @@ namespace OOnlineShop.Db
             this.dataBaseContext = dataBaseContext;
         }
 
-     
+
         public List<Product> GetProducts(string userId)
         {
             var favorite = TryGetFavoriteByUserId(userId);
-       
+
             return favorite.Products;
         }
 
@@ -45,7 +46,7 @@ namespace OOnlineShop.Db
                     favorite.Products.Add(product);
                 }
             }
-          
+
 
             dataBaseContext.SaveChanges();
         }
@@ -54,9 +55,18 @@ namespace OOnlineShop.Db
         {
             return dataBaseContext.Favorites.Include(x => x.Products).FirstOrDefault(f => f.UserId == userId);
 
-            
+
         }
 
-       
+        public void RemoveProduct(string userId, Guid id)
+        {
+
+            var favorite = TryGetFavoriteByUserId(userId);
+            var productToRemove = favorite.Products.Find(x => x.Id == id);
+            favorite.Products.Remove(productToRemove);
+            dataBaseContext.SaveChanges();
+        }
+
+
     }
 }
