@@ -5,7 +5,7 @@ namespace OnlineShopWebApp.Controllers
 {
     public class AccountController : Controller
     {
-        private readonly IUsersRepository usersRepository;
+        private readonly IUsersManager userManager;
 
         public AccountController(IUsersRepository usersRepository)
         {
