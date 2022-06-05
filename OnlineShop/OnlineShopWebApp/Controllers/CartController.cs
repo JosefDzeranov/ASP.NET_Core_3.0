@@ -28,6 +28,7 @@ namespace OnlineShopWebApp.Controllers
             var product = productsStorage.TryGetProduct(productId);
 
             cartsStorage.Add(product, Constants.UserId);
+
             return RedirectToAction("Index");
         }
 

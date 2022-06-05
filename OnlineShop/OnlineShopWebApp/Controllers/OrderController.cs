@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using OnlineShopWebApp.Interface;
 using OnlineShopWebApp.Models;
+using OnlineShopWebApp.ViewModels;
 
 namespace OnlineShopWebApp.Controllers
 {
@@ -24,18 +25,32 @@ namespace OnlineShopWebApp.Controllers
             return View(order);
         }
 
-        public IActionResult Add(Order order, Customer customer, CartItem cartItem)
+        public IActionResult Add(Order order)
         {
-            ordersStorage.Add(order, customer, Constants.UserId, cartItem);
+            if (ModelState.IsValid)
+            {
+                var existingCart = cartsStorage.TryGetByUserId(Constants.UserId);
+                order.Cart = existingCart;
+                order.UserId = Constants.UserId;
+                order.CostOrder = existingCart.Cost;
+                ordersStorage.Add(order, Constants.UserId);
+                cartsStorage.RemoveCartUser(Constants.UserId);
+            }
+            //ordersStorage.Add(order, customer, Constants.UserId, cartItem);
 
-            cartsStorage.RemoveCartUser(Constants.UserId);
+            //cartsStorage.RemoveCartUser(Constants.UserId);
 
             return RedirectToAction("OrderComplete");
         }
 
         public IActionResult OrderMaking()
         {
-            return View();
+            var existingCart = cartsStorage.TryGetByUserId(Constants.UserId);
+
+            var orderVM = new OrderViewModel();
+            orderVM.Cart = existingCart;
+
+            return View(orderVM);
         }
 
         public IActionResult OrderComplete()

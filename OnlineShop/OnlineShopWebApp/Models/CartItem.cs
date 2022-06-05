@@ -13,7 +13,6 @@ namespace OnlineShopWebApp.Models
             {
                 return Product.Cost * Count;
             }
-            set { }
         }
     }
 }

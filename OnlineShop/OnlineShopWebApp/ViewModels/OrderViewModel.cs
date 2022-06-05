@@ -8,7 +8,5 @@ namespace OnlineShopWebApp.ViewModels
 
         public Cart Cart { get; set; }
 
-        public Customer Customer { get; set; } = new Customer();
-
     }
 }

@@ -25,41 +25,9 @@ namespace OnlineShopWebApp.Models
         {
             return orders.FindAll(x => x.UserId == userId);
         }
-        public void Add(Order order, Customer customer, string userId, CartItem cartItem)
+        public void Add(Order order, string userId)
         {
-            int LastOrderNumber = 0;
-            if (orders.Count > 0)
-                LastOrderNumber = orders.FindLast(x => x.UserId == userId).OrderNumber;
-            else
-                LastOrderNumber++;
-
-            var newOrder = new Order()
-            {
-                Id = Guid.NewGuid(),
-                OrderNumber = LastOrderNumber,
-                OrderDateTime = DateTime.Now,
-                //                CostOrder = order.CostOrder,
-                UserId = Constants.UserId,
-                Items = new List<CartItem>
-                {
-                    new CartItem
-                    {
-                        ItemId = Guid.NewGuid(),
-                        Product = cartItem.Product,
-                        Count = cartItem.Count + 1
-                    }
-                },
-                Customer = new Customer()
-                {
-                    LastName = customer.LastName,
-                    Name = customer.Name,
-                    Phone = customer.Phone,
-                    Mail = customer.Mail,
-                    Address = customer.Address,
-                }
-            };
-
-            orders.Add(newOrder);
+            orders.Add(order);
 
             RemoveCartUser();
         }

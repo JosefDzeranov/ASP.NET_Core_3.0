@@ -29,8 +29,7 @@ namespace OnlineShopWebApp.Models
                         {
                             ItemId = Guid.NewGuid(),
                             Count = 1,
-                            Product = product,
-                            Cost = product.Cost
+                            Product = product
                         }
                     }
                 };
@@ -42,7 +41,7 @@ namespace OnlineShopWebApp.Models
 
                 if (existingCartItem != null)
                 {
-                    existingCartItem.Count += 1; ;
+                    existingCartItem.Count += 1;
                 }
                 else
                 {

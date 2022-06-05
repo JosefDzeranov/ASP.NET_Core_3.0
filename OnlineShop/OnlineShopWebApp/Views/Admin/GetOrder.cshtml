@@ -4,7 +4,7 @@
 <div class="row">
     @await Html.PartialAsync("AdminPanel")
     <div class="col text-center">
-        <h3>Заказ № @Model.OrderNumber</h3>
+        <h3>Заказ от @Model.OrderDateTime</h3>
         <table class="table">
             <tbody>
                 <tr>
@@ -13,7 +13,7 @@
                 </tr>
                 <tr>
                     <td><label>Адрес доставки</label></td>
-                    <td>@Model.Items</td>
+                    <td>@Model.Address</td>
                 </tr>
                 <tr>
                     <td><label>Получатель</label></td>
