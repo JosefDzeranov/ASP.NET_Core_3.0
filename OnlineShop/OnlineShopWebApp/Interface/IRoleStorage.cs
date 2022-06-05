@@ -5,9 +5,9 @@ namespace OnlineShopWebApp.Services
 {
     public interface IRoleStorage
     {
-        List<Role> GetAllRoles();
-        Role TryGetByRole(string Name);
-        void AddRole(Role role);
-        void RemoveRole(string Name);
+        List<Role> GetAll();
+        Role TryGet(string Name);
+        void Add(Role role);
+        void Remove(string Name);
     }
 }

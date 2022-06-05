@@ -37,7 +37,7 @@ namespace OnlineShopWebApp.Controllers
 
         public IActionResult Roles()
         {
-            var roles = roleStorage.GetAllRoles();
+            var roles = roleStorage.GetAll();
             return View(roles);
         }
 
@@ -111,13 +111,13 @@ namespace OnlineShopWebApp.Controllers
         [HttpPost]
         public IActionResult AddRole(Role role)
         {
-            if (roleStorage.TryGetByRole(role.Name) != null)
+            if (roleStorage.TryGet(role.Name) != null)
             {
                 ModelState.AddModelError("", "Роль с таким именем уже имеется");
             }
             if (ModelState.IsValid)
             {
-                roleStorage.AddRole(role);
+                roleStorage.Add(role);
                 return RedirectToAction("Roles", "Admin");
             }
 
@@ -125,7 +125,7 @@ namespace OnlineShopWebApp.Controllers
         }
         public IActionResult DeleteRole(string name)
         {
-            roleStorage.RemoveRole(name);
+            roleStorage.Remove(name);
 
             return RedirectToAction("Roles", "Admin");
         }

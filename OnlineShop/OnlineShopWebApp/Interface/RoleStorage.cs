@@ -7,22 +7,22 @@ namespace OnlineShopWebApp.Services
     public class RoleStorage : IRoleStorage
     {
         private List<Role> roles = new List<Role>();
-        public void AddRole(Role role)
+        public void Add(Role role)
         {
             roles.Add(role);
         }
 
-        public List<Role> GetAllRoles()
+        public List<Role> GetAll()
         {
             return roles;
         }
 
-        public void RemoveRole(string Name)
+        public void Remove(string Name)
         {
             roles.RemoveAll(x => x.Name == Name);
         }
 
-        public Role TryGetByRole(string Name)
+        public Role TryGet(string Name)
         {
             return roles.FirstOrDefault(x => x.Name == Name);
         }
