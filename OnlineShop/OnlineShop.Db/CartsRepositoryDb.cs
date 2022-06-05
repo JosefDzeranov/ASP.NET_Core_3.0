@@ -1,40 +1,44 @@
-﻿using OnlineShopWebApp.Models;
-using System;
+﻿using Microsoft.EntityFrameworkCore;
+using OnlineShop.Db.Models;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace OnlineShopWebApp
+namespace OnlineShop.Db
 {
-    public class CartsRepositoryInMemory : ICartsRepository
+    public class CartsRepositoryDb : ICartsRepository
     {
-        public List<Cart> Carts { get; set; } = new List<Cart>();
+        private readonly DataBaseContext dataBaseContext;
+
+        public CartsRepositoryDb(DataBaseContext dataBaseContext)
+        {
+            this.dataBaseContext = dataBaseContext;
+        }
 
         public Cart TryGetByUserId(string userId)
         {
-            return Carts.FirstOrDefault(x => x.UserId == userId);
+            return dataBaseContext.Carts.Include(x => x.Items).ThenInclude(x => x.Product).FirstOrDefault(x => x.UserId == userId);
         }
 
-        public void Add(ProductViewModel product, string userId)
+        public void Add(Product product, string userId)
         {
             var existingCart = TryGetByUserId(userId);
             if (existingCart == null)
             {
                 var newCart = new Cart
                 {
-                    Id = Guid.NewGuid(),
                     UserId = userId,
-                    Items = new List<CartItem>
-                    {
-                        new CartItem
-                        {
-                            Id=Guid.NewGuid(),
-                            Amount=1,
-                            Product=product
-                        }
-                    }
                 };
 
-                Carts.Add(newCart);
+                newCart.Items = new List<CartItem>
+                {
+                    new CartItem
+                    {
+                        Amount=1,
+                        Product=product,
+                        Cart = newCart
+                    }
+                };
+                dataBaseContext.Carts.Add(newCart);
             }
             else
             {
@@ -48,15 +52,16 @@ namespace OnlineShopWebApp
                 {
                     existingCart.Items.Add(new CartItem
                     {
-                        Id=Guid.NewGuid(),
                         Amount =1,
-                        Product = product
+                        Product = product,
+                        Cart=existingCart
                     });
                 }
             }
-        }
 
-        public void Remove(ProductViewModel product, string userId)
+            dataBaseContext.SaveChanges();
+        }
+        public void Remove(Product product, string userId)
         {
             var existingCart = TryGetByUserId(userId);
             var existingCartItem = existingCart.Items.FirstOrDefault(x => x.Product.Id == product.Id);
@@ -69,12 +74,14 @@ namespace OnlineShopWebApp
             {
                 existingCart.Items.Remove(existingCartItem);
             }
-        }
 
+            dataBaseContext.SaveChanges();
+        }
         public void Clear(string userId)
         {
             var existingCart = TryGetByUserId(userId);
-            Carts.Remove(existingCart);
+            dataBaseContext.Carts.Remove(existingCart);
+            dataBaseContext.SaveChanges();
         }
     }
 }

@@ -1,21 +1,14 @@
-﻿using OnlineShopWebApp.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 
 namespace OnlineShopWebApp
 {
     public class OrdersRepositoryInMemory
     {
-        private List<Cart> orders = new List<Cart>();
+        private List<CartViewModel> orders = new List<CartViewModel>();
 
-        public void AddCart(Cart cart)
+        public void AddCart(CartViewModel cart)
         {
             orders.Add(cart);
         }
-        
-
-
     }
 }
