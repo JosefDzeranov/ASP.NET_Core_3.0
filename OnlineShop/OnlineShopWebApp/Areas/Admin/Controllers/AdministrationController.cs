@@ -33,8 +33,9 @@ namespace OnlineShopWebApp.Controllers
         public IActionResult Orders()
         {
             var ordersList = orderManager.GetOrders();
+            var orderListViewModels = Mapping.ToOrdersViewModels(ordersList);
 
-            return View(ordersList);
+            return View(orderListViewModels);
 
         }
 
@@ -42,15 +43,15 @@ namespace OnlineShopWebApp.Controllers
         {
             var order = orderManager.TryGetOrderById(id);
 
-            return View(order);
+            return View(Mapping.ToOrderViewModel(order));
 
         }
 
         [HttpPost]
-        public IActionResult UpdateStatus(Guid id, OrderStatus status)
+        public IActionResult UpdateStatus(Guid id, OrderStatusViewModel status)
         {
 
-            orderManager.UpdateStatus(id, status);
+            orderManager.UpdateStatus(id, Mapping.ToOrderStatus(status));
             return RedirectToAction("Orders");
 
         }

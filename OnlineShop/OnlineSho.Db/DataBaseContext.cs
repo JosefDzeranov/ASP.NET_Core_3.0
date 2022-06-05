@@ -13,6 +13,8 @@ namespace OnlineShop.Db
 
         public DbSet<Comparison> Comparisons { get; set; }
 
+        public DbSet<Order> Orders { get; set; }
+
         
         public DataBaseContext(DbContextOptions<DataBaseContext> options) : base(options)
         {

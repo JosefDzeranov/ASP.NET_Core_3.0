@@ -32,7 +32,7 @@ namespace OnlineShopWebApp
 
             services.AddTransient<ICartManager, CartManagerDB>();
             services.AddTransient<IProductManager, ProductManagerDB>();
-            services.AddSingleton<IOrderManager, OrderManager>();
+            services.AddTransient<IOrderManager, OrderManager>();
             services.AddTransient<IComparison, ComparisonManager>();
             services.AddTransient<IFavoritesManager, FavoritesManager>();
             services.AddSingleton<IRolesManager, RolesManager>();
