@@ -4,7 +4,7 @@ using OnlineShopWebApp.Helper;
 
 namespace OnlineShopWebApp.Views.Shared.ViewComponents.CartViewComponents
 {
-    public class CartViewComponent: ViewComponent
+    public class CartViewComponent : ViewComponent
     {
         private readonly ICartsRepository cartsRepository;
         public CartViewComponent(ICartsRepository cartsRepository)

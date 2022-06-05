@@ -1,7 +1,7 @@
 ﻿@model List<ProductViewModel>
 
 @{
-    ViewData["Title"] = "Home Page";
+    ViewData["Title"] = "Favorite Page";
 }
 
 <div class="container-fluid">
@@ -32,10 +32,11 @@
                 <a class="btn btn-outline-success btn-sm" role="button"
                    asp-area=""
                    asp-controller="Favorite"
-                   asp-action="Add"
+                   asp-action="Remove"
                    asp-route-productId="@product.Id">
-                    ♡
+                    Remove
                 </a>
+
 
             </div>
         </div>
