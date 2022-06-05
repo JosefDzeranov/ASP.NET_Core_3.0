@@ -16,6 +16,8 @@ namespace OnlineShopWebApp.Interface
 
         Order GetOrder(Guid orderId);
 
+
+
         void SaveEditedOrder(Guid order, OrderState state);
     }
 }
