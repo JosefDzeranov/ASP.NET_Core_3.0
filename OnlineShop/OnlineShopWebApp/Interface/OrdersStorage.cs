@@ -11,6 +11,8 @@ namespace OnlineShopWebApp.Models
 
         private List<Cart> carts = new List<Cart>();
 
+        private List<Role> roles = new List<Role>();
+
         public Order TryGetOrderByUserId(string userId)
         {
             return orders.FirstOrDefault(x => x.UserId == userId);
