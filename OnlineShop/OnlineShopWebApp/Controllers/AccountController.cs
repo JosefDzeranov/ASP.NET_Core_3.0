@@ -64,8 +64,7 @@ namespace OnlineShopWebApp.Controllers
                 if (result.Succeeded)
                 {
                     _signInManager.SignInAsync(user, false).Wait();
-                    return Redirect(registrationData.ReturnUrl ?? "/Home");
-                    //return RedirectToAction(nameof(HomeController.Index), "Home");
+                    return Redirect(registrationData.ReturnUrl ?? "/Home");                    
                 }
                 else
                 {
