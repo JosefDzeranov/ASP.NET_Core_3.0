@@ -32,7 +32,7 @@ namespace OnlineShopWebApp.Controllers
                 var result = _signInManager.PasswordSignInAsync(enterData.Login, enterData.Password, enterData.Remember, false).Result;
                 if (result.Succeeded)
                 {
-                    return Redirect(enterData.ReturnUrl);
+                    return Redirect(enterData.ReturnUrl ?? "/Home");
                 }
                 else
                 {
@@ -42,9 +42,9 @@ namespace OnlineShopWebApp.Controllers
             return View(nameof(Login));
         }
 
-        public IActionResult Registration()
+        public IActionResult Registration(string returnUrl)
         {
-            return View();
+            return View(new RegistrationData() { ReturnUrl = returnUrl });
         }
         [HttpPost]
         public IActionResult Registration(RegistrationData registrationData)
@@ -57,14 +57,15 @@ namespace OnlineShopWebApp.Controllers
                     Password = registrationData.Password,
                     UserName = registrationData.Name,
                     Age = registrationData.Age,
-                    Email = registrationData.Email
+                    Email = registrationData.Email                    
                 };
 
                 var result = _userManager.CreateAsync(user, registrationData.Password).Result;
                 if (result.Succeeded)
                 {
                     _signInManager.SignInAsync(user, false).Wait();
-                    return RedirectToAction(nameof(HomeController.Index), "Home");
+                    return Redirect(registrationData.ReturnUrl ?? "/Home");
+                    //return RedirectToAction(nameof(HomeController.Index), "Home");
                 }
                 else
                 {
