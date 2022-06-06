@@ -4,8 +4,9 @@
     <div class="row text-center">
         <div class="col">
             <div class="validation" asp-validation-summary="All"></div>
-            <input type="hidden" name="=returnUrl" value="@Model.ReturnUrl"/>
+            
             <h3>Вход</h3>
+            <input type="hidden" name="returnUrl" value="@Model.ReturnUrl"/>
             <div>
                 <label asp-for="Login">Логин</label>
                 <input asp-for="Login" />
@@ -23,7 +24,7 @@
                 </label>
             </div>
             <br />
-            <button class="btn btn-dark" type="submit" asp-controller="Account" asp-action="Login" asp-route-returnUrl="@Model.ReturnUrl">Вход</button>
+            <button class="btn btn-dark" type="submit" asp-controller="Account" asp-action="Login" >Вход</button>
             <br />            
             <a asp-area="" asp-controller="Account" asp-action="registration">Регистрация нового пользователя</a>
         </div>

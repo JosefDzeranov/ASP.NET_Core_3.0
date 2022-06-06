@@ -32,7 +32,7 @@ namespace OnlineShopWebApp.Controllers
                 var result = _signInManager.PasswordSignInAsync(enterData.Login, enterData.Password, enterData.Remember, false).Result;
                 if (result.Succeeded)
                 {
-                    return RedirectToAction(enterData.ReturnUrl);
+                    return Redirect(enterData.ReturnUrl);
                 }
                 else
                 {
@@ -75,6 +75,11 @@ namespace OnlineShopWebApp.Controllers
                 }
             }
             return View(registrationData);
+        }
+        public IActionResult Logout(string returnUrl)
+        {
+            _signInManager.SignOutAsync().Wait();
+            return RedirectToAction(nameof(HomeController.Index), "Home");
         }
     }
 }

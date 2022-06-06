@@ -10,8 +10,8 @@ namespace OnlineShop.Db
     {
         public static void Initialize(UserManager<User> userManager, RoleManager<IdentityRole> roleManager)
         {
-            var adminEmail = "adminEmail@gmail.com";
-            var password = "12345678";
+            var adminName = "Administrator";
+            var password = "Admin1234.";
             if (roleManager.FindByNameAsync(Constants.AdminRoleName).Result == null)
             {
                 roleManager.CreateAsync(new IdentityRole(Constants.AdminRoleName)).Wait();
@@ -20,9 +20,9 @@ namespace OnlineShop.Db
             {
                 roleManager.CreateAsync(new IdentityRole(Constants.UserRoleName)).Wait();
             }
-            if (roleManager.FindByNameAsync(adminEmail).Result == null)
+            if (roleManager.FindByNameAsync(adminName).Result == null)
             {
-                var admin = new User { Email = adminEmail, UserName = adminEmail };
+                var admin = new User { UserName = adminName };
                 var result = userManager.CreateAsync(admin, password).Result;
                 if (result.Succeeded)
                 {
