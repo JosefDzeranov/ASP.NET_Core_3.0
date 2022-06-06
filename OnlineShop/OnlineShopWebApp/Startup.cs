@@ -26,7 +26,7 @@ namespace OnlineShopWebApp
             services.AddDbContext<DataBaseContext>(options =>
             options.UseSqlServer(connection));
 
-            services.AddSingleton<IOrdersRepository, OrdersRepositoryJSON>();
+            services.AddTransient<IOrdersRepository, OrdersRepositoryDb>();
             services.AddTransient<IProductsRepository, ProductRepositoryDb>();
             services.AddTransient<ICartsRepository, CartsRepositoryDb>();
             services.AddTransient<IFavoriteRepository, FavoriteRepositoryDB>();

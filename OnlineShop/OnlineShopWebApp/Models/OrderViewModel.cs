@@ -1,11 +1,12 @@
-﻿using System;
+﻿using OnlineShop.Db.Models;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 
 namespace OnlineShopWebApp.Models
 {
-    public class Order
+    public class OrderViewModel
     {
         [Required(ErrorMessage = "Please enter Firstname.")]
         [StringLength(20, MinimumLength = 2, ErrorMessage = "Firstname should have length between 2 and 20 characters.")]
@@ -36,12 +37,13 @@ namespace OnlineShopWebApp.Models
         public string Country { get; set; }
         public Guid Id { get; set; }
         public List<CartItemViewModel> Items { get; set; }
-        public OrderStatus Status { get; set; }
+        public OrderStatusViewModel Status { get; set; }
         public DateTime CreatedDateTime { get; set; }
-        public Order()
+        public UserDeliveryInfo User { get; set; }
+        public OrderViewModel()
         {
             Id = Guid.NewGuid();
-            Status = OrderStatus.Created;
+            Status = OrderStatusViewModel.Created;
             CreatedDateTime = DateTime.Now;
         }
         public decimal Cost
@@ -51,5 +53,7 @@ namespace OnlineShopWebApp.Models
                 return Items?.Sum(x => x.Cost) ?? 0;
             }
         }
+
+        
     }
 }

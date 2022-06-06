@@ -35,7 +35,6 @@ namespace OnlineShop.Db
                     {
                         Amount=1,
                         Product=product,
-                        Cart = newCart
                     }
                 };
                 dataBaseContext.Carts.Add(newCart);
@@ -54,7 +53,7 @@ namespace OnlineShop.Db
                     {
                         Amount =1,
                         Product = product,
-                        Cart=existingCart
+                        //Cart=existingCart
                     });
                 }
             }

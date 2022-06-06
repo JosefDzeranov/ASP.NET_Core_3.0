@@ -72,11 +72,5 @@ namespace OnlineShopWebApp.Areas.Admin.Controllers
             productsRepository.Update(productDb);
             return RedirectToAction("Index");
         }
-
-        //public IActionResult Delete(Guid productId)
-        //{
-        //    productsRepository.Delete(productId);
-        //    return RedirectToAction("Index");
-        //}
     }
 }
