@@ -13,7 +13,16 @@ namespace OnlineShop.Db.Models
         public List<CartItem> CartItems { get; set; }
         public Product()
         {
+            //Id = new Guid(); <= does not help
             CartItems = new List<CartItem>();
+        }
+        public Product(string name, decimal cost, string description, string imagePath)
+        {
+            //Id = new Guid(); <= does not help
+            Name = name;
+            Cost = cost;
+            Description = description;
+            ImagePath = imagePath;
         }
     }
 }
