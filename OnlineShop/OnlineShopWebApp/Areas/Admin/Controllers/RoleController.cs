@@ -38,8 +38,18 @@ namespace OnlineShopWebApp.Areas.Admin.Controllers
         {
             if (ModelState.IsValid)
             {
-                _roleManager.CreateAsync(new IdentityRole(name)).Wait();
-                return RedirectToAction("Index");
+                var result = _roleManager.CreateAsync(new IdentityRole(name)).Result;
+                if (result.Succeeded)
+                {
+                    return RedirectToAction("Index");
+                }
+                else
+                {
+                    foreach (var error in result.Errors)
+                    {
+                        ModelState.AddModelError(string.Empty, error.Description);
+                    }
+                }
             }
             return View();
         }

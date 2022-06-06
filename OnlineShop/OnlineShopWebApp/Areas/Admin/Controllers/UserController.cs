@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using System.Linq;
 using OnlineShopWebApp.Helpers;
+using System.Collections.Generic;
 
 namespace OnlineShopWebApp.Areas.Admin.Controllers
 {
@@ -16,9 +17,11 @@ namespace OnlineShopWebApp.Areas.Admin.Controllers
     public class UserController : Controller
     {
         private readonly UserManager<User> _userManager;
-        public UserController(UserManager<User> userManager)
+        private readonly RoleManager<IdentityRole> _roleManager;
+        public UserController(UserManager<User> userManager, RoleManager<IdentityRole> roleManager)
         {
             _userManager = userManager;
+            _roleManager = roleManager;
         }
 
         public IActionResult Index()
@@ -110,46 +113,46 @@ namespace OnlineShopWebApp.Areas.Admin.Controllers
         }
 
 
-        //public IActionResult Edit(string userId)
-        //{
-        //    var user = _userManager.FindByIdAsync(userId).Result;
+        public IActionResult EditRights(string userId)
+        {
+            var user = _userManager.FindByIdAsync(userId).Result;
 
-        //    if (user != null)
-        //    {
-        //        var userRoles = _userManager.GetRolesAsync(user).Result;
-        //        var allRoles = _roleManager.Roles.ToList();
-        //        var roleViewModel = new RoleViewModel
-        //        {
-        //            UserId = user.Id,
-        //            UserEmail = user.Email,
-        //            UserRoles = userRoles,
-        //            AllRoles = allRoles
-        //        };
-        //        return View(roleViewModel);
-        //    }
-        //    return View();
-        //}
+            if (user != null)
+            {
+                var userRoles = _userManager.GetRolesAsync(user).Result;
+                var allRoles = _roleManager.Roles.ToList();
+                var roleViewModel = new RoleViewModel
+                {
+                    UserId = user.Id,
+                    UserEmail = user.Email,
+                    UserRoles = userRoles,
+                    AllRoles = allRoles
+                };
+                return View(roleViewModel);
+            }
+            return View();
+        }
 
-        //[HttpPost]
-        //public IActionResult Edit(string userId, List<string> roles)
-        //{
-        //    if (ModelState.IsValid)
-        //    {
-        //        var user = _userManager.FindByIdAsync(userId).Result;
-        //        if (user != null)
-        //        {
-        //            var userRoles = _userManager.GetRolesAsync(user).Result;
-        //            var allRoles = _roleManager.Roles.ToList();
-        //            var addedRoles = roles.Except(userRoles);
-        //            var removedRoles = userRoles.Except(roles);
+        [HttpPost]
+        public IActionResult EditRights(string userId, List<string> roles)
+        {
+            if (ModelState.IsValid)
+            {
+                var user = _userManager.FindByIdAsync(userId).Result;
+                if (user != null)
+                {
+                    var userRoles = _userManager.GetRolesAsync(user).Result;
+                    var allRoles = _roleManager.Roles.ToList();
+                    var addedRoles = roles.Except(userRoles);
+                    var removedRoles = userRoles.Except(roles);
 
-        //            _userManager.AddToRolesAsync(user, addedRoles).Wait();
-        //            _userManager.RemoveFromRolesAsync(user, removedRoles).Wait();
-        //            return RedirectToAction("Index");
-        //        }
-        //    }
-        //    return View();
-        //}
+                    _userManager.AddToRolesAsync(user, addedRoles).Wait();
+                    _userManager.RemoveFromRolesAsync(user, removedRoles).Wait();
+                    return RedirectToAction("Index");
+                }
+            }
+            return View();
+        }
 
 
 
