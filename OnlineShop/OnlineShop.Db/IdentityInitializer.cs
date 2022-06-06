@@ -6,9 +6,9 @@ using System.Text;
 
 namespace OnlineShop.Db
 {
-    public class IdentityInitialization
+    public class IdentityInitializer
     {
-        public static void Initiallize(UserManager<User> userManager, RoleManager<IdentityRole> roleManager)
+        public static void Initialize(UserManager<User> userManager, RoleManager<IdentityRole> roleManager)
         {
             var adminEmail = "adminEmail@gmail.com";
             var password = "12345678";

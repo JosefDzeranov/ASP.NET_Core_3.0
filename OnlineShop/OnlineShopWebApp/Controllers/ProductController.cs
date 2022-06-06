@@ -5,9 +5,11 @@ using System.Linq;
 using System.Threading.Tasks;
 using OnlineShopWebApp.Models;
 using OnlineShop.Db;
+using Microsoft.AspNetCore.Authorization;
 
 namespace OnlineShopWebApp.Controllers
 {
+    [Authorize]
     public class ProductController : Controller
     {
         private readonly IProductsRepository productsRepository;

@@ -10,5 +10,6 @@ namespace OnlineShopWebApp.Models
         [Required(ErrorMessage = "Введите пароль")]
         public string Password { get; set; }
         public bool Remember { get; set; }
+        public string ReturnUrl { get; set; }
     }
 }

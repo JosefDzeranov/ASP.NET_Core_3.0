@@ -1,41 +1,45 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc;
+using OnlineShop.Db.Models;
 using OnlineShopWebApp.Models;
 
 namespace OnlineShopWebApp.Controllers
 {
     public class AccountController : Controller
     {
-        private readonly IUsersManager userManager;
+        private readonly IUsersRepository usersRepository;
+        private readonly UserManager<User> _userManager;
+        private readonly SignInManager<User> _signInManager;
 
-        public AccountController(IUsersRepository usersRepository)
+        public AccountController(IUsersRepository usersRepository, UserManager<User> userManager, SignInManager<User> signInManager)
         {
             this.usersRepository = usersRepository;
+            _userManager = userManager;
+            _signInManager = signInManager;
         }
 
-        public IActionResult Authorization()
+
+        public IActionResult Authorization(string returnUrl)
         {
-            return View();
+            return View(new EnterData() { ReturnUrl = returnUrl } );
         }
 
         [HttpPost]
         public IActionResult Authorization(EnterData enterData)
         {
-            if (!ModelState.IsValid)
+            if (ModelState.IsValid)
             {
-                return View(nameof(Authorization));
+                var result = _signInManager.PasswordSignInAsync(enterData.Login, enterData.Password, enterData.Remember, false).Result;
+                if (result.Succeeded)
+                {
+                    return RedirectToAction(enterData.ReturnUrl);
+                }
+                else
+                {
+                   ModelState.AddModelError("", "Неверный логин или пароль");
+                }                
             }
-            var user = usersRepository.TryGetByLogin(enterData.Login);
-            if (user == null)
-            {
-                ModelState.AddModelError("", "Такого пользователя не существует");
-                return RedirectToAction(nameof(Authorization));
-            }
-            if (enterData.Password != user.Password)
-            {
-                ModelState.AddModelError("", "Неверный пароль");
-                return RedirectToAction(nameof(Authorization));
-            }
-            return RedirectToAction(nameof(HomeController.Index), "Home");
+            return View(nameof(Authorization));
         }
 
         public IActionResult Registration()

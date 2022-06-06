@@ -4,6 +4,7 @@
     <div class="row text-center">
         <div class="col">
             <div class="validation" asp-validation-summary="All"></div>
+            <input type="hidden" name="=returnUrl" value="@Model.ReturnUrl"/>
             <h3>Вход</h3>
             <div>
                 <label asp-for="Login">Логин</label>
