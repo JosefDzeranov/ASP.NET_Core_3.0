@@ -19,13 +19,13 @@ namespace OnlineShopWebApp.Controllers
         }
 
 
-        public IActionResult Authorization(string returnUrl)
+        public IActionResult Login(string returnUrl)
         {
-            return View(new EnterData() { ReturnUrl = returnUrl } );
+            return View(new EnterData() { ReturnUrl = returnUrl });
         }
 
         [HttpPost]
-        public IActionResult Authorization(EnterData enterData)
+        public IActionResult Login(EnterData enterData)
         {
             if (ModelState.IsValid)
             {
@@ -36,10 +36,10 @@ namespace OnlineShopWebApp.Controllers
                 }
                 else
                 {
-                   ModelState.AddModelError("", "Неверный логин или пароль");
-                }                
+                    ModelState.AddModelError("", "Неверный логин или пароль");
+                }
             }
-            return View(nameof(Authorization));
+            return View(nameof(Login));
         }
 
         public IActionResult Registration()
@@ -51,20 +51,30 @@ namespace OnlineShopWebApp.Controllers
         {
             if (ModelState.IsValid)
             {
-                usersRepository.Add(new UserAccount
+                User user = new User
                 {
                     Login = registrationData.Login,
                     Password = registrationData.Password,
-                    Name = registrationData.Name,
+                    UserName = registrationData.Name,
                     Age = registrationData.Age,
                     Email = registrationData.Email
-                });
-                return RedirectToAction(nameof(HomeController.Index), "Home");
+                };
+
+                var result = _userManager.CreateAsync(user, registrationData.Password).Result;
+                if (result.Succeeded)
+                {
+                    _signInManager.SignInAsync(user, false).Wait();
+                    return RedirectToAction(nameof(HomeController.Index), "Home");
+                }
+                else
+                {
+                    foreach(var error in result.Errors)
+                    {
+                        ModelState.AddModelError(string.Empty, error.Description);
+                    }                    
+                }
             }
-            else
-            {
-                return View(registrationData);
-            }
+            return View(registrationData);
         }
     }
 }

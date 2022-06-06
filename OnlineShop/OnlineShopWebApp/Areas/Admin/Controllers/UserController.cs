@@ -61,7 +61,7 @@ namespace OnlineShopWebApp.Areas.Admin.Controllers
         {
             if (ModelState.IsValid)
             {
-                usersRepository.Add(new UserAccount
+                usersRepository.Add(new UserViewModel
                 {
                     Login = registrationData.Login,
                     Password = registrationData.Password,
@@ -69,7 +69,7 @@ namespace OnlineShopWebApp.Areas.Admin.Controllers
                     Age = registrationData.Age,
                     Email = registrationData.Email
                 });
-                return RedirectToAction(nameof(UserController.Users), "User");
+                return RedirectToAction(nameof(UserController.Users), "UserViewModel");
             }
             else
             {
@@ -82,7 +82,7 @@ namespace OnlineShopWebApp.Areas.Admin.Controllers
             return View(user);
         }
         [HttpPost]
-        public IActionResult Edit(UserAccount userAccount, string userLogin)
+        public IActionResult Edit(UserViewModel userAccount, string userLogin)
         {
             if (ModelState.IsValid)
             {

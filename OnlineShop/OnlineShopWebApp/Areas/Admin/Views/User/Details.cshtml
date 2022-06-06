@@ -1,4 +1,4 @@
-﻿@model UserAccount
+﻿@model UserViewModel
 
 <div class="row">
     <div class="col-6">
@@ -22,18 +22,19 @@
                 </tr>
             </tbody>
         </table>
-        
-    <br/>
-    <div class="dropdown show">
-        <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            Действия
-        </a>
 
-        <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-            <a class="dropdown-item" asp-area="Admin" asp-controller="user" asp-action="ChangePassword" asp-route-userLogin="@Model.Login">Смена пароля</a>
-            <a class="dropdown-item" asp-area="Admin" asp-controller="user" asp-action="Edit" asp-route-userLogin="@Model.Login">Редактирование данных</a>
-            <a class="dropdown-item" asp-area="Admin" asp-controller="user" asp-action="Access" asp-route-userLogin="@Model.Login">Права доступа</a>
-            <a class="dropdown-item" asp-area="Admin" asp-controller="user" asp-action="Delete" asp-route-userLogin="@Model.Login">Удалить пользователя</a>
+        <br />
+        <div class="dropdown show">
+            <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Действия
+            </a>
+
+            <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                <a class="dropdown-item" asp-area="Admin" asp-controller="user" asp-action="ChangePassword" asp-route-userLogin="@Model.Login">Смена пароля</a>
+                <a class="dropdown-item" asp-area="Admin" asp-controller="user" asp-action="Edit" asp-route-userLogin="@Model.Login">Редактирование данных</a>
+                <a class="dropdown-item" asp-area="Admin" asp-controller="user" asp-action="Access" asp-route-userLogin="@Model.Login">Права доступа</a>
+                <a class="dropdown-item" asp-area="Admin" asp-controller="user" asp-action="Delete" asp-route-userLogin="@Model.Login">Удалить пользователя</a>
+            </div>
         </div>
     </div>
 </div>

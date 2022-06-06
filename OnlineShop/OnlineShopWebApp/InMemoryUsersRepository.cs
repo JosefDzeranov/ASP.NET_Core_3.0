@@ -6,18 +6,18 @@ namespace OnlineShopWebApp
 {
     public class InMemoryUsersRepository : IUsersRepository
     {
-        List<UserAccount> users = new List<UserAccount>();
+        List<UserViewModel> users = new List<UserViewModel>();
 
-        public List<UserAccount> GetAll()
+        public List<UserViewModel> GetAll()
         {
             return users;
         }
 
-        public UserAccount TryGetByLogin(string login)
+        public UserViewModel TryGetByLogin(string login)
         {
             return users.FirstOrDefault(x => x.Login == login);
         }
-        public void Add(UserAccount newUser)
+        public void Add(UserViewModel newUser)
         {
             users.Add(newUser);
         }
@@ -28,7 +28,7 @@ namespace OnlineShopWebApp
             existingUser.Password = newPassword.Password;
         }
 
-        public void Edit (UserAccount userChange, string oldLogin)
+        public void Edit (UserViewModel userChange, string oldLogin)
         {
             var existingUser = TryGetByLogin(oldLogin);
             existingUser.Name = userChange.Name;
