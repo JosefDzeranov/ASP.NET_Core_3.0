@@ -6,9 +6,9 @@
 
 <form method="post">
     <div class="col">
-      <input type="text" class="form-control" name="name" placeholder="Поиск товара">
-      <br />
-      <button class="btn-primary" type="submit" asp-controller="Home" asp-action="ProductSearch">Искать</button>  
+        <input type="text" class="form-control" name="name" placeholder="Поиск товара">
+        <br />
+        <button class="btn-primary" type="submit" asp-controller="Home" asp-action="ProductSearch">Искать</button>
     </div>
 </form>
 
@@ -23,7 +23,9 @@
                             <img class="card-img-top" src=@product.ImagesPath alt="Изображение товара" />
                         </div>
                         <div class="product-details">
-                            <a style="color:black" href="/product/index/@product.Id"><h4>@product.Name</h4></a>
+                            <a style="color:black" asp-area="" asp-controller="Product" asp-action="Index" asp-route-id="@product.Id">
+                                <h4>@product.Name</h4>
+                            </a>
                             <p>@product.Description</p>
                         </div>
                         <div class="product-bottom-details d-flex justify-content-between">
@@ -31,13 +33,13 @@
                                 <small>₽@product.Price</small>
                             </div>
                             <div class="product-links">
-                                <a href="/cart/add?productId=@product.Id"><i class="fas fa-shopping-cart"></i></a>
-                                <a href="/favourite/add?productId=@product.Id"><i class="far fa-heart"></i></a>
+                                <a asp-area="" asp-controller="Cart" asp-action="Add" asp-route-productId="@product.Id"><i class="fas fa-shopping-cart"></i></a>
+                                <a asp-area="" asp-controller="Favourite" asp-action="Add" asp-route-productId="@product.Id"><i class="far fa-heart"></i></a>
                             </div>
                         </div>
                     </div>
                 </div>
-            }    
+            }
         </div>
     </div>
 </section>

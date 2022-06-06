@@ -34,5 +34,5 @@
             </table>
         </div>
     </div>
-    <button class="btn btn-success" type="submit" asp-controller="Admin" asp-action="UpdateOrderStatus" asp-route-orderId="@Model.Id">Обновить статус</button>
+    <button class="btn btn-success" type="submit" asp-area="admin" asp-controller="Order" asp-action="UpdateOrderStatus" asp-route-orderId="@Model.Id">Обновить статус</button>
 </form>

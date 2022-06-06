@@ -31,7 +31,7 @@
                                 <td>Admin</td>
                                 <td>@product.CreatedDateTime.ToString("d")</td>
                                 <td>@product.CreatedDateTime.ToString("t")</td>
-                                <td><a href="/admin/admin/orderDetails?orderId=@product.Id">Подробнее</a></td>
+                                <td><a asp-area="admin" asp-controller="Order" asp-action="orderDetails" asp-route-orderId="@product.Id">Подробнее</a></td>
                             </tr>
                         }
                     </tbody>
