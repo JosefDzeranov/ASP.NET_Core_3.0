@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using OnlineShop.Db.Models;
 
 namespace OnlineShop.Db
@@ -10,7 +7,7 @@ namespace OnlineShop.Db
     {
         //доступ к таблицам
         public DbSet<Product> Products { get; set; }
-        public DbSet<FavoriteProduct> favoriteProducts { get; set; }
+        public DbSet<FavoriteProduct> FavoriteProducts { get; set; }
 
         public DatabaseContext(DbContextOptions<DatabaseContext> options)
             : base(options)
