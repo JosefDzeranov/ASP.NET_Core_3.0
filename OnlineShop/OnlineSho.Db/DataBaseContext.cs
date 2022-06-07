@@ -15,11 +15,12 @@ namespace OnlineShop.Db
 
         public DbSet<Order> Orders { get; set; }
 
-        
+
         public DataBaseContext(DbContextOptions<DataBaseContext> options) : base(options)
         {
-          
-            Database.EnsureCreated();
+
+            // Database.EnsureCreated();
+            Database.Migrate();
         }
     }
 }
