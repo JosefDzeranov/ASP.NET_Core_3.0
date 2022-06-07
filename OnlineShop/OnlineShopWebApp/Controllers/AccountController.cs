@@ -2,7 +2,7 @@
 using OnlineShopWebApp.Areas.Admin.Models;
 using OnlineShopWebApp.Models;
 
-namespace OnlineShopWebApp.Areas.Admin.Controllers
+namespace OnlineShopWebApp.Controllers
 {
     public class AccountController : Controller
     {

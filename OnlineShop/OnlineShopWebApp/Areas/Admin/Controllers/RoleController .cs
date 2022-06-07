@@ -15,25 +15,25 @@ namespace OnlineShopWebApp.Areas.Admin.Controllers
             this.rolesRepository = rolesRepository;
         }
 
-        public IActionResult Roles()
+        public IActionResult Index()
         {
             var roles = rolesRepository.GetAllProducts();
             return View(roles);
         }
 
-        public IActionResult RemoveRole(string roleName)
+        public IActionResult Remove(string roleName)
         {
             rolesRepository.Remove(roleName);
             return RedirectToAction("Roles");
         }
 
-        public IActionResult AddRole()
+        public IActionResult Add()
         {
             return View();
         }
 
         [HttpPost]
-        public IActionResult AddRole(Role role)
+        public IActionResult Add(Role role)
         {
             if (rolesRepository.TryGetByName(role.Name) != null)
             {

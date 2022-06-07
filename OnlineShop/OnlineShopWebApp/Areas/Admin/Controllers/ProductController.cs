@@ -16,7 +16,7 @@ namespace OnlineShopWebApp.Areas.Admin.Controllers
             this.productsRepository = productsRepository;
         }
 
-        public IActionResult Products()
+        public IActionResult Index()
         {
             var products = productsRepository.GetAllProducts();
             if (products == null || products.Count == 0)
@@ -24,13 +24,13 @@ namespace OnlineShopWebApp.Areas.Admin.Controllers
             return View(products);
         }
 
-        public IActionResult AddProduct()
+        public IActionResult Add()
         {
             return View();
         }
 
         [HttpPost]
-        public IActionResult AddProduct(Product product)
+        public IActionResult Add(Product product)
         {
             if (ModelState.IsValid == false)
                 return View(product);
@@ -38,7 +38,7 @@ namespace OnlineShopWebApp.Areas.Admin.Controllers
             return RedirectToAction("Products");
         }
 
-        public IActionResult EditProduct(int productId)
+        public IActionResult Edit(int productId)
         {
             var product = productsRepository.TryGetByid(productId);
             return View(product);
@@ -46,7 +46,7 @@ namespace OnlineShopWebApp.Areas.Admin.Controllers
         }
 
         [HttpPost]
-        public IActionResult EditProduct(Product product)
+        public IActionResult Edit(Product product)
         {
             if (ModelState.IsValid == false)
                 return View(product);

@@ -1,7 +1,6 @@
-﻿using OnlineShopWebApp.Models;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 
-namespace OnlineShopWebApp.Areas.Admin.Models
+namespace OnlineShopWebApp.Models
 {
     public class Registration
     {

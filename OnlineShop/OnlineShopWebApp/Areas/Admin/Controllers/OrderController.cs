@@ -14,7 +14,7 @@ namespace OnlineShopWebApp.Areas.Admin.Controllers
             this.orderRepository = orderRepository;
         }
 
-        public IActionResult Orders()
+        public IActionResult Index()
         {
             var orders = orderRepository.GetAll();
             if (orders == null || orders.Count == 0)
