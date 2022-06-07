@@ -1,18 +1,16 @@
 ﻿
 <!DOCTYPE html>
 <html lang="en">
+<link rel="shortcut icon" type="image/x-icon" href="favicon.ico" />
 <head >
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <title>@ViewData["Title"] - @MyConstant.NameOrganization</title>
-    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="~/css/site.css" />
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="~/css/site.css"/>
 </head>
-<body class="bg-image" 
-      style="background-image: url('/image/Back_picture_with_drawings_1.svg'); 
-             background-repeat: no-repeat; 
-             background-attachment: fixed; 
-             background-position: top right; background-size: 25%;">
+<body class="bg-image"
+      style="background-image: url('/image/Back_picture_with_drawings_1.svg'); background-repeat: no-repeat; background-attachment: fixed; background-position: top right; background-size: 25%;">
 @await Html.PartialAsync("Header")
 <div class="container">
     <main role="main" class="pb-3">
