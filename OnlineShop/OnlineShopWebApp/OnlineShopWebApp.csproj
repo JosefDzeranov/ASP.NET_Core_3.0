@@ -20,10 +20,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Include="wwwroot\image\favicon.ico" />
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="..\OnlineShop.Db\OnlineShop.Db.csproj" />
   </ItemGroup>
 
