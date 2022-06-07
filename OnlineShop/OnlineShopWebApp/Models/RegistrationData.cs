@@ -14,11 +14,7 @@ namespace OnlineShopWebApp.Models
 
         [Required(ErrorMessage = "Введите e-mail")]
         [EmailAddress(ErrorMessage = "Некорректный адрес")]
-
-        public string Email { get; set; }
-
-        [Required(ErrorMessage = "Введите логин")]
-        public string Login { get; set; }
+        public string Email { get; set; }        
 
         [Required(ErrorMessage = "Введите пароль")]
         [StringLength(50, MinimumLength = 8, ErrorMessage = "Пароль должен содержать не менее 8 символов")]

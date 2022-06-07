@@ -53,11 +53,10 @@ namespace OnlineShopWebApp.Controllers
             {
                 User user = new User
                 {
-                    Login = registrationData.Login,
-                    Password = registrationData.Password,
-                    UserName = registrationData.Name,
+                    Name = registrationData.Name,
                     Age = registrationData.Age,
-                    Email = registrationData.Email
+                    Email = registrationData.Email,
+                    UserName = registrationData.Email
                 };
 
                 var result = _userManager.CreateAsync(user, registrationData.Password).Result;

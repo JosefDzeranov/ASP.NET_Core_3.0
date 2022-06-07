@@ -62,8 +62,7 @@ namespace OnlineShopWebApp.Areas.Admin.Controllers
             if (ModelState.IsValid)
             {
                 usersRepository.Add(new UserViewModel
-                {
-                    Login = registrationData.Login,
+                {                   
                     Password = registrationData.Password,
                     Name = registrationData.Name,
                     Age = registrationData.Age,
