@@ -27,7 +27,13 @@ namespace OnlineShopWebApp.Areas.Admin.Controllers
         public IActionResult Index()
         {
             var users = _userManager.Users.ToList();
-            var userViewModels = users.ToUserViewModels();
+            var userViewModels = new List<UserViewModel>();
+            foreach (var user in users)
+            {
+                var userRoles = _userManager.GetRolesAsync(user).Result;
+                var userViewModel = user.ToUserViewModel(userRoles);
+                userViewModels.Add(userViewModel);
+            }
             return View(userViewModels);
         }
 
@@ -51,7 +57,8 @@ namespace OnlineShopWebApp.Areas.Admin.Controllers
         public IActionResult Details(Guid id)
         {
             var user = _userManager.FindByIdAsync(id.ToString()).Result;
-            var userViewModel = user.ToUserViewModel();
+            var userRoles = _userManager.GetRolesAsync(user).Result;
+            var userViewModel = user.ToUserViewModel(userRoles);
             return View(userViewModel);
         }
 
@@ -113,9 +120,9 @@ namespace OnlineShopWebApp.Areas.Admin.Controllers
         }
 
 
-        public IActionResult EditRights(string userId)
+        public IActionResult EditRights(string id)
         {
-            var user = _userManager.FindByIdAsync(userId).Result;
+            var user = _userManager.FindByIdAsync(id).Result;
 
             if (user != null)
             {
@@ -153,8 +160,5 @@ namespace OnlineShopWebApp.Areas.Admin.Controllers
             }
             return View();
         }
-
-
-
     }
 }

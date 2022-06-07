@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 namespace OnlineShopWebApp.Areas.Admin.Models
@@ -15,7 +16,7 @@ namespace OnlineShopWebApp.Areas.Admin.Models
         [StringLength(25, MinimumLength = 2)]
         public string LastName { get; set; }
 
-        public string Role { get; set; }
+        public IList<string> UserRoles { get; set; }
 
         [Required]
         [Phone]
@@ -26,17 +27,9 @@ namespace OnlineShopWebApp.Areas.Admin.Models
         public string Email { get; set; }
         public string Password { get; set; }
 
-        public UserViewModel() { } // Empty ctor for XML serializing.
-
-        public UserViewModel(Guid id, string firstname, string lastname, string role, string phone, string email, string password)
+        public UserViewModel()
         {
-            Id = id;
-            FirstName = firstname;
-            LastName = lastname;
-            Role = role;
-            Phone = phone;
-            Email = email;
-            Password = password;
+            UserRoles = new List<string>();
         }
     }
 }

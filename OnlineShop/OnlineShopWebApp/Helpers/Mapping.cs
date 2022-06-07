@@ -182,7 +182,21 @@ namespace OnlineShopWebApp.Helpers
                 FirstName = user.FirstName,
                 LastName = user.LastName,
                 Phone = user.PhoneNumber,
-                Email = user.Email
+                Email = user.Email,             
+            };
+            return userViewModel;
+        }
+
+        public static UserViewModel ToUserViewModel(this User user, IList<string> userRoles)
+        {
+            var userViewModel = new UserViewModel
+            {
+                Id = Guid.Parse(user.Id),
+                FirstName = user.FirstName,
+                LastName = user.LastName,
+                Phone = user.PhoneNumber,
+                Email = user.Email,
+                UserRoles = userRoles
             };
             return userViewModel;
         }

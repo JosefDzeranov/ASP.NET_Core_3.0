@@ -1,0 +1,33 @@
+﻿@using OnlineShopWebApp.Areas.Admin.Models
+
+@model RoleViewModel
+
+@{
+    ViewData["Title"] = "Edit access rights";
+}
+<div class="container align-content-center">
+    <div class="row">
+        <div class="col-2">
+            @await Html.PartialAsync("AdminMenuLeft")
+        </div>
+        <div class="col-5">
+            <h2>Edit access rights</h2>
+            <form asp-area="Admin" asp-controller="User" asp-action="EditRights">
+                <div class="validation" asp-validation-summary="All"></div>
+                <div class="mb-3">
+                    <input hidden name="userId" value="@Model.UserId" />
+                </div>
+                @foreach(var role in Model.AllRoles)
+                {
+                <div class="mb-3 form-check">
+                    <input class="form-check-input" type="checkbox" name="roles" value="@role.Name"
+                           @(Model.UserRoles.Contains(role.Name) ? "checked=\"checked\"" : "" ) />@role.Name <br />
+                </div>
+                }
+                <div class="mb-3">
+                    <button class="btn btn-outline-dark btn-sm" type="submit" asp-area="Admin" asp-controller="User" asp-action="EditRights">Save</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
