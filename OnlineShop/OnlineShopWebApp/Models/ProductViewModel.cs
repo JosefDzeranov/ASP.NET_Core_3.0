@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Http;
+using System;
 using System.ComponentModel.DataAnnotations;
 
 namespace OnlineShopWebApp.Models
@@ -13,9 +14,9 @@ namespace OnlineShopWebApp.Models
         [Required(ErrorMessage = "Цена должна быть указана")]
         [Range(typeof(decimal), "25.00", "50000.00")]
         public decimal Cost { get; set; }
-        public string Description { get; set; }
-        [Required(ErrorMessage = "Фото должно быть добавлено")]
+        public string Description { get; set; }   
         public string ImgPath { get; set; }
+        public IFormFile UploadedImg { get; set; }
 
     }
 }

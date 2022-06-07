@@ -1,26 +1,32 @@
 ﻿@model ProductViewModel
 <div class="card shadow">
     <div class="card-body">
-        <form asp-controller="Product" asp-action="EditProduct">
-            <div class="row justify-content-center">
+        <form asp-controller="Product" asp-action="EditProduct" enctype="multipart/form-data">
+            <div class="row">
+                <div class="col-3">
+                    <img src="@Model.ImgPath" alt="изображение книги" />
+                </div>
                 <div class="col-6">
                     <div class="mb-3">
+                        <label>Название:</label>
                         <input type="text" class="form-control" asp-for="Name" placeholder="Имя" value="@Model.Name" />
                         <span asp-validation-for="Name"></span>
                     </div>
                     <div class="mb-3">
-                        <input type="text" class="form-control" asp-for="Cost" placeholder="Цена" value="@Model.Cost"/>
-                         <span asp-validation-for="Cost"></span>
+                        <label>Цена:</label>
+                        <input type="text" class="form-control" asp-for="Cost" placeholder="Цена" value="@Model.Cost" />
+                        <span asp-validation-for="Cost"></span>
                     </div>
                     <div class="mb-3">
-                        <input type="text" class="form-control" asp-for="Description" placeholder="Описание" value="@Model.Description"/>
+                        <label>Описание:</label>
+                        <input type="text" class="form-control" asp-for="Description" placeholder="Описание" value="@Model.Description" />
                         <span asp-validation-for="Description"></span>
                     </div>
-                     <div class="mb-3">
-                        <input type="text" class="form-control" asp-for="ImgPath" placeholder="Картинка" value="/images/book.png"/>
-                         <span asp-validation-for="ImgPath"></span>
+                    <div class="mb-3">
+                        <label>Изображение:</label>
+                       <input type="file" class="form-control" asp-for="UploadedImg"/>
                     </div>
-                    <input type="hidden" class="form-control" asp-for="Id" value="@Model.Id"/>
+                    <input type="hidden" class="form-control" asp-for="Id" value="@Model.Id" />
                     <div class="mb-3 text-center">
                         <button type="submit" class="btn btn-dark">Изменить</button>
                     </div>
