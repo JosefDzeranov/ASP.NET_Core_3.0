@@ -2,7 +2,40 @@
   {
     "Login": "Gregory",
     "Comparisons": [],
-    "Cart": [],
+    "Cart": [
+      {
+        "Product": {
+          "Id": "69dc7be2-12fc-413e-daeb-08da48b687dc",
+          "CodeNumber": "234",
+          "Cost": 1000.00,
+          "Square": 12212,
+          "Width": 10,
+          "Length": 10,
+          "Description": "dsfsdf",
+          "Images": "0-1.jpg"
+        },
+        "Count": 1,
+        "additionalOptions": [
+          {}
+        ]
+      },
+      {
+        "Product": {
+          "Id": "41c08efd-6b55-42d9-daec-08da48b687dc",
+          "CodeNumber": "344",
+          "Cost": 3242.00,
+          "Square": 2332,
+          "Width": 23,
+          "Length": 23,
+          "Description": "dsfdsff",
+          "Images": "1-1.jpg"
+        },
+        "Count": 1,
+        "additionalOptions": [
+          {}
+        ]
+      }
+    ],
     "InfoBuying": {
       "Surname": "Молостов",
       "Firstname": "Григорий",

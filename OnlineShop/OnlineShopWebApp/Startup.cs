@@ -32,7 +32,8 @@ namespace OnlineShopWebApp
             services.AddDbContext<DatabaseContext>(options =>
                 options.UseSqlServer(connection));
             services.AddTransient<IBuyerManager, BuyerManager>();
-            services.AddTransient<IProductManager, ProductManager>();
+            services.AddTransient<IProductManager, ProductDbManager>();
+            services.AddTransient<IFavoriteRepository, FavoriteDbRepository>();
             services.AddSingleton<IRoleManager, RoleManager>();
             services.AddTransient<IUserManager, UserManager>();
             services.AddScoped<CheckingForAuthorization>();
