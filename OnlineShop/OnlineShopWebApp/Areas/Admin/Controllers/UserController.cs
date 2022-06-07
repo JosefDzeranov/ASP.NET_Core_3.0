@@ -55,34 +55,32 @@ namespace OnlineShopWebApp.Areas.Admin.Controllers
         public IActionResult Delete(string userName)
         {
             var user = userManager.FindByNameAsync(userName).Result;
-            userManager.DeleteAsync(user).Wait();            
+            userManager.DeleteAsync(user).Wait();
             return RedirectToAction("Users");
         }
 
-        //public IActionResult Add()
-        //{
-        //    return View();
-        //}
+        public IActionResult Add()
+        {
+            return View();
+        }
 
-        //[HttpPost]
-        //public IActionResult Add(RegistrationData registrationData)
-        //{
-        //    if (ModelState.IsValid)
-        //    {
-        //        usersRepository.Add(new UserViewModel
-        //        {                   
-        //            Password = registrationData.Password,
-        //            Name = registrationData.Name,
-        //            Age = registrationData.Age,
-        //            Email = registrationData.Email
-        //        });
-        //        return RedirectToAction(nameof(UserController.Users), "UserViewModel");
-        //    }
-        //    else
-        //    {
-        //        return View(registrationData);
-        //    }
-        //}
+        [HttpPost]
+        public IActionResult Add(RegistrationData registrationData)
+        {
+            if (ModelState.IsValid)
+            {
+                User user = new User
+                {
+                    Name = registrationData.Name,
+                    Age = registrationData.Age,
+                    Email = registrationData.Email,
+                    UserName = registrationData.Email
+                };
+                userManager.CreateAsync(user, registrationData.Password).Wait();
+                return RedirectToAction("Users");
+            }
+            return View(registrationData);
+        }
         //public IActionResult Edit(string userLogin)
         //{
         //    var user = usersRepository.TryGetByLogin(userLogin);
