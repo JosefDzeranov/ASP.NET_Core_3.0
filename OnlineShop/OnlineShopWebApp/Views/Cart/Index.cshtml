@@ -26,15 +26,16 @@ else
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach (var product in Model.Items)
+                    @foreach (var cartItem  in Model.Items)
                     {
                         <tr>
-                            <td><img src=@product.Product.ImagePath style="width: 80px; height: 80px;" /></td>
-                            <td><a href="/product/index/@product.Product.Id">@product.Product.Name</a></td>
-                            <td>@product.Product.Cost</td>
-                            <td>@product.Cost</td>
-                            <td>@product.Count</td>
-                            <td><a href="/cart/RemoveCountProductCart/?productId=@product.Product.Id&cartid=@product.ItemId" type="button" class="btn btn-danger">-</a><a href="/cart/add/?productId=@product.Product.Id" type="button" class="btn btn-danger">+</a></td>
+                            <td><img src=@cartItem.Product.ImagePath style="width: 80px; height: 80px;" /></td>
+                            <td><a href="/product/index/@cartItem.Product.Id">@cartItem.Product.Name</a></td>
+                            <td>@cartItem.Product.Cost</td>
+                            <td>@cartItem.Cost</td>
+                            <td>@cartItem.Count</td>
+                            <td><a href="/cart/RemoveCountProductCart/?cartItem.productId=@cartItem.Product.Id&cartid=@cartItem.ItemId" type="button" class="btn btn-danger">-</a>
+                                <a href="/cart/add/?cartItem.productId=@cartItem.Product.Id" type="button" class="btn btn-danger">+</a></td>
                         </tr>
                     }
                 </tbody>
@@ -48,7 +49,7 @@ else
                 </tr>
             </table>
             <div class="text-right">
-                <a type="button" class="btn btn-outline-danger" href="/cart/RemoveCartUser/?userId=@Model .UserId" role="button">Очистить корзину</a>
+                <a type="button" class="btn btn-outline-danger" href="/cart/RemoveCartUser/?userId=@Model.UserId" role="button">Очистить корзину</a>
             </div>
             <div class="text-center">
                 <a class="btn btn-dark" href="/home/index" role="button">Продолжить покупки</a>

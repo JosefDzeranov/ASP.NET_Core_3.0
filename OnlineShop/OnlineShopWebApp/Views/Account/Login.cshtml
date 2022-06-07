@@ -8,38 +8,42 @@
 {
     <div class="form">
         <form class="form-horizontal" role="form" method="POST" asp-action="Account">
-            <div class="form-group" align="center">
+            <div class="validation" asp-validation-summary="All">
                 <div class="form-group">
-                    <label for="inputEmail" class="col-sm-2 control-label">Логин</label>
-                    <div class="col-sm-10">
-                        <input type="text" class="form-control" placeholder="Логин" name="Email">
-                    </div>
-                </div>
-                <div class="form-group" align="center">
-                    <label for="inputPassword" class="col-sm-2 control-label">Пароль</label>
-                    <div class="col-sm-10">
-                        <input type="password" class="form-control" placeholder="Пароль" name="Password">
-                    </div>
-                </div>
-                <div class="form-group" align="center">
-                    <div class="col-sm-offset-2 col-sm-10">
-                        <div class="checkbox">
-                            <label>
-                                <input type="checkbox" value="true" name="RememberMe"> Запомнить меня?
-                            </label>
+                    <div class="form-group">
+                        <label asp-for="Login" class="col-sm-2 control-label">Логин</label>
+                        <div class="col-sm-10">
+                            <input class="form-control" asp-for="Login" name="Login" required minlength="3" maxlength="25">
+                            <span asp-validation-for="Password"></span>
                         </div>
                     </div>
-                </div>
-                <div class="form-group" align="center">
-                    <div class="col-sm-offset-2 col-sm-10">
-                        <p>
-                        <button type="submit" class="btn btn-dark" asp-controller="Account" asp-action="Login">Войти</button>
-                        </p>
+                    <div class="form-group">
+                        <label asp-for="Password" class="col-sm-2 control-label">Подтвердите пароль</label>
+                        <div class="col-sm-10">
+                            <input class="form-control" asp-for="Password" name="Password" required>
+                            <span asp-validation-for="Password"></span>
+                        </div>
                     </div>
-                    <div class="col-sm-offset-2 col-sm-10">
-                        <p>
-                        <button type="submit" class="btn btn-light" asp-controller="Account" asp-action="Registration">Регистрация нового пользователя</button>
-                        </p>
+                    <div class="form-check">
+                        <div class="col-sm-offset-2 col-sm-10">
+                            <div class="checkbox">
+                                <label>
+                                    <input type="checkbox" name="RememberMe" typeof="bool" value="true"> Запомнить меня?
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-sm-offset-2 col-sm-10">
+                            <p>
+                                <button type="submit" class="btn btn-dark" asp-controller="Account" asp-action="Login" align="center">Войти</button>
+                            </p>
+                        </div>
+                        <div class="col-sm-offset-2 col-sm-10">
+                            <p>
+                                <a class="btn btn-light" asp-controller="Account" asp-action="Registration">Регистрация</a>
+                            </p>
+                        </div>
                     </div>
                 </div>
             </div>

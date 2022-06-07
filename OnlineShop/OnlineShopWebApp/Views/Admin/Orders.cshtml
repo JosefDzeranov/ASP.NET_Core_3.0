@@ -1,0 +1,52 @@
+﻿@using OnlineShopWebApp.Models
+
+@model List<Order>
+<div class="row">
+    @await Html.PartialAsync("AdminPanel")
+
+    <div class="col-6">
+        <h3 align="center">Список заказов</h3>
+
+        @if (Model == null)
+        {
+            <div class="404">
+                <h2 align="center">Заказов нет</h2>
+                <img class="card-img-top" src="/images/404.jpg" />
+            </div>
+        }
+        else
+        {
+            <div class="row">
+                <div class="col-6">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>№</th>
+                                <th>Номер заказа</th>
+                                <th>Стоимость</th>
+                                <th>Статус</th>
+                                <th>Пользователь (логин)</th>
+                                <th>Дата</th>
+                                <th>Время</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @for (int i = 0; i < Model.Count; i++)
+                            {
+                                <tr>
+                                    <td>@(i+1)</td>
+                                    <td>@Model[i].CostOrder</td>
+                                    <td>@Model[i].State</td>
+                                    <td>@Model[i].UserId</td>
+                                    <td>@Model[i].OrderDateTime.ToString("d")</td>
+                                    <td>@Model[i].OrderDateTime.ToString("t")</td>
+                                    <td><a class="btn btn-light" asp-controller="Admin" asp-action="GetOrder" asp-route-id="@Model[i].Id" width="20px" role="button">Детали заказа</a></td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        }
+    </div>
+</div>
