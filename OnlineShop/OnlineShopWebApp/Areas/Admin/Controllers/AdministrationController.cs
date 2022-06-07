@@ -1,6 +1,10 @@
 using Microsoft.AspNetCore.Mvc;
+using OnlineShop.Db;
+using OnlineShop.Db.Models;
+using OnlineShopWebApp.Helpers;
 using OnlineShopWebApp.Models;
 using System;
+using System.Collections.Generic;
 
 namespace OnlineShopWebApp.Controllers
 {
@@ -29,8 +33,9 @@ namespace OnlineShopWebApp.Controllers
         public IActionResult Orders()
         {
             var ordersList = orderManager.GetOrders();
+            var orderListViewModels = Mapping.ToOrdersViewModels(ordersList);
 
-            return View(ordersList);
+            return View(orderListViewModels);
 
         }
 
@@ -38,15 +43,15 @@ namespace OnlineShopWebApp.Controllers
         {
             var order = orderManager.TryGetOrderById(id);
 
-            return View(order);
+            return View(Mapping.ToOrderViewModel(order));
 
         }
 
         [HttpPost]
-        public IActionResult UpdateStatus(Guid id, OrderStatus status)
+        public IActionResult UpdateStatus(Guid id, OrderStatusViewModel status)
         {
 
-            orderManager.UpdateStatus(id, status);
+            orderManager.UpdateStatus(id, Mapping.ToOrderStatus(status));
             return RedirectToAction("Orders");
 
         }
@@ -58,7 +63,7 @@ namespace OnlineShopWebApp.Controllers
         }
         public IActionResult AddNewUser()
         {
-            
+
             return View();
         }
 
@@ -69,14 +74,13 @@ namespace OnlineShopWebApp.Controllers
             {
                 usersManager.SaveNewUser(user);
 
-                return View("SaveAddedUser",user);
+                return View("SaveAddedUser", user);
             }
             else
             {
                 return RedirectToAction("AddNewUser");
             }
 
-           
         }
 
         public IActionResult ShowUser(Guid id)
@@ -90,7 +94,6 @@ namespace OnlineShopWebApp.Controllers
             {
                 return RedirectToAction("Users");
             }
-
 
         }
         public IActionResult ChangePassWord(Guid id)
@@ -153,7 +156,6 @@ namespace OnlineShopWebApp.Controllers
         }
 
 
-
         public IActionResult Roles()
         {
             var roles = rolesManager.Roles;
@@ -199,23 +201,43 @@ namespace OnlineShopWebApp.Controllers
 
         public IActionResult Products()
         {
-            var productList = productManager.ProductList;
-            return View(productList);
+            var productList = productManager.GetAll();
+            var pruductsViewModels = new List<ProductViewModel>();
+            foreach (var product in productList)
+            {
+                var productViewModel = Mapping.ToProductViewModel(product);
+                pruductsViewModels.Add(productViewModel);
+            }
+            return View(pruductsViewModels);
         }
 
-        public IActionResult EditProduct(int id)
+        public IActionResult EditProduct(Guid id)
         {
-            var product = productManager.FindProduct(id);
-            return View(product);
+            var product = productManager.TryGetById(id);
+            var productViewModel = new ProductViewModel
+            {
+                Id = product.Id,
+                Name = product.Name,
+                Cost = product.Cost
+
+            };
+            return View(productViewModel);
         }
 
         [HttpPost]
-        public IActionResult SaveEditedProduct(Product product)
+        public IActionResult SaveEditedProduct(ProductViewModel product)
         {
+            var productDb = new Product
+            {
+                Id = product.Id,
+                Name = product.Name,
+                Cost = product.Cost,
+                Description = product.Description,
+            };
 
             if (ModelState.IsValid)
             {
-                productManager.EditProduct(product);
+                productManager.EditProduct(productDb);
 
                 return View();
             }
@@ -226,10 +248,10 @@ namespace OnlineShopWebApp.Controllers
 
         }
 
-        public IActionResult RemoveProduct(int id)
+        public IActionResult RemoveProduct(Guid id)
         {
-            var product = productManager.FindProduct(id);
-            productManager.ProductList.Remove(product);
+            var product = productManager.TryGetById(id);
+            productManager.GetAll().Remove(product);
             return View(product);
         }
 
@@ -240,11 +262,20 @@ namespace OnlineShopWebApp.Controllers
         }
 
         [HttpPost]
-        public IActionResult SaveAddedProduct(Product product)
+        public IActionResult SaveAddedProduct(ProductViewModel product)
         {
+            var productDb = new Product
+            {
+                Name = product.Name,
+                Cost = product.Cost,
+                Description = product.Description
+
+            };
+
+
             if (ModelState.IsValid)
             {
-                productManager.ProductList.Add(product);
+                productManager.AddProduct(productDb);
 
                 return View(product);
             }

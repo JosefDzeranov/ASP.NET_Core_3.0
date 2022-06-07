@@ -1,5 +1,5 @@
-﻿@model List<Product>
-@if (Model.Count == 0)
+﻿@model List<ProductViewModel>
+@if (@Model == null || Model.Count == 0)
 {
     <h2>В Вашем избранном ничего нет</h2>
 }
@@ -22,6 +22,8 @@ else
                 <a class="btn btn-dark" href="/cart/addtocart/@product.Id" role="button">добавить в корзину</a>
                 <br />
                 <br /> <a class="btn btn-dark" href="/comparison/addtocompare/@product.Id" role="button">сравнить</a>
+                <br />
+                <br /> <a class="btn btn-dark" href="/favorites/remove/@product.Id" role="button">удалить из избранного</a>
             </div>
 
         </div>

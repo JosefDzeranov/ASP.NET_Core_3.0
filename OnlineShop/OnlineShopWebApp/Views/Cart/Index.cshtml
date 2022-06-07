@@ -1,5 +1,5 @@
 ﻿
-@model Cart
+@model CartViewModel
 
 
 <style>
@@ -14,7 +14,7 @@
 
 
 
-@if (Model.CartLines.Count == 0)
+@if (Model == null || Model.CartLines.Count == 0 )
 {
     <h1>Корзина пуста</h1>
 

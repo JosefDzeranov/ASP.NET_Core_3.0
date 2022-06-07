@@ -1,10 +1,11 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System;
+using System.ComponentModel.DataAnnotations;
 
 namespace OnlineShopWebApp
 {
-    public class Product
+    public class ProductViewModel
     {
-        public int Id { get; set; }
+        public Guid Id { get; set; }
 
         [Required(ErrorMessage ="Не указано название")]
         public string Name { get; set; }
@@ -15,19 +16,7 @@ namespace OnlineShopWebApp
         [Required(ErrorMessage = "Не указано описание")]
         public string Description { get; set; }
         
-        public Product(int id, string name, decimal cost, string description)
-        {
-            Id = id;
-            Name = name;
-            Cost = cost;
-            Description = description;
-
-        }
-
-        public Product()
-        {
-
-        }
+       
 
     }
 }

@@ -1,13 +1,14 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace OnlineShopWebApp.Models
 {
-    public class Cart
+    public class CartViewModel
     {
 
-        public List<CartLine> CartLines = new List<CartLine>();
-        public int Id { get; }
+        public List<CartLineViewModel> CartLines = new List<CartLineViewModel>();
+        public Guid Id { get; set; }
         public static int IdCounter = 0;
         public string UserId { get; set; }
 
@@ -34,12 +35,7 @@ namespace OnlineShopWebApp.Models
         }
 
 
-        public Cart(string userId)
-        {
-            IdCounter++;
-            Id = IdCounter;
-            UserId = userId;
-        }
+        
     }
 }
 

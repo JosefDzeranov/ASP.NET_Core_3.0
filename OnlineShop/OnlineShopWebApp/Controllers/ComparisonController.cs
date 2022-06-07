@@ -1,5 +1,9 @@
 using Microsoft.AspNetCore.Mvc;
+using OnlineShop.Db;
+using OnlineShop.Db.Models;
+using OnlineShopWebApp.Helpers;
 using OnlineShopWebApp.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -9,8 +13,7 @@ namespace OnlineShopWebApp.Controllers
     {
         private readonly IProductManager productManager;
         private readonly IComparison comparisonManager;
-        List<Product> compareList = new List<Product>();
-
+       
         public ComparisonController(IProductManager productManager, IComparison comparisonManager)
         {
             this.productManager = productManager;
@@ -20,27 +23,26 @@ namespace OnlineShopWebApp.Controllers
 
         public IActionResult Index()
         {
-            compareList = comparisonManager.Products;
-            return View(compareList);
+            var compareListProducts = comparisonManager.GetProducts(Constants.UserId);
+            var compareListProductsView = Mapping.ToProductsViewModels(compareListProducts);
+            return View(compareListProductsView);
 
         }
 
 
-        public IActionResult AddToCompare(int id)
+        public IActionResult AddToCompare(Guid id)
         {
-            var foundProduct = productManager.FindProduct(id);
+            var foundProduct = productManager.TryGetById(id);
+            comparisonManager.AddProduct(Constants.UserId, foundProduct);
+            return RedirectToAction("Index");
 
+        }
 
-            if (comparisonManager.Products.FirstOrDefault(x => x.Id == id) == null)
-            {
-                comparisonManager.AddProduct(foundProduct);
-                compareList = comparisonManager.Products;
-                return View(compareList);
-            }
-            else
-            {
-                return RedirectToAction("Index");
-            }
+        public IActionResult Remove(Guid id)
+        {
+            comparisonManager.RemoveProduct(Constants.UserId, id);
+            return RedirectToAction("Index");
+
         }
 
     }

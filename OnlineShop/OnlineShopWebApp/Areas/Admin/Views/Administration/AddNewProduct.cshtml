@@ -1,5 +1,5 @@
 ﻿@using OnlineShopWebApp
-@model Product
+@model ProductViewModel
 
 <form method="post">
     <h2>Добавление нового продукта:</h2>
@@ -8,8 +8,8 @@
     <p>Введите наименование продукта:</p>
     <input type="text" name="Name" required />
 
-    <p>Введите Id продукта:</p>
-    <input type="number" name="Id" required  />
+  @*  <p>Введите Id продукта:</p>
+    <input type="number" name="Id" required  />*@
 
     <p>Введите цену товара:</p>
     <input type="number" name="Cost" required/>

@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace OnlineShopWebApp.Models
+namespace OnlineShop.Db.Models
 {
     public class Order
     {
@@ -27,6 +27,11 @@ namespace OnlineShopWebApp.Models
             Id = Guid.NewGuid();
             Status = OrderStatus.Created;
 
+
+        }
+
+        public Order()
+        {
 
         }
     }

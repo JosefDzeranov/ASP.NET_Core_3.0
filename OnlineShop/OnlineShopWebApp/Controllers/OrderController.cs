@@ -1,11 +1,14 @@
 using Microsoft.AspNetCore.Mvc;
+using OnlineShop.Db;
+using OnlineShop.Db.Models;
+using OnlineShopWebApp.Helpers;
 using OnlineShopWebApp.Models;
 
 namespace OnlineShopWebApp.Controllers
 {
     public class OrderController : Controller
     {
-        IOrderManager orderManager;
+        private readonly IOrderManager orderManager;
         private readonly ICartManager cartManager;
 
 
@@ -18,22 +21,27 @@ namespace OnlineShopWebApp.Controllers
         public IActionResult Index()
         {
             var cart = cartManager.TryGetCartByUserID(Constants.UserId);
-            var orderData = new OrderData
+            var orderData = new OrderDataViewModel
             {
-                Cart = cart
+                Cart = Mapping.ToCartViewModel(cart)
             };
+
+            //var orderViewModel = new OrderViewModel
+            //{
+            //    Cart = Mapping.ToCartViewModel(cart)
+            //};
 
             return View(orderData);
         }
 
         [HttpPost]
-        public IActionResult MakeOrder(OrderData orderData)
+        public IActionResult MakeOrder(OrderDataViewModel orderData)
         {
 
             if (ModelState.IsValid)
             {
                 var cart = cartManager.TryGetCartByUserID(Constants.UserId);
-                var order = new Order(cart, orderData, Constants.UserId);
+                var order = new Order(cart, Mapping.ToOrderData(orderData), Constants.UserId);
 
 
                 orderManager.SaveOrder(order);
