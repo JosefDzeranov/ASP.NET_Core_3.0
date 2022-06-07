@@ -5,6 +5,7 @@ namespace OnlineShop.Db.Models
 {
     public class UserDeliveryInfo
     {
+        public Guid Id { get; set; }
         [Required]
         public string FirstName { get; set; }
         [Required]
