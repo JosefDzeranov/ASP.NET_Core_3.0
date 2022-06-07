@@ -5,8 +5,8 @@
         <table class="table">
             <tbody>
                 <tr>
-                    <td>Логин</td>
-                    <td>@Model.Login</td>
+                    <td>Логин (электронная почта)</td>
+                    <td>@Model.Email</td>
                 </tr>
                 <tr>
                     <td>Имя</td>
@@ -15,14 +15,9 @@
                 <tr>
                     <td>Возраст</td>
                     <td>@Model.Age</td>
-                </tr>
-                <tr>
-                    <td>E-mail</td>
-                    <td>@Model.Email</td>
-                </tr>
+                </tr>              
             </tbody>
         </table>
-
         <br />
         <div class="dropdown show">
             <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -30,10 +25,10 @@
             </a>
 
             <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                <a class="dropdown-item" asp-area="Admin" asp-controller="user" asp-action="ChangePassword" asp-route-userLogin="@Model.Login">Смена пароля</a>
-                <a class="dropdown-item" asp-area="Admin" asp-controller="user" asp-action="Edit" asp-route-userLogin="@Model.Login">Редактирование данных</a>
-                <a class="dropdown-item" asp-area="Admin" asp-controller="user" asp-action="Access" asp-route-userLogin="@Model.Login">Права доступа</a>
-                <a class="dropdown-item" asp-area="Admin" asp-controller="user" asp-action="Delete" asp-route-userLogin="@Model.Login">Удалить пользователя</a>
+                <a class="dropdown-item" asp-area="Admin" asp-controller="user" asp-action="ChangePassword" asp-route-userName="@Model.Email">Смена пароля</a>
+                <a class="dropdown-item" asp-area="Admin" asp-controller="user" asp-action="Edit" asp-route-userName="@Model.Email">Редактирование данных</a>
+                <a class="dropdown-item" asp-area="Admin" asp-controller="user" asp-action="Access" asp-route-userName="@Model.Email">Права доступа</a>
+                <a class="dropdown-item" asp-area="Admin" asp-controller="user" asp-action="Delete" asp-route-userName="@Model.Email">Удалить пользователя</a>
             </div>
         </div>
     </div>

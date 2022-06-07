@@ -9,8 +9,7 @@
             <div class="col">
                 <table class="table">
                     <thead>
-                        <tr>
-                            <th>Логин</th>
+                        <tr>                            
                             <th>Имя</th>
                             <th>E-mail</th>
                             <th></th>
@@ -19,11 +18,10 @@
                     <tbody>
                         @for (int i = 0; i < Model.Count; i++)
                         {
-                            <tr>
-                                <td>@Model[i].Login</td>
+                            <tr>                                
                                 <td>@Model[i].Name</td>
                                 <td>@Model[i].Email</td>
-                                <td><a asp-area="Admin" asp-controller="user" asp-action="details" asp-route-userLogin="@Model[i].Login">Подробнее</a></td>
+                                <td><a asp-area="Admin" asp-controller="user" asp-action="details" asp-route-userName="@Model[i].Email">Подробнее</a></td>
                             </tr>
                         }
                     </tbody>

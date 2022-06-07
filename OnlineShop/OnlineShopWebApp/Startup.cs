@@ -53,7 +53,7 @@ namespace OnlineShopWebApp
             services.AddTransient<ICartsRepository, CartsDbRepository>();
             services.AddTransient<IProductsRepository, ProductsDbRepository>();
             //services.AddTransient<IDeliveryRepository, DeliveryDbRepository>();
-            services.AddSingleton<IUsersRepository, InMemoryUsersRepository>();
+            //services.AddSingleton<IUsersRepository, InMemoryUsersRepository>();
             services.AddControllersWithViews();
         }
 

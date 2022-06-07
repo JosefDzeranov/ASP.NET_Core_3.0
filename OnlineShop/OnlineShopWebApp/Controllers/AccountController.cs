@@ -6,14 +6,12 @@ using OnlineShopWebApp.Models;
 namespace OnlineShopWebApp.Controllers
 {
     public class AccountController : Controller
-    {
-        private readonly IUsersRepository usersRepository;
+    {        
         private readonly UserManager<User> _userManager;
         private readonly SignInManager<User> _signInManager;
 
-        public AccountController(IUsersRepository usersRepository, UserManager<User> userManager, SignInManager<User> signInManager)
-        {
-            this.usersRepository = usersRepository;
+        public AccountController(UserManager<User> userManager, SignInManager<User> signInManager)
+        {            
             _userManager = userManager;
             _signInManager = signInManager;
         }

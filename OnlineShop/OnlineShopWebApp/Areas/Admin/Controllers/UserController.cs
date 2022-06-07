@@ -2,10 +2,8 @@
 using Microsoft.AspNetCore.Mvc;
 using OnlineShop.Db.Models;
 using OnlineShopWebApp.Models;
-using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
+using OnlineShopWebApp.Helpers;
 
 namespace OnlineShopWebApp.Areas.Admin.Controllers
 {
@@ -22,20 +20,20 @@ namespace OnlineShopWebApp.Areas.Admin.Controllers
         public IActionResult Users()
         {
             var users = userManager.Users.ToList();
-            return View(users.Select(x => x.Name));
+            return View(users.ToUsersViewModels());
         }
 
-        public IActionResult Details(string userLogin)
+        public IActionResult Details(string userName)
         {
-            var user = usersRepository.TryGetByLogin(userLogin);
-            return View(user);
+            var user = userManager.FindByNameAsync(userName).Result;
+            return View(user.ToUserViewModel());
         }
 
-        public IActionResult ChangePassword(string userLogin)
+        public IActionResult ChangePassword(string userName)
         {
             var newPassword = new NewPassword()
             {
-                Login = userLogin
+                UserName = userName
             };
             return View(newPassword);
         }
@@ -43,57 +41,66 @@ namespace OnlineShopWebApp.Areas.Admin.Controllers
         [HttpPost]
         public IActionResult ChangePassword(NewPassword newPassword)
         {
-            usersRepository.ChangePassword(newPassword);
+            if (ModelState.IsValid)
+            {
+                var user = userManager.FindByNameAsync(newPassword.UserName).Result;
+                var newHashPassword = userManager.PasswordHasher.HashPassword(user, newPassword.Password);
+                user.PasswordHash = newHashPassword;
+                userManager.UpdateAsync(user).Wait();
+                return RedirectToAction("Users");
+            }
+            return RedirectToAction("ChangePassword");
+        }
+
+        public IActionResult Delete(string userName)
+        {
+            var user = userManager.FindByNameAsync(userName).Result;
+            userManager.DeleteAsync(user).Wait();            
             return RedirectToAction("Users");
         }
 
-        public IActionResult Delete(string userLogin)
-        {
-            usersRepository.Delete(userLogin);
-            return RedirectToAction("Users");
-        }
+        //public IActionResult Add()
+        //{
+        //    return View();
+        //}
 
-        public IActionResult Add()
-        {
-            return View();
-        }
-
-        [HttpPost]
-        public IActionResult Add(RegistrationData registrationData)
-        {
-            if (ModelState.IsValid)
-            {
-                usersRepository.Add(new UserViewModel
-                {                   
-                    Password = registrationData.Password,
-                    Name = registrationData.Name,
-                    Age = registrationData.Age,
-                    Email = registrationData.Email
-                });
-                return RedirectToAction(nameof(UserController.Users), "UserViewModel");
-            }
-            else
-            {
-                return View(registrationData);
-            }
-        }
-        public IActionResult Edit(string userLogin)
-        {
-            var user = usersRepository.TryGetByLogin(userLogin);
-            return View(user);
-        }
-        [HttpPost]
-        public IActionResult Edit(UserViewModel userAccount, string userLogin)
-        {
-            if (ModelState.IsValid)
-            {
-                usersRepository.Edit(userAccount, userLogin);
-                return RedirectToAction("Products");
-            }
-            else
-            {
-                return View(userAccount);
-            }
-        }
-    } }
+        //[HttpPost]
+        //public IActionResult Add(RegistrationData registrationData)
+        //{
+        //    if (ModelState.IsValid)
+        //    {
+        //        usersRepository.Add(new UserViewModel
+        //        {                   
+        //            Password = registrationData.Password,
+        //            Name = registrationData.Name,
+        //            Age = registrationData.Age,
+        //            Email = registrationData.Email
+        //        });
+        //        return RedirectToAction(nameof(UserController.Users), "UserViewModel");
+        //    }
+        //    else
+        //    {
+        //        return View(registrationData);
+        //    }
+        //}
+        //public IActionResult Edit(string userLogin)
+        //{
+        //    var user = usersRepository.TryGetByLogin(userLogin);
+        //    return View(user);
+        //}
+        //[HttpPost]
+        //public IActionResult Edit(UserViewModel userAccount, string userLogin)
+        //{
+        //    if (ModelState.IsValid)
+        //    {
+        //        usersRepository.Edit(userAccount, userLogin);
+        //        return RedirectToAction("Products");
+        //    }
+        //    else
+        //    {
+        //        return View(userAccount);
+        //    }
+        //}
+    }
+}
 

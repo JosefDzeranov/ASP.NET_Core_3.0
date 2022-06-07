@@ -2,6 +2,7 @@
 using OnlineShopWebApp.Models;
 using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace OnlineShopWebApp.Helpers
 {
@@ -27,7 +28,7 @@ namespace OnlineShopWebApp.Helpers
                 Description = product.Description,
                 Pages = product.Pages
             };
-        }
+        }        
 
         public static CartViewModel ToCartViewModel(Cart cart)
         {
@@ -103,5 +104,31 @@ namespace OnlineShopWebApp.Helpers
                 Email = deliveryInformation.Email
             };
         }
+
+        public static List<UserViewModel> ToUsersViewModels(this List<User> users)
+        {
+            var usersViewModels = new List<UserViewModel>();
+            foreach (var user in users)
+            {
+                usersViewModels.Add(user.ToUserViewModel());
+            }
+            return usersViewModels;
+        }
+
+        public static UserViewModel ToUserViewModel(this User user)
+        {
+            return new UserViewModel
+            {
+                UserId = user.Id,
+                Name = user.Name,
+                Age = user.Age,
+                Email = user.Email               
+            };
+        }
+
+        //internal static object ToUserViewModel(Task<User> user)
+        //{
+        //    throw new NotImplementedException();
+        //}
     }
 }
