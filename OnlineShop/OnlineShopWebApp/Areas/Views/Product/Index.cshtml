@@ -39,8 +39,8 @@
                                     <td>@(product.Id + 1)</td>
                                     <td><a href="/product/index/@product.Id">@product.Name</a></td>
                                     <td>@product.Cost рублей</td>
-                                    <td><a class="btn btn-light" asp-controller="Admin" asp-action="EditProduct" asp-route-id="@product.Id" width="20px" role="button">Редактировать</a></td>
-                                    <td><a class="btn btn-light" asp-controller="Admin" asp-action="DeleteProduct" asp-route-id="@product.Id" width="20px" role="button">Удалить</a></td>
+                                    <td><a class="btn btn-light" asp-controller="Product" asp-action="EditProduct" asp-route-id="@product.Id" width="20px" role="button">Редактировать</a></td>
+                                    <td><a class="btn btn-light" asp-controller="Product" asp-action="DeleteProduct" asp-route-id="@product.Id" width="20px" role="button">Удалить</a></td>
                                 </tr>
                             }
                         </tbody>

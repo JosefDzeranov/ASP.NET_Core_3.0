@@ -1,0 +1,57 @@
+﻿@model Order
+
+
+<div class="row">
+    @await Html.PartialAsync("AdminPanel")
+    <div class="col text-center">
+        <h3>Заказ</h3>
+        <table class="table">
+            <tbody>
+                <tr>
+                    <td><label>Дата и время оформления</label></td>
+                    <td>@Model.OrderDateTime</td>
+                </tr>
+                <tr>
+                    <td><label>Адрес доставки</label></td>
+                    <td>@Model.Address</td>
+                </tr>
+                <tr>
+                    <td><label>Получатель</label></td>
+                    <td>@Model.UserId</td>
+                </tr>
+                <tr>
+                    <td><label>Телефон</label></td>
+                    <td>@Model.UserId</td>
+                </tr>
+                <tr>
+                    <td><label>Email</label></td>
+                    <td>///</td>
+                </tr>
+                <tr>
+                    <td><label>Сумма заказа</label></td>
+                    <td>@Model.CostOrder</td>
+                </tr>
+                <tr>
+                    <form method="post">
+                    <td><label asp-for="State">Статус заказа</label></td>
+                    <td>
+                            <div class="dropdown">
+                                <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                                    @Model.State
+                                </button>
+                                <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                                    <li><a class="dropdown-item" asp-controller="Order" asp-action="SaveEditedOrder" asp-route-orderId="@Model.Id" asp-route-status="@OrderState.Created">@OrderState.Created</a></li>
+                                    <li><a class="dropdown-item" asp-controller="Order" asp-action="SaveEditedOrder" asp-route-orderId="@Model.Id" asp-route-status="@OrderState.Finish">@OrderState.Finish</a></li>
+                                    <li><a class="dropdown-item" asp-controller="Order" asp-action="SaveEditedOrder" asp-route-orderId="@Model.Id" asp-route-status="@OrderState.Delivering">@OrderState.Delivering</a></li>
+                                    <li><a class="dropdown-item" asp-controller="Order" asp-action="SaveEditedOrder" asp-route-orderId="@Model.Id" asp-route-status="@OrderState.Delivered">@OrderState.Delivered</a></li>
+                                    <li><a class="dropdown-item" asp-controller="Order" asp-action="SaveEditedOrder" asp-route-orderId="@Model.Id" asp-route-status="@OrderState.Canceled">@OrderState.Canceled</a></li>
+                                </ul>
+                            </div>
+                    </td>
+                    </form>
+                </tr>
+            </tbody>
+        </table>
+        <button class="btn btn-dark" type="submit" asp-controller="Admin" asp-action="SaveEditedOrder" asp-route-orderId="@Model.Id" asp-route-status="@Model.State">Сохранить</button>
+    </div>
+</div>

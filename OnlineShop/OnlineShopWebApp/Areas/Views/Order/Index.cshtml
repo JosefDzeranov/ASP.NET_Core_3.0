@@ -40,7 +40,7 @@
                                     <td>@Model[i].UserId</td>
                                     <td>@Model[i].OrderDateTime.ToString("d")</td>
                                     <td>@Model[i].OrderDateTime.ToString("t")</td>
-                                    <td><a class="btn btn-light" asp-controller="Admin" asp-action="GetOrder" asp-route-id="@Model[i].Id" width="20px" role="button">Детали заказа</a></td>
+                                    <td><a class="btn btn-light" asp-controller="Order" asp-action="GetOrder" asp-route-id="@Model[i].Id" width="20px" role="button">Детали заказа</a></td>
                                 </tr>
                             }
                         </tbody>

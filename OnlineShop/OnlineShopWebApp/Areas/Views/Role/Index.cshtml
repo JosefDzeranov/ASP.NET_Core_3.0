@@ -19,12 +19,12 @@
                                 <td>@(i+1)</td>
                                 <td>@Model[i].Name</td>
                                 <td>
-                                    <a asp-controller="Admin" asp-action="DeleteRole" asp-route-name="@Model[i].Name" class="btn btn-danger">Удалить</a>
+                                    <a asp-controller="Role" asp-action="DeleteRole" asp-route-name="@Model[i].Name" class="btn btn-danger">Удалить</a>
                                 </td>
                             </tr>
                         }
                         <tr>
-                            <td colspan="4"><a asp-controller="Admin" asp-action="AddRole" class="btn btn-primary">Добавить</a></td>
+                            <td colspan="4"><a asp-controller="Role" asp-action="AddRole" class="btn btn-primary">Добавить</a></td>
                         </tr>
                     </table>
                 </div>

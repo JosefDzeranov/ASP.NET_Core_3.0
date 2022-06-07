@@ -2,9 +2,10 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Hosting;
 using OnlineShopWebApp.Interface;
 using OnlineShopWebApp.Models;
+using OnlineShopWebApp.Services;
+using Serilog;
 
 namespace OnlineShopWebApp
 {
@@ -26,12 +27,16 @@ namespace OnlineShopWebApp
 
             services.AddSingleton<IOrdersStorage, OrdersStorage>();
 
+            services.AddSingleton<IRoleStorage, RoleStorage>();
+
             services.AddControllersWithViews(); 
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
+            app.UseSerilogRequestLogging();
+
             app.UseStaticFiles();
 
             app.UseRouting();
