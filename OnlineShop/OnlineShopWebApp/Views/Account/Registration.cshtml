@@ -7,20 +7,27 @@
 @if (Model == null)
 {
     <div>
-    <form method="post">
-        <div class="form-group">
-            <input type="text" name="username" class="form-control" placeholder="Логин">
-        </div>
-        <div class="form-group">
-            <input type="text" name="password" class="form-control" placeholder="Пароль">
-        </div>
-        <div class="form-group">
-            <input type="text" name="confirmPassword" class="form-control" placeholder="Подтвердите пароль">
-        </div>
-        <div>
-            <p><button class="btn btn-dark" type="submit" asp-controller="Account" asp-action="Registration" align="center">Зарегистрироваться</button></p>
-        </div>
-    </form>
+        <form method="post">
+            <div class="validation" asp-validation-summary="All"></div>
+            <div class="form-group">
+                <label asp-for="Login">Логин</label><br />
+                <input asp-for="Login" name="username" class="form-control" required minlength="3" maxlength="25">
+                <span asp-validation-for="Login"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Password">Пароль</label>
+                <input asp-for="Password" name="password" class="form-control" required>
+                <span asp-validation-for="Password"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Password">Подтвердите пароль</label>
+                <input asp-for="Password" name="confirmPassword" class="form-control" required>
+                <span asp-validation-for="Password"></span>
+            </div>
+            <div>
+                <p><button class="btn btn-dark" type="submit" asp-controller="Account" asp-action="Registration" align="center">Зарегистрироваться</button></p>
+            </div>
+        </form>
     </div>
 }
 else

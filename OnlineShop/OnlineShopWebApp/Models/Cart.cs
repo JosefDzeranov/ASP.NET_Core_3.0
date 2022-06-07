@@ -13,7 +13,7 @@ namespace OnlineShopWebApp.Models
         {
             get
             {
-                return Items?.Sum(x => x.Cost) ?? 0;
+                return Items.Sum(x => x.Cost);
             }
         }
 
@@ -21,7 +21,7 @@ namespace OnlineShopWebApp.Models
         {
             get
             {
-                return Items?.Sum(x => x.Count) ?? 0;
+                return Items.Sum(x => x.Count);
             }
         }
     }
