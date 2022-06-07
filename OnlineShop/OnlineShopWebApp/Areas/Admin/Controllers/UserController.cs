@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc;
+using OnlineShop.Db.Models;
 using OnlineShopWebApp.Models;
 using System;
 using System.Collections.Generic;
@@ -10,17 +12,17 @@ namespace OnlineShopWebApp.Areas.Admin.Controllers
     [Area("Admin")]
     public class UserController : Controller
     {
-        private readonly IUsersRepository usersRepository;
+        private readonly UserManager<User> userManager;
 
-        public UserController(IUsersRepository usersRepository)
+        public UserController(UserManager<User> userManager)
         {
-            this.usersRepository = usersRepository;
+            this.userManager = userManager;
         }
 
         public IActionResult Users()
         {
-            var users = usersRepository.GetAll();
-            return View(users);
+            var users = userManager.Users.ToList();
+            return View(users.Select(x => x.Name));
         }
 
         public IActionResult Details(string userLogin)
