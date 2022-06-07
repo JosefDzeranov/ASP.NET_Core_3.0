@@ -55,7 +55,7 @@ namespace OnlineShopWebApp.Areas.Admin.Controllers
         {
             if (productViewModel.UploadedImg != null)
             {
-                var productImagesDirectoryPath = Path.Combine(appEnviroment.WebRootPath + "/images/products");
+                var productImagesDirectoryPath = Path.Combine(appEnviroment.WebRootPath + "/images/products/");
                 if (!Directory.Exists(productImagesDirectoryPath))
                 {
                     Directory.CreateDirectory(productImagesDirectoryPath);
@@ -65,7 +65,7 @@ namespace OnlineShopWebApp.Areas.Admin.Controllers
                 {
                     productViewModel.UploadedImg.CopyTo(fileStream);
                 }
-                productViewModel.ImgPath = "/images/products" + imgFileName;
+                productViewModel.ImgPath = "/images/products/" + imgFileName;
             }
             var productDb = productViewModel.MappingToProduct();
             productRepository.Update(productDb);
@@ -83,7 +83,7 @@ namespace OnlineShopWebApp.Areas.Admin.Controllers
             {
                 if(productViewModel.UploadedImg != null)
                 {
-                    var productImagesDirectoryPath = Path.Combine(appEnviroment.WebRootPath + "/images/products");
+                    var productImagesDirectoryPath = Path.Combine(appEnviroment.WebRootPath + "/images/products/");
                     if (!Directory.Exists(productImagesDirectoryPath))
                     {
                         Directory.CreateDirectory(productImagesDirectoryPath);
@@ -93,7 +93,7 @@ namespace OnlineShopWebApp.Areas.Admin.Controllers
                     {
                         productViewModel.UploadedImg.CopyTo(fileStream);
                     }
-                    productViewModel.ImgPath = "/images/products" + imgFileName;
+                    productViewModel.ImgPath = "/images/products/" + imgFileName;
                    
                 }
                 var productDb = productViewModel.MappingToProduct();
