@@ -81,24 +81,32 @@ namespace OnlineShopWebApp.Areas.Admin.Controllers
             }
             return View(registrationData);
         }
-        //public IActionResult Edit(string userLogin)
-        //{
-        //    var user = usersRepository.TryGetByLogin(userLogin);
-        //    return View(user);
-        //}
-        //[HttpPost]
-        //public IActionResult Edit(UserViewModel userAccount, string userLogin)
-        //{
-        //    if (ModelState.IsValid)
-        //    {
-        //        usersRepository.Edit(userAccount, userLogin);
-        //        return RedirectToAction("Products");
-        //    }
-        //    else
-        //    {
-        //        return View(userAccount);
-        //    }
-        //}
+
+        public IActionResult Edit(string userName)
+        {
+            var user = userManager.FindByNameAsync(userName).Result;
+            return View(user.ToUserViewModel());
+        }
+        [HttpPost]
+        public IActionResult Edit(UserViewModel userAccount)
+        {
+            if (ModelState.IsValid)
+            {
+                var user = userManager.FindByNameAsync(userAccount.Email).Result;
+                user.Email = userAccount.Email;
+                user.Age = userAccount.Age;
+                user.UserName = userAccount.Email;
+                user.Name = userAccount.Name;
+
+                userManager.UpdateAsync(user).Wait();
+                
+                return RedirectToAction("Users");
+            }
+            else
+            {
+                return View(userAccount);
+            }
+        }
     }
 }
 
