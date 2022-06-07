@@ -18,26 +18,26 @@ namespace OnlineShop.Db
 
         public void Add(string userId, Product product)
         {
-            var existingProduct = databaseContext.favoriteProducts.FirstOrDefault(
+            var existingProduct = databaseContext.FavoriteProducts.FirstOrDefault(
                 x => x.UserId == userId && x.Product.Id == product.Id
                 );
             if (existingProduct == null)
             {
-                databaseContext.favoriteProducts.Add(new FavoriteProduct { Product = product, UserId = userId });
+                databaseContext.FavoriteProducts.Add(new FavoriteProduct { Product = product, UserId = userId });
                 databaseContext.SaveChanges();
             }
         }
 
         public void Clear(string userId)
         {
-            var userFavoriteProducts = databaseContext.favoriteProducts.Where(x => x.UserId == userId).ToList();
-            databaseContext.favoriteProducts.RemoveRange(userFavoriteProducts);
+            var userFavoriteProducts = databaseContext.FavoriteProducts.Where(x => x.UserId == userId).ToList();
+            databaseContext.FavoriteProducts.RemoveRange(userFavoriteProducts);
             databaseContext.SaveChanges();
         }
 
         public List<Product> GetAll(string userId)
         {
-            return databaseContext.favoriteProducts
+            return databaseContext.FavoriteProducts
                 .Where(x => x.UserId == userId)
                 .Include(x => x.Product)
                 .Select(x => x.Product)
@@ -47,9 +47,9 @@ namespace OnlineShop.Db
         public void Remove(string userId, Guid productId)
         {
             var removeFavorite =
-                databaseContext.favoriteProducts.FirstOrDefault
+                databaseContext.FavoriteProducts.FirstOrDefault
                     (u => u.UserId == userId && u.Product.Id == productId);
-            databaseContext.favoriteProducts.Remove(removeFavorite);
+            databaseContext.FavoriteProducts.Remove(removeFavorite);
             databaseContext.SaveChanges();
         }
     }
