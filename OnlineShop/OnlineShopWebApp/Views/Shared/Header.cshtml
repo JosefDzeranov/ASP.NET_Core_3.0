@@ -2,19 +2,7 @@
 <header>
     <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
         <div class="container">
-            <a class="btn btn-link" asp-area="" asp-controller="User" asp-action="Index"><img src="/image/account.svg" width="20" height="20"></a>
-            <a class="btn btn-link" asp-area="" asp-controller="Favorite" asp-action="Index">
-                <img src="/image/favorite.svg" width="20" height="20">
-                @await Component.InvokeAsync("CalcFavoriteProductCount")
-            </a>
-            <a class="btn btn-link" asp-area="" asp-controller="Cart" asp-action="Index">
-                <img src="/image/icon_basket.svg" width="20" height="20">
-                @await Component.InvokeAsync("Cart")
-            </a>
-            <a class="btn btn-link" asp-area="" asp-controller="Cart" asp-action="Index">
-                <img src="/image/comparison.svg" width="20" height="20">
-            </a>
-            <div class="input-group col-2 input-group-sm small ">
+            <div class="d-flex justify-content-start input-group col-3 input-group-sm small ">
                 <div class="input-group-prepend">
                     <button class="btn btn-outline-secondary " type="button" aria-label="search">
                         <img src="/image/лупа 1.svg" width="14" height="14" />
@@ -32,25 +20,28 @@
                         <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Титул</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Услуги</a>
-                    </li>
-                    <li class="nav-item">
                         <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Каталог проектов</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Утилиты</a>
-                    </li>
-                    <li class="nav-item">
                         <a class="nav-link text-dark" asp-area="" asp-controller="Favorite" asp-action="Index">Избранное</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Контакты</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link text-dark" asp-area="Admin" asp-controller="Home" asp-action="Index">Панель администратора</a>
                     </li>
                 </ul>
             </div>
+            <a class="btn btn-link" asp-area="" asp-controller="Favorite" asp-action="Index">
+                <img src="/image/favorite.svg" width="20" height="20">
+                @await Component.InvokeAsync("CalcFavoriteProductCount")
+            </a>
+            <a class="btn btn-link" asp-area="" asp-controller="Cart" asp-action="Index">
+                <img src="/image/comparison.svg" width="20" height="20">
+            </a>
+            <a class="btn btn-link" asp-area="" asp-controller="Cart" asp-action="Index">
+                <img src="/image/icon_basket.svg" width="20" height="20">
+                @await Component.InvokeAsync("Cart")
+            </a>
+            <a class="btn btn-link" asp-area="" asp-controller="User" asp-action="Index"><img src="/image/account.svg" width="20" height="20"></a>
         </div>
     </nav>
 </header>

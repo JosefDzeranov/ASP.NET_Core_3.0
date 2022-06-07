@@ -14,8 +14,9 @@
           "Description": "dsfsdf",
           "Images": "0-1.jpg"
         },
-        "Count": 1,
+        "Count": 2,
         "additionalOptions": [
+          {},
           {}
         ]
       },
