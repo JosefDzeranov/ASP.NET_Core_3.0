@@ -6,7 +6,6 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace OnlineShopWebApp.Controllers
 {
-    [Authorize]
     public class OrderController : Controller
     {
         private readonly IOrderStorage _orderStorage;
@@ -17,6 +16,8 @@ namespace OnlineShopWebApp.Controllers
             _orderStorage = orderStorage;
             _basketStorage = basketStorage;
         }
+
+        [Authorize]
         public IActionResult Index()
         {
             var basket = _basketStorage.TryGetByUserId(Constants.UserId);

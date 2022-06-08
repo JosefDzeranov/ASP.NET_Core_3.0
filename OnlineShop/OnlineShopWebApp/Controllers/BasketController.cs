@@ -6,7 +6,6 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace OnlineShopWebApp.Controllers
 {
-    [Authorize]
     public class BasketController : Controller
     {
         private readonly IProductStorage _productStorage;
