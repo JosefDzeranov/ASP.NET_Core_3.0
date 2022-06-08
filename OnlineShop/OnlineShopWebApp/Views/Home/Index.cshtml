@@ -23,7 +23,14 @@
                 </a>
                 <h5>@product.Cost руб</h5>
                 <div class="row">
-                    <a class="btn btn-outline-dark text-nowrap btn-sm mx-1 my-1" href="#" role="button">В сравнение</a>
+                    <a class="btn btn-outline-dark text-nowrap btn-sm mx-1 my-1"
+                       asp-area="" 
+                       asp-controller="Comparison" 
+                       asp-action="Add" 
+                       asp-route-productId="@product.Id"
+                       role="button">
+                        В сравнение
+                    </a>
                     <p >   </p>
                     <a class="btn btn-outline-dark text-nowrap btn-sm mx-1 my-1"
                        asp-area="" 
