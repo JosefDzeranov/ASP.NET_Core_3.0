@@ -1,7 +1,9 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using OnlineShop.Db;
 using OnlineShop.Db.Models;
 using OnlineShopWebApp.Models;
+using System;
 
 namespace OnlineShopWebApp.Controllers
 {
@@ -9,11 +11,13 @@ namespace OnlineShopWebApp.Controllers
     {        
         private readonly UserManager<User> _userManager;
         private readonly SignInManager<User> _signInManager;
+        private readonly RoleManager<IdentityRole> rolesManager;
 
-        public AccountController(UserManager<User> userManager, SignInManager<User> signInManager)
-        {            
+        public AccountController(UserManager<User> userManager, SignInManager<User> signInManager, RoleManager<IdentityRole> rolesManager)
+        {
             _userManager = userManager;
             _signInManager = signInManager;
+            this.rolesManager = rolesManager;
         }
 
 
@@ -54,13 +58,16 @@ namespace OnlineShopWebApp.Controllers
                     Name = registrationData.Name,
                     Age = registrationData.Age,
                     Email = registrationData.Email,
-                    UserName = registrationData.Email
+                    UserName = registrationData.Email                  
                 };
 
                 var result = _userManager.CreateAsync(user, registrationData.Password).Result;
                 if (result.Succeeded)
                 {
                     _signInManager.SignInAsync(user, false).Wait();
+
+                    _userManager.AddToRoleAsync(user, Constants.UserRoleName).Wait();
+
                     return Redirect(registrationData.ReturnUrl ?? "/Home");                    
                 }
                 else
@@ -73,6 +80,7 @@ namespace OnlineShopWebApp.Controllers
             }
             return View(registrationData);
         }
+
         public IActionResult Logout(string returnUrl)
         {
             _signInManager.SignOutAsync().Wait();

@@ -125,10 +125,5 @@ namespace OnlineShopWebApp.Helpers
                 Email = user.Email               
             };
         }
-
-        //internal static object ToUserViewModel(Task<User> user)
-        //{
-        //    throw new NotImplementedException();
-        //}
     }
 }

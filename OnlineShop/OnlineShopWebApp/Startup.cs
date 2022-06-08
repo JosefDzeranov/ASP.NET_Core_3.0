@@ -45,15 +45,12 @@ namespace OnlineShopWebApp
                     IsEssential = true
                 };
             });
-
-            services.AddSingleton<IRolesRepository, InMemoryRolesRepository>();
+            
             services.AddTransient<IComparesRepository, ComparesDbRepository>();
             services.AddTransient<IFavouritesRepository, FavouritesDbRepository>();
             services.AddTransient<IOrdersRepository, OrdersDbRepository>();
             services.AddTransient<ICartsRepository, CartsDbRepository>();
-            services.AddTransient<IProductsRepository, ProductsDbRepository>();
-            //services.AddTransient<IDeliveryRepository, DeliveryDbRepository>();
-            //services.AddSingleton<IUsersRepository, InMemoryUsersRepository>();
+            services.AddTransient<IProductsRepository, ProductsDbRepository>();            
             services.AddControllersWithViews();
         }
 
