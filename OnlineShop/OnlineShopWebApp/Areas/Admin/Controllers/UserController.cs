@@ -11,10 +11,12 @@ namespace OnlineShopWebApp.Areas.Admin.Controllers
     public class UserController : Controller
     {
         private readonly UserManager<User> userManager;
+        private readonly RoleManager<IdentityRole> rolesManager;
 
-        public UserController(UserManager<User> userManager)
+        public UserController(UserManager<User> userManager, RoleManager<IdentityRole> rolesManager)
         {
             this.userManager = userManager;
+            this.rolesManager = rolesManager;
         }
 
         public IActionResult Users()
@@ -106,6 +108,20 @@ namespace OnlineShopWebApp.Areas.Admin.Controllers
             {
                 return View(userAccount);
             }
+        }
+
+        public IActionResult EditRights(string userName)
+        {
+            var user = userManager.FindByNameAsync(userName).Result;
+            var userRoles = userManager.GetRolesAsync(user).Result;
+            var roles = rolesManager.Roles.ToList();
+            var newRoles = new EditRightsViewModel
+            {
+                UserName = user.UserName,
+                UserRoles = userRoles.Select(x => new RoleViewModel { Name = x }).ToList(),
+                AllRoles = roles.Select(x => new RoleViewModel { Name = x.Name }).ToList()
+            };
+            return View(newRoles);
         }
     }
 }

@@ -1,0 +1,32 @@
+﻿@model EditRightsViewModel
+
+<div class="row">
+    @await Html.PartialAsync("AdministrationMenu")
+
+    <div class="col-6">
+        <h3>Список ролей для @Model.UserName</h3>
+        <div class="row">
+            <div class="col">
+                @foreach (var role in Model.AllRoles)
+                {
+                    <div>
+                        if (Model.UserRoles.Contains(role))
+                        {
+                        <div class="form-check">
+                            <input class="form-check-input" name="UserRoles[@role.Name]" type="checkbox" value="true" checked>
+                            <label class="form-check-label" for="flexCheckDefault">@role.Name</label>
+                        </div>
+                        }
+                        else
+                        {
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked">
+                            <label class="form-check-label" for="flexCheckChecked">@role.Name</label>
+                        </div>
+                        }
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</div>

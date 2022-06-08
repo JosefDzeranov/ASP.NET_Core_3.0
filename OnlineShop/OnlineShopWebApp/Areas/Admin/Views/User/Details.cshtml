@@ -27,7 +27,7 @@
             <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
                 <a class="dropdown-item" asp-area="Admin" asp-controller="user" asp-action="ChangePassword" asp-route-userName="@Model.Email">Смена пароля</a>
                 <a class="dropdown-item" asp-area="Admin" asp-controller="user" asp-action="Edit" asp-route-userName="@Model.Email">Редактирование данных</a>
-                <a class="dropdown-item" asp-area="Admin" asp-controller="user" asp-action="Access" asp-route-userName="@Model.Email">Права доступа</a>
+                <a class="dropdown-item" asp-area="Admin" asp-controller="user" asp-action="EditRights" asp-route-userName="@Model.Email">Права доступа</a>
                 <a class="dropdown-item" asp-area="Admin" asp-controller="user" asp-action="Delete" asp-route-userName="@Model.Email">Удалить пользователя</a>
             </div>
         </div>
