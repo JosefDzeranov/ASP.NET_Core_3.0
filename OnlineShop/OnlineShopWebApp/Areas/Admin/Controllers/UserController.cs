@@ -4,6 +4,7 @@ using OnlineShop.Db.Models;
 using OnlineShopWebApp.Models;
 using System.Linq;
 using OnlineShopWebApp.Helpers;
+using System.Collections.Generic;
 
 namespace OnlineShopWebApp.Areas.Admin.Controllers
 {
@@ -122,6 +123,18 @@ namespace OnlineShopWebApp.Areas.Admin.Controllers
                 AllRoles = roles.Select(x => new RoleViewModel { Name = x.Name }).ToList()
             };
             return View(newRoles);
+        }
+
+        [HttpPost]
+        public IActionResult EditRights(string userName, string[] userRoles)
+        {           
+            var user = userManager.FindByNameAsync(userName).Result;
+            var oldUserRoles = userManager.GetRolesAsync(user).Result;
+
+            userManager.RemoveFromRolesAsync(user, oldUserRoles).Wait();
+            userManager.AddToRolesAsync(user, userRoles).Wait();
+
+            return RedirectToAction("EditRights", new { name = userName});
         }
     }
 }
