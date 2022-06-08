@@ -39,28 +39,32 @@
                             <td>@Model.Cart[i].Count</td>
                             <td>@(Model.Cart[i].Count*Model.Cart[i].Product.Cost)</td>
                             <td>
-                                <div class="d-grid gap-2">
-                                    <a class="btn btn-outline-dark text-nowrap mx-1 my-1" 
-                                       asp-area=""
-                                       asp-controller="Cart"
-                                       asp-action="AddProduct"
-                                       asp-route-productId="@Model.Cart[i].Product.Id"
-                                       role="button">
-                                        +
-                                    </a>
-                                    <a class="btn btn-outline-dark text-nowrap mx-auto my-1"
-                                       asp-area="" asp-controller="Cart"
-                                       asp-action="ReduceDuplicateProduct"
-                                       asp-route-productId="@Model.Cart[i].Product.Id"
-                                       role="button">
-                                        -
-                                    </a>
+                                <div class="container">
+                                    <div class="d-grid gap-2">
+                                        <a class="btn btn-outline-dark text-nowrap mx-1 my-1"
+                                           asp-area=""
+                                           asp-controller="Cart"
+                                           asp-action="AddProduct"
+                                           asp-route-productId="@Model.Cart[i].Product.Id"
+                                           role="button">
+                                            +
+                                        </a>
+                                        <a class="btn btn-outline-dark text-nowrap mx-auto my-1"
+                                           asp-area="" asp-controller="Cart"
+                                           asp-action="ReduceDuplicateProduct"
+                                           asp-route-productId="@Model.Cart[i].Product.Id"
+                                           role="button">
+                                            -
+                                        </a>
+                                    </div>
+                                </div>
+                                <div>
                                     <a class="btn btn-outline-dark text-nowrap mx-1 my-1 border-1"
                                        asp-area="" asp-controller="Cart"
                                        asp-action="DeleteProduct"
                                        asp-route-productId="@Model.Cart[i].Product.Id"
                                        role="button">
-                                        Удалить <br/> проект
+                                        Удалить из корзины
                                     </a>
                                 </div>
                             </td>

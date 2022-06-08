@@ -35,6 +35,24 @@
         "additionalOptions": [
           {}
         ]
+      },
+      {
+        "Product": {
+          "Id": "c3ebc3f7-6f5d-4bc7-71eb-08da49211ca8",
+          "CodeNumber": "1232",
+          "Cost": 6577657.00,
+          "Square": 56757,
+          "Width": 657,
+          "Length": 567,
+          "Description": "weqweeq",
+          "Images": "0-1.jpg"
+        },
+        "Count": 3,
+        "additionalOptions": [
+          {},
+          {},
+          {}
+        ]
       }
     ],
     "InfoBuying": {

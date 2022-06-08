@@ -19,8 +19,6 @@
                     <th scope="col" class="align-top">Габариты (м)</th>
                     <th scope="col" class="align-top">Площадь (м2)</th>
                     <th scope="col" class="align-top">Стоймость (руб)</th>
-                    <th scope="col" class="align-top">Количество (типов)</th>
-                    <th scope="col" class="align-top">Cтоймость (руб)</th>
                     <th scope="col"> </th>
                 </tr>
             </thead>
@@ -36,7 +34,6 @@
                             <td>@Model[i].Length х @Model[i].Width</td>
                             <td>@Model[i].Square</td>
                             <td>@Model[i].Cost</td>
-                            <td>@Model[i].Cost</td>
                             <td>
                                 <div class="d-grid gap-2">
                                     <a class="btn btn-outline-dark text-nowrap btn-sm mx-1 my-1"
@@ -45,7 +42,7 @@
                                        asp-action="Add" 
                                        asp-route-productId="@Model[i].Id"
                                        role="button">
-                                        В избранное
+                                        <img src="/image/favoriteAdd.svg" width="20" height="20">
                                     </a>
                                     <a class="btn btn-outline-dark text-nowrap btn-sm mx-1 my-1"
                                        asp-area="" 
@@ -53,7 +50,7 @@
                                        asp-action="AddProduct" 
                                        asp-route-productId="@Model[i].Id"
                                        role="button">
-                                        В корзину
+                                        <img src="/image/cartAdd.svg" width="20" height="20">
                                     </a>
                                     <a class="btn btn-outline-danger text-nowrap btn-sm mx-1 my-1"
                                        asp-area="" 
