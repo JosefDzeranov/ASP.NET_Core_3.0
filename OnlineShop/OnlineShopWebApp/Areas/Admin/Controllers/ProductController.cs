@@ -55,20 +55,18 @@ namespace OnlineShopWebApp.Areas.Admin.Controllers
         {
             if (productViewModel.UploadedImg != null)
             {
-                var productImagesDirectoryPath = Path.Combine(appEnviroment.WebRootPath + "/images/products/");
-                if (!Directory.Exists(productImagesDirectoryPath))
-                {
-                    Directory.CreateDirectory(productImagesDirectoryPath);
-                }
-                var imgFileName = Guid.NewGuid() + "." + productViewModel.UploadedImg.FileName.Split('.').Last();
-                using (var fileStream = new FileStream(productImagesDirectoryPath + imgFileName, FileMode.Create))
-                {
-                    productViewModel.UploadedImg.CopyTo(fileStream);
-                }
-                productViewModel.ImgPath = "/images/products/" + imgFileName;
+                var uploadFile = new UploadFile(
+                    productViewModel.UploadedImg,
+                    appEnviroment.WebRootPath,
+                    Const.ImagesDirectory);
+
+                uploadFile.SaveFile();
+                productViewModel.ImgPath = uploadFile.FilePath;
             }
+
             var productDb = productViewModel.MappingToProduct();
             productRepository.Update(productDb);
+
             return RedirectToAction("Index", "Product");
         }
 
@@ -81,20 +79,15 @@ namespace OnlineShopWebApp.Areas.Admin.Controllers
         {
             if (ModelState.IsValid)
             {
-                if(productViewModel.UploadedImg != null)
+                if (productViewModel.UploadedImg != null)
                 {
-                    var productImagesDirectoryPath = Path.Combine(appEnviroment.WebRootPath + "/images/products/");
-                    if (!Directory.Exists(productImagesDirectoryPath))
-                    {
-                        Directory.CreateDirectory(productImagesDirectoryPath);
-                    }
-                    var imgFileName = Guid.NewGuid() + "." + productViewModel.UploadedImg.FileName.Split('.').Last();
-                    using (var fileStream = new FileStream(productImagesDirectoryPath + imgFileName, FileMode.Create))
-                    {
-                        productViewModel.UploadedImg.CopyTo(fileStream);
-                    }
-                    productViewModel.ImgPath = "/images/products/" + imgFileName;
-                   
+                    var uploadFile = new UploadFile(
+                        productViewModel.UploadedImg,
+                        appEnviroment.WebRootPath,
+                        Const.ImagesDirectory);
+
+                    uploadFile.SaveFile();
+                    productViewModel.ImgPath = uploadFile.FilePath;
                 }
                 var productDb = productViewModel.MappingToProduct();
                 productRepository.Add(productDb);
@@ -103,6 +96,7 @@ namespace OnlineShopWebApp.Areas.Admin.Controllers
          
             return View(productViewModel);
         }
+
 
     }
 }
