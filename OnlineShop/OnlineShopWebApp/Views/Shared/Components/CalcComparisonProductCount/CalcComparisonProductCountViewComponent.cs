@@ -2,14 +2,14 @@
 using OnlineShop.Db.Interfase;
 using OnlineShopWebApp.Interfase;
 
-namespace OnlineShopWebApp.Views.Shared.Components.CalcFavoriteProductCount
+namespace OnlineShopWebApp.Views.Shared.Components.CalcComparisonProductCount
 {
-    public class CalcFavoriteProductCountViewComponent : ViewComponent
+    public class CalcComparisonProductCountViewComponent : ViewComponent
     {
         private readonly IFavoriteRepository _favoriteRepository;
         private readonly IBuyerManager _buyerManager;
         private readonly IUserManager _userManager;
-        public CalcFavoriteProductCountViewComponent(IFavoriteRepository favoriteRepository, IBuyerManager buyerManager, IUserManager userManager)
+        public CalcComparisonProductCountViewComponent(IFavoriteRepository favoriteRepository, IBuyerManager buyerManager, IUserManager userManager)
         {
             _favoriteRepository = favoriteRepository;
             _buyerManager = buyerManager;
@@ -28,7 +28,7 @@ namespace OnlineShopWebApp.Views.Shared.Components.CalcFavoriteProductCount
             {
                 productCount = _favoriteRepository.GetAll(user.Login).Count;
             }
-            return View("CalcFavoriteProductCount",productCount);
+            return View("CalcComparisonProductCount", productCount);
         }
     }
 }

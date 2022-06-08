@@ -34,8 +34,9 @@
                 <img src="/image/favorite.svg" width="20" height="20">
                 @await Component.InvokeAsync("CalcFavoriteProductCount")
             </a>
-            <a class="btn btn-link" asp-area="" asp-controller="Cart" asp-action="Index">
+            <a class="btn btn-link" asp-area="" asp-controller="Comparison" asp-action="Index">
                 <img src="/image/comparison.svg" width="20" height="20">
+                @await Component.InvokeAsync("CalcComparisonProductCount")
             </a>
             <a class="btn btn-link" asp-area="" asp-controller="Cart" asp-action="Index">
                 <img src="/image/icon_basket.svg" width="20" height="20">

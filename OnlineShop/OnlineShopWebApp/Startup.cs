@@ -34,6 +34,7 @@ namespace OnlineShopWebApp
             services.AddTransient<IBuyerManager, BuyerManager>();
             services.AddTransient<IProductManager, ProductDbManager>();
             services.AddTransient<IFavoriteRepository, FavoriteDbRepository>();
+            services.AddTransient<IComparisonRepository, ÑomparisonDbRepository>();
             services.AddSingleton<IRoleManager, RoleManager>();
             services.AddTransient<IUserManager, UserManager>();
             services.AddScoped<CheckingForAuthorization>();
