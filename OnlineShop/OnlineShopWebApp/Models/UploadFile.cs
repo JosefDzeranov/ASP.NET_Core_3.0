@@ -8,7 +8,9 @@ namespace OnlineShopWebApp.Models
     public class UploadFile
     {
         public IFormFile File { get; set; }
-        public string FileName { get { return Guid.NewGuid() + "." + File.FileName.Split('.').Last(); } }
+
+        private readonly Guid fileGuid = Guid.NewGuid();
+        public string FileName { get { return fileGuid + "." + File.FileName.Split('.').Last(); } }
         public string DirectoryPath { get; set; }
         public string RootPath { get; set; }
         public string FullDirectoryPath { get { return Path.Combine(RootPath + "/images/products/"); } }
