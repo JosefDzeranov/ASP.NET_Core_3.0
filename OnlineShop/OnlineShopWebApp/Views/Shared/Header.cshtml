@@ -19,14 +19,28 @@
                     </li>
                     <li class="nav-item">
                         <a class="nav-link text-dark" asp-area="" asp-controller="Favourite" asp-action="Index">Избранное</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link text-dark" asp-area="" asp-controller="Account" asp-action="Authorization"> Вход/Регистрация</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link text-dark" asp-area="Admin" asp-controller="order" asp-action="Orders">Панель Администратора</a>
-                    </li>
+                    </li>                   
 
+                    @if (User.Identity.IsAuthenticated)
+                    {
+                        <li class="nav-item">
+                            @User.Identity.Name
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Account" asp-action="Logout">Выход</a>
+                        </li>
+                    }
+                    else
+                    {
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Account" asp-action="Login">Войти</a>
+                        </li>
+                    }
+
+                    @if (User.IsInRole(Constants.AdminRoleName))
+                    {
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="Admin" asp-controller="Order" asp-action="Orders">Панель Администратора</a>
+                        </li>
+                    }
                 </ul>
             </div>
         </div>

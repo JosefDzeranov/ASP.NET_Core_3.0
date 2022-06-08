@@ -4,7 +4,7 @@ namespace OnlineShopWebApp.Models
 {
     public class NewPassword
     {
-        public string Login { get; set; }
+        public string UserName { get; set; }
 
         [Required(ErrorMessage = "Введите пароль")]
         [StringLength(50, MinimumLength = 8, ErrorMessage = "Пароль должен содержать не менее 8 символов")]

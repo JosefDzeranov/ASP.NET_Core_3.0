@@ -5,9 +5,11 @@ using System.Linq;
 using System.Threading.Tasks;
 using OnlineShopWebApp.Models;
 using OnlineShop.Db;
+using Microsoft.AspNetCore.Authorization;
+using OnlineShopWebApp.Helpers;
 
 namespace OnlineShopWebApp.Controllers
-{
+{    
     public class ProductController : Controller
     {
         private readonly IProductsRepository productsRepository;
@@ -19,7 +21,7 @@ namespace OnlineShopWebApp.Controllers
         public IActionResult Index(Guid id)
         {
             var product = productsRepository.TryGetById(id);
-            return View(product);
+            return View(Mapping.ToProductViewModel(product));
         }
         
     }

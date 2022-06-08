@@ -1,4 +1,4 @@
-﻿@model Order
+﻿@model OrderViewModel
 
 <div class="row">
     @await Html.PartialAsync("AdministrationMenu")
@@ -16,29 +16,29 @@
                             </tr>
                             <tr>
                                 <th>Адрес доставки</th>
-                                <td>@Model.DeliveryInformarion.Adress</td>
+                                <td>@Model.DeliveryInformation.Adress</td>
                             </tr>
                             <tr>
                                 <th>Получатель</th>
-                                <td>@Model.DeliveryInformarion.Name</td>
+                                <td>@Model.DeliveryInformation.Name</td>
                             </tr>
                             <tr>
                                 <th>Телефон</th>
-                                <td>@Model.DeliveryInformarion.Phone</td>
+                                <td>@Model.DeliveryInformation.Phone</td>
                             </tr>
                             <tr>
                                 <th>E-mail</th>
-                                <td>@Model.DeliveryInformarion.Email</td>
+                                <td>@Model.DeliveryInformation.Email</td>
                             </tr>
                             <tr>
                                 <th>Сумма</th>
-                                <td>@Model.Cart.FullCost</td>
+                                <td>@Model.FullCost</td>
                             </tr>
                             <tr>
                                 <th>Статус</th>
                                 <td>
                                     <select asp-for="@Model.State"
-                                            asp-items="@Html.GetEnumSelectList<OrderState>()"
+                                            asp-items="@Html.GetEnumSelectList<OrderStateViewModel>()"
                                             class="form-control"></select>
                                 </td>
                             </tr>

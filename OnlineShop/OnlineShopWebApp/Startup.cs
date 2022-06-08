@@ -1,11 +1,15 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using OnlineShop.Db;
+using OnlineShop.Db.Models;
 using Serilog;
+using System;
 
 namespace OnlineShopWebApp
 {
@@ -24,15 +28,32 @@ namespace OnlineShopWebApp
             string connection = Configuration.GetConnectionString("online_shop_rybakova");
             services.AddDbContext<DatabaseContext>(options =>
             options.UseSqlServer(connection));
+            
+            services.AddDbContext<IdentityContext>(options =>
+            options.UseSqlServer(connection));
+
+            services.AddIdentity<User, IdentityRole>()
+                .AddEntityFrameworkStores<IdentityContext>();
+
+            services.ConfigureApplicationCookie(options =>
+            {
+                options.ExpireTimeSpan = TimeSpan.FromHours(24);
+                options.LoginPath = "/Account/Login";
+                options.LogoutPath = "/Account/Logout";
+                options.Cookie = new CookieBuilder()
+                {
+                    IsEssential = true
+                };
+            });
 
             services.AddSingleton<IRolesRepository, InMemoryRolesRepository>();
-            services.AddSingleton<IComparesRepository, InMemoryComparesRepository>();
-            services.AddSingleton<IFavouritesRepository, InMemoryFavouritesRepository>();
-            services.AddSingleton<IOrdersRepository, InMemoryOrdersRepository>();
+            services.AddTransient<IComparesRepository, ComparesDbRepository>();
+            services.AddTransient<IFavouritesRepository, FavouritesDbRepository>();
+            services.AddTransient<IOrdersRepository, OrdersDbRepository>();
             services.AddTransient<ICartsRepository, CartsDbRepository>();
             services.AddTransient<IProductsRepository, ProductsDbRepository>();
-            services.AddSingleton<IDeliveryRepository, InMemoryDeliveryRepository>();
-            services.AddSingleton<IUsersRepository, InMemoryUsersRepository>();
+            //services.AddTransient<IDeliveryRepository, DeliveryDbRepository>();
+            //services.AddSingleton<IUsersRepository, InMemoryUsersRepository>();
             services.AddControllersWithViews();
         }
 
@@ -50,6 +71,9 @@ namespace OnlineShopWebApp
                 app.UseHsts();
             }
             app.UseHttpsRedirection();
+
+            app.UseAuthentication();
+            app.UseAuthorization();
 
             app.UseSerilogRequestLogging();
 

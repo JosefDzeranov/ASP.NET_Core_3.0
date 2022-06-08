@@ -42,6 +42,7 @@ namespace OnlineShop.Db
         {
             var product = databaseContext.Products.FirstOrDefault(x => x.Id == id);
             databaseContext.Products.Remove(product);
+            databaseContext.SaveChanges();
         }
 
         public List<Product> TryGetByName(string name)

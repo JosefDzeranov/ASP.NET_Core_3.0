@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace OnlineShopWebApp.Models
 {
-    public enum OrderState
+    public enum OrderStateViewModel
     {
         [Display(Name = "Создан")]
         Created,

@@ -13,9 +13,7 @@ namespace OnlineShop.Db
         public CartsDbRepository(DatabaseContext databaseContext)
         {
             this.databaseContext = databaseContext;
-        }
-
-        //private List<Cart> carts = new List<Cart>();
+        }        
         public Cart TryGetByUserId(string userId)
         {
             return databaseContext.Carts.Include(x=>x.Items).ThenInclude(x=>x.Product).FirstOrDefault(x => x.UserId == userId);

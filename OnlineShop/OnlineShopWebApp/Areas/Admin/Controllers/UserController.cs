@@ -1,39 +1,39 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc;
+using OnlineShop.Db.Models;
 using OnlineShopWebApp.Models;
-using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
+using OnlineShopWebApp.Helpers;
 
 namespace OnlineShopWebApp.Areas.Admin.Controllers
 {
     [Area("Admin")]
     public class UserController : Controller
     {
-        private readonly IUsersRepository usersRepository;
+        private readonly UserManager<User> userManager;
 
-        public UserController(IUsersRepository usersRepository)
+        public UserController(UserManager<User> userManager)
         {
-            this.usersRepository = usersRepository;
+            this.userManager = userManager;
         }
 
         public IActionResult Users()
         {
-            var users = usersRepository.GetAll();
-            return View(users);
+            var users = userManager.Users.ToList();
+            return View(users.ToUsersViewModels());
         }
 
-        public IActionResult Details(string userLogin)
+        public IActionResult Details(string userName)
         {
-            var user = usersRepository.TryGetByLogin(userLogin);
-            return View(user);
+            var user = userManager.FindByNameAsync(userName).Result;
+            return View(user.ToUserViewModel());
         }
 
-        public IActionResult ChangePassword(string userLogin)
+        public IActionResult ChangePassword(string userName)
         {
             var newPassword = new NewPassword()
             {
-                Login = userLogin
+                UserName = userName
             };
             return View(newPassword);
         }
@@ -41,13 +41,21 @@ namespace OnlineShopWebApp.Areas.Admin.Controllers
         [HttpPost]
         public IActionResult ChangePassword(NewPassword newPassword)
         {
-            usersRepository.ChangePassword(newPassword);
-            return RedirectToAction("Users");
+            if (ModelState.IsValid)
+            {
+                var user = userManager.FindByNameAsync(newPassword.UserName).Result;
+                var newHashPassword = userManager.PasswordHasher.HashPassword(user, newPassword.Password);
+                user.PasswordHash = newHashPassword;
+                userManager.UpdateAsync(user).Wait();
+                return RedirectToAction("Users");
+            }
+            return RedirectToAction("ChangePassword");
         }
 
-        public IActionResult Delete(string userLogin)
+        public IActionResult Delete(string userName)
         {
-            usersRepository.Delete(userLogin);
+            var user = userManager.FindByNameAsync(userName).Result;
+            userManager.DeleteAsync(user).Wait();
             return RedirectToAction("Users");
         }
 
@@ -61,38 +69,44 @@ namespace OnlineShopWebApp.Areas.Admin.Controllers
         {
             if (ModelState.IsValid)
             {
-                usersRepository.Add(new UserAccount
+                User user = new User
                 {
-                    Login = registrationData.Login,
-                    Password = registrationData.Password,
                     Name = registrationData.Name,
                     Age = registrationData.Age,
-                    Email = registrationData.Email
-                });
-                return RedirectToAction(nameof(UserController.Users), "User");
+                    Email = registrationData.Email,
+                    UserName = registrationData.Email
+                };
+                userManager.CreateAsync(user, registrationData.Password).Wait();
+                return RedirectToAction("Users");
             }
-            else
-            {
-                return View(registrationData);
-            }
+            return View(registrationData);
         }
-        public IActionResult Edit(string userLogin)
+
+        public IActionResult Edit(string userName)
         {
-            var user = usersRepository.TryGetByLogin(userLogin);
-            return View(user);
+            var user = userManager.FindByNameAsync(userName).Result;
+            return View(user.ToUserViewModel());
         }
         [HttpPost]
-        public IActionResult Edit(UserAccount userAccount, string userLogin)
+        public IActionResult Edit(UserViewModel userAccount)
         {
             if (ModelState.IsValid)
             {
-                usersRepository.Edit(userAccount, userLogin);
-                return RedirectToAction("Products");
+                var user = userManager.FindByNameAsync(userAccount.Email).Result;
+                user.Email = userAccount.Email;
+                user.Age = userAccount.Age;
+                user.UserName = userAccount.Email;
+                user.Name = userAccount.Name;
+
+                userManager.UpdateAsync(user).Wait();
+                
+                return RedirectToAction("Users");
             }
             else
             {
                 return View(userAccount);
             }
         }
-    } }
+    }
+}
 
