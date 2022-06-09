@@ -21,7 +21,7 @@ namespace OnlineShop.DB
             return _databaseContext.Carts.Include(x => x.Items).ThenInclude(x => x.Product).AsNoTracking().ToList();
         }
 
-        public Cart TryGetByUserId(int userId)
+        public Cart TryGetByUserId(string userId)
         {
             return _databaseContext.Carts
                 .Where(x =>x.IsDeleted == false)
@@ -31,7 +31,7 @@ namespace OnlineShop.DB
                 .FirstOrDefault(x => x.UserId == userId);
         }
 
-        public void Add(Product product, int userId)
+        public void Add(Product product, string userId)
         {
             var existingCart = TryGetByUserId(userId);
             if (existingCart != null)
@@ -72,7 +72,7 @@ namespace OnlineShop.DB
             _databaseContext.SaveChanges();
         }
 
-        public void DecreaseAmount(int productId, int userId)
+        public void DecreaseAmount(int productId, string userId)
         {
             var existingCart = TryGetByUserId(userId);
             var existingCartItem = existingCart?.Items?.FirstOrDefault(x => x.Product.Id == productId);
@@ -91,7 +91,7 @@ namespace OnlineShop.DB
             }
         }
 
-        public void Delete(int userId)
+        public void Delete(string userId)
         {
             var existingCart = TryGetByUserId(userId);
             _databaseContext.Entry(existingCart).State = EntityState.Detached;

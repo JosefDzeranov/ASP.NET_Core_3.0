@@ -24,7 +24,7 @@ namespace OnlineShopWebApp.Areas.Admin.Controllers
             return View(users);
         }
 
-        public IActionResult Get(int userId)
+        public IActionResult Get(string userId)
         {
             var necessaryUser = _userBase.AllUsers().FirstOrDefault(x => x.Id == userId);
             return View(necessaryUser);
@@ -54,7 +54,7 @@ namespace OnlineShopWebApp.Areas.Admin.Controllers
         //    }
         //}
 
-        public IActionResult Edit(int userId)
+        public IActionResult Edit(string userId)
         {
             var necessaryUser = _userBase.AllUsers().FirstOrDefault(x => x.Id == userId);
             return View(necessaryUser);
@@ -74,7 +74,7 @@ namespace OnlineShopWebApp.Areas.Admin.Controllers
             }
         }
 
-        public IActionResult Delete(int userId)
+        public IActionResult Delete(string userId)
         {
             _userBase.Delete(userId);
             return RedirectToAction("Users", "User");

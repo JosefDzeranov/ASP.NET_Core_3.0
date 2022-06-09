@@ -58,8 +58,8 @@ namespace OnlineShopWebApp.Helpers
                 Login = user.Login,
                 FirstName = user.FirstName,
                 LastName = user.LastName,
-                Password = user.Password,
-                Phone = user.Phone,
+                Password = user.PasswordHash,
+                Phone = user.PhoneNumber,
             };
             return userViewModel;
         }
@@ -72,8 +72,8 @@ namespace OnlineShopWebApp.Helpers
                 Login = user.Login,
                 FirstName = user.FirstName,
                 LastName = user.LastName,
-                Password = user.Password,
-                Phone = user.Phone,
+                PasswordHash = user.Password,
+                PhoneNumber = user.Phone,
             };
             return userDB;
         }

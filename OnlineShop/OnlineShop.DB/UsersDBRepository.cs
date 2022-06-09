@@ -1,10 +1,8 @@
-﻿using Newtonsoft.Json;
-using OnlineShop.Db;
+﻿using OnlineShop.Db;
 using OnlineShop.DB.Models;
+using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
-using System.Text;
 
 namespace OnlineShop.DB
 {
@@ -17,25 +15,25 @@ namespace OnlineShop.DB
             _databaseContext = databaseContext;
         }
 
-        public List<User> AllUsers()
+        public IEnumerable<User> AllUsers()
         {
-            var users = _databaseContext.Users.ToList();
+            var users = _databaseContext.Users;
             if (users.Any())
             {
                 return users;
             }
             else
             {
-                var newUser = new User("Firokikidreamtek", "+7-985-041-73-94", "11");
+                var newUser = new User() { UserName = "Firokikidreamtek" };
                 _databaseContext.Users.Add(newUser);
                 _databaseContext.SaveChanges();
-                return _databaseContext.Users.ToList();
+                return _databaseContext.Users;
             }
         }
 
 
 
-        public User TryGetById(int userId)
+        public User TryGetById(string userId)
         {
             return _databaseContext.Users.FirstOrDefault(x => x.Id == userId);
         }
@@ -46,7 +44,7 @@ namespace OnlineShop.DB
         //    UpdateData();
         //}
 
-        public void Delete(int userId)
+        public void Delete(string userId)
         {
             _databaseContext.Users.Remove(TryGetById(userId));
             _databaseContext.SaveChanges();
@@ -58,13 +56,13 @@ namespace OnlineShop.DB
             userForEdit.Login = user.Login;
             userForEdit.LastName = user.LastName;
             userForEdit.FirstName = user.FirstName;
-            userForEdit.Phone = user.Phone;
+            userForEdit.PhoneNumber = user.PhoneNumber;
             _databaseContext.SaveChanges();
         }
 
         public void Add(User user)
         {
-            user.Phone = "Please, fill this field";
+            user.PhoneNumber = "Please, fill this field";
             _databaseContext.Users.Add(user);
             _databaseContext.SaveChanges();
 

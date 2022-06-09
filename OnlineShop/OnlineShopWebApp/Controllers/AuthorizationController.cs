@@ -1,5 +1,7 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc;
 using OnlineShop.DB;
+using OnlineShop.DB.Models;
 using OnlineShopWebApp.Models;
 using System.Linq;
 
@@ -8,10 +10,14 @@ namespace OnlineShopWebApp.Controllers
     public class AuthorizationController : Controller
     {
         private readonly IUserBase _userBase;
+        private readonly UserManager<User> _userManager;
+        private readonly SignInManager<User> _signInManager;
 
-        public AuthorizationController(IUserBase userBase)
+        public AuthorizationController(IUserBase userBase, SignInManager<User> signInManager, UserManager<User> userManager)
         {
             _userBase = userBase;
+            _signInManager = signInManager;
+            _userManager = userManager;
         }
 
         public IActionResult Index()
@@ -21,7 +27,7 @@ namespace OnlineShopWebApp.Controllers
 
         public bool Authentification(Authorization authorization)
         {
-            if (_userBase.AllUsers().Any(x => x.Login == authorization.Name && x.Password == authorization.Password))
+            if (_userBase.AllUsers().Any(x => x.Login == authorization.Name && x.PasswordHash == authorization.Password))
             {
                 return true;
             }
