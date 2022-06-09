@@ -10,22 +10,22 @@
                 <div class="col">
                     @foreach (var role in Model.AllRoles)
                     {
-                        <div>
-                            @if (Model.UserRoles.Contains(role))
+                    <div>                        
+                            @if (Model.UserRoles.Contains(role.Name))
                             {
                                 <div class="form-check">
-                                    <input class="form-check-input" name="userRoles" type="checkbox" value="@role.Name" checked>
-                                    <label class="form-check-label" for="flexCheckDefault">@role.Name</label>
-                                </div>
+                                    <input class="form-check-input" name="userRoles" type="checkbox" value="@role.Name" checked="checked">
+                                    <label class="form-check-label">@role.Name</label>
+                                </div>                                
                             }
                             else
                             {
                                 <div class="form-check">
-                                   <input class="form-check-input" name="userRoles" type="checkbox" value="@role.Name">
-                                   <label class="form-check-label" for="flexCheckChecked">@role.Name</label>
+                                    <input class="form-check-input" name="userRoles" type="checkbox" value="@role.Name">
+                                    <label class="form-check-label">@role.Name</label>
                                 </div>
-                            }
-                        </div>
+                            }                        
+                    </div>
                     }
                 </div>
                 <button class="btn btn-dark" type="submit" asp-area="Admin" asp-controller="User" asp-action="EditRights" asp-route-userName="@Model.UserName">Сохранить</button>

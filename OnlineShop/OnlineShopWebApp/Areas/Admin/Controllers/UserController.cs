@@ -119,8 +119,8 @@ namespace OnlineShopWebApp.Areas.Admin.Controllers
             var newRoles = new EditRightsViewModel
             {
                 UserName = user.UserName,
-                UserRoles = userRoles.Select(x => new RoleViewModel { Name = x }).ToList(),
-                AllRoles = roles.Select(x => new RoleViewModel { Name = x.Name }).ToList()
+                UserRoles = userRoles,
+                AllRoles = roles
             };
             return View(newRoles);
         }
@@ -134,7 +134,7 @@ namespace OnlineShopWebApp.Areas.Admin.Controllers
             userManager.RemoveFromRolesAsync(user, oldUserRoles).Wait();
             userManager.AddToRolesAsync(user, userRoles).Wait();
 
-            return RedirectToAction("EditRights", new { name = userName});
+            return RedirectToAction( "EditRights", new { userName = user.UserName } );
         }
     }
 }
