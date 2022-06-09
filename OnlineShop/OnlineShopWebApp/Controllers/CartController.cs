@@ -9,8 +9,7 @@ using OnlineShopWebApp.Helpers;
 using Microsoft.AspNetCore.Authorization;
 
 namespace OnlineShopWebApp.Controllers
-{
-    [Authorize]
+{    
     public class CartController : Controller
     {
         private readonly IProductsRepository productsRepository;
