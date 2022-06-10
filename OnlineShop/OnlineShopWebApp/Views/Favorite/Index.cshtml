@@ -1,0 +1,33 @@
+﻿@model IEnumerable<ProductViewModel>
+
+	<div class="row">
+		@foreach(var product in Model)
+		{
+			<div class="col-3 card shadow">
+				<img class="card-img-top" src=@product.ImagePath alt="Изображение товара"/>
+
+				<div class="card-body">
+					<a style="color:black"
+					asp-area=""
+					asp-controller="Product"
+					asp-action="Index"
+					asp-route-id="@product.Id">
+					<h5>@product.Name</h5>
+				</a>
+				<h5>@product.Cost</h5>
+					<a class="btn btn-outline-success"
+					asp-area=""
+					asp-controller="Cart"
+					asp-action="Add"
+					asp-route-productid="@product.Id"
+					role="button">Добавить в корзину</a>
+				<a class="btn btn-danger"
+				   asp-area=""
+					asp-controller="Favorite"
+					asp-action="Remove"
+					asp-route-productid="@product.Id"
+					role="button">Удалить из избранного</a>
+					</div>
+					</div>
+ 		}
+	</div>
