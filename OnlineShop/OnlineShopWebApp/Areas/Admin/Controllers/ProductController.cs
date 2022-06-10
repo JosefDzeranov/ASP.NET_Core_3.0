@@ -51,19 +51,20 @@ namespace OnlineShopWebApp.Areas.Admin.Controllers
             return View(productViewModel);
         }
         [HttpPost]
-        public IActionResult EditProduct(ProductViewModel productViewModel)
+        public IActionResult EditProduct(EditProductViewModel editProductViewModel)
         {
-            if (productViewModel.UploadedImg != null)
+            if (ModelState.IsValid)
             {
-                
-                uploadFile.SaveFile();
-                productViewModel.ImgPath = uploadFile.FilePath;
+                if (editProductViewModel.UploadedImages != null)
+                {
+                    var imagesPaths = filesUploader.SaveFiles(editProductViewModel.UploadedImages, Const.ImagesDirectory);
+
+                    var productDb = editProductViewModel.MappingToProduct(imagesPaths);
+                    productRepository.Update(productDb);
+                }
+                return RedirectToAction("Index", "Product");
             }
-
-            var productDb = productViewModel.MappingToProduct();
-            productRepository.Update(productDb);
-
-            return RedirectToAction("Index", "Product");
+            return View(editProductViewModel);
         }
 
         public IActionResult AddProduct()

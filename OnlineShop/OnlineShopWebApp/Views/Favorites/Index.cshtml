@@ -13,7 +13,7 @@
             <div class="col-3">
                 <div class="card-deck">
                     <a asp-controller="Product" asp-action="Index" asp-route-id="@product.Id">
-                        <img src="@product.ImgPath" class="card-img-top" alt="изображение книги" />
+                        <img src="@product.MainImagePath" class="card-img-top" alt="изображение книги" />
                     </a>
                     <div class="card-body">
                         <a class="text-decoration-none text-black" asp-controller="Product" asp-action="Index" asp-route-id="@product.Id">

@@ -1,10 +1,10 @@
-﻿@model ProductViewModel
+﻿@model EditProductViewModel
 <div class="card shadow">
     <div class="card-body">
         <form asp-controller="Product" asp-action="EditProduct" enctype="multipart/form-data">
             <div class="row justify-content-center">
                 <div class="col-4 text-center">
-                    <img src="@Model.ImgPath" width="300" height="475" alt="изображение книги" />
+                    <img src="@Model.MainImagePath" width="300" height="475" alt="изображение книги" />
                 </div>
                 <div class="col-8">
                     <div class="mb-3">
@@ -24,13 +24,12 @@
                     </div>
                     <div class="mb-3">
                         <label>Изображение:</label>
-                       <input type="file" class="form-control" asp-for="UploadedImg"/>
+                        <input type="file" class="form-control" asp-for="UploadedImages" multiple />
                     </div>
                     <input type="hidden" class="form-control" asp-for="Id" value="@Model.Id" />
                     <div class="mb-3 text-center">
                         <button type="submit" class="btn btn-dark">Изменить</button>
                     </div>
-                    <input type="hidden" asp-for="ImgPath" value="@Model.ImgPath" />
                     <div class="mb-3 text-center">
                         <a class="btn btn-dark" asp-controller="Product" asp-action="Index">Отмена</a>
                     </div>

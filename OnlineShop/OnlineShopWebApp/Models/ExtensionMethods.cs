@@ -18,7 +18,7 @@ namespace OnlineShopWebApp.Models
                 Name = productViewModel.Name,
                 Cost = productViewModel.Cost,
                 Description = productViewModel.Description,
-                ImgPath = productViewModel.ImgPath,
+                Images = productViewModel.ImagesPaths.MappingToImages()
 
             };
 
@@ -32,11 +32,38 @@ namespace OnlineShopWebApp.Models
                 Name = product.Name,
                 Cost = product.Cost,
                 Description = product.Description,
-                ImgPath = product.ImgPath,
+                ImagesPaths = product.Images.MappingToImagesPaths(),
 
             };
 
             return productViewModel;
+        }
+
+        public static EditProductViewModel MappingToEditProductViewModel(this Product product)
+        {
+            var editProductViewModel = new EditProductViewModel
+            {
+                Id = product.Id,
+                Name = product.Name,
+                Cost = product.Cost,
+                Description = product.Description,
+                ImagesPaths = product.Images.MappingToImagesPaths(),
+            };
+            return editProductViewModel;
+           
+        }
+        public static Product MappingToProduct(this EditProductViewModel editProductViewModel, List<string> imagesPaths)
+        {
+            var product = new Product
+            {
+                Id = editProductViewModel.Id,
+                Name = editProductViewModel.Name,
+                Cost = editProductViewModel.Cost,
+                Description = editProductViewModel.Description,
+                Images =  imagesPaths.MappingToImages(),
+            };
+            return product;
+
         }
 
         public static List<ProductViewModel> MappingToListProductViewModel(this List<Product> products)
@@ -71,7 +98,7 @@ namespace OnlineShopWebApp.Models
                         Name = item.Product.Name,
                         Description = item.Product.Description,
                         Cost = item.Product.Cost,
-                        ImgPath = item.Product.ImgPath
+                        ImagesPaths = item.Product.Images.MappingToImagesPaths(),
 
                     },
                     Quantinity = item.Quantinity,
@@ -233,6 +260,11 @@ namespace OnlineShopWebApp.Models
         public static List<Image> MappingToImages(this List<string> paths)
         {
             return paths.Select(p => new Image { Path = p}).ToList();
+        }
+
+        public static List<string> MappingToImagesPaths(this List<Image> images)
+        {
+            return images.Select(p => p.Path).ToList();
         }
     }
 
