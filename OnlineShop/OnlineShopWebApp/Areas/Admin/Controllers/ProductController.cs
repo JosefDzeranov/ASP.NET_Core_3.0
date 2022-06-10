@@ -18,12 +18,11 @@ namespace OnlineShopWebApp.Areas.Admin.Controllers
     public class ProductController : Controller
     {
         private readonly IProductRepository productRepository;
-        private readonly IWebHostEnvironment appEnviroment;
+        
 
         public ProductController(IProductRepository productRepository, IWebHostEnvironment appEnviroment)
         {
             this.productRepository = productRepository;
-            this.appEnviroment = appEnviroment;
 
         }
         public IActionResult Index()
