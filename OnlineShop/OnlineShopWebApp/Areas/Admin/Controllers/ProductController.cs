@@ -18,11 +18,12 @@ namespace OnlineShopWebApp.Areas.Admin.Controllers
     public class ProductController : Controller
     {
         private readonly IProductRepository productRepository;
-        
+        private readonly FilesUploader filesUploader;
 
-        public ProductController(IProductRepository productRepository, IWebHostEnvironment appEnviroment)
+        public ProductController(IProductRepository productRepository, FilesUploader filesUploader)
         {
             this.productRepository = productRepository;
+            this.filesUploader = filesUploader;
 
         }
         public IActionResult Index()
@@ -54,11 +55,7 @@ namespace OnlineShopWebApp.Areas.Admin.Controllers
         {
             if (productViewModel.UploadedImg != null)
             {
-                var uploadFile = new UploadFile(
-                    productViewModel.UploadedImg,
-                    appEnviroment.WebRootPath,
-                    Const.ImagesDirectory);
-
+                
                 uploadFile.SaveFile();
                 productViewModel.ImgPath = uploadFile.FilePath;
             }
@@ -74,26 +71,18 @@ namespace OnlineShopWebApp.Areas.Admin.Controllers
             return View();
         }
         [HttpPost]
-        public IActionResult AddProduct(ProductViewModel productViewModel)
+        public IActionResult AddProduct(AddProductViewModel addProductViewModel)
         {
             if (ModelState.IsValid)
             {
-                if (productViewModel.UploadedImg != null)
-                {
-                    var uploadFile = new UploadFile(
-                        productViewModel.UploadedImg,
-                        appEnviroment.WebRootPath,
-                        Const.ImagesDirectory);
-
-                    uploadFile.SaveFile();
-                    productViewModel.ImgPath = uploadFile.FilePath;
-                }
-                var productDb = productViewModel.MappingToProduct();
+                var imagesPaths = filesUploader.SaveFiles(addProductViewModel.UploadedImages, Const.ImagesDirectory);
+                 
+                var productDb = addProductViewModel.MappingToProduct(imagesPaths);
                 productRepository.Add(productDb);
                 return RedirectToAction("Index", "Product");
             }
          
-            return View(productViewModel);
+            return View(addProductViewModel);
         }
 
 

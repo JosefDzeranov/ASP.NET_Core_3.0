@@ -13,6 +13,6 @@ namespace OnlineShopWebApp.Models
         [Range(typeof(decimal), "25.00", "50000.00")]
         public decimal Cost { get; set; }
         public string Description { get; set; }
-        public List<IFormFile> Images { get; set; }
+        public List<IFormFile> UploadedImages { get; set; }
     }
 }

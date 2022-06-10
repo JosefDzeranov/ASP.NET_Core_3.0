@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace OnlineShop.DB.Models
 {
@@ -8,7 +9,8 @@ namespace OnlineShop.DB.Models
         public string Name { get; set; }
         public decimal Cost { get; set; }
         public string Description { get; set; }
-        public string ImgPath { get; set; }
+
+        public virtual List<Image> Images { get; set; }
        
     }
 

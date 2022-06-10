@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 
@@ -39,6 +40,17 @@ namespace OnlineShopWebApp.Models
              return null;
         }
 
+        public List<string> SaveFiles(List<IFormFile> files, string folder)
+        {
+            var paths = new List<string>();
+
+            foreach (var file in files)
+            {
+                paths.Add(SaveFile(file, folder));
+            }
+
+            return paths;
+        }
 
        
 

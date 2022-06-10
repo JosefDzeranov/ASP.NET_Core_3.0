@@ -218,9 +218,23 @@ namespace OnlineShopWebApp.Models
             
             return user;
         }
+
+        public static Product MappingToProduct(this AddProductViewModel addProductViewModel, List<string> filePaths)
+        {
+            return new Product
+            {
+                Name = addProductViewModel.Name,
+                Cost = addProductViewModel.Cost,
+                Description = addProductViewModel.Description,
+                Images = filePaths.MappingToImages()
+            };
+        }
+
+        public static List<Image> MappingToImages(this List<string> paths)
+        {
+            return paths.Select(p => new Image { Path = p}).ToList();
+        }
     }
-
-
 
 }
 
