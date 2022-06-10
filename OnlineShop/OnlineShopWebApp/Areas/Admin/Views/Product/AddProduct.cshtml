@@ -1,7 +1,7 @@
 ﻿@model ProductViewModel
 <div class="card shadow">
     <div class="card-body">
-        <form asp-controller="Product" asp-action="AddProduct">
+        <form asp-controller="Product" asp-action="AddProduct" enctype="multipart/form-data">
             <div class="row justify-content-center">
                 <div class="col-6">
                     <div class="mb-3">
@@ -16,9 +16,9 @@
                         <input type="text" class="form-control" asp-for="Description" placeholder="Описание"/>
                         <span asp-validation-for="Description"></span>
                     </div>
-                     <div class="mb-3">
-                        <input type="text" class="form-control" asp-for="ImgPath" placeholder="Картинка" value="/images/book.png"/>
-                          <span asp-validation-for="ImgPath"></span>
+                      <div class="mb-3">
+                          <label>Изображение:</label>
+                        <input type="file" class="form-control" asp-for="UploadedImg"/>  
                     </div>
                     <div class="mb-3 text-center">
                         <button type="submit" class="btn btn-dark">Добавить</button>

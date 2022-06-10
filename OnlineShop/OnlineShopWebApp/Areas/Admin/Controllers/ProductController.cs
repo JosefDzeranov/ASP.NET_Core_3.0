@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using OnlineShop.DB;
 using OnlineShop.DB.Models;
@@ -7,6 +8,8 @@ using OnlineShopWebApp.Models;
 using OnlineShopWebApp.Services;
 using System;
 using System.Collections.Generic;
+using System.IO;
+using System.Linq;
 
 namespace OnlineShopWebApp.Areas.Admin.Controllers
 {
@@ -15,10 +18,12 @@ namespace OnlineShopWebApp.Areas.Admin.Controllers
     public class ProductController : Controller
     {
         private readonly IProductRepository productRepository;
+        private readonly IWebHostEnvironment appEnviroment;
 
-        public ProductController(IProductRepository productRepository)
+        public ProductController(IProductRepository productRepository, IWebHostEnvironment appEnviroment)
         {
             this.productRepository = productRepository;
+            this.appEnviroment = appEnviroment;
 
         }
         public IActionResult Index()
@@ -48,11 +53,19 @@ namespace OnlineShopWebApp.Areas.Admin.Controllers
         [HttpPost]
         public IActionResult EditProduct(ProductViewModel productViewModel)
         {
-            if (ModelState.IsValid)
+            if (productViewModel.UploadedImg != null)
             {
-                var productDb = productViewModel.MappingToProduct();
-                productRepository.Update(productDb);
+                var uploadFile = new UploadFile(
+                    productViewModel.UploadedImg,
+                    appEnviroment.WebRootPath,
+                    Const.ImagesDirectory);
+
+                uploadFile.SaveFile();
+                productViewModel.ImgPath = uploadFile.FilePath;
             }
+
+            var productDb = productViewModel.MappingToProduct();
+            productRepository.Update(productDb);
 
             return RedirectToAction("Index", "Product");
         }
@@ -64,10 +77,26 @@ namespace OnlineShopWebApp.Areas.Admin.Controllers
         [HttpPost]
         public IActionResult AddProduct(ProductViewModel productViewModel)
         {
-            var productDb = productViewModel.MappingToProduct();
-            productRepository.Add(productDb);
-            return RedirectToAction("Index", "Product");
+            if (ModelState.IsValid)
+            {
+                if (productViewModel.UploadedImg != null)
+                {
+                    var uploadFile = new UploadFile(
+                        productViewModel.UploadedImg,
+                        appEnviroment.WebRootPath,
+                        Const.ImagesDirectory);
+
+                    uploadFile.SaveFile();
+                    productViewModel.ImgPath = uploadFile.FilePath;
+                }
+                var productDb = productViewModel.MappingToProduct();
+                productRepository.Add(productDb);
+                return RedirectToAction("Index", "Product");
+            }
+         
+            return View(productViewModel);
         }
+
 
     }
 }
