@@ -1,14 +1,14 @@
-﻿using OnlineShopWebApp.Models;
-using System.Collections.Generic;
-namespace OnlineShopWebApp.Services
-{
-    public interface IOrdersRepository
-    {
-        void Add(Order order);
+﻿//using OnlineShopWebApp.Models;
+//using System.Collections.Generic;
+//namespace OnlineShopWebApp.Services
+//{
+//    public interface IOrdersRepository
+//    {
+//        void Add(OrderViewModel order);
 
-        List<Order> GetAll();
-        Order TryGetByUserId(int id);
+//        List<OrderViewModel> GetAll();
+//        OrderViewModel TryGetByUserId(int id);
 
-        void UpdateStatus(int orderId, OrderStatus newStatus);
-    }
-}
+//        void UpdateStatus(int orderId, OrderStatusViewModel newStatus);
+//    }
+//}

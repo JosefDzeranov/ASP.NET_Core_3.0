@@ -8,6 +8,7 @@ using Serilog;
 using Microsoft.EntityFrameworkCore;
 using OnlineShop.Db;
 using OnlineShop.db;
+using IOrdersRepository = OnlineShop.db.IOrdersRepository;
 
 namespace OnlineShopWebApp
 {
@@ -25,16 +26,16 @@ namespace OnlineShopWebApp
             string connection = Configuration.GetConnectionString("online_shop");
             services.AddDbContext<DatabaseContext>(options =>
                 options.UseSqlServer(connection), ServiceLifetime.Singleton);
-
-            services.AddControllersWithViews();
+            
             services.AddTransient<ICartRepository, CartsDbRepository>();
             services.AddTransient<IProductDataSource, ProductsDbRepository>();
-            services.AddSingleton<ICustomerProfile, InMemoryCustomerProfile>();
-            services.AddSingleton<IOrdersRepository, InMemoryOrdersRepository>();
+            services.AddTransient<ICustomerProfile, InMemoryCustomerProfile>();
+            services.AddTransient<IOrdersRepository, OrdersDbRepository>();
             services.AddSingleton<IRolesRepository, InMemoryRolesRepository>();
             services.AddSingleton<IUsersManager, UsersManager>();
             services.AddTransient<IFavoriteRepository, FavoriteDbRepository>();
-
+            
+            services.AddControllersWithViews();
 
         }
 

@@ -2,30 +2,31 @@
 using System.Collections.Generic;
 using System;
 using OnlineShop.db.Models;
+using OnlineShop.db;
 
 namespace OnlineShopWebApp.Models
 {
-    public class Order
+    public class OrderViewModel
     {
-        private static int idSequence = 0;
-        public int Id { get; set; }
+        public int? Id { get; set; }
         public string Name { get; set; }
         public string Phone { get; set; }
         public string Email { get; set; }
         public string Address { get; set; }
-        public OrderStatus Status { get; set; }
+        
+        public CustomerViewModel User { get; set; }
+
+        public OrderStatusViewModel Status { get; set; }
 
         public DateTime CreateDateTime { get; set; }
 
-        public List<CartItem> CartItems { get; set; }
+        public List<CartItemViewModel> CartItems { get; set; }
 
-        public Order()
+        public OrderViewModel()
         {
-            idSequence = idSequence + 1;
-            Id = idSequence;
-            Status = OrderStatus.Created;
+            Status = OrderStatusViewModel.Created;
             CreateDateTime = DateTime.Now;
-            CartItems = new List<CartItem>();
+            CartItems = new List<CartItemViewModel>();
         }
 
         public decimal Cost => CartItems.Sum(x => x.Cost);

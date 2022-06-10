@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
 namespace OnlineShopWebApp.Models
 {
-    public enum OrderStatus
+    public enum OrderStatusViewModel
     {
         [Display(Name = "Cоздан")]
         Created,

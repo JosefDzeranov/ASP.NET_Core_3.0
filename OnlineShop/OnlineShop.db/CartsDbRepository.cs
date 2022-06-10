@@ -1,110 +1,118 @@
-﻿//using OnlineShop.db.Models;
-//using System.Collections.Generic;
-//using System.Linq;
+﻿using OnlineShop.db.Models;
+using OnlineShop.Db;
+using System.Collections.Generic;
+using System.Linq;
+using Microsoft.EntityFrameworkCore;
 
-//namespace OnlineShop.Db
-//{
-//    public class CartsDbRepository : ICartRepository
-//    {
-//        private readonly DatabaseContext databaseContext;
-//        private readonly ProductsDbRepository productsDbRepository;
+namespace OnlineShop.db
+{ 
+    public class CartsDbRepository : ICartRepository
+    {
+        private readonly IProductDataSource productDataSource;
+        private readonly DatabaseContext databaseContext;
 
-//        public Dictionary<Product, int> CartItems { get => throw new System.NotImplementedException(); set => throw new System.NotImplementedException(); }
+        public CartsDbRepository(IProductDataSource productDataSource, DatabaseContext databaseContext)
+        {
+            this.productDataSource = productDataSource;
+            this.databaseContext = databaseContext;
+        }
 
-//        public CartsDbRepository(
-//            DatabaseContext databaseContext, 
-//            ProductsDbRepository productsDbRepository)
-//        {
-//            this.databaseContext = databaseContext;
-//            this.productsDbRepository = productsDbRepository;
-//        }
-   
-//        public Cart GetCartForUser(string userId)
-//        {
-//            var cart = databaseContext.Carts.FirstOrDefault(x => x.UserId == userId);
-            
-//            if (cart == null)
-//            {
-//                cart = new Cart()
-//                {
-//                    UserId = userId,
-//                };
-//                databaseContext.Carts.Add(cart);
-//                databaseContext.SaveChanges();
-//            }
+        public void Add(Product product, string userId)
+        {
+            var cart = TryGetByUserId(userId);
 
-//            return cart;
-//        }
+            if (cart == null)
+            {
+                cart = new Cart()
+                {
+                    UserId = userId,
+                };
 
-//        public void Add(int id)
-//        {
-//            var product = productsDbRepository.GetProductById(id);
-//            Add(product);
-//            //databaseContext.Carts.Add(product);
-//            //databaseContext.SaveChanges();
-//        }
+                databaseContext.Carts.Add(cart);
+             }
 
-//        public void Add(Product product /*, string userId*/)
-//        {
-//            string userId = "??????";
-//            var cart = GetCartForUser(userId);
-//            var cartItem = new CartItem()
-//            {
-//                Product = product,
-//                Cart = cart,
-//                Amount = 1
-//            };
-//            databaseContext.CartItems.Add(cartItem);
-//            databaseContext.SaveChanges();
-//        }
+            var existingItem = cart.Items.Where(x=>x.Product.Id == product.Id).FirstOrDefault();
 
-//        public void Remove(int id /*,string userId*/)
-//        {
-//            var product = productsDbRepository.GetProductById(id);
-//            Remove(product);
-//        }
+            if (existingItem == null)
+            {
+                existingItem= new CartItem()
+                {
+                    Product = product,
+                    Amount = 1
+                };
+                cart.Items.Add(existingItem);
+            }
+            else
+            {
+                existingItem.Amount += 1;
+            }
+  
+            databaseContext.SaveChanges();
+        }
 
-//        public void Remove(Product product/*, *//*,string userId*/)
-//        {
-//            string userId = "??????";
-//            var cart = GetCartForUser(userId);
+        public void Add(int id, string userId)
+        {
+            var product = productDataSource.GetProductById(id);
+            Add(product, userId);     
+        }
 
-//            var cartItem = cart.Items.Where(x => x.Product == product).First();
+        public void Remove(int id, string userId)
+        {
+            var product = productDataSource.GetProductById(id);
+            Remove(product, userId);
 
-//            if (cartItem.Amount > 1)
-//            {
-//                cartItem.Amount -= 1;
-//            }
-//            else
-//            {
-//                databaseContext.CartItems.Remove(cartItem);
-//            }
+        }
 
-//            databaseContext.SaveChanges();
-//        }
+        public void Remove(Product product, string userId)
+        {
+            var cart = TryGetByUserId(userId);
 
-//        public void RemoveAll()
-//        {
-//            string userId = "??????";
-//            var cart = GetCartForUser(userId);
-//            cart.Items.Clear();
-//            databaseContext.SaveChanges();
-//        }
+            var existingItem = cart.Items.Where(x => x.Product.Id == product.Id).First();
 
-//        public Cart TryGetByUserId(string userId)
-//        {
-//            throw new System.NotImplementedException();
-//        }
+            if (existingItem.Amount > 1)
+            {
+                existingItem.Amount -= 1;
+            }
+            else
+            {
+                cart.Items.Remove(existingItem);
+            }
+            databaseContext.CartItems.Remove(existingItem);
+            databaseContext.SaveChanges();
+        }
 
-//        public void GetAllProduct()
-//        {
-//            throw new System.NotImplementedException();
-//        }
+        public void RemoveAll(string userId)
+        {
+            var cart = TryGetByUserId(userId);
+            databaseContext.Carts.Remove(cart);
+            databaseContext.SaveChanges();
+        }
 
-//        //public Dictionary<Product, int> CartItems { get; set; } = new Dictionary<Product, int>();
+        public Cart TryGetByUserId(string userId)
+        {
+            return databaseContext.Carts.FirstOrDefault(x => x.UserId == userId);
+        }
 
-//        //public decimal Cost => throw new System.NotImplementedException();
+        public void GetAllProduct()
+        {
+            throw new System.NotImplementedException();
+        }
 
-//        //public int Amount => throw new System.NotImplementedException();
-//    }
-//}
+        //public Dictionary<Product, int> CartItems { get; set; } = new Dictionary<Product, int>();
+
+        //public decimal Cost
+        //{
+        //    get
+        //    {
+        //        return CartItems.Sum(item => item.Key.Cost * item.Value);
+        //    }
+        //}
+        //public int Amount
+        //{
+        //    get
+        //    {
+        //        return CartItems.Sum(item => item.Value);
+        //    }
+        //}
+    }
+}

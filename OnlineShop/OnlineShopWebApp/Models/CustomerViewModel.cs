@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
 namespace OnlineShopWebApp.Models
 {
-    public class Customer
+    public class CustomerViewModel
     {
         [Required(ErrorMessage ="Не указано имя")]
         [StringLength(25, MinimumLength =2, ErrorMessage ="Имя должно быть от 2 от 25 симоволов")]
