@@ -32,12 +32,12 @@ namespace OnlineShopWebApp.Controllers
         }
 
         [HttpPost]
-        public IActionResult BuyValid(UserDeleveryInfo userDeleveryInfo)
+        public IActionResult BuyValid(InfoBuying infoBuying)
         {
             var buyerLogin = _userManager.GetLoginAuthorizedUser();
             if (ModelState.IsValid)
             {
-                _buyerManager.SaveInfoBuying(userDeleveryInfo, buyerLogin);
+                _buyerManager.SaveInfoBuying(infoBuying, buyerLogin);
                 return RedirectToAction("Buy", new {buyerId = buyerLogin });
             }
             else return Content("errorValid");

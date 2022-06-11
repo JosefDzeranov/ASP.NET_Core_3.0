@@ -20,7 +20,7 @@ namespace OnlineShopWebApp.Filters
                     new RedirectToRouteResult(new RouteValueDictionary(new
                     {
                         Area = "",
-                        controller = "LoginBuyer",
+                        controller = "Login",
                         action = "Index"
                     }));
             }

@@ -2,7 +2,7 @@
 
 namespace OnlineShopWebApp.Models.Users.Buyer
 {
-    public class UserDeleveryInfo
+    public class InfoBuying
     {
         [StringLength(100, MinimumLength = 2, ErrorMessage = "В фамилии должно быть не менее 2 букв")]
         [Required(ErrorMessage = "Не указана фамилия")]

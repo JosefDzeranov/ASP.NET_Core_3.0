@@ -11,7 +11,7 @@
                 <div class="col-10 container">
                     <form method="post"  asp-area="Admin" asp-controller="Users" asp-action="Edit">
                         <div class="container">
-                            <input type="hidden"  name="LoginBuyer" asp-for="Login" value="@Model.Login"/>
+                            <input type="hidden"  name="Login" asp-for="Login" value="@Model.Login"/>
                             <h3 class="display-5 Title_sile text-center">Редактирование данных пользователя: @Model.Login</h3>
                             <br/>
                             <div class="row">

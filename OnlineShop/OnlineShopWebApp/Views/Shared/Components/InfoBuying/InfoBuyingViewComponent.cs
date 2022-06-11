@@ -19,7 +19,7 @@ namespace OnlineShopWebApp.Views.Shared.Components.InfoBuying
         public IViewComponentResult Invoke()
         {
             var buyerLogin = userManager.GetLoginAuthorizedUser();
-            var infoBuying = buyerManager.FindBuyer(buyerLogin).UserDeleveryInfo;
+            var infoBuying = buyerManager.FindBuyer(buyerLogin).InfoBuying;
             return View("InfoBuying", infoBuying);
         }
     }
