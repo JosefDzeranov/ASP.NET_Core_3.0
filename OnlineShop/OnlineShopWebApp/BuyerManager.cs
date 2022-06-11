@@ -6,6 +6,8 @@ using OnlineShop.Db.Interfase;
 using OnlineShop.Db.Models;
 using OnlineShopWebApp.Models.Users;
 using OnlineShopWebApp.Models.Users.Buyer;
+using Order = OnlineShopWebApp.Models.Users.Buyer.Order;
+using UserDeleveryInfo = OnlineShop.Db.Models.UserDeleveryInfo;
 
 namespace OnlineShopWebApp
 {
@@ -46,7 +48,7 @@ namespace OnlineShopWebApp
         public void Buy(string buyerLogin)
         {
             var buyer = FindBuyer(buyerLogin);
-            buyer.Orders.Add(new OrderItem(buyer.Cart, buyer.Login, buyer.InfoBuying));
+            buyer.Orders.Add(new Order(){LoginBuyer = buyer.Login});
             buyer.Cart.Clear();
             JsonStorage.Write(buyers);
         }
@@ -98,56 +100,18 @@ namespace OnlineShopWebApp
         }
         #endregion
 
-        #region Orders
-        public OrderItem FindOrderItem(Guid orderId)
-        {
-            foreach (var buyer in buyers)
-            {
-                var orders = buyer.Orders;
-                foreach (var order in orders)
-                {
-                    if (order.Id == orderId)
-                    {
-                        return order;
-                    }
-                }
-            }
-            return null;
-        }
 
-        public List<OrderItem> CollectAllOrders()
-        {
-            List<OrderItem> collectAllOrders = new List<OrderItem>();
-            foreach (var buyer in buyers)
-            {
-                var orders = buyer.Orders;
-                foreach (var order in orders)
-                {
-                    collectAllOrders.Add(order);
-                }
-            }
-            return collectAllOrders;
-        }
-
-        public void UpdateOrderStatus(OrderItem newOrder)
-        {
-            var order = FindOrderItem(newOrder.Id);
-            order.Status = newOrder.Status;
-            JsonStorage.Write(buyers);
-        }
-        #endregion
-
-        #region InfoBuying
-        public void SaveInfoBuying(InfoBuying infoBuying, string buyerLogin)
+        #region UserDeleveryInfo
+        public void SaveInfoBuying(UserDeleveryInfo userDeleveryInfo, string buyerLogin)
         {
             var buyer = FindBuyer(buyerLogin);
-            buyer.InfoBuying = infoBuying;
+            buyer.UserDeleveryInfo = userDeleveryInfo;
             JsonStorage.Write(buyers);
         }
         public void ClearInfoBuying(string buyerLogin)
         {
             var buyer = FindBuyer(buyerLogin);
-            buyer.InfoBuying = null;
+            buyer.UserDeleveryInfo = null;
             JsonStorage.Write(buyers);
         }
         #endregion

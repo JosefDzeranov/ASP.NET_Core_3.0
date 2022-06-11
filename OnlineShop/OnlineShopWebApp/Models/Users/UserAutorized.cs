@@ -14,7 +14,7 @@ namespace OnlineShopWebApp.Models.Users
 
         //public UserAutorized(string login, string password)
         //{
-        //    Login = login;
+        //    LoginBuyer = login;
         //    Password = password;
         //}
     }

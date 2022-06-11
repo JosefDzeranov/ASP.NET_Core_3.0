@@ -11,24 +11,27 @@ namespace OnlineShopWebApp.Areas.Admin.Controllers
     public class OrdersController : Controller
     {
         private readonly IBuyerManager _buyerManager;
-        public OrdersController(IBuyerManager buyerManager)
+        private readonly IOrdersRepository _ordersRepository;
+        public OrdersController(IBuyerManager buyerManager, IOrdersRepository ordersRepository)
         {
             _buyerManager = buyerManager;
+            _ordersRepository = ordersRepository;
         }
         public IActionResult Index()
         {
-            var orders = _buyerManager.CollectAllOrders();
+            var orders = _ordersRepository.GetAll();
+            //var orders = _buyerManager.CollectAllOrders();
             return View(orders);
         }
         public IActionResult Details(Guid orderId)
         {
-            var order = _buyerManager.FindOrderItem(orderId);
+            var order = _ordersRepository.FindOrderItem(orderId);
             return View(order);
         }
         [HttpPost]
-        public IActionResult SaveDetails(OrderItem newOrder)
+        public IActionResult SaveDetails(Order newOrder)
         {
-            _buyerManager.UpdateOrderStatus(newOrder);
+            _ordersRepository.UpdateOrderStatus(newOrder);
             var orderId = newOrder.Id;
             return RedirectToAction("Details", new { orderId });
         }
