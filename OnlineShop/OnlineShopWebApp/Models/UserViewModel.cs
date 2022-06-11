@@ -16,6 +16,7 @@ namespace OnlineShopWebApp.Models
         public string Phone { get; set; }
         public string LastName { get; set; }
         public bool RememberMe { get; set; }
+        public string AvatarPath { get; set; }
         public Role Role { get; set; }
 
     }

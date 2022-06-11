@@ -189,7 +189,8 @@ namespace OnlineShopWebApp.Models
                 Email = user.Email,
                 FirstName = user.FirstName,
                 LastName = user.LastName,
-                Phone = user.PhoneNumber
+                Phone = user.PhoneNumber,
+                AvatarPath = user.AvatarPath,
 
             };
             return userViewModel;
@@ -229,6 +230,7 @@ namespace OnlineShopWebApp.Models
                 LastName = user.LastName,
                 Email = user.Email,
                 PhoneNumber = user.PhoneNumber,
+                
             };
             return userInfoViewModel;
         }
@@ -242,7 +244,7 @@ namespace OnlineShopWebApp.Models
             user.LastName = userInfoViewModel.LastName;
             user.Email = userInfoViewModel.Email;
             user.PhoneNumber = userInfoViewModel.PhoneNumber;
-            
+
             return user;
         }
 
