@@ -50,7 +50,7 @@ namespace OnlineShopWebApp.Models
                 ImagesPaths = product.Images.MappingToImagesPaths(),
             };
             return editProductViewModel;
-           
+
         }
         public static Product MappingToProduct(this EditProductViewModel editProductViewModel, List<string> imagesPaths)
         {
@@ -60,7 +60,7 @@ namespace OnlineShopWebApp.Models
                 Name = editProductViewModel.Name,
                 Cost = editProductViewModel.Cost,
                 Description = editProductViewModel.Description,
-                Images =  imagesPaths.MappingToImages(),
+                Images = imagesPaths.MappingToImages(),
             };
             return product;
 
@@ -190,8 +190,6 @@ namespace OnlineShopWebApp.Models
                 FirstName = user.FirstName,
                 LastName = user.LastName,
                 Phone = user.PhoneNumber,
-                AvatarPath = user.AvatarPath,
-
             };
             return userViewModel;
         }
@@ -200,11 +198,11 @@ namespace OnlineShopWebApp.Models
         {
             var usersViewModel = new List<UserViewModel>();
 
-            foreach(var user in users)
+            foreach (var user in users)
             {
                 usersViewModel.Add(MappingToUserViewModel(user));
             }
-           
+
             return usersViewModel;
         }
 
@@ -230,7 +228,7 @@ namespace OnlineShopWebApp.Models
                 LastName = user.LastName,
                 Email = user.Email,
                 PhoneNumber = user.PhoneNumber,
-                
+
             };
             return userInfoViewModel;
         }
@@ -247,7 +245,19 @@ namespace OnlineShopWebApp.Models
 
             return user;
         }
-
+        public static UserProfileViewModel MappingToUserProfileViewModel(this User user)
+        {
+            var profileViewModel = new UserProfileViewModel
+            {
+                Id = user.Id,
+                FirstName = user.FirstName,
+                LastName = user.LastName,
+                Email = user.Email,
+                PhoneNumber = user.PhoneNumber,
+                AvatarPath = user.AvatarPath,
+            };
+            return profileViewModel;
+        }
         public static Product MappingToProduct(this AddProductViewModel addProductViewModel, List<string> filePaths)
         {
             return new Product
@@ -261,7 +271,7 @@ namespace OnlineShopWebApp.Models
 
         public static List<Image> MappingToImages(this List<string> paths)
         {
-            return paths.Select(p => new Image { Path = p}).ToList();
+            return paths.Select(p => new Image { Path = p }).ToList();
         }
 
         public static List<string> MappingToImagesPaths(this List<Image> images)

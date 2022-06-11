@@ -94,5 +94,13 @@ namespace OnlineShopWebApp.Controllers
             }
             return View(registerVM);
         }
+
+        [Authorize]
+        public IActionResult Profile()
+        {
+            var user = userManager.GetUserAsync(HttpContext.User).Result;
+            var userProfileViewModel = user.MappingToUserProfileViewModel();
+            return View(userProfileViewModel);
+        }
     }
 }
