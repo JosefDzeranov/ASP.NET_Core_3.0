@@ -15,7 +15,7 @@ namespace OnlineShop.DB.Models
         public string Email { get; set; }
         public string Phone { get; set; }
         public string Address { get; set; }
-        public virtual List<CartItem> CartItems { get; set; }
+        public virtual List<CartItem> CartItems { get; set; } = new List<CartItem>();
     }
 
 }

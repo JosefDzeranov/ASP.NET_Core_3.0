@@ -18,9 +18,9 @@ namespace OnlineShopWebApp.Areas.Admin.Controllers
     public class ProductController : Controller
     {
         private readonly IProductRepository productRepository;
-        private readonly FilesUploader filesUploader;
+        private readonly IFilesUploader filesUploader;
 
-        public ProductController(IProductRepository productRepository, FilesUploader filesUploader)
+        public ProductController(IProductRepository productRepository, IFilesUploader filesUploader)
         {
             this.productRepository = productRepository;
             this.filesUploader = filesUploader;
@@ -47,8 +47,8 @@ namespace OnlineShopWebApp.Areas.Admin.Controllers
         public IActionResult EditProduct(Guid id)
         {
             var product = productRepository.TryGetById(id);
-            var productViewModel = product.MappingToProductViewModel();
-            return View(productViewModel);
+            var editProductViewModel = product.MappingToEditProductViewModel();
+            return View(editProductViewModel);
         }
         [HttpPost]
         public IActionResult EditProduct(EditProductViewModel editProductViewModel)

@@ -15,5 +15,10 @@ namespace OnlineShop.DB
         {
             Database.Migrate();
         }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<Image>().HasOne(x=> x.Product).WithMany(x=>x.Images).HasForeignKey(p =>p.ProductId).OnDelete(DeleteBehavior.Cascade);
+                }
     }
 }

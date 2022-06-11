@@ -253,7 +253,7 @@ namespace OnlineShopWebApp.Models
                 Name = addProductViewModel.Name,
                 Cost = addProductViewModel.Cost,
                 Description = addProductViewModel.Description,
-                Images = filePaths.MappingToImages()
+                Images = filePaths?.MappingToImages()
             };
         }
 

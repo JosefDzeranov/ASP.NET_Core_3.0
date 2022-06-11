@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.Linq;
 
 namespace OnlineShopWebApp.Models
 {
@@ -15,14 +16,9 @@ namespace OnlineShopWebApp.Models
         [Range(typeof(decimal), "25.00", "50000.00")]
         public decimal Cost { get; set; }
         public string Description { get; set; }
-        public List<string> ImagesPaths { get; set; }
-        public string MainImagePath
-        {
-            get
-            {
-                return ImagesPaths.Count == 0 ? "/images/book.png" : ImagesPaths[0];
-            }
-        }
+        public List<string> ImagesPaths { get; set; } = new List<string>();
+        public string MainImagePath => ImagesPaths.Count == 0 ? "/images/book.png" : ImagesPaths.FirstOrDefault();
+
         public List<IFormFile> UploadedImages { get; set; }
     }
 }

@@ -8,7 +8,7 @@ using System.Linq;
 namespace OnlineShopWebApp.Models
 
 {
-    public class FilesUploader
+    public class FilesUploader : IFilesUploader
     {
         private readonly IWebHostEnvironment appEnviroment;
         public FilesUploader(IWebHostEnvironment appEnviroment)
@@ -43,14 +43,18 @@ namespace OnlineShopWebApp.Models
 
         public List<string> SaveFiles(List<IFormFile> files, string folder)
         {
-            var paths = new List<string>();
-
-            foreach (var file in files)
+            if(files != null)
             {
-                paths.Add(SaveFile(file, folder));
-            }
+                var paths = new List<string>();
 
-            return paths;
+                foreach (var file in files)
+                {
+                    paths.Add(SaveFile(file, folder));
+                }
+
+                return paths;
+            }
+            return null;
         }
 
        
