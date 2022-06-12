@@ -30,31 +30,31 @@ namespace OnlineShop.Db
 
         public List<Product> GetAll()
         {
-            if (dataBaseContext.Products.Count() == 0)
-            {
-                dataBaseContext.Products.Add(new Product
-                {
-                    Name = "Cheeseburger",
-                    Cost = 5,
-                    Description = "Just a cheeseburger"
-                });
-                dataBaseContext.Products.Add(new Product
-                {
-                    Name = "Hamburger",
-                    Cost = 3,
-                    Description = "Just a hamburger"
-                });
-                dataBaseContext.Products.Add(new Product
-                {
-                    Name = "Bigburger",
-                    Cost = 10,
-                    Description = "the biggest burger"
-                });
+            //if (dataBaseContext.Products.Count() == 0)
+            //{
+            //    dataBaseContext.Products.Add(new Product
+            //    {
+            //        Name = "Cheeseburger",
+            //        Cost = 5,
+            //        Description = "Just a cheeseburger"
+            //    });
+            //    dataBaseContext.Products.Add(new Product
+            //    {
+            //        Name = "Hamburger",
+            //        Cost = 3,
+            //        Description = "Just a hamburger"
+            //    });
+            //    dataBaseContext.Products.Add(new Product
+            //    {
+            //        Name = "Bigburger",
+            //        Cost = 10,
+            //        Description = "the biggest burger"
+            //    });
 
-                dataBaseContext.SaveChanges();
+            //    dataBaseContext.SaveChanges();
 
 
-            }
+            //}
             return dataBaseContext.Products.ToList();
         }
       
