@@ -3,11 +3,12 @@ using OnlineShop.db;
 using OnlineShop.Db;
 using OnlineShopWebApp.Services;
 using OnlineShopWebApp.Helpers;
-using System.Linq;
+using Microsoft.AspNetCore.Authorization;
 
 
 namespace OnlineShopWebApp.Controllers
 {
+    [Authorize]
     public class CartController : Controller
     {
         private readonly IProductDataSource productDataSource;
@@ -21,25 +22,26 @@ namespace OnlineShopWebApp.Controllers
         }
         public IActionResult Index()
         {
+            var user = User.Identity.Name;
             //var viewModelDict = cartRepository.CartItems.ToDictionary(k => Mapping.ToProductViewModel(k.Key), v=>v.Value);
-            return View(Mapping.ToCartViewModel(cartRepository.TryGetByUserId(Const.UserId)));
+            return View(Mapping.ToCartViewModel(cartRepository.TryGetByUserId(User.Identity.Name)));
         }
 
         public IActionResult Add(int productId)
         {
-            cartRepository.Add(productId, Const.UserId);
+            cartRepository.Add(productId, User.Identity.Name);
             return RedirectToAction("Index");
         }
 
         public IActionResult RemoveProduct(int productId)
         {
-            cartRepository.Remove(productId, Const.UserId);
+            cartRepository.Remove(productId, User.Identity.Name);
             return RedirectToAction("Index");
         }
 
-        public IActionResult RemoveAll(string userId)
+        public IActionResult RemoveAll()
         {
-            cartRepository.RemoveAll(userId);
+            cartRepository.RemoveAll(User.Identity.Name);
             return RedirectToAction("Index");
         }
 

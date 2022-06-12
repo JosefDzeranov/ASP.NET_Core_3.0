@@ -11,12 +11,32 @@
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
                         </li>
-                      <li class="nav-item">
-                            <a class="btn btn-outline-success" alt="Картинка корзины" asp-area="Admin" asp-controller="Order" asp-action="Index"><span class="bi bi-cup-straw"> Панель администратора</span></a>
-                            <a class="btn btn-outline-success" alt="Картинка корзины" asp-area="" asp-controller="Account" asp-action="Login"><span class="bi bi-door-open"> Авторизация</span></a>
-                            <a class="btn btn-outline-success" alt="Картинка корзины" asp-area="" asp-controller="Cart" asp-action="Index"><span class="bi bi-cart2"> Корзина @await Component.InvokeAsync("Cart")</span></a>
-                            <a class="btn btn-outline-success" alt="Избранное" asp-area="" asp-controller="Favorite" asp-action="Index"><span class="bi bi-star-fill"> Избранное @await Component.InvokeAsync("CalcFavoriteProductsCount")</span></a>
-                      </li>
+	                    <li class="nav-item">
+		                    <a class="btn btn-outline-success" alt="Картинка корзины" asp-area="" asp-controller="Cart" asp-action="Index"><span class="bi bi-cart2"> Корзина @await Component.InvokeAsync("Cart")</span></a>
+		                    <a class="btn btn-outline-success" alt="Избранное" asp-area="" asp-controller="Favorite" asp-action="Index"><span class="bi bi-star-fill"> Избранное @await Component.InvokeAsync("CalcFavoriteProductsCount")</span></a>
+	                    </li>
+	                                   
+
+	                    @if (User.Identity.IsAuthenticated)
+	                    {
+		                    <li class="nav-item">
+			                    @User.Identity.Name
+			                    <a class="nav-link text-dark" asp-area="" asp-controller="Account" asp-action="Logout">Выход</a>
+		                    </li>
+	                    }
+	                    else
+	                    {
+		                    <li class="nav-item">
+			                    <a class="btn btn-outline-success" asp-area="" asp-controller="Account" asp-action="Login"> <span class="bi bi-door-open">Войти</span></a>
+		                    </li>
+	                    }
+
+	                    @if (User.IsInRole(Constants.AdminRoleName))
+	                    {
+		                    <li class="nav-item">
+			                    <a class="nav-link text-dark" asp-area="Admin" asp-controller="Order" asp-action="Index"> <span class="bi bi-cup-straw"> Панель Администратора</span></a>
+		                    </li>
+	                    }
                     </ul>
                 </div>
             </div>

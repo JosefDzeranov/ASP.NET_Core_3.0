@@ -3,18 +3,14 @@
 <form asp-action="Login" asp-controller="Account" method="post">
 	<div>
 		<div class="validation" asp-validation-summary="All"></div>
-		<h3>Вход</h3>
 
+		<h3>Вход</h3>
+		<input type="hidden" asp-for="ReturnUrl" name="returnUrl"/>
+		
 		<div>
 			<label asp-for="Login">Логин</label><br />
 			<input asp-for="Login" />
 			<span asp-validation-for="Login"></span>
-        </div>
-
-			<div>
-			<label asp-for="Phone">Телефон</label><br />
-			<input asp-for="Phone" />
-			<span asp-validation-for="Phone"></span>
         </div>
 
 		<div>
@@ -23,12 +19,14 @@
 			<span asp-validation-for="Password"></span>
         </div>
 
-		<label><input type="checkbox" value="true" name="rememberMe"/>Запомнить меня?</label><br>
+		<label><input type="checkbox" value="true" name="RememberMe"/>Запомнить меня?</label><br>
 
 		<input type="submit" value="Войти" class ="btn btn-outline-success" role="button" asp-controller="Account" asp-action="Login"></div>
 
-		<div><br>
-			<a asp-controller="Registration"
-			asp-action="Register">Регистрация нового пользователя</a>
-		</div>
+	<div><br>
+		<a asp-controller="Registration"
+		   asp-action="Register">Регистрация нового пользователя</a>
+	</div>
+	
+
 </form>

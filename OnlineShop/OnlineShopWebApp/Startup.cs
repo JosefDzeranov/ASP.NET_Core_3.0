@@ -9,6 +9,11 @@ using Microsoft.EntityFrameworkCore;
 using OnlineShop.Db;
 using OnlineShop.db;
 using IOrdersRepository = OnlineShop.db.IOrdersRepository;
+using OnlineShop.db.Models;
+using Microsoft.AspNetCore.Identity;
+using System;
+using Microsoft.AspNetCore.Http;
+
 
 namespace OnlineShopWebApp
 {
@@ -26,7 +31,35 @@ namespace OnlineShopWebApp
             string connection = Configuration.GetConnectionString("online_shop");
             services.AddDbContext<DatabaseContext>(options =>
                 options.UseSqlServer(connection), ServiceLifetime.Singleton);
-            
+
+            services.AddDbContext<IdentityContext>(options =>
+                options.UseSqlServer(connection));
+
+            services.AddIdentity<User, IdentityRole>()
+                .AddEntityFrameworkStores<IdentityContext>();
+
+            services.Configure<IdentityOptions>(options =>
+            {
+                // Default Lockout settings.
+                options.Password.RequireDigit = false;
+                options.Password.RequireLowercase = false;
+                options.Password.RequireNonAlphanumeric = false;
+                options.Password.RequiredLength = 1;
+                options.Password.RequireUppercase = false;
+            });
+
+            services.ConfigureApplicationCookie(options =>
+            {
+                //options.ReturnUrlParameter = "returnUrl";
+                options.ExpireTimeSpan = TimeSpan.FromHours(48);
+                options.LoginPath = "/Account/Login";
+                options.LogoutPath = "/Account/Logout";
+                options.Cookie = new CookieBuilder()
+                {
+                    IsEssential = true
+                };
+            });
+
             services.AddTransient<ICartRepository, CartsDbRepository>();
             services.AddTransient<IProductDataSource, ProductsDbRepository>();
             services.AddTransient<ICustomerProfile, InMemoryCustomerProfile>();
@@ -59,6 +92,8 @@ namespace OnlineShopWebApp
             app.UseStaticFiles();
 
             app.UseRouting();
+
+            app.UseAuthentication();
 
             app.UseAuthorization();
 

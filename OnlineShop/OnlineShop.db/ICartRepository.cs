@@ -1,28 +1,23 @@
 ﻿using OnlineShop.db.Models;
-using System.Collections.Generic;
-using System; 
+
 
 namespace OnlineShop.db
 
 {
-	public interface ICartRepository
-	{
-		//Dictionary<Product, int> CartItems { get; set; }
+    public interface ICartRepository
+    {
+        void Add(int id, string userId);
 
-		//decimal Cost { get; }
+        void Remove(int id, string userId);
 
-		void Add(int id, string userId);
+        void Add(Product product, string userId);
 
-		void Remove(int id, string userId);
+        void Remove(Product product, string userId);
 
-		void Add(Product product, string userId);
+        void RemoveAll(string userId);
 
-		void Remove(Product product, string userId);
+        Cart TryGetByUserId(string userId);
 
-		void RemoveAll(string userId);
-
-		Cart TryGetByUserId(string userId);
-
-		void GetAllProduct();
-	}
+        void GetAllProduct();
+    }
 }

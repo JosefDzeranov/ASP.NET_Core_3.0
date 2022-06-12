@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
-using System.Linq;
+
 
 namespace OnlineShop.db.Models
 {
@@ -11,15 +10,8 @@ namespace OnlineShop.db.Models
 
         public string UserId { get; set; }
 
-        public List<CartItem> Items { get; set; }
+        public List<CartItem> Items { get; set; } = new List<CartItem>();
 
         public DateTime CreatedDateTime { get; set; }
-
-        public Cart()
-        {
-            CreatedDateTime= DateTime.Now;
-            Items = new List<CartItem>();
-        }
-
     }
 }

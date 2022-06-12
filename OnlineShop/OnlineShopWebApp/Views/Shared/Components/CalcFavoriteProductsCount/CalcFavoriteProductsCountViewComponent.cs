@@ -16,7 +16,7 @@ namespace OnlineShopWebApp.Views.Shared.Components.CalcFavoriteProductsCount
 
         public IViewComponentResult Invoke()
         {
-            var productsCount = favoriteRepository.GetAll(Const.UserId)?.Count ?? 0;
+            var productsCount = favoriteRepository.GetAll(User.Identity.Name)?.Count ?? 0;
             return View("CalcFavoriteProductsCount", productsCount);
         }
     }

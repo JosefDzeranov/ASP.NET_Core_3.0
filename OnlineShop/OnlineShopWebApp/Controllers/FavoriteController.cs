@@ -1,11 +1,12 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using OnlineShop.db;
 using OnlineShopWebApp.Helpers;
-using System;
 using OnlineShop.Db;
+using Microsoft.AspNetCore.Authorization;
 
 namespace OnlineShopWebApp.Controllers
 {
+    [Authorize]
     public class FavoriteController : Controller
     {
         private readonly IFavoriteRepository favoriteRepository;
@@ -18,20 +19,20 @@ namespace OnlineShopWebApp.Controllers
         }
         public IActionResult Index()
         {
-            var products = favoriteRepository.GetAll(Const.UserId);
+            var products = favoriteRepository.GetAll(User.Identity.Name);
             return View(Mapping.ToProductViewModels(products));
         }
 
         public IActionResult Add(int productId)
         {
             var product = productDataSource.GetProductById(productId);
-            favoriteRepository.Add(Const.UserId, product);
+            favoriteRepository.Add(User.Identity.Name, product);
             return RedirectToAction(nameof(Index));
         }
 
-        public IActionResult Remove (int productId)
+        public IActionResult Remove(int productId)
         {
-            favoriteRepository.Remove(Const.UserId, productId);
+            favoriteRepository.Remove(User.Identity.Name, productId);
             return RedirectToAction(nameof(Index));
         }
     }
