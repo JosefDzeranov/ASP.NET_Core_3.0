@@ -24,8 +24,7 @@
 		<input type="submit" value="Войти" class ="btn btn-outline-success" role="button" asp-controller="Account" asp-action="Login"></div>
 
 	<div><br>
-		<a asp-controller="Registration"
-		   asp-action="Register">Регистрация нового пользователя</a>
+		<a asp-area= "" asp-controller="Registration" asp-action="Register" asp-route-returnUrl="@Model.ReturnUrl">Регистрация нового пользователя</a>
 	</div>
 	
 

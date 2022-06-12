@@ -6,6 +6,8 @@
 	
 		<h3>Регистрация</h3>
 
+		<input type="hidden" name="returnUrl" value="@Model.ReturnUrl"/>
+
 		<div>
 			<label asp-for="UserName">Имя</label><br />
 			<input asp-for="UserName"/>
