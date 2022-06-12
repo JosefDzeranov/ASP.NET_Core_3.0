@@ -19,7 +19,7 @@ namespace OnlineShop.Db
         public DataBaseContext(DbContextOptions<DataBaseContext> options) : base(options)
         {
 
-            // Database.EnsureCreated();
+            
             Database.Migrate();
         }
     }
