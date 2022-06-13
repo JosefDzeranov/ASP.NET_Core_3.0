@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 using OnlineShop.Db;
 using OnlineShop.DB.Models;
 using System;
@@ -10,32 +11,51 @@ namespace OnlineShop.DB
     public class CartsDBRepository : ICartBase
     {
         private readonly DatabaseContext _databaseContext;
+        private readonly UserManager<User> _userManager;
 
-        public CartsDBRepository(DatabaseContext databaseContext)
+        public CartsDBRepository(DatabaseContext databaseContext, UserManager<User> userManager)
         {
             _databaseContext = databaseContext;
+            _userManager = userManager;
         }
 
         public List<Cart> AllCarts()
         {
-            return _databaseContext.Carts.Include(x => x.Items).ThenInclude(x => x.Product).AsNoTracking().ToList();
+            return _databaseContext.Carts.Include(x => x.Items).ThenInclude(x => x.Product).Where(x => x.IsDeleted == false).ToList();
         }
 
-        public Cart TryGetByUserId(int userId)
+        public Cart TryGetByUserId(string userId)
         {
             return _databaseContext.Carts
-                .Where(x =>x.IsDeleted == false)
+                .Where(x => x.IsDeleted == false)
                 .Include(x => x.Items)
                 .ThenInclude(x => x.Product)
                 .AsNoTracking()
                 .FirstOrDefault(x => x.UserId == userId);
         }
 
-        public void Add(Product product, int userId)
+        public Cart TryGetByUserName(string userName)
         {
-            var existingCart = TryGetByUserId(userId);
+            var user = _userManager.Users.FirstOrDefault(x => x.UserName == userName);
+            var carts = _databaseContext.Carts.Where(x => x.IsDeleted == false)
+                        .Include(x => x.Items)
+                        .ThenInclude(x => x.Product);
+            var necessaryCart = carts
+                                .AsNoTracking()
+                                .FirstOrDefault(x => x.UserId == user.Id);
+            return necessaryCart;
+
+
+
+
+        }
+
+        public void Add(Product product, string userId)
+        {
+            var existingCart = AllCarts().FirstOrDefault(x => x.UserId == userId);
             if (existingCart != null)
             {
+                
                 var existingCartItem = existingCart.Items.FirstOrDefault(x => x.Product.Id == product.Id);
                 if (existingCartItem != null)
                 {
@@ -72,9 +92,9 @@ namespace OnlineShop.DB
             _databaseContext.SaveChanges();
         }
 
-        public void DecreaseAmount(int productId, int userId)
+        public void DecreaseAmount(int productId, string userId)
         {
-            var existingCart = TryGetByUserId(userId);
+            var existingCart = AllCarts().FirstOrDefault(x => x.UserId == userId);
             var existingCartItem = existingCart?.Items?.FirstOrDefault(x => x.Product.Id == productId);
             if (existingCartItem.Amount > 0)
             {
@@ -83,6 +103,7 @@ namespace OnlineShop.DB
                 {
                     existingCart.Items.Remove(existingCartItem);
                 }
+                _databaseContext.Carts.Update(existingCart);
                 _databaseContext.SaveChanges();
                 if (!existingCart.Items.Any())
                 {
@@ -91,13 +112,14 @@ namespace OnlineShop.DB
             }
         }
 
-        public void Delete(int userId)
+        public void Delete(string userId)
         {
-            var existingCart = TryGetByUserId(userId);
-            _databaseContext.Entry(existingCart).State = EntityState.Detached;
-            _databaseContext.Entry(existingCart).State = EntityState.Modified;
-            existingCart.IsDeleted = true;
-            _databaseContext.SaveChanges();
+            var existingCart = AllCarts().FirstOrDefault(x => x.UserId == userId);
+            if (existingCart != null)
+            {
+                existingCart.IsDeleted = true;
+                _databaseContext.SaveChanges();
+            }
         }
     }
 }

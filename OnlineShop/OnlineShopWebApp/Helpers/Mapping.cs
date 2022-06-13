@@ -58,10 +58,19 @@ namespace OnlineShopWebApp.Helpers
                 Login = user.Login,
                 FirstName = user.FirstName,
                 LastName = user.LastName,
-                Password = user.Password,
-                Phone = user.Phone,
+                Password = user.PasswordHash,
+                Phone = user.PhoneNumber,
             };
             return userViewModel;
+        }
+        public static User ToUser(this Registration user)
+        {
+            var userDB = new User
+            {
+                Login = user.Login,
+                UserName = user.Login,
+            };
+            return userDB;
         }
 
         public static User ToUser(this UserViewModel user)
@@ -72,8 +81,8 @@ namespace OnlineShopWebApp.Helpers
                 Login = user.Login,
                 FirstName = user.FirstName,
                 LastName = user.LastName,
-                Password = user.Password,
-                Phone = user.Phone,
+                PasswordHash = user.Password,
+                PhoneNumber = user.Phone,
             };
             return userDB;
         }

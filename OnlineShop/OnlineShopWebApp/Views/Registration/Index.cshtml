@@ -12,6 +12,7 @@
             <div class="col-4 mx-auto">
                 <h2>Зарегестрируйтесь</h2>
                 <div class="mb-3">
+                    <input type="hidden" asp-for="ReturnUrl" value="@Model.ReturnUrl" />
                     <input class="form-control" asp-for="Login" placeholder="Введите имя">
                     <span asp-validation-for="Login"></span>
                 </div>
@@ -24,7 +25,12 @@
                     <span asp-validation-for="ConfirmPassword"></span>
                 </div>
                 <div class="mb-3">
-                    <button type="submit" class="btn btn-outline-dark" asp-controller="Registration" asp-action="Registrate">Зарегестрироваться</button>
+                    <button type="submit" class="btn btn-outline-dark"
+                            asp-controller="Registration"
+                            asp-action="Registrate">
+
+                        Зарегестрироваться
+                    </button>
                 </div>
             </div>
         </div>

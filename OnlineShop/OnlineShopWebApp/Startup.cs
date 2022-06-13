@@ -1,11 +1,15 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using OnlineShop.Db;
 using OnlineShop.DB;
+using OnlineShop.DB.Models;
 using Serilog;
+using System;
 
 namespace OnlineShopWebApp
 {
@@ -29,10 +33,27 @@ namespace OnlineShopWebApp
                 options.EnableSensitiveDataLogging(true);
             });
 
+            services.AddDbContext<IdentityContext>(options =>
+           options.UseSqlServer(connection));
+
+            services.AddIdentity<User, IdentityRole>()
+                .AddEntityFrameworkStores<IdentityContext>();
+
+            services.ConfigureApplicationCookie(options =>
+            {
+                options.ExpireTimeSpan = TimeSpan.FromHours(24);
+                options.LoginPath = "/Authorization/Authorize";
+                options.LogoutPath = "/Authorization/Logout";
+                options.Cookie = new CookieBuilder()
+                {
+                    IsEssential = true
+                };
+            });
+
             services.AddTransient<IProductBase, ProductsDBRepository>();
             services.AddTransient<ICartBase,CartsDBRepository>();
             services.AddTransient<IOrderBase, OrdersDBRepository>();
-            services.AddTransient<IUserBase, UsersDBRepository>();
+            //services.AddTransient<UserManager<User>, UsersDBRepository>();
 
 
             services.AddControllersWithViews();
@@ -45,7 +66,11 @@ namespace OnlineShopWebApp
 
             app.UseStaticFiles();
 
+
             app.UseRouting();
+
+            app.UseAuthentication();
+            app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
             {

@@ -6,11 +6,11 @@ namespace OnlineShop.DB
     public interface IUserBase
     {
         void Add(User user);
-        List<User> AllUsers();
+        IEnumerable<User> AllUsers();
         //bool Authentification(Authorization authorization);
-        void Delete(int userId);
+        void Delete(string userId);
         void Edit(User user);
         //void NewPassword(NewPassword newPassword);
-        User TryGetById(int userId);
+        User TryGetById(string userId);
     }
 }

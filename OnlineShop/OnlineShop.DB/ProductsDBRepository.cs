@@ -14,18 +14,6 @@ namespace OnlineShop.DB
             _databaseContext = databaseContext;
         }
 
-        public int NextproductId()
-        {
-            if(AllProducts().Any())
-            {
-                var maxIdProduct = AllProducts().Select(x => x.Id).Max();
-                return maxIdProduct + 1;
-            }
-            else
-            {
-                return 1;
-            }
-        }
         public IEnumerable<Product> AllProducts()
         {
             return _databaseContext.Products;

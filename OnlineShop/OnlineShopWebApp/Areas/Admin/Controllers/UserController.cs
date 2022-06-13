@@ -1,38 +1,45 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc;
 using OnlineShop.DB;
-using OnlineShopWebApp.Areas.Admin.Models;
-using OnlineShopWebApp.Helpers;
+using OnlineShop.DB.Models;
 using OnlineShopWebApp.Models;
 using System.Linq;
 
 namespace OnlineShopWebApp.Areas.Admin.Controllers
 {
-    [Area("Admin")]
+    [Area(Const.AdminRoleName)]
+    [Authorize(Roles = Const.AdminRoleName)]
     public class UserController : Controller
     {
 
-        private readonly IUserBase _userBase;
+        private readonly UserManager<User> _userManager;
 
-        public UserController(IUserBase userBase)
+        public UserController(UserManager<User> userManager)
         {
-            _userBase = userBase;
+            _userManager = userManager;
         }
 
         public IActionResult Users()
         {
-            var users = _userBase.AllUsers();
+            var users = _userManager.Users;
             return View(users);
         }
 
-        public IActionResult Get(int userId)
+        private User GetUserFromDB(string userId)
         {
-            var necessaryUser = _userBase.AllUsers().FirstOrDefault(x => x.Id == userId);
+            return _userManager.Users.FirstOrDefault(x => x.Id == userId);
+        }
+
+        public IActionResult Get(string userId)
+        {
+            var necessaryUser = _userManager.Users.FirstOrDefault(x => x.Id == userId);
             return View(necessaryUser);
         }
 
         //public IActionResult ChangePassword(int userId)
         //{
-        //    var necessaryUser = _userBase.AllUsers().FirstOrDefault(x => x.Id == userId);
+        //    var necessaryUser = _userManager.AllUsers().FirstOrDefault(x => x.Id == userId);
         //    var newPassword = new NewPassword
         //    {
         //        UserId = userId
@@ -45,7 +52,7 @@ namespace OnlineShopWebApp.Areas.Admin.Controllers
         //{
         //    if (ModelState.IsValid)
         //    {
-        //        _userBase.NewPassword(newPassword);
+        //        _userManager.NewPassword(newPassword);
         //        return RedirectToAction("GetUser", "User", new { userId = newPassword.UserId });
         //    }
         //    else
@@ -54,9 +61,9 @@ namespace OnlineShopWebApp.Areas.Admin.Controllers
         //    }
         //}
 
-        public IActionResult Edit(int userId)
+        public IActionResult Edit(string userId)
         {
-            var necessaryUser = _userBase.AllUsers().FirstOrDefault(x => x.Id == userId);
+            var necessaryUser = GetUserFromDB(userId);
             return View(necessaryUser);
         }
 
@@ -65,8 +72,8 @@ namespace OnlineShopWebApp.Areas.Admin.Controllers
         {
             if (ModelState.IsValid)
             {
-                _userBase.Edit(user.ToUser());
-                return RedirectToAction("GetUser", "User", new { userId = user.Id });
+                Edit(user.Id);
+                return RedirectToAction("Get", "User", new { userId = user.Id });
             }
             else
             {
@@ -74,10 +81,18 @@ namespace OnlineShopWebApp.Areas.Admin.Controllers
             }
         }
 
-        public IActionResult Delete(int userId)
+        public IActionResult Delete(string userId)
         {
-            _userBase.Delete(userId);
-            return RedirectToAction("Users", "User");
+            var result = _userManager.DeleteAsync(GetUserFromDB(userId)).Result;
+            if(result.Succeeded)
+            {
+                return RedirectToAction("Users", "User");
+            }
+            else
+            {
+                return View();
+            }
+            
         }
     }
 }

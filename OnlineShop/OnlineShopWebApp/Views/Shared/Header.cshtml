@@ -1,4 +1,5 @@
-﻿<header>
+﻿@using OnlineShop.DB
+<header>
     <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
         <div class="container">
             <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">OnlineShopWebApp</a>
@@ -17,12 +18,27 @@
                     <li class="nav-item">
                         <a class="btn btn-danger" asp-area="" asp-controller="Cart" asp-action="Index">Корзина @await Component.InvokeAsync("Cart")</a>
                     </li>
-                    <li class="nav-item">
-                        <a class="btn btn-success" asp-area="" asp-controller="Authorization" asp-action="Index">Войти</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="btn btn-dark" asp-area="admin" asp-controller="order" asp-action="orders">Админ панель</a>
-                    </li>
+                    @if (User.Identity.IsAuthenticated)
+                    {
+                        <p>@User.Identity.Name</p>
+                        <li>
+                            <a class="btn btn-success" asp-area="" asp-controller="Authorization" asp-action="Logout">
+                                Выйти
+                            </a>
+                        </li>
+                    }
+                    else
+                    {
+                        <li class="nav-item">
+                            <a class="btn btn-success" asp-area="" asp-controller="Authorization" asp-action="Authorize">Войти</a>
+                        </li>
+                    }
+                    @if (User.IsInRole(Const.AdminRoleName))
+                    {
+                        <li class="nav-item">
+                            <a class="btn btn-dark" asp-area="admin" asp-controller="order" asp-action="orders">Админ панель</a>
+                        </li>
+                    }
                 </ul>
             </div>
         </div>

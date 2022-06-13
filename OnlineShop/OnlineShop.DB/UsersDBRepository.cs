@@ -1,43 +1,45 @@
-﻿using Newtonsoft.Json;
+﻿using Microsoft.AspNetCore.Identity;
 using OnlineShop.Db;
 using OnlineShop.DB.Models;
+using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
-using System.Text;
 
 namespace OnlineShop.DB
 {
     public class UsersDBRepository : IUserBase
     {
         private readonly DatabaseContext _databaseContext;
-
-        public UsersDBRepository(DatabaseContext databaseContext)
+        private readonly UserManager<User> _userManager;
+        private readonly SignInManager<User> _signInManager;
+        public UsersDBRepository(DatabaseContext databaseContext, UserManager<User> userManager, SignInManager<User> signInManager)
         {
             _databaseContext = databaseContext;
+            _userManager = userManager;
+            _signInManager = signInManager;
         }
 
-        public List<User> AllUsers()
+        public IEnumerable<User> AllUsers()
         {
-            var users = _databaseContext.Users.ToList();
-            if (users.Any())
-            {
-                return users;
-            }
-            else
-            {
-                var newUser = new User("Firokikidreamtek", "+7-985-041-73-94", "11");
-                _databaseContext.Users.Add(newUser);
-                _databaseContext.SaveChanges();
-                return _databaseContext.Users.ToList();
-            }
+            var users = _userManager.Users.Where(x => !x.UserName.Contains("admin"));
+            //if (users.Any())
+            //{
+            return users;
+            //}
+            //else
+            //{
+            //    var newUser = new User() { UserName = "Firokikidreamtek" };
+            //    _userManager.Users.Add(newUser);
+            //    _databaseContext.SaveChanges();
+            //    return _databaseContext.Users;
+            //}
         }
 
 
 
-        public User TryGetById(int userId)
+        public User TryGetById(string userId)
         {
-            return _databaseContext.Users.FirstOrDefault(x => x.Id == userId);
+            return _userManager.Users.FirstOrDefault(x => x.Id == userId);
         }
 
         //public void NewPassword(NewPassword newPassword)
@@ -46,10 +48,10 @@ namespace OnlineShop.DB
         //    UpdateData();
         //}
 
-        public void Delete(int userId)
+        public void Delete(string userId)
         {
-            _databaseContext.Users.Remove(TryGetById(userId));
-            _databaseContext.SaveChanges();
+            //_userManager.Users.R(TryGetById(userId));
+            //_databaseContext.SaveChanges();
         }
 
         public void Edit(User user)
@@ -58,15 +60,15 @@ namespace OnlineShop.DB
             userForEdit.Login = user.Login;
             userForEdit.LastName = user.LastName;
             userForEdit.FirstName = user.FirstName;
-            userForEdit.Phone = user.Phone;
+            userForEdit.PhoneNumber = user.PhoneNumber;
             _databaseContext.SaveChanges();
         }
 
         public void Add(User user)
         {
-            user.Phone = "Please, fill this field";
-            _databaseContext.Users.Add(user);
-            _databaseContext.SaveChanges();
+            //user.PhoneNumber = "Please, fill this field";
+            //_databaseContext.Users.Add(user);
+            //_databaseContext.SaveChanges();
 
         }
     }

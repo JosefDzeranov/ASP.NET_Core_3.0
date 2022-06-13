@@ -1,5 +1,8 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc;
 using OnlineShop.DB;
+using OnlineShop.DB.Models;
 using OnlineShopWebApp.Models;
 using System.Linq;
 
@@ -7,25 +10,22 @@ namespace OnlineShopWebApp.Controllers
 {
     public class AuthorizationController : Controller
     {
-        private readonly IUserBase _userBase;
+        
+        private readonly ICartBase _cartBase;
+        private readonly SignInManager<User> _signInManager;
 
-        public AuthorizationController(IUserBase userBase)
+
+        public AuthorizationController(SignInManager<User> signInManager, ICartBase cartBase)
         {
-            _userBase = userBase;
+            _signInManager = signInManager;
+            _cartBase = cartBase;
         }
 
-        public IActionResult Index()
-        {
-            return View();
-        }
 
-        public bool Authentification(Authorization authorization)
+        [HttpGet]
+        public IActionResult Authorize(string returnUrl)
         {
-            if (_userBase.AllUsers().Any(x => x.Login == authorization.Name && x.Password == authorization.Password))
-            {
-                return true;
-            }
-            return false;
+            return View(new Authorization() { ReturnUrl = returnUrl });
         }
 
         [HttpPost]
@@ -34,9 +34,13 @@ namespace OnlineShopWebApp.Controllers
 
             if (ModelState.IsValid)
             {
-                var result = Authentification(authorization);
-                if (result == true)
+                var result = _signInManager.PasswordSignInAsync(authorization.Name, authorization.Password, authorization.RememberMe, false).Result;
+                if (result.Succeeded)
                 {
+                    if (authorization.ReturnUrl != null)
+                    {
+                        return Redirect(authorization.ReturnUrl);
+                    }
                     return RedirectToAction("Index", "Home");
                 }
                 else
@@ -44,7 +48,19 @@ namespace OnlineShopWebApp.Controllers
                     ModelState.AddModelError("Password", "Неправильный логин или пароль");
                 }
             }
-            return View("Index");
+            return View("Authorize");
+        }
+
+        [Authorize]
+        public IActionResult Logout()
+        {
+            var cart = _cartBase.TryGetByUserName(User.Identity.Name);
+            if (cart != null)
+            {
+                _cartBase.Delete(cart.UserId);
+            }
+            _signInManager.SignOutAsync().Wait();
+            return RedirectToAction("Index", "Home");
         }
     }
 }
