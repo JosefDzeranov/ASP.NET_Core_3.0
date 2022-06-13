@@ -1,69 +1,62 @@
 ﻿@using OnlineShop.DB
-<header>
-    <div class="px-3 py-2 bg-dark text-white">
-        <div class="container">
-            <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
-                <a asp-area="" asp-controller="Home" asp-action="Index" class="d-flex align-items-center my-2 my-lg-0 me-lg-auto text-light text-decoration-none">
-                   <h3>Книжный магазин</h3>
-                </a>
 
-                <ul class="nav col-12 col-lg-auto my-2 justify-content-center my-md-0 text-small">
+<header class="px-3 py-2 bg-dark text-white">
+    <div class="container">
+        <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
+            <a asp-area="" asp-controller="Home" asp-action="Index" class="d-flex align-items-center my-2 my-lg-0 me-lg-auto text-light text-decoration-none">
+                <h3>Книжный магазин</h3>
+            </a>
+            <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
+                <li>
+                    <a class="nav-link text-light text-center" asp-area="" asp-controller="Home" asp-action="Index">
+                        <h4><i class="bi bi-house-door"></i></h4>
+                        Home
+                    </a>
+                </li>
+                @if (User.IsInRole(Const.AdminRoleName))
+                {
                     <li>
-                        <a class="nav-link text-light text-center" asp-area="" asp-controller="Home" asp-action="Index">
-                            <h4><i class="bi bi-house-door"></i></h4>
-                            Home
-                        </a>
-                    </li>
-                    @if (User.IsInRole(Const.AdminRoleName))
-                    {
-                        <li>
                         <a class="nav-link text-light text-center" asp-area="Admin" asp-controller="Order" asp-action="Index">
                             <h4><i class="bi bi-gear"></i></h4>
                             Администрирование
                         </a>
                     </li>
-                    }
-                    <li>
-                        @await Component.InvokeAsync("Favorites")
-                    </li>
-                    <li>
-                        @await Component.InvokeAsync("Cart")
-                    </li>
-                    @if (User.Identity.IsAuthenticated)
-                    {
-                          <li>
-                        <a asp-area="" asp-controller="Account" asp-action="Logout" class="nav-link text-light text-center">
-                            <h4><i class="bi bi-box-arrow-in-right"></i></h4>
-                            Выйти
-                        </a>
-                        </li>
-                    }
-                    else
-                    {
-                        <li>
-                        <a asp-area="" asp-controller="Account" asp-action="Login" class="nav-link text-light text-center">
-                            <h4><i class="bi bi-box-arrow-in-right"></i></h4>
-                            Войти
-                        </a>
-                    </li>
-                     <li>
-                        <a asp-area="" asp-controller="Account" asp-action="Register" class="nav-link text-light text-center">
-                            <h4><i class="bi bi-person-circle"></i></h4>
-                           Регистрация
-                        </a>
-                    </li>
-                        
-                    }
-                    
-                </ul>
-            </div>
+                }
+                <li>
+                    @await Component.InvokeAsync("Favorites")
+                </li>
+                <li>
+                    @await Component.InvokeAsync("Cart")
+                </li>
+            </ul>
+
+            <form class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3" role="search">
+                <input type="search" class="form-control" placeholder="Search..." aria-label="Search">
+            </form>
+
+            @if (User.Identity.IsAuthenticated)
+            {
+                <div class="dropdown text-end">
+                    <a href="#" class="d-block link-dark text-decoration-none dropdown-toggle" id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
+                        <img src="https://github.com/mdo.png" alt="mdo" width="52" height="52" class="rounded-circle">
+                    </a>
+                    <ul class="dropdown-menu text-small" aria-labelledby="dropdownUser1">
+                        <li><a class="dropdown-item" href="#">New project...</a></li>
+                        <li><a class="dropdown-item" href="#">Settings</a></li>
+                        <li><a class="dropdown-item" href="#">Profile</a></li>
+                        <li><hr class="dropdown-divider"></li>
+                        <li><a class="dropdown-item" asp-area="" asp-controller="Account" asp-action="Logout">Выйти</a></li>
+                    </ul>
+                </div>
+            }
+            else
+            {
+                <div class="text-end">
+                     <a asp-area="" asp-controller="Account" asp-action="Login" class="btn btn-outline-light me-2">Войти</a>
+                  <a asp-area="" asp-controller="Account" asp-action="Register" class="btn btn-warning">Регистрация</a>          
+                </div>
+            }
+
         </div>
-    </div>
-    <div class="px-3 py-2 border-bottom mb-3">
-      <div class="container  d-flex flex-wrap justify-content-center">
-        <form class="w-100 me-3">
-          <input type="search" class="form-control" placeholder="Search..." aria-label="Search">
-        </form>
-      </div>
     </div>
 </header>
