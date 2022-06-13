@@ -31,37 +31,37 @@ namespace OnlineShop.Db
             var image1 = new Image
             {
                 Id = Guid.Parse("ed104a21-5d13-43cf-86b6-dce052735bd5"),
-                Url = "/images/Products/image1.png",
+                Url = "/images/Products/item1.png",
                 ProductId = product1Id
             };
             var image2 = new Image
             {
-                Id = Guid.Parse("58a00580-f628-42c8-a32d-371a7adf85bc"),
-                Url = "/images/Products/image2.png",
+                Id = Guid.Parse("1fcdb7e1-6c36-4d63-8d72-1de5f0be4c75"),
+                Url = "/images/Products/item2.png",
                 ProductId = product2Id
             };
             var image3 = new Image
             {
                 Id = Guid.Parse("58a00580-f628-42c8-a32d-371a7adf85bc"),
-                Url = "/images/Products/image3.png",
+                Url = "/images/Products/item3.png",
                 ProductId = product3Id
             };
             var image4 = new Image
             {
                 Id = Guid.Parse("baff13d6-da29-4a42-ad86-bf4ee29ec70b"),
-                Url = "/images/Products/image4.png",
+                Url = "/images/Products/item4.png",
                 ProductId = product4Id
             };
             var image5 = new Image
             {
                 Id = Guid.Parse("3b0fed2c-8cbd-453f-93f4-90ff6c3ab7fb"),
-                Url = "/images/Products/image5.png",
+                Url = "/images/Products/item5.png",
                 ProductId = product5Id
             };
             var image6 = new Image
             {
                 Id = Guid.Parse("29c149e1-553b-49b0-b106-6b0882a71745"),
-                Url = "/images/Products/image6.png",
+                Url = "/images/Products/item6.png",
                 ProductId = product6Id
             };
 

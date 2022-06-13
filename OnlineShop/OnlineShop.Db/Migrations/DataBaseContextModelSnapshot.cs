@@ -84,6 +84,63 @@ namespace OnlineShop.Db.Migrations
                     b.ToTable("FavoriteProducts");
                 });
 
+            modelBuilder.Entity("OnlineShop.Db.Models.Image", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("ProductId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("Url")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ProductId");
+
+                    b.ToTable("Image");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = new Guid("ed104a21-5d13-43cf-86b6-dce052735bd5"),
+                            ProductId = new Guid("31825d42-7a2c-4245-84a5-32f044df42eb"),
+                            Url = "/images/Products/image1.png"
+                        },
+                        new
+                        {
+                            Id = new Guid("1fcdb7e1-6c36-4d63-8d72-1de5f0be4c75"),
+                            ProductId = new Guid("99b708a2-dcf2-4614-9a52-6c828bf3ef01"),
+                            Url = "/images/Products/image2.png"
+                        },
+                        new
+                        {
+                            Id = new Guid("58a00580-f628-42c8-a32d-371a7adf85bc"),
+                            ProductId = new Guid("d93266b2-af1d-4d7b-abcf-7ff41138c8ad"),
+                            Url = "/images/Products/image3.png"
+                        },
+                        new
+                        {
+                            Id = new Guid("baff13d6-da29-4a42-ad86-bf4ee29ec70b"),
+                            ProductId = new Guid("dc3024e6-a030-4aff-8d2b-8a1b8c35c1d8"),
+                            Url = "/images/Products/image4.png"
+                        },
+                        new
+                        {
+                            Id = new Guid("3b0fed2c-8cbd-453f-93f4-90ff6c3ab7fb"),
+                            ProductId = new Guid("77e13cf3-2861-4c5f-9dfa-bde3eeb5eaf6"),
+                            Url = "/images/Products/image5.png"
+                        },
+                        new
+                        {
+                            Id = new Guid("29c149e1-553b-49b0-b106-6b0882a71745"),
+                            ProductId = new Guid("c6acbc3f-3429-4cb7-8242-c896feb0c8ea"),
+                            Url = "/images/Products/image6.png"
+                        });
+                });
+
             modelBuilder.Entity("OnlineShop.Db.Models.Order", b =>
                 {
                     b.Property<Guid>("Id")
@@ -134,7 +191,6 @@ namespace OnlineShop.Db.Migrations
                             Id = new Guid("31825d42-7a2c-4245-84a5-32f044df42eb"),
                             Cost = 1000m,
                             Description = "Description1",
-                            ImagePath = "/images/item1.jpg",
                             Name = "Name1"
                         },
                         new
@@ -142,23 +198,20 @@ namespace OnlineShop.Db.Migrations
                             Id = new Guid("99b708a2-dcf2-4614-9a52-6c828bf3ef01"),
                             Cost = 2000m,
                             Description = "Description2",
-                            ImagePath = "/images/item2.jpg",
                             Name = "Name2"
                         },
                         new
                         {
-                            Id = new Guid("c6acbc3f-3429-4cb7-8242-c896feb0c8ea"),
+                            Id = new Guid("d93266b2-af1d-4d7b-abcf-7ff41138c8ad"),
                             Cost = 3000m,
                             Description = "Description3",
-                            ImagePath = "/images/item3.jpg",
                             Name = "Name3"
                         },
                         new
                         {
-                            Id = new Guid("d93266b2-af1d-4d7b-abcf-7ff41138c8ad"),
+                            Id = new Guid("dc3024e6-a030-4aff-8d2b-8a1b8c35c1d8"),
                             Cost = 4000m,
                             Description = "Description4",
-                            ImagePath = "/images/item4.jpg",
                             Name = "Name4"
                         },
                         new
@@ -166,15 +219,13 @@ namespace OnlineShop.Db.Migrations
                             Id = new Guid("77e13cf3-2861-4c5f-9dfa-bde3eeb5eaf6"),
                             Cost = 5000m,
                             Description = "Description5",
-                            ImagePath = "/images/item5.jpg",
                             Name = "Name5"
                         },
                         new
                         {
-                            Id = new Guid("dc3024e6-a030-4aff-8d2b-8a1b8c35c1d8"),
+                            Id = new Guid("c6acbc3f-3429-4cb7-8242-c896feb0c8ea"),
                             Cost = 6000m,
                             Description = "Description6",
-                            ImagePath = "/images/item6.jpg",
                             Name = "Name6"
                         });
                 });
@@ -232,6 +283,17 @@ namespace OnlineShop.Db.Migrations
                     b.Navigation("Product");
                 });
 
+            modelBuilder.Entity("OnlineShop.Db.Models.Image", b =>
+                {
+                    b.HasOne("OnlineShop.Db.Models.Product", "Product")
+                        .WithMany("Images")
+                        .HasForeignKey("ProductId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Product");
+                });
+
             modelBuilder.Entity("OnlineShop.Db.Models.Order", b =>
                 {
                     b.HasOne("OnlineShop.Db.Models.UserDeliveryInfo", "User")
@@ -254,6 +316,8 @@ namespace OnlineShop.Db.Migrations
             modelBuilder.Entity("OnlineShop.Db.Models.Product", b =>
                 {
                     b.Navigation("CartItems");
+
+                    b.Navigation("Images");
                 });
 #pragma warning restore 612, 618
         }
