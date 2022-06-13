@@ -63,6 +63,15 @@ namespace OnlineShopWebApp.Helpers
             };
             return userViewModel;
         }
+        public static User ToUser(this Registration user)
+        {
+            var userDB = new User
+            {
+                Login = user.Login,
+                UserName = user.Login,
+            };
+            return userDB;
+        }
 
         public static User ToUser(this UserViewModel user)
         {

@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc;
 using OnlineShop.DB;
 using OnlineShop.DB.Models;
 using OnlineShopWebApp.Helpers;
@@ -6,22 +8,23 @@ using System.Linq;
 
 namespace OnlineShopWebApp.Controllers
 {
+    [Authorize]
     public class OrderController : Controller
     {
         private readonly IOrderBase _orderBase;
         private readonly ICartBase _cartBase;
-        private readonly IUserBase _userBase;
+        private readonly UserManager<User> _userManager;
 
-        public OrderController(IOrderBase orderStorage, ICartBase cartBase, IUserBase userBase)
+        public OrderController(IOrderBase orderStorage, ICartBase cartBase, UserManager<User> userManager)
         {
             _orderBase = orderStorage;
             _cartBase = cartBase;
-            _userBase = userBase;
+            _userManager = userManager;
         }
 
         private void AddNewOrder(DeliveryInfoModelView deliveryInfo)
         {
-            var existingUser = _userBase.AllUsers().First();
+            var existingUser = _userManager.FindByNameAsync(User.Identity.Name).Result;
             var cart = _cartBase.TryGetByUserId(existingUser.Id).ToCartViewModel();
             var order = new Order(cart.Items.Select(x => x.ToCartItem()).ToList(), deliveryInfo.ToDeliveryInfo());
             _orderBase.Add(order);
@@ -38,8 +41,7 @@ namespace OnlineShopWebApp.Controllers
             if (ModelState.IsValid)
             {
                 AddNewOrder(deliveryInfo);
-
-                var existingUser = _userBase.AllUsers().First();
+                var existingUser = _userManager.FindByNameAsync(User.Identity.Name).Result;
                 _cartBase.Delete(existingUser.Id);
                 return View();
             }

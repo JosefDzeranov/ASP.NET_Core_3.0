@@ -10,5 +10,6 @@ namespace OnlineShop.DB
         void DecreaseAmount(int productId, string userId);
         void Delete(string userId);
         List<Cart> AllCarts();
+        Cart TryGetByUserName(string userName);
     }
 }

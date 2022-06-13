@@ -9,7 +9,6 @@ namespace OnlineShopWebApp.Models
     [RegistrLengthName]
     public class Registration
     {
-        [Remote(action: "CheckName", controller: "Registration", ErrorMessage = "Это имя уже используется")]
         [Required(ErrorMessage = "Введите логин")]
         public string Login { get; set; }
         [Required(ErrorMessage = "Введите пароль")]
@@ -18,5 +17,6 @@ namespace OnlineShopWebApp.Models
         [Required(ErrorMessage = "Введите пароль повторно")]
         [Compare("Password", ErrorMessage = "Пароли не совпадают")]
         public string ConfirmPassword { get; set; }
+        public string ReturnUrl { get; set; }
     }
 }

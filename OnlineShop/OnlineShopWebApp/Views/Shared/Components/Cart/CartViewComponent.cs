@@ -1,5 +1,7 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc;
 using OnlineShop.DB;
+using OnlineShop.DB.Models;
 using OnlineShopWebApp.Helpers;
 using System.Linq;
 
@@ -8,21 +10,31 @@ namespace OnlineShopWebApp.Views.Shared.ViewComponents.CartViewComponents
     public class CartViewComponent : ViewComponent
     {
         private readonly ICartBase _cartBase;
-        private readonly IUserBase _userBase;
+        private readonly UserManager<User> _userManager;
 
 
-        public CartViewComponent(ICartBase cartBase, IUserBase userBase)
+        public CartViewComponent(ICartBase cartBase, UserManager<User> userManager)
         {
             _cartBase = cartBase;
-            _userBase = userBase;
+            _userManager = userManager;
         }
 
         public IViewComponentResult Invoke()
         {
-            var existingUser = _userBase.AllUsers().FirstOrDefault();
-            var cart = _cartBase.TryGetByUserId(existingUser.Id);
-            var ProductViewModelCounts = cart.ToCartViewModel()?.Amount ?? 0;
-            return View("Cart",ProductViewModelCounts);
+            var userName = User.Identity.Name;
+            if(userName == null)
+            {
+                var user = _userManager.Users.FirstOrDefault(x => x.UserName.Contains("user"));
+                var cart = _cartBase.TryGetByUserId(user.Id);
+                var ProductViewModelCounts = cart.ToCartViewModel()?.Amount ?? 0;
+                return View("Cart", ProductViewModelCounts);
+            }
+            else
+            {
+                var cart = _cartBase.TryGetByUserName(userName);
+                var ProductViewModelCounts = cart.ToCartViewModel()?.Amount ?? 0;
+                return View("Cart", ProductViewModelCounts);
+            }
         }
     }
 }

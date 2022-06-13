@@ -1,5 +1,7 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc;
 using OnlineShop.DB;
+using OnlineShop.DB.Models;
 using OnlineShopWebApp.Helpers;
 using OnlineShopWebApp.Models;
 using System.Linq;
@@ -9,29 +11,37 @@ namespace OnlineShopWebApp.Controllers
     public class RegistrationController : Controller
     {
 
-        private readonly IUserBase _userBase;
+        private readonly UserManager<User> _userManager;
+        private readonly SignInManager<User> _signInManager;
 
-        public RegistrationController(IUserBase userBase)
+        public RegistrationController(UserManager<User> userManager, SignInManager<User> signInManager = null)
         {
-            _userBase = userBase;
+            _userManager = userManager;
+            _signInManager = signInManager;
         }
-        public IActionResult Index()
+        public IActionResult Index(string returnUrl)
         {
-            return View();
+            return View(new Registration() { ReturnUrl = returnUrl });
         }
 
         private void AddNewUser(Registration registration)
         {
-            var newUser = new UserViewModel(registration);
-            _userBase.Add(newUser.ToUser());
+            var resultForUser = _userManager.CreateAsync(registration.ToUser(), registration.Password).Result;
+            if (resultForUser.Succeeded)
+            {
+                _userManager.AddToRoleAsync(registration.ToUser(), Const.UserRoleName).Wait();
+            }
         }
 
-        [AcceptVerbs("Get", "Post")]
-        public IActionResult CheckName(string login)
+        private bool CheckName(Registration registration)
         {
-            var allUsers = _userBase.AllUsers();
-            if (allUsers.Any(x=>x.Login == login)) return Json(false);
-            return Json(true);
+            var user = registration.ToUser();
+            bool flag = _userManager.Users.Any(x => x.UserName == user.UserName);
+            if (flag == true)
+            {
+                return true;
+            }
+            else return false;
         }
 
         [HttpPost]
@@ -39,12 +49,24 @@ namespace OnlineShopWebApp.Controllers
         {
             if (ModelState.IsValid)
             {
-                AddNewUser(registration);
-                return RedirectToAction("Index", "Home");
+                if (CheckName(registration) == false)
+                {
+                    AddNewUser(registration);
+                    _signInManager.PasswordSignInAsync(registration.Login, registration.Password, true, false).Wait();
+                    if (registration.ReturnUrl != null)
+                    {
+                        return Redirect(registration.ReturnUrl);
+                    }
+                }
+                else
+                {
+                    ModelState.AddModelError("Login", "Такой логин уже есть. Введите другой");
+                }
+                return View("Index");
             }
             else
             {
-                return View("Index");
+                return RedirectToAction("Index", "Home");
             }
         }
     }

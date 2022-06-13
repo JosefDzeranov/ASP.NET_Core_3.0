@@ -1,4 +1,5 @@
-﻿using OnlineShop.Db;
+﻿using Microsoft.AspNetCore.Identity;
+using OnlineShop.Db;
 using OnlineShop.DB.Models;
 using System;
 using System.Collections.Generic;
@@ -9,33 +10,36 @@ namespace OnlineShop.DB
     public class UsersDBRepository : IUserBase
     {
         private readonly DatabaseContext _databaseContext;
-
-        public UsersDBRepository(DatabaseContext databaseContext)
+        private readonly UserManager<User> _userManager;
+        private readonly SignInManager<User> _signInManager;
+        public UsersDBRepository(DatabaseContext databaseContext, UserManager<User> userManager, SignInManager<User> signInManager)
         {
             _databaseContext = databaseContext;
+            _userManager = userManager;
+            _signInManager = signInManager;
         }
 
         public IEnumerable<User> AllUsers()
         {
-            var users = _databaseContext.Users;
-            if (users.Any())
-            {
-                return users;
-            }
-            else
-            {
-                var newUser = new User() { UserName = "Firokikidreamtek" };
-                _databaseContext.Users.Add(newUser);
-                _databaseContext.SaveChanges();
-                return _databaseContext.Users;
-            }
+            var users = _userManager.Users.Where(x => !x.UserName.Contains("admin"));
+            //if (users.Any())
+            //{
+            return users;
+            //}
+            //else
+            //{
+            //    var newUser = new User() { UserName = "Firokikidreamtek" };
+            //    _userManager.Users.Add(newUser);
+            //    _databaseContext.SaveChanges();
+            //    return _databaseContext.Users;
+            //}
         }
 
 
 
         public User TryGetById(string userId)
         {
-            return _databaseContext.Users.FirstOrDefault(x => x.Id == userId);
+            return _userManager.Users.FirstOrDefault(x => x.Id == userId);
         }
 
         //public void NewPassword(NewPassword newPassword)
@@ -46,8 +50,8 @@ namespace OnlineShop.DB
 
         public void Delete(string userId)
         {
-            _databaseContext.Users.Remove(TryGetById(userId));
-            _databaseContext.SaveChanges();
+            //_userManager.Users.R(TryGetById(userId));
+            //_databaseContext.SaveChanges();
         }
 
         public void Edit(User user)
@@ -62,9 +66,9 @@ namespace OnlineShop.DB
 
         public void Add(User user)
         {
-            user.PhoneNumber = "Please, fill this field";
-            _databaseContext.Users.Add(user);
-            _databaseContext.SaveChanges();
+            //user.PhoneNumber = "Please, fill this field";
+            //_databaseContext.Users.Add(user);
+            //_databaseContext.SaveChanges();
 
         }
     }

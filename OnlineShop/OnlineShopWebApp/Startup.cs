@@ -42,8 +42,8 @@ namespace OnlineShopWebApp
             services.ConfigureApplicationCookie(options =>
             {
                 options.ExpireTimeSpan = TimeSpan.FromHours(24);
-                options.LoginPath = "/Account/Login";
-                options.LogoutPath = "/Account/Logout";
+                options.LoginPath = "/Authorization/Authorize";
+                options.LogoutPath = "/Authorization/Logout";
                 options.Cookie = new CookieBuilder()
                 {
                     IsEssential = true
@@ -53,7 +53,7 @@ namespace OnlineShopWebApp
             services.AddTransient<IProductBase, ProductsDBRepository>();
             services.AddTransient<ICartBase,CartsDBRepository>();
             services.AddTransient<IOrderBase, OrdersDBRepository>();
-            services.AddTransient<IUserBase, UsersDBRepository>();
+            //services.AddTransient<UserManager<User>, UsersDBRepository>();
 
 
             services.AddControllersWithViews();

@@ -1,5 +1,5 @@
 ﻿using Microsoft.AspNetCore.Identity;
-using System.ComponentModel.DataAnnotations;
+using System.Collections.Generic;
 
 namespace OnlineShop.DB.Models
 {
@@ -9,17 +9,10 @@ namespace OnlineShop.DB.Models
         public string FirstName { get; set; }
         public string LastName { get; set; }
 
-
         public User(string login)
         {
             Login = login;
         }
-
-        //public User(Registration registration)
-        //{
-        //    Login = registration.Login;
-        //    Password = registration.Password;
-        //}
         public User() { }
 
 
