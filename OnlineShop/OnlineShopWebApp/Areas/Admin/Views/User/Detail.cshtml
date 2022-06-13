@@ -1,4 +1,4 @@
-﻿@model UserAccount
+﻿@model UserViewModel
 <div class="row">
 	<div class="col-6">
 		<table class="table">
@@ -11,8 +11,8 @@
 				<td>@Model.Phone</td>
 			</tr>
 			<tr>
-				<td>Логин</td>
-				<td>@Model.Login</td>
+				<td>Email</td>
+				<td>@Model.Email</td>
 			</tr>
 		</table>
 	</div>
@@ -23,7 +23,7 @@
 	</button>
 	<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
 		<a class="dropdown-item" asp-area="Admin" asp-controller="User" asp-action="ChangePassword" asp-route-id="@Model.Name">Сменить пароль</a>
-		<a class="dropdown-item" asp-area="Admin" asp-controller="User" asp-action="Edit" asp-route-id="@Model.Name">Редактировать данные</a>
+		<a class="dropdown-item" asp-area="Admin" asp-controller="User" asp-action="Edit" asp-route-name="@Model.Name">Редактировать данные</a>
 		<a class="dropdown-item" asp-area="Admin" asp-controller="User" asp-action="EditRights" asp-route-id="@Model.Name">Права доступа</a>
-		<a class="dropdown-item" asp-area="Admin" asp-controller="User" asp-action="Remove" asp-route-id="@Model.Name">Удалить</a>
+		<a class="dropdown-item" asp-area="Admin" asp-controller="User" asp-action="Remove" asp-route-name="@Model.Name">Удалить</a>
 	</div>

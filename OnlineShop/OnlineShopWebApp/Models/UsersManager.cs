@@ -4,41 +4,41 @@ using OnlineShopWebApp.Models;
 
 namespace OnlineShopWebApp
 {
-    public class UsersManager : IUsersManager
+    public class InMemoryUserManager : IUsersManager
     {
-        private readonly List<UserAccount> users = new List<UserAccount>();
+        private readonly List<UserViewModel> users = new List<UserViewModel>();
 
-        public List<UserAccount> GetAll()
+        public List<UserViewModel> GetAll()
         {
             return users;
         }
-        public void Add(UserAccount user)
+        public void Add(UserViewModel user)
         {
             users.Add(user);
         }
 
-        public UserAccount TryGetByName(string name)
+        public UserViewModel TryGetByName(string name)
         {
             return users.FirstOrDefault(x => x.Name == name);
         }
 
-        public void ChangePassword (string userName, string newPassword)
+        public void ChangePassword(string userName, string newPassword)
         {
-            var account= TryGetByName(userName);
+            var account = TryGetByName(userName);
             account.Password = newPassword;
         }
 
         public void Remove(string id)
         {
-           users.Remove(TryGetByName(id));
+            users.Remove(TryGetByName(id));
         }
 
-        public void Edit(UserAccount user)
+        public void Edit(UserViewModel user)
         {
             var existingUser = TryGetByName(user.Name);
             existingUser.Phone = user.Phone;
-            existingUser.Login = user.Login;
-          
+            existingUser.Email = user.Email;
+
         }
     }
 }

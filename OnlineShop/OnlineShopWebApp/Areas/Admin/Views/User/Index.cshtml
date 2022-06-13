@@ -1,4 +1,4 @@
-﻿@model List<UserAccount>
+﻿@model List<UserViewModel>
 <div class="row">
 	@await Html.PartialAsync("AdminMenu")
 
@@ -25,7 +25,7 @@
 					<td>@(i+1)</td>
 					<td>@Model[i].Name</td>
 					<td>@Model[i].Phone</td>
-					<td>@Model[i].Login</td>
+					<td>@Model[i].Email</td>
 				<td><a 
 						asp-area="Admin"
 						asp-controller="User"

@@ -65,7 +65,6 @@ namespace OnlineShopWebApp
             services.AddTransient<ICustomerProfile, InMemoryCustomerProfile>();
             services.AddTransient<IOrdersRepository, OrdersDbRepository>();
             services.AddSingleton<IRolesRepository, InMemoryRolesRepository>();
-            services.AddSingleton<IUsersManager, UsersManager>();
             services.AddTransient<IFavoriteRepository, FavoriteDbRepository>();
             
             services.AddControllersWithViews();

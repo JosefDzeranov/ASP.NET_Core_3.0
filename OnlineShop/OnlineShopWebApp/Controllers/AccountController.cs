@@ -3,8 +3,6 @@ using Microsoft.AspNetCore.Mvc;
 using OnlineShop.db.Models;
 using OnlineShopWebApp.Models;
 
-
-
 namespace OnlineShopWebApp.Controllers
 {
     public class AccountController : Controller
@@ -12,7 +10,7 @@ namespace OnlineShopWebApp.Controllers
         private readonly UserManager<User> _userManager;
         private readonly SignInManager<User> _signInManager;
 
-        public AccountController(IUsersManager usersManager, UserManager<User> userManager,
+        public AccountController(UserManager<User> userManager,
             SignInManager<User> signInManager)
         {
             _userManager = userManager;
@@ -24,7 +22,6 @@ namespace OnlineShopWebApp.Controllers
         {
             return View(new UserCredentials() { ReturnUrl = returnUrl });
         }
-
 
         [HttpPost]
         public IActionResult Login(UserCredentials userCredentials)
@@ -43,10 +40,8 @@ namespace OnlineShopWebApp.Controllers
                     ModelState.AddModelError("", "Неверный логин или пароль");
                 }
             }
-
             return View(nameof(Login), userCredentials);
         }
-
 
         public IActionResult Logout(string returnUrl)
         {
