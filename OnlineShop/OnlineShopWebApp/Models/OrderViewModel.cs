@@ -8,7 +8,7 @@ namespace OnlineShopWebApp.Models
     public class OrderViewModel
     {
         public Guid Id { get; set; } = Guid.NewGuid();
-        public Guid UserId { get; set; }
+        public string UserId { get; set; }
         public CartViewModel Cart { get; set; }
         public DateTime Created { get; set; } = DateTime.Now;
 
