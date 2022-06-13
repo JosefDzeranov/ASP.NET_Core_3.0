@@ -20,14 +20,19 @@ namespace OnlineShopWebApp.Views.Shared.Components.Cart
 
         public IViewComponentResult Invoke()
         {
-            var userId = userManager.FindByNameAsync(User.Identity.Name).Result.Id;
-            var cartDb = cartRepository.TryGetByUserId(userId);
-            if(cartDb != null)
+            if (User.Identity.IsAuthenticated)
             {
-                var cartViewModel = cartDb.MappingToCartViewModel();
-                var productCount = cartViewModel?.Count ?? 0;
-                return View("Cart", productCount);
+                var userId = userManager.FindByNameAsync(User.Identity.Name).Result.Id;
+                var cartDb = cartRepository.TryGetByUserId(userId);
+                if (cartDb != null)
+                {
+                    var cartViewModel = cartDb.MappingToCartViewModel();
+                    var productCount = cartViewModel?.Count ?? 0;
+                    return View("Cart", productCount);
+                }
+                return View("Cart", 0);
             }
+            
 
             return View("Cart", 0);
         }

@@ -19,9 +19,14 @@ namespace OnlineShopWebApp.Views.Shared.Components.Favorites
 
         public IViewComponentResult Invoke()
         {
-            var userId = userManager.FindByNameAsync(User.Identity.Name).Result.Id;
-            var favorites = favoriteRepository.TryGetByUserId(userId);
-            var productCount = favorites?.Products.Count ?? (0);
+            var productCount = 0;
+            if (User.Identity.IsAuthenticated)
+            {
+                var userId = userManager.FindByNameAsync(User.Identity.Name).Result?.Id;
+                var favorites = favoriteRepository.TryGetByUserId(userId);
+                productCount = favorites?.Products.Count ?? 0;
+               
+            }
             return View("Favorites", productCount);
         }
     }
