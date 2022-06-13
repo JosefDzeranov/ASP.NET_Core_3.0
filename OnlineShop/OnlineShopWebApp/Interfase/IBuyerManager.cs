@@ -12,13 +12,13 @@ namespace OnlineShopWebApp.Interfase
         void AddProductInCart(Product product, string buyerLogin);
         void DeleteProductInCart(Guid productId, string buyerLogin);
         void ReduceDuplicateProductCart(Guid productId, string buyerLogin);
-        List<OrderItem> CollectAllOrders();
-        OrderItem FindOrderItem(Guid orderId);
-        void UpdateOrderStatus(OrderItem newOrder);
+        List<Order> CollectAllOrders();
+        Order FindOrderItem(Guid orderId);
+        void UpdateOrderStatus(Order newOrder);
         void Buy(string buyerLogin);
         void ClearCart(string buyerLogin);
         UserBuyer FindBuyer(string buyerLogin);
-        void SaveInfoBuying(InfoBuying infoBuying, string buyerLogin);
+        void SaveInfoBuying(UserDeleveryInfo userDeleveryInfo, string buyerLogin);
         void ClearInfoBuying(string buyerLogin);
         void Remove(string login);
     }

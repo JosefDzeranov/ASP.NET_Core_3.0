@@ -3,22 +3,22 @@ using System.Collections.Generic;
 
 namespace OnlineShopWebApp.Models.Users.Buyer
 {
-    public class OrderItem
+    public class Order
     {
         public Guid Id { get; set; }
         public List<CartItem> CartItem { get; set; }
-        public InfoBuying InfoBuying { get; set; }
+        public UserDeleveryInfo UserDeleveryInfo { get; set; }
         public DateTime DateTime { get; set; }
         public string Status { get; set; }
         public string Login { get; set; }
         public decimal FullCost { get; set; }
 
-        public OrderItem()
+        public Order()
         {
 
         }
 
-        public OrderItem(List<CartItem> cartItem, string login, InfoBuying infoBuying)
+        public Order(List<CartItem> cartItem, string login, UserDeleveryInfo userDeleveryInfo)
         {
             Id = Guid.NewGuid();
             CartItem = new List<CartItem>(cartItem);
@@ -26,7 +26,7 @@ namespace OnlineShopWebApp.Models.Users.Buyer
             DateTime = DateTime.UtcNow;
             Status = MyConstant.RosterStatus[0];
             Login = login;
-            InfoBuying = infoBuying;
+            UserDeleveryInfo = userDeleveryInfo;
         }
 
         public string ShowUnitRegisterStatus(int index)

@@ -46,7 +46,7 @@ namespace OnlineShopWebApp
         public void Buy(string buyerLogin)
         {
             var buyer = FindBuyer(buyerLogin);
-            buyer.Orders.Add(new OrderItem(buyer.Cart, buyer.Login, buyer.InfoBuying));
+            buyer.Orders.Add(new Order(buyer.Cart, buyer.Login, buyer.UserDeleveryInfo));
             buyer.Cart.Clear();
             JsonStorage.Write(buyers);
         }
@@ -99,7 +99,7 @@ namespace OnlineShopWebApp
         #endregion
 
         #region Orders
-        public OrderItem FindOrderItem(Guid orderId)
+        public Order FindOrderItem(Guid orderId)
         {
             foreach (var buyer in buyers)
             {
@@ -115,9 +115,9 @@ namespace OnlineShopWebApp
             return null;
         }
 
-        public List<OrderItem> CollectAllOrders()
+        public List<Order> CollectAllOrders()
         {
-            List<OrderItem> collectAllOrders = new List<OrderItem>();
+            List<Order> collectAllOrders = new List<Order>();
             foreach (var buyer in buyers)
             {
                 var orders = buyer.Orders;
@@ -129,7 +129,7 @@ namespace OnlineShopWebApp
             return collectAllOrders;
         }
 
-        public void UpdateOrderStatus(OrderItem newOrder)
+        public void UpdateOrderStatus(Order newOrder)
         {
             var order = FindOrderItem(newOrder.Id);
             order.Status = newOrder.Status;
@@ -137,17 +137,17 @@ namespace OnlineShopWebApp
         }
         #endregion
 
-        #region InfoBuying
-        public void SaveInfoBuying(InfoBuying infoBuying, string buyerLogin)
+        #region UserDeleveryInfo
+        public void SaveInfoBuying(UserDeleveryInfo userDeleveryInfo, string buyerLogin)
         {
             var buyer = FindBuyer(buyerLogin);
-            buyer.InfoBuying = infoBuying;
+            buyer.UserDeleveryInfo = userDeleveryInfo;
             JsonStorage.Write(buyers);
         }
         public void ClearInfoBuying(string buyerLogin)
         {
             var buyer = FindBuyer(buyerLogin);
-            buyer.InfoBuying = null;
+            buyer.UserDeleveryInfo = null;
             JsonStorage.Write(buyers);
         }
         #endregion

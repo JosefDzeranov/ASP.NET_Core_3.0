@@ -11,11 +11,5 @@ namespace OnlineShopWebApp.Models.Users
         [StringLength(100, MinimumLength = 8, ErrorMessage = "Длина пароля должна быть от 8")]
         [Required(ErrorMessage = "Не указан пароль")]
         public string Password { get; set; }
-
-        //public UserAutorized(string login, string password)
-        //{
-        //    Login = login;
-        //    Password = password;
-        //}
     }
 }

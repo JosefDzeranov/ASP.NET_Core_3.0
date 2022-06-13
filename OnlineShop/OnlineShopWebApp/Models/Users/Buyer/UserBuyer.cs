@@ -10,8 +10,8 @@ namespace OnlineShopWebApp.Models.Users.Buyer
         public string Login { get; set; }
         public List<ProductViewModel> Comparisons { get; set; } = new List<ProductViewModel>();
         public List<CartItem> Cart { get; set; } = new List<CartItem>();
-        public InfoBuying InfoBuying { get; set; } = new InfoBuying();
-        public List<OrderItem> Orders { get; set; } = new List<OrderItem>();
+        public UserDeleveryInfo UserDeleveryInfo { get; set; } = new UserDeleveryInfo();
+        public List<Order> Orders { get; set; } = new List<Order>();
 
         public decimal SumCost(List<CartItem> listProducts)
         {

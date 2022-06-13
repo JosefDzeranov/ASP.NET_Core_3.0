@@ -26,7 +26,7 @@ namespace OnlineShopWebApp.Areas.Admin.Controllers
             return View(order);
         }
         [HttpPost]
-        public IActionResult SaveDetails(OrderItem newOrder)
+        public IActionResult SaveDetails(Order newOrder)
         {
             _buyerManager.UpdateOrderStatus(newOrder);
             var orderId = newOrder.Id;

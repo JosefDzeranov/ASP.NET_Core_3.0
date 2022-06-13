@@ -1,4 +1,4 @@
-﻿@model OrderItem
+﻿@model Order
 @{
     ViewData["Title"] = "Подробности заказа";
 }
@@ -17,37 +17,37 @@
                     <div class="row">
                         <div class="text-center col-3 ">Фамилия:</div>
                         <div class="col-9">
-                            <p>@Model.InfoBuying.Surname</p>
+                            <p>@Model.UserDeleveryInfo.Surname</p>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-3  text-center">Имя:</div>
                         <div class="col-9">
-                            <p>@Model.InfoBuying.Firstname</p>
+                            <p>@Model.UserDeleveryInfo.Firstname</p>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-3 text-center">Отчество:</div>
                         <div class="col-9">
-                            <p>@Model.InfoBuying.Secondname</p>
+                            <p>@Model.UserDeleveryInfo.Secondname</p>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-3  text-center">Контактный телефон:</div>
                         <div class="col-9">
-                            <p>@Model.InfoBuying.Phone</p>
+                            <p>@Model.UserDeleveryInfo.Phone</p>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-3  text-center">Электронная почта:</div>
                         <div class="col-9">
-                            <p>@Model.InfoBuying.Email</p>
+                            <p>@Model.UserDeleveryInfo.Email</p>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-3 text-center">Комментарий:</div>
                         <div class="col-9">
-                            <p>@Model.InfoBuying.Commentary</p>
+                            <p>@Model.UserDeleveryInfo.Commentary</p>
                         </div>
                     </div>
                     <div class="row">
