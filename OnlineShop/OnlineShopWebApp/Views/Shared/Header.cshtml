@@ -37,13 +37,12 @@
             @if (User.Identity.IsAuthenticated)
             {
                 <div class="dropdown text-end">
-                    <a href="#" class="d-block link-dark text-decoration-none dropdown-toggle" id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
-                        <img src="https://github.com/mdo.png" alt="mdo" width="52" height="52" class="rounded-circle">
+                    <a href="#" class="d-block link-light text-decoration-none dropdown-toggle" id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
+                        <img src="/images/defaultAvatar.png" alt="mdo" width="52" height="52" class="rounded-circle">
                     </a>
                     <ul class="dropdown-menu text-small" aria-labelledby="dropdownUser1">
-                        <li><a class="dropdown-item" href="#">New project...</a></li>
-                        <li><a class="dropdown-item" href="#">Settings</a></li>
-                        <li><a class="dropdown-item" href="#">Profile</a></li>
+                        <li><a class="dropdown-item" href="#">Мои заказы</a></li>
+                        <li><a class="dropdown-item" asp-area="" asp-controller="Account" asp-action="Profile">Профиль</a></li>
                         <li><hr class="dropdown-divider"></li>
                         <li><a class="dropdown-item" asp-area="" asp-controller="Account" asp-action="Logout">Выйти</a></li>
                     </ul>

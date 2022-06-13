@@ -254,10 +254,21 @@ namespace OnlineShopWebApp.Models
                 LastName = user.LastName,
                 Email = user.Email,
                 PhoneNumber = user.PhoneNumber,
-                AvatarPath = user.AvatarPath,
+                AvatarPath = user.AvatarPath ?? "/images/defaultAvatar.png",
             };
             return profileViewModel;
         }
+        public static User MappingToUser(this UserProfileViewModel userProfileViewModel, User user, string imagePath)
+        {
+            user.UserName = userProfileViewModel.Email;
+            user.FirstName = userProfileViewModel.FirstName;
+            user.LastName = userProfileViewModel.LastName;
+            user.Email = userProfileViewModel.Email;
+            user.PhoneNumber = userProfileViewModel.PhoneNumber;
+            user.AvatarPath = imagePath ?? user.AvatarPath;
+            return user;
+        }
+
         public static Product MappingToProduct(this AddProductViewModel addProductViewModel, List<string> filePaths)
         {
             return new Product

@@ -14,11 +14,13 @@ namespace OnlineShopWebApp.Controllers
 
         private readonly UserManager<User> userManager;
         private readonly SignInManager<User> signInManager;
-       
-        public AccountController( UserManager<User> userManager, SignInManager<User> signInManager)
+        private readonly IFilesUploader filesUploader;
+
+        public AccountController( UserManager<User> userManager, SignInManager<User> signInManager, IFilesUploader filesUploader)
         {
             this.userManager = userManager;
             this.signInManager = signInManager;
+            this.filesUploader = filesUploader;
         }
 
         [HttpGet]
@@ -98,9 +100,35 @@ namespace OnlineShopWebApp.Controllers
         [Authorize]
         public IActionResult Profile()
         {
-            var user = userManager.GetUserAsync(HttpContext.User).Result;
+            var user = userManager.FindByNameAsync(User.Identity.Name).Result;
             var userProfileViewModel = user.MappingToUserProfileViewModel();
             return View(userProfileViewModel);
+        }
+        [Authorize] 
+        public IActionResult EditProfile()
+        {
+            var user = userManager.FindByNameAsync(User.Identity.Name).Result;
+            var userProfileViewModel = user.MappingToUserProfileViewModel();
+            return View(userProfileViewModel);
+        }
+
+        [Authorize]
+        [HttpPost]
+        public IActionResult EditProfile(UserProfileViewModel userProfileViewModel)
+        {
+
+            if (ModelState.IsValid)
+            {
+                var imagePath = filesUploader.SaveFile(userProfileViewModel.UploadedImage, Const.AvatarDirectory);
+                var existingUser = userManager.FindByNameAsync(User.Identity.Name).Result;
+                var user = userProfileViewModel.MappingToUser(existingUser, imagePath);
+                userManager.UpdateAsync(user).Wait();
+
+                return RedirectToAction("Profile", "Account");
+            }
+            
+           return View(userProfileViewModel);
+           
         }
     }
 }
