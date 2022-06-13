@@ -4,11 +4,10 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Threading.Tasks;
 
 namespace OnlineShopWebApp.Helper
 {
-   
+
     public class ImagesProvider
     {
         private readonly IWebHostEnvironment appEnvoronment;
