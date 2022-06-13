@@ -1,9 +1,6 @@
-﻿using OnlineShopWebApp.Controllers;
+﻿using Microsoft.AspNetCore.Http;
 using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace OnlineShopWebApp.Models
 {
@@ -21,6 +18,8 @@ namespace OnlineShopWebApp.Models
         public string Description { get; set; }
 
         [Required(ErrorMessage = "Введите количество страниц")]
-        public int Pages { get; set; }        
+        public int Pages { get; set; }
+        public string ImagePath { get; set; }
+        public IFormFile UploadedFile { get; set; }
     }
 }

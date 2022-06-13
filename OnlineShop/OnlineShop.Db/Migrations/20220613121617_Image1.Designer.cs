@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using OnlineShop.Db;
 
 namespace OnlineShop.Db.Migrations
 {
     [DbContext(typeof(DatabaseContext))]
-    partial class DatabaseContextModelSnapshot : ModelSnapshot
+    [Migration("20220613121617_Image1")]
+    partial class Image1
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -176,37 +178,37 @@ namespace OnlineShop.Db.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("cd96483b-1355-42d8-af13-cbed6fb9c62b"),
+                            Id = new Guid("e584204a-a402-46c9-afc5-556392d53214"),
                             Cost = 450m,
                             Description = "Автор: Стивен Кинг Жанр: мистика, ужасы",
-                            ImagePath = "/images/products/king.jpg",
+                            ImagePath = "/images/products/image1.jpg",
                             Name = "Оно",
                             Pages = 1025
                         },
                         new
                         {
-                            Id = new Guid("10c24824-0593-4a95-b389-838561e14ee0"),
+                            Id = new Guid("f1fb6aa1-0734-4ce1-a703-c98fd7d2527b"),
                             Cost = 350m,
                             Description = "Автор: Терри Пратчетт Жанр: фэнтези",
-                            ImagePath = "/images/products/terri.jpg",
+                            ImagePath = "/images/products/image2.jpg",
                             Name = "Мрачный жнец",
                             Pages = 356
                         },
                         new
                         {
-                            Id = new Guid("51bfdd19-2d33-4b0b-896d-65432751deb4"),
+                            Id = new Guid("6077ff1c-0f23-403f-94b6-bdcbb72c6e40"),
                             Cost = 300m,
                             Description = "Автор: Джек Лондон Жанр: роман",
-                            ImagePath = "/images/products/london.jpg",
+                            ImagePath = "/images/products/image3.jpg",
                             Name = "Странник по звездам",
                             Pages = 332
                         },
                         new
                         {
-                            Id = new Guid("809659f0-cae4-4dc7-811c-4f4eabe5e2a4"),
+                            Id = new Guid("ee4ad8ee-3a4e-480e-922c-be7cdb3ce8b9"),
                             Cost = 350m,
                             Description = "Автор: Дарья Донцова Жанр: детектив",
-                            ImagePath = "/images/products/don.jpg",
+                            ImagePath = "/images/products/image4.jpg",
                             Name = "Крутые наследнички",
                             Pages = 425
                         });

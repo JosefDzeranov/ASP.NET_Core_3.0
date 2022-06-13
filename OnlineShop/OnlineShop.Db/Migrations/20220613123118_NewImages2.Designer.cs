@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using OnlineShop.Db;
 
 namespace OnlineShop.Db.Migrations
 {
     [DbContext(typeof(DatabaseContext))]
-    partial class DatabaseContextModelSnapshot : ModelSnapshot
+    [Migration("20220613123118_NewImages2")]
+    partial class NewImages2
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -176,7 +178,7 @@ namespace OnlineShop.Db.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("cd96483b-1355-42d8-af13-cbed6fb9c62b"),
+                            Id = new Guid("0468eb6c-d1e3-4241-9bbd-c556ef1267f5"),
                             Cost = 450m,
                             Description = "Автор: Стивен Кинг Жанр: мистика, ужасы",
                             ImagePath = "/images/products/king.jpg",
@@ -185,7 +187,7 @@ namespace OnlineShop.Db.Migrations
                         },
                         new
                         {
-                            Id = new Guid("10c24824-0593-4a95-b389-838561e14ee0"),
+                            Id = new Guid("560900d8-55c5-427d-9e2f-ec43fbfb9311"),
                             Cost = 350m,
                             Description = "Автор: Терри Пратчетт Жанр: фэнтези",
                             ImagePath = "/images/products/terri.jpg",
@@ -194,7 +196,7 @@ namespace OnlineShop.Db.Migrations
                         },
                         new
                         {
-                            Id = new Guid("51bfdd19-2d33-4b0b-896d-65432751deb4"),
+                            Id = new Guid("0e46f88c-f1b1-49fe-a6f5-5ec1b9b59766"),
                             Cost = 300m,
                             Description = "Автор: Джек Лондон Жанр: роман",
                             ImagePath = "/images/products/london.jpg",
@@ -203,10 +205,10 @@ namespace OnlineShop.Db.Migrations
                         },
                         new
                         {
-                            Id = new Guid("809659f0-cae4-4dc7-811c-4f4eabe5e2a4"),
+                            Id = new Guid("4d340a05-a91f-4b19-b3a4-06cbdf142281"),
                             Cost = 350m,
                             Description = "Автор: Дарья Донцова Жанр: детектив",
-                            ImagePath = "/images/products/don.jpg",
+                            ImagePath = "/images/products/don.png",
                             Name = "Крутые наследнички",
                             Pages = 425
                         });

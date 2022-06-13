@@ -32,6 +32,7 @@ namespace OnlineShop.Db
                     Cost = 450,
                     Description = "Автор: Стивен Кинг Жанр: мистика, ужасы",
                     Pages = 1025,
+                    ImagePath = "/images/products/king.jpg"
                 },
                 new Product
                 {
@@ -39,7 +40,8 @@ namespace OnlineShop.Db
                     Name = "Мрачный жнец",
                     Cost = 350,
                     Description = "Автор: Терри Пратчетт Жанр: фэнтези",
-                    Pages = 356
+                    Pages = 356,
+                    ImagePath = "/images/products/terri.jpg"
                 },
                 new Product
                 {
@@ -47,7 +49,8 @@ namespace OnlineShop.Db
                     Name = "Странник по звездам",
                     Cost = 300,
                     Description = "Автор: Джек Лондон Жанр: роман",
-                    Pages = 332
+                    Pages = 332,
+                    ImagePath = "/images/products/london.jpg"
                 },
                 new Product
                 {
@@ -55,7 +58,8 @@ namespace OnlineShop.Db
                     Name = "Крутые наследнички",
                     Cost = 350,
                     Description = "Автор: Дарья Донцова Жанр: детектив",
-                    Pages = 425
+                    Pages = 425,
+                    ImagePath = "/images/products/don.jpg"
                 }
             });
         }
