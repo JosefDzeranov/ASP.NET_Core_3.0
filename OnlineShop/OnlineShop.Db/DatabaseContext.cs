@@ -19,57 +19,62 @@ namespace OnlineShop.Db
         }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            modelBuilder.Entity<Image>().HasOne(p => p.Product).WithMany(p => p.Images).HasForeignKey(p => p.ProductId).OnDelete(DeleteBehavior.Cascade);
+
+            var product1Id = Guid.Parse("31825d42-7a2c-4245-84a5-32f044df42eb");
+            var product2Id = Guid.Parse("99b708a2-dcf2-4614-9a52-6c828bf3ef01");
+            var product3Id = Guid.Parse("d93266b2-af1d-4d7b-abcf-7ff41138c8ad");
+            var product4Id = Guid.Parse("dc3024e6-a030-4aff-8d2b-8a1b8c35c1d8");
+            var product5Id = Guid.Parse("77e13cf3-2861-4c5f-9dfa-bde3eeb5eaf6");
+            var product6Id = Guid.Parse("c6acbc3f-3429-4cb7-8242-c896feb0c8ea");
+
+            var image1 = new Image
+            {
+                Id = Guid.Parse("ed104a21-5d13-43cf-86b6-dce052735bd5"),
+                Url = "/images/Products/image1.png",
+                ProductId = product1Id
+            };
+            var image2 = new Image
+            {
+                Id = Guid.Parse("58a00580-f628-42c8-a32d-371a7adf85bc"),
+                Url = "/images/Products/image2.png",
+                ProductId = product2Id
+            };
+            var image3 = new Image
+            {
+                Id = Guid.Parse("58a00580-f628-42c8-a32d-371a7adf85bc"),
+                Url = "/images/Products/image3.png",
+                ProductId = product3Id
+            };
+            var image4 = new Image
+            {
+                Id = Guid.Parse("baff13d6-da29-4a42-ad86-bf4ee29ec70b"),
+                Url = "/images/Products/image4.png",
+                ProductId = product4Id
+            };
+            var image5 = new Image
+            {
+                Id = Guid.Parse("3b0fed2c-8cbd-453f-93f4-90ff6c3ab7fb"),
+                Url = "/images/Products/image5.png",
+                ProductId = product5Id
+            };
+            var image6 = new Image
+            {
+                Id = Guid.Parse("29c149e1-553b-49b0-b106-6b0882a71745"),
+                Url = "/images/Products/image6.png",
+                ProductId = product6Id
+            };
+
+            modelBuilder.Entity<Image>().HasData(image1, image2, image3, image4, image5, image6);
+
             modelBuilder.Entity<Product>().HasData(new List<Product>()
             {
-                new Product()
-                {
-                    Id=Guid.NewGuid(),
-                    Name="Name1",
-                    Cost=1000,
-                    Description = "Description1",
-                    ImagePath="/images/item1.jpg",
-                },
-                new Product()
-                {
-                    Id=Guid.NewGuid(),
-                    Name="Name2",
-                    Cost=2000,
-                    Description = "Description2",
-                    ImagePath="/images/item2.jpg",
-                },
-                new Product()
-                {
-                    Id=Guid.NewGuid(),
-                    Name="Name3",
-                    Cost=3000,
-                    Description = "Description3",
-                    ImagePath="/images/item3.jpg",
-                },
-                new Product()
-                {
-                    Id=Guid.NewGuid(),
-                    Name="Name4",
-                    Cost=4000,
-                    Description = "Description4",
-                    ImagePath="/images/item4.jpg",
-                },
-                new Product()
-                {
-                    Id=Guid.NewGuid(),
-                    Name="Name5",
-                    Cost=5000,
-                    Description = "Description5",
-                    ImagePath="/images/item5.jpg",
-                },
-                new Product()
-                {
-                    Id= Guid.NewGuid(),
-                    Name="Name6",
-                    Cost=6000,
-                    Description = "Description6",
-                    ImagePath="/images/item6.jpg",
-                },
-
+                new Product(product1Id,"Name1",1000, "Description1"),
+                new Product(product2Id,"Name2",2000, "Description2"),
+                new Product(product3Id,"Name3",3000, "Description3"),
+                new Product(product4Id,"Name4",4000, "Description4"),
+                new Product(product5Id,"Name5",5000, "Description5"),
+                new Product(product6Id,"Name6",6000, "Description6"),
             }) ;
         }
     }
