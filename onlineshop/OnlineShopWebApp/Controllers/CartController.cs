@@ -40,7 +40,6 @@ namespace OnlineShopWebApp.Controllers
                 Name = product.Name,
                 Cost = product.Cost,
                 Description = product.Description,
-                ImagePath = product.ImagePath
             };
 
             cartsRepository.Remove(product, Constants.UserId);
