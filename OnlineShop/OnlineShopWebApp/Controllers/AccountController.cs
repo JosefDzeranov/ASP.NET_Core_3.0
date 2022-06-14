@@ -61,10 +61,10 @@ namespace OnlineShopWebApp.Controllers
         [HttpGet]
         public IActionResult Register(string returnUrl)
         {
-            return View(new RegisterViewModel() { ReturnUrl = returnUrl});
+            return View(new RegisterNewUserViewModel() { ReturnUrl = returnUrl});
         }
         [HttpPost]
-        public IActionResult Register(RegisterViewModel registerVM)
+        public IActionResult Register(RegisterNewUserViewModel registerVM)
         {
             if (registerVM.Password == registerVM.FirstName)
             {
@@ -85,7 +85,12 @@ namespace OnlineShopWebApp.Controllers
                 {
                     userManager.AddToRoleAsync(user, Const.UserRoleName).Wait();
                     signInManager.SignInAsync(user, false).Wait();
-                    return Redirect(registerVM.ReturnUrl);
+
+                    if (registerVM.ReturnUrl != null)
+                    {
+                        return Redirect(registerVM.ReturnUrl);
+                    }
+                    return RedirectToAction("Index", "Home");
                 }
                 else
                 {
