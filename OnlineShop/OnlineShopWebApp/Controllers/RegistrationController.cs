@@ -1,23 +1,25 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using OnlineShopWebApp.Areas.Admin.Models;
+﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc;
+using OnlineShop.db.Models;
 using OnlineShopWebApp.Models;
 
 namespace OnlineShopWebApp.Controllers
 {
     public class RegistrationController : Controller
     {
-        private readonly IUsersManager usersManager;
+        private readonly UserManager<User> userManager;
+        private readonly SignInManager<User> signInManager;
 
-        public RegistrationController(IUsersManager usersManager)
+        public RegistrationController(UserManager<User> userManager, SignInManager<User> signInManager)
         {
-            this.usersManager = usersManager;
+            this.userManager = userManager;
+            this.signInManager = signInManager;
         }
 
-        public IActionResult Index() 
+        public IActionResult Index()
         {
             return View();
         }
-
 
         [HttpPost]
         public IActionResult Index(Registration registration)
@@ -27,7 +29,7 @@ namespace OnlineShopWebApp.Controllers
                 ModelState.AddModelError("", "Имя и логин не должны совпадать");
             }
 
-            return View("Registration");
+            return View("Registration", registration);
         }
 
 
@@ -37,28 +39,32 @@ namespace OnlineShopWebApp.Controllers
         }
 
         [HttpPost]
-
         public IActionResult Register(Registration registration)
         {
-            if (registration.UserName == registration.Password)
-            {
-                ModelState.AddModelError("", "Логин и пароль не должны совпадать");
-            }
-
             if (ModelState.IsValid)
             {
-                usersManager.Add(new UserAccount
+                User user = new User
                 {
-                    Name = registration.UserName,
-                    Login = registration.Login,
-                    Password = registration.Password,
-                    Phone=registration.Phone,
-                });
+                    UserName = registration.UserName,
+                    Email = registration.Login,
 
-                return RedirectToAction(nameof(HomeController.Index), "Home");
+                };
+                var result = userManager.CreateAsync(user, registration.Password).Result;
+                if (result.Succeeded)
+                {
+                    signInManager.SignInAsync(user, false).Wait();
+                    return RedirectToAction(nameof(HomeController.Index), "Home");
+                }
+                else
+                {
+                    foreach (var error in result.Errors)
+                    {
+                        ModelState.AddModelError(string.Empty, error.Description);
+                    }
+                }
             }
-
-            return RedirectToAction(nameof(Register));
+            return View(registration);
         }
+
     }
 }

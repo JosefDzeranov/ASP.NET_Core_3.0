@@ -3,7 +3,6 @@ using OnlineShop.db.Models;
 using System.Linq;
 using OnlineShop.Db;
 using Microsoft.EntityFrameworkCore;
-using System;
 
 
 namespace OnlineShop.db

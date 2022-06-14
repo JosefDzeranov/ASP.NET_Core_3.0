@@ -2,7 +2,6 @@
 using OnlineShopWebApp.Models;
 using OnlineShop.db.Models;
 using System.Linq;
-using System;
 using OnlineShop.db;
 
 namespace OnlineShopWebApp.Helpers
@@ -30,12 +29,17 @@ namespace OnlineShopWebApp.Helpers
 
         public static CartViewModel ToCartViewModel(Cart cart)
         {
-            return new CartViewModel
+            if (cart != null)
             {
-                Id = cart.Id,
-                UserId = cart.UserId,
-                Items = ToCartItemsViewModels(cart.Items).ToList(),
-            };
+                return new CartViewModel
+                {
+                    Id = cart.Id,
+                    UserId = cart.UserId,
+                    Items = ToCartItemsViewModels(cart.Items).ToList(),
+                };
+            }
+
+            return null;
         }
 
         public static CartItemViewModel ToCartItemViewModel(CartItem cartDbItem)
@@ -55,7 +59,7 @@ namespace OnlineShopWebApp.Helpers
             return new CustomerViewModel
             {
                 Id = customer.Id,
-                Name=customer.Name,
+                Name = customer.Name,
                 Phone = customer.Phone,
                 Adress = customer.Adress
             };
@@ -105,14 +109,14 @@ namespace OnlineShopWebApp.Helpers
                 yield return ToOrderViewModel(order);
             }
         }
-        public static Order ToOrder (OrderViewModel order)
+        public static Order ToOrder(OrderViewModel order)
         {
             return new Order
             {
                 Id = order.Id,
                 CreateDateTime = order.CreateDateTime,
                 Status = (OrderStatus)order.Status,
-                //Items = ToCartItems(order.CartItems).ToList(),
+
                 User = new Customer()
                 {
                     Name = order.Name,
@@ -120,18 +124,18 @@ namespace OnlineShopWebApp.Helpers
                     Adress = order.Address
                 },
             };
-               
+
         }
 
-        public static IEnumerable<CartItem> ToCartItems (IEnumerable<CartItemViewModel> cartItems)
+        public static IEnumerable<CartItem> ToCartItems(IEnumerable<CartItemViewModel> cartItems)
         {
             foreach (var item in cartItems)
             {
                 yield return ToCartItem(item);
             }
         }
-        
-        public static CartItem ToCartItem (CartItemViewModel cartItem)
+
+        public static CartItem ToCartItem(CartItemViewModel cartItem)
         {
             return new CartItem
             {
@@ -141,13 +145,13 @@ namespace OnlineShopWebApp.Helpers
             };
         }
 
-        public static Product ToProduct (ProductViewModel product)
+        public static Product ToProduct(ProductViewModel product)
         {
             return new Product(id: product.Id, name: product.Name, cost: product.Cost, description: product.Description,
                 imagePath: product.ImagePath);
         }
 
-        public static Customer ToCustomer (CustomerViewModel customer)
+        public static Customer ToCustomer(CustomerViewModel customer)
         {
             return new Customer
             {

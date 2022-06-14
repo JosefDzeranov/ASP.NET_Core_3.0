@@ -1,4 +1,5 @@
-﻿using OnlineShop.db.Models;
+﻿using System;
+using OnlineShop.db.Models;
 using OnlineShop.Db;
 using System.Collections.Generic;
 using System.Linq;
@@ -25,13 +26,14 @@ namespace OnlineShop.db
             {
                 cart = new Cart()
                 {
-                    UserId = userId,
+                    CreatedDateTime = DateTime.Now,
+                    UserId = userId
                 };
 
                 databaseContext.Carts.Add(cart);
-             }
+            }
 
-            var existingItem = cart.Items.Where(x=>x.Product.Id == product.Id).FirstOrDefault();
+            var existingItem = cart.Items.FirstOrDefault(x => x.Product.Id == product.Id);
 
             if (existingItem == null)
             {
@@ -67,7 +69,7 @@ namespace OnlineShop.db
         {
             var cart = TryGetByUserId(userId);
 
-            var existingItem = cart.Items.Where(x => x.Product.Id == product.Id).First();
+            var existingItem = cart.Items.First(x => x.Product.Id == product.Id);
 
             if (existingItem.Amount > 1)
             {
@@ -90,7 +92,7 @@ namespace OnlineShop.db
 
         public Cart TryGetByUserId(string userId)
         {
-            return databaseContext.Carts.FirstOrDefault(x => x.UserId == userId);
+            return databaseContext.Carts.Include(x=> x.Items).FirstOrDefault(x => x.UserId == userId);
         }
 
         public void GetAllProduct()
@@ -98,21 +100,5 @@ namespace OnlineShop.db
             throw new System.NotImplementedException();
         }
 
-        //public Dictionary<Product, int> CartItems { get; set; } = new Dictionary<Product, int>();
-
-        //public decimal Cost
-        //{
-        //    get
-        //    {
-        //        return CartItems.Sum(item => item.Key.Cost * item.Value);
-        //    }
-        //}
-        //public int Amount
-        //{
-        //    get
-        //    {
-        //        return CartItems.Sum(item => item.Value);
-        //    }
-        //}
     }
 }

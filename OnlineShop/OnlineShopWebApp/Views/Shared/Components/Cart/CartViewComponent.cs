@@ -17,7 +17,7 @@ namespace OnlineShopWebApp.Views.Shared.Components.Cart
 
         public IViewComponentResult Invoke()
         {
-            var cart = cartRepository.TryGetByUserId(Const.UserId);
+            var cart = cartRepository.TryGetByUserId(User.Identity.Name);
             int? productCount = cart?.Items.Sum(x=>x.Amount) ?? 0;
 
             if (productCount == 0)

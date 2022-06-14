@@ -4,11 +4,13 @@ using OnlineShopWebApp.Models;
 using OnlineShopWebApp.Helpers;
 using OnlineShop.Db;
 using System.Collections.Generic;
+using Microsoft.AspNetCore.Authorization;
 using OnlineShop.db.Models;
 
 namespace OnlineShopWebApp.Areas.Admin.Controllers
 {
-    [Area("Admin")]
+    [Area(Constants.AdminRoleName)]
+    [Authorize(Roles = Constants.AdminRoleName)]
     public class ProductController : Controller
     {
         private readonly IProductDataSource productDataSource;

@@ -1,13 +1,13 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using OnlineShopWebApp.Services;
 using OnlineShopWebApp.Models;
-using System.Collections.Generic;
 using OnlineShop.db;
-using OnlineShop.db.Models;
 using OnlineShopWebApp.Helpers;
+using Microsoft.AspNetCore.Authorization;
 
 namespace OnlineShopWebApp.Controllers
 {
+    [Authorize]
     public class OrderCompleteController : Controller
     {
         private readonly ICartRepository cartRepository;
@@ -27,14 +27,13 @@ namespace OnlineShopWebApp.Controllers
 
         public IActionResult Buy(OrderViewModel orderViewModel)
         {
-            var cartItems = cartRepository.TryGetByUserId(Const.UserId).Items;
-            //orderViewModel.CartItems = new List<CartItemViewModel>(Mapping.ToCartItemsViewModels(cartRepository.TryGetByUserId(Const.UserId).Items));
+            var cartItems = cartRepository.TryGetByUserId(User.Identity.Name).Items;
             var order = Mapping.ToOrder(orderViewModel);
             order.Items.AddRange(cartItems);
             ordersRepository.Add(order);
-            cartRepository.RemoveAll(Const.UserId);
+            cartRepository.RemoveAll(User.Identity.Name);
             return View();
         }
-        
+
     }
 }
