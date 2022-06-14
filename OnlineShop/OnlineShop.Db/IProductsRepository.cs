@@ -10,7 +10,6 @@ namespace OnlineShop.Db
         Product TryGetById(Guid id);
         void Add(Product product);
         void Update(Product product);
-        //void Delete(Guid productId);
     }
 
 }

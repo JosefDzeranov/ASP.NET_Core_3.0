@@ -40,9 +40,7 @@ namespace OnlineShopWebApp.Areas.Admin.Controllers
                 return View();
             }
 
-
             var imagesPaths = imagesProvider.SafeFiles(product.UploadedFiles, ImageFolders.Products);
-            //productsRepository.Add(productDb);
             productsRepository.Add(product.ToProduct(imagesPaths));
             return RedirectToAction(nameof(Index));
         }
