@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace OnlineShopWebApp.Models.Users.Buyer
+namespace OnlineShopWebApp.Models
 {
     public class UserDeleveryInfo
     {

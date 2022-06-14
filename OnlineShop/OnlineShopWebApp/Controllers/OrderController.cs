@@ -1,51 +1,53 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using OnlineShopWebApp.Filters;
 using OnlineShopWebApp.Interfase;
-using OnlineShopWebApp.Models.Users.Buyer;
+using OnlineShopWebApp.Models;
 
 namespace OnlineShopWebApp.Controllers
 {
     [ServiceFilter(typeof(CheckingForAuthorization))]
     public class OrderController : Controller
     {
-        private readonly IBuyerManager _buyerManager;
-        private readonly IUserManager _userManager;
-        public OrderController(IBuyerManager buyerManager, IUserManager userManager)
+        private readonly IOrdersManager _orderManager;
+        private readonly ICartsManager _cartsManager;
+        private readonly IUsersManager _usersManager;
+        public OrderController(IOrdersManager orderManager, IUsersManager usersManager, ICartsManager cartsManager)
         {
-            _buyerManager = buyerManager;
-            _userManager = userManager;
+            _orderManager = orderManager;
+            _usersManager = usersManager;
+            _cartsManager = cartsManager;
         }
 
         public IActionResult Index()
         {
-            var buyerLogin = _userManager.GetLoginAuthorizedUser();
-            return View(_buyerManager.FindBuyer(buyerLogin));
+            var buyerLogin = _usersManager.GetLoginAuthorizedUser();
+            return View(_usersManager.Find(buyerLogin));
         }
 
         [HttpPost]
 
         public IActionResult RewriteInfoBuying()
         {
-            var buyerLogin = _userManager.GetLoginAuthorizedUser();
-            _buyerManager.ClearInfoBuying(buyerLogin);
+            var buyerLogin = _usersManager.GetLoginAuthorizedUser();
+            _cartsManager.ClearInfoBuying(buyerLogin);
             return RedirectToAction("Index", new {buyerId = buyerLogin });
         }
 
         [HttpPost]
         public IActionResult BuyValid(UserDeleveryInfo userDeleveryInfo)
         {
-            var buyerLogin = _userManager.GetLoginAuthorizedUser();
+            var buyerLogin = _usersManager.GetLoginAuthorizedUser();
             if (ModelState.IsValid)
             {
-                _buyerManager.SaveInfoBuying(userDeleveryInfo, buyerLogin);
+                _cartsManager.SaveInfoBuying(userDeleveryInfo, buyerLogin);
                 return RedirectToAction("Buy", new {buyerId = buyerLogin });
             }
-            else return Content("errorValid");
+            return Content("errorValid");
         }
         public IActionResult Buy()
         {
-            var buyerLogin = _userManager.GetLoginAuthorizedUser();
-            _buyerManager.Buy(buyerLogin);
+            var buyerLogin = _usersManager.GetLoginAuthorizedUser();
+            _orderManager.Buy(buyerLogin);
             return View();
         }
     }

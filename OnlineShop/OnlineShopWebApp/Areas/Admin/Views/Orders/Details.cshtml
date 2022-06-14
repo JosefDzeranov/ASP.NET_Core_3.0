@@ -54,24 +54,7 @@
                         <div class="col-3 font-weight-bold">Состав заказа:</div>
                         <div class="col-9"></div>
                     </div>   
-                    @foreach (var cartItem in @Model.CartItem)
-                    {
-                        <div class="row">
-                            <div class="col-3"></div>
-                            <div class="col-9 ">
-                                <text>
-                                    @for (int c = 0; c < cartItem.additionalOptions.Count; c++)
-                                    {
-                                        <p></p>
-                                        <p class="font-weight-bold">Проект @cartItem.Product.CodeNumber . @cartItem.Product.Description (тип @(c+1))</p>
-                                        <p><img src="/image/@cartItem.Product.Images[0]" width="200"/></p>
-                                        <p>Цена: @cartItem.Product.Cost руб</p>
-                                        <p>Дополнительные опции: @cartItem.additionalOptions[0].TotalCost() руб</p>
-                                    }
-                                </text>
-                            </div>
-                        </div>
-                    }
+
                     <div class="row">
                         <div class="col-3  font-weight-bold">Общая стоймость заказа:</div>
                         <div class="col-9  font-weight-bold">@Model.FullCost</div>

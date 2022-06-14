@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace OnlineShopWebApp.Models.Users.Buyer
+namespace OnlineShopWebApp.Models
 {
     public class Order
     {
@@ -10,7 +10,7 @@ namespace OnlineShopWebApp.Models.Users.Buyer
         public UserDeleveryInfo UserDeleveryInfo { get; set; }
         public DateTime DateTime { get; set; }
         public string Status { get; set; }
-        public string Login { get; set; }
+        public string BuyerLogin { get; set; }
         public decimal FullCost { get; set; }
 
         public Order()
@@ -18,14 +18,14 @@ namespace OnlineShopWebApp.Models.Users.Buyer
 
         }
 
-        public Order(List<CartItem> cartItem, string login, UserDeleveryInfo userDeleveryInfo)
+        public Order(List<CartItem> cartItem, string buyerLogin, UserDeleveryInfo userDeleveryInfo)
         {
             Id = Guid.NewGuid();
             CartItem = new List<CartItem>(cartItem);
             CalculateFullCostOrder();
             DateTime = DateTime.UtcNow;
             Status = MyConstant.RosterStatus[0];
-            Login = login;
+            BuyerLogin = buyerLogin;
             UserDeleveryInfo = userDeleveryInfo;
         }
 
@@ -49,12 +49,8 @@ namespace OnlineShopWebApp.Models.Users.Buyer
             FullCost = 0;
             foreach (var cartItem in CartItem)
             {
-                foreach (var v in cartItem.additionalOptions)
-                {
-                    FullCost += (v.TotalCost() + cartItem.Product.Cost);
-                }
+                FullCost += cartItem.Product.Cost;
             }
-
         }
 
     }

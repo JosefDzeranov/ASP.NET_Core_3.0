@@ -1,18 +1,17 @@
 ﻿using System;
 using System.Collections.Generic;
-using OnlineShopWebApp.Models.Users;
+using OnlineShopWebApp.Models;
 
 namespace OnlineShopWebApp.Interfase
 {
-    public interface IUserManager
+    public interface IUsersManager
     {
         List<User> GetAll();
         void Authorized(UserAutorized user);
         string GetLoginAuthorizedUser();
         bool CheckingForAuthorization();
-        bool GettingAccess(string userLogin, string action, string controller, string area);
 
-        User FindByLogin(string userLogin);
+        User Find(string userLogin);
 
         void Add(UserRegistration userInput);
 

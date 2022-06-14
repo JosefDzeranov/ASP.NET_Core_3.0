@@ -7,19 +7,19 @@ namespace OnlineShopWebApp.Views.Shared.Components.InfoBuying
     // Бланк для заполнения данных покупателя для оформления заказа
     public class InfoBuyingViewComponent:ViewComponent
     {
-        private readonly IBuyerManager buyerManager;
-        private readonly IUserManager userManager;
+        private readonly ICartsManager _cartsManager;
+        private readonly IUsersManager usersManager;
 
-        public InfoBuyingViewComponent(IBuyerManager buyerManager, IUserManager userManager)
+        public InfoBuyingViewComponent(IUsersManager usersManager, ICartsManager cartsManager)
         {
-            this.buyerManager = buyerManager;
-            this.userManager = userManager;
+            this.usersManager = usersManager;
+            _cartsManager = cartsManager;
         }
 
         public IViewComponentResult Invoke()
         {
-            var buyerLogin = userManager.GetLoginAuthorizedUser();
-            var infoBuying = buyerManager.FindBuyer(buyerLogin).UserDeleveryInfo;
+            var buyerLogin = usersManager.GetLoginAuthorizedUser();
+            var infoBuying = _cartsManager.Find(buyerLogin).UserDeleveryInfo;
             return View("InfoBuying", infoBuying);
         }
     }
