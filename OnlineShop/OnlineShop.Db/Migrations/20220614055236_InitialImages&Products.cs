@@ -159,12 +159,12 @@ namespace OnlineShop.Db.Migrations
                 columns: new[] { "Id", "ProductId", "Url" },
                 values: new object[,]
                 {
-                    { new Guid("ed104a21-5d13-43cf-86b6-dce052735bd5"), new Guid("31825d42-7a2c-4245-84a5-32f044df42eb"), "/images/Products/image1.png" },
-                    { new Guid("1fcdb7e1-6c36-4d63-8d72-1de5f0be4c75"), new Guid("99b708a2-dcf2-4614-9a52-6c828bf3ef01"), "/images/Products/image2.png" },
-                    { new Guid("58a00580-f628-42c8-a32d-371a7adf85bc"), new Guid("d93266b2-af1d-4d7b-abcf-7ff41138c8ad"), "/images/Products/image3.png" },
-                    { new Guid("baff13d6-da29-4a42-ad86-bf4ee29ec70b"), new Guid("dc3024e6-a030-4aff-8d2b-8a1b8c35c1d8"), "/images/Products/image4.png" },
-                    { new Guid("3b0fed2c-8cbd-453f-93f4-90ff6c3ab7fb"), new Guid("77e13cf3-2861-4c5f-9dfa-bde3eeb5eaf6"), "/images/Products/image5.png" },
-                    { new Guid("29c149e1-553b-49b0-b106-6b0882a71745"), new Guid("c6acbc3f-3429-4cb7-8242-c896feb0c8ea"), "/images/Products/image6.png" }
+                    { new Guid("ed104a21-5d13-43cf-86b6-dce052735bd5"), new Guid("31825d42-7a2c-4245-84a5-32f044df42eb"), "/images/Products/item1.png" },
+                    { new Guid("1fcdb7e1-6c36-4d63-8d72-1de5f0be4c75"), new Guid("99b708a2-dcf2-4614-9a52-6c828bf3ef01"), "/images/Products/item2.png" },
+                    { new Guid("58a00580-f628-42c8-a32d-371a7adf85bc"), new Guid("d93266b2-af1d-4d7b-abcf-7ff41138c8ad"), "/images/Products/item3.png" },
+                    { new Guid("baff13d6-da29-4a42-ad86-bf4ee29ec70b"), new Guid("dc3024e6-a030-4aff-8d2b-8a1b8c35c1d8"), "/images/Products/item4.png" },
+                    { new Guid("3b0fed2c-8cbd-453f-93f4-90ff6c3ab7fb"), new Guid("77e13cf3-2861-4c5f-9dfa-bde3eeb5eaf6"), "/images/Products/item5.png" },
+                    { new Guid("29c149e1-553b-49b0-b106-6b0882a71745"), new Guid("c6acbc3f-3429-4cb7-8242-c896feb0c8ea"), "/images/Products/item6.png" }
                 });
 
             migrationBuilder.CreateIndex(

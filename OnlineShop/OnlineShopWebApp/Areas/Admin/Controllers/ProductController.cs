@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using OnlineShop.Db;
 using OnlineShop.Db.Models;
+using OnlineShopWebApp.Admin.Models;
 using OnlineShopWebApp.Helper;
 using OnlineShopWebApp.Models;
 using System;
@@ -12,10 +13,12 @@ namespace OnlineShopWebApp.Areas.Admin.Controllers
     public class ProductController : Controller
     {
         private readonly IProductsRepository productsRepository;
+        private readonly ImagesProvider imagesProvider;
 
-        public ProductController(IProductsRepository productsRepository)
+        public ProductController(IProductsRepository productsRepository, ImagesProvider imagesProvider)
         {
             this.productsRepository = productsRepository;
+            this.imagesProvider = imagesProvider;
         }
         
         public IActionResult Index()
@@ -30,22 +33,18 @@ namespace OnlineShopWebApp.Areas.Admin.Controllers
         }
 
         [HttpPost]
-        public IActionResult Add(ProductViewModel product)
+        public IActionResult Add(AddProductViewModel product)
         {
             if (!ModelState.IsValid)
             {
                 return View();
             }
 
-            var productDb = new Product
-            {
-                Name = product.Name,
-                Cost = product.Cost,
-                Description = product.Description
-            };
 
-            productsRepository.Add(productDb);
-            return RedirectToAction("Index");
+            var imagesPaths = imagesProvider.SafeFiles(product.UploadedFiles, ImageFolders.Products);
+            //productsRepository.Add(productDb);
+            productsRepository.Add(product.ToProduct(imagesPaths));
+            return RedirectToAction(nameof(Index));
         }
 
         public IActionResult Edit(Guid productId)

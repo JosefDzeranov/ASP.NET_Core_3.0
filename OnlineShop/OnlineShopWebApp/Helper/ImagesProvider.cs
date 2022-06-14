@@ -7,10 +7,14 @@ using System.Linq;
 
 namespace OnlineShopWebApp.Helper
 {
-
     public class ImagesProvider
     {
-        private readonly IWebHostEnvironment appEnvoronment;
+        private readonly IWebHostEnvironment appEnvironment;
+
+        public ImagesProvider(IWebHostBuilder appEnvironment)
+        {
+            this.appEnvironment = (IWebHostEnvironment)appEnvironment;
+        }
 
         public List<string> SafeFiles(IFormFile[] files, ImageFolders folder)
         {
@@ -27,7 +31,7 @@ namespace OnlineShopWebApp.Helper
         {
             if (file!=null)
             {
-                var folderPath = Path.Combine(appEnvoronment.WebRootPath + "/images/" + folder);
+                var folderPath = Path.Combine(appEnvironment.WebRootPath + "/images/" + folder);
                 if (!Directory.Exists(folderPath))
                 {
                     Directory.CreateDirectory(folderPath);
