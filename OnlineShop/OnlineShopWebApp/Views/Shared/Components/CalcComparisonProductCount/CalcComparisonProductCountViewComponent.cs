@@ -6,12 +6,12 @@ namespace OnlineShopWebApp.Views.Shared.Components.CalcComparisonProductCount
 {
     public class CalcComparisonProductCountViewComponent : ViewComponent
     {
-        private readonly IComparisonManager _comparisonManager;
+        private readonly IComparisonRepository _comparisonRepository;
         private readonly IUsersManager usersManager;
-        public CalcComparisonProductCountViewComponent(IComparisonManager comparisonManager, IUsersManager usersManager)
+        public CalcComparisonProductCountViewComponent(IComparisonRepository comparisonRepository, IUsersManager usersManager)
         {
             this.usersManager = usersManager;
-            _comparisonManager = comparisonManager;
+            _comparisonRepository = comparisonRepository;
         }
 
         public IViewComponentResult Invoke()
@@ -24,7 +24,7 @@ namespace OnlineShopWebApp.Views.Shared.Components.CalcComparisonProductCount
             }
             else
             {
-                productCount = _comparisonManager.GetAll(buyerLogin).Count;
+                productCount = _comparisonRepository.GetAll(buyerLogin).Count;
             }
             return View("CalcComparisonProductCount", productCount);
         }

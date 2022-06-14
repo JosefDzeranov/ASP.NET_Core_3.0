@@ -8,36 +8,36 @@ using OnlineShop.Db.Models;
 
 namespace OnlineShop.Db
 {
-    public class СomparisonDbManager : IComparisonManager
+    public class FavoriteDbRepository: IFavoriteRepository
     {
         private readonly DatabaseContext databaseContext;
-        public СomparisonDbManager(DatabaseContext databaseContext)
+        public FavoriteDbRepository(DatabaseContext databaseContext)
         {
             this.databaseContext = databaseContext;
         }
 
         public void Add(string userId, Product product)
         {
-            var existingProduct = databaseContext.ComparisonProducts.FirstOrDefault(
+            var existingProduct = databaseContext.FavoriteProducts.FirstOrDefault(
                 x => x.UserId == userId && x.Product.Id == product.Id
                 );
             if (existingProduct == null)
             {
-                databaseContext.ComparisonProducts.Add(new ComparisonProduct { Product = product, UserId = userId });
+                databaseContext.FavoriteProducts.Add(new FavoriteProduct { Product = product, UserId = userId });
                 databaseContext.SaveChanges();
             }
         }
 
         public void Clear(string userId)
         {
-            var userСomparisonProducts = databaseContext.ComparisonProducts.Where(x => x.UserId == userId).ToList();
-            databaseContext.ComparisonProducts.RemoveRange(userСomparisonProducts);
+            var userFavoriteProducts = databaseContext.FavoriteProducts.Where(x => x.UserId == userId).ToList();
+            databaseContext.FavoriteProducts.RemoveRange(userFavoriteProducts);
             databaseContext.SaveChanges();
         }
 
         public List<Product> GetAll(string userId)
         {
-            return databaseContext.ComparisonProducts
+            return databaseContext.FavoriteProducts
                 .Where(x => x.UserId == userId)
                 .Include(x => x.Product)
                 .Select(x => x.Product)
@@ -47,9 +47,9 @@ namespace OnlineShop.Db
         public void Remove(string userId, Guid productId)
         {
             var removeFavorite =
-                databaseContext.ComparisonProducts.FirstOrDefault
+                databaseContext.FavoriteProducts.FirstOrDefault
                     (u => u.UserId == userId && u.Product.Id == productId);
-            databaseContext.ComparisonProducts.Remove(removeFavorite);
+            databaseContext.FavoriteProducts.Remove(removeFavorite);
             databaseContext.SaveChanges();
         }
     }

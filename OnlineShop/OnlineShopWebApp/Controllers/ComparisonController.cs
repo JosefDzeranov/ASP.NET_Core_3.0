@@ -10,38 +10,38 @@ namespace OnlineShopWebApp.Controllers
     public class ComparisonController : Controller
     {
         private readonly IUsersManager _usersManager;
-        private readonly IProductManager _productManager;
-        private readonly IComparisonManager _comparisonManager;
-        public ComparisonController(IProductManager productManager, IComparisonManager comparisonManager, IUsersManager usersManager)
+        private readonly IProductRepository _productRepository;
+        private readonly IComparisonRepository _comparisonRepository;
+        public ComparisonController(IProductRepository productRepository, IComparisonRepository comparisonRepository, IUsersManager usersManager)
         {
             _usersManager = usersManager;
-            _productManager = productManager;
-            _comparisonManager = comparisonManager;
+            _productRepository = productRepository;
+            _comparisonRepository = comparisonRepository;
         }
 
         public IActionResult Index()
         {
             var buyerLogin = _usersManager.GetLoginAuthorizedUser();
-            var products = _comparisonManager.GetAll(buyerLogin);
-            return View(Mapping.ToProductViewModels(products));
+            var products = _comparisonRepository.GetAll(buyerLogin);
+            return View(Mapping.ToProduct_ViewModels(products));
         }
         public IActionResult Add(Guid productId)
         {
             var buyerLogin = _usersManager.GetLoginAuthorizedUser();
-            var product = _productManager.Find(productId);
-            _comparisonManager.Add(buyerLogin, product);
+            var product = _productRepository.Find(productId);
+            _comparisonRepository.Add(buyerLogin, product);
             return RedirectToAction(nameof(Index));
         }
         public IActionResult Remove(Guid productId)
         {
             var buyerLogin = _usersManager.GetLoginAuthorizedUser();
-            _comparisonManager.Remove(buyerLogin, productId);
+            _comparisonRepository.Remove(buyerLogin, productId);
             return RedirectToAction(nameof(Index));
         }
         public IActionResult Clear()
         {
             var buyerLogin = _usersManager.GetLoginAuthorizedUser();
-            _comparisonManager.Clear(buyerLogin);
+            _comparisonRepository.Clear(buyerLogin);
             return RedirectToAction(nameof(Index));
         }
     }

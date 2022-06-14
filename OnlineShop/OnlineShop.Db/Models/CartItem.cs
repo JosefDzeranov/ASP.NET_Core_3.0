@@ -1,6 +1,4 @@
-﻿using OnlineShop.Db.Models;
-
-namespace OnlineShopWebApp.Models
+﻿namespace OnlineShop.Db.Models
 {
     public class CartItem
     {

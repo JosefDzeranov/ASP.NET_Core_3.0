@@ -7,19 +7,19 @@ namespace OnlineShopWebApp.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly IProductManager _productManager;
-        public HomeController(IProductManager productManager)
+        private readonly IProductRepository _productRepository;
+        public HomeController(IProductRepository productRepository)
         {
-            _productManager = productManager;
+            _productRepository = productRepository;
         }
 
         public IActionResult Index()
         {
-            var productsDb = _productManager.GetAll();
-            var productsViewModels = new List<ProductViewModel>();
+            var productsDb = _productRepository.GetAll();
+            var productsViewModels = new List<Product_ViewModel>();
             foreach (var product in productsDb)
             {
-                var productViewModels = new ProductViewModel
+                var productViewModels = new Product_ViewModel
                 {
                     Id = product.Id,
                     CodeNumber = product.CodeNumber,

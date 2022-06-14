@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace OnlineShopWebApp.Models
+namespace OnlineShop.Db.Models
 {
     public class Order
     {
@@ -54,4 +54,6 @@ namespace OnlineShopWebApp.Models
         }
 
     }
+
+
 }

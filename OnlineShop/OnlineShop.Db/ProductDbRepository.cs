@@ -6,10 +6,10 @@ using OnlineShop.Db.Models;
 
 namespace OnlineShop.Db
 {
-    public class ProductDbManager : IProductManager
+    public class ProductDbRepository : IProductRepository
     {
         private readonly DatabaseContext _databaseContext;
-        public ProductDbManager(DatabaseContext databaseContext)
+        public ProductDbRepository(DatabaseContext databaseContext)
         {
             _databaseContext = databaseContext;
         }

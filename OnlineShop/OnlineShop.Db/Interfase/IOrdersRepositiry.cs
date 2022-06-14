@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
-using OnlineShopWebApp.Models;
+using OnlineShop.Db.Models;
 
-namespace OnlineShopWebApp.Interfase
+namespace OnlineShop.Db.Interfase
 {
-    public interface IOrdersManager
+    public interface IOrdersRepositiry
     {
         void Add(Order order);
         List<Order> GetAll();

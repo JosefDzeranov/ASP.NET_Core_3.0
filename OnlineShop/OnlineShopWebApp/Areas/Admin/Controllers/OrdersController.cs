@@ -1,5 +1,6 @@
 ﻿using System;
 using Microsoft.AspNetCore.Mvc;
+using OnlineShop.Db.Models;
 using OnlineShopWebApp.Filters;
 using OnlineShopWebApp.Interfase;
 using OnlineShopWebApp.Models;

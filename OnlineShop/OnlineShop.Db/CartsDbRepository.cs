@@ -1,31 +1,27 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using OnlineShop.Db.Interfase;
 using OnlineShop.Db.Models;
-using OnlineShopWebApp.Interfase;
-using OnlineShopWebApp.Models;
 
-namespace OnlineShopWebApp
+namespace OnlineShop.Db
 {
-    public class CartsManager : ICartsManager
+    public class CartsDbRepository : ICartsRepository
     {
-        private readonly IProductManager _productManager;
-        private IWorkWithData jsonStorage { get; } = new JsonWorkWithData(nameSave);
-        private const string nameSave = "carts";
-        private List<Cart> carts = new List<Cart>();
+        private readonly DatabaseContext _databaseContext;
 
-        public CartsManager(IProductManager productManager)
+        public CartsDbRepository(DatabaseContext databaseContext)
         {
-            _productManager = productManager;
-            carts = jsonStorage.Read<List<Cart>>();
+            _databaseContext = databaseContext;
         }
         public List<Cart> GetAll()
         {
-            return carts;
+            return _databaseContext.Carts.ToList();
         }
 
         public Cart Find(string buyerLogin)
         {
+            var carts = GetAll();
             foreach (var cart in carts)
             {
                 if (cart.BuyerLogin == buyerLogin)
@@ -38,6 +34,7 @@ namespace OnlineShopWebApp
 
         public void CreateCartBuyer(string buyerLogin)
         {
+            var carts = GetAll();
             Cart cart = new Cart()
             {
                 BuyerLogin = buyerLogin
@@ -56,7 +53,7 @@ namespace OnlineShopWebApp
             }
             else
             {
-                var product = _productManager.Find(productId);
+                var product = _databaseContext.Products.FirstOrDefault(product => product.Id == productId);
                 cart.CartItems.Add(new CartItem(product));
             }
             fullSumm(buyerLogin);
@@ -126,7 +123,7 @@ namespace OnlineShopWebApp
             return sum;
         }
 
-        public void SaveInfoBuying(UserDeleveryInfo userDeleveryInfo, string buyerLogin)
+        public void SaveInfoBuying(UserDeleveryInfo_Views userDeleveryInfo, string buyerLogin)
         {
             var cart = Find(buyerLogin);
             cart.UserDeleveryInfo = userDeleveryInfo;

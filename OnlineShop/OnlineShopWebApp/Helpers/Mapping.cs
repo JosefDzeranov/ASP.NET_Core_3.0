@@ -6,13 +6,13 @@ namespace OnlineShopWebApp.Helpers
 {
     public class Mapping
     {
-        public static List<ProductViewModel> ToProductViewModels(List<Product> products)
+        public static List<Product_ViewModel> ToProduct_ViewModels(List<Product> products)
         {
-            List <ProductViewModel> productsViewModels = new List <ProductViewModel>();
+            List <Product_ViewModel> productsViewModels = new List <Product_ViewModel>();
             foreach (var product in products)
             {
                 productsViewModels.Add(
-                    new ProductViewModel
+                    new Product_ViewModel
                     {
                     Id = product.Id,
                     CodeNumber = product.CodeNumber,
@@ -25,6 +25,13 @@ namespace OnlineShopWebApp.Helpers
                 });
             }
             return productsViewModels;
+        }
+        public static Order_ViewModel ToOrder_ViewModels(Order products)
+        {
+            return new Order_ViewModel()
+            {
+                //
+            }
         }
     }
 }

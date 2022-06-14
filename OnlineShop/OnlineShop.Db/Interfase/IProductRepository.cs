@@ -4,7 +4,7 @@ using OnlineShop.Db.Models;
 
 namespace OnlineShop.Db.Interfase
 {
-    public interface IProductManager
+    public interface IProductRepository
     {
         Product Find(Guid productId);
         void Delete(Product product);

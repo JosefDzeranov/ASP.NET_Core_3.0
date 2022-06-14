@@ -4,7 +4,7 @@ using OnlineShop.Db.Models;
 
 namespace OnlineShop.Db.Interfase
 {
-    public interface IComparisonManager
+    public interface IFavoriteRepository
     {
         void Add(string userId, Product product);
         void Clear(string userId);

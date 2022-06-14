@@ -34,7 +34,7 @@ namespace OnlineShopWebApp.Controllers
         }
 
         [HttpPost]
-        public IActionResult BuyValid(UserDeleveryInfo userDeleveryInfo)
+        public IActionResult BuyValid(UserDeleveryInfo_ViewModel userDeleveryInfo)
         {
             var buyerLogin = _usersManager.GetLoginAuthorizedUser();
             if (ModelState.IsValid)
