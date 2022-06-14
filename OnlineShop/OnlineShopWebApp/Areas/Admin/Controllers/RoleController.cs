@@ -1,8 +1,11 @@
-﻿using Microsoft.AspNetCore.Authorization;
+﻿using System.Linq;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using OnlineShopWebApp.Services;
 using OnlineShopWebApp.Areas.Admin.Models;
 using OnlineShop.Db;
+using System.Collections.Generic;
 
 namespace OnlineShopWebApp.Areas.Admin.Controllers
 {
@@ -10,41 +13,52 @@ namespace OnlineShopWebApp.Areas.Admin.Controllers
     [Authorize(Roles = Constants.AdminRoleName)]
     public class RoleController : Controller
     {
-        private readonly IRolesRepository rolesRepository;
 
-        public RoleController(IRolesRepository rolesRepository)
+        private readonly RoleManager<IdentityRole> rolesManager;
+
+        public RoleController(RoleManager<IdentityRole> rolesManager)
         {
-            this.rolesRepository = rolesRepository;
+            this.rolesManager= rolesManager;
         }
         public IActionResult Index()
         {
-            var roles = rolesRepository.GetAll();
-            return View(roles);
+            var roles = rolesManager.Roles.ToList();
+            return View(roles.Select(x=>new RoleViewModel{Name = x.Name}).ToList());
         }
 
         public IActionResult Add()
         {
             return View();
         }
+
         [HttpPost]
 
-        public IActionResult Add(Role role)
+        public IActionResult Add(RoleViewModel role)
         {
-            if (rolesRepository.TryGetByName(role.Name) != null)
+            var result = rolesManager.CreateAsync(new IdentityRole(role.Name)).Result;
+            if (result.Succeeded)
             {
-                ModelState.AddModelError("", "Такая роль уже существует");
+                return RedirectToAction("Index");
             }
-            if (ModelState.IsValid)
+            else
             {
-                rolesRepository.Add(role);
-                return RedirectToAction(nameof(Index));
+                foreach (var error in result.Errors)
+                {
+                    ModelState.AddModelError(string.Empty, error.Description);
+                }
             }
             return View(role);
         }
 
         public IActionResult Remove(string roleName)
+
         {
-            rolesRepository.Remove(roleName);
+            var role = rolesManager.FindByNameAsync(roleName).Result;
+
+            if (role != null)
+            {
+                rolesManager.DeleteAsync(role).Wait();
+            }
             return RedirectToAction(nameof(Index));
         }
     }

@@ -16,11 +16,6 @@ namespace OnlineShopWebApp.Controllers
             this.signInManager = signInManager;
         }
 
-        public IActionResult Index()
-        {
-            return View();
-        }
-
         [HttpPost]
         public IActionResult Index(Registration registration)
         {
