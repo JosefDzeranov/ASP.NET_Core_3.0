@@ -56,10 +56,9 @@ namespace OnlineShopWebApp.Helpers
             {
                 Id = user.Id,
                 Login = user.Login,
-                FirstName = user.FirstName,
-                LastName = user.LastName,
-                Password = user.PasswordHash,
-                Phone = user.PhoneNumber,
+                FirstName = "Please, fill this field",
+                LastName = "Please, fill this field",
+                Phone = "Please, fill this field"
             };
             return userViewModel;
         }
@@ -73,19 +72,19 @@ namespace OnlineShopWebApp.Helpers
             return userDB;
         }
 
-        public static User ToUser(this UserViewModel user)
-        {
-            var userDB = new User
-            {
-                Id = user.Id,
-                Login = user.Login,
-                FirstName = user.FirstName,
-                LastName = user.LastName,
-                PasswordHash = user.Password,
-                PhoneNumber = user.Phone,
-            };
-            return userDB;
-        }
+        //public static User ToUser(this UserViewModel user)
+        //{
+        //    var userDB = new User
+        //    {
+        //        Id = user.Id,
+        //        Login = user.Login,
+        //        FirstName = user.FirstName,
+        //        LastName = user.LastName,
+        //        PasswordHash = user.Password,
+        //        PhoneNumber = user.Phone,
+        //    };
+        //    return userDB;
+        //}
 
         public static OrderViewModel ToOrderViewModel(this Order order)
         {

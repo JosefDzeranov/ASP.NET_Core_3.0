@@ -1,5 +1,7 @@
 ﻿@using OnlineShopWebApp.Models
 
+@model List<UserViewModel>
+
 <div class="row text-center">
 
     @await Html.PartialAsync("AdminMenu")
@@ -16,24 +18,25 @@
                     <th>Телефон</th>
                 </tr>
             </thead>
-            @foreach (var p in Model)
+
+            @for (var i = 0; i < Model.Count(); i++)
             {
                 <tbody>
                     <tr>
                         <td>
-                            @p.Id
+                            @(i+1)
                         </td>
                         <td>
-                            <a asp-area="admin" asp-controller="user" asp-action="Get" asp-route-userId="@p.Id">@p.Login</a>
+                            <a asp-area="admin" asp-controller="user" asp-action="Get" asp-route-userId="@Model[i].Id">@Model[i].Login</a>
                         </td>
                         <td>
-                            @p.FirstName
+                            @Model[i].FirstName
                         </td>
                         <td>
-                            @p.LastName
+                            @Model[i].LastName
                         </td>
                         <td>
-                            @p.Phone
+                            @Model[i].Phone
                         </td>
                     </tr>
                 </tbody>

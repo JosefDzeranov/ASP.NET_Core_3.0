@@ -9,20 +9,9 @@ namespace OnlineShopWebApp.Models
         public string Login { get; set; }
         public string? FirstName { get; set; }
         public string? LastName { get; set; }
-        public string Phone { get; set; }
-        public string Password { get; set; }
-        public UserViewModel(string id, string name, string phone, string password)
-        {
-            Id = id;
-            Login = name;
-            Phone = phone;
-            Password = password;
-        }
-        public UserViewModel(Registration registration)
-        {
-            Login = registration.Login;
-            Password = registration.Password;
-        }
+        public string? Phone { get; set; }
+        public string? Password { get; set; }
+
         public UserViewModel() { }
 
 
