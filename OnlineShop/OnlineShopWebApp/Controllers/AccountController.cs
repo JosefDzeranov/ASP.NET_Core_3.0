@@ -15,12 +15,14 @@ namespace OnlineShopWebApp.Controllers
         private readonly UserManager<User> userManager;
         private readonly SignInManager<User> signInManager;
         private readonly IFilesUploader filesUploader;
+        private readonly IOrderRepository ordersRepository;
 
-        public AccountController( UserManager<User> userManager, SignInManager<User> signInManager, IFilesUploader filesUploader)
+        public AccountController( UserManager<User> userManager, SignInManager<User> signInManager, IFilesUploader filesUploader, IOrderRepository ordersRepository)
         {
             this.userManager = userManager;
             this.signInManager = signInManager;
             this.filesUploader = filesUploader;
+            this.ordersRepository = ordersRepository;
         }
 
         [HttpGet]
@@ -129,6 +131,14 @@ namespace OnlineShopWebApp.Controllers
             
            return View(userProfileViewModel);
            
+        }
+
+        [Authorize]
+        public IActionResult UserOrders()
+        {
+            var userId = userManager.FindByNameAsync(User.Identity.Name).Result.Id;
+            var orders = ordersRepository.TryGetByUserId(userId);
+            return View(orders.MappingListOrderViewModel());
         }
     }
 }

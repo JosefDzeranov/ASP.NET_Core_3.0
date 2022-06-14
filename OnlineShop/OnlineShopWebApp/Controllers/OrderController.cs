@@ -1,6 +1,8 @@
 ﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using OnlineShop.DB;
+using OnlineShop.DB.Models;
 using OnlineShop.DB.Services;
 using OnlineShopWebApp.Models;
 using OnlineShopWebApp.Services;
@@ -15,15 +17,18 @@ namespace OnlineShopWebApp.Controllers
 
         private readonly ICartRepository cartRepository;
         private readonly IOrderRepository orderRepository;
-        public OrderController(ICartRepository cartRepository, IOrderRepository orderRepository)
+        private readonly UserManager<User> userManager;
+        public OrderController(ICartRepository cartRepository, IOrderRepository orderRepository, UserManager<User> userManager)
         {
             this.cartRepository = cartRepository;
             this.orderRepository = orderRepository;
+            this.userManager = userManager;
         }
 
         public IActionResult Index()
         {
-            var existingCart = cartRepository.TryGetByUserId(Const.UserId);
+            var userId = userManager.FindByNameAsync(User.Identity.Name).Result.Id;
+            var existingCart = cartRepository.TryGetByUserId(userId);
 
             var orderVM = new OrderViewModel();
             orderVM.Cart = existingCart.MappingToCartViewModel();
@@ -35,10 +40,11 @@ namespace OnlineShopWebApp.Controllers
         {
             if (ModelState.IsValid)
             {
-                var existingCart = cartRepository.TryGetByUserId(Const.UserId);
+                var userId = userManager.FindByNameAsync(User.Identity.Name).Result.Id;
+                var existingCart = cartRepository.TryGetByUserId(userId);
                 var order = orderViewModel.MappingToOrder(existingCart);
                 orderRepository.Add(order);
-                cartRepository.Clear(Const.UserId);
+                cartRepository.Clear(userId);
                 return View();
             }
             return RedirectToAction("Index", "Order");
