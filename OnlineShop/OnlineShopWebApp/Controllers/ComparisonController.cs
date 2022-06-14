@@ -11,37 +11,37 @@ namespace OnlineShopWebApp.Controllers
     {
         private readonly IUsersManager _usersManager;
         private readonly IProductManager _productManager;
-        private readonly IComparisonRepository _comparisonRepository;
-        public ComparisonController(IProductManager productManager, IComparisonRepository comparisonRepository, IUsersManager usersManager)
+        private readonly IComparisonManager _comparisonManager;
+        public ComparisonController(IProductManager productManager, IComparisonManager comparisonManager, IUsersManager usersManager)
         {
             _usersManager = usersManager;
             _productManager = productManager;
-            _comparisonRepository = comparisonRepository;
+            _comparisonManager = comparisonManager;
         }
 
         public IActionResult Index()
         {
             var buyerLogin = _usersManager.GetLoginAuthorizedUser();
-            var products = _comparisonRepository.GetAll(buyerLogin);
+            var products = _comparisonManager.GetAll(buyerLogin);
             return View(Mapping.ToProductViewModels(products));
         }
         public IActionResult Add(Guid productId)
         {
             var buyerLogin = _usersManager.GetLoginAuthorizedUser();
             var product = _productManager.Find(productId);
-            _comparisonRepository.Add(buyerLogin, product);
+            _comparisonManager.Add(buyerLogin, product);
             return RedirectToAction(nameof(Index));
         }
         public IActionResult Remove(Guid productId)
         {
             var buyerLogin = _usersManager.GetLoginAuthorizedUser();
-            _comparisonRepository.Remove(buyerLogin, productId);
+            _comparisonManager.Remove(buyerLogin, productId);
             return RedirectToAction(nameof(Index));
         }
         public IActionResult Clear()
         {
             var buyerLogin = _usersManager.GetLoginAuthorizedUser();
-            _comparisonRepository.Clear(buyerLogin);
+            _comparisonManager.Clear(buyerLogin);
             return RedirectToAction(nameof(Index));
         }
     }

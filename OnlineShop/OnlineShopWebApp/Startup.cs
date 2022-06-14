@@ -32,8 +32,8 @@ namespace OnlineShopWebApp
             services.AddDbContext<DatabaseContext>(options =>
                 options.UseSqlServer(connection));
             services.AddTransient<IProductManager, ProductDbManager>();
-            services.AddTransient<IFavoriteRepository, FavoriteDbRepository>();
-            services.AddTransient<IComparisonRepository, ÑomparisonDbRepository>();
+            services.AddTransient<IFavoriteManager, FavoriteDbManager>();
+            services.AddTransient<IComparisonManager, ÑomparisonDbManager>();
             services.AddTransient<ICartsManager, CartsManager>();
             services.AddTransient<IOrdersManager, OrdersManager>();
             services.AddTransient<IRoleManager, RoleManager>();

@@ -11,31 +11,31 @@ namespace OnlineShopWebApp.Controllers
     {
         private readonly IUsersManager _usersManager;
         private readonly IProductManager _productManager;
-        private readonly IFavoriteRepository _favoriteRepository;
-        public FavoriteController(IProductManager productManager, IFavoriteRepository favoriteRepository, IUsersManager usersManager)
+        private readonly IFavoriteManager _favoriteManager;
+        public FavoriteController(IProductManager productManager, IFavoriteManager favoriteManager, IUsersManager usersManager)
         {
             _usersManager = usersManager;
             _productManager = productManager;
-            _favoriteRepository = favoriteRepository;
+            _favoriteManager = favoriteManager;
         }
 
         public IActionResult Index()
         {
             var buyerLogin = _usersManager.GetLoginAuthorizedUser();
-            var products = _favoriteRepository.GetAll(buyerLogin);
+            var products = _favoriteManager.GetAll(buyerLogin);
             return View(Mapping.ToProductViewModels(products));
         }
         public IActionResult Add(Guid productId)
         {
             var buyerLogin = _usersManager.GetLoginAuthorizedUser();
             var product = _productManager.Find(productId);
-            _favoriteRepository.Add(buyerLogin, product);
+            _favoriteManager.Add(buyerLogin, product);
             return RedirectToAction(nameof(Index));
         }
         public IActionResult Remove(Guid productId)
         {
             var buyerLogin = _usersManager.GetLoginAuthorizedUser();
-            _favoriteRepository.Remove(buyerLogin, productId);
+            _favoriteManager.Remove(buyerLogin, productId);
             return RedirectToAction(nameof(Index));
         }
     }

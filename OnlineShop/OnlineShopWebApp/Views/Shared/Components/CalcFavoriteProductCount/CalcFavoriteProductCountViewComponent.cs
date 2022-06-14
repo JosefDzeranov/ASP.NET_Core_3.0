@@ -6,11 +6,11 @@ namespace OnlineShopWebApp.Views.Shared.Components.CalcFavoriteProductCount
 {
     public class CalcFavoriteProductCountViewComponent : ViewComponent
     {
-        private readonly IFavoriteRepository _favoriteRepository;
+        private readonly IFavoriteManager _favoriteManager;
         private readonly IUsersManager usersManager;
-        public CalcFavoriteProductCountViewComponent(IFavoriteRepository favoriteRepository, IUsersManager usersManager)
+        public CalcFavoriteProductCountViewComponent(IFavoriteManager favoriteManager, IUsersManager usersManager)
         {
-            _favoriteRepository = favoriteRepository;
+            _favoriteManager = favoriteManager;
             this.usersManager = usersManager;
         }
 
@@ -24,7 +24,7 @@ namespace OnlineShopWebApp.Views.Shared.Components.CalcFavoriteProductCount
             }
             else
             {
-                productCount = _favoriteRepository.GetAll(buyerLogin).Count;
+                productCount = _favoriteManager.GetAll(buyerLogin).Count;
             }
             return View("CalcFavoriteProductCount",productCount);
         }
