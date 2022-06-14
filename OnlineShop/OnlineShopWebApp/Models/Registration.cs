@@ -34,5 +34,6 @@ namespace OnlineShopWebApp.Models
         [Required(ErrorMessage = "Не указан повторный пароль")]
         [Compare("Password", ErrorMessage = "Пароли не совпадают")]
         public string ConfirmPassword { get; set; }
+        public string ReturnUrl { get; set; }
     }
 }

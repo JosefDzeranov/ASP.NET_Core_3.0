@@ -33,10 +33,11 @@ namespace OnlineShopWebApp.Controllers
         }
 
 
-        public IActionResult Register()
+        public IActionResult Register(string returnUrl)
         {
-            return View();
+            return View(new Registration() {ReturnUrl = returnUrl});
         }
+
 
         [HttpPost]
         public IActionResult Register(Registration registration)
@@ -53,7 +54,7 @@ namespace OnlineShopWebApp.Controllers
                 if (result.Succeeded)
                 {
                     signInManager.SignInAsync(user, false).Wait();
-                    return RedirectToAction(nameof(HomeController.Index), "Home");
+                    return Redirect(registration.ReturnUrl ?? "/Home");
                 }
                 else
                 {
