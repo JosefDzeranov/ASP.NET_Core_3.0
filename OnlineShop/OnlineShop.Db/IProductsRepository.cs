@@ -11,7 +11,7 @@ namespace OnlineShop.Db
         Product TryGetById(Guid id);
         List<Product> TryGetByName(string name);
         void Add(Product product);
-        void Edit(Product newProduct);
+        void Edit();
         void Delete(Guid id);
     }
 }

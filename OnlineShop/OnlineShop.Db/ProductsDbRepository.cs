@@ -29,13 +29,14 @@ namespace OnlineShop.Db
             databaseContext.SaveChanges();
         }
 
-        public void Edit(Product newProduct)
+        public void Edit()
         {
-            var product = databaseContext.Products.FirstOrDefault(x => x.Id == newProduct.Id);
-            product.Name = newProduct.Name;
-            product.Cost = newProduct.Cost;
-            product.Description = newProduct.Description;
-            product.Pages = newProduct.Pages;
+            //var product = databaseContext.Products.FirstOrDefault(x => x.Id == newProduct.Id);
+            //product.Name = newProduct.Name;
+            //product.Cost = newProduct.Cost;
+            //product.Description = newProduct.Description;
+            //product.Pages = newProduct.Pages;
+            //product.ImagePath = newProduct.ImagePath;
             databaseContext.SaveChanges();
         }
         public void Delete(Guid id)

@@ -57,7 +57,7 @@ namespace OnlineShopWebApp.Areas.Admin.Controllers
                 }
 
                 var productDb = new Product
-                {                    
+                {
                     Name = product.Name,
                     Cost = product.Cost,
                     Description = product.Description,
@@ -73,33 +73,54 @@ namespace OnlineShopWebApp.Areas.Admin.Controllers
         public IActionResult Edit(Guid productId)
         {
             var product = productsRepository.TryGetById(productId);
-            return View(Mapping.ToProductViewModel(product));
+            return View(new ProductViewModel
+            {
+                Id = product.Id,
+                Name = product.Name,
+                Description = product.Description,
+                Pages = product.Pages,
+                Cost = product.Cost,
+                ImagePath = product.ImagePath
+            });
         }
         [HttpPost]
-        public IActionResult Edit(ProductViewModel product)
+        public IActionResult Edit(ProductViewModel changedProduct)
         {
-            var productDb = new Product
+            if (!ModelState.IsValid)
             {
-                Name = product.Name,
-                Cost = product.Cost,
-                Description = product.Description,
-                Pages = product.Pages
-            };
+                return View(changedProduct);
+            }
 
-            if (ModelState.IsValid)
+            var product = productsRepository.TryGetById(changedProduct.Id);
+
+            product.Id = changedProduct.Id;
+            product.Name = changedProduct.Name;
+            product.Cost = changedProduct.Cost;
+            product.Description = changedProduct.Description;
+            product.Pages = changedProduct.Pages;
+
+            if (changedProduct.UploadedFile != null)
             {
-                productsRepository.Edit(productDb);
+                FileInfo fileInfo = new FileInfo(Path.Combine(appEnvironment.WebRootPath + product.ImagePath));
+                fileInfo.Delete();
+                string productImagePath = Path.Combine(appEnvironment.WebRootPath + "/images/products/");
+                var fileName = Guid.NewGuid() + "." + changedProduct.UploadedFile.FileName.Split('.').Last();
+                using (var fileStream = new FileStream(productImagePath + fileName, FileMode.Create))
+                {
+                    changedProduct.UploadedFile.CopyTo(fileStream);
+                }
+
+                product.ImagePath = "/images/products/" + fileName;                
+            }           
+
+            productsRepository.Edit();       
+            return RedirectToAction("Products");                                   
+        }
+
+            public IActionResult Delete(Guid productId)
+            {
+                productsRepository.Delete(productId);
                 return RedirectToAction("Products");
             }
-            else
-            {
-                return View(product);
-            }
-        }
-        public IActionResult Delete(Guid productId)
-        {
-            productsRepository.Delete(productId);
-            return RedirectToAction("Products");
         }
     }
-}
