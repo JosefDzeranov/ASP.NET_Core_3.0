@@ -2,7 +2,7 @@
 
 namespace OnlineShopWebApp.ViewModels
 {
-    public class RegisterNewUserViewModel
+    public class RegisterUserViewModel
     {
 
         [Required(ErrorMessage = "не указано имя")]

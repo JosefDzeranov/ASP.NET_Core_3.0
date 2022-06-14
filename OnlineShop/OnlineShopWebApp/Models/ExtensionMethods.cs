@@ -206,7 +206,7 @@ namespace OnlineShopWebApp.Models
             return usersViewModel;
         }
 
-        public static User MappingToUserFromRegisterViewModel(this RegisterViewModel regiserViewModel)
+        public static User MappingToUserFromRegisterViewModel(this AddUserViewModel regiserViewModel)
         {
             var user = new User
             {

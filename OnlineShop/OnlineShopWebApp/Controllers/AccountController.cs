@@ -63,10 +63,10 @@ namespace OnlineShopWebApp.Controllers
         [HttpGet]
         public IActionResult Register(string returnUrl)
         {
-            return View(new RegisterNewUserViewModel() { ReturnUrl = returnUrl});
+            return View(new RegisterUserViewModel() { ReturnUrl = returnUrl});
         }
         [HttpPost]
-        public IActionResult Register(RegisterNewUserViewModel registerVM)
+        public IActionResult Register(RegisterUserViewModel registerVM)
         {
             if (registerVM.Password == registerVM.FirstName)
             {
