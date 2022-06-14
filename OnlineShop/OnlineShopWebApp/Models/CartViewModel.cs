@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 
-namespace OnlineShopWebApp
+namespace OnlineShopWebApp.Models
 {
     public class CartViewModel
     {

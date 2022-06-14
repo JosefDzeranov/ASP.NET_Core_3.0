@@ -1,7 +1,7 @@
 ﻿using OnlineShopWebApp.Models;
 using System;
 
-namespace OnlineShopWebApp
+namespace OnlineShopWebApp.Models
 {
     public class CartItemViewModel
     {

@@ -1,35 +1,44 @@
 ﻿using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
+using OnlineShop.Db;
+using OnlineShopWebApp.Helper;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 
-namespace OnlineShopWebApp.Helper
+namespace OnlineShopWebApp.Models
 {
-    public class ImagesProvider
+    public class ImagesProvider : IImagesProvider
     {
         private readonly IWebHostEnvironment appEnvironment;
 
-        public ImagesProvider(IWebHostBuilder appEnvironment)
+        public ImagesProvider(IWebHostEnvironment appEnvironment)
         {
             this.appEnvironment = (IWebHostEnvironment)appEnvironment;
         }
 
         public List<string> SafeFiles(IFormFile[] files, ImageFolders folder)
         {
-            var imagesPaths = new List<string>();
-            foreach (var file in files)
+            if (files != null)
             {
-                var imagePath = SafeFile(file, folder);
-                imagesPaths.Add(imagePath);
+                {
+
+                }
+                var imagesPaths = new List<string>();
+                foreach (var file in files)
+                {
+                    var imagePath = SafeFile(file, folder);
+                    imagesPaths.Add(imagePath);
+                }
+                return imagesPaths;
             }
-            return imagesPaths;
+            return null;
         }
 
         public string SafeFile(IFormFile file, ImageFolders folder)
         {
-            if (file!=null)
+            if (file != null)
             {
                 var folderPath = Path.Combine(appEnvironment.WebRootPath + "/images/" + folder);
                 if (!Directory.Exists(folderPath))
@@ -47,7 +56,7 @@ namespace OnlineShopWebApp.Helper
             }
             return null;
         }
-            
+
     }
 
 }

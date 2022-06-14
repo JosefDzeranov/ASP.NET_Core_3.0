@@ -13,9 +13,9 @@ namespace OnlineShopWebApp.Areas.Admin.Controllers
     public class ProductController : Controller
     {
         private readonly IProductsRepository productsRepository;
-        private readonly ImagesProvider imagesProvider;
+        private readonly IImagesProvider imagesProvider;
 
-        public ProductController(IProductsRepository productsRepository, ImagesProvider imagesProvider)
+        public ProductController(IProductsRepository productsRepository, IImagesProvider imagesProvider)
         {
             this.productsRepository = productsRepository;
             this.imagesProvider = imagesProvider;
@@ -41,6 +41,7 @@ namespace OnlineShopWebApp.Areas.Admin.Controllers
             }
 
             var imagesPaths = imagesProvider.SafeFiles(product.UploadedFiles, ImageFolders.Products);
+
             productsRepository.Add(product.ToProduct(imagesPaths));
             return RedirectToAction(nameof(Index));
         }

@@ -25,7 +25,6 @@ namespace OnlineShopWebApp.Helper
                 Name = product.Name,
                 Cost = product.Cost,
                 Description = product.Description,
-                //ImagePath=product.ImagePath
                 ImagesPaths = product.Images.Select(x => x.Url).ToArray()
             };
         }
@@ -95,6 +94,6 @@ namespace OnlineShopWebApp.Helper
         {
             return paths.Select(x => new Image { Url = x }).ToList();
         }
-        //public static User ToUser(UserDeliveryInfo user)
+        
     }
 }

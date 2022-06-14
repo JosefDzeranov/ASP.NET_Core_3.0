@@ -4,6 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using OnlineShop.Db;
+using OnlineShopWebApp.Models;
 using Serilog;
 
 namespace OnlineShopWebApp
@@ -25,11 +26,14 @@ namespace OnlineShopWebApp
             // adds context MobileContext as a service for the app
             services.AddDbContext<DataBaseContext>(options =>
             options.UseSqlServer(connection));
+           
 
             services.AddTransient<IOrdersRepository, OrdersRepositoryDb>();
             services.AddTransient<IProductsRepository, ProductRepositoryDb>();
             services.AddTransient<ICartsRepository, CartsRepositoryDb>();
             services.AddTransient<IFavoriteRepository, FavoriteRepositoryDB>();
+            services.AddTransient<IImagesProvider, ImagesProvider>();
+
             services.AddControllersWithViews();
         }
 
