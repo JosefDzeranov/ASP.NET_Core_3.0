@@ -1,4 +1,4 @@
-﻿@model UserAccount
+﻿@model UserViewModel
 
 <form method="post" asp-action="Edit">
 <div class="row">
@@ -15,13 +15,17 @@
 		<input type="text" asp-for="Phone"/>
 		<span asp-validation-for="Phone">Редактировать телефон</span><br />
 
-		<input type="email" asp-for="Login"/>
-		<span asp-validation-for="Login">Редактировать логин</span><br />
+		<input type="email" asp-for="Email"/>
+		<span asp-validation-for="Email">Редактировать логин</span><br />
+		
 		<br />
 		<button type="submit" class="btn-outline-success"
-		asp-area="Admin"
-		asp-controller="User"
-		asp-action="Edit">Сохранить изменения</button>
+
+		        asp-area="Admin"
+		        asp-controller="User"
+		        asp-action="Edit"
+		        asp-route-name="@Model.Name">Сохранить изменения</button> 
 	</div>
+
 </div>
 </form>

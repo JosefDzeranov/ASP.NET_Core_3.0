@@ -26,7 +26,6 @@ namespace OnlineShopWebApp.Helpers
                 ImagePath = product.ImagePath,
             };
         }
-
         public static CartViewModel ToCartViewModel(Cart cart)
         {
             if (cart != null)
@@ -41,7 +40,6 @@ namespace OnlineShopWebApp.Helpers
 
             return null;
         }
-
         public static CartItemViewModel ToCartItemViewModel(CartItem cartDbItem)
         {
 
@@ -63,7 +61,6 @@ namespace OnlineShopWebApp.Helpers
                 Phone = customer.Phone,
                 Adress = customer.Adress
             };
-
         }
 
         public static IEnumerable<CartItemViewModel> ToCartItemsViewModels(IEnumerable<CartItem> cartDbItems)
@@ -76,10 +73,8 @@ namespace OnlineShopWebApp.Helpers
                     Amount = cartDbItem.Amount,
                     Product = ToProductViewModel(cartDbItem.Product)
                 };
-
             }
         }
-
         public static FavoriteProductViewModel ToFavoriteProductViewModel(FavoriteProduct favoriteProduct)
         {
             return new FavoriteProductViewModel
@@ -89,7 +84,6 @@ namespace OnlineShopWebApp.Helpers
                 FavoriteProducts = ToProductViewModels(favoriteProduct.Products).ToList()
             };
         }
-
         public static OrderViewModel ToOrderViewModel(Order order)
         {
             return new OrderViewModel
@@ -101,7 +95,6 @@ namespace OnlineShopWebApp.Helpers
                 CartItems = ToCartItemsViewModels(order.Items).ToList()
             };
         }
-
         public static IEnumerable<OrderViewModel> ToOrderViewModels(IEnumerable<Order> orders)
         {
             foreach (var order in orders)
@@ -126,7 +119,6 @@ namespace OnlineShopWebApp.Helpers
             };
 
         }
-
         public static IEnumerable<CartItem> ToCartItems(IEnumerable<CartItemViewModel> cartItems)
         {
             foreach (var item in cartItems)
@@ -134,7 +126,6 @@ namespace OnlineShopWebApp.Helpers
                 yield return ToCartItem(item);
             }
         }
-
         public static CartItem ToCartItem(CartItemViewModel cartItem)
         {
             return new CartItem
@@ -144,7 +135,6 @@ namespace OnlineShopWebApp.Helpers
                 Product = ToProduct(cartItem.Product),
             };
         }
-
         public static Product ToProduct(ProductViewModel product)
         {
             return new Product(id: product.Id, name: product.Name, cost: product.Cost, description: product.Description,
@@ -159,6 +149,16 @@ namespace OnlineShopWebApp.Helpers
                 Name = customer.Name,
                 Phone = customer.Phone,
                 Adress = customer.Adress,
+            };
+        }
+
+        public static UserViewModel ToUserViewModel(this User user)
+        {
+            return new UserViewModel
+            {
+                Name = user.UserName,
+                Phone = user.PhoneNumber,
+                Email = user.Email
             };
         }
     }

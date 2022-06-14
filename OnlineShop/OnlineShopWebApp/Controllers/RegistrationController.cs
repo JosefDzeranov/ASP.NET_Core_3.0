@@ -35,7 +35,7 @@ namespace OnlineShopWebApp.Controllers
 
         public IActionResult Register(string returnUrl)
         {
-            return View(new Registration() {ReturnUrl = returnUrl});
+            return View(new Registration() { ReturnUrl = returnUrl });
         }
 
 
@@ -48,6 +48,7 @@ namespace OnlineShopWebApp.Controllers
                 {
                     UserName = registration.UserName,
                     Email = registration.Login,
+                    PhoneNumber = registration.Phone,
 
                 };
                 var result = userManager.CreateAsync(user, registration.Password).Result;
