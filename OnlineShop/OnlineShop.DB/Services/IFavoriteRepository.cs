@@ -5,9 +5,9 @@ namespace OnlineShop.DB.Services
 {
     public interface IFavoriteRepository
     {
-        Favorite TryGetByUserId(Guid userId);
+        Favorite TryGetByUserId(string userId);
 
-        void Add(Product product, Guid userId);
-        void Remove(Product product, Guid userId);
+        void Add(Product product, string userId);
+        void Remove(Product product, string userId);
     }
 }

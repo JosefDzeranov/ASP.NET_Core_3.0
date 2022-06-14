@@ -14,7 +14,7 @@ namespace OnlineShop.DB.Services
             this.onlineShopContext = onlineShopContext;
         }
 
-        public void Add(Product product, Guid userId)
+        public void Add(Product product, string userId)
         {
             var existingFavorite = TryGetByUserId(userId);
             if (existingFavorite == null)
@@ -47,7 +47,7 @@ namespace OnlineShop.DB.Services
             onlineShopContext.SaveChanges();
         }
 
-        public void Remove(Product product, Guid userId)
+        public void Remove(Product product, string userId)
         {
             var existingFavorite = TryGetByUserId(userId);
             if (existingFavorite != null)
@@ -62,7 +62,7 @@ namespace OnlineShop.DB.Services
             onlineShopContext.SaveChanges();
         }
 
-        public Favorite TryGetByUserId(Guid userId)
+        public Favorite TryGetByUserId(string userId)
         {
             return onlineShopContext.Favorites.FirstOrDefault(x => x.UserId == userId);
         }

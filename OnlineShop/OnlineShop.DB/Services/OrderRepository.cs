@@ -31,9 +31,10 @@ namespace OnlineShopWebApp.Services
             return onlineShopContext.Orders.ToList();
         }
 
-        public Order TryGetByUserId(Guid userId)
+        public List<Order> TryGetByUserId(string userId)
         {
-            return onlineShopContext.Orders.FirstOrDefault(x => x.UserId == userId);
+            return onlineShopContext.Orders.Where(x => x.UserId == userId).ToList();
+
         }
 
         public void UpdateStatus(Guid orderId, OrderStatus status)
