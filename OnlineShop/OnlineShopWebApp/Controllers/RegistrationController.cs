@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using OnlineShop.db.Models;
 using OnlineShopWebApp.Models;
+using System;
 
 namespace OnlineShopWebApp.Controllers
 {
@@ -50,6 +51,7 @@ namespace OnlineShopWebApp.Controllers
                 if (result.Succeeded)
                 {
                     signInManager.SignInAsync(user, false).Wait();
+                    TryAssignUserRole(user);
                     return Redirect(registration.ReturnUrl ?? "/Home");
                 }
                 else
@@ -63,5 +65,17 @@ namespace OnlineShopWebApp.Controllers
             return View(registration);
         }
 
+        private void TryAssignUserRole(User user)
+        {
+            try
+            {
+                userManager.AddToRoleAsync(user, Const.UserRoleName).Wait();
+            }
+            catch (Exception)
+
+            {
+                throw;
+            }
+        }
     }
 }

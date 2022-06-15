@@ -8,6 +8,8 @@ using OnlineShop.db.Models;
 using System.Linq;
 using System.Collections.Generic;
 using OnlineShop.db;
+using OnlineShopWebApp.Areas.Admin.Models;
+using OnlineShopWebApp.Areas.Admin.Views.User;
 
 namespace OnlineShopWebApp.Areas.Admin.Controllers
 {
@@ -17,10 +19,12 @@ namespace OnlineShopWebApp.Areas.Admin.Controllers
     public class UserController : Controller
     {
         private readonly UserManager<User> userManager;
+        private readonly RoleManager<IdentityRole> rolesManager;
 
-        public UserController(UserManager<User> usersManager)
+        public UserController(UserManager<User> userManager, RoleManager<IdentityRole> rolesManager)
         {
-            this.userManager = usersManager;
+            this.userManager = userManager;
+            this.rolesManager = rolesManager;
         }
         public IActionResult Index()
         {
@@ -50,7 +54,7 @@ namespace OnlineShopWebApp.Areas.Admin.Controllers
             }
 
             if (ModelState.IsValid)
-               
+
             {
                 var user = userManager.FindByNameAsync(changePassword.UserName).Result;
                 var newHashPassword = userManager.PasswordHasher.HashPassword(user, changePassword.Password);
@@ -60,13 +64,14 @@ namespace OnlineShopWebApp.Areas.Admin.Controllers
             }
             return RedirectToAction(nameof(ChangePassword));
         }
-        public IActionResult Remove (string name)
+        public IActionResult Remove(string name)
         {
             var user = userManager.FindByNameAsync(name).Result;
             userManager.DeleteAsync(user).Wait();
             return RedirectToAction(nameof(Index));
 
         }
+
 
         [HttpGet]
         public IActionResult Edit(string name)
@@ -80,7 +85,7 @@ namespace OnlineShopWebApp.Areas.Admin.Controllers
         {
             if (ModelState.IsValid)
             {
-                var user=userManager.FindByNameAsync(userAccount.Name).Result;
+                var user = userManager.FindByNameAsync(userAccount.Name).Result;
 
                 user.UserName = userAccount.Name;
                 user.PhoneNumber = userAccount.Phone;
@@ -94,6 +99,35 @@ namespace OnlineShopWebApp.Areas.Admin.Controllers
                 return View(userAccount);
             }
         }
-   
+        public IActionResult EditRights(string name)
+        {
+            var user = userManager.FindByNameAsync(name).Result;
+            var userRoles = userManager.GetRolesAsync(user).Result;
+            var roles = rolesManager.Roles.ToList();
+
+            var model = new EditRightsViewModel
+            {
+                UserName = user.UserName,
+                UserRoles = userRoles.Select(x => new RoleViewModel { Name = x }).ToList(),
+                AllRoles = roles.Select(x => new RoleViewModel { Name = x.Name }).ToList()
+            };
+
+            return View(model);
+        }
+
+        [HttpPost]
+        public IActionResult EditRights(string userName, Dictionary<string, string> UserRolesViewModel)
+        {
+            var userSelectedRoles = UserRolesViewModel.Select(x => x.Key);
+
+            var user = userManager.FindByNameAsync(userName).Result;
+            var userRoles = userManager.GetRolesAsync(user).Result;
+
+            userManager.RemoveFromRolesAsync(user, userRoles).Wait();
+            userManager.AddToRolesAsync(user, userSelectedRoles).Wait();
+
+            return Redirect($"/Admin/User/Detail?name={userName}");
+        }
+
     }
 }
