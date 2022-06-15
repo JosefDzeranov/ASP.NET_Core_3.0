@@ -6,6 +6,7 @@ using OnlineShop.DB.Models;
 using OnlineShopWebApp.Models;
 using OnlineShopWebApp.Services;
 using OnlineShopWebApp.ViewModels;
+using System.Threading.Tasks;
 
 namespace OnlineShopWebApp.Controllers
 {
@@ -139,10 +140,10 @@ namespace OnlineShopWebApp.Controllers
         }
 
         [Authorize]
-        public IActionResult UserOrders()
+        public async Task<IActionResult> UserOrdersAsync()
         {
-            var userId = userManager.FindByNameAsync(User.Identity.Name).Result.Id;
-            var orders = ordersRepository.TryGetByUserId(userId);
+            var userId = (await userManager.FindByNameAsync(User.Identity.Name)).Id;
+            var orders = await ordersRepository.TryGetByUserIdAsync(userId);
             return View(orders.MappingListOrderViewModel());
         }
     }

@@ -1,8 +1,10 @@
-﻿using OnlineShop.DB;
+﻿using Microsoft.EntityFrameworkCore;
+using OnlineShop.DB;
 using OnlineShop.DB.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace OnlineShopWebApp.Services
 {
@@ -15,35 +17,35 @@ namespace OnlineShopWebApp.Services
             this.onlineShopContext = onlineShopContext;
         }
 
-        public void Add(Order order)
+        public async Task AddAsync(Order order)
         {
-            onlineShopContext.Orders.Add(order);
-            onlineShopContext.SaveChanges();
+            await onlineShopContext.Orders.AddAsync(order);
+            await onlineShopContext.SaveChangesAsync();
         }
 
-        public Order TryGetById(Guid Id)
+        public async Task<Order> TryGetByIdAsync(Guid Id)
         {
-            return onlineShopContext.Orders.FirstOrDefault(x => x.Id == Id);
+            return await onlineShopContext.Orders.FirstOrDefaultAsync(x => x.Id == Id);
         }
 
-        public List<Order> TryGetAll()
+        public async Task<List<Order>> TryGetAllAsync()
         {
-            return onlineShopContext.Orders.ToList();
+            return await onlineShopContext.Orders.ToListAsync();
         }
 
-        public List<Order> TryGetByUserId(string userId)
+        public async Task<List<Order>> TryGetByUserIdAsync(string userId)
         {
-            return onlineShopContext.Orders.Where(x => x.UserId == userId).ToList();
+            return await onlineShopContext.Orders.Where(x => x.UserId == userId).ToListAsync();
 
         }
 
-        public void UpdateStatus(Guid orderId, OrderStatus status)
+        public async Task UpdateStatusAsync(Guid orderId, OrderStatus status)
         {
 
-            var order = TryGetById(orderId);
+            var order = await TryGetByIdAsync(orderId);
             order.Status = status;
             onlineShopContext.Orders.Update(order);
-            onlineShopContext.SaveChanges();
+            await onlineShopContext.SaveChangesAsync();
         }
 
        

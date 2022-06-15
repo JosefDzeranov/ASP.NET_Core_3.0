@@ -43,7 +43,7 @@ namespace OnlineShopWebApp.Controllers
                 var userId = userManager.FindByNameAsync(User.Identity.Name).Result.Id;
                 var existingCart = cartRepository.TryGetByUserId(userId);
                 var order = orderViewModel.MappingToOrder(existingCart);
-                orderRepository.Add(order);
+                orderRepository.AddAsync(order);
                 cartRepository.Clear(userId);
                 return View();
             }
