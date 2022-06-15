@@ -18,6 +18,7 @@ namespace OnlineShop.Db.Models
 
         public Product()
         {
+            Id = Guid.NewGuid();
             CartLines = new List<CartLine>();
         }
 

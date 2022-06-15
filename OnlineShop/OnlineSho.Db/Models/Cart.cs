@@ -12,8 +12,11 @@ namespace OnlineShop.Db.Models
        
         public string UserId { get; set; } 
 
+        public DateTime CreatedDateTime { get; set; }
+
         public Cart()
         {
+            CreatedDateTime = DateTime.Now;
             CartLines = new List<CartLine>();
            
         }

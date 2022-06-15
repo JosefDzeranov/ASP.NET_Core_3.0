@@ -30,6 +30,7 @@ namespace OnlineShop.Db
 
         public List<Product> GetAll()
         {
+          
             return dataBaseContext.Products.ToList();
         }
       
