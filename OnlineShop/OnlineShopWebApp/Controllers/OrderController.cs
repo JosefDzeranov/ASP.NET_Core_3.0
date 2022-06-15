@@ -8,6 +8,7 @@ using OnlineShopWebApp.Models;
 using OnlineShopWebApp.Services;
 using OnlineShopWebApp.ViewModels;
 using System;
+using System.Threading.Tasks;
 
 namespace OnlineShopWebApp.Controllers
 {
@@ -25,10 +26,10 @@ namespace OnlineShopWebApp.Controllers
             this.userManager = userManager;
         }
 
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            var userId = userManager.FindByNameAsync(User.Identity.Name).Result.Id;
-            var existingCart = cartRepository.TryGetByUserId(userId);
+            var userId = (await userManager.FindByNameAsync(User.Identity.Name)).Id;
+            var existingCart = await cartRepository.TryGetByUserIdAsync(userId);
 
             var orderVM = new OrderViewModel();
             orderVM.Cart = existingCart.MappingToCartViewModel();
@@ -36,15 +37,15 @@ namespace OnlineShopWebApp.Controllers
         }
 
         [HttpPost]
-        public IActionResult Create(OrderViewModel orderViewModel)
+        public async Task<IActionResult> CreateAsync(OrderViewModel orderViewModel)
         {
             if (ModelState.IsValid)
             {
-                var userId = userManager.FindByNameAsync(User.Identity.Name).Result.Id;
-                var existingCart = cartRepository.TryGetByUserId(userId);
+                var userId = (await userManager.FindByNameAsync(User.Identity.Name)).Id;
+                var existingCart = await cartRepository.TryGetByUserIdAsync(userId);
                 var order = orderViewModel.MappingToOrder(existingCart);
-                orderRepository.AddAsync(order);
-                cartRepository.Clear(userId);
+                await orderRepository.AddAsync(order);
+                await cartRepository.ClearAsync(userId);
                 return View();
             }
             return RedirectToAction("Index", "Order");

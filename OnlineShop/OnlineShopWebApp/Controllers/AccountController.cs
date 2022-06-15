@@ -32,11 +32,11 @@ namespace OnlineShopWebApp.Controllers
             return View(new LoginViewModel(){ ReturnUrl = returnUrl});
         }
         [HttpPost]
-        public IActionResult Login(LoginViewModel loginVM)
+        public async Task<IActionResult> LoginAsync(LoginViewModel loginVM)
         {
             if (ModelState.IsValid)
             {
-                var result = signInManager.PasswordSignInAsync(loginVM.UserName, loginVM.Password, loginVM.RememberMe,false).Result;
+                var result = await signInManager.PasswordSignInAsync(loginVM.UserName, loginVM.Password, loginVM.RememberMe,false);
                 if (result.Succeeded)
                 {
                     if (loginVM.ReturnUrl != null)
@@ -54,9 +54,9 @@ namespace OnlineShopWebApp.Controllers
             return View(loginVM);
         }
         [Authorize]
-        public IActionResult Logout()
+        public async Task<IActionResult> LogoutAsync()
         {
-            signInManager.SignOutAsync().Wait();
+           await signInManager.SignOutAsync();
 
             return RedirectToAction("Index", "Home");
         }
@@ -67,7 +67,7 @@ namespace OnlineShopWebApp.Controllers
             return View(new RegisterUserViewModel() { ReturnUrl = returnUrl});
         }
         [HttpPost]
-        public IActionResult Register(RegisterUserViewModel registerVM)
+        public async Task<IActionResult> RegisterAync(RegisterUserViewModel registerVM)
         {
             if (registerVM.Password == registerVM.FirstName)
             {
@@ -82,12 +82,12 @@ namespace OnlineShopWebApp.Controllers
                     Email = registerVM.Email,
                 };
 
-                var result = userManager.CreateAsync(user, registerVM.Password).Result;
+                var result = await userManager.CreateAsync(user, registerVM.Password);
 
                 if (result.Succeeded)
                 {
-                    userManager.AddToRoleAsync(user, Const.UserRoleName).Wait();
-                    signInManager.SignInAsync(user, false).Wait();
+                    await userManager.AddToRoleAsync(user, Const.UserRoleName);
+                    await signInManager.SignInAsync(user, false);
 
                     if (registerVM.ReturnUrl != null)
                     {
@@ -106,31 +106,31 @@ namespace OnlineShopWebApp.Controllers
         }
 
         [Authorize]
-        public IActionResult Profile()
+        public async Task<IActionResult> ProfileAsync()
         {
-            var user = userManager.FindByNameAsync(User.Identity.Name).Result;
+            var user = await userManager.FindByNameAsync(User.Identity.Name);
             var userProfileViewModel = user.MappingToUserProfileViewModel();
             return View(userProfileViewModel);
         }
         [Authorize] 
-        public IActionResult EditProfile()
+        public async Task<IActionResult> EditProfileAsync()
         {
-            var user = userManager.FindByNameAsync(User.Identity.Name).Result;
+            var user = await userManager.FindByNameAsync(User.Identity.Name);
             var userProfileViewModel = user.MappingToUserProfileViewModel();
             return View(userProfileViewModel);
         }
 
         [Authorize]
         [HttpPost]
-        public IActionResult EditProfile(UserProfileViewModel userProfileViewModel)
+        public async Task<IActionResult> EditProfileAsync(UserProfileViewModel userProfileViewModel)
         {
 
             if (ModelState.IsValid)
             {
                 var imagePath = filesUploader.SaveFile(userProfileViewModel.UploadedImage, Const.AvatarDirectory);
-                var existingUser = userManager.FindByNameAsync(User.Identity.Name).Result;
+                var existingUser = await userManager.FindByNameAsync(User.Identity.Name);
                 var user = userProfileViewModel.MappingToUser(existingUser, imagePath);
-                userManager.UpdateAsync(user).Wait();
+                await userManager.UpdateAsync(user);
 
                 return RedirectToAction("Profile", "Account");
             }

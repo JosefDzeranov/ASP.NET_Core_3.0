@@ -1,7 +1,9 @@
-﻿using OnlineShop.DB.Models;
+﻿using Microsoft.EntityFrameworkCore;
+using OnlineShop.DB.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace OnlineShop.DB.Services
 
@@ -15,17 +17,17 @@ namespace OnlineShop.DB.Services
             this.onlineShopContext = onlineShopContext;
         }
 
-        public Cart TryGetByUserId(string userId)
+        public async Task<Cart> TryGetByUserIdAsync(string userId)
         {
-            return onlineShopContext.Carts.FirstOrDefault(x => x.UserId == userId);
+            return await onlineShopContext.Carts.FirstOrDefaultAsync(x => x.UserId == userId);
         }
-        public Cart TryGetById(Guid Id)
+        public async Task<Cart> TryGetByIdAsync(Guid Id)
         {
-            return onlineShopContext.Carts.FirstOrDefault(x => x.Id == Id);
+            return await onlineShopContext.Carts.FirstOrDefaultAsync(x => x.Id == Id);
         }
-        public void Add(Product product, string userId)
+        public async Task AddAsync(Product product, string userId)
         {
-            var existingCart = TryGetByUserId(userId);
+            var existingCart = await TryGetByUserIdAsync(userId);
             if (existingCart == null)
             {
                 var newCart = new Cart
@@ -42,7 +44,7 @@ namespace OnlineShop.DB.Services
                         }
                     }
                 };
-                onlineShopContext.Carts.Add(newCart);
+                await onlineShopContext.Carts.AddAsync(newCart);
 
             }
             else
@@ -62,30 +64,30 @@ namespace OnlineShop.DB.Services
                         Quantinity = 1
 
                     };
-                    onlineShopContext.CartItems.Add(carItem);
+                    await onlineShopContext.CartItems.AddAsync(carItem);
                     existingCart.Items.Add(carItem);
 
                 }
                 onlineShopContext.Carts.Update(existingCart);
             }
 
-            onlineShopContext.SaveChanges();
+            await onlineShopContext.SaveChangesAsync();
         }
 
-        public void Clear(string userId)
+        public async Task ClearAsync(string userId)
         {
-            var existingCart = TryGetByUserId(userId);
+            var existingCart = await TryGetByUserIdAsync(userId);
             if (existingCart != null)
             {
                 onlineShopContext.Carts.Remove(existingCart);
-                onlineShopContext.SaveChanges();
+                await onlineShopContext.SaveChangesAsync();
             }
 
         }
 
-        public void RemoveItem(Guid productId, string userId)
+        public async Task RemoveItemAsync(Guid productId, string userId)
         {
-            var existingCart = TryGetByUserId(userId);
+            var existingCart = await TryGetByUserIdAsync(userId);
             if (existingCart != null)
             {
                 var existingCartItem = existingCart.Items.FirstOrDefault(x => x.Product.Id == productId);
@@ -97,13 +99,13 @@ namespace OnlineShop.DB.Services
                         existingCart.Items.Remove(existingCartItem);
                     }
                     onlineShopContext.Carts.Update(existingCart);
-                    onlineShopContext.SaveChanges();
+                    await onlineShopContext.SaveChangesAsync();
                 }
             }
             if (existingCart.Items.Count == 0)
             {
                 onlineShopContext.Carts.Remove(existingCart);
-                onlineShopContext.SaveChanges();
+                await onlineShopContext.SaveChangesAsync();
             }
         }
 

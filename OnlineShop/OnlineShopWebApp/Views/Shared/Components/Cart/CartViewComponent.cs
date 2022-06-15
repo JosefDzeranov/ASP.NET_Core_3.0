@@ -4,6 +4,7 @@ using OnlineShop.DB;
 using OnlineShop.DB.Models;
 using OnlineShop.DB.Services;
 using OnlineShopWebApp.Models;
+using System.Threading.Tasks;
 
 namespace OnlineShopWebApp.Views.Shared.Components.Cart
 {
@@ -18,12 +19,12 @@ namespace OnlineShopWebApp.Views.Shared.Components.Cart
             this.userManager = userManager;
         }
 
-        public IViewComponentResult Invoke()
+        public async Task<IViewComponentResult> InvokeAsync()
         {
             if (User.Identity.IsAuthenticated)
             {
-                var userId = userManager.FindByNameAsync(User.Identity.Name).Result.Id;
-                var cartDb = cartRepository.TryGetByUserId(userId);
+                var userId = (await userManager.FindByNameAsync(User.Identity.Name)).Id;
+                var cartDb = await cartRepository.TryGetByUserIdAsync(userId);
                 if (cartDb != null)
                 {
                     var cartViewModel = cartDb.MappingToCartViewModel();
