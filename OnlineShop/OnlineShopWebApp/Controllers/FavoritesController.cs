@@ -25,12 +25,12 @@ namespace OnlineShopWebApp.Controllers
             this.userManager = userManager;
         }
 
-        public async Task <IActionResult> Index()
+        public async Task<IActionResult> Index()
         {
             var userId = userManager.FindByNameAsync(User.Identity.Name).Result.Id;
             var favorite = await favoriteRepository.TryGetByUserIdAsync(userId);
             var products = favorite?.Products;
-            if(products != null)
+            if (products != null)
             {
                 var productsViewModel = new List<ProductViewModel>();
 
@@ -52,7 +52,7 @@ namespace OnlineShopWebApp.Controllers
             var product = await productRepository.TryGetByIdAsync(productId);
             await favoriteRepository.AddAsync(product, userId);
 
-            return RedirectToAction(act, control, new{ id = productId });
+            return RedirectToAction(act, control, new { id = productId });
         }
 
         public async Task<IActionResult> Remove(Guid productId)
@@ -60,7 +60,7 @@ namespace OnlineShopWebApp.Controllers
             var userId = userManager.FindByNameAsync(User.Identity.Name).Result.Id;
             var product = await productRepository.TryGetByIdAsync(productId);
             await favoriteRepository.RemoveAsync(product, userId);
-            
+
             return RedirectToAction("Index");
         }
     }

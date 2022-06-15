@@ -18,7 +18,7 @@ namespace OnlineShopWebApp.Controllers
         private readonly IFilesUploader filesUploader;
         private readonly IOrderRepository ordersRepository;
 
-        public AccountController( UserManager<User> userManager, SignInManager<User> signInManager, IFilesUploader filesUploader, IOrderRepository ordersRepository)
+        public AccountController(UserManager<User> userManager, SignInManager<User> signInManager, IFilesUploader filesUploader, IOrderRepository ordersRepository)
         {
             this.userManager = userManager;
             this.signInManager = signInManager;
@@ -29,14 +29,14 @@ namespace OnlineShopWebApp.Controllers
         [HttpGet]
         public IActionResult Login(string returnUrl)
         {
-            return View(new LoginViewModel(){ ReturnUrl = returnUrl});
+            return View(new LoginViewModel() { ReturnUrl = returnUrl });
         }
         [HttpPost]
         public async Task<IActionResult> LoginAsync(LoginViewModel loginVM)
         {
             if (ModelState.IsValid)
             {
-                var result = await signInManager.PasswordSignInAsync(loginVM.UserName, loginVM.Password, loginVM.RememberMe,false);
+                var result = await signInManager.PasswordSignInAsync(loginVM.UserName, loginVM.Password, loginVM.RememberMe, false);
                 if (result.Succeeded)
                 {
                     if (loginVM.ReturnUrl != null)
@@ -56,7 +56,7 @@ namespace OnlineShopWebApp.Controllers
         [Authorize]
         public async Task<IActionResult> LogoutAsync()
         {
-           await signInManager.SignOutAsync();
+            await signInManager.SignOutAsync();
 
             return RedirectToAction("Index", "Home");
         }
@@ -64,7 +64,7 @@ namespace OnlineShopWebApp.Controllers
         [HttpGet]
         public IActionResult Register(string returnUrl)
         {
-            return View(new RegisterUserViewModel() { ReturnUrl = returnUrl});
+            return View(new RegisterUserViewModel() { ReturnUrl = returnUrl });
         }
         [HttpPost]
         public async Task<IActionResult> RegisterAync(RegisterUserViewModel registerVM)
@@ -112,7 +112,7 @@ namespace OnlineShopWebApp.Controllers
             var userProfileViewModel = user.MappingToUserProfileViewModel();
             return View(userProfileViewModel);
         }
-        [Authorize] 
+        [Authorize]
         public async Task<IActionResult> EditProfileAsync()
         {
             var user = await userManager.FindByNameAsync(User.Identity.Name);
@@ -134,9 +134,9 @@ namespace OnlineShopWebApp.Controllers
 
                 return RedirectToAction("Profile", "Account");
             }
-            
-           return View(userProfileViewModel);
-           
+
+            return View(userProfileViewModel);
+
         }
 
         [Authorize]
