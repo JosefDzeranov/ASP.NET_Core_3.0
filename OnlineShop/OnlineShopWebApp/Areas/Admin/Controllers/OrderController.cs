@@ -37,9 +37,9 @@ namespace OnlineShopWebApp.Areas.Admin.Controllers
             return RedirectToAction("Index", "Order");
         }
 
-        public IActionResult UpdateOrderStatus(Guid orderId, OrderStatus status)
+        public async Task<IActionResult> UpdateOrderStatusAsync(Guid orderId, OrderStatus status)
         {
-            orderRepository.UpdateStatusAsync(orderId, status);
+            await orderRepository.UpdateStatusAsync(orderId, status);
 
             return RedirectToAction("OrderDetails", "Order", new { orderId });
         }
