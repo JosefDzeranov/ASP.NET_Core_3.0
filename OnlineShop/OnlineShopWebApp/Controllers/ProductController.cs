@@ -22,14 +22,7 @@ namespace OnlineShopWebApp.Controllers
             {
                 return NotFound();
             }
-            var productViewModel = new ProductViewModel
-            {
-                Id = product.Id,
-                Name = product.Name,
-                Cost = product.Cost,
-                Description = product.Description,
-                ImgPath = product.ImgPath
-            };
+            var productViewModel = product.MappingToProductViewModel();
             return View(productViewModel);
         }
     }

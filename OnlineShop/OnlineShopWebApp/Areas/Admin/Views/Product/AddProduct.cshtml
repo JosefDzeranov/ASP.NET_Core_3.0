@@ -1,4 +1,4 @@
-﻿@model ProductViewModel
+﻿@model AddProductViewModel
 <div class="card shadow">
     <div class="card-body">
         <form asp-controller="Product" asp-action="AddProduct" enctype="multipart/form-data">
@@ -18,7 +18,7 @@
                     </div>
                       <div class="mb-3">
                           <label>Изображение:</label>
-                        <input type="file" class="form-control" asp-for="UploadedImg"/>  
+                        <input type="file" class="form-control" asp-for="UploadedImages" multiple/>  
                     </div>
                     <div class="mb-3 text-center">
                         <button type="submit" class="btn btn-dark">Добавить</button>

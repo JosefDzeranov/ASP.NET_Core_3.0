@@ -45,11 +45,11 @@ namespace OnlineShopWebApp.Areas.Admin.Controllers
         {
             var roles = roleManager.Roles.ToList();
 
-            return View(new RegisterViewModel() {Roles = roles});
+            return View(new AddUserViewModel() {Roles = roles});
         }
 
         [HttpPost]
-        public IActionResult AddUser(RegisterViewModel registerViewModel)
+        public IActionResult AddUser(AddUserViewModel registerViewModel)
         {
             if (registerViewModel.Password == registerViewModel.FirstName)
             {

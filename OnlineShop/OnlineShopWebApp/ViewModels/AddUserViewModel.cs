@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace OnlineShopWebApp.ViewModels
 {
-    public class RegisterViewModel
+    public class AddUserViewModel
     {
         [Required(ErrorMessage = "не указано имя")]
         [StringLength(16, MinimumLength = 2, ErrorMessage = "имя должно быть от 2 до 16 символов")]

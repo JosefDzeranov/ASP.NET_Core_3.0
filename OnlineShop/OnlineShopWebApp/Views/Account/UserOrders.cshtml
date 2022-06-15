@@ -1,0 +1,32 @@
+﻿@model List<OrderViewModel>
+
+    <div class="row justify-content-center">
+        <div class="card shadow my-2 col-lg-10">
+            <div class="card-body">
+                <h3>Список заказов</h3>
+                <div class="row">
+                    <table class="table">
+                        <tr>
+                            <th>№</th>
+                            <th>Сумма</th>
+                            <th>Статус</th>
+                            <th>Дата</th>
+                            <th>Время</th>
+                            <th></th>
+                        </tr>
+                        @foreach (var order in Model)
+                        {
+                            <tr>
+                                <td>@order.Id</td>
+                                <td>@order.Cart.TotalCost ₽</td>
+                                <td>@order.Status.GetEnumDisplayName()</td>
+                                <td>@order.Created.ToString("d")</td>
+                                <td>@order.Created.ToString("t")</td>
+                                <td><a asp-controller="Order" asp-action="OrderDetails" asp-route-orderId="@order.Id" class="btn btn-info">подробнее</a></td>
+                            </tr>
+                        }
+                    </table>
+                </div>
+            </div>
+        </div>  
+</div>

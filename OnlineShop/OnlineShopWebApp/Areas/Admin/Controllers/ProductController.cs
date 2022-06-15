@@ -18,12 +18,12 @@ namespace OnlineShopWebApp.Areas.Admin.Controllers
     public class ProductController : Controller
     {
         private readonly IProductRepository productRepository;
-        private readonly IWebHostEnvironment appEnviroment;
+        private readonly IFilesUploader filesUploader;
 
-        public ProductController(IProductRepository productRepository, IWebHostEnvironment appEnviroment)
+        public ProductController(IProductRepository productRepository, IFilesUploader filesUploader)
         {
             this.productRepository = productRepository;
-            this.appEnviroment = appEnviroment;
+            this.filesUploader = filesUploader;
 
         }
         public IActionResult Index()
@@ -47,27 +47,24 @@ namespace OnlineShopWebApp.Areas.Admin.Controllers
         public IActionResult EditProduct(Guid id)
         {
             var product = productRepository.TryGetById(id);
-            var productViewModel = product.MappingToProductViewModel();
-            return View(productViewModel);
+            var editProductViewModel = product.MappingToEditProductViewModel();
+            return View(editProductViewModel);
         }
         [HttpPost]
-        public IActionResult EditProduct(ProductViewModel productViewModel)
+        public IActionResult EditProduct(EditProductViewModel editProductViewModel)
         {
-            if (productViewModel.UploadedImg != null)
+            if (ModelState.IsValid)
             {
-                var uploadFile = new UploadFile(
-                    productViewModel.UploadedImg,
-                    appEnviroment.WebRootPath,
-                    Const.ImagesDirectory);
+                if (editProductViewModel.UploadedImages != null)
+                {
+                    var imagesPaths = filesUploader.SaveFiles(editProductViewModel.UploadedImages, Const.ImagesDirectory);
 
-                uploadFile.SaveFile();
-                productViewModel.ImgPath = uploadFile.FilePath;
+                    var productDb = editProductViewModel.MappingToProduct(imagesPaths);
+                    productRepository.Update(productDb);
+                }
+                return RedirectToAction("Index", "Product");
             }
-
-            var productDb = productViewModel.MappingToProduct();
-            productRepository.Update(productDb);
-
-            return RedirectToAction("Index", "Product");
+            return View(editProductViewModel);
         }
 
         public IActionResult AddProduct()
@@ -75,26 +72,18 @@ namespace OnlineShopWebApp.Areas.Admin.Controllers
             return View();
         }
         [HttpPost]
-        public IActionResult AddProduct(ProductViewModel productViewModel)
+        public IActionResult AddProduct(AddProductViewModel addProductViewModel)
         {
             if (ModelState.IsValid)
             {
-                if (productViewModel.UploadedImg != null)
-                {
-                    var uploadFile = new UploadFile(
-                        productViewModel.UploadedImg,
-                        appEnviroment.WebRootPath,
-                        Const.ImagesDirectory);
-
-                    uploadFile.SaveFile();
-                    productViewModel.ImgPath = uploadFile.FilePath;
-                }
-                var productDb = productViewModel.MappingToProduct();
+                var imagesPaths = filesUploader.SaveFiles(addProductViewModel.UploadedImages, Const.ImagesDirectory);
+                 
+                var productDb = addProductViewModel.MappingToProduct(imagesPaths);
                 productRepository.Add(productDb);
                 return RedirectToAction("Index", "Product");
             }
          
-            return View(productViewModel);
+            return View(addProductViewModel);
         }
 
 
