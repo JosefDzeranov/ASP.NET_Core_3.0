@@ -8,6 +8,7 @@ using OnlineShop.DB;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using OnlineShop.DB.Models;
+using System.Threading.Tasks;
 
 namespace OnlineShopWebApp.Controllers
 {
@@ -37,10 +38,10 @@ namespace OnlineShopWebApp.Controllers
             return View();
         }
 
-        public IActionResult Add(Guid productId)
+        public async Task<IActionResult> Add(Guid productId)
         {
             var userId = userManager.FindByNameAsync(User.Identity.Name).Result.Id;
-            var product = productRepository.TryGetById(productId);
+            var product = await productRepository.TryGetByIdAsync(productId);
             cartRepository.Add(product, userId);
 
             return RedirectToAction("Index");

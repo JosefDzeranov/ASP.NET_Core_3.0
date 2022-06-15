@@ -1,15 +1,16 @@
 ﻿using OnlineShop.DB.Models;
 using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace OnlineShop.DB.Services
 {
     public interface IProductRepository
     {
-        Product TryGetById(Guid id);
-        List<Product> GetAll();
-        void Delete(Product product);
-        void Add(Product product);
-        void Update(Product product);
+        Task<Product> TryGetByIdAsync(Guid id);
+        Task<List<Product>> GetAllAsync();
+        Task DeleteAsync(Product product);
+        Task AddAsync(Product product);
+        Task UpdateAsync(Product product);
     }
 }

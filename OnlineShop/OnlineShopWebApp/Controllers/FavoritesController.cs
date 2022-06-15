@@ -8,6 +8,7 @@ using OnlineShopWebApp.Models;
 using OnlineShopWebApp.Services;
 using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace OnlineShopWebApp.Controllers
 {
@@ -45,19 +46,19 @@ namespace OnlineShopWebApp.Controllers
         }
 
 
-        public IActionResult Add(Guid productId, string control, string act)
+        public async Task<IActionResult> Add(Guid productId, string control, string act)
         {
             var userId = userManager.FindByNameAsync(User.Identity.Name).Result.Id;
-            var product = productRepository.TryGetById(productId);
+            var product = await productRepository.TryGetByIdAsync(productId);
             favoriteRepository.Add(product, userId);
 
             return RedirectToAction(act, control, new{ id = productId });
         }
 
-        public IActionResult Remove(Guid productId)
+        public async Task<IActionResult> Remove(Guid productId)
         {
             var userId = userManager.FindByNameAsync(User.Identity.Name).Result.Id;
-            var product = productRepository.TryGetById(productId);
+            var product = await productRepository.TryGetByIdAsync(productId);
             favoriteRepository.Remove(product, userId);
             
             return RedirectToAction("Index");
