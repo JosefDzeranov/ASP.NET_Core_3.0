@@ -9,7 +9,7 @@ namespace OnlineShop.Db.Interfase
         List<Cart> GetAll();
         Cart Find(string buyerLogin);
         void CreateCartBuyer(string buyerLogin);
-        void AddProductInCart(Guid productId, string buyerLogin);
+        void AddProduct(Guid productId, string buyerLogin);
         void UpCountInCartItem(Guid productId, string buyerLogin);
         void DownCountInCartItem(Guid productId, string buyerLogin);
         void DeleteProductInCart(Guid productId, string buyerLogin);

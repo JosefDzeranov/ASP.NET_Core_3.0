@@ -31,7 +31,7 @@ namespace OnlineShopWebApp.Controllers
         public IActionResult AddProduct(Guid productId)
         {
             var buyerLogin = _usersManager.GetLoginAuthorizedUser();
-            _cartsRepository.AddProductInCart(productId, buyerLogin);
+            _cartsRepository.AddProduct(productId, buyerLogin);
             return RedirectToAction("Index");
         }
 

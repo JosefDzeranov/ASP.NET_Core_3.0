@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using Microsoft.EntityFrameworkCore;
 using OnlineShop.Db.Interfase;
 using OnlineShop.Db.Models;
 
@@ -21,15 +22,11 @@ namespace OnlineShop.Db
 
         public Cart Find(string buyerLogin)
         {
-            var carts = GetAll();
-            foreach (var cart in carts)
-            {
-                if (cart.BuyerLogin == buyerLogin)
-                {
-                    return cart;
-                }
-            }
-            return null;
+            var cart = _databaseContext.Carts
+                .Include(cart => cart.CartItems)
+                .ThenInclude(CartItem => CartItem.Product)
+                .FirstOrDefault(Cart => Cart.BuyerLogin == buyerLogin);
+            return cart;
         }
 
         public void CreateCartBuyer(string buyerLogin)
@@ -42,21 +39,22 @@ namespace OnlineShop.Db
             Save();
         }
 
-        public void AddProductInCart(Guid productId, string buyerLogin)
+        public void AddProduct(Guid productId, string buyerLogin)
         {
             var cart = Find(buyerLogin);
+            var product = _databaseContext.Products.Find(productId);
             var existingCartItem = cart.CartItems.Find(x => x.Product.Id == productId);
             if (existingCartItem != null)
             {
-                UpCountInCartItem(productId, buyerLogin);
+                existingCartItem.Count++;
             }
             else
             {
-                var product = _databaseContext.Products.FirstOrDefault(product => product.Id == productId);
-                _databaseContext.Carts.
-                    Where(x => x.BuyerLogin == buyerLogin).
-                    ToList()[0].CartItems.
-                    Add(new CartItem() { Count = 1, Id = new Guid(), Product = product, Cart = cart.Id});
+                cart.CartItems.Add(new CartItem()
+                {
+                    Product = product,
+                    Count = 1
+                });
             }
             Save();
             fullSumm(buyerLogin);
