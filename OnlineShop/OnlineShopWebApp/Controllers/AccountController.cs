@@ -14,11 +14,15 @@ namespace OnlineShopWebApp.Controllers
 
         private readonly UserManager<User> userManager;
         private readonly SignInManager<User> signInManager;
-       
-        public AccountController( UserManager<User> userManager, SignInManager<User> signInManager)
+        private readonly IFilesUploader filesUploader;
+        private readonly IOrderRepository ordersRepository;
+
+        public AccountController( UserManager<User> userManager, SignInManager<User> signInManager, IFilesUploader filesUploader, IOrderRepository ordersRepository)
         {
             this.userManager = userManager;
             this.signInManager = signInManager;
+            this.filesUploader = filesUploader;
+            this.ordersRepository = ordersRepository;
         }
 
         [HttpGet]
@@ -59,10 +63,10 @@ namespace OnlineShopWebApp.Controllers
         [HttpGet]
         public IActionResult Register(string returnUrl)
         {
-            return View(new RegisterViewModel() { ReturnUrl = returnUrl});
+            return View(new RegisterUserViewModel() { ReturnUrl = returnUrl});
         }
         [HttpPost]
-        public IActionResult Register(RegisterViewModel registerVM)
+        public IActionResult Register(RegisterUserViewModel registerVM)
         {
             if (registerVM.Password == registerVM.FirstName)
             {
@@ -83,7 +87,12 @@ namespace OnlineShopWebApp.Controllers
                 {
                     userManager.AddToRoleAsync(user, Const.UserRoleName).Wait();
                     signInManager.SignInAsync(user, false).Wait();
-                    return Redirect(registerVM.ReturnUrl);
+
+                    if (registerVM.ReturnUrl != null)
+                    {
+                        return Redirect(registerVM.ReturnUrl);
+                    }
+                    return RedirectToAction("Index", "Home");
                 }
                 else
                 {
@@ -93,6 +102,48 @@ namespace OnlineShopWebApp.Controllers
 
             }
             return View(registerVM);
+        }
+
+        [Authorize]
+        public IActionResult Profile()
+        {
+            var user = userManager.FindByNameAsync(User.Identity.Name).Result;
+            var userProfileViewModel = user.MappingToUserProfileViewModel();
+            return View(userProfileViewModel);
+        }
+        [Authorize] 
+        public IActionResult EditProfile()
+        {
+            var user = userManager.FindByNameAsync(User.Identity.Name).Result;
+            var userProfileViewModel = user.MappingToUserProfileViewModel();
+            return View(userProfileViewModel);
+        }
+
+        [Authorize]
+        [HttpPost]
+        public IActionResult EditProfile(UserProfileViewModel userProfileViewModel)
+        {
+
+            if (ModelState.IsValid)
+            {
+                var imagePath = filesUploader.SaveFile(userProfileViewModel.UploadedImage, Const.AvatarDirectory);
+                var existingUser = userManager.FindByNameAsync(User.Identity.Name).Result;
+                var user = userProfileViewModel.MappingToUser(existingUser, imagePath);
+                userManager.UpdateAsync(user).Wait();
+
+                return RedirectToAction("Profile", "Account");
+            }
+            
+           return View(userProfileViewModel);
+           
+        }
+
+        [Authorize]
+        public IActionResult UserOrders()
+        {
+            var userId = userManager.FindByNameAsync(User.Identity.Name).Result.Id;
+            var orders = ordersRepository.TryGetByUserId(userId);
+            return View(orders.MappingListOrderViewModel());
         }
     }
 }

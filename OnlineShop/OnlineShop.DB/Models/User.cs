@@ -9,5 +9,6 @@ namespace OnlineShop.DB.Models
     {
         public  string FirstName {get; set; }
         public string LastName {get; set; }
+        public string AvatarPath { get; set; }
     }
 }

@@ -8,7 +8,7 @@ namespace OnlineShopWebApp.Models
     {
 
         public Guid Id { get; set; }
-        public Guid UserId { get; set; }
+        public string UserId { get; set; }
         public List<CartItemViewModel> Items { get; set; }
 
         public decimal TotalCost

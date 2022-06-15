@@ -1,14 +1,7 @@
-﻿
-@model List<OrderViewModel>
-@{
-    ViewData["Title"] = "Панель администратора";
-}
+﻿@model List<OrderViewModel>
 
-
-<div class="row">
-     @await Html.PartialAsync("AdminLeftPanel")
-    <div class="col-9">
-        <div class="card">
+    <div class="row justify-content-center">
+        <div class="card shadow my-2 col-lg-10">
             <div class="card-body">
                 <h3>Список заказов</h3>
                 <div class="row">
@@ -17,7 +10,6 @@
                             <th>№</th>
                             <th>Сумма</th>
                             <th>Статус</th>
-                            <th>Польозватель(логин)</th>
                             <th>Дата</th>
                             <th>Время</th>
                             <th></th>
@@ -28,7 +20,6 @@
                                 <td>@order.Id</td>
                                 <td>@order.Cart.TotalCost ₽</td>
                                 <td>@order.Status.GetEnumDisplayName()</td>
-                                 <td>@order.Email</td>
                                 <td>@order.Created.ToString("d")</td>
                                 <td>@order.Created.ToString("t")</td>
                                 <td><a asp-controller="Order" asp-action="OrderDetails" asp-route-orderId="@order.Id" class="btn btn-info">подробнее</a></td>
@@ -37,7 +28,5 @@
                     </table>
                 </div>
             </div>
-        </div>
-    </div>
+        </div>  
 </div>
-
