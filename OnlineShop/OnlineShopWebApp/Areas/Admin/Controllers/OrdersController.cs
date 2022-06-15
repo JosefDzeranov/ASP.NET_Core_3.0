@@ -1,7 +1,10 @@
 ﻿using System;
+using System.Linq;
 using Microsoft.AspNetCore.Mvc;
+using OnlineShop.Db.Interfase;
 using OnlineShop.Db.Models;
 using OnlineShopWebApp.Filters;
+using OnlineShopWebApp.Helpers;
 using OnlineShopWebApp.Interfase;
 using OnlineShopWebApp.Models;
 
@@ -11,25 +14,26 @@ namespace OnlineShopWebApp.Areas.Admin.Controllers
     [ServiceFilter(typeof(CheckingForAuthorization))]
     public class OrdersController : Controller
     {
-        private readonly IOrdersManager _ordersManager;
-        public OrdersController(IOrdersManager ordersManager)
+        private readonly IOrdersRepositiry _ordersRepositiry;
+        public OrdersController(IOrdersRepositiry ordersRepositiry)
         {
-            _ordersManager = ordersManager;
+            _ordersRepositiry = ordersRepositiry;
         }
         public IActionResult Index()
         {
-            var orders = _ordersManager.GetAll();
-            return View(orders);
+            var orders = _ordersRepositiry.GetAll();
+
+            return View(orders.Select(x => Mapping.ToOrder_ViewModels(x)).ToList());
         }
         public IActionResult Details(Guid orderId)
         {
-            var order = _ordersManager.Find(orderId);
-            return View(order);
+            var order = _ordersRepositiry.Find(orderId);
+            return View(Mapping.ToOrder_ViewModels(order));
         }
         [HttpPost]
         public IActionResult SaveDetails(Order newOrder)
         {
-            _ordersManager.UpdateOrderStatus(newOrder);
+            _ordersRepositiry.UpdateOrderStatus(newOrder);
             var orderId = newOrder.Id;
             return RedirectToAction("Details", new { orderId });
         }

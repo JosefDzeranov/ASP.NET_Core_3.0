@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
+using OnlineShop.Db.Models;
 
-namespace OnlineShop.Db.Models
+namespace OnlineShopWebApp.Models
 {
-    public class Order
+    public class Order_ViewModels
     {
         public Guid Id { get; set; }
         public List<CartItem> CartItem { get; set; }
@@ -11,12 +13,26 @@ namespace OnlineShop.Db.Models
         public DateTime CreateDateTime { get; set; }
         public OrderStatus Status { get; set; }
         public string BuyerLogin { get; set; }
-        public decimal FullCost { get; set; }
 
-        public Order()
+        public decimal FullCost
+        {
+            get
+            {
+                return FullCost;
+            }
+            set
+            {
+                FullCost = CartItem?.Sum(x => x.Cost) ?? 0;
+            }
+        }
+
+        public Order_ViewModels()
         {
             CreateDateTime = DateTime.UtcNow;
             Status = OrderStatus.Created;
         }
+
+
+            
     }
 }

@@ -1,6 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using OnlineShop.Db;
+using OnlineShop.Db.Interfase;
+using OnlineShop.Db.Models;
 using OnlineShopWebApp.Interfase;
 using OnlineShopWebApp.Models;
 
@@ -8,20 +11,25 @@ namespace OnlineShopWebApp
 {
     public class UsersManager : IUsersManager
     {
+        private readonly IRoleManager _roleManager;
+        private readonly ICartsRepository _cartRepository;
 
         private readonly List<User> users;
         private UserAutorized userAutorized { get; set; }
         private const string nameSave = "users";
         private IWorkWithData JsonStorage { get; } = new JsonWorkWithData(nameSave);
         private IWorkWithData AutorizedData { get; } = new JsonWorkWithData("autorization");
-        public UsersManager()
+        
+        public UsersManager(IRoleManager roleManager, ICartsRepository cartRepository)
         {
             users = JsonStorage.Read<List<User>>();
             userAutorized = AutorizedData.Read<UserAutorized>();
+            _roleManager = roleManager;
+            _cartRepository = cartRepository;
         }
         public string GetLoginAuthorizedUser()
         {
-            return userAutorized.Login;
+            return userAutorized?.Login;
         }
         public void Authorized(UserAutorized user)
         {
@@ -38,8 +46,17 @@ namespace OnlineShopWebApp
         public void AssignRole(string userLogin, Guid roleId)
         {
             var user = Find(userLogin);
-            user.SetRole(roleId);
+            SetRole(user, roleId);
             Save();
+        }
+        public void SetRole(User user, Guid roleId)
+        {
+            user.RoleId = roleId;
+            user.RoleName = _roleManager.Find(roleId).Name;
+            if (roleId == MyConstant.RoleDefaultId)
+            {
+                _cartRepository.CreateCartBuyer(user.Login);
+            }
         }
 
         public List<User> GetAll()
@@ -60,9 +77,9 @@ namespace OnlineShopWebApp
                 Password = userInput.Password
             };
             users.Add(newUser);
+            AssignRole(userInput.Login, MyConstant.RoleDefaultId); //Покупатель
             Save();
         }
-
         public void Remove(string login)
         {
             users?.RemoveAll(x => x.Login == login);

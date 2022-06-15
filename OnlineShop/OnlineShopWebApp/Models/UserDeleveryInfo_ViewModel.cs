@@ -1,9 +1,12 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System;
+using System.ComponentModel.DataAnnotations;
 
 namespace OnlineShopWebApp.Models
 {
-    public class UserDeleveryInfo
+    public class UserDeleveryInfo_ViewModels
     {
+        public Guid Id { get; set; }
+
         [StringLength(100, MinimumLength = 2, ErrorMessage = "В фамилии должно быть не менее 2 букв")]
         [Required(ErrorMessage = "Не указана фамилия")]
         public string Surname { get; set; }
@@ -17,8 +20,6 @@ namespace OnlineShopWebApp.Models
         public string Secondname { get; set; }
 
         [StringLength(12, MinimumLength = 11, ErrorMessage = "В телефоне должно быть от 11 знаков")]
-        //[RegularExpression(@"^(+$)+@[0-9]{11}$", ErrorMessage = "Неверно заполнен номер")]
-        //[RegularExpression(@"^([\+\s])*[O-9]{11}$", ErrorMessage = "Некорректный номер телефона")]
         public string Phone { get; set; }
 
         [Required(ErrorMessage = "Не указан email")]

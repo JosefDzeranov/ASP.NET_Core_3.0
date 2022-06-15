@@ -51,7 +51,6 @@ namespace OnlineShopWebApp.Controllers
             if (ModelState.IsValid)
             {
                 _usersManager.Add(userInput);
-                _usersManager.AssignRole(userInput.Login, MyConstant.RoleDefaultId); //Покупатель
                 return RedirectToAction("Index", "User");
             }
             return View();

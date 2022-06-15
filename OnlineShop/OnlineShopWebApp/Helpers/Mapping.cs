@@ -26,12 +26,31 @@ namespace OnlineShopWebApp.Helpers
             }
             return productsViewModels;
         }
-        public static Order_ViewModel ToOrder_ViewModels(Order products)
+        public static Order_ViewModels ToOrder_ViewModels(Order order)
         {
-            return new Order_ViewModel()
+            return new Order_ViewModels()
             {
-                //
-            }
+                Id = order.Id,
+                CreateDateTime = order.CreateDateTime,
+                Status = order.Status,
+                BuyerLogin = order.BuyerLogin,
+                CartItem = order.CartItem,
+                FullCost = order.FullCost,
+                UserDeleveryInfo = order.UserDeleveryInfo
+            };
+        }
+
+        public static UserDeleveryInfo_ViewModels ToUserDeleveryInfo_ViewModels(UserDeleveryInfo userDeleveryInfo)
+        {
+            return new UserDeleveryInfo_ViewModels()
+            {
+                Commentary = userDeleveryInfo.Commentary,
+                Email = userDeleveryInfo.Email,
+                Firstname = userDeleveryInfo.Firstname,
+                Phone = userDeleveryInfo.Phone,
+                Secondname = userDeleveryInfo.Secondname,
+                Surname = userDeleveryInfo.Surname
+            };
         }
     }
 }

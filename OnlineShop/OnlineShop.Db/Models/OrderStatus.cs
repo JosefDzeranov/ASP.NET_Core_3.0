@@ -4,7 +4,12 @@ using System.Text;
 
 namespace OnlineShop.Db.Models
 {
-    internal class OrderStatus
+    public enum OrderStatus
     {
+        Created,
+        Processed,
+        Delivering,
+        Delivered,
+        Canceled
     }
 }

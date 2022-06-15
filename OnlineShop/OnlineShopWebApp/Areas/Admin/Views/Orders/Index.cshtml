@@ -1,4 +1,4 @@
-﻿@model List<OnlineShop.Db.Models.Order>
+﻿@model List<Order>
 @{
     ViewData["Title"] = "Панель администратора";
 }
@@ -32,8 +32,8 @@
                                     <td class="small">@Model[i].FullCost</td>
                                     <td class="small">@Model[i].Status</td>
                                     <td class="small">@Model[i].BuyerLogin</td>
-                                    <td class="small">@Model[i].DataRegistration()</td>
-                                    <td class="small">@Model[i].TimeRegistration()</td>
+                                    <td class="small">@Model[i].CreateDateTime.ToString("d")</td>
+                                    <td class="small">@Model[i].CreateDateTime.ToString("t")</td>
                                     <td class="small">
                                         <a class="text-nowrap mx-1 my-1"
                                            asp-area="Admin" asp-controller="Orders"

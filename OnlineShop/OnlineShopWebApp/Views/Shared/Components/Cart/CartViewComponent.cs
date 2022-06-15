@@ -1,23 +1,24 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using OnlineShop.Db.Interfase;
 using OnlineShopWebApp.Interfase;
 
 namespace OnlineShopWebApp.Views.Shared.Components.Cart
 {
     public class CartViewComponent : ViewComponent
     {
-        private readonly ICartsManager _cartsManager;
+        private readonly ICartsRepository _cartsRepository;
         private readonly IUsersManager usersManager;
 
-        public CartViewComponent(ICartsManager cartsManager, IUsersManager usersManager)
+        public CartViewComponent(ICartsRepository cartsRepository, IUsersManager usersManager)
         {
-            _cartsManager = cartsManager;
+            _cartsRepository = cartsRepository;
             this.usersManager = usersManager;
         }
 
         public IViewComponentResult Invoke()
         {
             var buyerLogin = usersManager.GetLoginAuthorizedUser();
-            var cart = _cartsManager.Find(buyerLogin);
+            var cart = _cartsRepository.Find(buyerLogin);
             int sumProduct;
             if (cart == null)
             {
@@ -25,7 +26,7 @@ namespace OnlineShopWebApp.Views.Shared.Components.Cart
             }
             else
             {
-                sumProduct = _cartsManager.SumAllProducts(buyerLogin);
+                sumProduct = _cartsRepository.SumAllProducts(buyerLogin);
             }
             return View("Cart", sumProduct);
         }

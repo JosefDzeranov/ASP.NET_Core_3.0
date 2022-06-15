@@ -1,4 +1,4 @@
-﻿@model OnlineShop.Db.Models.Order
+﻿@model Order
 @{
     ViewData["Title"] = "Подробности заказа";
 }
@@ -70,7 +70,7 @@
                                         <option selected>@Model.Status</option>
                                         @for (int index = 0; index < 5; index++)
                                         {
-                                            <option value="@Model.ShowUnitRegisterStatus(index)">@Model.ShowUnitRegisterStatus(index)</option>
+                                            <option value="@Model.Status"></option>
                                         }
                                     </select>
                                 </div>

@@ -16,7 +16,7 @@ namespace OnlineShopWebApp.Views.Shared.Components.CalcFavoriteProductCount
 
         public IViewComponentResult Invoke()
         {
-            var buyerLogin = usersManager.GetLoginAuthorizedUser();
+            var buyerLogin = usersManager?.GetLoginAuthorizedUser();
             int productCount;
             if (buyerLogin == null)
             {

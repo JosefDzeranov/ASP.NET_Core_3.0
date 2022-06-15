@@ -34,12 +34,11 @@ namespace OnlineShop.Db
 
         public void CreateCartBuyer(string buyerLogin)
         {
-            var carts = GetAll();
             Cart cart = new Cart()
             {
                 BuyerLogin = buyerLogin
             };
-            carts.Add(cart);
+            _databaseContext.Carts.Add(cart);
             Save();
         }
 
@@ -54,10 +53,10 @@ namespace OnlineShop.Db
             else
             {
                 var product = _databaseContext.Products.FirstOrDefault(product => product.Id == productId);
-                cart.CartItems.Add(new CartItem(product));
+                _databaseContext.Carts.Where(x => x.BuyerLogin == buyerLogin).ToList()[0].CartItems.Add(new CartItem() { Count = 1, Id = new Guid(), Product = product });
             }
-            fullSumm(buyerLogin);
             Save();
+            fullSumm(buyerLogin);
         }
 
         public void UpCountInCartItem(Guid productId, string buyerLogin)
@@ -65,8 +64,8 @@ namespace OnlineShop.Db
             var cart = Find(buyerLogin);
             var existingCartItem = cart.CartItems.Find(x => x.Product.Id == productId);
             existingCartItem.Count++;
-            fullSumm(buyerLogin);
             Save();
+            fullSumm(buyerLogin);
         }
 
         public void DownCountInCartItem(Guid productId, string buyerLogin)
@@ -74,16 +73,16 @@ namespace OnlineShop.Db
             var cart = Find(buyerLogin);
             var existingCartItem = cart.CartItems.Find(x => x.Product.Id == productId);
             existingCartItem.Count--;
-            fullSumm(buyerLogin);
             Save();
+            fullSumm(buyerLogin);
         }
 
         public void DeleteProductInCart(Guid productId, string buyerLogin)
         {
             var cart = Find(buyerLogin);
             cart.CartItems.RemoveAll(cartItem => cartItem.Product.Id == productId);
-            fullSumm(buyerLogin);
             Save();
+            fullSumm(buyerLogin);
         }
 
         public void ReduceDuplicateProductCart(Guid productId, string buyerLogin)
@@ -98,8 +97,8 @@ namespace OnlineShop.Db
             {
                 cart.CartItems.Remove(existingCartItem);
             }
-            fullSumm(buyerLogin);
             Save();
+            fullSumm(buyerLogin);
         }
 
         public void ClearCart(string buyerLogin)
@@ -123,7 +122,7 @@ namespace OnlineShop.Db
             return sum;
         }
 
-        public void SaveInfoBuying(UserDeleveryInfo_Views userDeleveryInfo, string buyerLogin)
+        public void SaveInfoBuying(UserDeleveryInfo userDeleveryInfo, string buyerLogin)
         {
             var cart = Find(buyerLogin);
             cart.UserDeleveryInfo = userDeleveryInfo;
@@ -139,7 +138,7 @@ namespace OnlineShop.Db
 
         private void Save()
         {
-            jsonStorage.Write(carts);
+            _databaseContext.SaveChanges();
         }
 
         private void fullSumm(string buyerLogin)
@@ -150,7 +149,7 @@ namespace OnlineShop.Db
             {
                 sum += cartItem.Count * cartItem.Product.Cost;
             }
-            cart.FullSumm = sum;
+            _databaseContext.Carts.Where(x => x.BuyerLogin == buyerLogin).ToList()[0].FullSumm = sum;
             Save();
         }
     }

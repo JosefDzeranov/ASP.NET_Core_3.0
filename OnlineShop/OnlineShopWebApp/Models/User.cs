@@ -35,12 +35,7 @@ namespace OnlineShopWebApp.Models
 
         public Guid RoleId { get; set; }
 
-        public void SetRole(Guid roleId)
-        {
-            roleManager = new RoleManager();
-            RoleId = roleId;
-            RoleName = roleManager.Find(roleId).Name;
-        }
+
 
     }
 }
