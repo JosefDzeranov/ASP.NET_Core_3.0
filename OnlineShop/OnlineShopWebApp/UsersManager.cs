@@ -15,7 +15,9 @@ namespace OnlineShopWebApp
         private readonly ICartsRepository _cartRepository;
 
         private readonly List<User> users;
+
         private UserAutorized userAutorized { get; set; }
+
         private const string nameSave = "users";
         private IWorkWithData JsonStorage { get; } = new JsonWorkWithData(nameSave);
         private IWorkWithData AutorizedData { get; } = new JsonWorkWithData("autorization");
@@ -40,6 +42,11 @@ namespace OnlineShopWebApp
         public bool CheckingForAuthorization()
         {
             if (userAutorized == null) return false;
+            var user = Find(userAutorized.Login);
+            if (_cartRepository.Find(user.Login) == null && user.RoleId == MyConstant.RoleDefaultId)
+            {
+                _cartRepository.CreateCartBuyer(user.Login);
+            }
             return true;
         }
 
@@ -76,8 +83,8 @@ namespace OnlineShopWebApp
                 Login = userInput.Login,
                 Password = userInput.Password
             };
-            users.Add(newUser);
             AssignRole(userInput.Login, MyConstant.RoleDefaultId); //Покупатель
+            users.Add(newUser);
             Save();
         }
         public void Remove(string login)
