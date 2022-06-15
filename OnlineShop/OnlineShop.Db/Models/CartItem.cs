@@ -12,10 +12,12 @@ namespace OnlineShop.Db.Models
         {
             get
             {
-                return Product.Cost * Count;
+                return Cost;
+            }
+            set
+            {
+                Cost = Product.Cost * Count;
             }
         }
-        
-
     }
 }
