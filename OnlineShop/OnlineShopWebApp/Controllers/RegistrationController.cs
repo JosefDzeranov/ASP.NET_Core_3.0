@@ -19,7 +19,7 @@ namespace OnlineShopWebApp.Controllers
             _userManager = userManager;
             _signInManager = signInManager;
         }
-        public IActionResult Index(string returnUrl)
+        public IActionResult Index(string returnUrl = null)
         {
             return View(new Registration() { ReturnUrl = returnUrl });
         }
@@ -62,7 +62,7 @@ namespace OnlineShopWebApp.Controllers
                 {
                     ModelState.AddModelError("Login", "Такой логин уже есть. Введите другой");
                 }
-                return View("Index");
+                return View("Index", registration);
             }
             else
             {

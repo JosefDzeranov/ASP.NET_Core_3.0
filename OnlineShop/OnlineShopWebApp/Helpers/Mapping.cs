@@ -56,9 +56,9 @@ namespace OnlineShopWebApp.Helpers
             {
                 Id = user.Id,
                 Login = user.Login,
-                FirstName = "Please, fill this field",
-                LastName = "Please, fill this field",
-                Phone = "Please, fill this field"
+                FirstName = user.FirstName,
+                LastName = user.LastName,
+                Phone = user.PhoneNumber
             };
             return userViewModel;
         }

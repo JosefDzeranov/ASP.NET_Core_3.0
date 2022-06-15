@@ -69,10 +69,11 @@ namespace OnlineShopWebApp.Areas.Admin.Controllers
             }
         }
 
+        [HttpGet]
         public IActionResult Edit(string userId)
         {
             var necessaryUser = GetUserFromDB(userId);
-            return View(necessaryUser);
+            return View(necessaryUser.ToUserViewModel());
         }
 
         [HttpPost]
@@ -80,7 +81,13 @@ namespace OnlineShopWebApp.Areas.Admin.Controllers
         {
             if (ModelState.IsValid)
             {
-                Edit(user.Id);
+                var userToEdit = _userManager.FindByNameAsync(user.Login).Result;
+
+                userToEdit.FirstName = user.FirstName;
+                userToEdit.LastName = user.LastName;
+                userToEdit.PhoneNumber = user.Phone;
+
+                var result = _userManager.UpdateAsync(userToEdit).Result;
                 return RedirectToAction("Get", "User", new { userId = user.Id });
             }
             else

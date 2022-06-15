@@ -1,0 +1,39 @@
+﻿@using Microsoft.AspNetCore.Identity
+@model List<IdentityRole>
+
+<div class="row">
+   @await Html.PartialAsync("AdminMenu")
+    <div class="col-9">
+        <div class="card">
+            <div class="card-body">
+                <h3>Роли</h3>
+                <div class="row">
+                    <table class="table">
+                        <tr>
+                            <th>№</th>
+                            <th>Название</th>
+                            <th></th>
+                        </tr>
+                        @for (int i=0; i < Model.Count; i++)
+                        {
+                            <tr>
+                                <td>@(i+1)</td>
+                                <td>@Model[i].Name</td>
+                                <td>
+                                    <a asp-controller="Role" asp-action="DeleteRole" asp-route-name="@Model[i].Name" class="btn btn-danger">Удалить</a>
+                                </td>
+                            </tr>
+                        }
+                        <tr>
+                            <td colspan="4"><a asp-controller="Role" asp-action="AddRole" class="btn btn-primary">Добавить</a></td>
+
+                        </tr>
+
+                    </table> 
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+</div>

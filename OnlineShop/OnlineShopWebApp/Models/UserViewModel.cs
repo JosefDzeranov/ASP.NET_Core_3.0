@@ -7,9 +7,9 @@ namespace OnlineShopWebApp.Models
         public string Id { get; set; }
         [StringLength(30, MinimumLength = 4, ErrorMessage = "Длинна логина должна от 4-х до 30-ти символов.")]
         public string Login { get; set; }
-        public string? FirstName { get; set; }
-        public string? LastName { get; set; }
-        public string? Phone { get; set; }
+        public string? FirstName { get; set; } = "Please, fill this field";
+        public string? LastName { get; set; } = "Please, fill this field";
+        public string? Phone { get; set; } = "Please, fill this field";
         public string? Password { get; set; }
 
         public UserViewModel() { }
