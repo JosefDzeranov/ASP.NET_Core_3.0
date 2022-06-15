@@ -12,10 +12,12 @@ namespace OnlineShop.Db.Models
         public int Pages { get; set; }
         public string ImagePath { get; set; }
         public List<CartItem> CartItems { get; set; }
+        public List<Image> Images  { get; set; }
 
         public Product()
         {
             CartItems = new List<CartItem>();
+            Images = new List<Image>();
         }
     }
 }
