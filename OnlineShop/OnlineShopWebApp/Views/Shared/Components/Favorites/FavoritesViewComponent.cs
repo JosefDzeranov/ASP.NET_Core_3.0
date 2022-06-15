@@ -4,6 +4,7 @@ using OnlineShop.DB;
 using OnlineShop.DB.Models;
 using OnlineShop.DB.Services;
 using OnlineShopWebApp.Services;
+using System.Threading.Tasks;
 
 namespace OnlineShopWebApp.Views.Shared.Components.Favorites
 {
@@ -17,13 +18,13 @@ namespace OnlineShopWebApp.Views.Shared.Components.Favorites
             this.userManager = userManager;
         }
 
-        public IViewComponentResult Invoke()
+        public async Task<IViewComponentResult> InvokeAsync()
         {
             var productCount = 0;
             if (User.Identity.IsAuthenticated)
             {
-                var userId = userManager.FindByNameAsync(User.Identity.Name).Result?.Id;
-                var favorites = favoriteRepository.TryGetByUserId(userId);
+                var userId = (await userManager.FindByNameAsync(User.Identity.Name)).Id;
+                var favorites = await favoriteRepository.TryGetByUserIdAsync(userId);
                 productCount = favorites?.Products.Count ?? 0;
                
             }

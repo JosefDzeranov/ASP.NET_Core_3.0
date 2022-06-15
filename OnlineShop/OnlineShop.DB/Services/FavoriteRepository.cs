@@ -1,7 +1,9 @@
-﻿using OnlineShop.DB.Models;
+﻿using Microsoft.EntityFrameworkCore;
+using OnlineShop.DB.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace OnlineShop.DB.Services
 {
@@ -14,9 +16,9 @@ namespace OnlineShop.DB.Services
             this.onlineShopContext = onlineShopContext;
         }
 
-        public void Add(Product product, string userId)
+        public async Task AddAsync(Product product, string userId)
         {
-            var existingFavorite = TryGetByUserId(userId);
+            var existingFavorite = await TryGetByUserIdAsync(userId);
             if (existingFavorite == null)
             {
                 var newFavorite = new Favorite
@@ -28,7 +30,7 @@ namespace OnlineShop.DB.Services
                         product
                     }
                 };
-                onlineShopContext.Favorites.Add(newFavorite);
+                await onlineShopContext.Favorites.AddAsync(newFavorite);
 
             }
             else
@@ -44,12 +46,12 @@ namespace OnlineShop.DB.Services
 
             }
 
-            onlineShopContext.SaveChanges();
+            await onlineShopContext.SaveChangesAsync();
         }
 
-        public void Remove(Product product, string userId)
+        public async Task RemoveAsync(Product product, string userId)
         {
-            var existingFavorite = TryGetByUserId(userId);
+            var existingFavorite = await TryGetByUserIdAsync(userId);
             if (existingFavorite != null)
             {
                 existingFavorite.Products.Remove(product);
@@ -59,12 +61,12 @@ namespace OnlineShop.DB.Services
                     onlineShopContext.Favorites.Remove(existingFavorite);
                 }
             }
-            onlineShopContext.SaveChanges();
+            await onlineShopContext.SaveChangesAsync();
         }
 
-        public Favorite TryGetByUserId(string userId)
+        public async Task<Favorite> TryGetByUserIdAsync(string userId)
         {
-            return onlineShopContext.Favorites.FirstOrDefault(x => x.UserId == userId);
+            return await onlineShopContext.Favorites.FirstOrDefaultAsync(x => x.UserId == userId);
         }
 
 

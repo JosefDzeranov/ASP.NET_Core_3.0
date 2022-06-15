@@ -1,13 +1,13 @@
 ﻿using OnlineShop.DB.Models;
 using System;
+using System.Threading.Tasks;
 
 namespace OnlineShop.DB.Services
 {
     public interface IFavoriteRepository
     {
-        Favorite TryGetByUserId(string userId);
-
-        void Add(Product product, string userId);
-        void Remove(Product product, string userId);
+        Task<Favorite> TryGetByUserIdAsync(string userId);
+        Task AddAsync(Product product, string userId);
+        Task RemoveAsync(Product product, string userId);
     }
 }

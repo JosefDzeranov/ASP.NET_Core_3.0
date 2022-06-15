@@ -29,7 +29,7 @@ namespace OnlineShopWebApp.Areas.Admin.Controllers
         }
 
 
-        public async Task<IActionResult> DeleteProduct(Guid id)
+        public async Task<IActionResult> DeleteProductAsync(Guid id)
         {
             var product = await productRepository.TryGetByIdAsync(id);
             if (product != null)
@@ -39,14 +39,14 @@ namespace OnlineShopWebApp.Areas.Admin.Controllers
             return RedirectToAction("Index", "Product");
         }
 
-        public async Task<IActionResult> EditProduct(Guid id)
+        public async Task<IActionResult> EditProductAsync(Guid id)
         {
             var product = await productRepository.TryGetByIdAsync(id);
             var editProductViewModel = product.MappingToEditProductViewModel();
             return View(editProductViewModel);
         }
         [HttpPost]
-        public async Task<IActionResult> EditProduct(EditProductViewModel editProductViewModel)
+        public async Task<IActionResult> EditProductAsync(EditProductViewModel editProductViewModel)
         {
             if (ModelState.IsValid)
             {
@@ -68,7 +68,7 @@ namespace OnlineShopWebApp.Areas.Admin.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> AddProduct(AddProductViewModel addProductViewModel)
+        public async Task<IActionResult> AddProductAsync(AddProductViewModel addProductViewModel)
         {
             if (ModelState.IsValid)
             {
