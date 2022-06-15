@@ -41,7 +41,7 @@ namespace OnlineShopWebApp
 
         public bool CheckingForAuthorization()
         {
-            if (userAutorized == null) return false;
+            if (userAutorized.Login == null) return false;
             var user = Find(userAutorized.Login);
             if (_cartRepository.Find(user.Login) == null && user.RoleId == MyConstant.RoleDefaultId)
             {

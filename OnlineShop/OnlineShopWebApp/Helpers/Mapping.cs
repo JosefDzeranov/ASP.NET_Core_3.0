@@ -40,6 +40,19 @@ namespace OnlineShopWebApp.Helpers
             };
         }
 
+        public static Cart_ViewModel ToCart_ViewModels(Cart cart)
+        {
+            return new Cart_ViewModel()
+            {
+                Id = cart.Id,
+                CreateDateTime = cart.CreateDateTime,
+                BuyerLogin = cart.BuyerLogin,
+                UserDeleveryInfo = cart.UserDeleveryInfo,
+                FullSumm = cart.FullSumm,
+                CartItems = cart.CartItems
+            };
+        }
+
         public static UserDeleveryInfo_ViewModels ToUserDeleveryInfo_ViewModels(UserDeleveryInfo userDeleveryInfo)
         {
             return new UserDeleveryInfo_ViewModels()

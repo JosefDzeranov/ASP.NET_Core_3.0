@@ -3,6 +3,7 @@ using OnlineShopWebApp.Interfase;
 using System;
 using OnlineShop.Db.Interfase;
 using OnlineShopWebApp.Filters;
+using OnlineShopWebApp.Helpers;
 
 namespace OnlineShopWebApp.Controllers
 {
@@ -24,7 +25,7 @@ namespace OnlineShopWebApp.Controllers
             {
                 return RedirectToAction("Index", "Login");
             }
-            return View(cart);
+            return View(Mapping.ToCart_ViewModels(cart));
         }
 
         public IActionResult AddProduct(Guid productId)

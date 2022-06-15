@@ -2,6 +2,7 @@
 using OnlineShop.Db.Interfase;
 using OnlineShop.Db.Models;
 using OnlineShopWebApp.Filters;
+using OnlineShopWebApp.Helpers;
 using OnlineShopWebApp.Interfase;
 using OnlineShopWebApp.Models;
 
@@ -24,7 +25,7 @@ namespace OnlineShopWebApp.Controllers
         {
             var buyerLogin = _usersManager.GetLoginAuthorizedUser();
             var cart = _cartsRepository.Find(buyerLogin);
-            return View(cart);
+            return View(Mapping.ToCart_ViewModels(cart));
         }
 
         [HttpPost]

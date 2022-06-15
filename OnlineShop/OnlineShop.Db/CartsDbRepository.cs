@@ -53,7 +53,10 @@ namespace OnlineShop.Db
             else
             {
                 var product = _databaseContext.Products.FirstOrDefault(product => product.Id == productId);
-                _databaseContext.Carts.Where(x => x.BuyerLogin == buyerLogin).ToList()[0].CartItems.Add(new CartItem() { Count = 1, Id = new Guid(), Product = product });
+                _databaseContext.Carts.
+                    Where(x => x.BuyerLogin == buyerLogin).
+                    ToList()[0].CartItems.
+                    Add(new CartItem() { Count = 1, Id = new Guid(), Product = product, Cart = cart.Id});
             }
             Save();
             fullSumm(buyerLogin);
