@@ -23,9 +23,10 @@ namespace OnlineShopWebApp.Controllers
 
 
         [HttpGet]
-        public IActionResult Authorize(string returnUrl)
+        public IActionResult Authorize(string returnUrl = null)
         {
             return View(new Authorization() { ReturnUrl = returnUrl });
+
         }
 
         [HttpPost]
@@ -48,7 +49,7 @@ namespace OnlineShopWebApp.Controllers
                     ModelState.AddModelError("Password", "Неправильный логин или пароль");
                 }
             }
-            return View("Authorize");
+            return View("Authorize", authorization);
         }
 
         [Authorize]

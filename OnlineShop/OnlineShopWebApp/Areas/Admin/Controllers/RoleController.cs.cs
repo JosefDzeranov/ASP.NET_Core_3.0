@@ -2,53 +2,64 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using OnlineShop.DB;
-using OnlineShop.DB.Models;
+using System.Linq;
 
 namespace OnlineShopWebApp.Areas.Admin.Controllers
 {
-    //[Area(Const.AdminRoleName)]
-    //[Authorize(Roles = Const.AdminRoleName)]
-    //public class RoleController : Controller
-    //{
-    //    private readonly UserManager<User> _userManager;
+    [Area(Const.AdminRoleName)]
+    [Authorize(Roles = Const.AdminRoleName)]
+    public class RoleController : Controller
+    {
+        private readonly RoleManager<IdentityRole> roleManager;
 
-    //    public RoleController(UserManager<User> userManager)
-    //    {
-    //        _userManager = userManager;
-    //    }
+        public RoleController(RoleManager<IdentityRole> roleManager)
+        {
+            this.roleManager = roleManager;
+        }
 
-    //    public IActionResult Index()
-    //    {
-    //        var roles = _userManager.GetAll();
-    //        return View(roles);
-    //    }
+        public IActionResult Index()
+        {
+            var roles = roleManager.Roles.ToList();
+            return View(roles);
+        }
 
-    //    public IActionResult AddRole()
-    //    {
-    //        return View();
-    //    }
+        public IActionResult AddRole()
+        {
+            return View();
+        }
 
-    //    [HttpPost]
-    //    public IActionResult AddRole(Role role)
-    //    {
-    //        if (roleRepository.TryGetByName(role.Name) != null)
-    //        {
-    //            ModelState.AddModelError("", "Роль с таким именем уже существует");
-    //        }
-    //        if (ModelState.IsValid)
-    //        {
-    //            roleRepository.Add(role);
-    //            return RedirectToAction("Index", "Role");
-    //        }
+        [HttpPost]
+        public IActionResult AddRole(IdentityRole role)
+        {
 
-    //        return View(role);
-    //    }
 
-    //    public IActionResult DeleteRole(string name)
-    //    {
-    //        roleRepository.Remove(name);
+            if (role != null)
+            {
+                if (roleManager.FindByNameAsync(role.Name).Result != null)
+                {
+                    ModelState.AddModelError("", "Роль с таким именем уже существует");
+                }
+                else
+                {
+                    roleManager.CreateAsync(new IdentityRole(role.Name)).Wait();
+                }
 
-    //        return RedirectToAction("Index", "Role");
-    //    }
-    //}
+                return RedirectToAction("Index", "Role");
+            }
+
+            return View(role);
+        }
+
+        public IActionResult DeleteRole(string name)
+        {
+            var role = roleManager.FindByNameAsync(name).Result;
+            if (role != null)
+            {
+                roleManager.DeleteAsync(role).Wait();
+
+            }
+
+            return RedirectToAction("Index", "Role");
+        }
+    }
 }

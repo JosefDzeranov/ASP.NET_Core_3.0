@@ -1,0 +1,24 @@
+﻿@model Role
+<div class="card shadow">
+    <div class="card-body">
+        <form asp-controller="Role" asp-action="AddRole">
+            <div class="validation" asp-validation-summary=ModelOnly></div>
+            <div class="row justify-content-center">
+                <div class="col-6">
+                    <div class="mb-3">
+                        <input type="text" class="form-control" asp-for="Name" placeholder="Имя"/>
+                        <span asp-validation-for="Name"></span>
+                    </div>
+                    <div class="mb-3 text-center">
+                        <button type="submit" class="btn btn-dark">Добавить</button>
+                    </div>
+                    <div class="mb-3 text-center">
+                        <a class="btn btn-dark" asp-controller="Role" asp-action="Index">Отмена</a>
+                    </div>
+                </div>
+
+            </div>
+
+        </form>
+    </div>
+</div>

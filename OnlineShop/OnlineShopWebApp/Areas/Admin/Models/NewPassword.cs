@@ -12,7 +12,7 @@ namespace OnlineShopWebApp.Areas.Admin.Models
         [Compare("Password", ErrorMessage = "Пароли не совпадают")]
         public string? ConfirmPassword { get; set; }
 
-        public int UserId { get; set; }
+        public string UserId { get; set; }
         
     }
 
