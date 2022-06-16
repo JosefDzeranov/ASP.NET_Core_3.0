@@ -29,7 +29,25 @@ namespace OnlineShopWebApp.Helpers
                 Pages = product.Pages,
                 ImagePath = product.ImagePath
             };
-        }        
+        }
+
+        public static Product ToProduct(this AddProductViewModel product, List<string> imagesPathes)
+        {
+            var productDb = new Product
+            {
+                Name = product.Name,
+                Cost = product.Cost,
+                Description = product.Description,
+                Pages = product.Pages,
+                Images = ToImage(imagesPathes)
+            };
+            return productDb;
+        }
+
+        public static List<Image> ToImage(List<string> imagesPathes)
+        {
+            return imagesPathes.Select(x => new Image { Url = x }).ToList();
+        }
 
         public static CartViewModel ToCartViewModel(Cart cart)
         {
