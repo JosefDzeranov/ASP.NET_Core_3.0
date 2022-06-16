@@ -1,6 +1,4 @@
-﻿
-
-namespace OnlineShop.db.Models
+﻿namespace OnlineShop.db.Models
 {
     public class CartItem
     {

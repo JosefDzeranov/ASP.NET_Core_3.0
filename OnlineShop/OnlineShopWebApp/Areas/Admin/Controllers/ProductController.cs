@@ -1,11 +1,9 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using OnlineShopWebApp.Services;
-using OnlineShopWebApp.Models;
 using OnlineShopWebApp.Helpers;
 using OnlineShop.Db;
-using System.Collections.Generic;
 using Microsoft.AspNetCore.Authorization;
-using OnlineShop.db.Models;
+using OnlineShopWebApp.Areas.Admin.Models;
 
 namespace OnlineShopWebApp.Areas.Admin.Controllers
 {
@@ -14,10 +12,12 @@ namespace OnlineShopWebApp.Areas.Admin.Controllers
     public class ProductController : Controller
     {
         private readonly IProductDataSource productDataSource;
+        private readonly ImagesProvider imagesProvider;
 
-        public ProductController(IProductDataSource productDataSource)
+        public ProductController(IProductDataSource productDataSource, ImagesProvider imagesProvider)
         {
             this.productDataSource = productDataSource;
+            this.imagesProvider = imagesProvider;
         }
 
         public IActionResult Index()
@@ -33,17 +33,16 @@ namespace OnlineShopWebApp.Areas.Admin.Controllers
         }
 
         [HttpPost]
-        public IActionResult Add(ProductViewModel product)
+        public IActionResult Add(AddProductViewModel product)
         {
             if (!ModelState.IsValid)
             {
                 return View(product);
             }
-            var productDb = new Product(name: product.Name, cost: product.Cost, description: product.Description);
 
-            productDataSource.AddProduct(productDb);
+            var imagesPath = imagesProvider.SafeFiles(product.UploadFiles, ImageFolders.Products);
+            productDataSource.AddProduct(product.ToProduct(imagesPath));
             return RedirectToAction(nameof(Index));
-
         }
 
         public IActionResult Remove(int productId)
@@ -56,23 +55,20 @@ namespace OnlineShopWebApp.Areas.Admin.Controllers
         public IActionResult Edit(int productId)
         {
             var product = productDataSource.GetProductById(productId);
-            return View(Mapping.ToProductViewModel(product));
+            return View(product.ToEditProductViewModel());
         }
-
         [HttpPost]
-        public IActionResult Edit(ProductViewModel product)
+        public IActionResult Edit(EditProductViewModel product)
         {
             if (!ModelState.IsValid)
             {
-                return View (product);
-               
+                return View(product);
             }
-            
-            var productDb = Mapping.ToProduct(product);
 
-            productDataSource.EditProduct(productDb);
+            var addedImagesPath = imagesProvider.SafeFiles(product.UploadFiles, ImageFolders.Products);
+            product.ImagesPaths = addedImagesPath;
+            productDataSource.Update(product.ToProduct());
             return RedirectToAction(nameof(Index));
         }
-
     }
 }

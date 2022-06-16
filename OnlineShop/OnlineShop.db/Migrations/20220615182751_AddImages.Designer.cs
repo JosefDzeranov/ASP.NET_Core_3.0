@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using OnlineShop.Db;
 
@@ -11,9 +12,10 @@ using OnlineShop.Db;
 namespace OnlineShop.db.Migrations
 {
     [DbContext(typeof(DatabaseContext))]
-    partial class DatabaseContextModelSnapshot : ModelSnapshot
+    [Migration("20220615182751_AddImages")]
+    partial class AddImages
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -134,19 +136,19 @@ namespace OnlineShop.db.Migrations
 
                     b.HasIndex("ProductId");
 
-                    b.ToTable("Images");
+                    b.ToTable("Image");
 
                     b.HasData(
                         new
                         {
-                            Id = 1,
-                            ProductId = 1,
+                            Id = -1,
+                            ProductId = -1,
                             Url = "/images/turkey.jpg"
                         },
                         new
                         {
-                            Id = 2,
-                            ProductId = 2,
+                            Id = -2,
+                            ProductId = -2,
                             Url = "/images/greece.jpg"
                         },
                         new
@@ -269,7 +271,7 @@ namespace OnlineShop.db.Migrations
                     b.HasData(
                         new
                         {
-                            Id = 1,
+                            Id = -1,
                             Cost = 50000m,
                             Description = "Тур в Турцию за 50000 рублей",
                             IsActive = true,
@@ -277,7 +279,7 @@ namespace OnlineShop.db.Migrations
                         },
                         new
                         {
-                            Id = 2,
+                            Id = -2,
                             Cost = 60000m,
                             Description = "Тур в Грецию за 60000 рублей",
                             IsActive = true,

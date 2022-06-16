@@ -1,4 +1,5 @@
-﻿@model ProductViewModel
+﻿@model AddProductViewModel
+<form method="post" enctype="multipart/form-data">
 <div class="row">
 	@await Html.PartialAsync("AdminMenu")
 
@@ -6,42 +7,41 @@
 		<h3>Добавить продукт</h3>
 	</div>
 </div>
-<form method="post" action="/admin/AddProduct">
 	<div class="validation" asp-validation-summary="All"></div>
 
 	<div class="row text-center">
-	<div class="col-3">
-		<div><br>
-			<label asp-for="Name">Продукт</label><br />
-			<input class="form-control" asp-for="Name" />
-			<span asp-validation-for="Name" />
+		<div class="col-3">
+			<div><br>
+				<label asp-for="Name">Продукт</label><br />
+				<input class="form-control" asp-for="Name" />
+				<span asp-validation-for="Name" />
+			</div>
+
+			<div><br>
+				<label asp-for="Cost">Цена</label><br />
+				<input class="form-control" asp-for="Cost" />
+				<span asp-validation-for="Cost" />
+			</div>
+
+			<div><br>
+				<label asp-for="Description">Описание</label><br />
+				<input class="form-control" asp-for="Description" />
+				<span asp-validation-for="Description" />
+			</div>
+	
+			<div class="row">
+				<div class="col-6">
+					<label asp-for="UploadFiles">Загрузить изображение</label>
+					<input type="file" multiple accept="image/*" class="form-control" name="UploadFiles"/> 
+					<span asp-validation-for="UploadFiles"></span>
+				</div>
+			</div>
+
+				<div>
+					<button type="submit" asp-area="Admin" asp-controller="Product" class ="btn btn-outline-success" asp-action="Add">Создать</button>
+			</div>
+		</div>
 		</div>
 
-		<div><br>
-			<label asp-for="Cost">Цена</label><br />
-			<input class="form-control" asp-for="Cost" />
-			<span asp-validation-for="Cost" />
-		</div>
-
-		<div><br>
-			<label asp-for="Description">Описание</label><br />
-			<input class="form-control" asp-for="Description" />
-			<span asp-validation-for="Description" />
-		</div>
-	
-		<div>
-			<label>Добавить изображение</label><br />
-			<label><input type="file" name="file"></label></div>
-		<div><br>
-		
-		<input type="submit"
-		asp-area="Admin"
-		asp-controller="Product"
-		asp-action="Add"
-		value="Добавить" class ="btn btn-outline-success" role="button"/></div>
-	<div><br>
-	</div>
-	</div>
-	</div>
-	
-</form>
+		</form>
+			
