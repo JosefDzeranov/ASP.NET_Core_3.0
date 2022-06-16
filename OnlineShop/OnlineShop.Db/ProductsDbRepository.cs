@@ -1,4 +1,5 @@
-﻿using OnlineShop.Db.Models;
+﻿using Microsoft.EntityFrameworkCore;
+using OnlineShop.Db.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,7 +16,7 @@ namespace OnlineShop.Db
         }        
         public List<Product> GetAll()
         {
-            return databaseContext.Products.ToList();
+            return databaseContext.Products.Include(x => x.Images).ToList();
         }
 
         public Product TryGetById(Guid id)
