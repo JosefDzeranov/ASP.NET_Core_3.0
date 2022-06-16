@@ -21,7 +21,7 @@ namespace OnlineShop.Db
 
         public Product TryGetById(Guid id)
         {
-            return databaseContext.Products.FirstOrDefault(x => x.Id == id);
+            return databaseContext.Products.Include(x => x.Images).FirstOrDefault(x => x.Id == id);
         }
 
         public void Add(Product product)
@@ -31,13 +31,7 @@ namespace OnlineShop.Db
         }
 
         public void Edit()
-        {
-            //var product = databaseContext.Products.FirstOrDefault(x => x.Id == newProduct.Id);
-            //product.Name = newProduct.Name;
-            //product.Cost = newProduct.Cost;
-            //product.Description = newProduct.Description;
-            //product.Pages = newProduct.Pages;
-            //product.ImagePath = newProduct.ImagePath;
+        {            
             databaseContext.SaveChanges();
         }
         public void Delete(Guid id)

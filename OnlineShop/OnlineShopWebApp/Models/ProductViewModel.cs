@@ -1,5 +1,4 @@
-﻿using Microsoft.AspNetCore.Http;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
@@ -22,6 +21,5 @@ namespace OnlineShopWebApp.Models
         public int Pages { get; set; }
         public List<string> ImagesPaths { get; set; }
         public string ImagePath => ImagesPaths.Count == 0 ? "/images/products/image1.jpg" : ImagesPaths[0];
-
     }
 }
