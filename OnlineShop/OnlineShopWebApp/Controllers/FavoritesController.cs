@@ -8,6 +8,7 @@ using OnlineShopWebApp.Models;
 using OnlineShopWebApp.Services;
 using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace OnlineShopWebApp.Controllers
 {
@@ -24,12 +25,12 @@ namespace OnlineShopWebApp.Controllers
             this.userManager = userManager;
         }
 
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
             var userId = userManager.FindByNameAsync(User.Identity.Name).Result.Id;
-            var favorite = favoriteRepository.TryGetByUserId(userId);
+            var favorite = await favoriteRepository.TryGetByUserIdAsync(userId);
             var products = favorite?.Products;
-            if(products != null)
+            if (products != null)
             {
                 var productsViewModel = new List<ProductViewModel>();
 
@@ -45,21 +46,21 @@ namespace OnlineShopWebApp.Controllers
         }
 
 
-        public IActionResult Add(Guid productId, string control, string act)
+        public async Task<IActionResult> Add(Guid productId, string control, string act)
         {
             var userId = userManager.FindByNameAsync(User.Identity.Name).Result.Id;
-            var product = productRepository.TryGetById(productId);
-            favoriteRepository.Add(product, userId);
+            var product = await productRepository.TryGetByIdAsync(productId);
+            await favoriteRepository.AddAsync(product, userId);
 
-            return RedirectToAction(act, control, new{ id = productId });
+            return RedirectToAction(act, control, new { id = productId });
         }
 
-        public IActionResult Remove(Guid productId)
+        public async Task<IActionResult> Remove(Guid productId)
         {
             var userId = userManager.FindByNameAsync(User.Identity.Name).Result.Id;
-            var product = productRepository.TryGetById(productId);
-            favoriteRepository.Remove(product, userId);
-            
+            var product = await productRepository.TryGetByIdAsync(productId);
+            await favoriteRepository.RemoveAsync(product, userId);
+
             return RedirectToAction("Index");
         }
     }

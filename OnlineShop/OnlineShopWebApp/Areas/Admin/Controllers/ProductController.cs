@@ -1,15 +1,10 @@
 ﻿using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using OnlineShop.DB;
-using OnlineShop.DB.Models;
 using OnlineShop.DB.Services;
 using OnlineShopWebApp.Models;
-using OnlineShopWebApp.Services;
 using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
+using System.Threading.Tasks;
 
 namespace OnlineShopWebApp.Areas.Admin.Controllers
 {
@@ -26,32 +21,32 @@ namespace OnlineShopWebApp.Areas.Admin.Controllers
             this.filesUploader = filesUploader;
 
         }
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            var products = productRepository.GetAll();
+            var products = await productRepository.GetAllAsync();
             var productsViewModel = products.MappingToListProductViewModel();
             return View(productsViewModel);
         }
 
 
-        public IActionResult DeleteProduct(Guid id)
+        public async Task<IActionResult> DeleteProductAsync(Guid id)
         {
-            var product = productRepository.TryGetById(id);
+            var product = await productRepository.TryGetByIdAsync(id);
             if (product != null)
             {
-                productRepository.Delete(product);
+                await productRepository.DeleteAsync(product);
             }
             return RedirectToAction("Index", "Product");
         }
 
-        public IActionResult EditProduct(Guid id)
+        public async Task<IActionResult> EditProductAsync(Guid id)
         {
-            var product = productRepository.TryGetById(id);
+            var product = await productRepository.TryGetByIdAsync(id);
             var editProductViewModel = product.MappingToEditProductViewModel();
             return View(editProductViewModel);
         }
         [HttpPost]
-        public IActionResult EditProduct(EditProductViewModel editProductViewModel)
+        public async Task<IActionResult> EditProductAsync(EditProductViewModel editProductViewModel)
         {
             if (ModelState.IsValid)
             {
@@ -60,7 +55,7 @@ namespace OnlineShopWebApp.Areas.Admin.Controllers
                     var imagesPaths = filesUploader.SaveFiles(editProductViewModel.UploadedImages, Const.ImagesDirectory);
 
                     var productDb = editProductViewModel.MappingToProduct(imagesPaths);
-                    productRepository.Update(productDb);
+                    await productRepository.UpdateAsync(productDb);
                 }
                 return RedirectToAction("Index", "Product");
             }
@@ -71,18 +66,19 @@ namespace OnlineShopWebApp.Areas.Admin.Controllers
         {
             return View();
         }
+
         [HttpPost]
-        public IActionResult AddProduct(AddProductViewModel addProductViewModel)
+        public async Task<IActionResult> AddProductAsync(AddProductViewModel addProductViewModel)
         {
             if (ModelState.IsValid)
             {
                 var imagesPaths = filesUploader.SaveFiles(addProductViewModel.UploadedImages, Const.ImagesDirectory);
-                 
+
                 var productDb = addProductViewModel.MappingToProduct(imagesPaths);
-                productRepository.Add(productDb);
+                await productRepository.AddAsync(productDb);
                 return RedirectToAction("Index", "Product");
             }
-         
+
             return View(addProductViewModel);
         }
 

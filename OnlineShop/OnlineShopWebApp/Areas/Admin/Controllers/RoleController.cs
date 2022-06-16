@@ -1,9 +1,11 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using OnlineShop.DB;
 using OnlineShopWebApp.Services;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace OnlineShopWebApp.Areas.Admin.Controllers
 {
@@ -18,9 +20,9 @@ namespace OnlineShopWebApp.Areas.Admin.Controllers
             this.roleManager = roleManager;
         }
 
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            var roles = roleManager.Roles.ToList();
+            var roles = await roleManager.Roles.ToListAsync();
             return View(roles);
         }
 
@@ -30,19 +32,19 @@ namespace OnlineShopWebApp.Areas.Admin.Controllers
         }
 
         [HttpPost]
-        public IActionResult AddRole(IdentityRole role)
+        public async Task<IActionResult> AddRoleAsync(IdentityRole role)
         {
 
 
             if (role != null)
             {
-                if (roleManager.FindByNameAsync(role.Name).Result != null)
+                if (await roleManager.FindByNameAsync(role.Name) != null)
                 {
                     ModelState.AddModelError("", "Роль с таким именем уже существует");
                 }
                 else
                 {
-                    roleManager.CreateAsync(new IdentityRole(role.Name)).Wait();
+                    await roleManager.CreateAsync(new IdentityRole(role.Name));
                 }
 
                 return RedirectToAction("Index", "Role");
@@ -51,12 +53,12 @@ namespace OnlineShopWebApp.Areas.Admin.Controllers
             return View(role);
         }
 
-        public IActionResult DeleteRole(string name)
+        public async Task<IActionResult> DeleteRoleAsync(string name)
         {
-            var role = roleManager.FindByNameAsync(name).Result;
+            var role = await roleManager.FindByNameAsync(name);
             if (role != null)
             {
-                roleManager.DeleteAsync(role).Wait();
+                await roleManager.DeleteAsync(role);
 
             }
 

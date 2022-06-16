@@ -3,6 +3,7 @@ using OnlineShopWebApp.Services;
 using OnlineShopWebApp.Models;
 using System;
 using OnlineShop.DB.Services;
+using System.Threading.Tasks;
 
 namespace OnlineShopWebApp.Controllers
 {
@@ -14,10 +15,10 @@ namespace OnlineShopWebApp.Controllers
         {
             this.productRepository = productRepository;
         }
-        public IActionResult Index(Guid id)
+        public async Task<IActionResult> Index(Guid id)
         {
 
-            var product = productRepository.TryGetById(id);
+            var product = await productRepository.TryGetByIdAsync(id);
             if (product == null)
             {
                 return NotFound();

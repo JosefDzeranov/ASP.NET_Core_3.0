@@ -5,6 +5,7 @@ using OnlineShop.DB.Models;
 using OnlineShopWebApp.Models;
 using OnlineShopWebApp.Services;
 using System;
+using System.Threading.Tasks;
 
 namespace OnlineShopWebApp.Areas.Admin.Controllers
 {
@@ -19,16 +20,16 @@ namespace OnlineShopWebApp.Areas.Admin.Controllers
             this.orderRepository = orderRepository;
         }
 
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            var ordersDb = orderRepository.TryGetAll();
+            var ordersDb = await orderRepository.TryGetAllAsync();
             var ordersViewModel = ordersDb.MappingListOrderViewModel();
             return View(ordersViewModel);
         }
 
-        public IActionResult OrderDetails(Guid orderId)
+        public async Task<IActionResult> OrderDetailsAsync(Guid orderId)
         {
-            var order = orderRepository.TryGetById(orderId);
+            var order = await orderRepository.TryGetByIdAsync(orderId);
             if (order!= null)
             {
                 return View(order.MappingToOrderViewModel());
@@ -36,9 +37,9 @@ namespace OnlineShopWebApp.Areas.Admin.Controllers
             return RedirectToAction("Index", "Order");
         }
 
-        public IActionResult UpdateOrderStatus(Guid orderId, OrderStatus status)
+        public async Task<IActionResult> UpdateOrderStatusAsync(Guid orderId, OrderStatus status)
         {
-            orderRepository.UpdateStatus(orderId, status);
+            await orderRepository.UpdateStatusAsync(orderId, status);
 
             return RedirectToAction("OrderDetails", "Order", new { orderId });
         }

@@ -8,6 +8,7 @@ using OnlineShop.DB;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using OnlineShop.DB.Models;
+using System.Threading.Tasks;
 
 namespace OnlineShopWebApp.Controllers
 {
@@ -25,11 +26,11 @@ namespace OnlineShopWebApp.Controllers
             this.userManager = userManager;
 
         }
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            var userId = userManager.FindByNameAsync(User.Identity.Name).Result.Id;
-            var cartDb = cartRepository.TryGetByUserId(userId);
-            if(cartDb != null)
+            var userId = (await userManager.FindByNameAsync(User.Identity.Name)).Id;
+            var cartDb = await cartRepository.TryGetByUserIdAsync(userId);
+            if (cartDb != null)
             {
                 var cartViewModel = cartDb.MappingToCartViewModel();
                 return View(cartViewModel);
@@ -37,25 +38,25 @@ namespace OnlineShopWebApp.Controllers
             return View();
         }
 
-        public IActionResult Add(Guid productId)
+        public async Task<IActionResult> AddAsync(Guid productId)
         {
-            var userId = userManager.FindByNameAsync(User.Identity.Name).Result.Id;
-            var product = productRepository.TryGetById(productId);
-            cartRepository.Add(product, userId);
+            var userId = (await userManager.FindByNameAsync(User.Identity.Name)).Id;
+            var product = await productRepository.TryGetByIdAsync(productId);
+            await cartRepository.AddAsync(product, userId);
 
             return RedirectToAction("Index");
         }
 
-        public IActionResult Remove(Guid productId)
+        public async Task<IActionResult> RemoveAsync(Guid productId)
         {
-            var userId = userManager.FindByNameAsync(User.Identity.Name).Result.Id;
-            cartRepository.RemoveItem(productId, userId);
+            var userId = (await userManager.FindByNameAsync(User.Identity.Name)).Id;
+            await cartRepository.RemoveItemAsync(productId, userId);
             return RedirectToAction("Index");
         }
-        public IActionResult RemoveAll()
+        public async Task<IActionResult> RemoveAllAsync()
         {
-            var userId = userManager.FindByNameAsync(User.Identity.Name).Result.Id;
-            cartRepository.Clear(userId);
+            var userId = (await userManager.FindByNameAsync(User.Identity.Name)).Id;
+            await cartRepository.ClearAsync(userId);
             return RedirectToAction("Index");
         }
     }

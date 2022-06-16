@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using OnlineShopWebApp.Services;
 using OnlineShop.DB.Services;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace OnlineShopWebApp.Controllers
 {
@@ -15,9 +16,9 @@ namespace OnlineShopWebApp.Controllers
         {
             this.productRepository = productRepository;
         }
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            var products = productRepository.GetAll();
+            var products = await productRepository.GetAllAsync();
 
             var productsViewModel = products.MappingToListProductViewModel();
 

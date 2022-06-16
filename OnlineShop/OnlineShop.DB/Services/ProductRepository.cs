@@ -5,6 +5,7 @@ using OnlineShop.DB.Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace OnlineShopDB.Services
 {
@@ -17,39 +18,39 @@ namespace OnlineShopDB.Services
             this.onlineShopContext = onlineShopContext;
         }
 
-        public List<Product> GetAll()
+        public async Task<List<Product>> GetAllAsync()
         {
-            return onlineShopContext.Products.ToList();
+            return await onlineShopContext.Products.ToListAsync();
         }
 
-        public Product TryGetById(Guid id)
+        public async Task<Product> TryGetByIdAsync(Guid id)
         {
-            return onlineShopContext.Products.FirstOrDefault(product => product.Id == id);    
+            return await onlineShopContext.Products.FirstOrDefaultAsync(product => product.Id == id);
         }
 
-        public void Delete(Product product)
+        public async Task DeleteAsync(Product product)
         {
             onlineShopContext.Products.Remove(product);
-            var productInCart = onlineShopContext.CartItems.FirstOrDefault(x => x.Product.Id == product.Id);
+            var productInCart = await onlineShopContext.CartItems.FirstOrDefaultAsync(x => x.Product.Id == product.Id);
             if (productInCart != null)
             {
                 onlineShopContext.CartItems.Remove(productInCart);
             }
-           
-            onlineShopContext.SaveChanges();
+
+            await onlineShopContext.SaveChangesAsync();
         }
 
-        public void Add(Product product)
+        public async Task AddAsync(Product product)
         {
-            onlineShopContext.Products.Add(product);
-            onlineShopContext.SaveChanges();
+            await onlineShopContext.Products.AddAsync(product);
+            await onlineShopContext.SaveChangesAsync();
         }
 
-        public void Update(Product product)
+        public async Task UpdateAsync(Product product)
         {
-            
+
             onlineShopContext.Products.Update(product);
-            onlineShopContext.SaveChanges();
+            await onlineShopContext.SaveChangesAsync();
         }
     }
 }

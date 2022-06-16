@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using OnlineShop.DB.Models;
+using System.Threading.Tasks;
 
 namespace OnlineShopWebApp.Views.Shared.Components.Profile
 {
@@ -13,11 +14,11 @@ namespace OnlineShopWebApp.Views.Shared.Components.Profile
             this.userManager = userManager;
         }
 
-        public IViewComponentResult Invoke()
+        public async Task<IViewComponentResult> InvokeAsync()
              {
             if (User.Identity.IsAuthenticated)
             {
-                var user = userManager.FindByNameAsync(User.Identity.Name).Result;
+                var user = await userManager.FindByNameAsync(User.Identity.Name);
                 var avatar = user.AvatarPath;
                 return View("Profile", avatar);
             }
