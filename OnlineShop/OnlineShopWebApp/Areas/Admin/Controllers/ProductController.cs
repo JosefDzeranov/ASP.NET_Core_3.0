@@ -35,23 +35,19 @@ namespace OnlineShopWebApp.Areas.Admin.Controllers
         }
 
         [HttpPost]
-        public IActionResult Add(ProductViewModel product)
+        public IActionResult Add(AddProductViewModel product)
         {
             if (!ModelState.IsValid)
             {
                 return View(product);
             }
 
-            if (product.UploadedFile != null)
+            if (product.UploadedFiles.Count != 0)
             {
-                string productImagePath = Path.Combine(appEnvironment.WebRootPath + "/images/products/");
-                if (!Directory.Exists(productImagePath))
-                {
-                    Directory.CreateDirectory(productImagePath);
-                }
+                var folderPath = ImagesProvider.GetFolderPath("products");               
 
                 var fileName = Guid.NewGuid() + "." + product.UploadedFile.FileName.Split('.').Last();
-                using (var fileStream = new FileStream(productImagePath + fileName, FileMode.Create))
+                using (var fileStream = new FileStream(folderPath + fileName, FileMode.Create))
                 {
                     product.UploadedFile.CopyTo(fileStream);
                 }
