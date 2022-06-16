@@ -30,11 +30,11 @@
                 <span asp-validation-for="Pages" />
             </div>
             <br />
-            <div>
+           @* <div>
                 <label asp-for="UploadedFile">Загрузить изображение</label>
                 <input type="file" asp-for="UploadedFile" class="form-control"/>
                 <span asp-validation-for="UploadedFile" />
-            </div>
+            </div>*@
             <br />
             <button class="btn btn-dark" type="submit" asp-area="Admin" asp-controller="product" asp-action="Edit" asp-route-productId="@Model.Id">Сохранить</button>
         </div>

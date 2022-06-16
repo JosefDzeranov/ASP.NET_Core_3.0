@@ -1,4 +1,4 @@
-﻿@model ProductViewModel
+﻿@model AddProductViewModel
 
 <form method="post" enctype="multipart/form-data">
     <div class="row">
@@ -30,9 +30,9 @@
             </div>
             <br />
             <div>
-                <label asp-for="UploadedFile">Загрузить изображение</label>
-                <input type="file" asp-for="UploadedFile" class="form-control"/>
-                <span asp-validation-for="UploadedFile" />
+                <label asp-for="UploadedFiles">Загрузить изображения</label>
+                <input type="file" asp-for="UploadedFiles" multiple class="form-control"/>
+                <span asp-validation-for="UploadedFiles" />
             </div>
             <br />
             <button class="btn btn-dark" type="submit" asp-area="admin" asp-controller="product" asp-action="add">Добавить</button>

@@ -8,6 +8,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using OnlineShop.Db;
 using OnlineShop.Db.Models;
+using OnlineShopWebApp.Helpers;
 using Serilog;
 using System;
 
@@ -50,7 +51,8 @@ namespace OnlineShopWebApp
             services.AddTransient<IFavouritesRepository, FavouritesDbRepository>();
             services.AddTransient<IOrdersRepository, OrdersDbRepository>();
             services.AddTransient<ICartsRepository, CartsDbRepository>();
-            services.AddTransient<IProductsRepository, ProductsDbRepository>();            
+            services.AddTransient<IProductsRepository, ProductsDbRepository>();
+            services.AddTransient<ImagesProvider>();            
             services.AddControllersWithViews();
         }
 

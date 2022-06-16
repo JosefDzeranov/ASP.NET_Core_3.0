@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
 using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 namespace OnlineShopWebApp.Models
@@ -7,7 +8,7 @@ namespace OnlineShopWebApp.Models
     public class ProductViewModel
     {
         public Guid Id { get; set; }
-            
+
         [Required(ErrorMessage = "Введите название книги")]
         public string Name { get; set; }
 
@@ -19,7 +20,8 @@ namespace OnlineShopWebApp.Models
 
         [Required(ErrorMessage = "Введите количество страниц")]
         public int Pages { get; set; }
-        public string ImagePath { get; set; }
-        public IFormFile UploadedFile { get; set; }
+        public List<string> ImagesPaths { get; set; }
+        public string ImagePath => ImagesPaths == null ? "/images/products/image1.jpg" : ImagesPaths[0];
+
     }
 }
