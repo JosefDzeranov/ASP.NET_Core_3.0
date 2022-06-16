@@ -32,6 +32,22 @@ namespace OnlineShopWebApp.Helpers
             };
         }
 
+        public static EditProductViewModel ToEditProductViewModel(Product product)
+        {
+           return new EditProductViewModel
+            {
+                Id = product.Id,
+                Name = product.Name,
+                Description = product.Description,
+                Pages = product.Pages,
+                Cost = product.Cost,
+                ImagesPaths = product.Images.Select(x => x.Url).ToList()
+           };             
+        }
+
+
+
+
         public static Product ToProduct(this AddProductViewModel product, List<string> imagesPathes)
         {
             var productDb = new Product
@@ -52,7 +68,7 @@ namespace OnlineShopWebApp.Helpers
 
         public static CartViewModel ToCartViewModel(Cart cart)
         {
-            if (cart==null)
+            if (cart == null)
             {
                 return null;
             }
@@ -90,7 +106,7 @@ namespace OnlineShopWebApp.Helpers
             return ordersViewModels;
         }
 
-       public static OrderViewModel ToOrderViewModel(this Order order)
+        public static OrderViewModel ToOrderViewModel(this Order order)
         {
             return new OrderViewModel
             {
@@ -142,7 +158,7 @@ namespace OnlineShopWebApp.Helpers
                 UserId = user.Id,
                 Name = user.Name,
                 Age = user.Age,
-                Email = user.Email               
+                Email = user.Email
             };
         }
     }

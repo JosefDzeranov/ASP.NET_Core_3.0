@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using OnlineShop.Db;
+using OnlineShop.Db.Models;
 using OnlineShopWebApp.Helpers;
 using OnlineShopWebApp.Models;
 using System;
@@ -43,52 +44,41 @@ namespace OnlineShopWebApp.Areas.Admin.Controllers
             return RedirectToAction("Products");
         }
 
-        //public IActionResult Edit(Guid productId)
-        //{
-        //    var product = productsRepository.TryGetById(productId);
-        //    return View(new ProductViewModel
-        //    {
-        //        Id = product.Id,
-        //        Name = product.Name,
-        //        Description = product.Description,
-        //        Pages = product.Pages,
-        //        Cost = product.Cost,
-        //        ImagePath = product.ImagePath
-        //    });
-        //}
-        //[HttpPost]
-        //public IActionResult Edit(ProductViewModel changedProduct)
-        //{
-        //    if (!ModelState.IsValid)
-        //    {
-        //        return View(changedProduct);
-        //    }
+        public IActionResult Edit(Guid productId)
+        {
+            var product = productsRepository.TryGetById(productId);
+            return View(Mapping.ToEditProductViewModel(product));
+        }
 
-        //    var product = productsRepository.TryGetById(changedProduct.Id);
 
-        //    product.Id = changedProduct.Id;
-        //    product.Name = changedProduct.Name;
-        //    product.Cost = changedProduct.Cost;
-        //    product.Description = changedProduct.Description;
-        //    product.Pages = changedProduct.Pages;
+        [HttpPost]
+        public IActionResult Edit(EditProductViewModel changedProduct)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View(changedProduct);
+            }
 
-        //    if (changedProduct.UploadedFile != null)
-        //    {
-        //        FileInfo fileInfo = new FileInfo(Path.Combine(appEnvironment.WebRootPath + product.ImagePath));
-        //        fileInfo.Delete();
-        //        string productImagePath = Path.Combine(appEnvironment.WebRootPath + "/images/products/");
-        //        var fileName = Guid.NewGuid() + "." + changedProduct.UploadedFile.FileName.Split('.').Last();
-        //        using (var fileStream = new FileStream(productImagePath + fileName, FileMode.Create))
-        //        {
-        //            changedProduct.UploadedFile.CopyTo(fileStream);
-        //        }
+            var product = productsRepository.TryGetById(changedProduct.Id);
 
-        //        product.ImagePath = "/images/products/" + fileName;                
-        //    }           
+            product.Id = changedProduct.Id;
+            product.Name = changedProduct.Name;
+            product.Cost = changedProduct.Cost;
+            product.Description = changedProduct.Description;
+            product.Pages = changedProduct.Pages;
 
-        //    productsRepository.Edit();       
-        //    return RedirectToAction("Products");                                   
-        //}
+            if (changedProduct.UploadedFiles != null)
+            {
+                var newImages = imagesProvider.SaveFiles(changedProduct.UploadedFiles, ImagesFolders.products);
+                foreach (var newImage in newImages)
+                {
+                    product.Images.Add(new Image { Url = newImage });
+                }                                       
+            }
+
+            productsRepository.Edit();
+            return RedirectToAction("Products");
+        }
 
         public IActionResult Delete(Guid productId)
         {
