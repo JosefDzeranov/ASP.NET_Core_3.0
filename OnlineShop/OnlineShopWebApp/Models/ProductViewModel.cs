@@ -21,7 +21,7 @@ namespace OnlineShopWebApp.Models
         [Required(ErrorMessage = "Введите количество страниц")]
         public int Pages { get; set; }
         public List<string> ImagesPaths { get; set; }
-        public string ImagePath => ImagesPaths == null ? "/images/products/image1.jpg" : ImagesPaths[0];
+        public string ImagePath => ImagesPaths.Count == 0 ? "/images/products/image1.jpg" : ImagesPaths[0];
 
     }
 }

@@ -18,9 +18,9 @@ namespace OnlineShopWebApp.Controllers
         {
             this.productsRepository = productsRepository;
         }
-        public IActionResult Index(Guid id)
+        public IActionResult Index(Guid Id)
         {
-            var product = productsRepository.TryGetById(id);
+            var product = productsRepository.TryGetById(Id);
             return View(Mapping.ToProductViewModel(product));
         }
         

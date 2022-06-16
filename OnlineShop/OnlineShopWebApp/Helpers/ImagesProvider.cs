@@ -38,7 +38,8 @@ namespace OnlineShopWebApp.Helpers
                 }
 
                 var fileName = Guid.NewGuid() + "." + file.FileName.Split('.').Last();
-                using (var fileStream = new FileStream(folder + fileName, FileMode.Create))
+                string path = Path.Combine(folderImagePath, fileName);
+                using (var fileStream = new FileStream(path, FileMode.Create))
                 {
                     file.CopyTo(fileStream);
                 }
