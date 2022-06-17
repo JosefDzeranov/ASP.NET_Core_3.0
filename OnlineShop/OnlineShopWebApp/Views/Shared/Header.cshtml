@@ -21,7 +21,7 @@
 	                    {
 		                    <li class="nav-item">
 			                    @User.Identity.Name
-			                    <a class="nav-link text-dark" asp-area="" asp-controller="Account" asp-action="Logout">Выход</a>
+			                    <a class="btn btn-outline-success" asp-area="" asp-controller="Account" asp-action="Logout"><span class="bi bi-incognito">Выход</span></a>
 		                    </li>
 	                    }
 	                    else
@@ -34,7 +34,7 @@
 	                    @if (User.IsInRole(Constants.AdminRoleName))
 	                    {
 		                    <li class="nav-item">
-			                    <a class="nav-link text-dark" asp-area="Admin" asp-controller="Order" asp-action="Index"> <span class="bi bi-cup-straw"> Панель Администратора</span></a>
+			                    <a class="btn btn-outline-success" asp-area="Admin" asp-controller="Order" asp-action="Index"> <span class="bi bi-cup-straw"> Панель Администратора</span></a>
 		                    </li>
 	                    }
                     </ul>
