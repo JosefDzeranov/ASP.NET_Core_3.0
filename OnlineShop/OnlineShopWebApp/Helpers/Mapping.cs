@@ -44,10 +44,6 @@ namespace OnlineShopWebApp.Helpers
                 ImagesPaths = product.Images.Select(x => x.Url).ToList()
            };             
         }
-
-
-
-
         public static Product ToProduct(this AddProductViewModel product, List<string> imagesPathes)
         {
             var productDb = new Product
@@ -150,7 +146,6 @@ namespace OnlineShopWebApp.Helpers
             }
             return usersViewModels;
         }
-
         public static UserViewModel ToUserViewModel(this User user)
         {
             return new UserViewModel
@@ -159,6 +154,18 @@ namespace OnlineShopWebApp.Helpers
                 Name = user.Name,
                 Age = user.Age,
                 Email = user.Email
+            };
+        }
+
+        public static AddUserViewModel ToAddUserViewModel(this User user)
+        {
+            return new AddUserViewModel
+            {
+                UserId = user.Id,
+                Name = user.Name,
+                Age = user.Age,
+                Email = user.Email,
+                ImagePath = user.Image.Url
             };
         }
     }

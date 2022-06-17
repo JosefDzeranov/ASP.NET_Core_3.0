@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using OnlineShop.Db;
 using OnlineShop.Db.Models;
+using OnlineShopWebApp.Helpers;
 using OnlineShopWebApp.Models;
 using System;
 
@@ -9,15 +10,17 @@ namespace OnlineShopWebApp.Controllers
 {
     public class AccountController : Controller
     {        
-        private readonly UserManager<User> _userManager;
-        private readonly SignInManager<User> _signInManager;
+        private readonly UserManager<User> userManager;
+        private readonly SignInManager<User> signInManager;
         private readonly RoleManager<IdentityRole> rolesManager;
+        private readonly ImagesProvider imagesProvider;
 
-        public AccountController(UserManager<User> userManager, SignInManager<User> signInManager, RoleManager<IdentityRole> rolesManager)
+        public AccountController(UserManager<User> userManager, SignInManager<User> signInManager, RoleManager<IdentityRole> rolesManager, ImagesProvider imagesProvider)
         {
-            _userManager = userManager;
-            _signInManager = signInManager;
+            this.userManager = userManager;
+            this.signInManager = signInManager;
             this.rolesManager = rolesManager;
+            this.imagesProvider = imagesProvider;
         }
 
 
@@ -31,7 +34,7 @@ namespace OnlineShopWebApp.Controllers
         {
             if (ModelState.IsValid)
             {
-                var result = _signInManager.PasswordSignInAsync(enterData.Login, enterData.Password, enterData.Remember, false).Result;
+                var result = signInManager.PasswordSignInAsync(enterData.Login, enterData.Password, enterData.Remember, false).Result;
                 if (result.Succeeded)
                 {
                     return Redirect(enterData.ReturnUrl ?? "/Home");
@@ -61,12 +64,12 @@ namespace OnlineShopWebApp.Controllers
                     UserName = registrationData.Email                  
                 };
 
-                var result = _userManager.CreateAsync(user, registrationData.Password).Result;
+                var result = userManager.CreateAsync(user, registrationData.Password).Result;
                 if (result.Succeeded)
                 {
-                    _signInManager.SignInAsync(user, false).Wait();
+                    signInManager.SignInAsync(user, false).Wait();
 
-                    _userManager.AddToRoleAsync(user, Constants.UserRoleName).Wait();
+                    userManager.AddToRoleAsync(user, Constants.UserRoleName).Wait();
 
                     return Redirect(registrationData.ReturnUrl ?? "/Home");                    
                 }
@@ -83,8 +86,25 @@ namespace OnlineShopWebApp.Controllers
 
         public IActionResult Logout(string returnUrl)
         {
-            _signInManager.SignOutAsync().Wait();
+            signInManager.SignOutAsync().Wait();
             return RedirectToAction(nameof(HomeController.Index), "Home");
         }
+
+        public IActionResult Index(string userName)
+        {
+            var user = userManager.FindByNameAsync(userName).Result;
+            return View(user.ToAddUserViewModel());
+        }
+
+        [HttpPost]
+        public IActionResult SaveProfileImage(AddUserViewModel user)
+        {
+            var imagePath = imagesProvider.SaveFile(user.UploadedFile, ImagesFolders.profiles);
+            var 
+        }
+
+
+
+
     }
 }
