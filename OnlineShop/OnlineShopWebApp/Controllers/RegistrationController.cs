@@ -10,7 +10,6 @@ namespace OnlineShopWebApp.Controllers
     {
         private readonly UserManager<User> userManager;
         private readonly SignInManager<User> signInManager;
-
         public RegistrationController(UserManager<User> userManager, SignInManager<User> signInManager)
         {
             this.userManager = userManager;
@@ -24,16 +23,13 @@ namespace OnlineShopWebApp.Controllers
             {
                 ModelState.AddModelError("", "Имя и логин не должны совпадать");
             }
-
             return View("Registration", registration);
         }
-
 
         public IActionResult Register(string returnUrl)
         {
             return View(new Registration() { ReturnUrl = returnUrl });
         }
-
 
         [HttpPost]
         public IActionResult Register(Registration registration)

@@ -11,14 +11,11 @@ namespace OnlineShopWebApp.Areas.Admin.Controllers
     [Authorize(Roles = Constants.AdminRoleName)]
     public class OrderController : Controller
     {
-
         private readonly IOrdersRepository ordersRepository;
 
         public OrderController(IOrdersRepository ordersRepository)
         {
-
             this.ordersRepository = ordersRepository;
-
         }
 
         public IActionResult Index()
@@ -26,7 +23,6 @@ namespace OnlineShopWebApp.Areas.Admin.Controllers
             var orders = ordersRepository.GetAll();
             return View(Mapping.ToOrderViewModels(orders).ToList());
         }
-
 
         public IActionResult Detail(int orderId)
         {

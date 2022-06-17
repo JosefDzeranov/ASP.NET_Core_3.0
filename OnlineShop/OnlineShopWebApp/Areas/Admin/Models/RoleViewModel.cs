@@ -8,7 +8,7 @@ namespace OnlineShopWebApp.Areas.Admin.Models
 
         public override bool Equals(object obj)
         {
-            var role = (RoleViewModel) obj;
+            var role = (RoleViewModel)obj;
             return Name == role.Name;
         }
     }

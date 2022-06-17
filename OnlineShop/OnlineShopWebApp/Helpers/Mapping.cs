@@ -3,6 +3,7 @@ using OnlineShopWebApp.Models;
 using OnlineShop.db.Models;
 using System.Linq;
 using OnlineShop.db;
+using OnlineShopWebApp.Areas.Admin.Models;
 
 namespace OnlineShopWebApp.Helpers
 {
@@ -15,7 +16,7 @@ namespace OnlineShopWebApp.Helpers
                 yield return ToProductViewModel(product);
             }
         }
-        public static ProductViewModel ToProductViewModel(Product product)
+        public static ProductViewModel ToProductViewModel(this Product product)
         {
             return new ProductViewModel
             {
@@ -23,7 +24,7 @@ namespace OnlineShopWebApp.Helpers
                 Name = product.Name,
                 Cost = product.Cost,
                 Description = product.Description,
-                ImagePath = product.ImagePath,
+                ImagesPath = product.Images?.Select(x => x.Url).ToArray()
             };
         }
         public static CartViewModel ToCartViewModel(Cart cart)
@@ -42,16 +43,13 @@ namespace OnlineShopWebApp.Helpers
         }
         public static CartItemViewModel ToCartItemViewModel(CartItem cartDbItem)
         {
-
             return new CartItemViewModel
             {
                 Id = cartDbItem.Id,
                 Amount = cartDbItem.Amount,
                 Product = ToProductViewModel(cartDbItem.Product)
             };
-
         }
-
         public static CustomerViewModel ToCustomerViewModel(Customer customer)
         {
             return new CustomerViewModel
@@ -135,12 +133,59 @@ namespace OnlineShopWebApp.Helpers
                 Product = ToProduct(cartItem.Product),
             };
         }
-        public static Product ToProduct(ProductViewModel product)
+        public static Product ToProduct(this ProductViewModel product)
         {
-            return new Product(id: product.Id, name: product.Name, cost: product.Cost, description: product.Description,
-                imagePath: product.ImagePath);
+            return new Product
+            {
+                Id = product.Id,
+                Name = product.Name,
+                Cost = product.Cost,
+                Description = product.Description
+            };
         }
 
+        public static Product ToProduct(this AddProductViewModel addProductViewModel, List<string> ImagesPath)
+        {
+            return new Product
+            {
+                Name = addProductViewModel.Name,
+                Cost = addProductViewModel.Cost,
+                Description = addProductViewModel.Description,
+                Images = ToImages(ImagesPath)
+            };
+        }
+
+        public static Product ToProduct(this EditProductViewModel editProduct)
+        {
+            return new Product
+            {
+                Id = editProduct.Id,
+                Name = editProduct.Name,
+                Cost = editProduct.Cost,
+                Description = editProduct.Description,
+                Images = editProduct.ImagesPaths.ToImages()
+            };
+        }
+        public static EditProductViewModel ToEditProductViewModel(this Product product)
+        {
+            return new EditProductViewModel
+            {
+                Id = product.Id,
+                Name = product.Name,
+                Cost = product.Cost,
+                Description = product.Description,
+                ImagesPaths = product.Images.ToPaths()
+            };
+        }
+        public static List<Image> ToImages(this List<string> paths)
+        {
+            return paths.Select(x => new Image { Url = x }).ToList();
+        }
+
+        public static List<string> ToPaths(this List<Image> paths)
+        {
+            return paths.Select(x => x.Url).ToList();
+        }
         public static Customer ToCustomer(CustomerViewModel customer)
         {
             return new Customer

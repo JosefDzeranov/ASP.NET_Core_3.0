@@ -1,30 +1,62 @@
-﻿@model ProductViewModel
+﻿@model EditProductViewModel
 
-<form method="post" asp-action="Edit">
-<div class="row">
-	@await Html.PartialAsync("AdminMenu")
+<form method="post" enctype="multipart/form-data">
+	<div class="row">
+		@await Html.PartialAsync("AdminMenu")
 
 
-	<div class="col-9">
-		<h3>Редактировать информацию о продукте</h3>
+		<div class="col-9">
+			<h3>Редактировать информацию о продукте</h3>
 
-		<div class="validation" asp-validation-summary="All"></div>
+			<div class="validation" asp-validation-summary="All"></div>
 
-		<input type="hidden" asp-for="Id"/>
+			<input type="hidden" name="Id" value="@Model?.Id"/>
+			<div class="row">
+				<div class="col-6">
+					<label asp-for="Name"> </label><br />
+					<input class="form-control" asp-for="Name" value="@Model?.Name"/>
+					<span asp-validation-for="Name"/>
+				</div>
+			</div>
+			<input type="hidden" name="Id" value="@Model?.Id"/>
+			<div class="row">
+				<div class="col-6">
+					<label asp-for="Description"> </label><br />
+					<input class="form-control" asp-for="Description" value="@Model?.Description"/>
+					<span asp-validation-for="Description"/>
+				</div>
+			</div>
+			
+			<input type="hidden" name="Id" value="@Model?.Id"/>
+			<div class="row">
+				<div class="col-6">
+					<label asp-for="Cost"> </label><br />
+					<input class="form-control" asp-for="Cost" value="@Model?.Cost"/>
+					<span asp-validation-for="Cost"/>
+				</div>
+			</div>
 
-		<input type="text" asp-for="Name"/>
-		<span asp-validation-for="Name"></span><br />
+			<div class="row">
+				<div class="col-6">
+					<input type="hidden" asp-for="@Model.ImagesPaths" value="@Model.ImagesPaths"/>
+					<label>Изображения</label><br/>
 
-		<input type="number" asp-for="Cost"/>
-		<span asp-validation-for="Cost"></span><br />
-
-		<input type="text" asp-for="Description"/>
-		<span asp-validation-for="Description"></span><br />
-		<br />
-		<button type="submit" class="btn-outline-success"
-		asp-area="Admin"
-		asp-controller="Product"
-		asp-action="Edit">Сохранить изменения</button>
+					@foreach (var ImagePath in Model.ImagesPaths)
+					{
+						<div style="padding: 4px">
+							<img src="@ImagePath" width="150" height="150"/>
+						</div>
+					}
+				</div>
+			</div>
+	
+			<div class="form-group">
+				<label>Загрузить новые изображения</label>
+				<input type="file" multiple accept="image/*" class="form-control" name="UploadFiles"/> 
+			</div>
+			<div>
+				<button type="submit" class="btn-outline-success" asp-area="Admin" asp-controller="Product" asp-action="Edit">Обновить</button>
+			</div>
+		</div>
 	</div>
-</div>
 </form>

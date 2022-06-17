@@ -32,14 +32,11 @@ namespace OnlineShopWebApp
         {
             users.Remove(TryGetByName(id));
         }
-
         public void Edit(UserViewModel user)
         {
             var existingUser = TryGetByName(user.Name);
             existingUser.Phone = user.Phone;
             existingUser.Email = user.Email;
-
         }
-
     }
 }
