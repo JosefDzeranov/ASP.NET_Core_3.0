@@ -66,13 +66,13 @@ namespace OnlineShopWebApp.Tests
             var expected = testProducts.MappingToListProductViewModel();
 
             
-            productRepository.Setup(repo => repo.GetAll()).Returns(testProducts);
+            productRepository.Setup(repo => repo.GetAllAsync()).ReturnsAsync(testProducts);
             var controller = new HomeController(productRepository.Object);
            
 
             // Act
 
-            var actual = controller.Index() as ViewResult;
+            var actual = controller.Index().Result as ViewResult;
             var model = actual.Model as List<ProductViewModel>;
 
             // Assert

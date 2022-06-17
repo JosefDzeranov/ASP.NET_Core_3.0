@@ -6,7 +6,42 @@
 <p><h6 class="text-black-50">Артикул: @Model.Id</h6></p>
 <div class="row">
     <div class="col-4 my-4">
-        <img src="@Model.MainImagePath" width="400" height="700" alt="изображение книги" />
+        @if (Model.ImagesPaths.Count > 1)
+        {
+            <div id="carouselProduct" class="carousel slide" data-bs-ride="carousel">
+                <div class="carousel-indicators">
+                    <button type="button" data-bs-target="#carouselProduct" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+                    @for( int i = 1; i <= Model.ImagesPaths.Count - 1; i++)
+                    {
+                         <button type="button" data-bs-target="#carouselProduct" data-bs-slide-to="@i" aria-label="Slide @i"></button>
+                    }
+                </div>
+                <div class="carousel-inner">
+                    <div class="carousel-item active">
+                        <img src=@Model.ImagesPaths[0] width="400" height="700" class="d-block w-100" alt="картинка книги">
+                    </div>
+                     @for( int i = 1; i <= Model.ImagesPaths.Count - 1; i++)
+                    {
+                        <div class="carousel-item">
+                        <img src="@Model.ImagesPaths[i]" width="400" height="700" class="d-block w-100" alt="...">
+                    </div>
+                    }    
+                </div>
+                <button class="carousel-control-prev" type="button" data-bs-target="#carouselProduct" data-bs-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Предыдущий</span>
+                </button>
+                <button class="carousel-control-next" type="button" data-bs-target="#carouselProduct" data-bs-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Следующий</span>
+                </button>
+            </div>
+        }
+        else
+        {
+            <img src="@Model.MainImagePath" width="400" height="700" alt="изображение книги" />
+        }
+        
     </div>
     <div class="col-5 my-4">
         <p><h4>Описание:</h4></p>
@@ -19,10 +54,10 @@
                 <p><h4>@Model.Name</h4></p>
                 <p><h3>@Model.Cost ₽</h3></p>
                 <div class="row">
-                <a asp-controller="Cart" asp-action="Add" asp-route-productId="@Model.Id" class="btn btn-dark my-1">Добавить в корзину</a>
-                <a asp-controller="Favorites" asp-action="Add" asp-route-productId="@Model.Id"asp-route-control="@ViewContext.RouteData.Values["controller"].ToString()" asp-route-act="@ViewContext.RouteData.Values["action"].ToString()" class="btn btn-primary my-1"><i class="bi bi-bookmark"></i> в избранное</a>
+                    <a asp-controller="Cart" asp-action="Add" asp-route-productId="@Model.Id" class="btn btn-dark my-1">Добавить в корзину</a>
+                    <a asp-controller="Favorites" asp-action="Add" asp-route-productId="@Model.Id" asp-route-control="@ViewContext.RouteData.Values["controller"].ToString()" asp-route-act="@ViewContext.RouteData.Values["action"].ToString()" class="btn btn-primary my-1"><i class="bi bi-bookmark"></i> в избранное</a>
                 </div>
-               
+
             </div>
         </div>
     </div>
