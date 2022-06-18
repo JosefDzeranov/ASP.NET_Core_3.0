@@ -2,18 +2,18 @@
 
 <form method="post" enctype="multipart/form-data">
     <div class="row">
-
-        @*@await Html.PartialAsync("UserMenu")*@
-        <div class="col-6 card shadow">
-            <img class="card-img-bottom" src="@Model.ImagePath" />
+        @await Html.PartialAsync("UserMenu")
+        <div class="col-5 card shadow text-center">
+            <img class="img-fluid" src="@Model.ImagePath" />
             <div>
                 <label asp-for="UploadedFile">Загрузить изображение</label>
                 <input type="file" asp-for="UploadedFile" class="form-control" />
                 <span asp-validation-for="UploadedFile" />
             </div>
-
+            <button class="btn btn-dark" type="submit" asp-area="" asp-controller="account" asp-action="changeprofile">Изменить аватар</button>
+            <button class="btn btn-dark" type="submit" asp-area="" asp-controller="account" asp-action="deleteimage">Удалить аватар</button>
         </div>
-        <div class="col-6">
+        <div class="col-5 text-center">
             <div>
                 <label asp-for="Email">Логин/E-mail:</label>
                 <input asp-for="Email" />
@@ -29,7 +29,7 @@
                 <input asp-for="Age" />
                 <span asp-validation-for="Age" />
             </div><br />
-        </div>
-        <button class="btn btn-dark" type="submit" asp-area="" asp-controller="account" asp-action="changeprofile">Сохранить</button>
+            <button class="btn btn-dark" type="submit" asp-area="" asp-controller="account" asp-action="changeprofile">Сохранить</button>
+        </div>             
     </div>
 </form>

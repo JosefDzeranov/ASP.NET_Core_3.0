@@ -47,5 +47,11 @@ namespace OnlineShopWebApp.Helpers
             }
             return null;
         }
+
+        public void Delete(string imagePath)
+        {
+            FileInfo fileInfo = new FileInfo(Path.Combine(appEnvironment.WebRootPath + imagePath));
+            fileInfo.Delete();
+        }
     }
 }

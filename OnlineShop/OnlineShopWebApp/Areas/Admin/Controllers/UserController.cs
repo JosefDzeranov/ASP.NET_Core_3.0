@@ -77,7 +77,8 @@ namespace OnlineShopWebApp.Areas.Admin.Controllers
                     Name = registrationData.Name,
                     Age = registrationData.Age,
                     Email = registrationData.Email,
-                    UserName = registrationData.Email
+                    UserName = registrationData.Email,
+                    ImagePath = "/images/profiles/common.png"
                 };
                 userManager.CreateAsync(user, registrationData.Password).Wait();
                 return RedirectToAction("Users");

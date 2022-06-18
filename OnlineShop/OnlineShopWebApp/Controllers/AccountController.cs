@@ -5,6 +5,7 @@ using OnlineShop.Db.Models;
 using OnlineShopWebApp.Helpers;
 using OnlineShopWebApp.Models;
 using System;
+using System.IO;
 
 namespace OnlineShopWebApp.Controllers
 {
@@ -61,15 +62,16 @@ namespace OnlineShopWebApp.Controllers
                     Name = registrationData.Name,
                     Age = registrationData.Age,
                     Email = registrationData.Email,
-                    UserName = registrationData.Email
+                    UserName = registrationData.Email,
+                    ImagePath = "/images/profiles/common.png"
                 };
 
                 var result = userManager.CreateAsync(user, registrationData.Password).Result;
                 if (result.Succeeded)
                 {
-                    signInManager.SignInAsync(user, false).Wait();
-
                     userManager.AddToRoleAsync(user, Constants.UserRoleName).Wait();
+
+                    signInManager.SignInAsync(user, false).Wait();                   
 
                     return Redirect(registrationData.ReturnUrl ?? "/Home");
                 }
@@ -98,17 +100,43 @@ namespace OnlineShopWebApp.Controllers
 
         [HttpPost]
         public IActionResult ChangeProfile(AddUserViewModel changedUser)
+        {            
+            var user = userManager.FindByNameAsync(changedUser.Email).Result;
+            user.Email = changedUser.Email;
+            user.Age = changedUser.Age;
+            user.UserName = changedUser.Email;
+            user.Name = changedUser.Name;
+            if (changedUser.UploadedFile != null)
+            {
+                if (user.ImagePath != "/images/profiles/common.png")
+                {
+                    imagesProvider.Delete(user.ImagePath);
+                }
+                user.ImagePath = imagesProvider.SaveFile(changedUser.UploadedFile, ImagesFolders.profiles);
+            }
+
+            userManager.UpdateAsync(user).Wait();
+
+            return RedirectToAction("Index", new { userName = user.UserName });
+        }
+
+
+        [HttpPost]
+        public IActionResult DeleteImage(AddUserViewModel changedUser)
         {
             var user = userManager.FindByNameAsync(changedUser.Email).Result;
             user.Email = changedUser.Email;
             user.Age = changedUser.Age;
             user.UserName = changedUser.Email;
             user.Name = changedUser.Name;
-            user.ImagePath = imagesProvider.SaveFile(changedUser.UploadedFile, ImagesFolders.profiles);
+
+            imagesProvider.Delete(user.ImagePath);
+
+            user.ImagePath = "/images/profiles/common.png";
 
             userManager.UpdateAsync(user).Wait();
 
-            return RedirectToAction("Index", user.Name);
+            return RedirectToAction("Index", new { userName = user.UserName });
         }
     }
 }
