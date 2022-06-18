@@ -35,11 +35,14 @@
                         }
                         else if (User.IsInRole(Constants.UserRoleName))
                         {
-                            <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="Account" asp-action="Index" asp-route-userName="@User.Identity.Name">Личный кабинет</a>
-                            </li>
-                            <li class="nav-item">
-                                @User.Identity.Name
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="#" id="navbarDarkDropdownMenuLink" role="button" data-toggle="dropdown" aria-expanded="false">
+                                    @await Component.InvokeAsync("Profile")
+                                </a>
+                                <div class="dropdown-menu" aria-labelledby="navbarDarkDropdownMenuLink">
+                                    <a class="dropdown-item" asp-area="" asp-controller="Account" asp-action="Index" asp-route-userName="@User.Identity.Name">Личный кабинет</a>
+                                    <a class="dropdown-item" asp-area="" asp-controller="Account" asp-action="Logout">Выход</a>
+                                </div>
                             </li>
                         }
                     }
