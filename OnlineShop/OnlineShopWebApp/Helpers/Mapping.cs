@@ -161,6 +161,18 @@ namespace OnlineShopWebApp.Helpers
                 Email = user.Email,
                 ImagePath = user.ImagePath
             };
-        }        
-    }
+        }
+
+        public static AddUserViewModel ToAddUserViewModel(this User user)
+        {
+            return new AddUserViewModel
+            {
+                UserId = user.Id,
+                Name = user.Name,
+                Age = user.Age,
+                Email = user.Email,
+                ImagePath = user.ImagePath
+            };
+        }
+    }        
 }

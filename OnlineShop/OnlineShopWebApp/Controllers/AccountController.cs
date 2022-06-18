@@ -93,11 +93,11 @@ namespace OnlineShopWebApp.Controllers
         public IActionResult Index(string userName)
         {
             var user = userManager.FindByNameAsync(userName).Result;
-            return View(user.ToUserViewModel());
+            return View(user.ToAddUserViewModel());
         }
 
         [HttpPost]
-        public IActionResult ChangeImage(AddUserViewModel changedUser)
+        public IActionResult ChangeProfile(AddUserViewModel changedUser)
         {
             var user = userManager.FindByNameAsync(changedUser.Email).Result;
             user.Email = changedUser.Email;
@@ -108,7 +108,7 @@ namespace OnlineShopWebApp.Controllers
 
             userManager.UpdateAsync(user).Wait();
 
-            return RedirectToAction("Index");
+            return RedirectToAction("Index", user.Name);
         }
     }
 }
