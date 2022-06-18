@@ -6,5 +6,6 @@ namespace OnlineShop.Db.Models
     {      
         public string Age { get; set; }
         public string Name { get; set; }
+        public string ImagePath { get; set; }
     }
 }
