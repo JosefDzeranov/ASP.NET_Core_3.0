@@ -19,10 +19,22 @@
                     </li>
                     <li class="nav-item">
                         <a class="nav-link text-dark" asp-area="" asp-controller="Favourite" asp-action="Index">Избранное</a>
-                    </li>                   
+                    </li>
 
                     @if (User.Identity.IsAuthenticated)
                     {
+                        @if (User.IsInRole(Constants.AdminRoleName))
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="Admin" asp-controller="Order" asp-action="Orders">Панель Администратора</a>
+                            </li>
+                        }
+                        else if (User.IsInRole(Constants.UserRoleName))
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Account" asp-action="Index" asp-route-userName="@User.Identity.Name">Личный кабинет</a>
+                            </li>
+                        }
                         <li class="nav-item">
                             @User.Identity.Name
                             <a class="nav-link text-dark" asp-area="" asp-controller="Account" asp-action="Logout">Выход</a>
@@ -32,13 +44,6 @@
                     {
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Account" asp-action="Login">Войти</a>
-                        </li>
-                    }
-
-                    @if (User.IsInRole(Constants.AdminRoleName))
-                    {
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="Admin" asp-controller="Order" asp-action="Orders">Панель Администратора</a>
                         </li>
                     }
                 </ul>

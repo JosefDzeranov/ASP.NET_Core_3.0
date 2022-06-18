@@ -1,0 +1,20 @@
+﻿@model AddUserViewModel
+
+<form method="post" enctype="multipart/form-data">
+    <div class="row">
+        @await Html.PartialAsync("UserMenu")
+        <div class="col-6 card shadow">
+            <img class="card-img-bottom" src="@Model.ImagePath" />
+            <div>
+                <label asp-for="UploadedFile">Загрузить изображение</label>
+                <input type="file" asp-for="UploadedFile" class="form-control" />
+                <span asp-validation-for="UploadedFile" />
+            </div>
+        </div>
+        <div class="col-6">
+            <h4>Имя: @Model.Name</h4>
+            <h4>Возраст: @Model.Age</h4>
+            <h4>Логин/E-mail: @Model.Email</h4>
+        </div>
+    </div>
+</form>

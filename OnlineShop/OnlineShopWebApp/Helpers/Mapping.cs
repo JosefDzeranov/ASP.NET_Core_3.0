@@ -34,7 +34,7 @@ namespace OnlineShopWebApp.Helpers
 
         public static EditProductViewModel ToEditProductViewModel(Product product)
         {
-           return new EditProductViewModel
+            return new EditProductViewModel
             {
                 Id = product.Id,
                 Name = product.Name,
@@ -42,7 +42,7 @@ namespace OnlineShopWebApp.Helpers
                 Pages = product.Pages,
                 Cost = product.Cost,
                 ImagesPaths = product.Images.Select(x => x.Url).ToList()
-           };             
+            };
         }
 
 
@@ -158,8 +158,9 @@ namespace OnlineShopWebApp.Helpers
                 UserId = user.Id,
                 Name = user.Name,
                 Age = user.Age,
-                Email = user.Email
+                Email = user.Email,
+                ImagePath = user.ImagePath
             };
-        }
+        }        
     }
 }
