@@ -1,7 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using OnlineShopWebApp.Interface;
 using OnlineShopWebApp.Models;
-using OnlineShopWebApp.Services;
 using System;
 
 namespace OnlineShopWebApp.Areas.Admin.Controllers
@@ -23,7 +22,7 @@ namespace OnlineShopWebApp.Areas.Admin.Controllers
             return View(existingOrders);
         }
 
-        public IActionResult GetOrder(Guid orderId)
+        public IActionResult GetOrder()
         {
             var order = ordersStorage.TryGetOrderAllByUserId(Constants.UserId);
             if (order != null)

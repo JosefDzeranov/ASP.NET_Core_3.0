@@ -18,14 +18,15 @@ else
                 <table class="table table-striped">
                     <thead class="table-light" align="center">
                         <tr>
-                            <th scope="col">Номер</th>
-                            <th scope="col">Дата</th>
+                            <th scope="col">Стоимость заказа</th>
+                            <th scope="col">Дата заказа</th>
                         </tr>
                     </thead>
                     <tbody>
                         @foreach (var order in Model)
                         {
                             <tr>
+                                <td><a href="/order/index/@order.Id">@order.CostOrder</a></td>
                                 <td><a href="/order/index/@order.Id">@order.OrderDateTime</a></td>
                             </tr>
                         }

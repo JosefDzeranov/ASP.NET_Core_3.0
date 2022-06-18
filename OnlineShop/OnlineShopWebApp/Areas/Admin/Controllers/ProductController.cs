@@ -16,7 +16,6 @@ namespace OnlineShopWebApp.Areas.Admin.Controllers
         }
         public IActionResult Index()
         {
-
             var products = productsStorage.GetAll();
 
             return View(products);
