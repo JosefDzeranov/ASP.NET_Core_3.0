@@ -1,0 +1,12 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<users>
+	<user id="d5b19a99-5ac4-4c9b-9fa1-84c58eb5030a">
+		<firstname>Иванов</firstname>
+		<lastname>Иван</lastname>
+		<role>User</role>
+		<phone>89991111111</phone>
+		<address>Москва, ул.Пушкина, 25</address>
+		<email>mail@mail.ru</email>
+		<password>111</password>
+	</user>
+</users>

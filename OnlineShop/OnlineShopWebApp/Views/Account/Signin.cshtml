@@ -13,7 +13,7 @@
                     <div class="form-group">
                         <label asp-for="Email" class="col-sm-2 control-label">Логин</label>
                         <div class="col-sm-10">
-                            <input class="form-control" asp-for="Email" name="Login" required minlength="3" maxlength="25">
+                            <input class="form-control" asp-for="Email" name="Email" required minlength="3" maxlength="25">
                             <span asp-validation-for="Password"></span>
                         </div>
                     </div>
@@ -36,12 +36,12 @@
                     <div class="form-group">
                         <div class="col-sm-offset-2 col-sm-10">
                             <p>
-                                <button type="submit" class="btn btn-dark" asp-controller="Account" asp-action="Login" align="center">Войти</button>
+                                <button type="submit" class="btn btn-dark" asp-controller="User" asp-action="Signin" align="center">Войти</button>
                             </p>
                         </div>
                         <div class="col-sm-offset-2 col-sm-10">
                             <p>
-                                <a class="btn btn-light" asp-controller="Account" asp-action="Registration">Регистрация</a>
+                                <a class="btn btn-light" asp-controller="User" asp-action="Signup">Регистрация</a>
                             </p>
                         </div>
                     </div>

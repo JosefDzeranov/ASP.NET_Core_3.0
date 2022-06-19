@@ -9,10 +9,13 @@ namespace OnlineShopWebApp.Areas.Admin.Controllers
     public class OrderController : Controller
     {
         private readonly IOrdersStorage ordersStorage;
+        
+        private readonly ICartsStorage cartsStorage;
 
-        public OrderController(IOrdersStorage ordersStorage)
+        public OrderController(IOrdersStorage ordersStorage, ICartsStorage cartsStorage)
         {
             this.ordersStorage = ordersStorage;
+            this.cartsStorage = cartsStorage;
         }
 
         public IActionResult Index()

@@ -1,0 +1,50 @@
+﻿@using OnlineShopWebApp.Models
+@using OnlineShopWebApp.Models.Attributes;
+
+@model SignUp
+
+@{
+    ViewData["Title"] = "Добавление пользователя";
+}
+<div class="container align-content-center">
+    <div class="row">
+        <div class="col-2">
+            @await Html.PartialAsync("AdminPanel")
+        </div>
+        <div class="col-5">
+            <h2>Add user</h2>
+            <form asp-controller="User" asp-action="Signup">
+                <div class="validation" asp-validation-summary="All"></div>
+                <div class="col text-center">
+                    <div>
+                        <input class="form-control" asp-for="FirstName" placeholder="First name">
+                        <span asp-validation-for="FirstName"></span>
+                    </div>
+                    <div>
+                        <input class="form-control" asp-for="LastName" placeholder="Last name">
+                        <span asp-validation-for="LastName"></span>
+                    </div>
+                    <div>
+                        <input class="form-control" asp-for="Phone" placeholder="Phone number">
+                        <span asp-validation-for="Phone"></span>
+                    </div>
+                    <div>
+                        <input class="form-control" asp-for="Email" placeholder="Email">
+                        <span asp-validation-for="Email"></span>
+                    </div>
+                    <div>
+                        <input class="form-control" asp-for="Password" type="password" placeholder="Password">
+                        <span asp-validation-for="Password"></span>
+                    </div>
+                    <div>
+                        <input class="form-control" asp-for="ConfirmPassword" type="password" placeholder="Confirm password">
+                        <span asp-validation-for="ConfirmPassword"></span>
+                    </div>
+                    <div>
+                        <button type="submit" class="btn btn-dark" asp-controller="User" asp-action="Add">Добавить пользователя</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

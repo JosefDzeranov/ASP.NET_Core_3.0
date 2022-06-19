@@ -9,19 +9,22 @@
             <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
                 <ul class="navbar-nav flex-grow-1">
                     <li class="nav-item">
-                        <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Главная</a>
+                        <a class="nav-link text-dark" role="button" asp-area="" asp-controller="Home" asp-action="Index">Главная</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link text-dark" asp-area="" asp-controller="Cart" asp-action="Index">Корзина @await Component?.InvokeAsync("Cart")</a>
+                        <a class="nav-link text-dark" role="button" asp-area="" asp-controller="Cart" asp-action="Index">Корзина @await Component?.InvokeAsync("Cart")</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link text-dark" asp-area="" asp-controller="Order" asp-action="Index">Заказы</a>
+                        <a class="nav-link text-dark" role="button" asp-area="" asp-controller="Order" asp-action="Index">Заказы</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link text-dark" asp-area="" asp-controller="Account" asp-action="Login">Войти</a>
+                        <a class="nav-link text-dark" role="button" asp-area="" asp-controller="Account" asp-action="Signin">Войти</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link text-dark" asp-area="Admin" asp-controller="Order" asp-action="Index">Администратор</a>
+                        <a class="nav-link text-dark" role="button" asp-area="" asp-controller="Account" asp-action="Signup">Регистрация</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-dark" role="button" asp-area="Admin" asp-controller="Order" asp-action="Index">Администратор</a>
                     </li>
                 </ul>
             </div>

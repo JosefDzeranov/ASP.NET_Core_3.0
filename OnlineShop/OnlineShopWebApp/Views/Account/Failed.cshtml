@@ -1,0 +1,16 @@
+﻿@{
+    ViewData["Title"] = "Autorization failed";
+}
+<div class="container align-content-center">
+    <div class="row text-center">
+        <div class="col-6 mx-auto">
+            <h2>Ошибка входа</h2>
+            <div class="mt-3">
+                Неверно введен логин или пароль!. <a asp-controller="User" asp-action="Signin">Войти</a>
+            </div>
+            <div class="mb-3">
+                Нет регистрации? <a asp-controller="User" asp-action="Signup">Регистрация</a>
+            </div>
+        </div>
+    </div>
+</div>

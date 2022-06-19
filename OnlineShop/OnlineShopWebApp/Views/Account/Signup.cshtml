@@ -1,0 +1,53 @@
+﻿@using OnlineShopWebApp.Models
+
+@model SignUp
+
+<h2 align="center">Вход</h2>
+
+@if (Model == null)
+{
+    <div>
+        <form method="post">
+            <div class="validation" asp-validation-summary="All"></div>
+            <div class="form-group">
+                <label asp-for="FirstName">Имя</label><br />
+                <input asp-for="FirstName" name="FirstName" class="form-control" required minlength="3" maxlength="25">
+                <span asp-validation-for="FirstName"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="LastName">Фамилия</label><br />
+                <input asp-for="LastName" name="LastName" class="form-control" required minlength="3" maxlength="25">
+                <span asp-validation-for="LastName"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Phone">Телефон</label><br />
+                <input asp-for="Phone" name="Phone" class="form-control" required minlength="10" maxlength="10">
+                <span asp-validation-for="Phone"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Email">Адрес эл.почты</label><br />
+                <input asp-for="Email" name="Email" class="form-control" required minlength="3" maxlength="25">
+                <span asp-validation-for="Email"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Password">Пароль</label>
+                <input asp-for="Password" name="Password" class="form-control" required>
+                <span asp-validation-for="Password"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Password">Подтвердите пароль</label>
+                <input asp-for="Password" name="СonfirmPassword" class="form-control" required>
+                <span asp-validation-for="Password"></span>
+            </div>
+            <div>
+                <p><button class="btn btn-dark" type="submit" asp-controller="Account" asp-action="Registration" align="center">Зарегистрироваться</button></p>
+            </div>
+        </form>
+    </div>
+}
+else
+{
+    <div class="">
+        <div>Вы уже зарегистрированы!</div>
+    </div>
+}

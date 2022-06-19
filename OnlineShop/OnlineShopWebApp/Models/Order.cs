@@ -28,14 +28,18 @@ namespace OnlineShopWebApp.Models
         [Required(ErrorMessage = "Имя не заполнено")]
         [StringLength(16, MinimumLength = 2, ErrorMessage = "имя должно быть от 2 до 16 символов")]
         public string Name { get; set; }
+
         [Required(ErrorMessage = "Фамилия не заполнена")]
         [StringLength(25, MinimumLength = 2, ErrorMessage = "имя должно быть от 2 до 25 символов")]
         public string LastName { get; set; }
+
         [Required(ErrorMessage = "не указан email")]
         [EmailAddress(ErrorMessage = "некорректный формат email")]
         public string Mail { get; set; }
+
         [Required(ErrorMessage = "не указан телефон")]
         public string Phone { get; set; }
+
         [Required(ErrorMessage = "не указан адрес")]
         public string Address { get; set; }
         //public decimal CostOrder { get; set; }

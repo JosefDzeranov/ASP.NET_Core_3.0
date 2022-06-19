@@ -1,6 +1,6 @@
 ﻿@using OnlineShopWebApp.Models
 
-@model Account
+@model SignIn
 
 <h2 align="center">Вход</h2>
 
@@ -10,9 +10,9 @@
         <form method="post">
             <div class="validation" asp-validation-summary="All"></div>
             <div class="form-group">
-                <label asp-for="Login">Логин</label><br />
-                <input asp-for="Login" name="username" class="form-control" required minlength="3" maxlength="25">
-                <span asp-validation-for="Login"></span>
+                <label asp-for="Email">Логин</label><br />
+                <input asp-for="Email" name="username" class="form-control" required minlength="3" maxlength="25">
+                <span asp-validation-for="Email"></span>
             </div>
             <div class="form-group">
                 <label asp-for="Password">Пароль</label>

@@ -36,9 +36,6 @@ namespace OnlineShopWebApp.Controllers
                 ordersStorage.Add(order, Constants.UserId);
                 cartsStorage.RemoveCartUser(Constants.UserId);
             }
-            //ordersStorage.Add(order, customer, Constants.UserId, cartItem);
-
-            //cartsStorage.RemoveCartUser(Constants.UserId);
 
             return RedirectToAction("OrderComplete");
         }

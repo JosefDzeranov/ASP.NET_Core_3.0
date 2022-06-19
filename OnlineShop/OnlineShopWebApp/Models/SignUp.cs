@@ -3,12 +3,24 @@ using System.ComponentModel.DataAnnotations;
 
 namespace OnlineShopWebApp.Models
 {
-    public class Registration
+    public class SignUp
     {
-        [Required(ErrorMessage = "Не указан логин")]
-        [EmailAddress(ErrorMessage = "Введите корректный email")]
-        public string UserName { get; set; }
-        
+        [Required]
+        [StringLength(25, MinimumLength = 2)]
+        public string FirstName { get; set; }
+
+        [Required]
+        [StringLength(25, MinimumLength = 2)]
+        public string LastName { get; set; }
+
+        [Required]
+        [Phone]
+        public string Phone { get; set; }
+
+        [Required]
+        [EmailAddress]
+        public string Email { get; set; }
+      
         [Required(ErrorMessage = "Не указан пароль")]
         public string Password { get; set; }
 

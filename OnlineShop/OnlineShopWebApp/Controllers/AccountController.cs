@@ -1,43 +1,52 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using OnlineShopWebApp.Interface;
 using OnlineShopWebApp.Models;
 
 namespace OnlineShopWebApp.Controllers
 {
     public class AccountController : Controller
     {
-        public IActionResult Login()
+        private readonly IUserStorage _userStorage;
+        
+        public AccountController(IUserStorage userStorage)
+        {
+            _userStorage = userStorage;
+        }
+
+        public IActionResult Signin()
         {
             return View();
         }
 
         [HttpPost]
-        public IActionResult Login(Account account)
+        public IActionResult Signin(SignIn signin)
         {
             if (ModelState.IsValid)
             {
                 return RedirectToAction("Index", "Home");
             }
-            return View(account);
+            return View(signin);
         }
 
-        public IActionResult Registration()
+        public IActionResult Signup()
         {
             return View();
         }
 
         [HttpPost]
-        public IActionResult Registration(Registration register)
+        public IActionResult Signup(SignUp signup)
         {
-            if(register.UserName == register.Password)
+            if(signup.Email == signup.Password)
             {
-                ModelState.AddModelError(string.Empty, "Имя и пароль не должны совпадать");
+                ModelState.AddModelError(string.Empty, "Логин и пароль не должны совпадать");
             }
 
             if (ModelState.IsValid)
             {
+                _userStorage.Add(signup);
                 return RedirectToAction("Index", "Home");
             }
-            return View(register);
+            return View(signup);
         }
     }
 }
