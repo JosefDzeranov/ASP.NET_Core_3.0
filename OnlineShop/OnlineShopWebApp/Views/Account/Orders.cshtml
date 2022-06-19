@@ -1,0 +1,40 @@
+﻿@model List<OrderViewModel>
+
+
+<div class="row">
+    @await Html.PartialAsync("UserMenu")
+    <div class="col text-center">
+        @foreach (var order in @Model)
+        {
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Создан @order.Date + @order.Time</th>
+                        <th>Статус @order.State</th>
+                    </tr>
+                    <tr>
+                        <th>Адрес доставки @order.DeliveryInformation.Adress</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in order.Items)
+                    {
+                        <tr>
+                            <td>
+                                @item.Product.Description
+                            </td>
+                            <td>
+                                @item.Amount x @item.Product.Cost руб.
+                            </td>
+                        </tr>
+                    }
+                    <tr>                        
+                        <td class="text-right">
+                            Итого @order.FullCost
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        }
+    </div>
+</div>
