@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using OnlineShop.Db.Interfase;
 using OnlineShop.Db.Models;
 using OnlineShopWebApp.Filters;
+using OnlineShopWebApp.Interfase;
 using OnlineShopWebApp.Models;
 
 namespace OnlineShopWebApp.Areas.Admin.Controllers
@@ -13,6 +14,7 @@ namespace OnlineShopWebApp.Areas.Admin.Controllers
     public class ProductsController : Controller
     {
         private readonly IProductRepository _productRepository;
+        private readonly IWorkWithData _productRepositoryJson = new JsonWorkWithData("projects_for_sale");
         public ProductsController(IProductRepository productRepository)
         {
             _productRepository = productRepository;
@@ -114,6 +116,16 @@ namespace OnlineShopWebApp.Areas.Admin.Controllers
             };
 
             _productRepository.AddNew(productDb);
+            return RedirectToAction("Index");
+        }
+
+        public IActionResult CardNewProductsDefoult()
+        {
+            var productsJson = _productRepositoryJson.Read<List<Product>>();
+            foreach (var productJson in productsJson)
+            {
+                _productRepository.AddNew(productJson);
+            }
             return RedirectToAction("Index");
         }
     }
