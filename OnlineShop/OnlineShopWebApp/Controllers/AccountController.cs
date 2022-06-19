@@ -138,5 +138,12 @@ namespace OnlineShopWebApp.Controllers
 
             return RedirectToAction("Index", new { userName = user.UserName });
         }
+
+        public IActionResult Orders(string userName)
+        {
+            var user = userManager.FindByNameAsync(userName).Result;
+            var orders = user.Orders;
+            return View(orders.ToOrderViewModels());
+        }
     }
 }
