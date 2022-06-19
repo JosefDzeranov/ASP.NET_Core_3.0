@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 
-namespace OnlineShopWebApp.Models
+namespace OnlineShop.Db.Models
 {
     public class Cart
     {
@@ -23,6 +23,11 @@ namespace OnlineShopWebApp.Models
             {
                 return Items.Sum(x => x.Count);
             }
+        }
+
+        public Cart()
+        {
+            Items = new List<CartItem>();
         }
     }
 }

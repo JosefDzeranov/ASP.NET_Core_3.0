@@ -1,7 +1,10 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using OnlineShop.Db;
+using OnlineShop.Db.Interface;
 using OnlineShopWebApp.Interface;
 using OnlineShopWebApp.Models;
 using OnlineShopWebApp.Services;
@@ -21,9 +24,18 @@ namespace OnlineShopWebApp
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddSingleton<IProductsStorage, ProductsStorage>(); 
+            // получаем строку подключения из файла конфигурации
+            string connection = Configuration.GetConnectionString("online_shop");
 
-            services.AddSingleton<ICartsStorage, CartsStorage>();
+            // Добавляем контекст DatabaseContext в качестве сервиса в приложение
+            services.AddDbContext<DatabaseContext>(options =>
+                    options.UseSqlServer(connection));
+
+            services.AddControllersWithViews();
+
+            services.AddTransient<IProductsStorage, ProductsDbStorage>(); 
+
+            services.AddTransient<ICartsStorage, CartsDbStorage>();
 
             services.AddSingleton<IOrdersStorage, OrdersStorage>();
 

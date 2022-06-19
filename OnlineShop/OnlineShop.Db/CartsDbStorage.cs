@@ -1,11 +1,13 @@
-﻿using OnlineShopWebApp.Interface;
+﻿using OnlineShop.Db.Interface;
+using OnlineShop.Db.Models;
+using OnlineShopWebApp.Db.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 
 namespace OnlineShopWebApp.Models
 {
-    public class CartsStorage : ICartsStorage
+    public class CartsDbStorage : ICartsStorage
     {
         private List<Cart> carts = new List<Cart>();
 

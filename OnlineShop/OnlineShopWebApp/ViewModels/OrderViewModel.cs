@@ -1,4 +1,5 @@
-﻿using OnlineShopWebApp.Models;
+﻿using OnlineShop.Db.Models;
+using OnlineShopWebApp.Models;
 
 namespace OnlineShopWebApp.ViewModels
 {
@@ -6,7 +7,7 @@ namespace OnlineShopWebApp.ViewModels
     {
         public Order Order { get; set; } = new Order();
 
-        public Cart Cart { get; set; }
+        public CartViewModel Cart { get; set; }
 
     }
 }

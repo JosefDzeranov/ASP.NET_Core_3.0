@@ -1,6 +1,6 @@
-﻿@using OnlineShopWebApp.Models
+﻿@using OnlineShopWebApp.Db.Models
 
-@model List<Product>
+@model List<ProductViewModel>
 <div class="row">
     @await Html.PartialAsync("AdminPanel")
 
@@ -36,7 +36,7 @@
                             {
                                 
                                 <tr>
-                                    <td>@(product.Id + 1)</td>
+                                    <td>@(product.Id)</td>
                                     <td><a href="/product/index/@product.Id">@product.Name</a></td>
                                     <td>@product.Cost рублей</td>
                                     <td><a class="btn btn-light" asp-controller="Admin" asp-action="EditProduct" asp-route-id="@product.Id" width="20px" role="button">Редактировать</a></td>

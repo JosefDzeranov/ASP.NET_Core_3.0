@@ -1,5 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using OnlineShopWebApp.Interface;
+using OnlineShop.Db;
+using OnlineShop.Db.Interface;
+using System;
 
 namespace OnlineShopWebApp.Controllers
 {
@@ -23,7 +25,7 @@ namespace OnlineShopWebApp.Controllers
             return View(cart);
         }
 
-        public IActionResult Add(int productId)
+        public IActionResult Add(Guid productId)
         {
             var product = productsStorage.TryGetProduct(productId);
 
@@ -32,7 +34,7 @@ namespace OnlineShopWebApp.Controllers
             return RedirectToAction("Index");
         }
 
-        public IActionResult RemoveProduct(int productId)
+        public IActionResult RemoveProduct(Guid productId)
         {
             var product = productsStorage.TryGetProduct(productId);
 
@@ -41,7 +43,7 @@ namespace OnlineShopWebApp.Controllers
             return RedirectToAction("Index");
         }
 
-        public IActionResult RemoveCountProductCart(int productId)
+        public IActionResult RemoveCountProductCart(Guid productId)
         {
             var product = productsStorage.TryGetProduct(productId);
 

@@ -1,17 +1,18 @@
-﻿using OnlineShopWebApp.Models;
+﻿using OnlineShopWebApp.Db.Models;
+using System;
 using System.Collections.Generic;
 
-namespace OnlineShopWebApp.Interface
+namespace OnlineShop.Db
 {
     public interface IProductsStorage
     {
         List<Product> GetAll();
 
-        Product TryGetProduct(int id);
+        Product TryGetProduct(Guid id);
 
-        List<Product> DeserializeJsonProducts();
+//        List<Product> DeserializeJsonProducts();
 
-        void Delete(int Id);
+        void Delete(Guid Id);
 
         void SaveEditedProduct(Product newProduct);
 

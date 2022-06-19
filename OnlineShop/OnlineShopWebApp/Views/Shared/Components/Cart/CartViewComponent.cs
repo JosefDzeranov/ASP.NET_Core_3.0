@@ -1,5 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using OnlineShopWebApp.Interface;
+using OnlineShop.Db.Interface;
 
 namespace OnlineShopWebApp.Views.Shared.ViewComponents.CartViewComponents
 {

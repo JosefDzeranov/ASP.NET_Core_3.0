@@ -1,4 +1,5 @@
-﻿using OnlineShopWebApp.Areas.Admin.Models;
+﻿using OnlineShop.Db.Models;
+using OnlineShopWebApp.Areas.Admin.Models;
 using OnlineShopWebApp.Interface;
 using System;
 using System.Collections.Generic;
@@ -10,7 +11,7 @@ namespace OnlineShopWebApp.Models
     {
         private List<Order> orders = new List<Order>();
 
-        private List<Cart> carts = new List<Cart>();
+        private List<CartViewModel> carts = new List<CartViewModel>();
 
         private List<Role> roles = new List<Role>();
 

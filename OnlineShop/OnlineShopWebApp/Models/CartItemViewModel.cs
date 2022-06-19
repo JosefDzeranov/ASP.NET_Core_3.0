@@ -1,8 +1,9 @@
-﻿using System;
+﻿using OnlineShopWebApp.Db.Models;
+using System;
 
 namespace OnlineShopWebApp.Models
 {
-    public class CartItem
+    public class CartItemViewModel
     {
         public Guid ItemId { get; set; }
         public Product Product { get; set; }
@@ -14,5 +15,6 @@ namespace OnlineShopWebApp.Models
                 return Product.Cost * Count;
             }
         }
+        //public CartViewModel Cart { get; set; }
     }
 }

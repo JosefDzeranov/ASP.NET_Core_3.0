@@ -1,7 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using OnlineShop.Db.Models;
+using System;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
 
 namespace OnlineShopWebApp.Models
 {
@@ -13,7 +12,7 @@ namespace OnlineShopWebApp.Models
 
         public DateTime OrderDateTime { get; set; } = DateTime.Now;
 
-        public Cart Cart { get; set; }
+        public CartViewModel Cart { get; set; }
 
         //public List<CartItem> Items { get; set; }
 

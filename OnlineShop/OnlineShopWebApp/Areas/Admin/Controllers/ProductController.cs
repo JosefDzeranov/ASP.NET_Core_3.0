@@ -1,6 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using OnlineShopWebApp.Interface;
+using OnlineShop.Db;
+using OnlineShopWebApp.Db.Models;
 using OnlineShopWebApp.Models;
+using System;
 
 namespace OnlineShopWebApp.Areas.Admin.Controllers
 {
@@ -22,7 +24,7 @@ namespace OnlineShopWebApp.Areas.Admin.Controllers
         }
 
 
-        public IActionResult DeleteProduct(int id)
+        public IActionResult DeleteProduct(Guid id)
         {
             var product = productsStorage.TryGetProduct(id);
             if (product != null)
@@ -32,14 +34,14 @@ namespace OnlineShopWebApp.Areas.Admin.Controllers
             return RedirectToAction("Index", "Product");
         }
 
-        public IActionResult EditProduct(int id)
+        public IActionResult EditProduct(Guid id)
         {
             var product = productsStorage.TryGetProduct(id);
 
             return View(product);
         }
         [HttpPost]
-        public IActionResult EditProduct(Product newProduct)
+        public IActionResult EditProduct(ProductViewModel newProduct)
         {
             if (ModelState.IsValid)
             {
@@ -54,7 +56,7 @@ namespace OnlineShopWebApp.Areas.Admin.Controllers
             return View();
         }
         [HttpPost]
-        public IActionResult AddProduct(Product product)
+        public IActionResult AddProduct(ProductViewModel product)
         {
             productsStorage.Add(product);
             return RedirectToAction("Index", "Product");

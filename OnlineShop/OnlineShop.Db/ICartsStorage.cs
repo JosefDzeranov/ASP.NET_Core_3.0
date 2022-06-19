@@ -1,6 +1,7 @@
-﻿using OnlineShopWebApp.Models;
+﻿using OnlineShop.Db.Models;
+using OnlineShopWebApp.Db.Models;
 
-namespace OnlineShopWebApp.Interface
+namespace OnlineShop.Db
 {
     public interface ICartsStorage
     {
