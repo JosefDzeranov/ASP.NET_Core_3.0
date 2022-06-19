@@ -1,12 +1,12 @@
 ﻿using OnlineShopWebApp.Db.Models;
 using System;
 
-namespace OnlineShopWebApp.Models
+namespace OnlineShop.Db.Models
 {
     public class CartItemViewModel
     {
         public Guid ItemId { get; set; }
-        public Product Product { get; set; }
+        public ProductViewModel Product { get; set; }
         public int Count { get; set; }
         public decimal Cost
         {
@@ -15,6 +15,5 @@ namespace OnlineShopWebApp.Models
                 return Product.Cost * Count;
             }
         }
-        //public CartViewModel Cart { get; set; }
     }
 }

@@ -3,6 +3,7 @@ using OnlineShop.Db;
 using OnlineShopWebApp.Interface;
 using OnlineShopWebApp.Models;
 using OnlineShopWebApp.ViewModels;
+using OnlineShopWebApp.Helpers;
 
 namespace OnlineShopWebApp.Controllers
 {
@@ -21,9 +22,15 @@ namespace OnlineShopWebApp.Controllers
 
         public IActionResult Index()
         {
-            var order = ordersStorage.TryGetOrderAllByUserId(Constants.UserId);
+            var order = cartsStorage.TryGetByUserId(Constants.UserId);
+            
+            var cartViewModel = order.ToCartViewModel();
+            var orderForm = new OrderFormViewModel
+            {
+                Cart = cartViewModel
+            };
 
-            return View(order);
+            return View(orderForm);
         }
 
         public IActionResult Add(Order order)
@@ -31,9 +38,9 @@ namespace OnlineShopWebApp.Controllers
             if (ModelState.IsValid)
             {
                 var existingCart = cartsStorage.TryGetByUserId(Constants.UserId);
-                order.Cart = existingCart;
-                order.UserId = Constants.UserId;
-                order.CostOrder = existingCart.Cost;
+                //order.Cart = existingCart;
+                //order.UserId = Constants.UserId;
+                //order.CostOrder = existingCart.Cost;
                 ordersStorage.Add(order, Constants.UserId);
                 cartsStorage.RemoveCartUser(Constants.UserId);
             }
@@ -46,7 +53,7 @@ namespace OnlineShopWebApp.Controllers
             var existingCart = cartsStorage.TryGetByUserId(Constants.UserId);
 
             var orderVM = new OrderViewModel();
-            orderVM.Cart = existingCart;
+            //orderVM.Cart = existingCart;
 
             return View(orderVM);
         }

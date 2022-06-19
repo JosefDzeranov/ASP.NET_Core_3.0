@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using OnlineShop.Db;
-using OnlineShop.Db.Interface;
+using OnlineShopWebApp.Helpers;
 using System;
 
 namespace OnlineShopWebApp.Controllers
@@ -21,8 +21,10 @@ namespace OnlineShopWebApp.Controllers
         public IActionResult Index()
         {
             var cart = cartsStorage.TryGetByUserId(Constants.UserId);
+            
+            var cartViewModel = cart.ToCartViewModel();
 
-            return View(cart);
+            return View(cartViewModel);
         }
 
         public IActionResult Add(Guid productId)

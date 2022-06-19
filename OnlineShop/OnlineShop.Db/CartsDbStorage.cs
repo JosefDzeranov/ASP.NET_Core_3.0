@@ -1,4 +1,4 @@
-﻿using OnlineShop.Db.Interface;
+﻿using OnlineShop.Db;
 using OnlineShop.Db.Models;
 using OnlineShopWebApp.Db.Models;
 using System;

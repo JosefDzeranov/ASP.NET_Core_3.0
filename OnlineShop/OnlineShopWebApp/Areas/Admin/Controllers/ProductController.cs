@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using OnlineShop.Db;
 using OnlineShopWebApp.Db.Models;
-using OnlineShopWebApp.Models;
+using OnlineShopWebApp.Helpers;
 using System;
 
 namespace OnlineShopWebApp.Areas.Admin.Controllers
@@ -41,11 +41,15 @@ namespace OnlineShopWebApp.Areas.Admin.Controllers
             return View(product);
         }
         [HttpPost]
-        public IActionResult EditProduct(ProductViewModel newProduct)
+        public IActionResult EditProduct(ProductViewModel productViewModel)
         {
             if (ModelState.IsValid)
             {
-                productsStorage.SaveEditedProduct(newProduct);
+                var product = productViewModel.ToProduct();
+
+                productsStorage.SaveEditedProduct(product);
+
+                return RedirectToAction("Index");
             }
 
             return RedirectToAction("Index", "Product");
@@ -56,9 +60,12 @@ namespace OnlineShopWebApp.Areas.Admin.Controllers
             return View();
         }
         [HttpPost]
-        public IActionResult AddProduct(ProductViewModel product)
+        public IActionResult AddProduct(ProductViewModel productViewModel)
         {
+            var product = productViewModel.ToProduct();
+
             productsStorage.Add(product);
+
             return RedirectToAction("Index", "Product");
         }
 
