@@ -7,17 +7,5 @@ namespace OnlineShop.Db.Models
         public Guid Id { get; set; }
         public Product Product { get; set; }
         public int Count { get; set; }
-
-        public decimal Cost
-        {
-            get
-            {
-                return Cost;
-            }
-            set
-            {
-                Cost = Product.Cost * Count;
-            }
-        }
     }
 }

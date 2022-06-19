@@ -12,10 +12,11 @@ namespace OnlineShopWebApp.Models
         public List<CartItem> CartItems { get; set; }
 
         public UserDeleveryInfo UserDeleveryInfo { get; set; } = new UserDeleveryInfo();
-
-        public decimal FullSumm { get; set; }
+        
 
         public DateTime CreateDateTime { get; set; }
+
+        public decimal FullSumm { get; set; }
 
     }
 }
