@@ -11,7 +11,6 @@ namespace OnlineShop.Db.Models
         public DateTime CreateDateTime { get; set; }
         public OrderStatus Status { get; set; }
         public string BuyerLogin { get; set; }
-        public decimal FullCost { get; set; }
 
         public Order()
         {

@@ -11,14 +11,29 @@
 
 
 <p>
-    <a class="btn btn-outline-dark text-nowrap"
-       data-toggle="collapse"
-       href="#collapseExample"
-       role="button"
-       aria-expanded="false"
-       aria-controls="collapseExample">
-        Заполнить данные о заказчике
-    </a>
+    @if (Model.UserDeleveryInfo.Firstname == null)
+    {
+        <a class="btn btn-outline-danger text-nowrap"
+           data-toggle="collapse"
+           href="#collapseExample"
+           role="button"
+           aria-expanded="false"
+           aria-controls="collapseExample">
+            Заполнить данные о заказчике
+        </a>
+    }
+    else
+    {
+        <a class="btn btn-outline-danger text-nowrap"
+           data-toggle="collapse"
+           href="#collapseExample"
+           role="button"
+           aria-expanded="false"
+           aria-controls="collapseExample">
+            Проверить данные о заказчике
+        </a>
+    }
+
 </p>
 <form method="post" asp-controller="Order" asp-action="BuyValid">
     <div class="was-validated" asp-validation-summary="All"></div>

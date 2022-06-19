@@ -22,13 +22,13 @@ namespace OnlineShopWebApp.Areas.Admin.Controllers
         public IActionResult Index()
         {
             var orders = _ordersRepositiry.GetAll();
-
-            return View(orders.Select(x => Mapping.ToOrder_ViewModels(x)).ToList());
+            var ordersVM = orders.Select(x => Mapping.ToOrder_ViewModel(x)).ToList();
+            return View(ordersVM);
         }
         public IActionResult Details(Guid orderId)
         {
             var order = _ordersRepositiry.Find(orderId);
-            return View(Mapping.ToOrder_ViewModels(order));
+            return View(Mapping.ToOrder_ViewModel(order));
         }
         [HttpPost]
         public IActionResult SaveDetails(Order newOrder)

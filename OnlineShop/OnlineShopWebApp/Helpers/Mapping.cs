@@ -26,7 +26,7 @@ namespace OnlineShopWebApp.Helpers
             }
             return productsViewModels;
         }
-        public static Order_ViewModels ToOrder_ViewModels(Order order)
+        public static Order_ViewModels ToOrder_ViewModel(Order order)
         {
             return new Order_ViewModels()
             {
@@ -35,12 +35,11 @@ namespace OnlineShopWebApp.Helpers
                 Status = order.Status,
                 BuyerLogin = order.BuyerLogin,
                 CartItems = order.CartItem,
-                FullCost = order.FullCost,
                 UserDeleveryInfo = order.UserDeleveryInfo
             };
         }
 
-        public static Cart_ViewModel ToCart_ViewModels(Cart cart)
+        public static Cart_ViewModel ToCart_ViewModel(Cart cart)
         {
             return new Cart_ViewModel()
             {
@@ -62,6 +61,19 @@ namespace OnlineShopWebApp.Helpers
                 Phone = userDeleveryInfo.Phone,
                 Secondname = userDeleveryInfo.Secondname,
                 Surname = userDeleveryInfo.Surname
+            };
+        }
+
+        public static UserDeleveryInfo ToUserDeleveryInfo(UserDeleveryInfo_ViewModels userDeleveryInfoViewModels)
+        {
+            return new UserDeleveryInfo()
+            {
+                Commentary = userDeleveryInfoViewModels.Commentary,
+                Email = userDeleveryInfoViewModels.Email,
+                Firstname = userDeleveryInfoViewModels.Firstname,
+                Phone = userDeleveryInfoViewModels.Phone,
+                Secondname = userDeleveryInfoViewModels.Secondname,
+                Surname = userDeleveryInfoViewModels.Surname
             };
         }
     }

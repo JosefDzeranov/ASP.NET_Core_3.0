@@ -13,22 +13,14 @@ namespace OnlineShopWebApp.Models
         public DateTime CreateDateTime { get; set; }
         public OrderStatus Status { get; set; }
         public string BuyerLogin { get; set; }
-
-        private decimal fullCost;
-        public decimal FullCost
+        public decimal FullCost()
         {
-            get
+            decimal fullCost = 0;
+            foreach (var cartItem in CartItems)
             {
-                return fullCost;
+                fullCost += cartItem.Product.Cost * cartItem.Count;
             }
-            set
-            {
-                fullCost = 0;
-                foreach (var cartItem in CartItems)
-                {
-                    fullCost += cartItem.Product.Cost * cartItem.Count;
-                }
-            }
+            return fullCost;
         }
 
     }

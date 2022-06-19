@@ -25,7 +25,7 @@ namespace OnlineShopWebApp.Controllers
         {
             var buyerLogin = _usersManager.GetLoginAuthorizedUser();
             var cart = _cartsRepository.Find(buyerLogin);
-            return View(Mapping.ToCart_ViewModels(cart));
+            return View(Mapping.ToCart_ViewModel(cart));
         }
 
         [HttpPost]
@@ -35,6 +35,16 @@ namespace OnlineShopWebApp.Controllers
             var buyerLogin = _usersManager.GetLoginAuthorizedUser();
             _cartsRepository.ClearInfoBuying(buyerLogin);
             return RedirectToAction("Index", new {buyerId = buyerLogin });
+        }
+
+        [HttpPost]
+
+        public IActionResult RewriteInfoBuying(UserDeleveryInfo_ViewModels userDeleveryInfoViewModels)
+        {
+            var buyerLogin = _usersManager.GetLoginAuthorizedUser();
+            var userDelevery = Mapping.ToUserDeleveryInfo(userDeleveryInfoViewModels);
+            _cartsRepository.ClearInfoBuying(buyerLogin);
+            return RedirectToAction("Index", new { buyerId = buyerLogin });
         }
 
         [HttpPost]

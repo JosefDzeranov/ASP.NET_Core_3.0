@@ -9,9 +9,11 @@ namespace OnlineShop.Db
     public class OrdersDbRepositiry : IOrdersRepositiry
     {
         private readonly DatabaseContext _databaseContext;
-        public OrdersDbRepositiry (DatabaseContext databaseContext)
+        private readonly ICartsRepository _cartsRepository;
+        public OrdersDbRepositiry (DatabaseContext databaseContext, ICartsRepository cartsRepository)
         {
             _databaseContext = databaseContext;
+            _cartsRepository = cartsRepository;
         }
 
         public void Add(Order order)
@@ -28,13 +30,21 @@ namespace OnlineShop.Db
         {
             return _databaseContext.Orders.FirstOrDefault(Order => Order.Id == orderId);
         }
+
         public void Buy(string buyerLogin)
         {
-            //var cart = _cartsManager.Find(buyerLogin);
-            //orders.Add(new Order(cart.CartItems, cart.BuyerLogin, cart.UserDeleveryInfo));
-
-            //cart.CartItems.Clear();
-            //Save();
+            var cart = _cartsRepository.Find(buyerLogin);
+            var orders = _databaseContext.Orders;
+            var userDeleveryInfo = cart.UserDeleveryInfo;
+            orders.Add(new Order()
+            {
+                BuyerLogin = buyerLogin, 
+                CartItem = new List<CartItem>(cart.CartItems), 
+                UserDeleveryInfo = userDeleveryInfo, 
+                Id = new Guid()
+            });
+            cart.CartItems.Clear();
+            Save();
         }
         public List<Order> CollectAllOrders(string buyerLogin)
         {

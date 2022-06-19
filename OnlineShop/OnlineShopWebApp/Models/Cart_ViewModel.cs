@@ -15,12 +15,15 @@ namespace OnlineShopWebApp.Models
 
         public DateTime CreateDateTime { get; set; }
 
-        public decimal FullCost
+        public decimal FullSumm()
         {
-            get;
-            set;
+            decimal fullSumm = 0;
+            foreach (var cartItem in CartItems)
+            {
+                fullSumm += cartItem.Count * cartItem.Product.Cost;
+            }
+            return fullSumm;
         }
-
 
     }
 }
