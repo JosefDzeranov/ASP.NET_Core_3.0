@@ -1,4 +1,11 @@
-﻿@model List<Role>
+﻿@using OnlineShopWebApp.Areas.Admin.Models
+@using System.Collections.Generic;
+
+@model List<Role>
+
+@{
+    ViewData["Title"] = "Роли";
+}
 
 <div class="row">
     @await Html.PartialAsync("AdminPanel")

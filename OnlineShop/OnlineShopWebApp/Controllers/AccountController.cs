@@ -23,7 +23,14 @@ namespace OnlineShopWebApp.Controllers
         {
             if (ModelState.IsValid)
             {
-                return RedirectToAction("Index", "Home");
+                if (_userStorage.Authorize(signin))
+                {
+                    return RedirectToAction("Index", "Home");
+                }
+                else
+                {
+                    return View("Failed");
+                }
             }
             return View(signin);
         }

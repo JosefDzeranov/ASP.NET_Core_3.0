@@ -1,4 +1,11 @@
-﻿@model Role
+﻿@using OnlineShopWebApp.Areas.Admin.Models
+
+@model Role
+
+@{
+    ViewData["Title"] = "Добавление роли";
+}
+
 <div class="card shadow">
     <div class="card-body">
         <form asp-controller="Role" asp-action="AddRole">

@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 namespace OnlineShopWebApp.Models
@@ -8,12 +7,12 @@ namespace OnlineShopWebApp.Models
     {
         public Guid Id { get; }
 
-        [Required (ErrorMessage = "Не указана фамилия")]
+        [Required(ErrorMessage = "Не указана фамилия")]
         [StringLength(25, MinimumLength = 2, ErrorMessage = "Фамилия должна содержать от 2-х до 25-ти символов")]
         public string LastName { get; set; }
 
         [Required(ErrorMessage = "Не указано имя")]
-        [StringLength (25, MinimumLength = 2, ErrorMessage = "Имя должно содержать от 2-х до 25-ти символов")]
+        [StringLength(25, MinimumLength = 2, ErrorMessage = "Имя должно содержать от 2-х до 25-ти символов")]
         public string FirstName { get; set; }
 
         [Required(ErrorMessage = "Не указан телефон")]

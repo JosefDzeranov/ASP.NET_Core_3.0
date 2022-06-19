@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Xml.Linq;
 using OnlineShopWebApp.Interface;
+using OnlineShopWebApp.Areas.Admin.Models;
 
 namespace OnlineShopWebApp
 {
@@ -100,6 +101,19 @@ namespace OnlineShopWebApp
                               .FirstOrDefault(user => Guid.Parse(user.Attribute("id").Value) == id);
 
             user.Remove();
+            xDoc.Save(fileName);
+        }
+
+        public void ChangePassword(ChangePassword data)
+        {
+            var xDoc = XDocument.Load(fileName);
+            var editUser = xDoc.Element("users")
+                               .Elements("user")
+                               .FirstOrDefault(u => Guid.Parse(u.Attribute("id").Value) == data.Id);
+
+            var password = editUser.Element("password");
+            password.Value = data.Password;
+
             xDoc.Save(fileName);
         }
     }

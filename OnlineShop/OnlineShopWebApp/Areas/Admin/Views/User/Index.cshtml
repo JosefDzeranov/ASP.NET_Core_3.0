@@ -1,0 +1,47 @@
+﻿@using OnlineShopWebApp.Areas.Admin.Models
+@using System.Collections.Generic
+
+@model List<User>
+
+@{
+    ViewData["Title"] = "Пользователи";
+}
+
+<div class="container">
+    <div class="row">
+        <div class="col-2">
+            @await Html.PartialAsync("AdminPanel")
+        </div>
+        <div class="col-6">
+            <h2>Users</h2>
+            <h6><a class="nav-link" asp-area="Admin" asp-controller="User" asp-action="Add">Добавить нового пользователя</a></h6>
+            <table class="table border-left border-right border-top border-bottom mt-4">
+                <caption>User list</caption>
+                <thead class="table-light">
+                    <tr>
+                        <th scope="col">№</th>
+                        <th scope="col">Логин (email)</th>
+                        <th scope="col">Роль</th>
+                    </tr>
+                </thead>
+                @for (int i = 0; i < Model.Count; i++)
+                {
+                    <tbody class="border-top-0">
+                        <tr>
+                            <td>
+                                @(i + 1)
+                            </td>
+                            <td>
+                                <a asp-area="Admin" asp-controller="User" asp-action="Details" asp-route-id="@Model[i].Id">@Model[i].Email</a>
+                            </td>
+                            <td>
+                                @Model[i].Role
+                            </td>
+                            <td>
+                        </tr>
+                    </tbody>
+                }
+            </table>
+        </div>
+    </div>
+</div>
