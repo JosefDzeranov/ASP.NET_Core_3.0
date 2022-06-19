@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using OnlineShop.Db.Interfase;
+using OnlineShopWebApp.Helpers;
 using OnlineShopWebApp.Interfase;
 
 namespace OnlineShopWebApp.Views.Shared.Components.Cart
@@ -26,7 +27,7 @@ namespace OnlineShopWebApp.Views.Shared.Components.Cart
             }
             else
             {
-                sumProduct = _cartsRepository.SumAllProducts(buyerLogin);
+                sumProduct = _cartsRepository.QuantityAllProducts(buyerLogin);
             }
             return View("Cart", sumProduct);
         }

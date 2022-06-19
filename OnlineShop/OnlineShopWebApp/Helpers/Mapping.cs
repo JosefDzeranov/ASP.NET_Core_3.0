@@ -49,7 +49,6 @@ namespace OnlineShopWebApp.Helpers
                 BuyerLogin = cart.BuyerLogin,
                 UserDeleveryInfo = cart.UserDeleveryInfo,
                 CartItems = cart.CartItems,
-                FullSumm = cart.FullSumm,
             };
         }
 

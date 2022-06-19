@@ -10,7 +10,6 @@ namespace OnlineShop.Db
     public class CartsDbRepository : ICartsRepository
     {
         private readonly DatabaseContext _databaseContext;
-
         public CartsDbRepository(DatabaseContext databaseContext)
         {
             _databaseContext = databaseContext;
@@ -57,7 +56,6 @@ namespace OnlineShop.Db
                 });
             }
             Save();
-            fullSumm(buyerLogin);
         }
 
         public void UpCountInCartItem(Guid productId, string buyerLogin)
@@ -66,7 +64,6 @@ namespace OnlineShop.Db
             var existingCartItem = cart.CartItems.Find(x => x.Product.Id == productId);
             existingCartItem.Count++;
             Save();
-            fullSumm(buyerLogin);
         }
 
         public void DownCountInCartItem(Guid productId, string buyerLogin)
@@ -75,7 +72,6 @@ namespace OnlineShop.Db
             var existingCartItem = cart.CartItems.Find(x => x.Product.Id == productId);
             existingCartItem.Count--;
             Save();
-            fullSumm(buyerLogin);
         }
 
         public void DeleteProductInCart(Guid productId, string buyerLogin)
@@ -83,7 +79,6 @@ namespace OnlineShop.Db
             var cart = Find(buyerLogin);
             cart.CartItems.RemoveAll(cartItem => cartItem.Product.Id == productId);
             Save();
-            fullSumm(buyerLogin);
         }
 
         public void ReduceDuplicateProductCart(Guid productId, string buyerLogin)
@@ -99,7 +94,6 @@ namespace OnlineShop.Db
                 cart.CartItems.Remove(existingCartItem);
             }
             Save();
-            fullSumm(buyerLogin);
         }
 
         public void ClearCart(string buyerLogin)
@@ -109,7 +103,7 @@ namespace OnlineShop.Db
             Save();
         }
 
-        public int SumAllProducts(string buyerLogin)
+        public int QuantityAllProducts(string buyerLogin)
         {
             var cart = Find(buyerLogin);
             int sum = 0;
@@ -140,18 +134,6 @@ namespace OnlineShop.Db
         private void Save()
         {
             _databaseContext.SaveChanges();
-        }
-
-        private void fullSumm(string buyerLogin)
-        {
-            var cart = Find(buyerLogin);
-            decimal sum = 0;
-            foreach (var cartItem in cart.CartItems)
-            {
-                sum += cartItem.Count * cartItem.Product.Cost;
-            }
-            _databaseContext.Carts.Where(x => x.BuyerLogin == buyerLogin).ToList()[0].FullSumm = sum;
-            Save();
         }
     }
 }

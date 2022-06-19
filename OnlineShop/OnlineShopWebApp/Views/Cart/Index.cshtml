@@ -57,16 +57,14 @@
                                            role="button">
                                             -
                                         </a>
+                                        <a class="btn btn-outline-dark text-nowrap mx-1 my-1 border-1"
+                                           asp-area="" asp-controller="Cart"
+                                           asp-action="DeleteProduct"
+                                           asp-route-productId="@Model.CartItems[i].Product.Id"
+                                           role="button">
+                                            Удалить
+                                        </a>
                                     </div>
-                                </div>
-                                <div>
-                                    <a class="btn btn-outline-dark text-nowrap mx-1 my-1 border-1"
-                                       asp-area="" asp-controller="Cart"
-                                       asp-action="DeleteProduct"
-                                       asp-route-productId="@Model.CartItems[i].Product.Id"
-                                       role="button">
-                                        Удалить из корзины
-                                    </a>
                                 </div>
                             </td>
                         </tr>
@@ -77,8 +75,8 @@
                 <td></td>
                 <td></td>
                 <td></td>
-                    <td>Итого:@Model.FullSumm</td>
-                    <td>  </td>
+                <td></td>
+                <td>Итого: @Model.FullSumm()</td>
                 <td></td>
                 </tbody>
             }

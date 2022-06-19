@@ -25,7 +25,8 @@ namespace OnlineShopWebApp.Controllers
             {
                 return RedirectToAction("Index", "Login");
             }
-            return View(Mapping.ToCart_ViewModels(cart));
+            var cartVM = Mapping.ToCart_ViewModels(cart);
+            return View(cartVM);
         }
 
         public IActionResult AddProduct(Guid productId)

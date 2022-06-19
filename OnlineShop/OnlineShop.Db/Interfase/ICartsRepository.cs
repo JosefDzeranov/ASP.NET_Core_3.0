@@ -15,7 +15,7 @@ namespace OnlineShop.Db.Interfase
         void DeleteProductInCart(Guid productId, string buyerLogin);
         void ReduceDuplicateProductCart(Guid productId, string buyerLogin);
         void ClearCart(string buyerLogin);
-        int SumAllProducts(string buyerLogin);
+        int QuantityAllProducts(string buyerLogin);
         void SaveInfoBuying(UserDeleveryInfo userDeleveryInfo, string buyerLogin);
         void ClearInfoBuying(string buyerLogin);
     }

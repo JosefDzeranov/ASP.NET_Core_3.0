@@ -12,8 +12,6 @@ namespace OnlineShop.Db.Models
 
         public UserDeleveryInfo UserDeleveryInfo { get; set; } = new UserDeleveryInfo();
 
-        public decimal FullSumm { get; set; }
-
         public DateTime CreateDateTime { get; set; }
 
         public Cart()
