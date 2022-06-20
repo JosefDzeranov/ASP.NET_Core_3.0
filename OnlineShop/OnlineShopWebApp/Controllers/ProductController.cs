@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using OnlineShop.Db;
+using OnlineShopWebApp.Helper;
 using System;
 
 namespace OnlineShopWebApp.Controllers
@@ -12,9 +13,9 @@ namespace OnlineShopWebApp.Controllers
         {
             this.productReposititory = productsRepository;
         }
-        public IActionResult Item(Guid productId)
+        public IActionResult Item(Guid id)
         {
-            var product = productReposititory.TryGetById(productId);
+            var product = Mapping.ToProductViewModel(productReposititory.TryGetById(id));
             return View(product);
         }
         public IActionResult Items()
