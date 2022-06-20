@@ -1,5 +1,4 @@
-﻿using OnlineShopWebApp.Models;
-using System;
+﻿using System;
 
 namespace OnlineShopWebApp.Models
 {

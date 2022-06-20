@@ -20,7 +20,6 @@ namespace OnlineShop.Db.Models
             Cost = cost;
             Description = description;
         }
-        
         public Product()
         {
             CartItems = new List<CartItem>();

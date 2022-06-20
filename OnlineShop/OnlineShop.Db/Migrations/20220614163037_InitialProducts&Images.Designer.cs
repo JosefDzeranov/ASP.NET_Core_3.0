@@ -10,8 +10,8 @@ using OnlineShop.Db;
 namespace OnlineShop.Db.Migrations
 {
     [DbContext(typeof(DataBaseContext))]
-    [Migration("20220614055236_InitialImages&Products")]
-    partial class InitialImagesProducts
+    [Migration("20220614163037_InitialProducts&Images")]
+    partial class InitialProductsImages
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {

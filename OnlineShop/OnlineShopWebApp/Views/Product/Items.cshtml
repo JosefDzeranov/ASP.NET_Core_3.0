@@ -17,7 +17,14 @@
                     {
                     <tr>
                         <td>
-                            <a style="color:black" href="/product/item/@item.Id">@item.Name </a>
+                            @*<a style="color:black" href="/product/item/@item.Id">@item.Name </a>*@
+                            <a style="color:black"
+                               asp-area=""
+                               asp-controller="Product"
+                               asp-action="Item"
+                               asp-route-id="@item.Id">
+                                <h3>@item.Name, @item.Cost @Constants.Rub</h3>
+                            </a>
                         </td>
                         <td>@item.Cost</td>
                         <td>@item.Description</td>

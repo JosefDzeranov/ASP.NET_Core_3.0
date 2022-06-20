@@ -53,7 +53,5 @@ namespace OnlineShopWebApp.Models
                 return Items?.Sum(x => x.Cost) ?? 0;
             }
         }
-
-        
     }
 }

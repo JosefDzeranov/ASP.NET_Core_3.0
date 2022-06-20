@@ -1,7 +1,5 @@
 ﻿using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
-using OnlineShop.Db;
-using OnlineShopWebApp.Helper;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -20,20 +18,15 @@ namespace OnlineShopWebApp.Models
 
         public List<string> SafeFiles(IFormFile[] files, ImageFolders folder)
         {
-            if (files != null)
+            var imagesPaths = new List<string>();
+            
+            foreach (var file in files)
             {
-                {
-
-                }
-                var imagesPaths = new List<string>();
-                foreach (var file in files)
-                {
-                    var imagePath = SafeFile(file, folder);
-                    imagesPaths.Add(imagePath);
-                }
-                return imagesPaths;
+                var imagePath = SafeFile(file, folder);
+                imagesPaths.Add(imagePath);
             }
-            return null;
+            
+            return imagesPaths;
         }
 
         public string SafeFile(IFormFile file, ImageFolders folder)

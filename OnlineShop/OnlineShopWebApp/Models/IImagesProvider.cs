@@ -1,5 +1,4 @@
 ﻿using Microsoft.AspNetCore.Http;
-using OnlineShopWebApp.Helper;
 using System.Collections.Generic;
 
 namespace OnlineShopWebApp.Models

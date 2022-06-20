@@ -1,5 +1,5 @@
-﻿namespace OnlineShopWebApp.Helper
-{
+﻿namespace OnlineShopWebApp.Models
+{ 
     public enum ImageFolders
     {
         Products,
