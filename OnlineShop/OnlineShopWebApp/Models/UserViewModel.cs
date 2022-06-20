@@ -1,4 +1,6 @@
-﻿using System;
+﻿using OnlineShop.Db.Models;
+using System;
+using System.Collections.Generic;
 
 namespace OnlineShopWebApp.Models
 {
@@ -8,6 +10,7 @@ namespace OnlineShopWebApp.Models
         public string Name { get; set; }
         public string Age { get; set; }
         public string Email { get; set; }
-        public string ImagePath { get; set; }       
+        public string ImagePath { get; set; }   
+        public List<Order> Orders { get; set; }
     }
 }

@@ -45,9 +45,6 @@ namespace OnlineShopWebApp.Helpers
             };
         }
 
-
-
-
         public static Product ToProduct(this AddProductViewModel product, List<string> imagesPathes)
         {
             var productDb = new Product
@@ -159,7 +156,8 @@ namespace OnlineShopWebApp.Helpers
                 Name = user.Name,
                 Age = user.Age,
                 Email = user.Email,
-                ImagePath = user.ImagePath
+                ImagePath = user.ImagePath,
+                Orders = user.Orders
             };
         }
 
