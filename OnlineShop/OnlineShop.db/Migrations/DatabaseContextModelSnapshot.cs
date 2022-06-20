@@ -134,7 +134,7 @@ namespace OnlineShop.db.Migrations
 
                     b.HasIndex("ProductId");
 
-                    b.ToTable("Images");
+                    b.ToTable("Image");
 
                     b.HasData(
                         new

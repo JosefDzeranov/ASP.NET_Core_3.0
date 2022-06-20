@@ -19,8 +19,12 @@
 
 	                    @if (User.Identity.IsAuthenticated)
 	                    {
-		                    <li class="nav-item">
-			                    @User.Identity.Name
+		                    <li class="nav-item dropdown">
+			                    <a class="nav-link dropdown-toggle text-dark" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="False">
+				                    @User.Identity.Name
+			                    </a>
+			                    <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink" />
+								<a class="dropdown-item" asp-route-area="" asp-controller="Account" asp-action="Index">Личный кабинет</a>
 			                    <a class="btn btn-outline-success" asp-area="" asp-controller="Account" asp-action="Logout"><span class="bi bi-incognito">Выход</span></a>
 		                    </li>
 	                    }

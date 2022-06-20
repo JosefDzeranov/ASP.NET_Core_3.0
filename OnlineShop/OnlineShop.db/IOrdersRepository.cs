@@ -14,5 +14,7 @@ namespace OnlineShop.db
         Order TryGetByUserId(int id);
 
         void UpdateStatus(int orderId, OrderStatus newStatus);
+
+        List<Order> TryGetByUserId(string userId);
     }
 }

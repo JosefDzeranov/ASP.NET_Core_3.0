@@ -1,0 +1,23 @@
+﻿<div class="row justify-content-center ">
+	<div class="card shadow my-2 col-lg-10">
+		<div class="card-body">
+			<div class="row">
+				<div class="col-4 text-center">
+					<img src="@Model.AvatarPath" width="150" height="150" alt="аватар" class="rounded-circle" />
+				</div>
+				<div class="col-8 text-sm-lg-start">
+					<div class="my-2">
+						<h1>@Model.FirstName</h1>
+						<h1>@Model.LastName</h1>
+					</div>
+					<div class="my-2">
+						<h4>@Model.Email</h4>
+					</div>
+					<div class="my-2">
+						<a asp-controller="Account" asp-action="Edit" class="link-dark"><h6>Изменить персональную информацию</h6></a>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

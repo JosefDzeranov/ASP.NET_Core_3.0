@@ -85,9 +85,9 @@ namespace OnlineShopWebApp.Areas.Admin.Controllers
         {
             if (ModelState.IsValid)
             {
-                var user = userManager.FindByNameAsync(userAccount.Name).Result;
+                var user = userManager.FindByNameAsync(userAccount.FirstName).Result;
 
-                user.UserName = userAccount.Name;
+                user.UserName = userAccount.FirstName;
                 user.PhoneNumber = userAccount.Phone;
                 user.Email = userAccount.Email;
 

@@ -10,7 +10,7 @@
 
 		<div class="validation" asp-validation-summary="All"></div>
 
-		<input type="hidden" asp-for="Name"/>
+		<input type="hidden" asp-for="FirstName"/>
 
 		<input type="text" asp-for="Phone"/>
 		<span asp-validation-for="Phone">Редактировать телефон</span><br />
@@ -24,7 +24,7 @@
 		        asp-area="Admin"
 		        asp-controller="User"
 		        asp-action="Edit"
-		        asp-route-name="@Model.Name">Сохранить изменения</button> 
+		        asp-route-name="@Model.FirstName">Сохранить изменения</button> 
 	</div>
 
 </div>

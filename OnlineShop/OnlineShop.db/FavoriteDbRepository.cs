@@ -57,5 +57,9 @@ namespace OnlineShop.db
 
             return fav;
         }
+        public FavoriteProduct TryGetByUserId(string userId)
+        {
+            return databaseContext.FavoriteProducts.FirstOrDefault(x => x.UserId == userId);
+        }
     }
 }

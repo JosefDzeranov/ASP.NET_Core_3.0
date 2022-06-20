@@ -4,6 +4,7 @@ using OnlineShop.db.Models;
 using System.Linq;
 using OnlineShop.db;
 using OnlineShopWebApp.Areas.Admin.Models;
+using System;
 
 namespace OnlineShopWebApp.Helpers
 {
@@ -36,6 +37,8 @@ namespace OnlineShopWebApp.Helpers
                     Id = cart.Id,
                     UserId = cart.UserId,
                     Items = ToCartItemsViewModels(cart.Items).ToList(),
+                    CreatedDateTime = cart.CreatedDateTime
+
                 };
             }
 
@@ -93,7 +96,8 @@ namespace OnlineShopWebApp.Helpers
                 CartItems = ToCartItemsViewModels(order.Items).ToList()
             };
         }
-        public static IEnumerable<OrderViewModel> ToOrderViewModels(IEnumerable<Order> orders)
+
+        public static IEnumerable<OrderViewModel> ToOrderViewModels(this IEnumerable<Order> orders)
         {
             foreach (var order in orders)
             {
@@ -177,6 +181,7 @@ namespace OnlineShopWebApp.Helpers
                 ImagesPaths = product.Images.ToPaths()
             };
         }
+
         public static List<Image> ToImages(this List<string> paths)
         {
             return paths.Select(x => new Image { Url = x }).ToList();
@@ -201,9 +206,27 @@ namespace OnlineShopWebApp.Helpers
         {
             return new UserViewModel
             {
-                Name = user.UserName,
-                Phone = user.PhoneNumber,
-                Email = user.Email
+                FirstName = user.FirstName,
+                LastName = user.LastName,
+                //Password = user.Password,
+                Email = user.Email,
+                Phone = user.Phone,
+                AvatarPath = user.AvatarPath,
+
+            };
+        }
+
+        public static User ToUser(this User existingUser, string imagePath)
+        {
+            return new User
+            {
+                FirstName = existingUser.FirstName,
+                LastName = existingUser.LastName,
+                //Password = existingUser.Password,
+                Email = existingUser.Email,
+                AvatarPath = existingUser.AvatarPath,
+                Phone = existingUser.Phone,
+
             };
         }
     }

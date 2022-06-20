@@ -35,7 +35,7 @@ namespace OnlineShopWebApp
             services.AddDbContext<IdentityContext>(options =>
                 options.UseSqlServer(connection));
 
-            services.AddIdentity<User, IdentityRole>()
+            services.AddIdentity<User, IdentityRole>().AddRoles<IdentityRole>().AddRoleManager<RoleManager<IdentityRole>>()
                 .AddEntityFrameworkStores<IdentityContext>();
 
             services.Configure<IdentityOptions>(options =>
@@ -67,7 +67,7 @@ namespace OnlineShopWebApp
             //services.AddSingleton<IRolesRepository, InMemoryRolesRepository>();
             services.AddTransient<IFavoriteRepository, FavoriteDbRepository>();
             services.AddTransient<ImagesProvider>();
-            
+
             services.AddControllersWithViews();
 
         }
@@ -87,13 +87,15 @@ namespace OnlineShopWebApp
             }
             app.UseHttpsRedirection();
 
+            app.UseAuthentication();
+
+            app.UseAuthorization();
+
             app.UseSerilogRequestLogging();
 
             app.UseStaticFiles();
 
             app.UseRouting();
-
-            app.UseAuthentication();
 
             app.UseAuthorization();
 

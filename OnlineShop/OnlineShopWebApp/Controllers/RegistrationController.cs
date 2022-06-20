@@ -1,8 +1,13 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using OnlineShop.db;
 using OnlineShop.db.Models;
+using OnlineShopWebApp.Helpers;
 using OnlineShopWebApp.Models;
 using System;
+using OnlineShop.Db;
+using OnlineShopWebApp.Services;
 
 namespace OnlineShopWebApp.Controllers
 {
@@ -10,45 +15,51 @@ namespace OnlineShopWebApp.Controllers
     {
         private readonly UserManager<User> userManager;
         private readonly SignInManager<User> signInManager;
-        public RegistrationController(UserManager<User> userManager, SignInManager<User> signInManager)
+        private readonly ImagesProvider imagesProvider;
+        private readonly IOrdersRepository ordersRepository;
+
+        public RegistrationController(UserManager<User> userManager, SignInManager<User> signInManager, ImagesProvider imagesProvider, IOrdersRepository ordersRepository)
         {
             this.userManager = userManager;
             this.signInManager = signInManager;
+            this.imagesProvider = imagesProvider;
+            this.ordersRepository = ordersRepository;
         }
 
         [HttpPost]
-        public IActionResult Index(Registration registration)
+        public IActionResult Index(RegistrationViewModel registrationViewModel)
         {
-            if (registration.UserName == registration.Login)
+            if (registrationViewModel.UserName == registrationViewModel.Login)
             {
                 ModelState.AddModelError("", "Имя и логин не должны совпадать");
             }
-            return View("Registration", registration);
+            return View("Registration", registrationViewModel);
         }
 
         public IActionResult Register(string returnUrl)
         {
-            return View(new Registration() { ReturnUrl = returnUrl });
+            return View(new RegistrationViewModel() { ReturnUrl = returnUrl });
         }
 
         [HttpPost]
-        public IActionResult Register(Registration registration)
+        public IActionResult Register(RegistrationViewModel registrationViewModel)
         {
             if (ModelState.IsValid)
             {
                 User user = new User
                 {
-                    UserName = registration.UserName,
-                    Email = registration.Login,
-                    PhoneNumber = registration.Phone,
+                    UserName = registrationViewModel.UserName,
+                    Email = registrationViewModel.Login,
+                    PhoneNumber = registrationViewModel.Phone,
+                    AvatarPath = registrationViewModel.ImagePath
 
                 };
-                var result = userManager.CreateAsync(user, registration.Password).Result;
+                var result = userManager.CreateAsync(user, registrationViewModel.Password).Result;
                 if (result.Succeeded)
                 {
                     signInManager.SignInAsync(user, false).Wait();
                     TryAssignUserRole(user);
-                    return Redirect(registration.ReturnUrl ?? "/Home");
+                    return Redirect(registrationViewModel.ReturnUrl ?? "/Home");
                 }
                 else
                 {
@@ -58,7 +69,7 @@ namespace OnlineShopWebApp.Controllers
                     }
                 }
             }
-            return View(registration);
+            return View(registrationViewModel);
         }
 
         private void TryAssignUserRole(User user)
