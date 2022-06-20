@@ -6,9 +6,14 @@ namespace OnlineShop.Db.Models
 {
     public class Cart
     {
-        public Guid Id;
+        public Guid Id { get; set; }
+
+        public DateTime CreateDate { get; set; }
+
         public string UserId { get; set; }
+
         public List<CartItem> Items { get; set; }
+
         public decimal Cost
         {
             get
@@ -28,6 +33,8 @@ namespace OnlineShop.Db.Models
         public Cart()
         {
             Items = new List<CartItem>();
+
+            CreateDate = DateTime.Now;
         }
     }
 }

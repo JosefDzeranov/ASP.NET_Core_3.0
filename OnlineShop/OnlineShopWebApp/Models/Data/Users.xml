@@ -1,12 +1,20 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <users>
-	<user id="d5b19a99-5ac4-4c9b-9fa1-84c58eb5030a">
-		<firstname>Иванов</firstname>
-		<lastname>Иван</lastname>
-		<role>User</role>
-		<phone>89991111111</phone>
-		<address>Москва, ул.Пушкина, 25</address>
-		<email>mail@mail.ru</email>
-		<password>111</password>
-	</user>
+  <user id="d5b19a99-5ac4-4c9b-9fa1-84c58eb5030a">
+    <firstname>Иванов</firstname>
+    <lastname>Иван</lastname>
+    <role>User</role>
+    <phone>89991111111</phone>
+    <address>Москва, ул.Пушкина, 25</address>
+    <email>mail@mail.ru</email>
+    <password>111</password>
+  </user>
+  <user id="1b9fb4f0-ea7e-4430-90e5-0e2697c65f34">
+    <firstname>Иван</firstname>
+    <lastname>Иванов</lastname>
+    <role>Customer</role>
+    <phone>89191234569</phone>
+    <email>mail@mail.ru</email>
+    <password>123</password>
+  </user>
 </users>

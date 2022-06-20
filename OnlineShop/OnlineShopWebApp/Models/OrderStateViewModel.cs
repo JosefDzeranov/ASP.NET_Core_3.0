@@ -1,7 +1,7 @@
 ﻿
 namespace OnlineShopWebApp.Models
 {
-    public enum OrderState
+    public enum OrderStateViewModel
     {
         /// <summary>
         /// Создан

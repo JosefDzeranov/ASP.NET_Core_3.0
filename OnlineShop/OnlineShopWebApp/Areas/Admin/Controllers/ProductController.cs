@@ -1,8 +1,9 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using OnlineShop.Db;
-using OnlineShopWebApp.Db.Models;
 using OnlineShopWebApp.Helpers;
+using OnlineShopWebApp.Models;
 using System;
+using System.Collections.Generic;
 
 namespace OnlineShopWebApp.Areas.Admin.Controllers
 {
@@ -20,7 +21,22 @@ namespace OnlineShopWebApp.Areas.Admin.Controllers
         {
             var products = productsStorage.GetAll();
 
-            return View(products);
+            var productsViewModels = new List<ProductViewModel>();
+            
+            foreach (var product in products)
+            {
+                var productViewModel = new ProductViewModel
+                {
+                    Id = product.Id,
+                    Name = product.Name,
+                    Cost = product.Cost,
+                    Description = product.Description,
+                    ImagePath = product.ImagePath
+                };
+                productsViewModels.Add(productViewModel);
+            }
+
+            return View(productsViewModels);
         }
 
 
@@ -37,28 +53,30 @@ namespace OnlineShopWebApp.Areas.Admin.Controllers
         public IActionResult EditProduct(Guid id)
         {
             var product = productsStorage.TryGetProduct(id);
+            
+            var productViewModel = product.ToProductViewModel();
 
-            return View(product);
+            return View(productViewModel);
         }
+
         [HttpPost]
-        public IActionResult EditProduct(ProductViewModel productViewModel)
+        public IActionResult SaveEditedProduct(ProductViewModel productViewModel)
         {
             if (ModelState.IsValid)
             {
                 var product = productViewModel.ToProduct();
 
                 productsStorage.SaveEditedProduct(product);
-
-                return RedirectToAction("Index");
             }
 
-            return RedirectToAction("Index", "Product");
+            return RedirectToAction("Index");
         }
 
         public IActionResult AddProduct()
         {
             return View();
         }
+
         [HttpPost]
         public IActionResult AddProduct(ProductViewModel productViewModel)
         {
@@ -66,7 +84,7 @@ namespace OnlineShopWebApp.Areas.Admin.Controllers
 
             productsStorage.Add(product);
 
-            return RedirectToAction("Index", "Product");
+            return RedirectToAction("Index");
         }
 
     }

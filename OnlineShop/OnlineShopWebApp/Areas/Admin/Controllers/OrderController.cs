@@ -36,7 +36,7 @@ namespace OnlineShopWebApp.Areas.Admin.Controllers
             return RedirectToAction("Index", "Order");
         }
 
-        public IActionResult SaveEditedOrder(Guid orderId, OrderState state)
+        public IActionResult SaveEditedOrder(Guid orderId, OrderStateViewModel state)
         {
             ordersStorage.SaveEditedOrder(orderId, state);
 

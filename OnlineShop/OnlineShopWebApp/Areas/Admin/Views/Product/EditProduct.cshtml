@@ -1,13 +1,14 @@
-﻿@using OnlineShopWebApp.Db.Models
+﻿@using OnlineShop.Db.Models
 
 @model ProductViewModel
 
-<form method="post">
+<form method="post" asp-action="EditProduct" asp-controller="Product" asp-area="Admin">
+    <div class="validation" asp-validation-summary="All"></div>
     <div class="row">
         @await Html.PartialAsync("AdminPanel")
         <div class="col text-center">
             <h3>Редактировать информацию об услуге</h3>
-            <input type="hidden" name="id" value="@Model.Id"/>
+            <input type="hidden" name="id" value="@Model.Id" />
             <label asp-for="Name">Название</label>
             <input asp-for="Name" value="@Model.Name" />
             <span asp-validation-for="Name"></span>
@@ -20,7 +21,7 @@
             <input asp-for="Description" value="@Model.Description" />
             <span asp-validation-for="Description"></span>
             <br />
-            <button class="btn btn-dark" type="submit" asp-controller="Admin" asp-action="SaveEditedProduct" asp-route-productId="@Model.Id">Сохранить</button>
+            <button class="btn btn-dark" type="submit" asp-area="Admin" asp-controller="Product" asp-action="SaveEditedProduct" asp-route-productId="@Model.Id">Сохранить</button>
         </div>
     </div>
 </form>

@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Options;
 using OnlineShop.Db;
 using OnlineShopWebApp.Interface;
 using OnlineShopWebApp.Models;
@@ -36,9 +37,11 @@ namespace OnlineShopWebApp
 
             services.AddTransient<ICartsStorage, CartsDbStorage>();
 
-            services.AddSingleton<IOrdersStorage, OrdersStorage>();
+            services.AddSingleton<IOrdersStorage, OrdersDbStorage>();
 
             services.AddSingleton<IRoleStorage, RoleStorage>();
+
+            services.AddSingleton<IUserStorage, UserStorage>();
 
             services.AddControllersWithViews(); 
         }
@@ -48,9 +51,16 @@ namespace OnlineShopWebApp
         {
             app.UseSerilogRequestLogging();
 
+            app.UseHttpsRedirection();
+
             app.UseStaticFiles();
 
             app.UseRouting();
+
+            app.UseAuthorization();
+
+            var localizationOptions = app.ApplicationServices.GetService<IOptions<RequestLocalizationOptions>>().Value;
+            app.UseRequestLocalization(localizationOptions);
 
             app.UseEndpoints(endpoints =>
             {

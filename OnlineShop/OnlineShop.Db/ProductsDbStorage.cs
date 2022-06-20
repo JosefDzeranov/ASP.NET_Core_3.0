@@ -1,9 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
-using Newtonsoft.Json;
-using OnlineShopWebApp.Db.Models;
+using OnlineShop.Db.Models;
 
 namespace OnlineShop.Db
 {

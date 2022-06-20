@@ -1,8 +1,7 @@
-﻿using OnlineShop.Db.Models;
-using System;
+﻿using System;
 using System.Collections.Generic;
 
-namespace OnlineShopWebApp.Db.Models
+namespace OnlineShop.Db.Models
 {
     public class Product
     {

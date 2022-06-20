@@ -1,8 +1,8 @@
-﻿@using OnlineShopWebApp.Db.Models
+﻿@using OnlineShopWebApp.Models
 
 @model ProductViewModel
 
-<form method="post">
+<form method="post" asp-action="AddProduct" asp-controller="Product" asp-area="Admin">
     <div class="row">
         @await Html.PartialAsync("AdminPanel")
         <div class="col text-center">
@@ -19,7 +19,7 @@
             <input asp-for="Description"/>
             <span asp-validation-for="Description"></span>
             <br />
-            <button class="btn btn-dark" type="submit" asp-controller="Product" asp-action="AddProduct" asp-route-product="@Model">Добавить</button>
+            <button class="btn btn-dark" type="submit" asp-area="Admin" asp-controller="Product" asp-action="AddProduct" asp-route-product="@Model">Добавить</button>
         </div>
     </div>
 </form>

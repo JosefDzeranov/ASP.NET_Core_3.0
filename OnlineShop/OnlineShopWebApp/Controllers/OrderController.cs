@@ -33,7 +33,7 @@ namespace OnlineShopWebApp.Controllers
             return View(orderForm);
         }
 
-        public IActionResult Add(Order order)
+        public IActionResult Add(Models.OrderViewModel order)
         {
             if (ModelState.IsValid)
             {
@@ -52,7 +52,7 @@ namespace OnlineShopWebApp.Controllers
         {
             var existingCart = cartsStorage.TryGetByUserId(Constants.UserId);
 
-            var orderVM = new OrderViewModel();
+            var orderVM = new ViewModels.OrderViewModel();
             //orderVM.Cart = existingCart;
 
             return View(orderVM);

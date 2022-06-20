@@ -5,7 +5,7 @@ namespace OnlineShopWebApp.ViewModels
 {
     public class OrderViewModel
     {
-        public Order Order { get; set; } = new Order();
+        public Models.OrderViewModel Order { get; set; } = new Models.OrderViewModel();
 
         public CartViewModel Cart { get; set; }
 

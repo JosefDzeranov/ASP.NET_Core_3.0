@@ -1,11 +1,9 @@
-﻿using OnlineShop.Db;
-using OnlineShop.Db.Models;
-using OnlineShopWebApp.Db.Models;
+﻿using OnlineShop.Db.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace OnlineShopWebApp.Models
+namespace OnlineShop.Db
 {
     public class CartsDbStorage : ICartsStorage
     {
@@ -13,7 +11,7 @@ namespace OnlineShopWebApp.Models
 
         public Cart TryGetByUserId(string userId)
         {
-            return carts.FirstOrDefault(x => x.UserId == userId);
+            return carts.FirstOrDefault(x => x.UserId.ToString() == userId);
         }
 
         public void Add(Product product, string userId)
@@ -84,7 +82,7 @@ namespace OnlineShopWebApp.Models
 
         public void RemoveCartUser(string userId)
         {
-            carts.Remove(carts.FirstOrDefault(x => x.UserId == userId));
+            carts.Remove(carts.FirstOrDefault(x => x.UserId.ToString() == userId));
         }
     }
 }

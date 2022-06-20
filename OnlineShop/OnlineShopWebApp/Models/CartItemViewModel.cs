@@ -1,13 +1,16 @@
-﻿using OnlineShopWebApp.Db.Models;
-using System;
+﻿using System;
+using OnlineShop.Db.Models;
 
-namespace OnlineShop.Db.Models
+namespace OnlineShopWebApp.Models
 {
     public class CartItemViewModel
     {
         public Guid ItemId { get; set; }
+
         public ProductViewModel Product { get; set; }
+
         public int Count { get; set; }
+
         public decimal Cost
         {
             get
