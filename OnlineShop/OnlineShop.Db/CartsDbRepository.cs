@@ -120,7 +120,15 @@ namespace OnlineShop.Db
         public void SaveInfoBuying(UserDeleveryInfo userDeleveryInfo, string buyerLogin)
         {
             var cart = Find(buyerLogin);
-            cart.UserDeleveryInfo = userDeleveryInfo;
+            cart.UserDeleveryInfo = new UserDeleveryInfo()
+            {
+                Commentary = userDeleveryInfo.Commentary,
+                Email = userDeleveryInfo.Email,
+                Firstname = userDeleveryInfo.Firstname,
+                Secondname = userDeleveryInfo.Secondname,
+                Phone = userDeleveryInfo.Phone,
+                Surname = userDeleveryInfo.Surname,
+            };
             Save();
         }
 

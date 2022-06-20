@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using System;
+using Microsoft.AspNetCore.Mvc;
 using OnlineShop.Db.Interfase;
 using OnlineShop.Db.Models;
 using OnlineShopWebApp.Filters;
@@ -50,6 +51,7 @@ namespace OnlineShopWebApp.Controllers
         [HttpPost]
         public IActionResult BuyValid(UserDeleveryInfo userDeleveryInfo)
         {
+            userDeleveryInfo.Id = Guid.NewGuid();
             var buyerLogin = _usersManager.GetLoginAuthorizedUser();
             if (ModelState.IsValid)
             {
