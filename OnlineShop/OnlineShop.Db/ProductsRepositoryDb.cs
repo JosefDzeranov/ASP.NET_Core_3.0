@@ -27,7 +27,7 @@ namespace OnlineShop.Db
 
         public void Add(Product product)
         {
-            product.ImagePath = "/images/item1.png";
+            product.ImagePath = "/Images/Products/item1.png";
             dataBaseContext.Products.Add(product);
             dataBaseContext.SaveChanges();
         }

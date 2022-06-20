@@ -19,6 +19,6 @@ namespace OnlineShopWebApp.Models
 
         public string[] ImagesPaths { get; set; }
 
-        public string ImagePath => ImagesPaths.Length == 0 ? "/image/Products/item1.png" : ImagesPaths[0];
+        public string ImagePath => ImagesPaths.Length == 0 ? "/images/Products/item1.png" : ImagesPaths[0];
     }
 }

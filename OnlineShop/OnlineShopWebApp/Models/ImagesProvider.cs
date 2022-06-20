@@ -25,7 +25,7 @@ namespace OnlineShopWebApp.Models
                 var imagePath = SafeFile(file, folder);
                 imagesPaths.Add(imagePath);
             }
-            
+
             return imagesPaths;
         }
 
@@ -34,6 +34,7 @@ namespace OnlineShopWebApp.Models
             if (file != null)
             {
                 var folderPath = Path.Combine(appEnvironment.WebRootPath + "/images/" + folder);
+
                 if (!Directory.Exists(folderPath))
                 {
                     Directory.CreateDirectory(folderPath);
@@ -41,12 +42,15 @@ namespace OnlineShopWebApp.Models
 
                 var fileName = Guid.NewGuid() + "." + file.FileName.Split('.').Last();
                 string path = Path.Combine(folderPath, fileName);
+
                 using (var fileStream = new FileStream(path, FileMode.Create))
                 {
                     file.CopyTo(fileStream);
                 }
+
                 return "/images/" + folder + "/" + fileName;
             }
+
             return null;
         }
 
