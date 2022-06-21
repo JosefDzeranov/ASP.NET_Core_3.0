@@ -18,7 +18,8 @@ namespace OnlineShopWebApp.Controllers
         }
         public IActionResult Index()
         {
-            var basket = _basketStorage.TryGetByUserId(Constants.UserId);
+            var userId = HttpContext.Request.Cookies["userId"];
+            var basket = _basketStorage.TryGetByUserId(userId);
 
             if (basket == null || basket.Items.Count == 0)
             {
@@ -32,21 +33,24 @@ namespace OnlineShopWebApp.Controllers
 
         public IActionResult Add(Guid id)
         {
+            var userId = HttpContext.Request.Cookies["userId"];
             var product = _productStorage.TryGetProduct(id);
-            _basketStorage.Add(Constants.UserId, product);
+            _basketStorage.Add(userId, product);
             return RedirectToAction("Index");
         }
 
         public IActionResult Remove(Guid id)
         {
+            var userId = HttpContext.Request.Cookies["userId"];
             var product = _productStorage.TryGetProduct(id);
-            _basketStorage.Remove(Constants.UserId, product);
+            _basketStorage.Remove(userId, product);
             return RedirectToAction("Index");
         }
 
         public IActionResult Clear()
         {
-            _basketStorage.Clear(Constants.UserId);
+            var userId = HttpContext.Request.Cookies["userId"];
+            _basketStorage.Clear(userId);
             return RedirectToAction("Index");
         }
     }

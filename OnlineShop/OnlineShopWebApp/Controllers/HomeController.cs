@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using OnlineShop.Db.Models;
 using OnlineShopWebApp.Helpers;
+using System;
 
 namespace OnlineShopWebApp.Controllers
 {
@@ -18,6 +19,11 @@ namespace OnlineShopWebApp.Controllers
 
         public IActionResult Index()
         {
+            if(!HttpContext.Request.Cookies.ContainsKey("userId"))
+            {
+                HttpContext.Response.Cookies.Append("userId", Guid.NewGuid().ToString());
+            }
+
             var products = _productStorage.GetAllAvailable();
             var productViewModels = products.ToProductViewModels();
             return View(productViewModels);

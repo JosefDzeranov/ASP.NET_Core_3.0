@@ -18,7 +18,8 @@ namespace OnlineShopWebApp.Views.Components.Basket
 
         public IViewComponentResult Invoke()
         {
-            var basket = _basketStorage.TryGetByUserId(Constants.UserId);
+            var userId = HttpContext.Request.Cookies["userId"];
+            var basket = _basketStorage.TryGetByUserId(userId);
             var basketViewModel = basket.ToBasketViewModel();
             return View("Basket", basketViewModel);
         }

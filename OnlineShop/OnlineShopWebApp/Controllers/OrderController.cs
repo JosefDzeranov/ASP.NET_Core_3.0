@@ -20,7 +20,8 @@ namespace OnlineShopWebApp.Controllers
         [Authorize]
         public IActionResult Index()
         {
-            var basket = _basketStorage.TryGetByUserId(Constants.UserId);
+            var userId = HttpContext.Request.Cookies["userId"];
+            var basket = _basketStorage.TryGetByUserId(userId);
             var basketViewModel = basket.ToBasketViewModel();
             var orderForm = new OrderFormViewModel
             {
@@ -38,10 +39,11 @@ namespace OnlineShopWebApp.Controllers
                 return RedirectToAction("Index");
             }
 
-            var basket = _basketStorage.TryGetByUserId(Constants.UserId);
+            var userId = HttpContext.Request.Cookies["userId"];
+            var basket = _basketStorage.TryGetByUserId(userId);
             var deliveryInfo = orderForm.DeliveryInfo.ToDeliveryInfo();
-            _orderStorage.Add(Constants.UserId, basket, deliveryInfo);
-            _basketStorage.Clear(Constants.UserId);
+            _orderStorage.Add(userId, basket, deliveryInfo);
+            _basketStorage.Clear(userId);
             return View();
         }
     }
