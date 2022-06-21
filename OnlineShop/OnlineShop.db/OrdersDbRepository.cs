@@ -33,6 +33,16 @@ namespace OnlineShop.db
             return databaseContext.Orders.FirstOrDefault(x => x.Id == id);
         }
 
+        public List<Order> TryGetByUserId(string userId)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        //public List<Order> TryGetByUserId(string userId)
+        //{
+        //    return databaseContext.Orders.Where(x => x.UserId == userId).ToList();
+        //}
+
         public void UpdateStatus(int orderId, OrderStatus newStatus)
         {
             var order = databaseContext.Orders.First(x => x.Id == orderId);

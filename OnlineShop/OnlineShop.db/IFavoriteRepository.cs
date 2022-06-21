@@ -11,6 +11,7 @@ namespace OnlineShop.db
         void Clear(string userId);
         List<Product> GetAll(string userId);
         void Remove(string userId, int productId);
-  
+        FavoriteProduct TryGetByUserId(string userId);
+
     }
 }

@@ -19,10 +19,20 @@
 
 	                    @if (User.Identity.IsAuthenticated)
 	                    {
-		                    <li class="nav-item">
-			                    @User.Identity.Name
+		                    <li class="nav-item dropdown">
+			                    <a class="nav-link dropdown-toggle text-dark" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="False">
+				                    @User.Identity.Name
+			                    </a>
+			                    <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink" />
+			                    <a class="dropdown-item" asp-route-area="" asp-controller="Account" asp-action="Profile">Личный кабинет</a>
 			                    <a class="btn btn-outline-success" asp-area="" asp-controller="Account" asp-action="Logout"><span class="bi bi-incognito">Выход</span></a>
 		                    </li>
+	
+		                    {
+			                    <li class="nav-item">
+				                    <a class="nav-link text-dark" asp-area="" asp-controller="Account" asp-action="Profile"> @await Component.InvokeAsync("Profile")</a>
+			                    </li>
+		                    }
 	                    }
 	                    else
 	                    {
@@ -37,6 +47,7 @@
 			                    <a class="btn btn-outline-success" asp-area="Admin" asp-controller="Order" asp-action="Index"> <span class="bi bi-cup-straw"> Панель Администратора</span></a>
 		                    </li>
 	                    }
+						
                     </ul>
                 </div>
             </div>

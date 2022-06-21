@@ -9,6 +9,13 @@ namespace OnlineShop.Db
         {
             var adminName = "admin@gmail.com";
             var password = "_Aa123456";
+
+            //var adminUser = userManager.FindByNameAsync(adminName).Result;
+            //if (adminUser != null)
+            //{
+            //    userManager.AddToRoleAsync(adminUser, Constants.AdminRoleName).Wait();
+            //}
+
             if (roleManager.FindByNameAsync(Constants.AdminRoleName).Result == null)
             {
                 roleManager.CreateAsync(new IdentityRole(Constants.AdminRoleName)).Wait();
@@ -17,15 +24,17 @@ namespace OnlineShop.Db
             {
                 roleManager.CreateAsync(new IdentityRole(Constants.UserRoleName)).Wait();
             }
-            if (roleManager.FindByNameAsync(adminName).Result == null)
+            if (userManager.FindByNameAsync(adminName).Result == null)
             {
-                var admin = new User { UserName = adminName };
+                var admin = new User { UserName = adminName, AvatarPath = "/images/defaultAvatar.png", Email = adminName, Phone = "123" };
                 var result = userManager.CreateAsync(admin, password).Result;
                 if (result.Succeeded)
                 {
                     userManager.AddToRoleAsync(admin, Constants.AdminRoleName).Wait();
                 }
             }
+
+            
         }
     }
 }

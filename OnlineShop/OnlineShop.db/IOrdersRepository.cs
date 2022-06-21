@@ -1,8 +1,5 @@
 ﻿using OnlineShop.db.Models;
 using System.Collections.Generic;
-using OnlineShop.Db;
-using System;
-
 
 namespace OnlineShop.db
 {
@@ -14,5 +11,7 @@ namespace OnlineShop.db
         Order TryGetByUserId(int id);
 
         void UpdateStatus(int orderId, OrderStatus newStatus);
+
+        List<Order> TryGetByUserId(string userId);
     }
 }

@@ -19,7 +19,7 @@ namespace OnlineShopWebApp
 
         public UserViewModel TryGetByName(string name)
         {
-            return users.FirstOrDefault(x => x.Name == name);
+            return users.FirstOrDefault(x => x.FirstName == name);
         }
 
         public void ChangePassword(string userName, string newPassword)
@@ -34,7 +34,7 @@ namespace OnlineShopWebApp
         }
         public void Edit(UserViewModel user)
         {
-            var existingUser = TryGetByName(user.Name);
+            var existingUser = TryGetByName(user.FirstName);
             existingUser.Phone = user.Phone;
             existingUser.Email = user.Email;
         }

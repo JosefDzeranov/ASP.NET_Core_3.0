@@ -4,7 +4,7 @@
 		<table class="table">
 			<tr>
 				<td>Имя</td>
-				<td>@Model.Name</td>
+				<td>@Model.FirstName</td>
 			</tr>
 			<tr>
 				<td>Телефон</td>
@@ -22,8 +22,8 @@
 		Действия
 	</button>
 	<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-		<a class="dropdown-item" asp-area="Admin" asp-controller="User" asp-action="ChangePassword" asp-route-name="@Model.Name">Сменить пароль</a>
-		<a class="dropdown-item" asp-area="Admin" asp-controller="User" asp-action="Edit" asp-route-name="@Model.Name">Редактировать данные</a>
-		<a class="dropdown-item" asp-area="Admin" asp-controller="User" asp-action="EditRights" asp-route-name="@Model.Name">Права доступа</a>
-		<a class="dropdown-item" asp-area="Admin" asp-controller="User" asp-action="Remove" asp-route-name="@Model.Name">Удалить</a>
+		<a class="dropdown-item" asp-area="Admin" asp-controller="User" asp-action="ChangePassword" asp-route-name="@Model.FirstName">Сменить пароль</a>
+		<a class="dropdown-item" asp-area="Admin" asp-controller="User" asp-action="Edit" asp-route-name="@Model.FirstName">Редактировать данные</a>
+		<a class="dropdown-item" asp-area="Admin" asp-controller="User" asp-action="EditRights" asp-route-name="@Model.FirstName">Права доступа</a>
+		<a class="dropdown-item" asp-area="Admin" asp-controller="User" asp-action="Remove" asp-route-name="@Model.FirstName">Удалить</a>
 	</div>

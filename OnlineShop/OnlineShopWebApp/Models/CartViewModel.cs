@@ -12,6 +12,8 @@ namespace OnlineShopWebApp.Models
 
         public List<CartItemViewModel> Items { get; set; }
 
+        public DateTime CreatedDateTime { get; set; }
+
         public decimal Cost
         {
             get

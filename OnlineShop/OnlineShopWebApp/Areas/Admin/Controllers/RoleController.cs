@@ -2,10 +2,9 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using OnlineShopWebApp.Services;
 using OnlineShopWebApp.Areas.Admin.Models;
 using OnlineShop.Db;
-using System.Collections.Generic;
+
 
 namespace OnlineShopWebApp.Areas.Admin.Controllers
 {

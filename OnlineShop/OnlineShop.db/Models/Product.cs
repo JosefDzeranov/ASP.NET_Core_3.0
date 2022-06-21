@@ -18,14 +18,12 @@ namespace OnlineShop.db.Models
             Description = description;
             IsActive = true;
         }
-
         public Product(string name, decimal cost, string description)
         {
             Name = name;
             Cost = cost;
             Description = description;
         }
-
         public Product()
         {
             Images = new List<Image>();

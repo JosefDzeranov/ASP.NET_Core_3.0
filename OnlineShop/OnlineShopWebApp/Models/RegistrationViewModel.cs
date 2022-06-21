@@ -2,14 +2,14 @@
 
 namespace OnlineShopWebApp.Models
 {
-    public class Registration
+    public class RegistrationViewModel
     {
-        public Registration()
+        public RegistrationViewModel()
         {
 
         }
 
-        public Registration(string userName, string phone, string password, string confirmPassword, string login)
+        public RegistrationViewModel(string userName, string phone, string password, string confirmPassword, string login)
         {
             UserName = userName;
             Phone = phone;
@@ -35,5 +35,6 @@ namespace OnlineShopWebApp.Models
         [Compare("Password", ErrorMessage = "Пароли не совпадают")]
         public string ConfirmPassword { get; set; }
         public string ReturnUrl { get; set; }
+        public string ImagePath { get; set; }
     }
 }

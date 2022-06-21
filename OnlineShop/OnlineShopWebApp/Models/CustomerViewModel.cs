@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using Microsoft.AspNetCore.Http;
+using System.ComponentModel.DataAnnotations;
 namespace OnlineShopWebApp.Models
 {
     public class CustomerViewModel
@@ -21,5 +22,8 @@ namespace OnlineShopWebApp.Models
 
         [Required(ErrorMessage = "Не указан телефон")]
         public string Phone { get; set; }
+        public string AvatarPath { get; set; }
+        public IFormFile UploadedImage { get; set; }
+
     }
 }

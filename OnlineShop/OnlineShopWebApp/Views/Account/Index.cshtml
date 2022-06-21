@@ -1,0 +1,26 @@
+﻿@model UserViewModel
+<div class="row">
+	<div class="col-6">
+		<table class="table">
+			<tr>
+				<td>Имя</td>
+				<td>@Model.FirstName</td>
+			</tr>
+			<tr>
+				<td>Телефон</td>
+				<td>@Model.Phone</td>
+			</tr>
+			<tr>
+				<td>Email</td>
+				<td>@Model.Email</td>
+			</tr>
+		</table>
+	</div>
+</div>
+<br />
+<button class="btn btn-outline-success" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-expanded="false">
+	Действия
+</button>
+<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+<a class="dropdown-item" asp-area="Admin" asp-controller="User" asp-action="ChangePassword" asp-route-name="@Model.FirstName">Сменить пароль</a>
+<a class="dropdown-item" asp-area="Admin" asp-controller="User" asp-action="Edit" asp-route-name="@Model.FirstName">Редактировать данные</a>
