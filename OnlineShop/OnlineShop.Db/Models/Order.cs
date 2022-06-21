@@ -10,6 +10,7 @@ namespace OnlineShop.Db.Models
         public OrderState State { get; set; }
         public string Date { get; set; }
         public string Time { get; set; }
+        public string UserId { get; set; }
         public List<CartItem> Items { get; set; }
         public Order()
         {
