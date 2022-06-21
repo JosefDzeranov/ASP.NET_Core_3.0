@@ -13,6 +13,7 @@ namespace OnlineShopWebApp.Models
         public OrderStateViewModel State { get; set; }
         public string Date { get; set; }
         public string Time { get; set; }
+        public string UserId { get; set; }
         public List<CartItemViewModel> Items { get; set; }
         public decimal FullCost
         {
