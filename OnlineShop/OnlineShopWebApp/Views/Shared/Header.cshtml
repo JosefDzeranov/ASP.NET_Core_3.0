@@ -24,9 +24,15 @@
 				                    @User.Identity.Name
 			                    </a>
 			                    <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink" />
-								<a class="dropdown-item" asp-route-area="" asp-controller="Account" asp-action="Index">Личный кабинет</a>
+			                    <a class="dropdown-item" asp-route-area="" asp-controller="Account" asp-action="Profile">Личный кабинет</a>
 			                    <a class="btn btn-outline-success" asp-area="" asp-controller="Account" asp-action="Logout"><span class="bi bi-incognito">Выход</span></a>
 		                    </li>
+	
+		                    {
+			                    <li class="nav-item">
+				                    <a class="nav-link text-dark" asp-area="" asp-controller="Account" asp-action="Profile"> @await Component.InvokeAsync("Profile")</a>
+			                    </li>
+		                    }
 	                    }
 	                    else
 	                    {
@@ -41,6 +47,7 @@
 			                    <a class="btn btn-outline-success" asp-area="Admin" asp-controller="Order" asp-action="Index"> <span class="bi bi-cup-straw"> Панель Администратора</span></a>
 		                    </li>
 	                    }
+						
                     </ul>
                 </div>
             </div>

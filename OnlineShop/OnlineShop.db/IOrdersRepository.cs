@@ -1,8 +1,5 @@
 ﻿using OnlineShop.db.Models;
 using System.Collections.Generic;
-using OnlineShop.Db;
-using System;
-
 
 namespace OnlineShop.db
 {

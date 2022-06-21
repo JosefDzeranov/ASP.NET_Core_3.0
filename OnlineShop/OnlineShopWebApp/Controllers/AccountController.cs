@@ -2,7 +2,6 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using OnlineShop.db;
-using OnlineShop.Db;
 using OnlineShop.db.Models;
 using OnlineShopWebApp.Helpers;
 using OnlineShopWebApp.Models;
@@ -76,13 +75,16 @@ namespace OnlineShopWebApp.Controllers
         [HttpPost]
         public IActionResult Edit(UserViewModel userProfile)
         {
-
+            ModelState.Remove("Password");
+            ModelState.Remove("ConfirmPassword");
             if (ModelState.IsValid)
             {
                 var imagePath = imagesProvider.SafeFile(userProfile.UploadedImage, ImageFolders.Profiles);
                 var existingUser = userManager.FindByNameAsync(User.Identity.Name).Result;
-                var user = Mapping.ToUser(existingUser, imagePath);
-                userManager.UpdateAsync(user).Wait();
+
+                existingUser.Update(userProfile, imagePath);
+                //var user = Mapping.ToUser(existingUser, imagePath);
+                userManager.UpdateAsync(existingUser).Wait();
 
                 return RedirectToAction("Profile", "Account");
             }
@@ -99,22 +101,12 @@ namespace OnlineShopWebApp.Controllers
             return View(orders.ToOrderViewModels());
         }
 
-    //    [HttpPost]
-    //    public IActionResult RemoveImage(UserViewModel User)
-    //    {
-    //        var user = userManager.FindByNameAsync(User.Email).Result;
-    //        user.Email = User.Email;
-    //        user.UserName = User.FirstName;
-    //        user.LastName = User.LastName;
+        public ActionResult AvatarPath()
+        {
+            var avatar  = userManager.FindByNameAsync(User.Identity.Name).Result.AvatarPath; 
+            return Content(avatar);
+        }
 
-    //        ImageFolders. imagesProvider.Delete(user..ImagePath);
-
-    //        user.ImagePath = "/images/profiles/common.png";
-
-    //        userManager.UpdateAsync(user).Wait();
-
-    //        return RedirectToAction("Index", new { userName = user.UserName });
-    //    }
     }
 }
 

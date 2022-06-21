@@ -17,7 +17,7 @@
 //        [EmailAddress(ErrorMessage = "некорректный формат email")]
 //        public string Email { get; set; }
 //        public string Id { get; set; }
-//        public string PhoneNumber { get; set; }
+//        public string Phone { get; set; }
 //        public string AvatarPath { get; set; }
 //        public IFormFile UploadedImage { get; set; }
 

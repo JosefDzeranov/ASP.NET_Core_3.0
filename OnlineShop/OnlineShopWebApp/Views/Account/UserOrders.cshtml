@@ -1,5 +1,32 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
-@{
-}
+﻿@model List<OrderViewModel>
+
+<div class="row justify-content-center">
+	<div class="card shadow my-2 col-lg-10">
+		<div class="card-body">
+			<h3>Список заказов</h3>
+			<div class="row">
+				<table class="table">
+					<tr>
+						<th>№</th>
+						<th>Сумма</th>
+						<th>Статус</th>
+						<th>Дата</th>
+						<th>Время</th>
+						<th></th>
+					</tr>
+					@foreach (var order in Model)
+					{
+						<tr>
+							<td>@order.Id</td>
+							<td>@order.Cost ₽</td>
+							<td>@order.Status</td>
+							<td>@order.CreateDateTime.ToString("d")</td>
+							<td>@order.CreateDateTime.ToString("t")</td>
+							<td><a asp-controller="Order" asp-action="jj" asp-route-orderId="@order.Id" class="btn btn-info">подробнее</a></td>
+						</tr>
+					}
+				</table>
+			</div>
+		</div>
+	</div>  
+</div>

@@ -21,9 +21,7 @@ namespace OnlineShopWebApp.Views.Shared.Components.Profile
                 var avatar = user.AvatarPath;
                 return View("Profile", avatar);
             }
-
             return View("Profile", "/images/defaultAvatar.png");
-
         }
     }
 }

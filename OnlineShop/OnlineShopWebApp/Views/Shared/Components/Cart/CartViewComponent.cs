@@ -1,7 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using OnlineShop.db;
-using System.Collections.Generic;
-using OnlineShopWebApp.Helpers;
 using System.Linq;
 using Microsoft.AspNetCore.Identity;
 using OnlineShop.db.Models;
@@ -29,24 +27,7 @@ namespace OnlineShopWebApp.Views.Shared.Components.Cart
 
             return View("Cart", productCount);
         }
-        //public IViewComponentResult Invoke()
-        //{
-        //    if (User.Identity.IsAuthenticated)
-        //    {
-        //        var userId = userManager.FindByNameAsync(User.Identity.Name).Result.Id;
-        //        var cartDb = cartRepository.TryGetByUserId(userId);
-        //        if (cartDb != null)
-        //        {
-        //            var cartViewModel = cartDb.ToCartViewModel();
-        //            var productCount = cartViewModel?.Count ?? 0;
-        //            return View("Cart", productCount);
-        //        }
-
-        //        return View("Cart", 0);
-        //    }
-
-        //    return View("Cart", 0);
-        //}
+  
     }
 }
 

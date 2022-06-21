@@ -1,4 +1,13 @@
-﻿<div class="row justify-content-center ">
+﻿<div class="col-2 float-left">
+	<a asp-area="" asp-controller="Account" asp-action="UserOrders" asp-route-userName="@User.Identity.Name">Заказы</a>
+	<br />
+	<a asp-area="" asp-controller="Account" asp-action="Edit" asp-route-userName="@User.Identity.Name">Личные данные</a>
+	<br /> 
+	<a asp-area="" asp-controller="Account" asp-action="Logout">Выход</a>
+</div> 
+
+
+<div class="row justify-content-center ">
 	<div class="card shadow my-2 col-lg-10">
 		<div class="card-body">
 			<div class="row">

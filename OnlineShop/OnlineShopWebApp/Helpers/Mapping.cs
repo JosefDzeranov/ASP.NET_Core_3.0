@@ -4,7 +4,6 @@ using OnlineShop.db.Models;
 using System.Linq;
 using OnlineShop.db;
 using OnlineShopWebApp.Areas.Admin.Models;
-using System;
 
 namespace OnlineShopWebApp.Helpers
 {
@@ -222,12 +221,21 @@ namespace OnlineShopWebApp.Helpers
             {
                 FirstName = existingUser.FirstName,
                 LastName = existingUser.LastName,
-                //Password = existingUser.Password,
                 Email = existingUser.Email,
                 AvatarPath = existingUser.AvatarPath,
                 Phone = existingUser.Phone,
 
             };
+        }
+        public static User Update(this User user, UserViewModel userProfile, string imagePath)
+        {
+            user.FirstName = userProfile.FirstName;
+            user.LastName = userProfile.LastName;
+            user.Email = userProfile.Email;
+            user.AvatarPath = imagePath;
+            user.Phone = userProfile.Phone;
+
+            return user;
         }
     }
 }
