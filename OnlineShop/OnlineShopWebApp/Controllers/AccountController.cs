@@ -15,13 +15,15 @@ namespace OnlineShopWebApp.Controllers
         private readonly SignInManager<User> signInManager;
         private readonly RoleManager<IdentityRole> rolesManager;
         private readonly ImagesProvider imagesProvider;
+        private readonly IOrdersRepository ordersRepository;
 
-        public AccountController(UserManager<User> userManager, SignInManager<User> signInManager, RoleManager<IdentityRole> rolesManager, ImagesProvider imagesProvider)
+        public AccountController(UserManager<User> userManager, SignInManager<User> signInManager, RoleManager<IdentityRole> rolesManager, ImagesProvider imagesProvider, IOrdersRepository ordersRepository)
         {
             this.userManager = userManager;
             this.signInManager = signInManager;
             this.rolesManager = rolesManager;
             this.imagesProvider = imagesProvider;
+            this.ordersRepository = ordersRepository;
         }
 
 
@@ -137,6 +139,14 @@ namespace OnlineShopWebApp.Controllers
             userManager.UpdateAsync(user).Wait();
 
             return RedirectToAction("Index", new { userName = user.UserName });
+        }
+
+        
+        public IActionResult Orders(string userName)
+        {
+            var user = userManager.FindByNameAsync(userName).Result;
+            var orders = ordersRepository.TryGetByUserId(user.Id);
+            return View(orders.ToOrderViewModels());
         }
     }
 }
