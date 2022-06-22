@@ -1,8 +1,7 @@
-﻿using System;
-using Microsoft.AspNetCore.Mvc;
-using OnlineShopWebApp.Models;
+﻿using Microsoft.AspNetCore.Mvc;
 using OnlineShopWebApp.Areas.Admin.Models;
-using OnlineShopWebApp.Interface;
+using OnlineShopWebApp.Models;
+using System;
 
 namespace OnlineShopWebApp.Areas.Admin.Controllers
 {

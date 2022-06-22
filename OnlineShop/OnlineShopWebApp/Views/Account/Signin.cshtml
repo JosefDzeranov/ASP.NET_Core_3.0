@@ -7,7 +7,7 @@
 @if (Model == null)
 {
     <div class="form">
-        <form class="form-horizontal" role="form" method="POST" asp-action="Account">
+        <form class="form-horizontal" role="form" method="post" asp-action="Signin" asp-controller="Account">
             <div class="validation" asp-validation-summary="All">
                 <div class="form-group">
                     <div class="form-group">
@@ -36,7 +36,7 @@
                     <div class="form-group">
                         <div class="col-sm-offset-2 col-sm-10">
                             <p>
-                                <button type="submit" class="btn btn-dark" asp-controller="Account" asp-action="Signin" align="center">Войти</button>
+                                <button type="submit" class="btn btn-dark" asp-controller="Account" asp-action="Index" align="center">Войти</button>
                             </p>
                         </div>
                         <div class="col-sm-offset-2 col-sm-10">

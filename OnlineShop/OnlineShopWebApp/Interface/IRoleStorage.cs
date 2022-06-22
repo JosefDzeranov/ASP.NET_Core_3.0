@@ -1,8 +1,7 @@
 ﻿using OnlineShopWebApp.Areas.Admin.Models;
-using OnlineShopWebApp.Models;
 using System.Collections.Generic;
 
-namespace OnlineShopWebApp.Services
+namespace OnlineShopWebApp
 {
     public interface IRoleStorage
     {

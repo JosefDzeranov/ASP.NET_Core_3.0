@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 
-namespace OnlineShopWebApp.Services
+namespace OnlineShopWebApp
 {
     public class RoleStorage : IRoleStorage
     {

@@ -1,10 +1,9 @@
-﻿using System;
+﻿using OnlineShopWebApp.Areas.Admin.Models;
 using OnlineShopWebApp.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Xml.Linq;
-using OnlineShopWebApp.Interface;
-using OnlineShopWebApp.Areas.Admin.Models;
 
 namespace OnlineShopWebApp
 {

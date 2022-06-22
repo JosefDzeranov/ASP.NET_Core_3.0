@@ -1,16 +1,15 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using OnlineShopWebApp.Interface;
 using OnlineShopWebApp.Models;
 
 namespace OnlineShopWebApp.Controllers
 {
     public class AccountController : Controller
     {
-        private readonly IUserStorage _userStorage;
+        private readonly IUserStorage userStorage;
         
         public AccountController(IUserStorage userStorage)
         {
-            _userStorage = userStorage;
+            this.userStorage = userStorage;
         }
 
         public IActionResult Signin()
@@ -23,7 +22,7 @@ namespace OnlineShopWebApp.Controllers
         {
             if (ModelState.IsValid)
             {
-                if (_userStorage.Authorize(signin))
+                if (userStorage.Authorize(signin))
                 {
                     return RedirectToAction("Index", "Home");
                 }
@@ -50,7 +49,7 @@ namespace OnlineShopWebApp.Controllers
 
             if (ModelState.IsValid)
             {
-                _userStorage.Add(signup);
+                userStorage.Add(signup);
                 return RedirectToAction("Index", "Home");
             }
             return View(signup);

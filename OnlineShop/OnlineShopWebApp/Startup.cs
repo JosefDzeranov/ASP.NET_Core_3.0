@@ -4,9 +4,6 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using OnlineShop.Db;
-using OnlineShopWebApp.Interface;
-using OnlineShopWebApp.Models;
-using OnlineShopWebApp.Services;
 using Serilog;
 
 namespace OnlineShopWebApp

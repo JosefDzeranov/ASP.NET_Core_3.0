@@ -3,7 +3,7 @@ using OnlineShopWebApp.Models;
 using System;
 using System.Collections.Generic;
 
-namespace OnlineShopWebApp.Interface
+namespace OnlineShopWebApp
 {
     public interface IUserStorage
     {

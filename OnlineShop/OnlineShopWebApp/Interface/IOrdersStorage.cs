@@ -2,7 +2,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace OnlineShopWebApp.Interface
+namespace OnlineShopWebApp
 {
     public interface IOrdersStorage
     {
@@ -15,8 +15,6 @@ namespace OnlineShopWebApp.Interface
         List<Order> TryGetAllOrders();
 
         Order GetOrder(Guid orderId);
-
-
 
         void SaveEditedOrder(Guid order, OrderState state);
     }

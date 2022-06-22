@@ -1,11 +1,10 @@
-﻿using OnlineShop.Db.Models;
-using OnlineShopWebApp.Areas.Admin.Models;
-using OnlineShopWebApp.Interface;
+﻿using OnlineShopWebApp.Areas.Admin.Models;
+using OnlineShopWebApp.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace OnlineShopWebApp.Models
+namespace OnlineShopWebApp
 {
     public class OrdersStorage : IOrdersStorage
     {

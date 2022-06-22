@@ -1,5 +1,4 @@
-﻿using OnlineShop.Db.Models;
-using System;
+﻿using System;
 using System.ComponentModel.DataAnnotations;
 
 namespace OnlineShopWebApp.Models
@@ -42,5 +41,19 @@ namespace OnlineShopWebApp.Models
         [Required(ErrorMessage = "не указан адрес")]
         public string Address { get; set; }
         //public decimal CostOrder { get; set; }
+
+        public Order() 
+        { 
+        
+        } 
+        
+        public Order(string userId, CartViewModel cart)
+        {
+            Id = Guid.NewGuid();
+            OrderDateTime = DateTime.Now;
+            UserId = userId;
+            State = OrderState.Created;
+            Cart = cart;
+        }
     }
 }
