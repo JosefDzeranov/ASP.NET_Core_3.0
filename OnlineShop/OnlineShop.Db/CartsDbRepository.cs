@@ -125,19 +125,29 @@ namespace OnlineShop.Db
 
         public void SaveInfoBuying(UserDeleveryInfo userDeleveryInfo, string buyerLogin)
         {
-            _databaseContext.Carts
-                .Include(cart => cart.CartItems)
-                .ThenInclude(CartItem => CartItem.Product)
-                .FirstOrDefault(Cart => Cart.BuyerLogin == buyerLogin)
-                .UserDeleveryInfo = new UserDeleveryInfo()
+            var cart = Find(buyerLogin);
+            cart.UserDeleveryInfo = new UserDeleveryInfo()
             {
                 Commentary = userDeleveryInfo.Commentary,
-                Firstname = userDeleveryInfo.Firstname,
                 Email = userDeleveryInfo.Email,
+                Firstname = userDeleveryInfo.Firstname,
                 Phone = userDeleveryInfo.Phone,
                 Secondname = userDeleveryInfo.Secondname,
-                Surname = userDeleveryInfo.Surname,
+                Surname = userDeleveryInfo.Surname
             };
+            //_databaseContext.Carts
+            //    .Include(cart => cart.CartItems)
+            //    .ThenInclude(CartItem => CartItem.Product)
+            //    .FirstOrDefault(Cart => Cart.BuyerLogin == buyerLogin)
+            //    .UserDeleveryInfo = new UserDeleveryInfo()
+            //{
+            //    Commentary = userDeleveryInfo.Commentary,
+            //    Firstname = userDeleveryInfo.Firstname,
+            //    Email = userDeleveryInfo.Email,
+            //    Phone = userDeleveryInfo.Phone,
+            //    Secondname = userDeleveryInfo.Secondname,
+            //    Surname = userDeleveryInfo.Surname,
+            //};
             Save();
         }
 

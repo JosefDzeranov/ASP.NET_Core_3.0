@@ -10,7 +10,7 @@ namespace OnlineShop.Db.Models
 
         public List<CartItem> CartItems { get; set; }
 
-        public UserDeleveryInfo UserDeleveryInfo { get; set; } = new UserDeleveryInfo();
+        public UserDeleveryInfo UserDeleveryInfo { get; set; }
 
         public DateTime CreateDateTime { get; set; }
 

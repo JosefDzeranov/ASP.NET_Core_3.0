@@ -53,6 +53,10 @@ namespace OnlineShopWebApp.Helpers
 
         public static UserDeleveryInfo_ViewModels ToUserDeleveryInfo_ViewModels(UserDeleveryInfo userDeleveryInfo)
         {
+            if (userDeleveryInfo == null)
+            {
+                return null;
+            }
             return new UserDeleveryInfo_ViewModels()
             {
                 Commentary = userDeleveryInfo.Commentary,
