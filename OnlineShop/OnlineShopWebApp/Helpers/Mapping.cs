@@ -65,7 +65,7 @@ namespace OnlineShopWebApp.Helpers
             {
                 ItemId = cartItem.ItemId,
 
-                //Product = cartItem.Product,
+                Product = cartItem.Product,
 
                 Count = cartItem.Count
             };

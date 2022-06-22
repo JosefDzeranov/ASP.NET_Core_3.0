@@ -1,12 +1,9 @@
-﻿using System;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 
 namespace OnlineShopWebApp.Models
 {
     public class DeliveryInfoViewModel
     {
-        public Guid Id { get; }
-
         [Required(ErrorMessage = "Не указан телефон")]
         public string Phone { get; set; }
 

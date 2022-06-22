@@ -10,7 +10,7 @@ namespace OnlineShopWebApp.Interface
 
         List<Order> TryGetOrderAllByUserId(string userId);
 
-        void Add(Order order, string userId, Cart cart, UserDeliveryInfo contactsinfo);
+        void Add(string userId, Cart cart, UserDeliveryInfo contactsinfo);
 
         List<Order> TryGetAllOrders();
 

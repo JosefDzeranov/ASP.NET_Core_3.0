@@ -20,10 +20,6 @@ namespace OnlineShopWebApp.Models
 
         public string Role { get; set; }
 
-        [Required(ErrorMessage = "Не указан адрес")]
-        [StringLength(128, MinimumLength = 8, ErrorMessage = "Адрес должен содержать от 8-х до 128-ми символов")]
-        public string Address { get; set; }
-
         [Required(ErrorMessage = "Не указан email")]
         public string Email { get; set; }
 
@@ -32,14 +28,13 @@ namespace OnlineShopWebApp.Models
 
         //public User() { } // Empty ctor for XML serializing.
 
-        public User(Guid id, string firstname, string lastname, string role, string phone, string email, string password, string address)
+        public User(Guid id, string firstname, string lastname, string role, string phone, string email, string password)
         {
             Id = id;
             FirstName = firstname;
             LastName = lastname;
             Phone = phone;
             Role = role;
-            Address = address;
             Email = email;
             Password = password;
         }

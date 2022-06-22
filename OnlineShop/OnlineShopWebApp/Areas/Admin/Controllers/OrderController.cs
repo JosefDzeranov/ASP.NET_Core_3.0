@@ -23,7 +23,11 @@ namespace OnlineShopWebApp.Areas.Admin.Controllers
         {
             var existingOrders = ordersStorage.TryGetOrderAllByUserId(Constants.UserId);
 
-            return View(existingOrders);
+            if (existingOrders.Count > 0)
+            {
+                return View(existingOrders);
+            }
+            return View();
         }
 
         public IActionResult GetOrder()

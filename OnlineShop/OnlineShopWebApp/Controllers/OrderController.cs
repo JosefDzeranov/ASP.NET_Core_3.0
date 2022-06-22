@@ -35,15 +35,18 @@ namespace OnlineShopWebApp.Controllers
         [HttpPost]
         public IActionResult Add(OrderViewModel order)
         {
-            if (ModelState.IsValid)
+            if (!ModelState.IsValid)
             {
-                var existingCart = cartsStorage.TryGetByUserId(Constants.UserId);
-
-                //ordersStorage.Add(order, existingCart);
-                cartsStorage.RemoveCartUser(Constants.UserId);
+                return RedirectToAction("Index");
             }
 
-            return RedirectToAction("OrderComplete");
+            var cart = cartsStorage.TryGetByUserId(Constants.UserId);
+            var deliveryInfo = order.DeliveryInfo.ToContactsDelivery();
+            ordersStorage.Add(Constants.UserId, cart, deliveryInfo);
+
+            cartsStorage.ClearCartUser(Constants.UserId);
+
+            return View();
         }
 
         public IActionResult OrderMaking()

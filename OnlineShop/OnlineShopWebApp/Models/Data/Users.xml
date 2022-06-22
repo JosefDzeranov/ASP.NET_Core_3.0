@@ -5,7 +5,6 @@
     <lastname>Иван</lastname>
     <role>User</role>
     <phone>89991111111</phone>
-    <address>Москва, ул.Пушкина, 25</address>
     <email>mail@mail.ru</email>
     <password>111</password>
   </user>
@@ -16,5 +15,21 @@
     <phone>89191234569</phone>
     <email>mail@mail.ru</email>
     <password>123</password>
+  </user>
+  <user id="d9465924-72b9-42a8-bb30-005d708d6552">
+    <firstname>Иван</firstname>
+    <lastname>Иванов</lastname>
+    <role>Customer</role>
+    <phone>89191234569</phone>
+    <email>mail@mail.ru</email>
+    <password>111</password>
+  </user>
+  <user id="f3261486-e39e-4019-8551-485ac1ee4612">
+    <firstname>Иван</firstname>
+    <lastname>Иванов</lastname>
+    <role>Customer</role>
+    <phone>89191234569</phone>
+    <email>mail2@mail.ru</email>
+    <password>111</password>
   </user>
 </users>

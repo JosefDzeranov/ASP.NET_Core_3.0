@@ -40,7 +40,7 @@ namespace OnlineShopWebApp.Models
             return orders;
         }
 
-        public void Add(Order order, string userId, Cart cart, UserDeliveryInfo contactsinfo)
+        public void Add(string userId, Cart cart, UserDeliveryInfo contactsinfo)
         {
             databaseContext.Orders.Add(new Order
             {

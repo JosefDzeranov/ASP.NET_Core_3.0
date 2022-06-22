@@ -11,7 +11,7 @@ namespace OnlineShopWebApp
     public class UserStorage : IUserStorage
     {
         private const string fileName = @"Models/Data/Users.xml";
-        private List<User> _users = new List<User>();
+        private List<User> users = new List<User>();
 
         public void Add(SignUp signup)
         {
@@ -39,7 +39,7 @@ namespace OnlineShopWebApp
         public List<User> GetAll()
         {
             var xDoc = XDocument.Load(fileName);
-            _users = xDoc.Element("users")
+            users = xDoc.Element("users")
                                .Elements("user")
                                .Select(user => new User(
                                        Guid.Parse(user.Attribute("id").Value),
@@ -48,10 +48,9 @@ namespace OnlineShopWebApp
                                        user.Element("role").Value,
                                        user.Element("phone").Value,
                                        user.Element("email").Value,
-                                       user.Element("address").Value,
                                        user.Element("password").Value)
                                        ).ToList();
-            return _users;
+            return users;
         }
 
         public bool Authorize(SignIn signin)

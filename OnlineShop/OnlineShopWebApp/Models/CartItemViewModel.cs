@@ -7,7 +7,7 @@ namespace OnlineShopWebApp.Models
     {
         public Guid ItemId { get; set; }
 
-        public ProductViewModel Product { get; set; }
+        public Product Product { get; set; }
 
         public int Count { get; set; }
 
