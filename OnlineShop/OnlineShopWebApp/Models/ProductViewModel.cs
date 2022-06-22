@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Http;
+using System;
 using System.ComponentModel.DataAnnotations;
 
 namespace OnlineShopWebApp.Models
@@ -7,7 +8,6 @@ namespace OnlineShopWebApp.Models
     {
         public Guid Id { get; set; }
 
-        [Required]
         public string ImagePath { get; set; }
 
         [Required]
@@ -20,5 +20,7 @@ namespace OnlineShopWebApp.Models
         public string Description { get; set; }
 
         public bool Available { get; set; }
+
+        public IFormFile UploadedFile { get; set; }
     }
 }

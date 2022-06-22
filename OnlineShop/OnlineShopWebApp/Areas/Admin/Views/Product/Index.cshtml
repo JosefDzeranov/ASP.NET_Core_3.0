@@ -11,7 +11,7 @@
         <div class="col-2">
             @await Html.PartialAsync("AdminMenuLeft")
         </div>
-        <div class="col-10">
+        <div class="col-7">
             <h2>Products</h2>
             <h6><a class="nav-link" asp-area="Admin" asp-controller="Product" asp-action="Add">Add new Product</a></h6>
             <table class="table border-left border-right border-top border-bottom mt-4">
@@ -19,6 +19,7 @@
                 <thead class="table-light">
                     <tr>
                         <th scope="col">№</th>
+                        <th scope="col">Image</th>
                         <th scope="col">Name</th>
                         <th scope="col">Cost</th>
                         <th scope="col"></th>
@@ -36,6 +37,9 @@
                                 @(i + 1)
                             </td>
                             <td>
+                                <a asp-area="" asp-controller="Product" asp-action="Index" asp-route-id="@Model[i].Id"><img class="img-fluid" src="@Model[i].ImagePath" alt="@Model[i].Name"></a>
+                            </td>
+                            <td>
                                 <a asp-area="" asp-controller="Product" asp-action="Index" asp-route-id="@Model[i].Id">@Model[i].Name</a>
                             </td>
                             <td>
@@ -44,7 +48,7 @@
                             <td>
                                 <div class="btn-group ml-2" role="group" aria-label="Edit/Remove buttons">
                                     <a class="btn btn-outline-dark btn-sm" role="button"
-                                       asp-area="Admin" asp-controller="Product" asp-action="Edit" asp-route-id="@Model[i].Id">Edit</a>
+                                   asp-area="Admin" asp-controller="Product" asp-action="Edit" asp-route-id="@Model[i].Id">Edit</a>
                                     <!-- Trigger modal -->
                                     <a class="btn btn-outline-dark btn-sm" role="button" href="#@modalId" data-toggle="modal">Remove</a>
                                     <!-- Modal -->
