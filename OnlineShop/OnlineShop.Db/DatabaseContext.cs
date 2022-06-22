@@ -7,7 +7,9 @@ namespace OnlineShop.Db
     {
         public DatabaseContext(DbContextOptions<DatabaseContext> options) : base(options)
         {
-            Database.EnsureCreated(); //создаем базу данных при первом обращении
+            //Database.EnsureCreated(); //создаем базу данных при первом обращении
+
+            Database.Migrate(); //миграция
         }
 
         /// <summary>
