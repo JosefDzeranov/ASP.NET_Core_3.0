@@ -1,0 +1,19 @@
+version: '3.4'
+
+services:
+  db:
+    image: "mcr.microsoft.com/mssql/server:2017-latest"
+    environment:
+      - ACCEPT_EULA=Y
+      - SA_PASSWORD=1Secure*Password1
+
+  onlineshopwebapp:
+    image: ${DOCKER_REGISTRY-}onlineshopwebapp
+    build:
+      context: .
+      dockerfile: OnlineShopWebApp/Dockerfile
+    ports:
+    - 8000:80
+    depends_on:
+    - db
+
