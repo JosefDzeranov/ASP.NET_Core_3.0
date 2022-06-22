@@ -1,9 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using OnlineShop.Db;
+using OnlineShopWebApp.Helpers;
 using OnlineShopWebApp.Interface;
 using OnlineShopWebApp.Models;
-using OnlineShopWebApp.ViewModels;
-using OnlineShopWebApp.Helpers;
 
 namespace OnlineShopWebApp.Controllers
 {
@@ -33,15 +32,14 @@ namespace OnlineShopWebApp.Controllers
             return View(orderForm);
         }
 
-        public IActionResult Add(Models.OrderViewModel order)
+        [HttpPost]
+        public IActionResult Add(OrderViewModel order)
         {
             if (ModelState.IsValid)
             {
                 var existingCart = cartsStorage.TryGetByUserId(Constants.UserId);
-                //order.Cart = existingCart;
-                //order.UserId = Constants.UserId;
-                //order.CostOrder = existingCart.Cost;
-                ordersStorage.Add(order, Constants.UserId);
+
+                //ordersStorage.Add(order, existingCart);
                 cartsStorage.RemoveCartUser(Constants.UserId);
             }
 

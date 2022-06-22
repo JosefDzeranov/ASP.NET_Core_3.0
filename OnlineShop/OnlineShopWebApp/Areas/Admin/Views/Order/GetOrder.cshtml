@@ -1,5 +1,6 @@
-﻿@model OrderViewModel
+﻿@using OnlineShopWebApp.Models
 
+@model OrderViewModel
 
 <div class="row">
     @await Html.PartialAsync("AdminPanel")
@@ -13,7 +14,7 @@
                 </tr>
                 <tr>
                     <td><label>Адрес доставки</label></td>
-                    <td>@Model.Address</td>
+                    <td>@Model.DeliveryInfo</td>
                 </tr>
                 <tr>
                     <td><label>Получатель</label></td>

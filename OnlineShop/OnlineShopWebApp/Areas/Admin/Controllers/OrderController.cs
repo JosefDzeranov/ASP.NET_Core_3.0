@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using OnlineShop.Db;
+using OnlineShop.Db.Models;
 using OnlineShopWebApp.Interface;
-using OnlineShopWebApp.Models;
 using System;
 
 namespace OnlineShopWebApp.Areas.Admin.Controllers
@@ -36,7 +36,7 @@ namespace OnlineShopWebApp.Areas.Admin.Controllers
             return RedirectToAction("Index", "Order");
         }
 
-        public IActionResult SaveEditedOrder(Guid orderId, OrderStateViewModel state)
+        public IActionResult SaveEditedOrder(Guid orderId, OrderState state)
         {
             ordersStorage.SaveEditedOrder(orderId, state);
 

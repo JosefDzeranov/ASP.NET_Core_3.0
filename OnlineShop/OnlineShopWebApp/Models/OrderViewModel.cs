@@ -18,7 +18,7 @@ namespace OnlineShopWebApp.Models
 
         public List<CartItemViewModel> Items { get; set; }
 
-        public ContactsDeliveryViewModel ContactsInfo { get; set; }
+        public DeliveryInfoViewModel DeliveryInfo { get; set; }
 
         public decimal CostOrder 
         {

@@ -19,10 +19,12 @@ namespace OnlineShop.Db
 
         public DbSet<CartItem> Items { get; set; }
 
+        public DbSet<FavoriteProduct> FavoriteProduct { get; set; }
+
         public DbSet<Order> Orders { get; set; }
 
         public DbSet<Address> Address { get; set; }
 
-        public DbSet<ContactsDelivery> ContactsDelivery { get; set; }
+        public DbSet<UserDeliveryInfo> UserDelivery { get; set; }
     }
 }

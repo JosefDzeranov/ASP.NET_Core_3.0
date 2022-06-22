@@ -65,7 +65,7 @@ namespace OnlineShopWebApp.Helpers
             {
                 ItemId = cartItem.ItemId,
 
-                Product = cartItem.Product,
+                //Product = cartItem.Product,
 
                 Count = cartItem.Count
             };
@@ -110,15 +110,15 @@ namespace OnlineShopWebApp.Helpers
             return cartItemViewModels;
         }
 
-        public static ContactsDeliveryViewModel ToContactsDeliveryViewModel(this ContactsDelivery ContactsInfo)
+        public static DeliveryInfoViewModel ToContactsDeliveryViewModel(this UserDeliveryInfo DeliveryInfo)
         {
-            var contactsDeliveryViewModel = new ContactsDeliveryViewModel
+            var contactsDeliveryViewModel = new DeliveryInfoViewModel
             {
-                Address = ContactsInfo.Address.ToAddressViewModel(),
+                Address = DeliveryInfo.Address.ToAddressViewModel(),
 
-                Phone = ContactsInfo.Phone,
+                Phone = DeliveryInfo.Phone,
 
-                Email = ContactsInfo.Email
+                Email = DeliveryInfo.Email
             };
             
             return contactsDeliveryViewModel;
@@ -166,11 +166,11 @@ namespace OnlineShopWebApp.Helpers
             return AddressViewModel;
         }
 
-        public static ContactsDelivery ToContactsDelivery(this ContactsDeliveryViewModel contactsDeliveryViewModel)
+        public static UserDeliveryInfo ToContactsDelivery(this DeliveryInfoViewModel contactsDeliveryViewModel)
         {
             var address = contactsDeliveryViewModel.Address.ToAddress();
 
-            var contactsInfo = new ContactsDelivery
+            var contactsInfo = new UserDeliveryInfo
             {
                 Address = address,
 
@@ -192,7 +192,7 @@ namespace OnlineShopWebApp.Helpers
 
                 State = (OrderStateViewModel)order.State,
 
-                ContactsInfo = order.ContactsDelivery,
+                //DeliveryInfo = order.DeliveryInfo,
 
                 Items = order.Items.ToCartItemViewModels()
             };

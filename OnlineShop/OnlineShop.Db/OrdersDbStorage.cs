@@ -24,7 +24,7 @@ namespace OnlineShopWebApp.Models
 
         public List<Order> TryGetAllOrders()
         {
-            var orders = databaseContext.Orders.Include(order => order.ContactsDelivery)
+            var orders = databaseContext.Orders.Include(order => order.DeliveryInfo)
                                                .ThenInclude(adress =>adress.Address)
                                                .Include(order => order.Items)
                                                .ThenInclude(item => item.Product)
@@ -35,12 +35,12 @@ namespace OnlineShopWebApp.Models
 
         public List<Order> TryGetOrderAllByUserId(string userId)
         {
-            var orders = databaseContext.Orders.Where(x => x.UserId.ToString() == userId);
+            var orders = databaseContext.Orders.Where(x => x.UserId == userId).ToList();
 
-            return (List<Order>)orders;
+            return orders;
         }
 
-        public void Add(Order order, string userId, Cart cart, ContactsDelivery contactsinfo)
+        public void Add(Order order, string userId, Cart cart, UserDeliveryInfo contactsinfo)
         {
             databaseContext.Orders.Add(new Order
             {
@@ -48,7 +48,7 @@ namespace OnlineShopWebApp.Models
 
                 Items = cart.Items,
 
-                ContactsDelivery = contactsinfo
+                DeliveryInfo = contactsinfo
             });
 
             databaseContext.SaveChanges();

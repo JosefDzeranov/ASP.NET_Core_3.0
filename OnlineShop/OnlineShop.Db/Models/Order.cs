@@ -15,7 +15,7 @@ namespace OnlineShop.Db.Models
 
         public List<CartItem> Items { get; set; }
 
-        public ContactsDelivery ContactsDelivery { get; set; }
+        public UserDeliveryInfo DeliveryInfo { get; set; }
 
         public Order()
         {

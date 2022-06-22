@@ -2,7 +2,7 @@
 
 namespace OnlineShop.Db.Models
 {
-    public class ContactsDelivery
+    public class UserDeliveryInfo
     {
         public Guid Id { get; set; }
 

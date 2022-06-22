@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace OnlineShopWebApp.Models
 {
-    public class ContactsDeliveryViewModel
+    public class DeliveryInfoViewModel
     {
         public Guid Id { get; }
 
@@ -17,7 +17,7 @@ namespace OnlineShopWebApp.Models
         [StringLength(128, MinimumLength = 8, ErrorMessage = "Адрес должен содержать от 8-х до 128-ми символов")]
         public AddressViewModel Address { get; set; }
 
-        public ContactsDeliveryViewModel() 
+        public DeliveryInfoViewModel() 
         { 
         
         }
