@@ -33,6 +33,8 @@ namespace OnlineShopWebApp
 
             services.AddTransient<ICartsStorage, CartsDbStorage>();
 
+            services.AddSingleton<IUserStorage, UserStorage>();
+
             services.AddSingleton<IOrdersStorage, OrdersStorage>();
 
             services.AddSingleton<IRoleStorage, RoleStorage>();

@@ -1,4 +1,7 @@
-﻿<div class="col-2 float-left">
+﻿@using OnlineShopWebApp.Areas.Admin.Models;
+@using OnlineShopWebApp.Models;
+
+<div class="col-2 float-left">
     <a asp-controller="Order" asp-action="Index" asp-area="Admin" class="list-group-item list-group-item-action">Заказы</a>
     <a asp-controller="User" asp-action="Index" asp-area="Admin" class="list-group-item list-group-item-action">Пользователи</a>
     <a asp-controller="Role" asp-action="Index" asp-area="Admin" class="list-group-item list-group-item-action">Роли</a>
