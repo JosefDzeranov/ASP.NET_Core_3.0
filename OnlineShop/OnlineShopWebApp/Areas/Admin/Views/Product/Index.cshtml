@@ -15,15 +15,12 @@
             <div class="404">
                 <h2 align="center">Услуг нет.</h2>
                 <img class="card-img-top" src="/images/404.jpg" />
-                 <a href="/Admin/Product/AddProduct">Добавить новый продукт</a>
+                <a href="/Admin/Product/AddProduct">Добавить новый продукт</a>
             </div>
         }
         else
         {
-            <div class="container">
-            <div class="row">
-
-                <h6><a class="nav-link" asp-area="Admin" asp-controller="Product" asp-action="Add">Add new Product</a></h6>
+                       @*     <h6><a class="nav-link" asp-area="Admin" asp-controller="Product" asp-action="Add">Add new Product</a></h6>
             <table class="table border-left border-right border-top border-bottom mt-4">
                 <caption>Product list</caption>
                 <thead class="table-light">
@@ -92,38 +89,38 @@
                 }
             </table>
         </div>
+               
                 
-                
-                -------
-
-
-
-                <div class="col">
-                     <a href="/Admin/Product/AddProduct">Добавить новый продукт</a>
-                    <table class="table">
-                        <thead>
-                            <tr>
-                                <th>№</th>
-                                <th>Название</th>
-                                <th>Цена (руб.)</th>
-                                <th></th>
-                                <th></th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @foreach (var product in Model)
-                            {
-                                int id = 0;
+                -------  *@
+            <div class="container">
+                <div class="row">
+                    <div class="col">
+                        <a href="/Admin/Product/AddProduct">Добавить новый продукт</a>
+                        <table class="table">
+                            <thead>
                                 <tr>
-                                    <td>@(id + 1)</td>
-                                    <td><a href="/product/index/@product.Id">@product.Name</a></td>
-                                    <td>@product.Cost рублей</td>
-                                    <td><a class="btn btn-light" role="button" asp-area="Admin" asp-controller="Product" asp-action="EditProduct" asp-route-id="@product.Id" width="20px" role="button">Редактировать</a></td>
-                                    <td><a class="btn btn-light" role="button" asp-area="Admin" asp-controller="Product" asp-action="DeleteProduct" asp-route-id="@product.Id" width="20px" role="button">Удалить</a></td>
+                                    <th>№</th>
+                                    <th>Название</th>
+                                    <th>Цена (руб.)</th>
+                                    <th></th>
+                                    <th></th>
                                 </tr>
-                            }
-                        </tbody>
-                    </table>
+                            </thead>
+                            <tbody>
+
+                                @for (int i = 0; i < Model.Count; i++)
+                                {
+                                    <tr>
+                                        <td>@(i + 1)</td>
+                                        <td><a href="/product/index/@Model[i].Id">@Model[i].Name</a></td>
+                                        <td>@Model[i].Cost рублей</td>
+                                        <td><a class="btn btn-light" role="button" asp-area="Admin" asp-controller="Product" asp-action="EditProduct" asp-route-id="@Model[i].Id" width="20px" role="button">Редактировать</a></td>
+                                        <td><a class="btn btn-light" role="button" asp-area="Admin" asp-controller="Product" asp-action="DeleteProduct" asp-route-id="@Model[i].Id" width="20px" role="button">Удалить</a></td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
         }
