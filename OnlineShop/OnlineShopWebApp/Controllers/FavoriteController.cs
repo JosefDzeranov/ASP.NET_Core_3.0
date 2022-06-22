@@ -19,7 +19,7 @@ namespace OnlineShopWebApp.Controllers
             var favoriteProducts = favoriteStorage.GetAllByUserId(Constants.UserId);
             if (favoriteProducts == null || favoriteProducts.Count == 0)
             {
-                return View("Empty");
+                return View();
             }
             return View(favoriteProducts);
         }
