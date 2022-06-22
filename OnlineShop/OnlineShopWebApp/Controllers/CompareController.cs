@@ -5,7 +5,6 @@ using OnlineShop.Db;
 
 namespace OnlineShopWebApp.Controllers
 {
-    [Authorize]
     public class CompareController : Controller
     {
         private readonly IProductStorage _productStorage;
@@ -18,7 +17,8 @@ namespace OnlineShopWebApp.Controllers
         }
         public IActionResult Index()
         {
-            var compareProducts = _compareStorage.GetAllByUserId(Constants.UserId);
+            var userId = HttpContext.Request.Cookies["userId"];
+            var compareProducts = _compareStorage.GetAllByUserId(userId);
             if (compareProducts == null || compareProducts.Count == 0)
             {
                 return View("Empty");
@@ -28,21 +28,24 @@ namespace OnlineShopWebApp.Controllers
 
         public IActionResult Add(Guid id)
         {
+            var userId = HttpContext.Request.Cookies["userId"];
             var product = _productStorage.TryGetProduct(id);
-            _compareStorage.Add(Constants.UserId, product);
+            _compareStorage.Add(userId, product);
             return RedirectToAction("Index");
         }
 
         public IActionResult Remove(Guid id)
         {
+            var userId = HttpContext.Request.Cookies["userId"];
             var product = _productStorage.TryGetProduct(id);
-            _compareStorage.Remove(Constants.UserId, product);
+            _compareStorage.Remove(userId, product);
             return RedirectToAction("Index");
         }
 
         public IActionResult Clear()
         {
-            _compareStorage.Clear(Constants.UserId);
+            var userId = HttpContext.Request.Cookies["userId"];
+            _compareStorage.Clear(userId);
             return RedirectToAction("Index");
         }
     }

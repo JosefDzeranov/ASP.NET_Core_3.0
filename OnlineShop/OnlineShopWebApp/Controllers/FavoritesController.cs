@@ -5,7 +5,6 @@ using OnlineShop.Db;
 
 namespace OnlineShopWebApp.Controllers
 {
-    [Authorize]
     public class FavoritesController : Controller
     {
         private readonly IProductStorage _productStorage;
@@ -18,7 +17,8 @@ namespace OnlineShopWebApp.Controllers
         }
         public IActionResult Index()
         {
-            var favoriteProducts= _favoritesStorage.GetAllByUserId(Constants.UserId);
+            var userId = HttpContext.Request.Cookies["userId"];
+            var favoriteProducts= _favoritesStorage.GetAllByUserId(userId);
             if (favoriteProducts == null || favoriteProducts.Count == 0)
             {
                 return View("Empty");
@@ -28,21 +28,24 @@ namespace OnlineShopWebApp.Controllers
 
         public IActionResult Add(Guid id)
         {
+            var userId = HttpContext.Request.Cookies["userId"];
             var product = _productStorage.TryGetProduct(id);
-            _favoritesStorage.Add(Constants.UserId, product);
+            _favoritesStorage.Add(userId, product);
             return RedirectToAction("Index");
         }
 
         public IActionResult Remove(Guid id)
         {
+            var userId = HttpContext.Request.Cookies["userId"];
             var product = _productStorage.TryGetProduct(id);
-            _favoritesStorage.Remove(Constants.UserId, product);
+            _favoritesStorage.Remove(userId, product);
             return RedirectToAction("Index");
         }
 
         public IActionResult Clear()
         {
-            _favoritesStorage.Clear(Constants.UserId);
+            var userId = HttpContext.Request.Cookies["userId"];
+            _favoritesStorage.Clear(userId);
             return RedirectToAction("Index");
         }
     }

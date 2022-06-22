@@ -12,7 +12,7 @@
             <h2>Sign up</h2>
             <form asp-controller="Account" asp-action="Signup">
                 <div class="validation" asp-validation-summary="All"></div>
-                <input type="hidden" name="returnUrl" value="@Model.ReturnUrl" />
+                <input type="hidden" name="ReturnUrl" value="@Model.ReturnUrl" />
                 <div class="mb-3">
                     <input class="form-control" asp-for="FirstName" placeholder="First name">
                     <span asp-validation-for="FirstName"></span>
