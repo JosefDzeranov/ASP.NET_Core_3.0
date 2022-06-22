@@ -4,6 +4,7 @@ using OnlineShopWebApp.Areas.Admin.Models;
 using OnlineShopWebApp.Models;
 using System.Collections.Generic;
 using Microsoft.AspNetCore.Identity;
+using System.Linq;
 
 namespace OnlineShopWebApp.Helpers
 {
@@ -13,12 +14,12 @@ namespace OnlineShopWebApp.Helpers
         {
             var productViewModel = new ProductViewModel
             {
-                Id = product.Id,
-                ImagePath = product.ImagePath,
+                Id = product.Id,               
                 Name = product.Name,
                 Cost = product.Cost,
                 Description = product.Description,
-                Available = product.Available
+                Available = product.Available,
+                ImagePaths = product.Images.Select(image => image.Url).ToArray()
             };
             return productViewModel;
         }
@@ -39,7 +40,6 @@ namespace OnlineShopWebApp.Helpers
             var product = new Product
             {
                 Id = productViewModel.Id,
-                ImagePath = productViewModel.ImagePath,
                 Name = productViewModel.Name,
                 Cost = productViewModel.Cost,
                 Description = productViewModel.Description,

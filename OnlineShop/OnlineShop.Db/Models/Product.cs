@@ -7,7 +7,7 @@ namespace OnlineShop.Db.Models
     {
         public Guid Id { get; set; }
 
-        public string ImagePath { get; set; }
+        public List<Image> Images { get; set; }
 
         public string Name { get; set; }
 
@@ -22,12 +22,12 @@ namespace OnlineShop.Db.Models
         public  Product ()
         {
             BasketItems = new List<BasketItem>();
+            Images = new List<Image>();
         }
 
-        public Product(string imagePath, string name, decimal cost, string description)
+        public Product(Guid id, string name, decimal cost, string description)
         {
-            Id = Guid.NewGuid();
-            ImagePath = imagePath;
+            Id = id;
             Name = name;
             Cost = cost;
             Description = description;

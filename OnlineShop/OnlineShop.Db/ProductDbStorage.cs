@@ -17,7 +17,7 @@ namespace OnlineShop.Db
 
         public List<Product> GetAll()
         {
-            return _databaseContext.Products.ToList();
+            return _databaseContext.Products.Include(p => p.Images).ToList();
         }
 
         public List<Product> GetAllAvailable()
@@ -51,7 +51,6 @@ namespace OnlineShop.Db
                 return;
             }
 
-            editProduct.ImagePath = product.ImagePath;
             editProduct.Name = product.Name;
             editProduct.Cost = product.Cost;
             editProduct.Description = product.Description;

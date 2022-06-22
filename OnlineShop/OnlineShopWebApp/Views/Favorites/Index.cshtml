@@ -13,7 +13,7 @@
         @foreach (var item in Model)
         {
             <div class="col-4 mb-4">
-                <img class="img-thumbnail mb-2" src="@item.ImagePath" alt="@item.Name">
+                <img class="img-thumbnail mb-2" src="@item.Images[0].Url" alt="@item.Name">
                 <a style="color: darkblue"
                asp-controller="Product" asp-action="Index" asp-route-id="@item.Id"><h5>@item.Name</h5></a>
                 <h6>$@item.Cost</h6>
