@@ -1,9 +1,11 @@
 ﻿using System;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using OnlineShop.Db;
 
 namespace OnlineShopWebApp.Controllers
 {
+    [Authorize]
     public class FavoriteController : Controller
     {
         private readonly IProductsStorage productStorage;

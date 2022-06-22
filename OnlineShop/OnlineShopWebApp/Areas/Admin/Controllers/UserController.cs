@@ -3,10 +3,13 @@ using Microsoft.AspNetCore.Mvc;
 using OnlineShopWebApp.Models;
 using OnlineShopWebApp.Areas.Admin.Models;
 using OnlineShopWebApp.Interface;
+using OnlineShop.Db;
+using Microsoft.AspNetCore.Authorization;
 
 namespace OnlineShopWebApp.Areas.Admin.Controllers
 {
-    [Area("Admin")]
+    [Area(Constants.AdminRoleName)]
+    [Authorize(Roles = Constants.AdminRoleName)]
     public class UserController : Controller
     {
         private readonly IUserStorage userStorage;
@@ -29,7 +32,7 @@ namespace OnlineShopWebApp.Areas.Admin.Controllers
         }
 
         [HttpPost]
-        public IActionResult Add(SignUp signup)
+        public IActionResult Add(SignupViewModel signup)
         {
             if (ModelState.IsValid)
             {

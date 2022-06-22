@@ -1,59 +1,93 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using OnlineShopWebApp.Interface;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc;
+using OnlineShop.Db.Models;
 using OnlineShopWebApp.Models;
 
 namespace OnlineShopWebApp.Controllers
 {
     public class AccountController : Controller
     {
-        private readonly IUserStorage _userStorage;
-        
-        public AccountController(IUserStorage userStorage)
+        private readonly UserManager<User> userManager;
+
+        private readonly SignInManager<User> signInManager;
+
+        public AccountController(UserManager<User> userManager, SignInManager<User> signInManager)
         {
-            _userStorage = userStorage;
+            this.userManager = userManager;
+            this.signInManager = signInManager;
         }
 
-        public IActionResult Signin()
+        public IActionResult Signin(string returnUrl)
         {
-            return View();
+            return View(new SigninViewModel() { ReturnUrl = returnUrl });
         }
 
         [HttpPost]
-        public IActionResult Signin(SignIn signin)
+        public IActionResult Signin(SigninViewModel signin)
         {
             if (ModelState.IsValid)
             {
-                if (_userStorage.Authorize(signin))
+                var result = signInManager.PasswordSignInAsync(signin.Email, signin.Password, signin.RememberMe, false).Result;
+                if (result.Succeeded)
                 {
-                    return RedirectToAction("Index", "Home");
-                }
-                else
-                {
-                    return View("Failed");
+                    if (signin.ReturnUrl != null)
+                    {
+                        return Redirect(signin.ReturnUrl ?? "/Home");
+                    }
+                    else
+                    {
+                        ModelState.AddModelError("", "Неверный пароль!");
+                    }
                 }
             }
             return View(signin);
         }
 
-        public IActionResult Signup()
+        public IActionResult Signup(string returnUrl)
         {
-            return View();
+            return View(new SignupViewModel() { ReturnUrl = returnUrl });
         }
 
         [HttpPost]
-        public IActionResult Signup(SignUp signup)
+        public IActionResult Signup(SignupViewModel signup)
         {
-            if(signup.Email == signup.Password)
-            {
-                ModelState.AddModelError(string.Empty, "Логин и пароль не должны совпадать");
-            }
-
             if (ModelState.IsValid)
             {
-                _userStorage.Add(signup);
+                var user = new User
+                {
+                    FirstName = signup.FirstName,
+                    LastName = signup.LastName,
+                    Email = signup.Email
+                };
+
+                var result = userManager.CreateAsync(user, signup.Password).Result;
+
+                if (result.Succeeded)
+                {
+                    signInManager.SignInAsync(user, false).Wait();
+                    return RedirectToAction(signup.ReturnUrl ?? "/Home"); 
+                }
+                else
+                {
+                    foreach (var error in result.Errors)
+                    {
+                        ModelState.AddModelError(string.Empty, error.Description);
+                    }
+                    //ModelState.AddModelError("Email", "Пользователь с таким адресом эл.почты уже зарегистрирован!");
+                    //return View(signup);
+                }
+            }
+
+            return View();
+        }
+
+            [Authorize]
+            public IActionResult Signout()
+            {
+                signInManager.SignOutAsync().Wait();
+
                 return RedirectToAction("Index", "Home");
             }
-            return View(signup);
         }
     }
-}

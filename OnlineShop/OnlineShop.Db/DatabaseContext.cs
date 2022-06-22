@@ -13,6 +13,13 @@ namespace OnlineShop.Db
             Database.Migrate(); //миграция
             // если изменилась модель то надо в Package Manager Console добавить миграцию например командой --Add-Migration Initialization -context DatabaseContext--
             // где Initialization - имя миграции, DatabaseContext - имя контекста в рамках которой выполняется миграция. Сейчас контекст пока 1.
+            //Add-Migration AddIdentityContext -context IdentityContext -OutputDir Migrations/Identity
+            //--dotnet ef database update--context ConfigurationDbContext
+
+            //dotnet ef migrations add InitConfigration -c Fully.Qualified.Namespaces.ConfigurationDbContext -o Migrations/Identity
+            //dotnet ef migrations add InitialIdentityServerConfigurationDbMigration -c IdentityServer4.EntityFramework.DbContexts.ConfigurationDbContext -o /Migrations/Identity
+
+            //Unable to create an object of type 'IdentityContext'. For the different patterns supported at design time, see https://go.microsoft.com/fwlink/?linkid=851728
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)

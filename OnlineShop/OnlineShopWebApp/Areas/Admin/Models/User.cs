@@ -1,11 +1,11 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
 
-namespace OnlineShopWebApp.Models
+namespace OnlineShopWebApp.Areas.Admin.Models
 {
     public class User
     {
-        public Guid Id { get; }
+        public Guid Id { get; set; }
 
         [Required(ErrorMessage = "Не указана фамилия")]
         [StringLength(25, MinimumLength = 2, ErrorMessage = "Фамилия должна содержать от 2-х до 25-ти символов")]
@@ -26,7 +26,7 @@ namespace OnlineShopWebApp.Models
         [Required(ErrorMessage = "Не указан пароль")]
         public string Password { get; set; }
 
-        //public User() { } // Empty ctor for XML serializing.
+        public User() { } // Empty ctor for XML serializing.
 
         public User(Guid id, string firstname, string lastname, string role, string phone, string email, string password)
         {

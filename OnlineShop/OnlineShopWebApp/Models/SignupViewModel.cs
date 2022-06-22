@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace OnlineShopWebApp.Models
 {
-    public class SignUp
+    public class SignupViewModel
     {
         [Required]
         [StringLength(25, MinimumLength = 2)]
@@ -27,5 +27,7 @@ namespace OnlineShopWebApp.Models
         [Required(ErrorMessage = "Не заполнено подтверждение пароля")]
         [Compare("Password", ErrorMessage = "Пароли не совпадают")]
         public string ConfirmPassword{ get; set; }
+
+        public string ReturnUrl { get; set; }
     }
 }

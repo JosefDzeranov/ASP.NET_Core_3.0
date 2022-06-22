@@ -1,14 +1,15 @@
 ﻿@using OnlineShopWebApp.Models
 
-@model SignIn
+@model SigninViewModel
 
 <h2 align="center">Вход</h2>
 
-@if (Model == null)
+@if (Model != null)
 {
     <div class="form">
         <form class="form-horizontal" role="form" method="POST" asp-action="Account">
             <div class="validation" asp-validation-summary="All">
+                <input type="hidden" name="returnUrl" value="@Model.ReturnUrl"/>
                 <div class="form-group">
                     <div class="form-group">
                         <label asp-for="Email" class="col-sm-2 control-label">Логин</label>
@@ -41,7 +42,7 @@
                         </div>
                         <div class="col-sm-offset-2 col-sm-10">
                             <p>
-                                <a class="btn btn-light" asp-controller="Account" asp-action="Signup">Регистрация</a>
+                                <a class="btn btn-light" asp-controller="Account" asp-action="Signup" asp-route-returnUrl="@Model.ReturnUrl">Регистрация</a>
                             </p>
                         </div>
                     </div>
