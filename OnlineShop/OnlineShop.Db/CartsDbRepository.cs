@@ -16,7 +16,7 @@ namespace OnlineShop.Db
         }        
         public Cart TryGetByUserId(string userId)
         {
-            return databaseContext.Carts.Include(x=>x.Items).ThenInclude(x=>x.Product).FirstOrDefault(x => x.UserId == userId);
+            return databaseContext.Carts.Include(x=>x.Items).FirstOrDefault(x => x.UserId == userId);
         }
 
         public void Add(Product product, string userId)

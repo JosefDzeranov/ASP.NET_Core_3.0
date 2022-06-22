@@ -24,12 +24,13 @@ namespace OnlineShop.Db
         {
             return databaseContext.Orders.Include(x => x.DeliveryInformation).Include(x => x.Items).ThenInclude(x => x.Product).FirstOrDefault(x => x.Id == id);
         }
-        public void Add(List<CartItem> items, DeliveryInformation deliveryInformation)
+        public void Add(Cart cart, DeliveryInformation deliveryInformation)
         {
             var newOrder = new Order
             {
                 Id = new Guid(),
-                Items = items,
+                Items = cart.Items,
+                UserId = cart.UserId,
                 DeliveryInformation = deliveryInformation,
                 Date = DateTime.Now.ToString("dd MMMM yyyy"),
                 Time = DateTime.Now.ToString("HH:mm:ss")
@@ -47,6 +48,11 @@ namespace OnlineShop.Db
                 existingOrder.State = newState;
                 databaseContext.SaveChanges();
             }
+        }
+
+        public List<Order> TryGetByUserId(string id)
+        {
+            return databaseContext.Orders.Include(x => x.Items).ThenInclude(x => x.Product).Where(x => x.UserId == id).ToList();
         }
     }
 }
