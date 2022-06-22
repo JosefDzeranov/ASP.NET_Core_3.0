@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using Microsoft.EntityFrameworkCore;
 using OnlineShop.Db.Models;
 
 namespace OnlineShop.Db
@@ -35,6 +36,11 @@ namespace OnlineShop.Db
             return databaseContext.Products.ToList();
         }
 
+        public List<Product> GetAllAvailable()
+        {
+            return databaseContext.Products.Where(p => p.Available == true).ToList();
+        }
+
         public Product TryGetProduct(Guid id)
         {
             return databaseContext.Products.FirstOrDefault(x => x.Id == id);
@@ -53,6 +59,23 @@ namespace OnlineShop.Db
             existingProduct.Name = newProduct.Name;
             existingProduct.Cost = newProduct.Cost;
             existingProduct.Description = newProduct.Description;
+            existingProduct.Available = newProduct.Available;
+
+            var orderWithProduct = databaseContext.Orders.Include(order => order.Items)
+                                                 .ThenInclude(item => item.Product)
+                                                 .FirstOrDefault(p => p.Id == newProduct.Id);
+
+            var cartItemWithProduct = databaseContext.Items.FirstOrDefault(x => x.Product.Id == newProduct.Id);
+
+            if (orderWithProduct != null || cartItemWithProduct != null)
+            {
+                newProduct.Available = false;
+            }
+            else
+            {
+                databaseContext.Products.Remove(newProduct);
+            }
+
 
             databaseContext.SaveChanges();
         }

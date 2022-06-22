@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using OnlineShop.Db;
 
 namespace OnlineShop.Db.Migrations
 {
     [DbContext(typeof(DatabaseContext))]
-    partial class DatabaseContextModelSnapshot : ModelSnapshot
+    [Migration("20220622192848_AddAvailable")]
+    partial class AddAvailable
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -162,53 +164,6 @@ namespace OnlineShop.Db.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Products");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = new Guid("d680c0a4-6a32-412f-bbaa-6100b42e2fc1"),
-                            Available = true,
-                            Cost = 5000m,
-                            Description = "Составление и оформление документов для подачи в суд",
-                            ImagePath = "/images/court.jpg",
-                            Name = "Составление документов, исков в суд"
-                        },
-                        new
-                        {
-                            Id = new Guid("ca92038f-0e3a-4c2a-b415-b36475aaa000"),
-                            Available = true,
-                            Cost = 4000m,
-                            Description = "Составление документов для регистрации/банкротства ЮЛ",
-                            ImagePath = "/images/bankruptcy.jpg",
-                            Name = "Составление документов для регистрации/банкротства ЮЛ"
-                        },
-                        new
-                        {
-                            Id = new Guid("5ebf7bcd-eff5-48ee-b1f4-5b5a00ada4a8"),
-                            Available = true,
-                            Cost = 6000m,
-                            Description = "Сопровождение и ведение гражданского дела в суде",
-                            ImagePath = "/images/civil_case.jpg",
-                            Name = "Сопровождение и ведение гражданского дела в суде"
-                        },
-                        new
-                        {
-                            Id = new Guid("46aa1f63-32b8-48d5-a313-43a7846e7e09"),
-                            Available = true,
-                            Cost = 3000m,
-                            Description = "Консультация по вопросам",
-                            ImagePath = "/images/law_consultation.jpg",
-                            Name = "Консультация по вопросам"
-                        },
-                        new
-                        {
-                            Id = new Guid("11197fca-ad64-400d-ac3d-5298da3c4422"),
-                            Available = true,
-                            Cost = 3000m,
-                            Description = "Правовая экспертиза документов и договоров",
-                            ImagePath = "/images/examination_documents.jpg",
-                            Name = "Анализ документов и договоров"
-                        });
                 });
 
             modelBuilder.Entity("OnlineShop.Db.Models.UserDeliveryInfo", b =>

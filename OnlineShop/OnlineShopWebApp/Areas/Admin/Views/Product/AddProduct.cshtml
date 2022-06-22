@@ -7,16 +7,21 @@
         @await Html.PartialAsync("AdminPanel")
         <div class="col text-center">
             <h3>Добавление новой услуги</h3>
+            <input name="Available" hidden value="true" />
+            <div class="mb-3">
+                <input class="form-control" asp-for="ImagePath" placeholder="Путь для хранения изображений услуг ...wwwroot/images/justice-2060093.jpg" />
+                <span asp-validation-for="ImagePath"></span>
+            </div>
             <label asp-for="Name">Название</label>
-            <input asp-for="Name"/>
+            <input asp-for="Name" />
             <span asp-validation-for="Name"></span>
             <br />
             <label asp-for="Cost">Цена</label>
-            <input asp-for="Cost"/>
+            <input asp-for="Cost" />
             <span asp-validation-for="Cost"></span>
             <br />
             <label asp-for="Description">Описание</label>
-            <input asp-for="Description"/>
+            <input asp-for="Description" />
             <span asp-validation-for="Description"></span>
             <br />
             <button class="btn btn-dark" type="submit" asp-area="Admin" asp-controller="Product" asp-action="AddProduct" asp-route-product="@Model">Добавить</button>

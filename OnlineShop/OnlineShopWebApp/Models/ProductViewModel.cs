@@ -18,5 +18,7 @@ namespace OnlineShopWebApp.Models
 
         [Required]
         public string ImagePath { get; set; }
+
+        public bool Available { get; set; }
     }
 }

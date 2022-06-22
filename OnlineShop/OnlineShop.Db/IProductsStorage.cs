@@ -8,9 +8,9 @@ namespace OnlineShop.Db
     {
         List<Product> GetAll();
 
-        Product TryGetProduct(Guid id);
+        List<Product> GetAllAvailable();
 
-//        List<Product> DeserializeJsonProducts();
+        Product TryGetProduct(Guid id);
 
         void Delete(Guid Id);
 
