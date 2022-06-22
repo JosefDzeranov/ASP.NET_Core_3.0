@@ -126,6 +126,12 @@ namespace OnlineShop.Db
         public void SaveInfoBuying(UserDeleveryInfo userDeleveryInfo, string buyerLogin)
         {
             var cart = Find(buyerLogin);
+            //_databaseContext.Carts
+            //    .Include(cart => cart.CartItems)
+            //    .ThenInclude(CartItem => CartItem.Product)
+            //    .FirstOrDefault(Cart => Cart.BuyerLogin == buyerLogin)
+            //    .UserDeleveryInfo = userDeleveryInfo;
+
             cart.UserDeleveryInfo = new UserDeleveryInfo()
             {
                 Commentary = userDeleveryInfo.Commentary,
@@ -135,6 +141,7 @@ namespace OnlineShop.Db
                 Secondname = userDeleveryInfo.Secondname,
                 Surname = userDeleveryInfo.Surname
             };
+
             //_databaseContext.Carts
             //    .Include(cart => cart.CartItems)
             //    .ThenInclude(CartItem => CartItem.Product)

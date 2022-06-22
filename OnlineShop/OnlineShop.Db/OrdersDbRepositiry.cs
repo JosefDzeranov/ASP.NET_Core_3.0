@@ -11,7 +11,7 @@ namespace OnlineShop.Db
     {
         private readonly DatabaseContext _databaseContext;
         private readonly ICartsRepository _cartsRepository;
-        public OrdersDbRepositiry (DatabaseContext databaseContext, ICartsRepository cartsRepository)
+        public OrdersDbRepositiry(DatabaseContext databaseContext, ICartsRepository cartsRepository)
         {
             _databaseContext = databaseContext;
             _cartsRepository = cartsRepository;
@@ -20,7 +20,7 @@ namespace OnlineShop.Db
         public void Add(Order order)
         {
             _databaseContext.Orders.Add(order);
-           Save();
+            Save();
         }
 
         public List<Order> GetAll()
@@ -40,21 +40,13 @@ namespace OnlineShop.Db
                     .FirstOrDefault(Cart => Cart.BuyerLogin == buyerLogin)
                     .CartItems;
             var cartUserDeleveryInfo = _cartsRepository.Find(buyerLogin).UserDeleveryInfo;
-            _databaseContext.Orders.Add(new Order()
+            var order = new Order()
             {
-                UserDeleveryInfo = 
-                    new UserDeleveryInfo()
-                    {
-                        Commentary = cartUserDeleveryInfo.Commentary,
-                        Email = cartUserDeleveryInfo.Email,
-                        Firstname = cartUserDeleveryInfo.Firstname,
-                        Phone = cartUserDeleveryInfo.Phone,
-                        Secondname = cartUserDeleveryInfo.Secondname,
-                        Surname = cartUserDeleveryInfo.Surname
-                    },
+                UserDeleveryInfo = cartUserDeleveryInfo,
                 Items = cartItems,
                 BuyerLogin = buyerLogin
-            });
+            };
+            _databaseContext.Orders.Add(order);
             Save();
             //    var cart = _cartsRepository.Find(buyerLogin);
             //    var orders = _databaseContext.Orders;
