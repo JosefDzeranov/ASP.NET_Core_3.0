@@ -28,6 +28,12 @@ namespace OnlineShop.Db
             return cart;
         }
 
+        //private UserDeleveryInfo findUserDeleveryInfo(Guid Id)
+        //{
+        //   var userDeleveryInfo = _databaseContext.UserDeleveryInfos.FirstOrDefault(u => u.Id == Id);
+        //   return userDeleveryInfo;
+        //}
+
         public void CreateCartBuyer(string buyerLogin)
         {
             Cart cart = new Cart()
@@ -119,14 +125,17 @@ namespace OnlineShop.Db
 
         public void SaveInfoBuying(UserDeleveryInfo userDeleveryInfo, string buyerLogin)
         {
-            var cart = Find(buyerLogin);
-            cart.UserDeleveryInfo = new UserDeleveryInfo()
+            _databaseContext.Carts
+                .Include(cart => cart.CartItems)
+                .ThenInclude(CartItem => CartItem.Product)
+                .FirstOrDefault(Cart => Cart.BuyerLogin == buyerLogin)
+                .UserDeleveryInfo = new UserDeleveryInfo()
             {
                 Commentary = userDeleveryInfo.Commentary,
-                Email = userDeleveryInfo.Email,
                 Firstname = userDeleveryInfo.Firstname,
-                Secondname = userDeleveryInfo.Secondname,
+                Email = userDeleveryInfo.Email,
                 Phone = userDeleveryInfo.Phone,
+                Secondname = userDeleveryInfo.Secondname,
                 Surname = userDeleveryInfo.Surname,
             };
             Save();

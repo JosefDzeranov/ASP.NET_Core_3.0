@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using Microsoft.EntityFrameworkCore;
 using OnlineShop.Db.Interfase;
 using OnlineShop.Db.Models;
 
@@ -35,17 +36,51 @@ namespace OnlineShop.Db
         {
             var cart = _cartsRepository.Find(buyerLogin);
             var orders = _databaseContext.Orders;
-            var userDeleveryInfo = cart.UserDeleveryInfo;
+            var orderId = Guid.NewGuid();
             orders.Add(new Order()
             {
-                BuyerLogin = buyerLogin, 
-                CartItem = new List<CartItem>(cart.CartItems), 
-                UserDeleveryInfo = userDeleveryInfo, 
-                Id = new Guid()
+                BuyerLogin = buyerLogin,
+                Id = orderId
             });
+            Save();
+            var cartInfoUsers = _databaseContext.Carts
+                .Include(cart => cart.CartItems)
+                .ThenInclude(CartItem => CartItem.Product)
+                .FirstOrDefault(Cart => Cart.BuyerLogin == buyerLogin)
+                .UserDeleveryInfo;
+            var orderInfoUsers = _databaseContext.Orders.FirstOrDefault(Order => Order.Id == orderId).UserDeleveryInfo;
+            orderInfoUsers = new UserDeleveryInfo()
+            {
+                Commentary = cartInfoUsers.Commentary,
+                Firstname = cartInfoUsers.Firstname,
+                Email = cartInfoUsers.Email,
+                Phone = cartInfoUsers.Phone,
+                Secondname = cartInfoUsers.Secondname,
+                Surname = cartInfoUsers.Surname,
+            };
+            var cartItems = _databaseContext.Carts
+                .Include(cart => cart.CartItems)
+                .ThenInclude(CartItem => CartItem.Product)
+                .FirstOrDefault(Cart => Cart.BuyerLogin == buyerLogin)
+                .CartItems;
+            var orderItems = _databaseContext.Orders.FirstOrDefault(Order => Order.Id == orderId).Items;
+            orderItems = new List<CartItem>();
+            
+            foreach (var cartItem in cartItems)
+            {
+                orderItems.Add(new CartItem()
+                {
+                    Count = cartItem.Count,
+                    Id = cartItem.Id,
+                    Product = cartItem.Product
+                });
+            }
+            Save();
             cart.CartItems.Clear();
             Save();
         }
+
+
         public List<Order> CollectAllOrders(string buyerLogin)
         {
             List<Order> collectAllOrders = new List<Order>();

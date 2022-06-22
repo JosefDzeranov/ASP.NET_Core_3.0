@@ -37,6 +37,5 @@ namespace OnlineShopWebApp.Areas.Admin.Controllers
             var orderId = newOrder.Id;
             return RedirectToAction("Details", new { orderId });
         }
-        
     }
 }
