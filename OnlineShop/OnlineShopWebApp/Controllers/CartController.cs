@@ -1,6 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using OnlineShop.Db;
-using OnlineShop.Db.Interface;
 using System;
 
 namespace OnlineShopWebApp.Controllers

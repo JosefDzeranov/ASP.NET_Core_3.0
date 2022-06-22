@@ -1,10 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using OnlineShop.Db;
-using OnlineShopWebApp.Db.Models;
-using OnlineShopWebApp.Models;
 using System;
 
-namespace OnlineShopWebApp.Areas.Admin.Controllers
+namespace OnlineShop.Areas.Admin.Controllers
 {
     [Area("Admin")]
     public class ProductController : Controller
@@ -40,27 +38,5 @@ namespace OnlineShopWebApp.Areas.Admin.Controllers
 
             return View(product);
         }
-        [HttpPost]
-        public IActionResult EditProduct(ProductViewModel newProduct)
-        {
-            if (ModelState.IsValid)
-            {
-                productsStorage.SaveEditedProduct(newProduct);
-            }
-
-            return RedirectToAction("Index", "Product");
-        }
-
-        public IActionResult AddProduct()
-        {
-            return View();
-        }
-        [HttpPost]
-        public IActionResult AddProduct(ProductViewModel product)
-        {
-            productsStorage.Add(product);
-            return RedirectToAction("Index", "Product");
-        }
-
     }
 }

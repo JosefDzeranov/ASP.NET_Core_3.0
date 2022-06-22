@@ -1,10 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
-namespace OnlineShopWebApp.Db.Models
+namespace OnlineShop.Db.Models
 {
     public class Product
     {
+        [Key]
         public Guid Id { get; set; }
 
         public string Name { get; set; }

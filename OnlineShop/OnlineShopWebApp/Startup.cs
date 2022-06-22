@@ -4,7 +4,6 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using OnlineShop.Db;
-using OnlineShop.Db.Interface;
 using OnlineShopWebApp.Interface;
 using OnlineShopWebApp.Models;
 using OnlineShopWebApp.Services;
@@ -52,6 +51,8 @@ namespace OnlineShopWebApp
             app.UseStaticFiles();
 
             app.UseRouting();
+
+            app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
             {

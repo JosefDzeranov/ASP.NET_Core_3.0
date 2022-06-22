@@ -1,11 +1,9 @@
-﻿using OnlineShop.Db.Interface;
-using OnlineShop.Db.Models;
-using OnlineShopWebApp.Db.Models;
+﻿using OnlineShop.Db.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace OnlineShopWebApp.Models
+namespace OnlineShop.Db
 {
     public class CartsDbStorage : ICartsStorage
     {

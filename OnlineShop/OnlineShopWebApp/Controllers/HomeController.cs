@@ -1,27 +1,42 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using OnlineShop.Db;
-using OnlineShop.Db.Interface;
+using OnlineShopWebApp.Models;
+using System.Collections.Generic;
 
 namespace OnlineShopWebApp.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly IProductsStorage productsStorage;
+        private readonly IProductsStorage productsDbStorage;
 
-        private readonly ICartsStorage cartsStorage;
+        private readonly ICartsStorage cartsDbStorage;
 
-        public HomeController(IProductsStorage productsStorage, ICartsStorage cartsStorage)
+        public HomeController(IProductsStorage productsDbStorage, ICartsStorage cartsDbStorage)
         {
-            this.productsStorage = productsStorage;
+            this.productsDbStorage = productsDbStorage;
 
-            this.cartsStorage = cartsStorage;
+            this.cartsDbStorage = cartsDbStorage;
         }
 
         public IActionResult Index()
         {
-            var products = productsStorage.GetAll();
+            var products = productsDbStorage.GetAll();
 
-            return View(products);
+            var productsViewModels = new List<ProductViewModel>();
+            foreach (var product in products)
+            {
+                var productViewModel = new ProductViewModel
+                {
+                    Id = product.Id,
+                    Name = product.Name,
+                    Cost = product.Cost,
+                    Description = product.Description,
+                    ImagePath = product.ImagePath
+                };
+                productsViewModels.Add(productViewModel);
+            }
+
+            return View(productsViewModels);
         }
     }
 }

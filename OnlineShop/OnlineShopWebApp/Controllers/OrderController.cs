@@ -30,10 +30,6 @@ namespace OnlineShopWebApp.Controllers
         {
             if (ModelState.IsValid)
             {
-                var existingCart = cartsStorage.TryGetByUserId(Constants.UserId);
-                order.Cart = existingCart;
-                order.UserId = Constants.UserId;
-                order.CostOrder = existingCart.Cost;
                 ordersStorage.Add(order, Constants.UserId);
                 cartsStorage.RemoveCartUser(Constants.UserId);
             }
@@ -46,7 +42,6 @@ namespace OnlineShopWebApp.Controllers
             var existingCart = cartsStorage.TryGetByUserId(Constants.UserId);
 
             var orderVM = new OrderViewModel();
-            orderVM.Cart = existingCart;
 
             return View(orderVM);
         }

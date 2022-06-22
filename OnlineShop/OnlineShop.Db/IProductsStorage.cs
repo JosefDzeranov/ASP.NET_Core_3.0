@@ -1,4 +1,4 @@
-﻿using OnlineShopWebApp.Db.Models;
+﻿using OnlineShop.Db.Models;
 using System;
 using System.Collections.Generic;
 
@@ -9,8 +9,6 @@ namespace OnlineShop.Db
         List<Product> GetAll();
 
         Product TryGetProduct(Guid id);
-
-//        List<Product> DeserializeJsonProducts();
 
         void Delete(Guid Id);
 

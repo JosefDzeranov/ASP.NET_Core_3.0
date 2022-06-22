@@ -1,6 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using OnlineShop.Db.Models;
-using OnlineShopWebApp.Db.Models;
 
 namespace OnlineShop.Db
 {
@@ -15,7 +14,9 @@ namespace OnlineShop.Db
         ////Доступ к таблицам
         /// </summary>
         public DbSet<Product> Products { get; set; }
+
         public DbSet<Cart> Carts { get; set; }
+
         public DbSet<CartItem> Items { get; set; }
     }
 }
