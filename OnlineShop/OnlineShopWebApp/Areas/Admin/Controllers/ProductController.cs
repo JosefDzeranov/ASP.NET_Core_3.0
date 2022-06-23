@@ -16,7 +16,7 @@ namespace OnlineShopWebApp.Areas.Admin.Controllers
     public class ProductController : Controller
     {
         private readonly IProductStorage _productStorage;
-        private readonly IWebHostEnvironment _appEnvironment;
+        
         public ProductController(IProductStorage productStorage, IWebHostEnvironment appEnvironment)
         {
             _productStorage = productStorage;
@@ -38,30 +38,18 @@ namespace OnlineShopWebApp.Areas.Admin.Controllers
         [HttpPost]
         public IActionResult Add(AddProductViewModel model)
         {
-            if (ModelState.IsValid)
+            if (!ModelState.IsValid)
             {
-                if(model.UploadedFile != null)
-                {
-                    var productImagePath = Path.Combine(_appEnvironment.WebRootPath + "/img/products/");
-                    
-                    if (!Directory.Exists(productImagePath))
-                    {
-                        Directory.CreateDirectory(productImagePath);
-                    }
+                return View(model);
+            }
 
-                    var fileName = Guid.NewGuid() + "." + model.UploadedFile.FileName.Split(".").Last();
+            var imagePath = imageProvider.SafeFiles(model.UploadedFiles, ImageFolders.Products);
 
-                    using (var fileStream = new FileStream(productImagePath + fileName, FileMode.Create))
-                    {
-                        model.UploadedFile.CopyTo(fileStream);
-                    }
-                    model.ImagePath = "/img/products/" + fileName;
-                }             
+
+
                 var product = model.ToProduct();
                 _productStorage.Add(product);
                 return RedirectToAction(nameof(Index));
-            }
-            return View();
         }
 
         public IActionResult Edit(Guid id)
