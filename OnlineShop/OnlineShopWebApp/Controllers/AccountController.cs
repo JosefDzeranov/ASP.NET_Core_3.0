@@ -13,11 +13,15 @@ namespace OnlineShopWebApp.Controllers
         private readonly UserManager<User> _userManager;
         private readonly SignInManager<User> _signInManager;
         private readonly IBasketStorage _basketStorage;
-        public AccountController(UserManager<User> userManager, SignInManager<User> signInManager, IBasketStorage basketStorage)
+        private readonly ICompareStorage _compareStorage;
+        private readonly IFavoritesStorage _favoritesStorage;
+        public AccountController(UserManager<User> userManager, SignInManager<User> signInManager, IBasketStorage basketStorage, ICompareStorage compareStorage, IFavoritesStorage favoritesStorage)
         {
             _userManager = userManager;
             _signInManager = signInManager;
             _basketStorage = basketStorage;
+            _compareStorage = compareStorage;
+            _favoritesStorage = favoritesStorage;
         }
 
         public IActionResult Signin(string returnUrl)
@@ -33,7 +37,7 @@ namespace OnlineShopWebApp.Controllers
                 var result = _signInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, false).Result;
                 if (result.Succeeded)
                 {
-                    SetUserIdToBasket(model.Email);
+                    SetUserId(model.Email); // Setting authorized user id to Basket, Compare or Favorites if nesessary. 
 
                     return Redirect(model.ReturnUrl ?? "/Home");
                 }
@@ -62,7 +66,7 @@ namespace OnlineShopWebApp.Controllers
                 {
                     _signInManager.SignInAsync(user, false).Wait();
 
-                    SetUserIdToBasket(model.Email);
+                    SetUserId(model.Email); // Setting authorized user id to Basket, Compare or Favorites if nesessary.
 
                     return Redirect(model.ReturnUrl ?? "/Home");
                 }
@@ -84,14 +88,29 @@ namespace OnlineShopWebApp.Controllers
             return RedirectToAction("Index", "Home");
         }
 
-        private void SetUserIdToBasket(string name)
+        private void SetUserId(string name)
         {
             var tempUserId = HttpContext.Request.Cookies["tempUserId"];
+
             var basket = _basketStorage.TryGetByUserId(tempUserId);
             if (basket != null)
             {
                 var currentUserId = _userManager.FindByNameAsync(name).Result.Id;
                 _basketStorage.ChangeUserId(tempUserId, currentUserId);
+            }
+
+            var compareProducts = _compareStorage.GetAllByUserId(tempUserId);
+            if (compareProducts != null)
+            {
+                var currentUserId = _userManager.FindByNameAsync(name).Result.Id;
+                _compareStorage.ChangeUserId(tempUserId, currentUserId);
+            }
+
+            var favorites = _favoritesStorage.GetAllByUserId(tempUserId);
+            if (favorites != null)
+            {
+                var currentUserId = _userManager.FindByNameAsync(name).Result.Id;
+                _favoritesStorage.ChangeUserId(tempUserId, currentUserId);
             }
         }
     }
