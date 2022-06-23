@@ -1,9 +1,13 @@
 ﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using OnlineShop.Db;
+using OnlineShop.Db.Models;
 using OnlineShopWebApp.Areas.Admin.Models;
 using OnlineShopWebApp.Models;
 using System;
+using System.Linq;
+using OnlineShopWebApp.Helpers;
 
 namespace OnlineShopWebApp.Areas.Admin.Controllers
 {
@@ -11,18 +15,18 @@ namespace OnlineShopWebApp.Areas.Admin.Controllers
     [Authorize(Roles = Constants.AdminRoleName)]
     public class UserController : Controller
     {
-        private readonly IUserStorage userStorage;
+        private readonly UserManager<User> userManager;
 
-        public UserController(IUserStorage userStorage)
+        public UserController(UserManager<User> userManager)
         {
-            this.userStorage = userStorage;
+            this.userManager = userManager;
         }
 
         public IActionResult Index()
         {
-            var users = userStorage.GetAll();
-
-            return View(users);
+            var users = userManager.Users.ToList();
+            var userViewModels = users.ToUserViewModels();
+            return View(userViewModels);
         }
 
         public IActionResult Add()
@@ -31,11 +35,12 @@ namespace OnlineShopWebApp.Areas.Admin.Controllers
         }
 
         [HttpPost]
-        public IActionResult Add(SignupViewModel signup)
+        public IActionResult Add(SignupViewModel model)
         {
             if (ModelState.IsValid)
             {
-                userStorage.Add(signup);
+                var user = model.ToUser();
+                userManager.CreateAsync(user, model.Password).Wait();
 
                 return RedirectToAction("Index");
             }
@@ -44,18 +49,17 @@ namespace OnlineShopWebApp.Areas.Admin.Controllers
 
         public IActionResult GetInfoUser(Guid id)
         {
-            var user = userStorage.TryGetUserById(id);
-
-            return View(user);
+            var user = userManager.FindByIdAsync(id.ToString()).Result;
+            var userViewModel = user.ToUserViewModel();
+            return View(userViewModel);
         }
 
         public IActionResult ChangePassword(Guid id)
         {
-            var user = userStorage.TryGetUserById(id);
-
-            var data = new ChangePassword()
+            var user = userManager.FindByIdAsync(id.ToString()).Result;
+            var data = new ChangePasswordViewModel()
             {
-                Id = user.Id,
+                Id = Guid.Parse(user.Id),
                 FirstName = user.FirstName,
                 LastName = user.LastName
             };
@@ -64,39 +68,47 @@ namespace OnlineShopWebApp.Areas.Admin.Controllers
         }
 
         [HttpPost]
-        public IActionResult ChangePassword(ChangePassword data)
+        public IActionResult ChangePassword(ChangePasswordViewModel model)
         {
             if (ModelState.IsValid)
             {
-                userStorage.ChangePassword(data);
-
-                return View("Success");
+                var user = userManager.FindByIdAsync(model.Id.ToString()).Result;
+                userManager.ChangePasswordAsync(user, model.CurrentPassword, model.NewPassword).Wait();
             }
 
-            return View(data);
+            return View(model);
         }
 
         public IActionResult Edit(Guid id)
         {
-            var user = userStorage.TryGetUserById(id);
-            return View(user);
+            var user = userManager.FindByIdAsync(id.ToString()).Result;
+            var userViewModel = user.ToUserViewModel();
+            return View(userViewModel);
         }
 
         [HttpPost]
-        public IActionResult Edit(User user)
+        public IActionResult Edit(UserViewModel model)
         {
             if (ModelState.IsValid)
             {
-                userStorage.Edit(user);
+                var user = userManager.FindByIdAsync(model.Id.ToString()).Result;
+
+                user.FirstName = model.FirstName;
+                user.LastName = model.LastName;
+                user.Email = model.Email;
+                user.PhoneNumber = model.Phone;
+
+                userManager.UpdateAsync(user).Wait();
                 return RedirectToAction("Index");
             }
-            return View();
+            return View(model);
         }
 
         public IActionResult Remove(Guid id)
         {
-            userStorage.Remove(id);
-            return RedirectToAction("Index"); ;
+            var user = userManager.FindByIdAsync(id.ToString()).Result;
+            userManager.DeleteAsync(user).Wait();
+            return RedirectToAction("Index");
         }
     }
 }

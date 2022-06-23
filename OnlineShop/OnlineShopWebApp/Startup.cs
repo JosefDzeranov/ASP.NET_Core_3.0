@@ -64,8 +64,6 @@ namespace OnlineShopWebApp
 
             services.AddSingleton<IRoleStorage, RoleStorage>();
 
-            services.AddSingleton<IUserStorage, UserStorage>();
-
             services.AddControllersWithViews();
         }
 
