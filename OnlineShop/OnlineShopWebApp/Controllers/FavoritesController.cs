@@ -1,7 +1,8 @@
 ﻿using System;
-using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using OnlineShop.Db;
+using OnlineShop.Db.Models;
 
 namespace OnlineShopWebApp.Controllers
 {
@@ -9,15 +10,17 @@ namespace OnlineShopWebApp.Controllers
     {
         private readonly IProductStorage _productStorage;
         private readonly IFavoritesStorage _favoritesStorage;
+        private readonly UserManager<User> _userManager;
 
-        public FavoritesController(IProductStorage productStorage, IFavoritesStorage favoritesStorage)
+        public FavoritesController(IProductStorage productStorage, IFavoritesStorage favoritesStorage, UserManager<User> userManager)
         {
             _productStorage = productStorage;
             _favoritesStorage = favoritesStorage;
+            _userManager = userManager;
         }
         public IActionResult Index()
         {
-            var userId = HttpContext.Request.Cookies["userId"];
+            var userId = GetUserId();
             var favoriteProducts= _favoritesStorage.GetAllByUserId(userId);
             if (favoriteProducts == null || favoriteProducts.Count == 0)
             {
@@ -28,7 +31,7 @@ namespace OnlineShopWebApp.Controllers
 
         public IActionResult Add(Guid id)
         {
-            var userId = HttpContext.Request.Cookies["userId"];
+            var userId = GetUserId();
             var product = _productStorage.TryGetProduct(id);
             _favoritesStorage.Add(userId, product);
             return RedirectToAction("Index");
@@ -36,7 +39,7 @@ namespace OnlineShopWebApp.Controllers
 
         public IActionResult Remove(Guid id)
         {
-            var userId = HttpContext.Request.Cookies["userId"];
+            var userId = GetUserId();
             var product = _productStorage.TryGetProduct(id);
             _favoritesStorage.Remove(userId, product);
             return RedirectToAction("Index");
@@ -44,9 +47,31 @@ namespace OnlineShopWebApp.Controllers
 
         public IActionResult Clear()
         {
-            var userId = HttpContext.Request.Cookies["userId"];
+            var userId = GetUserId();
             _favoritesStorage.Clear(userId);
             return RedirectToAction("Index");
+        }
+
+        private string GetUserId()
+        {
+            string userId;
+            if (HttpContext.User.Identity.IsAuthenticated)
+            {
+                userId = _userManager.GetUserId(User);
+            }
+            else
+            {
+                if (HttpContext.Request.Cookies.ContainsKey("tempUserId"))
+                {
+                    userId = HttpContext.Request.Cookies["tempUserId"];
+                }
+                else
+                {
+                    userId = Guid.NewGuid().ToString();
+                    HttpContext.Response.Cookies.Append("tempUserId", userId);
+                }
+            }
+            return userId;
         }
     }
 }

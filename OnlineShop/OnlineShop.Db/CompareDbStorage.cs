@@ -26,7 +26,7 @@ namespace OnlineShop.Db
         public void Add(string userId, Product product)
         {
             var compareProduct = _databaseContext.CompareProducts.FirstOrDefault(cp => cp.UserId == userId && cp.Product == product);
-            if(compareProduct == null)
+            if (compareProduct == null)
             {
                 _databaseContext.CompareProducts.Add(new CompareProduct
                 {
@@ -48,6 +48,16 @@ namespace OnlineShop.Db
         {
             var compareProducts = _databaseContext.CompareProducts.Where(cp => cp.UserId == userId).ToList();
             _databaseContext.CompareProducts.RemoveRange(compareProducts);
+            _databaseContext.SaveChanges();
+        }
+
+        public void ChangeUserId(string tempUserId, string currentUserId)
+        {
+            var compareProducts = _databaseContext.CompareProducts.Where(cp => cp.UserId == tempUserId).ToList();
+            foreach (var cp in compareProducts)
+            {
+                cp.UserId = currentUserId;
+            }
             _databaseContext.SaveChanges();
         }
     }

@@ -8,5 +8,6 @@ namespace OnlineShop.Db
         void Add(string userId, Product product);
         void Remove(string userId, Product product);
         void Clear(string userId);
+        void ChangeUserId(string tempUserId, string currentUserId);
     }
 }

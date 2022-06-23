@@ -3,6 +3,8 @@ using OnlineShopWebApp.Models;
 using OnlineShopWebApp.Helpers;
 using OnlineShop.Db;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
+using OnlineShop.Db.Models;
 
 namespace OnlineShopWebApp.Controllers
 {
@@ -10,17 +12,19 @@ namespace OnlineShopWebApp.Controllers
     {
         private readonly IOrderStorage _orderStorage;
         private readonly IBasketStorage _basketStorage;
+        private readonly UserManager<User> _userManager;
 
-        public OrderController(IOrderStorage orderStorage, IBasketStorage basketStorage)
+        public OrderController(IOrderStorage orderStorage, IBasketStorage basketStorage, UserManager<User> userManager)
         {
             _orderStorage = orderStorage;
             _basketStorage = basketStorage;
+            _userManager = userManager;
         }
 
         [Authorize]
         public IActionResult Index()
         {
-            var userId = HttpContext.Request.Cookies["userId"];
+            var userId = _userManager.GetUserId(User);
             var basket = _basketStorage.TryGetByUserId(userId);
             var basketViewModel = basket.ToBasketViewModel();
             var orderForm = new OrderFormViewModel
@@ -39,7 +43,7 @@ namespace OnlineShopWebApp.Controllers
                 return RedirectToAction("Index");
             }
 
-            var userId = HttpContext.Request.Cookies["userId"];
+            var userId = _userManager.GetUserId(User);
             var basket = _basketStorage.TryGetByUserId(userId);
             var deliveryInfo = orderForm.DeliveryInfo.ToDeliveryInfo();
             _orderStorage.Add(userId, basket, deliveryInfo);
