@@ -23,16 +23,6 @@ namespace OnlineShop.Db
 
         public List<Product> GetAll()
         {
-            //if (!File.Exists(FilePath))
-            //{
-            //    products.Add(new Product(0, "Составление документов, исков в суд", 5000, "Составление и оформление документов для подачи в суд", "/images/court.jpg"));
-            //    products.Add(new Product(1, "Составление документов для регистрации/банкротства ЮЛ", 4000, "Составление документов для регистрации/банкротства ЮЛ", "/images/bankruptcy.jpg"));
-            //    products.Add(new Product(2, "Сопровождение и ведение гражданского дела в суде", 6000, "Сопровождение и ведение гражданского дела в суде", "/images/civil_case.jpg"));
-            //    products.Add(new Product(3, "Консультация по вопросам", 3000, "Консультация по вопросам", "/images/law_consultation.jpg"));
-            //    products.Add(new Product(4, "Анализ документов и договоров", 3000, "Правовая экспертиза документов и договоров", "/images/examination_documents.jpg"));
-
-            //    return products;
-            //}
             return databaseContext.Products.ToList();
         }
 
@@ -61,31 +51,27 @@ namespace OnlineShop.Db
             existingProduct.Description = newProduct.Description;
             existingProduct.Available = newProduct.Available;
 
-            var orderWithProduct = databaseContext.Orders.Include(order => order.Items)
-                                                 .ThenInclude(item => item.Product)
-                                                 .FirstOrDefault(p => p.Id == newProduct.Id);
-
-            var cartItemWithProduct = databaseContext.Items.FirstOrDefault(x => x.Product.Id == newProduct.Id);
-
-            if (orderWithProduct != null || cartItemWithProduct != null)
-            {
-                newProduct.Available = false;
-            }
-            else
-            {
-                databaseContext.Products.Remove(newProduct);
-            }
-
-
             databaseContext.SaveChanges();
         }
 
         public void Delete(Guid productId)
         {
-            var product = databaseContext.Products.FirstOrDefault(x => x.Id == productId);
+            var product = databaseContext.Products.FirstOrDefault(p => p.Id == productId);
 
-            databaseContext.Products.Remove(product);
-            
+            var orderWithProduct = databaseContext.Orders.Include(order => order.Items)
+                                                 .ThenInclude(item => item.Product)
+                                                 .FirstOrDefault(p => p.Id == product.Id);
+
+            var cartItemWithProduct = databaseContext.CartItems.FirstOrDefault(x => x.Id == product.Id);
+
+            if (orderWithProduct != null || cartItemWithProduct != null)
+            {
+                product.Available = false;
+            }
+            else
+            {
+                databaseContext.Products.Remove(product);
+            }
             databaseContext.SaveChanges();
         }
 

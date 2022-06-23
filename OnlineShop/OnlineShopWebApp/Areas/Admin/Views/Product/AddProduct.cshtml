@@ -2,7 +2,7 @@
 
 @model ProductViewModel
 
-<form method="post" asp-action="AddProduct" asp-controller="Product" asp-area="Admin">
+<form method="post" enctype="multipart/form-data" asp-action="AddProduct" asp-controller="Product" asp-area="Admin">
     <div class="row">
         @await Html.PartialAsync("AdminPanel")
         <div class="col text-center">
@@ -23,6 +23,10 @@
             <label asp-for="Description">Описание</label>
             <input asp-for="Description" />
             <span asp-validation-for="Description"></span>
+            <br />
+            <label asp-for="UploadeImage">Изображение</label>
+            <input type="file" asp-for="UploadeImage" />
+            <span asp-validation-for="UploadeImage"></span>
             <br />
             <button class="btn btn-dark" type="submit" asp-area="Admin" asp-controller="Product" asp-action="AddProduct" asp-route-product="@Model">Добавить</button>
         </div>

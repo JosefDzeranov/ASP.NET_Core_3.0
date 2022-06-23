@@ -1,6 +1,8 @@
 ﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using OnlineShop.Db;
+using OnlineShop.Db.Models;
 using OnlineShopWebApp.Helpers;
 using OnlineShopWebApp.Models;
 
@@ -10,20 +12,21 @@ namespace OnlineShopWebApp.Controllers
     public class OrderController : Controller
     {
         private readonly IOrdersStorage ordersStorage;
-
         private readonly ICartsStorage cartsStorage;
+        private readonly UserManager<User> userManager;
 
-        public OrderController(IOrdersStorage ordersStorage, ICartsStorage cartsStorage)
+
+        public OrderController(IOrdersStorage ordersStorage, ICartsStorage cartsStorage, UserManager<User> userManager)
         {
             this.ordersStorage = ordersStorage;
-
             this.cartsStorage = cartsStorage;
+            this.userManager = userManager;
         }
 
         public IActionResult Index()
         {
-            var order = cartsStorage.TryGetByUserId(Constants.UserId);
-            
+            var userId = userManager.GetUserId(User);
+            var order = cartsStorage.TryGetByUserId(userId);
             var cartViewModel = order.ToCartViewModel();
             var orderForm = new OrderFormViewModel
             {
@@ -41,10 +44,11 @@ namespace OnlineShopWebApp.Controllers
                 return RedirectToAction("Index");
             }
 
-            var cart = cartsStorage.TryGetByUserId(Constants.UserId);
+            var userId = userManager.GetUserId(User);
+            var cart = cartsStorage.TryGetByUserId(userId);
             var deliveryInfo = order.DeliveryInfo.ToContactsDelivery();
+            
             ordersStorage.Add(Constants.UserId, cart, deliveryInfo);
-
             cartsStorage.ClearCartUser(Constants.UserId);
 
             return View();
@@ -63,7 +67,6 @@ namespace OnlineShopWebApp.Controllers
         public IActionResult OrderComplete()
         {
             var order = ordersStorage.TryGetOrderByUserId(Constants.UserId);
-
             return View(order);
         }
     }

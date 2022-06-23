@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Http;
+using System;
 using System.ComponentModel.DataAnnotations;
 
 namespace OnlineShopWebApp.Models
@@ -20,5 +21,7 @@ namespace OnlineShopWebApp.Models
         public string ImagePath { get; set; }
 
         public bool Available { get; set; }
+
+        public IFormFile UploadeImage { get; set; }
     }
 }

@@ -42,17 +42,12 @@ namespace OnlineShop.Db
         ////Доступ к таблицам
         /// </summary>
         public DbSet<Product> Products { get; set; }
-
         public DbSet<Cart> Carts { get; set; }
-
+        public DbSet<Cart> CartItems { get; set; }
         public DbSet<CartItem> Items { get; set; }
-
         public DbSet<FavoriteProduct> FavoriteProduct { get; set; }
-
         public DbSet<Order> Orders { get; set; }
-
         public DbSet<Address> Address { get; set; }
-
         public DbSet<UserDeliveryInfo> UserDelivery { get; set; }
     }
 }

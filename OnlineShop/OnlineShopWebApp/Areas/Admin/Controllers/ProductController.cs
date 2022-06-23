@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using OnlineShop.Db;
 using OnlineShopWebApp.Helpers;
@@ -13,16 +14,16 @@ namespace OnlineShop.Areas.Admin.Controllers
     public class ProductController : Controller
     {
         private readonly IProductsStorage productsStorage;
+        private readonly IWebHostEnvironment appEnviroment;
 
-        public ProductController(IProductsStorage productsStorage)
+        public ProductController(IProductsStorage productsStorage, IWebHostEnvironment appEnviroment)
         {
             this.productsStorage = productsStorage;
-
+            this.appEnviroment = appEnviroment;
         }
         public IActionResult Index()
         {
             var products = productsStorage.GetAllAvailable();
-
             var productsViewModels = new List<ProductViewModel>();
             
             foreach (var product in products)
@@ -41,7 +42,6 @@ namespace OnlineShop.Areas.Admin.Controllers
             return View(productsViewModels);
         }
 
-
         public IActionResult DeleteProduct(Guid id)
         {
             var product = productsStorage.TryGetProduct(id);
@@ -54,23 +54,26 @@ namespace OnlineShop.Areas.Admin.Controllers
 
         public IActionResult EditProduct(Guid id)
         {
-            var product = productsStorage.TryGetProduct(id);
-            
+            var product = productsStorage.TryGetProduct(id);           
             var productViewModel = product.ToProductViewModel();
-
             return View(productViewModel);
         }
 
         [HttpPost]
         public IActionResult SaveEditedProduct(ProductViewModel productViewModel)
         {
-            if (ModelState.IsValid)
+            if (productViewModel.UploadeImage != null)
             {
-                var product = productViewModel.ToProduct();
+                var uploadFile = new UploadFile(
+                    productViewModel.UploadeImage,
+                    appEnviroment.WebRootPath,
+                    Constants.ImagesDirectory);
 
-                productsStorage.SaveEditedProduct(product);
+                uploadFile.SaveFile();
+                productViewModel.ImagePath = uploadFile.FilePath;
             }
-
+            var product = productViewModel.ToProduct();
+            productsStorage.SaveEditedProduct(product);
             return RedirectToAction("Index");
         }
 
@@ -82,12 +85,24 @@ namespace OnlineShop.Areas.Admin.Controllers
         [HttpPost]
         public IActionResult AddProduct(ProductViewModel productViewModel)
         {
-            var product = productViewModel.ToProduct();
+            if (ModelState.IsValid)
+            {
+                if (productViewModel.UploadeImage != null)
+                {
+                    var uploadFile = new UploadFile(
+                        productViewModel.UploadeImage,
+                        appEnviroment.WebRootPath,
+                        Constants.ImagesDirectory);
 
-            productsStorage.Add(product);
+                    uploadFile.SaveFile();
+                    productViewModel.ImagePath = uploadFile.FilePath;
+                }
+                var productt = productViewModel.ToProduct();
+                productsStorage.Add(productt);
+                return RedirectToAction("Index", "Product");
+            }
 
-            return RedirectToAction("Index");
+            return View(productViewModel);
         }
-
     }
 }
