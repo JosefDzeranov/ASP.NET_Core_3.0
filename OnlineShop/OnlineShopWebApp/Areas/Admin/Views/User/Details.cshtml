@@ -32,8 +32,13 @@
                         <td>@Model.Email</td>
                     </tr>
                     <tr>
-                        <td>Role</td>
-                        <td>@Model.Role</td>
+                        <td>Roles</td>
+                        <td>
+                            @foreach (var role in Model.UserRoles)
+                            {
+                                <br/>@role
+                            }
+                        </td>
                     </tr>
                     <tr>
                         <td></td>

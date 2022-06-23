@@ -18,7 +18,7 @@
                     <tr>
                         <th scope="col">№</th>
                         <th scope="col">Логин (email)</th>
-                        <th scope="col">Роль</th>
+                        <th scope="col">Роли</th>
                     </tr>
                 </thead>
                 @for (int i = 0; i < Model.Count; i++)
@@ -32,7 +32,10 @@
                                 <a asp-area="Admin" asp-controller="User" asp-action="GetInfoUser" asp-route-id="@Model[i].Id">@Model[i].Email</a>
                             </td>
                             <td>
-                                @Model[i].Role
+                                @foreach (var role in @Model[i].UserRoles)
+                                {
+                                    <br/>@role
+                                }
                             </td>
                             <td>
                         </tr>

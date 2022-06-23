@@ -1,7 +1,10 @@
 ﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using OnlineShop.Db;
 using OnlineShopWebApp.Areas.Admin.Models;
+using OnlineShopWebApp.Helpers;
+using System.Linq;
 
 namespace OnlineShopWebApp.Areas.Admin.Controllers
 {
@@ -9,45 +12,70 @@ namespace OnlineShopWebApp.Areas.Admin.Controllers
     [Authorize(Roles = Constants.AdminRoleName)]
     public class RoleController : Controller
     {
-        private readonly IRoleStorage roleStorage;
+        RoleManager<IdentityRole> roleManager;
 
-        public RoleController(IRoleStorage roleStorage)
+        public RoleController(RoleManager<IdentityRole> roleManager)
         {
-            this.roleStorage = roleStorage;
+            this.roleManager = roleManager;
         }
 
         public IActionResult Index()
         {
-            var roles = roleStorage.GetAll();
-            return View(roles);
+            var roles = roleManager.Roles.ToList();
+            var roleViewModels = roles.ToRoleViewModels();
+            return View(roleViewModels);
         }
 
-        public IActionResult AddRole()
+        public IActionResult Add()
         {
             return View();
         }
 
         [HttpPost]
-        public IActionResult AddRole(Role role)
+        public IActionResult Add(string name)
         {
-            if (roleStorage.TryGet(role.Name) != null)
+            var result = roleManager.CreateAsync(new IdentityRole(name)).Result;
+            if (result.Succeeded)
             {
-                ModelState.AddModelError("", "Роль с таким именем уже существует");
+                return RedirectToAction("Index");
             }
-            if (ModelState.IsValid)
+            else
             {
-                roleStorage.AddRole(role);
-                return RedirectToAction("Index", "Role");
+                foreach (var error in result.Errors)
+                {
+                    ModelState.AddModelError(string.Empty, error.Description);
+                }
             }
-
-            return View(role);
+            return View();
         }
 
-        public IActionResult DeleteRole(string name)
+        public IActionResult Delete(string id)
         {
-            roleStorage.DeleteRole(name);
+            var role = roleManager.FindByIdAsync(id).Result;
+            roleManager.DeleteAsync(role).Wait();
+            return RedirectToAction("Index");
+        }
 
-            return RedirectToAction("Index", "Role");
+        [HttpPost]
+        public IActionResult Edit(RoleViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                var role = roleManager.FindByIdAsync(model.Id).Result;
+
+                role.Name = model.Name;
+
+                roleManager.UpdateAsync(role).Wait();
+                return RedirectToAction("Index");
+            }
+            return View(model);
+        }
+
+        public IActionResult Edit(string id)
+        {
+            var role = roleManager.FindByIdAsync(id).Result;
+            var roleViewModel = role.ToRoleViewModel();
+            return View(roleViewModel);
         }
     }
 }

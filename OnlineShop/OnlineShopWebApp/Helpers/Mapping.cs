@@ -1,4 +1,5 @@
-﻿using OnlineShop.Db.Models;
+﻿using Microsoft.AspNetCore.Identity;
+using OnlineShop.Db.Models;
 using OnlineShopWebApp.Areas.Admin.Models;
 using OnlineShopWebApp.Models;
 using System;
@@ -182,6 +183,20 @@ namespace OnlineShopWebApp.Helpers
             return orderViewModels;
         }
 
+        public static UserViewModel ToUserViewModel(this User user, IList<string> userRoles)
+        {
+            var userViewModel = new UserViewModel
+            {
+                Id = Guid.Parse(user.Id),
+                FirstName = user.FirstName,
+                LastName = user.LastName,
+                Phone = user.PhoneNumber,
+                Email = user.Email,
+                UserRoles = userRoles
+            };
+            return userViewModel;
+        }
+
         public static UserViewModel ToUserViewModel(this User user)
         {
             var userViewModel = new UserViewModel
@@ -195,7 +210,7 @@ namespace OnlineShopWebApp.Helpers
             return userViewModel;
         }
 
-        public static List<UserViewModel> ToUserViewModels(this List<User> users)
+        public static List<UserViewModel> ToUserViewModel(this List<User> users)
         {
             var userViewModels = new List<UserViewModel>();
             foreach (var user in users)
@@ -217,6 +232,27 @@ namespace OnlineShopWebApp.Helpers
                 PhoneNumber = signup.Phone
             };
             return user;
+        }
+
+        public static RoleViewModel ToRoleViewModel(this IdentityRole role)
+        {
+            var roleViewModel = new RoleViewModel
+            {
+                Id = role.Id,
+                Name = role.Name
+            };
+            return roleViewModel;
+        }
+
+        public static List<RoleViewModel> ToRoleViewModels(this List<IdentityRole> roles)
+        {
+            var roleViewModels = new List<RoleViewModel>();
+            foreach (var role in roles)
+            {
+                var roleViewModel = role.ToRoleViewModel();
+                roleViewModels.Add(roleViewModel);
+            }
+            return roleViewModels;
         }
     }
 }
