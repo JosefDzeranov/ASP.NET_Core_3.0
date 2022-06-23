@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Authorization;
 using OnlineShop.Db.Models;
 using OnlineShopWebApp.Models;
 using OnlineShopWebApp.Helpers;
+using OnlineShop.Db;
 
 namespace OnlineShopWebApp.Controllers
 {
@@ -11,32 +12,37 @@ namespace OnlineShopWebApp.Controllers
     {
         private readonly UserManager<User> _userManager;
         private readonly SignInManager<User> _signInManager;
-        public AccountController(UserManager<User> userManager, SignInManager<User> signInManager)
+        private readonly IBasketStorage _basketStorage;
+        public AccountController(UserManager<User> userManager, SignInManager<User> signInManager, IBasketStorage basketStorage)
         {
             _userManager = userManager;
             _signInManager = signInManager;
+            _basketStorage = basketStorage;
         }
+
         public IActionResult Signin(string returnUrl)
         {
             return View(new SigninViewModel() { ReturnUrl = returnUrl });
         }
 
         [HttpPost]
-        public IActionResult Signin(SigninViewModel signin)
+        public IActionResult Signin(SigninViewModel model)
         {
             if (ModelState.IsValid)
             {
-                var result = _signInManager.PasswordSignInAsync(signin.Email, signin.Password, signin.RememberMe, false).Result;
+                var result = _signInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, false).Result;
                 if (result.Succeeded)
                 {
-                    return Redirect(signin.ReturnUrl ?? "/Home");
+                    SetUserIdToBasket(model.Email);
+
+                    return Redirect(model.ReturnUrl ?? "/Home");
                 }
                 else
                 {
                     return View("Failed");
                 }
             }
-            return View(signin);
+            return View(model);
         }
 
         public IActionResult Signup(string returnUrl)
@@ -45,17 +51,20 @@ namespace OnlineShopWebApp.Controllers
         }
 
         [HttpPost]
-        public IActionResult Signup(SignupViewModel signup)
+        public IActionResult Signup(SignupViewModel model)
         {
             if (ModelState.IsValid)
             {
-                var user = signup.ToUser();
-                var result = _userManager.CreateAsync(user, signup.Password).Result;
+                var user = model.ToUser();
+                var result = _userManager.CreateAsync(user, model.Password).Result;
 
                 if (result.Succeeded)
                 {
                     _signInManager.SignInAsync(user, false).Wait();
-                    return Redirect(signup.ReturnUrl ?? "/Home");
+
+                    SetUserIdToBasket(model.Email);
+
+                    return Redirect(model.ReturnUrl ?? "/Home");
                 }
                 else
                 {
@@ -73,6 +82,17 @@ namespace OnlineShopWebApp.Controllers
         {
             _signInManager.SignOutAsync().Wait();
             return RedirectToAction("Index", "Home");
+        }
+
+        private void SetUserIdToBasket(string name)
+        {
+            var tempUserId = HttpContext.Request.Cookies["tempUserId"];
+            var basket = _basketStorage.TryGetByUserId(tempUserId);
+            if (basket != null)
+            {
+                var currentUserId = _userManager.FindByNameAsync(name).Result.Id;
+                _basketStorage.ChangeUserId(tempUserId, currentUserId);
+            }
         }
     }
 }
