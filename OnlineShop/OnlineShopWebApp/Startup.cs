@@ -62,8 +62,6 @@ namespace OnlineShopWebApp
 
             services.AddTransient<IFavoriteStorage, FavoriteDbStorage>();
 
-            services.AddSingleton<IRoleStorage, RoleStorage>();
-
             services.AddControllersWithViews();
         }
 

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 namespace OnlineShopWebApp.Areas.Admin.Models
@@ -18,7 +19,7 @@ namespace OnlineShopWebApp.Areas.Admin.Models
         [Required(ErrorMessage = "Не указан телефон")]
         public string Phone { get; set; }
 
-        public string Role { get; set; }
+        public IList<string> UserRoles { get; set; }
 
         [Required(ErrorMessage = "Не указан email")]
         public string Email { get; set; }
@@ -26,17 +27,9 @@ namespace OnlineShopWebApp.Areas.Admin.Models
         [Required(ErrorMessage = "Не указан пароль")]
         public string Password { get; set; }
 
-        public UserViewModel() { } // Empty ctor for XML serializing.
-
-        public UserViewModel(Guid id, string firstname, string lastname, string role, string phone, string email, string password)
+        public UserViewModel()
         {
-            Id = id;
-            FirstName = firstname;
-            LastName = lastname;
-            Phone = phone;
-            Role = role;
-            Email = email;
-            Password = password;
+            UserRoles = new List<string>();
         }
     }
 }

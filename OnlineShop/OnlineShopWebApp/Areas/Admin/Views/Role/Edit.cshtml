@@ -1,6 +1,6 @@
 ﻿@using OnlineShopWebApp.Areas.Admin.Models
 
-@model Role
+@model RoleViewModel
 
 @{
     ViewData["Title"] = "Изменение роли";
@@ -14,7 +14,7 @@
         <div class="col-5">
             <h2>Edit role data</h2>
             <div class="validation" asp-validation-summary="All"></div>
-            <form asp-controller="Role" asp-action="Save" asp-area="Admin">
+            <form asp-controller="Role" asp-action="Edit" asp-area="Admin">
                 <div class="validation" asp-validation-summary="All"></div>
                 <div class="mb-3">
                     <label class="form-label text-muted" asp-for="Name">Имя</label>
@@ -22,7 +22,7 @@
                     <span asp-validation-for="Name"></span>
                 </div>
                 <div class="mb-3">
-                    <button type="submit" class="btn btn-outline-dark btn-sm" asp-area="Admin" asp-controller="Role" asp-action="Save" asp-route-oldname="@Model.Name">Сохранить</button>
+                    <button type="submit" class="btn btn-outline-dark btn-sm" asp-area="Admin" asp-controller="Role" asp-action="Edit" asp-route-id="@Model.Id">Сохранить</button>
                 </div>
             </form>
         </div>

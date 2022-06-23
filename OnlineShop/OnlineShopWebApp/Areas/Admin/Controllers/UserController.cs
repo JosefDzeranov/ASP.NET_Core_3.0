@@ -1,13 +1,14 @@
-﻿using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Identity;
+﻿using Microsoft.AspNetCore.Identity;
+using System.Linq;
+using OnlineShopWebApp.Helpers;
+using System.Collections.Generic;
 using Microsoft.AspNetCore.Mvc;
-using OnlineShop.Db;
 using OnlineShop.Db.Models;
 using OnlineShopWebApp.Areas.Admin.Models;
 using OnlineShopWebApp.Models;
 using System;
-using System.Linq;
-using OnlineShopWebApp.Helpers;
+using Microsoft.AspNetCore.Authorization;
+using OnlineShop.Db;
 
 namespace OnlineShopWebApp.Areas.Admin.Controllers
 {
@@ -16,16 +17,24 @@ namespace OnlineShopWebApp.Areas.Admin.Controllers
     public class UserController : Controller
     {
         private readonly UserManager<User> userManager;
+        private readonly RoleManager<IdentityRole> roleManager;
 
-        public UserController(UserManager<User> userManager)
+        public UserController(UserManager<User> userManager, RoleManager<IdentityRole> roleManager)
         {
             this.userManager = userManager;
+            this.roleManager = roleManager;
         }
 
         public IActionResult Index()
         {
             var users = userManager.Users.ToList();
-            var userViewModels = users.ToUserViewModels();
+            var userViewModels = new List<UserViewModel>();
+            foreach (var user in users)
+            {
+                var userRoles = userManager.GetRolesAsync(user).Result;
+                var userViewModel = user.ToUserViewModel(userRoles);
+                userViewModels.Add(userViewModel);
+            }
             return View(userViewModels);
         }
 
@@ -50,7 +59,8 @@ namespace OnlineShopWebApp.Areas.Admin.Controllers
         public IActionResult GetInfoUser(Guid id)
         {
             var user = userManager.FindByIdAsync(id.ToString()).Result;
-            var userViewModel = user.ToUserViewModel();
+            var userRoles = userManager.GetRolesAsync(user).Result;
+            var userViewModel = user.ToUserViewModel(userRoles);
             return View(userViewModel);
         }
 
@@ -95,6 +105,7 @@ namespace OnlineShopWebApp.Areas.Admin.Controllers
 
                 user.FirstName = model.FirstName;
                 user.LastName = model.LastName;
+                user.UserName = model.Email;
                 user.Email = model.Email;
                 user.PhoneNumber = model.Phone;
 
@@ -109,6 +120,47 @@ namespace OnlineShopWebApp.Areas.Admin.Controllers
             var user = userManager.FindByIdAsync(id.ToString()).Result;
             userManager.DeleteAsync(user).Wait();
             return RedirectToAction("Index");
+        }
+
+        public IActionResult EditRights(string id)
+        {
+            var user = userManager.FindByIdAsync(id).Result;
+
+            if (user != null)
+            {
+                var userRoles = userManager.GetRolesAsync(user).Result;
+                var allRoles = roleManager.Roles.ToList();
+                var roleViewModel = new RoleViewModel
+                {
+                    UserId = user.Id,
+                    UserEmail = user.Email,
+                    UserRoles = userRoles,
+                    AllRoles = allRoles
+                };
+                return View(roleViewModel);
+            }
+            return View();
+        }
+
+        [HttpPost]
+        public IActionResult EditRights(string userId, List<string> roles)
+        {
+            if (ModelState.IsValid)
+            {
+                var user = userManager.FindByIdAsync(userId).Result;
+                if (user != null)
+                {
+                    var userRoles = userManager.GetRolesAsync(user).Result;
+                    //var allRoles = roleManager.Roles.ToList();
+                    var addedRoles = roles.Except(userRoles);
+                    var removedRoles = userRoles.Except(roles);
+
+                    userManager.AddToRolesAsync(user, addedRoles).Wait();
+                    userManager.RemoveFromRolesAsync(user, removedRoles).Wait();
+                    return RedirectToAction("Index");
+                }
+            }
+            return View();
         }
     }
 }

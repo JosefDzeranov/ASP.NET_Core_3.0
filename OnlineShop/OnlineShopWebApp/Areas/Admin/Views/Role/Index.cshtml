@@ -1,7 +1,7 @@
 ﻿@using OnlineShopWebApp.Areas.Admin.Models
 @using System.Collections.Generic;
 
-@model List<Role>
+@model List<RoleViewModel>
 
 @{
     ViewData["Title"] = "Роли";
@@ -26,12 +26,13 @@
                                 <td>@(i+1)</td>
                                 <td>@Model[i].Name</td>
                                 <td>
-                                    <a asp-area="Admin" asp-controller="Role" asp-action="DeleteRole" asp-route-name="@Model[i].Name" class="btn btn-danger">Удалить</a>
+                                    <a asp-area="Admin" asp-controller="Role" asp-action="Edit" asp-route-id="@Model[i].Id" class="btn btn-danger">Редактировать</a>
+                                    <a asp-area="Admin" asp-controller="Role" asp-action="Delete" asp-route-id="@Model[i].Id" class="btn btn-danger">Удалить</a>
                                 </td>
                             </tr>
                         }
                         <tr>
-                            <td colspan="4"><a asp-area="Admin" asp-controller="Role" asp-action="AddRole" class="btn btn-primary">Добавить</a></td>
+                            <td colspan="4"><a asp-area="Admin" asp-controller="Role" asp-action="Add" class="btn btn-primary">Добавить</a></td>
                         </tr>
                     </table>
                 </div>

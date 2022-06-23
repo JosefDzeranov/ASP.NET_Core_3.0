@@ -73,8 +73,6 @@ namespace OnlineShopWebApp.Controllers
                     {
                         ModelState.AddModelError(string.Empty, error.Description);
                     }
-                    //ModelState.AddModelError("Email", "Пользователь с таким адресом эл.почты уже зарегистрирован!");
-                    //return View(signup);
                 }
             }
 
