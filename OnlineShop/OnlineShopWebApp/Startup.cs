@@ -8,9 +8,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Options;
 using OnlineShop.Db;
 using OnlineShop.Db.Models;
-using OnlineShopWebApp.Interface;
 using OnlineShopWebApp.Models;
-using OnlineShopWebApp.Services;
 using Serilog;
 using System;
 
