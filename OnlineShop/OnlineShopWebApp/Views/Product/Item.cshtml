@@ -17,8 +17,7 @@
     <a class="btn btn-outline-light btn-sm" role="button"
        asp-area=""
        asp-controller="Home"
-       asp-action="Index"
->
+       asp-action="Index">
         Back to catalog
     </a>
     <a class="btn btn-outline-warning btn-sm" role="button"
@@ -28,6 +27,26 @@
        asp-route-productId="@Model.Id">
         Add to Cart
     </a>
+
+    <a class="btn btn-outline-warning btn-sm" role="button"
+       asp-area=""
+       asp-controller="Scene"
+       asp-action="Index">
+        Magic
+    </a>
+
+
+
+
 </div>
 
+<div class="col-8">
 
+    @* https://threejs.org/docs/index.html#manual/en/introduction/Creating-a-scene *@
+</div>
+
+<div class="col-lg-8 col-md-8">
+    <div id="Scene"></div>
+
+
+</div>
