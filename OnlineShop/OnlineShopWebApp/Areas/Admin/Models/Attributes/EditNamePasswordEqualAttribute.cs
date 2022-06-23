@@ -1,5 +1,4 @@
-﻿using OnlineShopWebApp.Models;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 
 namespace OnlineShopWebApp.Areas.Admin.Models.Attributes
 {
@@ -7,15 +6,17 @@ namespace OnlineShopWebApp.Areas.Admin.Models.Attributes
     {
         public override bool IsValid(object value)
         {
-            SignupViewModel data = (SignupViewModel)value;
+            ChangePasswordViewModel data = (ChangePasswordViewModel)value;
 
-            if (data.FirstName == data.Password)
+            if (data.FirstName == data.NewPassword)
+
+                if (data.FirstName == data.NewPassword)
             {
                 ErrorMessage = "Имя и пароль не могут совпадать";
                 return false;
             }
 
-            if (data.LastName == data.Password)
+            if (data.LastName == data.NewPassword)
             {
                 ErrorMessage = "Фамилия и пароль не могут совпадать";
                 return false;

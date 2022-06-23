@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using OnlineShop.Db.Models;
+using OnlineShopWebApp.Helpers;
 using OnlineShopWebApp.Models;
 
 namespace OnlineShopWebApp.Controllers
@@ -9,7 +10,6 @@ namespace OnlineShopWebApp.Controllers
     public class AccountController : Controller
     {
         private readonly UserManager<User> userManager;
-
         private readonly SignInManager<User> signInManager;
 
         public AccountController(UserManager<User> userManager, SignInManager<User> signInManager)
@@ -37,8 +37,12 @@ namespace OnlineShopWebApp.Controllers
                     }
                     else
                     {
-                        ModelState.AddModelError("", "Неверный пароль!");
+                        return RedirectToAction(nameof(HomeController.Index), "Home");
                     }
+                }
+                else
+                {
+                    ModelState.AddModelError("", "Неверный пароль!");
                 }
             }
             return View(signin);
@@ -54,12 +58,7 @@ namespace OnlineShopWebApp.Controllers
         {
             if (ModelState.IsValid)
             {
-                var user = new User
-                {
-                    FirstName = signup.FirstName,
-                    LastName = signup.LastName,
-                    Email = signup.Email
-                };
+                var user = signup.ToUser();
 
                 var result = userManager.CreateAsync(user, signup.Password).Result;
 

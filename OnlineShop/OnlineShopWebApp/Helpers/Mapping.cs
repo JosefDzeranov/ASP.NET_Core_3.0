@@ -1,5 +1,7 @@
 ﻿using OnlineShop.Db.Models;
+using OnlineShopWebApp.Areas.Admin.Models;
 using OnlineShopWebApp.Models;
+using System;
 using System.Collections.Generic;
 
 namespace OnlineShopWebApp.Helpers
@@ -9,14 +11,10 @@ namespace OnlineShopWebApp.Helpers
         public static ProductViewModel ToProductViewModel(this Product product)
         {
             var productViewModel = new ProductViewModel
-            
             {
                 Id = product.Id,
-
                 ImagePath = product.ImagePath,
-
                 Name = product.Name,
-
                 Cost = product.Cost,
                 Description = product.Description,
                 Available = product.Available
@@ -31,8 +29,7 @@ namespace OnlineShopWebApp.Helpers
             
             foreach (var product in products)
             {
-                var productViewModel = product.ToProductViewModel();
-                
+                var productViewModel = product.ToProductViewModel();             
                 productViewModels.Add(productViewModel);
             }
             
@@ -42,14 +39,10 @@ namespace OnlineShopWebApp.Helpers
         public static Product ToProduct(this ProductViewModel productViewModel)
         {
             var product = new Product
-            
             {
                 Id = productViewModel.Id,
-
                 ImagePath = productViewModel.ImagePath,
-
                 Name = productViewModel.Name,
-
                 Cost = productViewModel.Cost,
                 Description = productViewModel.Description,
                 Available = productViewModel.Available
@@ -61,12 +54,9 @@ namespace OnlineShopWebApp.Helpers
         public static CartItemViewModel ToCartItemViewModel(this CartItem cartItem)
         {
             var CartItemViewModel = new CartItemViewModel
-            
             {
                 ItemId = cartItem.ItemId,
-
                 Product = cartItem.Product,
-
                 Count = cartItem.Count
             };
             
@@ -115,9 +105,7 @@ namespace OnlineShopWebApp.Helpers
             var contactsDeliveryViewModel = new DeliveryInfoViewModel
             {
                 Address = DeliveryInfo.Address.ToAddressViewModel(),
-
                 Phone = DeliveryInfo.Phone,
-
                 Email = DeliveryInfo.Email
             };
             
@@ -129,15 +117,10 @@ namespace OnlineShopWebApp.Helpers
             var address = new Address
             {
                 ZipCode = addressViewModel.ZipCode,
-
                 Country = addressViewModel.Country,
-
                 City = addressViewModel.City,
-
                 Street = addressViewModel.Street,
-
                 House = addressViewModel.House,
-
                 Apartment = addressViewModel.Apartment
 
             };
@@ -150,17 +133,11 @@ namespace OnlineShopWebApp.Helpers
             var AddressViewModel = new AddressViewModel
             {
                 ZipCode = address.ZipCode,
-
                 Country = address.Country,
-
                 City = address.City,
-
                 Street = address.Street,
-
                 House = address.House,
-
                 Apartment = address.Apartment
-
             };
             
             return AddressViewModel;
@@ -169,13 +146,10 @@ namespace OnlineShopWebApp.Helpers
         public static UserDeliveryInfo ToContactsDelivery(this DeliveryInfoViewModel contactsDeliveryViewModel)
         {
             var address = contactsDeliveryViewModel.Address.ToAddress();
-
             var contactsInfo = new UserDeliveryInfo
             {
                 Address = address,
-
                 Phone = contactsDeliveryViewModel.Phone,
-
                 Email = contactsDeliveryViewModel.Email
             };
             
@@ -187,13 +161,9 @@ namespace OnlineShopWebApp.Helpers
             var orderViewModel = new OrderViewModel
             {
                 Id = order.Id,
-
                 OrderDateTime = order.Date,
-
                 State = (OrderStateViewModel)order.State,
-
                 //DeliveryInfo = order.DeliveryInfo,
-
                 Items = order.Items.ToCartItemViewModels()
             };
 
@@ -207,11 +177,46 @@ namespace OnlineShopWebApp.Helpers
             foreach (var order in orders)
             {
                 var orderViewModel = order.ToOrderViewModel();
-
                 orderViewModels.Add(orderViewModel);
             }
-
             return orderViewModels;
+        }
+
+        public static UserViewModel ToUserViewModel(this User user)
+        {
+            var userViewModel = new UserViewModel
+            {
+                Id = Guid.Parse(user.Id),
+                FirstName = user.FirstName,
+                LastName = user.LastName,
+                Phone = user.PhoneNumber,
+                Email = user.Email
+            };
+            return userViewModel;
+        }
+
+        public static List<UserViewModel> ToUserViewModels(this List<User> users)
+        {
+            var userViewModels = new List<UserViewModel>();
+            foreach (var user in users)
+            {
+                var userViewModel = user.ToUserViewModel();
+                userViewModels.Add(userViewModel);
+            }
+            return userViewModels;
+        }
+
+        public static User ToUser(this SignupViewModel signup)
+        {
+            var user = new User
+            {
+                FirstName = signup.FirstName,
+                LastName = signup.LastName,
+                UserName = signup.Email,
+                Email = signup.Email,
+                PhoneNumber = signup.Phone
+            };
+            return user;
         }
     }
 }
