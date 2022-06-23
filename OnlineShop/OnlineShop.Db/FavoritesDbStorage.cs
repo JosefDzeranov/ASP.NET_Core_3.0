@@ -52,5 +52,15 @@ namespace OnlineShopWebApp
             _databaseContext.FavoriteProducts.RemoveRange(favoriteProducts);
             _databaseContext.SaveChanges();
         }
+
+        public void ChangeUserId(string tempUserId, string currentUserId)
+        {
+            var favoriteProducts = _databaseContext.FavoriteProducts.Where(cp => cp.UserId == tempUserId).ToList();
+            foreach (var fp in favoriteProducts)
+            {
+                fp.UserId = currentUserId;
+            }
+            _databaseContext.SaveChanges();
+        }
     }
 }
