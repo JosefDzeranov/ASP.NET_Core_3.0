@@ -212,15 +212,15 @@ namespace OnlineShopWebApp.Helpers
             return userViewModels;
         }
 
-        public static User ToUser(this SignupViewModel signup)
+        public static User ToUser(this SignupViewModel model)
         {
             var user = new User
             {
-                FirstName = signup.FirstName,
-                LastName = signup.LastName,
-                UserName = signup.Email,
-                Email = signup.Email,
-                PhoneNumber = signup.Phone
+                FirstName = model.FirstName,
+                LastName = model.LastName,
+                UserName = model.Email,
+                Email = model.Email,
+                PhoneNumber = model.Phone
             };
             return user;
         }

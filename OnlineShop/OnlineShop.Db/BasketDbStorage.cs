@@ -89,5 +89,12 @@ namespace OnlineShop.Db
             _databaseContext.Baskets.Remove(basket);
             _databaseContext.SaveChanges();
         }
+
+        public void ChangeUserId(string tempUserId, string currentUserId)
+        {
+            var basket = TryGetByUserId(tempUserId);
+            basket.UserId = currentUserId;
+            _databaseContext.SaveChanges();
+        }
     }
 }
