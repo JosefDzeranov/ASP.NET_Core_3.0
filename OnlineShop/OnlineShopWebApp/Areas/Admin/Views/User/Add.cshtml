@@ -1,31 +1,29 @@
 ﻿@using OnlineShopWebApp.Models
 @using OnlineShopWebApp.Models.Attributes;
 
-@model SignUp
+@model SignupViewModel
 
 @{
     ViewData["Title"] = "Добавление пользователя";
 }
 <div class="container align-content-center">
     <div class="row">
-        <div class="col-2">
-            @await Html.PartialAsync("AdminPanel")
-        </div>
+        @await Html.PartialAsync("AdminPanel")
         <div class="col-5">
-            <h2>Add user</h2>
+            <h2>Добавление пользователя</h2>
             <form asp-controller="User" asp-action="Signup">
                 <div class="validation" asp-validation-summary="All"></div>
                 <div class="col text-center">
                     <div>
-                        <input class="form-control" asp-for="FirstName" placeholder="First name">
+                        <input class="form-control" asp-for="FirstName" placeholder="Имя">
                         <span asp-validation-for="FirstName"></span>
                     </div>
                     <div>
-                        <input class="form-control" asp-for="LastName" placeholder="Last name">
+                        <input class="form-control" asp-for="LastName" placeholder="Фамилия">
                         <span asp-validation-for="LastName"></span>
                     </div>
                     <div>
-                        <input class="form-control" asp-for="Phone" placeholder="Phone number">
+                        <input class="form-control" asp-for="Phone" placeholder="Телефон">
                         <span asp-validation-for="Phone"></span>
                     </div>
                     <div>
@@ -33,11 +31,11 @@
                         <span asp-validation-for="Email"></span>
                     </div>
                     <div>
-                        <input class="form-control" asp-for="Password" type="password" placeholder="Password">
+                        <input class="form-control" asp-for="Password" type="password" placeholder="Пароль">
                         <span asp-validation-for="Password"></span>
                     </div>
                     <div>
-                        <input class="form-control" asp-for="ConfirmPassword" type="password" placeholder="Confirm password">
+                        <input class="form-control" asp-for="ConfirmPassword" type="password" placeholder="Подтверждение пароля">
                         <span asp-validation-for="ConfirmPassword"></span>
                     </div>
                     <div>

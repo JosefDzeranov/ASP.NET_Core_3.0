@@ -8,6 +8,8 @@ namespace OnlineShop.Db
     {
         List<Product> GetAll();
 
+        List<Product> GetAllAvailable();
+
         Product TryGetProduct(Guid id);
 
         void Delete(Guid Id);

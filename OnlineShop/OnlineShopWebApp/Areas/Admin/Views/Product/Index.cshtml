@@ -1,4 +1,5 @@
-﻿@using OnlineShop.Db.Models
+﻿@using OnlineShopWebApp.Models
+@using System.Collections.Generic;
 
 @model List<ProductViewModel>
 
@@ -14,38 +15,112 @@
             <div class="404">
                 <h2 align="center">Услуг нет.</h2>
                 <img class="card-img-top" src="/images/404.jpg" />
-                 <a href="/Admin/AddProduct">Добавить новый продукт</a>
+                <a href="/Admin/Product/AddProduct">Добавить новый продукт</a>
             </div>
         }
         else
         {
-            <div class="row">
-                <div class="col">
-                     <a href="/Admin/AddProduct">Добавить новый продукт</a>
-                    <table class="table">
-                        <thead>
-                            <tr>
-                                <th>№</th>
-                                <th>Название</th>
-                                <th>Цена (руб.)</th>
-                                <th></th>
-                                <th></th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @foreach (var product in Model)
-                            {
-                                
+                       @*     <h6><a class="nav-link" asp-area="Admin" asp-controller="Product" asp-action="Add">Add new Product</a></h6>
+            <table class="table border-left border-right border-top border-bottom mt-4">
+                <caption>Product list</caption>
+                <thead class="table-light">
+                    <tr>
+                        <th scope="col">№</th>
+                        <th scope="col">Name</th>
+                        <th scope="col">Cost</th>
+                        <th scope="col"></th>
+                        <th scope="col"></th>
+                    </tr>
+                </thead>
+                @for (int i = 0; i < Model.Count; i++)
+                {
+                    string modalId = "removeModal" + (1 + i);
+                    string headerId = "removeModalLabel" + (1 + i);
+
+                    <tbody class="border-top-0">
+                        <tr>
+                            <td>
+                                @(i + 1)
+                            </td>
+                            <td>
+                                <a asp-area="" asp-controller="Product" asp-action="Index" asp-route-id="@Model[i].Id">@Model[i].Name</a>
+                            </td>
+                            <td>
+                                $@Model[i].Cost
+                            </td>
+                            <td>
+                                <div class="btn-group ml-2" role="group" aria-label="Edit/Remove buttons">
+                                    <a class="btn btn-outline-dark btn-sm" role="button"
+                                       asp-area="Admin" asp-controller="Product" asp-action="Edit" asp-route-id="@Model[i].Id">Редактировать</a>
+                                    <!-- Modal -->
+                                    <a class="btn btn-outline-dark btn-sm" role="button" data-toggle="modal"  asp-area="Admin" asp-controller="Product" asp-action="DeleteProduct" asp-route-id="Model[i].Id">Удалить</a>
+                                    <!-- Modal -->
+                                    <div class="modal fade" id="@modalId" data-backdrop="static" tabindex="-1" aria-labelledby="@headerId" aria-hidden="true">
+                                        <div class="modal-dialog modal-dialog-centered">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title" id="@headerId">Удаление продукта...</h5>
+                                                    <button type="button" class="close" data-dismiss="modal" aria-label="close">x</button>
+                                                </div>
+                                                <div class="modal-body text-center">
+                                                    <p>Вы действительно хотите удалить услугу?</p>
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-sm btn-outline-dark" data-dismiss="modal">Отмена</button>
+                                                    <a class="btn btn-sm btn-outline-danger" role="button" asp-area="Admin" asp-controller="Product" asp-action="EditProduct" asp-route-id="@Model[i].Id">Удалить услугу</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </td>
+                            <td>
+                                @if (Model[i].Available)
+                                {
+                                    <span class="text-info">Доступен</span>
+                                }
+                                else
+                                {
+                                    <span class="text-danger">Недоступен</span>
+                                }
+                            </td>
+                        </tr>
+                    </tbody>
+                }
+            </table>
+        </div>
+               
+                
+                -------  *@
+            <div class="container">
+                <div class="row">
+                    <div class="col">
+                        <a href="/Admin/Product/AddProduct">Добавить новый продукт</a>
+                        <table class="table">
+                            <thead>
                                 <tr>
-                                    <td>@(product.Id)</td>
-                                    <td><a href="/product/index/@product.Id">@product.Name</a></td>
-                                    <td>@product.Cost рублей</td>
-                                    <td><a class="btn btn-light" asp-controller="Product" asp-action="EditProduct" asp-route-id="@product.Id" width="20px" role="button">Редактировать</a></td>
-                                    <td><a class="btn btn-light" asp-controller="Product" asp-action="DeleteProduct" asp-route-id="@product.Id" width="20px" role="button">Удалить</a></td>
+                                    <th>№</th>
+                                    <th>Название</th>
+                                    <th>Цена (руб.)</th>
+                                    <th></th>
+                                    <th></th>
                                 </tr>
-                            }
-                        </tbody>
-                    </table>
+                            </thead>
+                            <tbody>
+
+                                @for (int i = 0; i < Model.Count; i++)
+                                {
+                                    <tr>
+                                        <td>@(i + 1)</td>
+                                        <td><a href="/product/index/@Model[i].Id">@Model[i].Name</a></td>
+                                        <td>@Model[i].Cost рублей</td>
+                                        <td><a class="btn btn-light" role="button" asp-area="Admin" asp-controller="Product" asp-action="EditProduct" asp-route-id="@Model[i].Id" width="20px" role="button">Редактировать</a></td>
+                                        <td><a class="btn btn-light" role="button" asp-area="Admin" asp-controller="Product" asp-action="DeleteProduct" asp-route-id="@Model[i].Id" width="20px" role="button">Удалить</a></td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
         }

@@ -1,4 +1,6 @@
-﻿@using OnlineShop.Db.Models
+﻿
+@using OnlineShopWebApp
+@using OnlineShopWebApp.Models
 
 @model CartViewModel
 
@@ -26,7 +28,7 @@ else
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach (var cartItem  in Model.Items)
+                    @foreach (var cartItem in Model.Items)
                     {
                         <tr>
                             <td><img src=@cartItem.Product.ImagePath style="width: 80px; height: 80px;" /></td>
@@ -34,8 +36,12 @@ else
                             <td>@cartItem.Product.Cost</td>
                             <td>@cartItem.Cost</td>
                             <td>@cartItem.Count</td>
-                            <td><a href="/cart/RemoveCountProductCart/?cartItem.productId=@cartItem.Product.Id&cartid=@cartItem.ItemId" type="button" class="btn btn-danger">-</a>
-                                <a href="/cart/add/?cartItem.productId=@cartItem.Product.Id" type="button" class="btn btn-danger">+</a></td>
+                            <td>
+                                <div class="btn-group ml-2" role="group" aria-label="Add/Remove buttons">
+                                    <a class="btn btn-danger" role="button" asp-area="" asp-controller="cart" asp-action="RemoveCountProductCart" asp-route-id="@cartItem.Product.Id">-</a>
+                                    <a class="btn btn-danger" role="button" asp-area="" asp-controller="cart" asp-action="Add" asp-route-id="@cartItem.Product.Id">+</a>
+                                </div>
+                            </td>
                         </tr>
                     }
                 </tbody>
@@ -53,7 +59,7 @@ else
             </div>
             <div class="text-center">
                 <a class="btn btn-dark" href="/home/index" role="button">Продолжить покупки</a>
-                <a class="btn btn-dark" href="/order/OrderMaking" role="button">Оформить заказ</a>
+                <a class="btn btn-dark" role="button" asp-area="" asp-controller="Order" asp-action="Index">Оформить заказ</a>
             </div>
         </div>
     </div>

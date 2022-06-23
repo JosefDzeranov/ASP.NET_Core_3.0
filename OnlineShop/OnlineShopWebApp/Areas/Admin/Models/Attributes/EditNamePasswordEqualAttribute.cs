@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using OnlineShopWebApp.Models;
+using System.ComponentModel.DataAnnotations;
 
 namespace OnlineShopWebApp.Areas.Admin.Models.Attributes
 {
@@ -6,7 +7,7 @@ namespace OnlineShopWebApp.Areas.Admin.Models.Attributes
     {
         public override bool IsValid(object value)
         {
-            ChangePassword data = (ChangePassword)value;
+            SignupViewModel data = (SignupViewModel)value;
 
             if (data.FirstName == data.Password)
             {

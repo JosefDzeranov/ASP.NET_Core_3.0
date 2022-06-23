@@ -17,15 +17,23 @@
                     <li class="nav-item">
                         <a class="nav-link text-dark" role="button" asp-area="" asp-controller="Order" asp-action="Index">Заказы</a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link text-dark" role="button" asp-area="" asp-controller="Account" asp-action="Signin">Войти</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link text-dark" role="button" asp-area="" asp-controller="Account" asp-action="Signup">Регистрация</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link text-dark" role="button" asp-area="Admin" asp-controller="Order" asp-action="Index">Администратор</a>
-                    </li>
+                    @if (User.Identity.IsAuthenticated)
+                    {
+                        <li class="nav-link text-dark">@User.Identity.Name</li>
+                        <li class="nav-link text-dark"><a class="nav-link text-dark" asp-area="" asp-controller="Account" asp-action="Signout">Выйти</a></li>
+                    }
+                    else
+                    {
+                        <a class="btn btn-outline-primary btn-sm text-nowrap mr-2" role="button" asp-area="" asp-controller="Account" asp-action="Signin">Войти</a>
+                        <a class="btn btn-outline-success btn-sm text-nowrap" role="button" asp-area="" asp-controller="Account" asp-action="Signup">Регистрация</a>
+                    }
+                    @if (User.IsInRole(Constants.AdminRoleName))
+                    {
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" role="button" asp-area="Admin" asp-controller="Order" asp-action="Index">Администратор</a>
+                        </li>
+                    }
+                    <li class="nav-item"><a class="nav-link text-dark" role="button" asp-area="" asp-controller="Favorite" asp-action="Index">Избранное</a></li>
                 </ul>
             </div>
         </div>

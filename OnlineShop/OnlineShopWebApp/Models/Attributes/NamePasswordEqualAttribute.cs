@@ -9,7 +9,7 @@ namespace OnlineShopWebApp.Models.Attributes
     {
         public override bool IsValid(object value)
         {
-            SignUp data = (SignUp)value;
+            SignupViewModel data = (SignupViewModel)value;
 
             if (data.FirstName == data.Password)
             {

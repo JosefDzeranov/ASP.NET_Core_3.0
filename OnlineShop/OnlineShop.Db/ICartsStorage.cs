@@ -10,7 +10,7 @@ namespace OnlineShop.Db
 
         void RemoveProduct(Product product, string userId);
 
-        void RemoveCartUser(string userId);
+        void ClearCartUser(string userId);
 
         void RemoveCountProductCart(Product product, string userId);
     }

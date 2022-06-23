@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using OnlineShop.Db;
 using System;
+using OnlineShopWebApp.Helpers;
 
 namespace OnlineShopWebApp.Controllers
 {
@@ -16,7 +17,9 @@ namespace OnlineShopWebApp.Controllers
         {
             var requestedProduct = productsStorage.TryGetProduct(id);
 
-            return View(requestedProduct);
+            var productViewModel = requestedProduct.ToProductViewModel();
+
+            return View(productViewModel);
         }
     }
 }

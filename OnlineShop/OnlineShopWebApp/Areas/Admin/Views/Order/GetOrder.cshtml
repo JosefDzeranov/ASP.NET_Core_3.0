@@ -1,5 +1,6 @@
-﻿@model Order
+﻿@using OnlineShopWebApp.Models
 
+@model OrderViewModel
 
 <div class="row">
     @await Html.PartialAsync("AdminPanel")
@@ -13,7 +14,7 @@
                 </tr>
                 <tr>
                     <td><label>Адрес доставки</label></td>
-                    <td>@Model.Address</td>
+                    <td>@Model.DeliveryInfo</td>
                 </tr>
                 <tr>
                     <td><label>Получатель</label></td>
@@ -40,11 +41,11 @@
                                     @Model.State
                                 </button>
                                 <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                                    <li><a class="dropdown-item" asp-controller="Order" asp-action="SaveEditedOrder" asp-route-orderId="@Model.Id" asp-route-status="@OrderState.Created">@OrderState.Created</a></li>
-                                    <li><a class="dropdown-item" asp-controller="Order" asp-action="SaveEditedOrder" asp-route-orderId="@Model.Id" asp-route-status="@OrderState.Finish">@OrderState.Finish</a></li>
-                                    <li><a class="dropdown-item" asp-controller="Order" asp-action="SaveEditedOrder" asp-route-orderId="@Model.Id" asp-route-status="@OrderState.Delivering">@OrderState.Delivering</a></li>
-                                    <li><a class="dropdown-item" asp-controller="Order" asp-action="SaveEditedOrder" asp-route-orderId="@Model.Id" asp-route-status="@OrderState.Delivered">@OrderState.Delivered</a></li>
-                                    <li><a class="dropdown-item" asp-controller="Order" asp-action="SaveEditedOrder" asp-route-orderId="@Model.Id" asp-route-status="@OrderState.Canceled">@OrderState.Canceled</a></li>
+                                    <li><a class="dropdown-item" asp-controller="Order" asp-action="SaveEditedOrder" asp-route-orderId="@Model.Id" asp-route-status="@OrderStateViewModel.Created">@OrderStateViewModel.Created</a></li>
+                                    <li><a class="dropdown-item" asp-controller="Order" asp-action="SaveEditedOrder" asp-route-orderId="@Model.Id" asp-route-status="@OrderStateViewModel.Finish">@OrderStateViewModel.Finish</a></li>
+                                    <li><a class="dropdown-item" asp-controller="Order" asp-action="SaveEditedOrder" asp-route-orderId="@Model.Id" asp-route-status="@OrderStateViewModel.Delivering">@OrderStateViewModel.Delivering</a></li>
+                                    <li><a class="dropdown-item" asp-controller="Order" asp-action="SaveEditedOrder" asp-route-orderId="@Model.Id" asp-route-status="@OrderStateViewModel.Delivered">@OrderStateViewModel.Delivered</a></li>
+                                    <li><a class="dropdown-item" asp-controller="Order" asp-action="SaveEditedOrder" asp-route-orderId="@Model.Id" asp-route-status="@OrderStateViewModel.Canceled">@OrderStateViewModel.Canceled</a></li>
                                 </ul>
                             </div>
                     </td>

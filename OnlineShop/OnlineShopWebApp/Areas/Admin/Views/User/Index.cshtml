@@ -9,14 +9,11 @@
 
 <div class="container">
     <div class="row">
-        <div class="col-2">
-            @await Html.PartialAsync("AdminPanel")
-        </div>
+        @await Html.PartialAsync("AdminPanel")
         <div class="col-6">
-            <h2>Users</h2>
+            <h2>Список пользователей</h2>
             <h6><a class="nav-link" asp-area="Admin" asp-controller="User" asp-action="Add">Добавить нового пользователя</a></h6>
             <table class="table border-left border-right border-top border-bottom mt-4">
-                <caption>User list</caption>
                 <thead class="table-light">
                     <tr>
                         <th scope="col">№</th>
@@ -32,7 +29,7 @@
                                 @(i + 1)
                             </td>
                             <td>
-                                <a asp-area="Admin" asp-controller="User" asp-action="Details" asp-route-id="@Model[i].Id">@Model[i].Email</a>
+                                <a asp-area="Admin" asp-controller="User" asp-action="GetInfoUser" asp-route-id="@Model[i].Id">@Model[i].Email</a>
                             </td>
                             <td>
                                 @Model[i].Role

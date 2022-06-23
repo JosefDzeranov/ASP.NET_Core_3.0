@@ -1,11 +1,15 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using OnlineShop.Db;
-using OnlineShopWebApp.Models;
+using OnlineShop.Db.Models;
+using OnlineShopWebApp.Interface;
 using System;
 
 namespace OnlineShopWebApp.Areas.Admin.Controllers
 {
-    [Area("Admin")]
+    [Area(Constants.AdminRoleName)]
+    [Authorize(Roles = Constants.AdminRoleName)]
+
     public class OrderController : Controller
     {
         private readonly IOrdersStorage ordersStorage;
@@ -22,7 +26,11 @@ namespace OnlineShopWebApp.Areas.Admin.Controllers
         {
             var existingOrders = ordersStorage.TryGetOrderAllByUserId(Constants.UserId);
 
-            return View(existingOrders);
+            if (existingOrders.Count > 0)
+            {
+                return View(existingOrders);
+            }
+            return View();
         }
 
         public IActionResult GetOrder()

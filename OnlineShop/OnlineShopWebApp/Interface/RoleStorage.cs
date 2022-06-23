@@ -7,7 +7,7 @@ namespace OnlineShopWebApp
     public class RoleStorage : IRoleStorage
     {
         private List<Role> roles = new List<Role>();
-        public void Add(Role role)
+        public void AddRole(Role role)
         {
             roles.Add(role);
         }
@@ -17,7 +17,7 @@ namespace OnlineShopWebApp
             return roles;
         }
 
-        public void Remove(string Name)
+        public void DeleteRole(string Name)
         {
             roles.RemoveAll(x => x.Name == Name);
         }

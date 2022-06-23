@@ -1,0 +1,61 @@
+﻿@using OnlineShop.Db.Models
+
+@model List<Product>
+
+@{
+    ViewData["Title"] = "Избранное";
+}
+@if (Model != null)
+{
+    <div class="container">
+        <div class="row">
+            <div class="col-12 mb-4">
+                <h2>Избранное</h2>
+            </div>
+            @foreach (var item in Model)
+            {
+                <div class="col-4 mb-4">
+                    <img class="img-thumbnail mb-2" src="@item.ImagePath" alt="@item.Name">
+                    <a style="color: darkblue"
+               asp-controller="Product" asp-action="Index" asp-route-id="@item.Id"><h5>@item.Name</h5></a>
+                    <h6>$@item.Cost</h6>
+                    <div class="row justify-content-between">
+                        <div class="col-auto text-left">
+                            <a class="btn btn-outline-dark btn-sm text-nowrap" role="button"
+                       asp-controller="Cart" asp-action="Add" asp-route-id="@item.Id">Добавить в корзину</a>
+                        </div>
+                        <div class="col-auto text-right">
+                            <a class="btn btn-outline-dark btn-sm text-nowrap" role="button"
+                       asp-controller="Favorite" asp-action="Remove" asp-route-id="@item.Id">Удалить</a>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+        <div class="row mt-4">
+            <div class="col-6 text-right">
+                <a class="btn btn-outline-dark btn-sm text-nowrap" role="button" href="/">Продолжить</a>
+            </div>
+            <div class="col-6 text-left">
+                <a class="btn btn-outline-dark btn-sm text-nowrap" role="button"
+               asp-controller="Favorite" asp-action="Clear">Очистить</a>
+            </div>
+        </div>
+    </div>
+}
+else
+{
+    <div class="container">
+        <h2 class="mb-3">Избранное</h2>
+        <div class="row">
+            <div class="col text-center">
+                <p>У Вас сейчас нет услуг в избранном!</p>
+                <div class="row mt-4 justify-content-center">
+                    <div class="col-2">
+                        <a class="btn btn-outline-dark btn-sm text-nowrap active" href="/" role="button">Продолжить</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}

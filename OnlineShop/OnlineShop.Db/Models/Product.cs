@@ -11,6 +11,7 @@ namespace OnlineShop.Db.Models
 
         public string Name { get; set; }
 
+        //[Column(TypeName = "decimal(18, 2)")]
         public decimal Cost { get; set; }
 
         public string Description { get; set; }
@@ -19,8 +20,21 @@ namespace OnlineShop.Db.Models
 
         public List<CartItem> CartItems { get; set; }
 
+        public bool Available { get; set; }
+
         public Product()
         {
+            CartItems = new List<CartItem>();
+        }
+
+        public Product(string name, decimal cost, string description, string imagePath)
+        {
+            Id = Guid.NewGuid();
+            ImagePath = imagePath;
+            Name = name;
+            Cost = cost;
+            Description = description;
+            Available = true;
             CartItems = new List<CartItem>();
         }
     }

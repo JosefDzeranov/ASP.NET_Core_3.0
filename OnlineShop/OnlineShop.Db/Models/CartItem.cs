@@ -7,8 +7,11 @@ namespace OnlineShop.Db.Models
     {
         [Key]
         public Guid ItemId { get; set; }
+
         public Product Product { get; set; }
+
         public int Count { get; set; }
+
         public decimal Cost
         {
             get
@@ -16,6 +19,5 @@ namespace OnlineShop.Db.Models
                 return Product.Cost * Count;
             }
         }
-        public Cart Cart { get; set; }
     }
 }

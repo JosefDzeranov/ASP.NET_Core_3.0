@@ -1,39 +1,24 @@
-﻿@using OnlineShopWebApp.ViewModels
+﻿@using OnlineShop.Db.Models
 
-@model OrderViewModel
+@model UserDeliveryInfo
 @{
     ViewData["Title"] = "Страница оформления заказа";
 }
 
 <h2 align="center">Оформление заказа</h2>
 
-@if (Model.Order != null)
+@if (Model != null)
 {
     <form method="post" asp-controller="Order" asp-action="Add">
         <div class="row">
             <div class="col text-center">
                 <div class="validation" asp-validation-summary="All"></div>
                 <div>
-                    <label asp-for="Order.Name">Имя</label>
-                    <div>
-                        <input asp-for="Order.Name" name="Name" required minlength="2" maxlength="25" />
-                        <span asp-validation-for="Order.Name"></span>
-                    </div>
-
-                </div>
-                <div>
-                    <label asp-for="Order.LastName">Фамилия</label>
-                    <div>
-                        <input asp-for="Order.LastName" name="lastname" required minlength="2" maxlength="25" />
-                        <span asp-validation-for="Order.LastName"></span>
-                    </div>
-                </div>
-                <div>
                     <label>E-mail</label>
                     <div>
-                        <input type="email" name="mail" required />
+                        <input asp-for="Email" name="Email" type="email" required />
                         <div>
-                            <span asp-validation-for="Order.Mail"></span>
+                            <span asp-validation-for="Email"></span>
                         </div>
                     </div>
                 </div>
@@ -42,51 +27,23 @@
                     <div>
                         <input type="tel" pattern="\d{4}-\d{3}-\d{4}" name="phone" required />
                         <div>
-                            <span asp-validation-for="Order.Phone"></span>
+                            <span asp-validation-for="Phone"></span>
                         </div>
                     </div>
                 </div>
                 <div>
                     <label>Адрес</label>
                     <div>
-                        <input type="text" name="address" required />
+                        <input asp-for="Address" name="Address" type="text" required minlength="2" maxlength="25" />
                         <div>
-                            <span asp-validation-for="Order.Address"></span>
+                            <span asp-validation-for="Address"></span>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-        <div>
-            <br/>
-            <h4 align="left">Детали заказа</h4>
-            <div class="row">
-                <table class="table">
-                    <tr>
-                        <th>Название</th>
-                        <th>Цена руб.</th>
-                        <th>Количество</th>
-                        <th>Стоимость руб.</th>
-                    </tr>
-                    @foreach (var Item in Model.Cart.Items)
-                    {
-                        <tr>
-                            <td>@Item.Product.Name</td>
-                            <td>@Item.Product.Cost</td>
-                            <td>@Item.Count</td>
-                            <td>@Item.Cost</td>
-                        </tr>
-                    }
-                </table>
-            </div>
-        </div>
-        <div class="text-right">
-            <h4>Итоговая сумма: @Model.Cart.Cost руб.</h4>
-        </div>
-        <div>
-            <input type="submit" class="btn btn-dark" value="Оформить заказ" />
-        </div>
     </form>
+
     <div>
         @Html.ActionLink("Назад в корзину", "Index", "Cart")
     </div>

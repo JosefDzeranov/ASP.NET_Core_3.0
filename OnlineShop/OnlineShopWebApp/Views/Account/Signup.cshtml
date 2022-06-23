@@ -1,14 +1,15 @@
 ﻿@using OnlineShopWebApp.Models
 
-@model SignUp
+@model SignupViewModel
 
 <h2 align="center">Вход</h2>
 
-@if (Model == null)
+@if (Model != null)
 {
     <div>
-        <form method="post" role="form" asp-action="Signup" asp-controller="Account">
-            <div class="validation" asp-validation-summary="All" ></div>
+        <form method="post">
+            <div class="validation" asp-validation-summary="All"></div>
+            <input type="hidden" name="returnUrl" value="@Model.ReturnUrl" />
             <div class="form-group">
                 <label asp-for="FirstName">Имя</label><br />
                 <input asp-for="FirstName" name="FirstName" class="form-control" required minlength="3" maxlength="25">

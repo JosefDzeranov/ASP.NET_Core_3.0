@@ -1,10 +1,18 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Options;
 using OnlineShop.Db;
+using OnlineShop.Db.Models;
+using OnlineShopWebApp.Interface;
+using OnlineShopWebApp.Models;
+using OnlineShopWebApp.Services;
 using Serilog;
+using System;
 
 namespace OnlineShopWebApp
 {
@@ -27,19 +35,40 @@ namespace OnlineShopWebApp
             services.AddDbContext<DatabaseContext>(options =>
                     options.UseSqlServer(connection));
 
+            // Добавляем контекст IdentityContext в качестве сервиса в приложение
+            services.AddDbContext<IdentityContext>(options =>
+                    options.UseSqlServer(connection));
+
+            services.AddIdentity<User, IdentityRole>() //указываем тип хранилища и привязываем пользователя к роли
+                    .AddEntityFrameworkStores<IdentityContext>(); //устанваливаем контекст
+
+            // настройки кук
+            services.ConfigureApplicationCookie(options =>
+            {
+                options.ExpireTimeSpan = TimeSpan.FromHours(4);
+                options.LoginPath = "/Account/SignIn"; //перенаправление при входе
+                options.LogoutPath = "/Account/SignOut"; //перенаправление при выходе
+                options.Cookie = new CookieBuilder
+                {
+                    IsEssential = true //куки обязательны в каждом запросе
+                };
+            });
+
             services.AddControllersWithViews();
 
-            services.AddTransient<IProductsStorage, ProductsDbStorage>(); 
+            services.AddTransient<IProductsStorage, ProductsDbStorage>();
 
             services.AddTransient<ICartsStorage, CartsDbStorage>();
 
-            services.AddSingleton<IUserStorage, UserStorage>();
+            services.AddTransient<IOrdersStorage, OrdersDbStorage>();
 
-            services.AddSingleton<IOrdersStorage, OrdersStorage>();
+            services.AddTransient<IFavoriteStorage, FavoriteDbStorage>();
 
             services.AddSingleton<IRoleStorage, RoleStorage>();
 
-            services.AddControllersWithViews(); 
+            services.AddSingleton<IUserStorage, UserStorage>();
+
+            services.AddControllersWithViews();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -47,11 +76,18 @@ namespace OnlineShopWebApp
         {
             app.UseSerilogRequestLogging();
 
+            app.UseHttpsRedirection();
+
             app.UseStaticFiles();
 
             app.UseRouting();
 
-            app.UseAuthorization();
+            app.UseAuthentication(); //аутентификация - кто зашел на сайт (авторизован или нет)
+             
+            app.UseAuthorization(); //авторизация (какой пользователь авторизован - с каким именем/ролью)
+
+            var localizationOptions = app.ApplicationServices.GetService<IOptions<RequestLocalizationOptions>>().Value;
+            app.UseRequestLocalization(localizationOptions);
 
             app.UseEndpoints(endpoints =>
             {

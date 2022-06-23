@@ -20,7 +20,7 @@ namespace OnlineShopWebApp.Controllers
 
         public IActionResult Index()
         {
-            var products = productsDbStorage.GetAll();
+            var products = productsDbStorage.GetAllAvailable();
 
             var productsViewModels = new List<ProductViewModel>();
             foreach (var product in products)

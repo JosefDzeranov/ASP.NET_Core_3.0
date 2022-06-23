@@ -1,9 +1,12 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
+using OnlineShop.Db;
 using OnlineShopWebApp.Areas.Admin.Models;
 
 namespace OnlineShopWebApp.Areas.Admin.Controllers
 {
-    [Area("Admin")]
+    [Area(Constants.AdminRoleName)]
+    [Authorize(Roles = Constants.AdminRoleName)]
     public class RoleController : Controller
     {
         private readonly IRoleStorage roleStorage;
@@ -19,13 +22,13 @@ namespace OnlineShopWebApp.Areas.Admin.Controllers
             return View(roles);
         }
 
-        public IActionResult Add()
+        public IActionResult AddRole()
         {
             return View();
         }
 
         [HttpPost]
-        public IActionResult Add(Role role)
+        public IActionResult AddRole(Role role)
         {
             if (roleStorage.TryGet(role.Name) != null)
             {
@@ -33,16 +36,16 @@ namespace OnlineShopWebApp.Areas.Admin.Controllers
             }
             if (ModelState.IsValid)
             {
-                roleStorage.Add(role);
+                roleStorage.AddRole(role);
                 return RedirectToAction("Index", "Role");
             }
 
             return View(role);
         }
 
-        public IActionResult Remove(string name)
+        public IActionResult DeleteRole(string name)
         {
-            roleStorage.Remove(name);
+            roleStorage.DeleteRole(name);
 
             return RedirectToAction("Index", "Role");
         }

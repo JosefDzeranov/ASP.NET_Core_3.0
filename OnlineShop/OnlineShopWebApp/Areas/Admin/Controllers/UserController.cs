@@ -1,22 +1,28 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using OnlineShopWebApp.Areas.Admin.Models;
 using OnlineShopWebApp.Models;
-using System;
+using OnlineShopWebApp.Areas.Admin.Models;
+using OnlineShopWebApp.Interface;
+using OnlineShop.Db;
+using Microsoft.AspNetCore.Authorization;
 
 namespace OnlineShopWebApp.Areas.Admin.Controllers
 {
-    [Area("Admin")]
+    [Area(Constants.AdminRoleName)]
+    [Authorize(Roles = Constants.AdminRoleName)]
     public class UserController : Controller
     {
-        private readonly IUserStorage _userStorage;
+        private readonly IUserStorage userStorage;
+
         public UserController(IUserStorage userStorage)
         {
-            _userStorage = userStorage;
+            this.userStorage = userStorage;
         }
 
         public IActionResult Index()
         {
-            var users = _userStorage.GetAll();
+            var users = userStorage.GetAll();
+
             return View(users);
         }
 
@@ -26,31 +32,35 @@ namespace OnlineShopWebApp.Areas.Admin.Controllers
         }
 
         [HttpPost]
-        public IActionResult Add(SignUp signup)
+        public IActionResult Add(SignupViewModel signup)
         {
             if (ModelState.IsValid)
             {
-                _userStorage.Add(signup);
+                userStorage.Add(signup);
+
                 return RedirectToAction("Index");
             }
             return View();
         }
 
-        public IActionResult Details(Guid id)
+        public IActionResult GetInfoUser(Guid id)
         {
-            var user = _userStorage.TryGetUserById(id);
+            var user = userStorage.TryGetUserById(id);
+
             return View(user);
         }
 
         public IActionResult ChangePassword(Guid id)
         {
-            var user = _userStorage.TryGetUserById(id);
+            var user = userStorage.TryGetUserById(id);
+
             var data = new ChangePassword()
             {
                 Id = user.Id,
                 FirstName = user.FirstName,
                 LastName = user.LastName
             };
+
             return View(data);
         }
 
@@ -59,15 +69,17 @@ namespace OnlineShopWebApp.Areas.Admin.Controllers
         {
             if (ModelState.IsValid)
             {
-                _userStorage.ChangePassword(data);
+                userStorage.ChangePassword(data);
+
                 return View("Success");
             }
+
             return View(data);
         }
 
         public IActionResult Edit(Guid id)
         {
-            var user = _userStorage.TryGetUserById(id);
+            var user = userStorage.TryGetUserById(id);
             return View(user);
         }
 
@@ -76,7 +88,7 @@ namespace OnlineShopWebApp.Areas.Admin.Controllers
         {
             if (ModelState.IsValid)
             {
-                _userStorage.Edit(user);
+                userStorage.Edit(user);
                 return RedirectToAction("Index");
             }
             return View();
@@ -84,7 +96,7 @@ namespace OnlineShopWebApp.Areas.Admin.Controllers
 
         public IActionResult Remove(Guid id)
         {
-            _userStorage.Remove(id);
+            userStorage.Remove(id);
             return RedirectToAction("Index"); ;
         }
     }

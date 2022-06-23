@@ -1,10 +1,13 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using OnlineShop.Db;
+using OnlineShopWebApp.Helpers;
+using OnlineShopWebApp.Interface;
 using OnlineShopWebApp.Models;
-using OnlineShopWebApp.ViewModels;
 
 namespace OnlineShopWebApp.Controllers
 {
+    [Authorize]
     public class OrderController : Controller
     {
         private readonly IOrdersStorage ordersStorage;
@@ -20,27 +23,40 @@ namespace OnlineShopWebApp.Controllers
 
         public IActionResult Index()
         {
-            var order = ordersStorage.TryGetOrderAllByUserId(Constants.UserId);
+            var order = cartsStorage.TryGetByUserId(Constants.UserId);
+            
+            var cartViewModel = order.ToCartViewModel();
+            var orderForm = new OrderFormViewModel
+            {
+                Cart = cartViewModel
+            };
 
-            return View(order);
+            return View(orderForm);
         }
 
-        public IActionResult Add(Order order)
+        [HttpPost]
+        public IActionResult Add(OrderViewModel order)
         {
-            if (ModelState.IsValid)
+            if (!ModelState.IsValid)
             {
-                ordersStorage.Add(order, Constants.UserId);
-                cartsStorage.RemoveCartUser(Constants.UserId);
+                return RedirectToAction("Index");
             }
 
-            return RedirectToAction("OrderComplete");
+            var cart = cartsStorage.TryGetByUserId(Constants.UserId);
+            var deliveryInfo = order.DeliveryInfo.ToContactsDelivery();
+            ordersStorage.Add(Constants.UserId, cart, deliveryInfo);
+
+            cartsStorage.ClearCartUser(Constants.UserId);
+
+            return View();
         }
 
         public IActionResult OrderMaking()
         {
             var existingCart = cartsStorage.TryGetByUserId(Constants.UserId);
 
-            var orderVM = new OrderViewModel();
+            var orderVM = new ViewModels.OrderViewModel();
+            //orderVM.Cart = existingCart;
 
             return View(orderVM);
         }

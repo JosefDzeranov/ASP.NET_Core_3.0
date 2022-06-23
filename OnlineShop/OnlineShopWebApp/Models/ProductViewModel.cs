@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 namespace OnlineShopWebApp.Models
@@ -20,11 +19,6 @@ namespace OnlineShopWebApp.Models
         [Required]
         public string ImagePath { get; set; }
 
-        //public List<CartItemViewModel> CartItems { get; set; }
-
-        //public ProductViewModel()
-        //{
-        //    CartItems = new List<CartItemViewModel>();
-        //}
+        public bool Available { get; set; }
     }
 }

@@ -7,7 +7,7 @@ namespace OnlineShopWebApp
     {
         List<Role> GetAll();
         Role TryGet(string Name);
-        void Add(Role role);
-        void Remove(string Name);
+        void AddRole(Role role);
+        void DeleteRole(string Name);
     }
 }
