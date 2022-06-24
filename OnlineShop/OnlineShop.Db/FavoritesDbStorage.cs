@@ -19,6 +19,7 @@ namespace OnlineShopWebApp
         {
             var favoriteProducts = _databaseContext.FavoriteProducts.Where(fp => fp.UserId == userId)
                                                                     .Include(fp => fp.Product)
+                                                                    .ThenInclude(p => p.Images)
                                                                     .Select(fp => fp.Product)
                                                                     .ToList();
             return favoriteProducts;

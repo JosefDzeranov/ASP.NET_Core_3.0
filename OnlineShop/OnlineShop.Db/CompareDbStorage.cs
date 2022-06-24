@@ -18,6 +18,7 @@ namespace OnlineShop.Db
         {
             var compareProducts = _databaseContext.CompareProducts.Where(cp => cp.UserId == userId)
                                                                   .Include(cp => cp.Product)
+                                                                  .ThenInclude(p => p.Images)
                                                                   .Select(cp => cp.Product)
                                                                   .ToList();
             return compareProducts;

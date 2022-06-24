@@ -42,14 +42,23 @@ namespace OnlineShopWebApp.Helpers
                     Directory.CreateDirectory(folderPath);
                 }
 
-                var fileName = Guid.NewGuid() + "." + file.FileName.Split(".").Last();
-                string path = Path.Combine(folderPath, fileName);
+                var existingFileNames = Directory.GetFiles(folderPath).Select(f => f.Split("\\").Last()).ToArray();
 
-                using (var fileStream = new FileStream(path, FileMode.Create))
+                if (!existingFileNames.Contains(file.FileName))
                 {
-                    file.CopyTo(fileStream);
+                    var fileName = Guid.NewGuid() + "." + file.FileName.Split(".").Last();
+                    string path = Path.Combine(folderPath, fileName);
+
+                    using (var fileStream = new FileStream(path, FileMode.Create))
+                    {
+                        file.CopyTo(fileStream);
+                    }
+                    return "/img/" + folder + "/" + fileName;
                 }
-                return "/img/" + folder + "/" + fileName;
+                else
+                {
+                    return "/img/" + folder + "/" + file.FileName;
+                }
             }
             return null;
         }

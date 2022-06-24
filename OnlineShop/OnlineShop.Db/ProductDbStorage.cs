@@ -56,10 +56,14 @@ namespace OnlineShop.Db
             editProduct.Description = product.Description;
             editProduct.Available = product.Available;
 
-            foreach(var image in product.Images)
+
+            foreach (var image in product.Images)
             {
+                if (image.Product != null)
+                {
                     image.ProductId = product.Id;
-                    _databaseContext.Images.Add(image);           
+                    _databaseContext.Images.Add(image);
+                }
             }
 
             _databaseContext.SaveChanges();
