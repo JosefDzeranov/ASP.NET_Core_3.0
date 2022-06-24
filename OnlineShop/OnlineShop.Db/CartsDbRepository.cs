@@ -22,16 +22,22 @@ namespace OnlineShop.Db
         public Cart Find(string buyerLogin)
         {
             var cart = _databaseContext.Carts
+                .Include(cart => cart.UserDeleveryInfo) // подтянуть данные из таблицы UserDeleveryInfo
                 .Include(cart => cart.CartItems)
                 .ThenInclude(CartItem => CartItem.Product)
                 .FirstOrDefault(Cart => Cart.BuyerLogin == buyerLogin);
             return cart;
         }
 
-        //private UserDeleveryInfo findUserDeleveryInfo(Guid Id)
+        //public UserDeleveryInfo FindUserDeleveryInfo(Guid Id)
         //{
-        //   var userDeleveryInfo = _databaseContext.UserDeleveryInfos.FirstOrDefault(u => u.Id == Id);
-        //   return userDeleveryInfo;
+        //    var userDeleveryInfo =
+        //        _databaseContext.Carts.Include(cart => cart.UserDeleveryInfo);
+
+        //    .Include(cart => cart.CartItems)
+        //    .ThenInclude(CartItem => CartItem.Product)
+        //    .FirstOrDefault(Cart => Cart.BuyerLogin == buyerLogin);
+        //    return userDeleveryInfo;
         //}
 
         public void CreateCartBuyer(string buyerLogin)
@@ -105,7 +111,7 @@ namespace OnlineShop.Db
         public void ClearCart(string buyerLogin)
         {
             var cart = Find(buyerLogin);
-            cart.CartItems.Clear();
+            cart.CartItems = null;
             Save();
         }
 
@@ -126,21 +132,17 @@ namespace OnlineShop.Db
         public void SaveInfoBuying(UserDeleveryInfo userDeleveryInfo, string buyerLogin)
         {
             var cart = Find(buyerLogin);
-            //_databaseContext.Carts
-            //    .Include(cart => cart.CartItems)
-            //    .ThenInclude(CartItem => CartItem.Product)
-            //    .FirstOrDefault(Cart => Cart.BuyerLogin == buyerLogin)
-            //    .UserDeleveryInfo = userDeleveryInfo;
 
-            cart.UserDeleveryInfo = new UserDeleveryInfo()
-            {
-                Commentary = userDeleveryInfo.Commentary,
-                Email = userDeleveryInfo.Email,
-                Firstname = userDeleveryInfo.Firstname,
-                Phone = userDeleveryInfo.Phone,
-                Secondname = userDeleveryInfo.Secondname,
-                Surname = userDeleveryInfo.Surname
-            };
+            cart.UserDeleveryInfo = 
+                new UserDeleveryInfo()
+                {
+                    Commentary = userDeleveryInfo.Commentary,
+                    Email = userDeleveryInfo.Email,
+                    Firstname = userDeleveryInfo.Firstname,
+                    Phone = userDeleveryInfo.Phone,
+                    Secondname = userDeleveryInfo.Secondname,
+                    Surname = userDeleveryInfo.Surname
+                };
 
             //_databaseContext.Carts
             //    .Include(cart => cart.CartItems)

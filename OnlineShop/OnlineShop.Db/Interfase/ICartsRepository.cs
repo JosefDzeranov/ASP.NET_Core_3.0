@@ -8,6 +8,7 @@ namespace OnlineShop.Db.Interfase
     {
         List<Cart> GetAll();
         Cart Find(string buyerLogin);
+        //UserDeleveryInfo FindUserDeleveryInfo(Guid id);
         void CreateCartBuyer(string buyerLogin);
         void AddProduct(Guid productId, string buyerLogin);
         void UpCountInCartItem(Guid productId, string buyerLogin);

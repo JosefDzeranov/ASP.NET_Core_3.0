@@ -29,25 +29,32 @@ namespace OnlineShop.Db
         }
         public Order Find(Guid orderId)
         {
-            return _databaseContext.Orders.FirstOrDefault(Order => Order.Id == orderId);
+            return _databaseContext.Orders
+                .Include(order => order)
+                .Include(order => order.Items)
+                .FirstOrDefault(Order => Order.Id == orderId);
         }
 
         public void Buy(string buyerLogin)
         {
+            
+            var cart = _cartsRepository.Find(buyerLogin);
             var cartItems = _databaseContext.Carts
-                    .Include(cart => cart.CartItems)
-                    .ThenInclude(CartItem => CartItem.Product)
-                    .FirstOrDefault(Cart => Cart.BuyerLogin == buyerLogin)
-                    .CartItems;
-            var cartUserDeleveryInfo = _cartsRepository.Find(buyerLogin).UserDeleveryInfo;
+                .Include(cart => cart.CartItems)
+                .ThenInclude(CartItem => CartItem.Product)
+                .FirstOrDefault(Cart => Cart.BuyerLogin == buyerLogin)
+                .CartItems;
             var order = new Order()
             {
-                UserDeleveryInfo = cartUserDeleveryInfo,
+                UserDeleveryInfo = cart.UserDeleveryInfo,
                 Items = cartItems,
                 BuyerLogin = buyerLogin
             };
             _databaseContext.Orders.Add(order);
+            _cartsRepository.ClearCart(buyerLogin);
+            
             Save();
+
             //    var cart = _cartsRepository.Find(buyerLogin);
             //    var orders = _databaseContext.Orders;
             //    var orderId = Guid.NewGuid();
@@ -92,6 +99,7 @@ namespace OnlineShop.Db
             //    Save();
             //    cart.CartItems.Clear();
             //    Save();
+
         }
 
 

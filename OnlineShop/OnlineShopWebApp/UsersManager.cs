@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using OnlineShop.Common;
+using OnlineShop.Common.Interface;
 using OnlineShop.Db;
 using OnlineShop.Db.Interfase;
 using OnlineShop.Db.Models;

@@ -1,4 +1,4 @@
-﻿namespace OnlineShopWebApp.Interfase
+﻿namespace OnlineShop.Common.Interface
 {
     public interface IWorkWithData
     {
