@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using OnlineShop.Db;
 using OnlineShop.Db.Models;
+using OnlineShopWebApp.Helpers;
 
 namespace OnlineShopWebApp.Controllers
 {
@@ -26,7 +27,7 @@ namespace OnlineShopWebApp.Controllers
             {
                 return View("Empty");
             }
-            return View(favoriteProducts);
+            return View(favoriteProducts.ToProductViewModels());
         }
 
         public IActionResult Add(Guid id)

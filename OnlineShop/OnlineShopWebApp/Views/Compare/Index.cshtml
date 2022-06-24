@@ -1,5 +1,5 @@
-﻿@using OnlineShop.Db.Models
-@model List<Product>
+﻿@using OnlineShopWebApp.Models
+@model List<ProductViewModel>
 
 @{
     ViewData["Title"] = "Compare";
@@ -10,22 +10,22 @@
         <div class="col-12 mb-4">
             <h2>Compare</h2>
         </div>
-        @foreach (var item in Model)
+        @foreach (var product in Model)
         {
             <div class="col-4 mb-4">
-                <img class="img-thumbnail mb-2" src="@item.Images[0].Url" alt="@item.Name">
+                <img class="img-thumbnail mb-2" src="@product.ImagePath" alt="@product.Name">
                 <a style="color: darkblue"
-               asp-controller="Product" asp-action="Index" asp-route-id="@item.Id"><h5>@item.Name</h5></a>
-                <h6>$@item.Cost</h6>
-                <p>@item.Description</p>
+               asp-controller="Product" asp-action="Index" asp-route-id="@product.Id"><h5>@product.Name</h5></a>
+                <h6>$@product.Cost</h6>
+                <p>@product.Description</p>
                 <div class="row justify-content-between">
                     <div class="col-auto text-left">
                         <a class="btn btn-outline-dark btn-sm text-nowrap" role="button"
-                       asp-area="" asp-controller="Basket" asp-action="Add" asp-route-id="@item.Id">Add to basket</a>
+                       asp-area="" asp-controller="Basket" asp-action="Add" asp-route-id="@product.Id">Add to basket</a>
                     </div>
                     <div class="col-auto text-right">
                         <a class="btn btn-outline-dark btn-sm text-nowrap" role="button"
-                       asp-controller="Compare" asp-action="Remove" asp-route-id="@item.Id">Remove from list</a>
+                       asp-controller="Compare" asp-action="Remove" asp-route-id="@product.Id">Remove from list</a>
                     </div>
                 </div>
             </div>

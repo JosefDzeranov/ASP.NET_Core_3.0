@@ -69,6 +69,7 @@ namespace OnlineShopWebApp.Helpers
                 Name = model.Name,
                 Cost = model.Cost,
                 Description = model.Description,
+                Available = model.Available,
                 Images = ToImages(imagePaths)
             };
             return product;

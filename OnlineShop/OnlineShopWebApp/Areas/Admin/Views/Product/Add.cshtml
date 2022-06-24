@@ -19,6 +19,13 @@
                 <div class="mb-3">
                     <input class="form-control" type="file" multiple accept="image/*" asp-for="UploadedFiles" placeholder="Upload files" />
                 </div>
+                <div class="mt-3">
+                    <label class="form-label text-muted" asp-for="Available">Available for sale</label>
+                </div>
+                <select class="col-2 mb-3 form-control form-control-sm" asp-for="Available">
+                    <option value="true">Available</option>
+                    <option value="false">Not available</option>
+                </select>
                 <div class="mb-3">
                     <input class="form-control" asp-for="Name" placeholder="Name" />
                     <span asp-validation-for="Name"></span>

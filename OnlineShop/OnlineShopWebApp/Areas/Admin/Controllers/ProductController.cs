@@ -63,7 +63,11 @@ namespace OnlineShopWebApp.Areas.Admin.Controllers
             }
 
             var imagePaths = _imageProvider.SaveFiles(model.UploadedFiles, ImageFolders.products);
-            model.ImagePaths = imagePaths;
+
+            if (imagePaths != null)
+            {
+                model.ImagePaths = imagePaths;
+            }
 
             var product = model.ToProduct();
             _productStorage.Edit(product);

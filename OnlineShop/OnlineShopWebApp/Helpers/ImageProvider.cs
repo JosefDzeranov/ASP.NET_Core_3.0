@@ -18,13 +18,17 @@ namespace OnlineShopWebApp.Helpers
 
         public List<string> SaveFiles(IFormFile[] files, ImageFolders folder)
         {
-            var imagePaths = new List<string>();
-            foreach(var file in files)
+            if (files != null)
             {
-                var imagePath = SaveFile(file, folder);
-                imagePaths.Add(imagePath);
+                var imagePaths = new List<string>();
+                foreach (var file in files)
+                {
+                    var imagePath = SaveFile(file, folder);
+                    imagePaths.Add(imagePath);
+                }
+                return imagePaths;
             }
-            return imagePaths;
+            return null;
         }
 
         public string SaveFile(IFormFile file, ImageFolders folder)
