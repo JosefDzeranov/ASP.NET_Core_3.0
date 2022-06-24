@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
 using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 namespace OnlineShopWebApp.Models
@@ -19,8 +20,8 @@ namespace OnlineShopWebApp.Models
 
         public bool Available { get; set; }
 
-        public string[] ImagePaths { get; set; }
+        public List<string> ImagePaths { get; set; }
 
-        public string ImagePath => ImagePaths.Length == 0 ? "/img/test.jpg" : ImagePaths[0];
+        public string ImagePath => ImagePaths.Count == 0 ? "/img/products/test.jpg" : ImagePaths[0];
     }
 }

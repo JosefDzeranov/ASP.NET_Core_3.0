@@ -14,6 +14,7 @@ using Microsoft.AspNetCore.Identity;
 using OnlineShop.Db.Models;
 using System;
 using Microsoft.AspNetCore.Http;
+using OnlineShopWebApp.Helpers;
 
 namespace OnlineShopWebApp
 {
@@ -56,6 +57,7 @@ namespace OnlineShopWebApp
             services.AddTransient<IOrderStorage, OrderDbStorage>();
             services.AddTransient<ICompareStorage, CompareDbStorage>();
             services.AddTransient<IFavoritesStorage, FavoritesDbStorage>();
+            services.AddTransient<IImageProvider, ImageProvider>();
 
             services.Configure<RequestLocalizationOptions>(options =>
             {

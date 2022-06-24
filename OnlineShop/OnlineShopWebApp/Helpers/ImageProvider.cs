@@ -7,7 +7,7 @@ using System.Linq;
 
 namespace OnlineShopWebApp.Helpers
 {
-    public class ImageProvider
+    public class ImageProvider : IImageProvider
     {
         private readonly IWebHostEnvironment _appEnvironment;
 
@@ -31,21 +31,21 @@ namespace OnlineShopWebApp.Helpers
         {
             if (file != null)
             {
-                var imagePath = Path.Combine(_appEnvironment.WebRootPath + "/img/" + folder);
+                var folderPath = Path.Combine(_appEnvironment.WebRootPath + "/img/" + folder);
 
-                if (!Directory.Exists(imagePath))
+                if (!Directory.Exists(folderPath))
                 {
-                    Directory.CreateDirectory(imagePath);
+                    Directory.CreateDirectory(folderPath);
                 }
 
                 var fileName = Guid.NewGuid() + "." + file.FileName.Split(".").Last();
-                string path = Path.Combine(imagePath, fileName);
+                string path = Path.Combine(folderPath, fileName);
 
                 using (var fileStream = new FileStream(path, FileMode.Create))
                 {
                     file.CopyTo(fileStream);
                 }
-                return "/img" + folder + "/" + fileName;
+                return "/img/" + folder + "/" + fileName;
             }
             return null;
         }

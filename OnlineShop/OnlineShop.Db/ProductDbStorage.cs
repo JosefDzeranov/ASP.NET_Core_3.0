@@ -22,12 +22,12 @@ namespace OnlineShop.Db
 
         public List<Product> GetAllAvailable()
         {
-            return _databaseContext.Products.Where(p => p.Available == true).ToList();
+            return _databaseContext.Products.Where(p => p.Available == true).Include(p => p.Images).ToList();
         }
 
         public Product TryGetProduct(Guid id)
         {
-            var product = _databaseContext.Products.FirstOrDefault(p => p.Id == id);
+            var product = _databaseContext.Products.Include(p => p.Images).FirstOrDefault(p => p.Id == id);
             return product;
         }
 
@@ -44,7 +44,7 @@ namespace OnlineShop.Db
 
         public void Edit(Product product)
         {
-            var editProduct = _databaseContext.Products.FirstOrDefault(p => p.Id == product.Id);
+            var editProduct = _databaseContext.Products.Include(p => p.Images).FirstOrDefault(p => p.Id == product.Id);
 
             if (editProduct == null)
             {
@@ -55,6 +55,12 @@ namespace OnlineShop.Db
             editProduct.Cost = product.Cost;
             editProduct.Description = product.Description;
             editProduct.Available = product.Available;
+
+            foreach(var image in product.Images)
+            {
+                    image.ProductId = product.Id;
+                    _databaseContext.Images.Add(image);           
+            }
 
             _databaseContext.SaveChanges();
         }

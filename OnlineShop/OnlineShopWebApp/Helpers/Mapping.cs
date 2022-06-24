@@ -19,7 +19,7 @@ namespace OnlineShopWebApp.Helpers
                 Cost = product.Cost,
                 Description = product.Description,
                 Available = product.Available,
-                ImagePaths = product.Images.Select(image => image.Url).ToArray()
+                ImagePaths = product.Images.ToPaths()
             };
             return productViewModel;
         }
@@ -35,17 +35,67 @@ namespace OnlineShopWebApp.Helpers
             return productViewModels;
         }
 
-        public static Product ToProduct(this ProductViewModel productViewModel)
+        public static EditProductViewModel ToEditProductViewModel(this Product product)
+        {
+            var editProductViewModel = new EditProductViewModel
+            {
+                Id = product.Id,
+                Name = product.Name,
+                Cost = product.Cost,
+                Description = product.Description,
+                Available = product.Available,
+                ImagePaths = product.Images.ToPaths()
+            };
+            return editProductViewModel;
+        }
+
+        public static Product ToProduct(this ProductViewModel model)
         {
             var product = new Product
             {
-                Id = productViewModel.Id,
-                Name = productViewModel.Name,
-                Cost = productViewModel.Cost,
-                Description = productViewModel.Description,
-                Available = productViewModel.Available
+                Id = model.Id,
+                Name = model.Name,
+                Cost = model.Cost,
+                Description = model.Description,
+                Available = model.Available
             };
             return product;
+        }
+
+        public static Product ToProduct(this AddProductViewModel model, List<string> imagePaths)
+        {
+            var product = new Product
+            {
+                Name = model.Name,
+                Cost = model.Cost,
+                Description = model.Description,
+                Images = ToImages(imagePaths)
+            };
+            return product;
+        }
+
+        public static Product ToProduct(this EditProductViewModel model)
+        {
+            var product = new Product
+            {
+                Id = model.Id,
+                Name = model.Name,
+                Cost = model.Cost,
+                Description = model.Description,
+                Available = model.Available,
+                Images = model.ImagePaths.ToImages()
+            };
+            return product;
+        }
+
+        public static List<Image> ToImages(this List<string> imagePaths)
+        {
+            return imagePaths.Select(path => new Image { Url = path }).ToList();
+        }
+
+        public static List<string> ToPaths(this List<Image> images)
+        {
+            return images.Select(image => image.Url).ToList();
         }
 
         public static BasketItemViewModel ToBasketItemViewModel(this BasketItem basketItem)

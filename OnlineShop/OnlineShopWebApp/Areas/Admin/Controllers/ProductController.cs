@@ -1,12 +1,8 @@
 ﻿using System;
 using Microsoft.AspNetCore.Mvc;
 using OnlineShop.Db;
-using OnlineShopWebApp.Models;
 using OnlineShopWebApp.Helpers;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Hosting;
-using System.IO;
-using System.Linq;
 using OnlineShopWebApp.Areas.Admin.Models;
 
 namespace OnlineShopWebApp.Areas.Admin.Controllers
@@ -16,11 +12,12 @@ namespace OnlineShopWebApp.Areas.Admin.Controllers
     public class ProductController : Controller
     {
         private readonly IProductStorage _productStorage;
-        
-        public ProductController(IProductStorage productStorage, IWebHostEnvironment appEnvironment)
+        private readonly IImageProvider _imageProvider;
+
+        public ProductController(IProductStorage productStorage, IImageProvider imageProvider)
         {
             _productStorage = productStorage;
-            _appEnvironment = appEnvironment;
+            _imageProvider = imageProvider;
         }
 
         public IActionResult Index()
@@ -43,44 +40,34 @@ namespace OnlineShopWebApp.Areas.Admin.Controllers
                 return View(model);
             }
 
-            var imagePath = imageProvider.SafeFiles(model.UploadedFiles, ImageFolders.Products);
+            var imagePaths = _imageProvider.SaveFiles(model.UploadedFiles, ImageFolders.products);
 
-
-
-                var product = model.ToProduct();
-                _productStorage.Add(product);
-                return RedirectToAction(nameof(Index));
+            var product = model.ToProduct(imagePaths);
+            _productStorage.Add(product);
+            return RedirectToAction(nameof(Index));
         }
 
         public IActionResult Edit(Guid id)
         {
             var product = _productStorage.TryGetProduct(id);
-            var productViewModel = product.ToProductViewModel();
-            return View(productViewModel);
+            var editProductViewModel = product.ToEditProductViewModel();
+            return View(editProductViewModel);
         }
 
         [HttpPost]
-        public IActionResult Edit(ProductViewModel model)
+        public IActionResult Edit(EditProductViewModel model)
         {
-            if (ModelState.IsValid)
+            if (!ModelState.IsValid)
             {
-                if (model.UploadedFile != null)
-                {
-                    var productImagePath = Path.Combine(_appEnvironment.WebRootPath + "/img/products/");
-                    var fileName = Guid.NewGuid() + "." + model.UploadedFile.FileName.Split(".").Last();
-
-                    using (var fileStream = new FileStream(productImagePath + fileName, FileMode.Create))
-                    {
-                        model.UploadedFile.CopyTo(fileStream);
-                    }
-                    model.ImagePath = "/img/products/" + fileName;
-                }
-
-                var product = model.ToProduct();
-                _productStorage.Edit(product);
-                return RedirectToAction(nameof(Index));
+                return View();
             }
-            return View();
+
+            var imagePaths = _imageProvider.SaveFiles(model.UploadedFiles, ImageFolders.products);
+            model.ImagePaths = imagePaths;
+
+            var product = model.ToProduct();
+            _productStorage.Edit(product);
+            return RedirectToAction(nameof(Index));
         }
 
         public IActionResult Remove(Guid id)

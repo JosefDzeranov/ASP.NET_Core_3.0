@@ -8,6 +8,7 @@ namespace OnlineShop.Db
     public class DatabaseContext : DbContext
     {
         public DbSet<Product> Products { get; set; }
+        public DbSet<Image> Images { get; set; }
         public DbSet<Basket> Baskets { get; set; }
         public DbSet<BasketItem> BasketItems { get; set; }
         public DbSet<FavoriteProduct> FavoriteProducts { get; set; }
@@ -34,28 +35,28 @@ namespace OnlineShop.Db
             var image1 = new Image
             {
                 Id = Guid.Parse("7512a027-6c2b-44ec-9dc1-460dc630a1e0"),
-                Url = "/img/stilllife.jpg",
+                Url = "/img/products/stilllife.jpg",
                 ProductId = product1Id
             };
 
             var image2 = new Image
             {
-                Id = Guid.Parse("d8591f3b-ab34-4b87-325d-08dag437cf17"),
-                Url = "/img/portret.jpg",
+                Id = Guid.Parse("7228b05f-8fb9-4171-a2e9-ab3aaeaf44cd"),
+                Url = "/img/products/portret.jpg",
                 ProductId = product1Id
             };
 
             var image3 = new Image
             {
-                Id = Guid.Parse("30245a9c-ee30-4ddc-b53d-8fa3v86f4f78"),
-                Url = "/img/landscape.jpg",
+                Id = Guid.Parse("7512a027-6c2b-44ec-9dc1-450dc630a1e0"),
+                Url = "/img/products/landscape.jpg",
                 ProductId = product1Id
             };
 
             var image4 = new Image
             {
-                Id = Guid.Parse("30245a9c-er40-4tdc-b53d-8fa3f86f4f80"),
-                Url = "/img/abstraction.jpg",
+                Id = Guid.Parse("a604ee7e-aa0e-4ffc-b596-816570a9bc79"),
+                Url = "/img/products/abstraction.jpg",
                 ProductId = product1Id
             };
 
