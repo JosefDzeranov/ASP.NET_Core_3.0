@@ -34,7 +34,7 @@ namespace OnlineShopWebApp.Helpers
                 CreateDateTime = order.CreateDateTime,
                 Status = order.Status,
                 BuyerLogin = order.BuyerLogin,
-                CartItems = order.Items,
+                CartItems = order.CartItems,
                 UserDeleveryInfo = order.UserDeleveryInfo
             };
         }

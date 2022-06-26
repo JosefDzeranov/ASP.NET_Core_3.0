@@ -27,8 +27,11 @@ namespace OnlineShopWebApp.Areas.Admin.Controllers
         }
         public IActionResult Details(Guid orderId)
         {
-            var order = _ordersRepositiry.Find(orderId);
-            return View(Mapping.ToOrder_ViewModel(order));
+            var orders = _ordersRepositiry.GetAll();
+            
+            var order = orders.Find(order => order.Id == orderId);
+            var orderVM = Mapping.ToOrder_ViewModel(order);
+            return View(orderVM);
         }
         [HttpPost]
         public IActionResult SaveDetails(Order newOrder)

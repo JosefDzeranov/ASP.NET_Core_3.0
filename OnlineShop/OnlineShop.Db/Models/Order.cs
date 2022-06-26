@@ -6,7 +6,7 @@ namespace OnlineShop.Db.Models
     public class Order
     {
         public Guid Id { get; set; }
-        public List<CartItem> Items { get; set; }
+        public List<CartItem> CartItems { get; set; }
         public UserDeleveryInfo UserDeleveryInfo { get; set; }
         public DateTime CreateDateTime { get; set; }
         public OrderStatus Status { get; set; }

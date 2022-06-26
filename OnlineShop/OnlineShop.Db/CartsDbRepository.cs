@@ -16,7 +16,10 @@ namespace OnlineShop.Db
         }
         public List<Cart> GetAll()
         {
-            return _databaseContext.Carts.ToList();
+            return _databaseContext.Carts
+                .Include(c => c.CartItems)
+                .Include(u => u.UserDeleveryInfo)
+                .ToList();
         }
 
         public Cart Find(string buyerLogin)
@@ -28,17 +31,6 @@ namespace OnlineShop.Db
                 .FirstOrDefault(Cart => Cart.BuyerLogin == buyerLogin);
             return cart;
         }
-
-        //public UserDeleveryInfo FindUserDeleveryInfo(Guid Id)
-        //{
-        //    var userDeleveryInfo =
-        //        _databaseContext.Carts.Include(cart => cart.UserDeleveryInfo);
-
-        //    .Include(cart => cart.CartItems)
-        //    .ThenInclude(CartItem => CartItem.Product)
-        //    .FirstOrDefault(Cart => Cart.BuyerLogin == buyerLogin);
-        //    return userDeleveryInfo;
-        //}
 
         public void CreateCartBuyer(string buyerLogin)
         {
@@ -143,20 +135,6 @@ namespace OnlineShop.Db
                     Secondname = userDeleveryInfo.Secondname,
                     Surname = userDeleveryInfo.Surname
                 };
-
-            //_databaseContext.Carts
-            //    .Include(cart => cart.CartItems)
-            //    .ThenInclude(CartItem => CartItem.Product)
-            //    .FirstOrDefault(Cart => Cart.BuyerLogin == buyerLogin)
-            //    .UserDeleveryInfo = new UserDeleveryInfo()
-            //{
-            //    Commentary = userDeleveryInfo.Commentary,
-            //    Firstname = userDeleveryInfo.Firstname,
-            //    Email = userDeleveryInfo.Email,
-            //    Phone = userDeleveryInfo.Phone,
-            //    Secondname = userDeleveryInfo.Secondname,
-            //    Surname = userDeleveryInfo.Surname,
-            //};
             Save();
         }
 

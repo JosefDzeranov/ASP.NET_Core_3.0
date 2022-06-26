@@ -25,19 +25,23 @@ namespace OnlineShop.Db
 
         public List<Order> GetAll()
         {
-            return _databaseContext.Orders.ToList();
+            return _databaseContext.Orders
+                .Include(c => c.CartItems)
+                .Include(u => u.UserDeleveryInfo)
+                .Include(ci => ci.CartItems).ThenInclude(p => p.Product)
+                .ToList();
         }
         public Order Find(Guid orderId)
         {
             return _databaseContext.Orders
                 .Include(order => order)
-                .Include(order => order.Items)
+                .Include(order => order.CartItems)
+                .ThenInclude(CartItem => CartItem.Product)
                 .FirstOrDefault(Order => Order.Id == orderId);
         }
 
         public void Buy(string buyerLogin)
         {
-            
             var cart = _cartsRepository.Find(buyerLogin);
             var cartItems = _databaseContext.Carts
                 .Include(cart => cart.CartItems)
@@ -47,7 +51,7 @@ namespace OnlineShop.Db
             var order = new Order()
             {
                 UserDeleveryInfo = cart.UserDeleveryInfo,
-                Items = cartItems,
+                CartItems = cartItems,
                 BuyerLogin = buyerLogin
             };
             _databaseContext.Orders.Add(order);
@@ -84,7 +88,7 @@ namespace OnlineShop.Db
             //        .ThenInclude(CartItem => CartItem.Product)
             //        .FirstOrDefault(Cart => Cart.BuyerLogin == buyerLogin)
             //        .CartItems;
-            //    var orderItems = _databaseContext.Orders.FirstOrDefault(Order => Order.Id == orderId).Items;
+            //    var orderItems = _databaseContext.Orders.FirstOrDefault(Order => Order.Id == orderId).CartItems;
             //    orderItems = new List<CartItem>();
 
             //    foreach (var cartItem in cartItems)

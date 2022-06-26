@@ -52,9 +52,20 @@
                     </div>
                     <div class="row">
                         <div class="col-3 font-weight-bold">Состав заказа:</div>
-                        <div class="col-9"></div>
+                    </div>
+                        @foreach (var prod in Model.CartItems)
+                        {
+                            <div class="row">
+                                <div class="col-3  text-center"></div>
+                                <div class="col-4"><img class="card-img-top " src="/image/@prod.Product.Images" width="200"/></div>
+                                
+                            </div>
+                            <div class="row">
+                            <div class="col-3  text-center">Количество типов:</div>
+                                <div class="col-9"> @prod.Count</div> 
+                            </div>  
+                        }
                     </div>   
-
                     <div class="row">
                         <div class="col-3  font-weight-bold">Общая стоймость заказа:</div>
                         <div class="col-9  font-weight-bold">@Model.FullCost()</div>
@@ -66,12 +77,10 @@
                             <div class="col-9">
                                 <div class="row">
                                     <input type="hidden" value="@Model.Id" name="Id" asp-for="Id"/>
-                                    <select class="custom-select" name="Status" asp-for="Status">
+                                    <select class="custom-select" name="Status" asp-for="Status"
+                                            class="form-control" 
+                                            asp-items="Html.GetEnumSelectList<OrderStatus_ViewModel>()">
                                         <option selected>@Model.Status</option>
-                                        @for (int index = 0; index < 5; index++)
-                                        {
-                                            <option value="@Model.Status"></option>
-                                        }
                                     </select>
                                 </div>
                                 <p></p>
