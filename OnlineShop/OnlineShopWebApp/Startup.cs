@@ -51,7 +51,6 @@ namespace OnlineShopWebApp
                 };
             });
 
-            services.AddControllersWithViews();
             services.AddTransient<IProductStorage, ProductDbStorage>();
             services.AddTransient<IBasketStorage, BasketDbStorage>();
             services.AddTransient<IOrderStorage, OrderDbStorage>();
@@ -59,13 +58,23 @@ namespace OnlineShopWebApp
             services.AddTransient<IFavoritesStorage, FavoritesDbStorage>();
             services.AddTransient<IImageProvider, ImageProvider>();
 
+            services.AddLocalization(options =>
+            {
+                options.ResourcesPath = "Resources";
+            });
+
+            services.AddControllersWithViews().AddViewLocalization();
+
             services.Configure<RequestLocalizationOptions>(options =>
             {
+                options.DefaultRequestCulture = new RequestCulture("en-US");
+
                 var supportedCultures = new[]
                 {
-                    new CultureInfo("en-US")
+                    new CultureInfo("en-US"),
+                    new CultureInfo("ru-RU")
                 };
-                options.DefaultRequestCulture = new RequestCulture("en-US");
+
                 options.SupportedCultures = supportedCultures;
                 options.SupportedUICultures = supportedCultures;
             });
@@ -95,8 +104,9 @@ namespace OnlineShopWebApp
             app.UseAuthentication();
             app.UseAuthorization();
 
-            var localizationOptions = app.ApplicationServices.GetService<IOptions<RequestLocalizationOptions>>().Value;
-            app.UseRequestLocalization(localizationOptions);
+            //var localizationOptions = app.ApplicationServices.GetService<IOptions<RequestLocalizationOptions>>().Value;
+            //app.UseRequestLocalization(localizationOptions);
+            app.UseRequestLocalization();
 
             app.UseEndpoints(endpoints =>
             {

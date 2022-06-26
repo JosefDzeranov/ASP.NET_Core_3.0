@@ -3,6 +3,8 @@ using OnlineShop.Db;
 using System.Linq;
 using OnlineShopWebApp.Helpers;
 using System;
+using Microsoft.AspNetCore.Localization;
+using Microsoft.AspNetCore.Http;
 
 namespace OnlineShopWebApp.Controllers
 {
@@ -15,7 +17,7 @@ namespace OnlineShopWebApp.Controllers
         }
 
         public IActionResult Index()
-        {         
+        {
             var products = _productStorage.GetAllAvailable();
             var productViewModels = products.ToProductViewModels();
             return View(productViewModels);
@@ -40,10 +42,19 @@ namespace OnlineShopWebApp.Controllers
             return View(productViewModels);
         }
 
-
-        public IActionResult Privacy()
+        [HttpPost]
+        public IActionResult ChangeLanguage(string culture, string returnUrl)
         {
-            return View();
+            Response.Cookies.Append(
+                CookieRequestCultureProvider.DefaultCookieName,
+                CookieRequestCultureProvider.MakeCookieValue(new RequestCulture(culture)),
+                    new CookieOptions
+                    {
+                        Expires = DateTimeOffset.UtcNow.AddDays(7)
+                    }
+            );
+
+            return LocalRedirect(returnUrl);
         }
     }
 }
