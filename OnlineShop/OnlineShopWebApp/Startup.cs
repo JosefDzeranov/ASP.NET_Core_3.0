@@ -38,6 +38,7 @@ namespace OnlineShopWebApp
             services.AddTransient<IOrdersRepositiry, OrdersDbRepositiry>();
             services.AddTransient<IRoleManager, RoleManager>();
             services.AddTransient<IUsersManager, UsersManager>();
+            services.AddSingleton<IEmployeeRepository, EmployeeRepository>();
             services.AddScoped<CheckingForAuthorization>();
             services.AddControllersWithViews();
             
