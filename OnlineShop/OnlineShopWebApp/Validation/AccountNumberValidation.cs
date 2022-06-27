@@ -36,7 +36,6 @@ namespace OnlineShopWebApp.Validation
                 return false;
 
             return true;
-
         }
     }
 }
