@@ -6,10 +6,10 @@ using OnlineShop.Db.Models;
 
 namespace OnlineShop.Db
 {
-    public class ProductDbManager : IProductManager
+    public class ProductDbRepository : IProductRepository
     {
         private readonly DatabaseContext _databaseContext;
-        public ProductDbManager(DatabaseContext databaseContext)
+        public ProductDbRepository(DatabaseContext databaseContext)
         {
             _databaseContext = databaseContext;
         }
@@ -22,15 +22,12 @@ namespace OnlineShop.Db
         public void Delete(Product product)
         {
             _databaseContext.Products.Remove(product);
-            _databaseContext.SaveChanges();
+            Save();
         }
         public void UpdateProduct(Product newProduct)
         {
             var oldProduct = _databaseContext.Products.FirstOrDefault(product => product.Id == newProduct.Id);
-            if (oldProduct != null)
-            {
-                return;
-            }
+
             oldProduct.Cost = newProduct.Cost;
             oldProduct.Description = newProduct.Description;
             oldProduct.Images = newProduct.Images;
@@ -38,17 +35,22 @@ namespace OnlineShop.Db
             oldProduct.CodeNumber = newProduct.CodeNumber;
             oldProduct.Square = newProduct.Square;
             oldProduct.Width = newProduct.Width;
-            _databaseContext.SaveChanges();
+            Save();
         }
         public void AddNew(Product product)
         {
             _databaseContext.Products.Add(product);
-            _databaseContext.SaveChanges();
+            Save();
         }
 
         public List<Product> GetAll()
         {
             return _databaseContext.Products.ToList();
+        }
+
+        private void Save()
+        {
+            _databaseContext.SaveChanges();
         }
     }
 }

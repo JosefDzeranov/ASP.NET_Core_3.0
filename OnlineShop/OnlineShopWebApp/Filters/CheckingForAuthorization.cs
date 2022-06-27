@@ -7,14 +7,14 @@ namespace OnlineShopWebApp.Filters
 {
     public class CheckingForAuthorization : ActionFilterAttribute
     {
-        private readonly IUserManager userManager;
-        public CheckingForAuthorization(IUserManager userManager)
+        private readonly IUsersManager usersManager;
+        public CheckingForAuthorization(IUsersManager usersManager)
         {
-            this.userManager = userManager;
+            this.usersManager = usersManager;
         }
         public override void OnActionExecuting(ActionExecutingContext context)
         {
-            if (!userManager.CheckingForAuthorization())
+            if (!usersManager.CheckingForAuthorization())
             {
                 context.Result =
                     new RedirectToRouteResult(new RouteValueDictionary(new

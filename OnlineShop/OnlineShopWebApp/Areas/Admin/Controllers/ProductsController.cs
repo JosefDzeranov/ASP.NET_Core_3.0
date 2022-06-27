@@ -1,9 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using Microsoft.AspNetCore.Mvc;
+using OnlineShop.Common;
+using OnlineShop.Common.Interface;
 using OnlineShop.Db.Interfase;
 using OnlineShop.Db.Models;
 using OnlineShopWebApp.Filters;
+using OnlineShopWebApp.Interfase;
 using OnlineShopWebApp.Models;
 
 namespace OnlineShopWebApp.Areas.Admin.Controllers
@@ -12,19 +15,20 @@ namespace OnlineShopWebApp.Areas.Admin.Controllers
     [ServiceFilter(typeof(CheckingForAuthorization))]
     public class ProductsController : Controller
     {
-        private readonly IProductManager _productManager;
-        public ProductsController(IProductManager productManager)
+        private readonly IProductRepository _productRepository;
+        private readonly IWorkWithData _productRepositoryJson = new JsonWorkWithData("projects_for_sale");
+        public ProductsController(IProductRepository productRepository)
         {
-            _productManager = productManager;
+            _productRepository = productRepository;
         }
 
         public IActionResult Index()
         {
-            var productsDb = _productManager.GetAll();
-            var productsViewModels = new List<ProductViewModel>();
+            var productsDb = _productRepository.GetAll();
+            var productsViewModels = new List<Product_ViewModel>();
             foreach (var product in productsDb)
             {
-                var productViewModels = new ProductViewModel
+                var productViewModels = new Product_ViewModel
                 {
                     Id = product.Id,
                     CodeNumber = product.CodeNumber,
@@ -43,16 +47,16 @@ namespace OnlineShopWebApp.Areas.Admin.Controllers
 
         public IActionResult Delete(Guid productId)
         {
-            var product = _productManager.Find(productId);
-            _productManager.Delete(product);
+            var product = _productRepository.Find(productId);
+            _productRepository.Delete(product);
             return RedirectToAction("Index");
         }
 
         public IActionResult CardUpdate(Guid productId)
         {
-            var product = _productManager.Find(productId);;
+            var product = _productRepository.Find(productId);;
 
-            var productViewModels = new ProductViewModel
+            var productViewModels = new Product_ViewModel
             {
                 Id = product.Id,
                 CodeNumber = product.CodeNumber,
@@ -67,7 +71,7 @@ namespace OnlineShopWebApp.Areas.Admin.Controllers
         }
 
         [HttpPost]
-        public IActionResult Update(ProductViewModel productViewModel)
+        public IActionResult Update(Product_ViewModel productViewModel)
         {
             if (!ModelState.IsValid)
             {
@@ -85,7 +89,7 @@ namespace OnlineShopWebApp.Areas.Admin.Controllers
                 Square = productViewModel.Square,
                 Width = productViewModel.Width
             };
-            _productManager.UpdateProduct(productDb);
+            _productRepository.UpdateProduct(productDb);
             return RedirectToAction("Index");
         }
         public IActionResult CardNewProduct()
@@ -94,7 +98,7 @@ namespace OnlineShopWebApp.Areas.Admin.Controllers
         }
 
         [HttpPost]
-        public IActionResult AddNew(ProductViewModel productViewModel)
+        public IActionResult AddNew(Product_ViewModel productViewModel)
         {
             if (!ModelState.IsValid)
             {
@@ -113,7 +117,17 @@ namespace OnlineShopWebApp.Areas.Admin.Controllers
                 Width = productViewModel.Width
             };
 
-            _productManager.AddNew(productDb);
+            _productRepository.AddNew(productDb);
+            return RedirectToAction("Index");
+        }
+
+        public IActionResult CardNewProductsDefoult()
+        {
+            var productsJson = _productRepositoryJson.Read<List<Product>>();
+            foreach (var productJson in productsJson)
+            {
+                _productRepository.AddNew(productJson);
+            }
             return RedirectToAction("Index");
         }
     }

@@ -1,16 +1,16 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using OnlineShop.Db.Models;
 using OnlineShopWebApp.Interfase;
-using OnlineShopWebApp.Models.Users;
 using OnlineShopWebApp.Models;
 
 namespace OnlineShopWebApp.Controllers
 {
     public class LoginController : Controller
     {
-        private readonly IUserManager _userManager;
-        public LoginController(IUserManager userManager)
+        private readonly IUsersManager _usersManager;
+        public LoginController(IUsersManager usersManager)
         {
-            _userManager = userManager;
+            _usersManager = usersManager;
         }
         public IActionResult Index()
         {
@@ -20,7 +20,7 @@ namespace OnlineShopWebApp.Controllers
         [HttpPost]
         public IActionResult Index(UserAutorized userInput)
         {
-            var user = _userManager?.FindByLogin(userInput.Login);
+            var user = _usersManager?.Find(userInput.Login);
             if (user == null)
             {
                 ModelState.AddModelError("", "Такого аккаунта не существует");
@@ -31,7 +31,7 @@ namespace OnlineShopWebApp.Controllers
             }
             if (ModelState.IsValid)
             {
-                _userManager.Authorized(userInput);
+                _usersManager.Authorized(userInput);
                 return RedirectToAction(actionName:"Index",controllerName: "User");
             }
             return View();
@@ -44,14 +44,13 @@ namespace OnlineShopWebApp.Controllers
             {
                 ModelState.AddModelError("", "Логин и пароль не должны совпадать!");
             }
-            if (_userManager.FindByLogin(userInput.Login) != null)
+            if (_usersManager.Find(userInput.Login) != null)
             {
                 ModelState.AddModelError("", "Такой аккаунт уже существует");
             }
             if (ModelState.IsValid)
             {
-                _userManager.Add(userInput);
-                _userManager.AssignRole(userInput.Login, MyConstant.RoleDefaultId); //Покупатель
+                _usersManager.Add(userInput);
                 return RedirectToAction("Index", "User");
             }
             return View();
@@ -69,7 +68,7 @@ namespace OnlineShopWebApp.Controllers
 
         public IActionResult Exit()
         {
-            _userManager.Exit();
+            _usersManager.Exit();
             return RedirectToAction("Index");
         }
     }

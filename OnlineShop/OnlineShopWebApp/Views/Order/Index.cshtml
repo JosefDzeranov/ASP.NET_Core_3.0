@@ -1,4 +1,4 @@
-﻿@model UserBuyer
+﻿@model Cart_ViewModel
 @{
     ViewData["Title"] = "Оформление заказа";
 }
@@ -11,14 +11,29 @@
 
 
 <p>
-    <a class="btn btn-outline-dark text-nowrap"
-       data-toggle="collapse"
-       href="#collapseExample"
-       role="button"
-       aria-expanded="false"
-       aria-controls="collapseExample">
-        Заполнить данные о заказчике
-    </a>
+    @if (Model.UserDeleveryInfo == null)
+    {
+        <a class="btn btn-outline-danger text-nowrap"
+           data-toggle="collapse"
+           href="#collapseExample"
+           role="button"
+           aria-expanded="false"
+           aria-controls="collapseExample">
+            Заполнить данные о заказчике
+        </a>
+    }
+    else
+    {
+        <a class="btn btn-outline-danger text-nowrap"
+           data-toggle="collapse"
+           href="#collapseExample"
+           role="button"
+           aria-expanded="false"
+           aria-controls="collapseExample">
+            Проверить данные о заказчике
+        </a>
+    }
+
 </p>
 <form method="post" asp-controller="Order" asp-action="BuyValid">
     <div class="was-validated" asp-validation-summary="All"></div>
@@ -30,7 +45,7 @@
 
     <h6>Список приобретаемых товаров:</h6>
     <h6>Пожалуйста, выберите дополнительные опции, если это необходимо</h6>
-    @await Html.PartialAsync("FormCheque", Model.Cart)
+    @await Html.PartialAsync("FormCheque", Model.CartItems)
 
 
     <button type="submit"  class="btn btn-outline-dark text-nowrap col-3 mx-0 my-3" asp-area="" asp-controller="Order" asp-action="BuyValid" role="button">Отправить заявку</button>

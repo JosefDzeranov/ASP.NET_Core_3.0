@@ -1,5 +1,5 @@
 ﻿
-@model List<ProductViewModel>
+@model List<Product_ViewModel>
 @{
     ViewData["Title"] = "Панель администратора";
 }
@@ -10,12 +10,21 @@
         <div class="col-10 container">
             <div class="container">
                 <h3 class="display-5 Title_sile text-center">Список продуктов</h3>
-                <div class="d-grid gap-2">
+                <div class="d-grid gap-2 col-2">
                     <a class="text-nowrap mx-1 my-1"
                        asp-area="Admin" asp-controller="Products" 
                        asp-action="CardNewProduct"
                        role="button">
                         Добавить новый продукт
+                    </a>
+                </div>
+                <div></div>
+                <div class="d-grid gap-2 col-2">
+                    <a class="text-nowrap mx-1 my-1"
+                       asp-area="Admin" asp-controller="Products" 
+                       asp-action="CardNewProductsDefoult"
+                       role="button">
+                        Добавить продукты по умолчанию
                     </a>
                 </div>
                 <div class="table-responsive">

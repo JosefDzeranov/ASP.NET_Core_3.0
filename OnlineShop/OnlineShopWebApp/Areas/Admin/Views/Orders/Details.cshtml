@@ -1,4 +1,4 @@
-﻿@model OrderItem
+﻿@model Order_ViewModels
 @{
     ViewData["Title"] = "Подробности заказа";
 }
@@ -17,64 +17,58 @@
                     <div class="row">
                         <div class="text-center col-3 ">Фамилия:</div>
                         <div class="col-9">
-                            <p>@Model.InfoBuying.Surname</p>
+                            <p>@Model.UserDeleveryInfo.Surname</p>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-3  text-center">Имя:</div>
                         <div class="col-9">
-                            <p>@Model.InfoBuying.Firstname</p>
+                            <p>@Model.UserDeleveryInfo.Firstname</p>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-3 text-center">Отчество:</div>
                         <div class="col-9">
-                            <p>@Model.InfoBuying.Secondname</p>
+                            <p>@Model.UserDeleveryInfo.Secondname</p>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-3  text-center">Контактный телефон:</div>
                         <div class="col-9">
-                            <p>@Model.InfoBuying.Phone</p>
+                            <p>@Model.UserDeleveryInfo.Phone</p>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-3  text-center">Электронная почта:</div>
                         <div class="col-9">
-                            <p>@Model.InfoBuying.Email</p>
+                            <p>@Model.UserDeleveryInfo.Email</p>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-3 text-center">Комментарий:</div>
                         <div class="col-9">
-                            <p>@Model.InfoBuying.Commentary</p>
+                            <p>@Model.UserDeleveryInfo.Commentary</p>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-3 font-weight-bold">Состав заказа:</div>
-                        <div class="col-9"></div>
-                    </div>   
-                    @foreach (var cartItem in @Model.CartItem)
-                    {
-                        <div class="row">
-                            <div class="col-3"></div>
-                            <div class="col-9 ">
-                                <text>
-                                    @for (int c = 0; c < cartItem.additionalOptions.Count; c++)
-                                    {
-                                        <p></p>
-                                        <p class="font-weight-bold">Проект @cartItem.Product.CodeNumber . @cartItem.Product.Description (тип @(c+1))</p>
-                                        <p><img src="/image/@cartItem.Product.Images[0]" width="200"/></p>
-                                        <p>Цена: @cartItem.Product.Cost руб</p>
-                                        <p>Дополнительные опции: @cartItem.additionalOptions[0].TotalCost() руб</p>
-                                    }
-                                </text>
+                    </div>
+                        @foreach (var prod in Model.CartItems)
+                        {
+                            <div class="row">
+                                <div class="col-3  text-center"></div>
+                                <div class="col-4"><img class="card-img-top " src="/image/@prod.Product.Images" width="200"/></div>
+                                
                             </div>
-                        </div>
-                    }
+                            <div class="row">
+                            <div class="col-3  text-center">Количество типов:</div>
+                                <div class="col-9"> @prod.Count</div> 
+                            </div>  
+                        }
+                    </div>   
                     <div class="row">
                         <div class="col-3  font-weight-bold">Общая стоймость заказа:</div>
-                        <div class="col-9  font-weight-bold">@Model.FullCost</div>
+                        <div class="col-9  font-weight-bold">@Model.FullCost()</div>
                     </div> 
                     <p></p>
                     <div class="row">
@@ -83,12 +77,10 @@
                             <div class="col-9">
                                 <div class="row">
                                     <input type="hidden" value="@Model.Id" name="Id" asp-for="Id"/>
-                                    <select class="custom-select" name="Status" asp-for="Status">
+                                    <select class="custom-select" name="Status" asp-for="Status"
+                                            class="form-control" 
+                                            asp-items="Html.GetEnumSelectList<OrderStatus_ViewModel>()">
                                         <option selected>@Model.Status</option>
-                                        @for (int index = 0; index < 5; index++)
-                                        {
-                                            <option value="@Model.ShowUnitRegisterStatus(index)">@Model.ShowUnitRegisterStatus(index)</option>
-                                        }
                                     </select>
                                 </div>
                                 <p></p>

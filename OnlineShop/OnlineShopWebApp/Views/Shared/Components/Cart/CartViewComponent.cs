@@ -1,30 +1,33 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using OnlineShop.Db.Interfase;
+using OnlineShopWebApp.Helpers;
 using OnlineShopWebApp.Interfase;
 
 namespace OnlineShopWebApp.Views.Shared.Components.Cart
 {
     public class CartViewComponent : ViewComponent
     {
-        private readonly IBuyerManager _buyerManager;
-        private readonly IUserManager _userManager;
+        private readonly ICartsRepository _cartsRepository;
+        private readonly IUsersManager usersManager;
 
-        public CartViewComponent(IBuyerManager buyerManager, IUserManager userManager)
+        public CartViewComponent(ICartsRepository cartsRepository, IUsersManager usersManager)
         {
-            _buyerManager = buyerManager;
-            _userManager = userManager;
+            _cartsRepository = cartsRepository;
+            this.usersManager = usersManager;
         }
 
         public IViewComponentResult Invoke()
         {
-            var user = _buyerManager.FindBuyer(_userManager.GetLoginAuthorizedUser());
+            var buyerLogin = usersManager.GetLoginAuthorizedUser();
+            var cart = _cartsRepository.Find(buyerLogin);
             int sumProduct;
-            if (user == null)
+            if (cart == null)
             {
                 sumProduct = 0;
             }
             else
             {
-                sumProduct = user.SumAllProducts();
+                sumProduct = _cartsRepository.QuantityAllProducts(buyerLogin);
             }
             return View("Cart", sumProduct);
         }

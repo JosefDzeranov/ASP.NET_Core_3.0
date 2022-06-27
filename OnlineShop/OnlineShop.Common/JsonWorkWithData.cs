@@ -2,9 +2,9 @@
 using System.Text.Encodings.Web;
 using System.Text.Json;
 using System.Text.Unicode;
-using OnlineShopWebApp.Interfase;
+using OnlineShop.Common.Interface;
 
-namespace OnlineShopWebApp
+namespace OnlineShop.Common
 {
     public class JsonWorkWithData : IWorkWithData
     {

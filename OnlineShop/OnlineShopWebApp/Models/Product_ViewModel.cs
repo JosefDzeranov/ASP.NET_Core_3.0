@@ -1,10 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 namespace OnlineShopWebApp.Models
 {
-    public class ProductViewModel
+    public class Product_ViewModel
     {
         public Guid Id { get; set; }
 

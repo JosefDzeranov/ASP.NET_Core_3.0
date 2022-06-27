@@ -2,7 +2,7 @@
 using System.ComponentModel.DataAnnotations;
 using OnlineShopWebApp.Interfase;
 
-namespace OnlineShopWebApp.Models.Users
+namespace OnlineShopWebApp.Models
 {
     public class User
     {
@@ -14,9 +14,9 @@ namespace OnlineShopWebApp.Models.Users
 
         [StringLength(50, MinimumLength = 3, ErrorMessage = "Длина строки должна быть от 3 до 50 символов")]
         public string Firstname { get; set; }
-        
+
         public string Secondname { get; set; }
-        
+
         public string Surname { get; set; }
 
         public string Phone { get; set; }
@@ -35,12 +35,7 @@ namespace OnlineShopWebApp.Models.Users
 
         public Guid RoleId { get; set; }
 
-        public void SetRole(Guid roleId)
-        {
-            roleManager = new RoleManager();
-            RoleId = roleId;
-            RoleName = roleManager.Find(roleId).Name;
-        }
+
 
     }
 }

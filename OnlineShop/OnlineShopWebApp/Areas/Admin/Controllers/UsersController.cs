@@ -2,7 +2,6 @@
 using OnlineShopWebApp.Filters;
 using OnlineShopWebApp.Interfase;
 using OnlineShopWebApp.Models;
-using OnlineShopWebApp.Models.Users;
 
 namespace OnlineShopWebApp.Areas.Admin.Controllers
 {
@@ -10,23 +9,23 @@ namespace OnlineShopWebApp.Areas.Admin.Controllers
     [ServiceFilter(typeof(CheckingForAuthorization))]
     public class UsersController : Controller
     {
-        private readonly IUserManager _userManager;
+        private readonly IUsersManager _usersManager;
         private readonly IRoleManager _roleManager;
 
-        public UsersController(IUserManager userManager, IRoleManager roleManager)
+        public UsersController(IUsersManager usersManager, IRoleManager roleManager)
         {
-            _userManager = userManager;
+            _usersManager = usersManager;
             _roleManager = roleManager;
         }
         public IActionResult Index()
         {
-            var users = _userManager.GetAll();
+            var users = _usersManager.GetAll();
             return View(users);
         }
 
         public IActionResult Details(string login)
         {
-            var user = _userManager.FindByLogin(login);
+            var user = _usersManager.Find(login);
             return View(user);
         }
 
@@ -45,21 +44,21 @@ namespace OnlineShopWebApp.Areas.Admin.Controllers
             {
                 ModelState.AddModelError("", "Логин и пароль не должны совпадать!");
             }
-            var user = _userManager.FindByLogin(changePassword.Login);
+            var user = _usersManager.Find(changePassword.Login);
             if (user.Password == changePassword.Password)
             {
                 ModelState.AddModelError("", "Вы ввели существующий пароль!");
             }
             if (ModelState.IsValid)
             {
-                _userManager.ChangePassword(changePassword.Login, changePassword.Password);
+                _usersManager.ChangePassword(changePassword.Login, changePassword.Password);
                 return RedirectToAction("Index", "Users");
             }
             return View(changePassword);
         }
         public IActionResult Edit(string login)
         {
-            var user = _userManager.FindByLogin(login);
+            var user = _usersManager.Find(login);
             UserInfo userInfo = new UserInfo()
             {
                 Login = user.Login,
@@ -77,7 +76,7 @@ namespace OnlineShopWebApp.Areas.Admin.Controllers
         {
             if (ModelState.IsValid)
             {
-                _userManager.ChangeInfo(userInfo);
+                _usersManager.ChangeInfo(userInfo);
                 return RedirectToAction("Index", "Users");
             }
             return View(userInfo);
@@ -85,7 +84,7 @@ namespace OnlineShopWebApp.Areas.Admin.Controllers
 
         public IActionResult EditRights(string login)
         {
-            var user = _userManager.FindByLogin(login);
+            var user = _usersManager.Find(login);
             ChangeRoleUser roleInfo = new ChangeRoleUser
             {
                 Login = user.Login,
@@ -99,13 +98,13 @@ namespace OnlineShopWebApp.Areas.Admin.Controllers
         [HttpPost]
         public IActionResult EditRights(ChangeRoleUser roleInfo)
         {
-            _userManager.AssignRole(roleInfo.Login, roleInfo.Id);
+            _usersManager.AssignRole(roleInfo.Login, roleInfo.Id);
             return RedirectToAction("Index", "Users");
         }
 
         public IActionResult Remove(string login)
         {
-            _userManager.Remove(login);
+            _usersManager.Remove(login);
             return RedirectToAction("Index", "Users");
         }
 

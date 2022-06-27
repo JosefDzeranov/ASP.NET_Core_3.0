@@ -3,6 +3,8 @@ using OnlineShopWebApp.Interfase;
 using OnlineShopWebApp.Models;
 using System.Collections.Generic;
 using System.Linq;
+using OnlineShop.Common;
+using OnlineShop.Common.Interface;
 
 namespace OnlineShopWebApp
 {

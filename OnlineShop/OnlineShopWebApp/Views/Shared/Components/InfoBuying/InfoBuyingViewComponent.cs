@@ -1,4 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using OnlineShop.Db.Interfase;
+using OnlineShopWebApp.Helpers;
 using OnlineShopWebApp.Interfase;
 
 
@@ -7,20 +9,21 @@ namespace OnlineShopWebApp.Views.Shared.Components.InfoBuying
     // Бланк для заполнения данных покупателя для оформления заказа
     public class InfoBuyingViewComponent:ViewComponent
     {
-        private readonly IBuyerManager buyerManager;
-        private readonly IUserManager userManager;
+        private readonly ICartsRepository _cartsRepository;
+        private readonly IUsersManager usersManager;
 
-        public InfoBuyingViewComponent(IBuyerManager buyerManager, IUserManager userManager)
+        public InfoBuyingViewComponent(IUsersManager usersManager, ICartsRepository cartsRepository)
         {
-            this.buyerManager = buyerManager;
-            this.userManager = userManager;
+            this.usersManager = usersManager;
+            _cartsRepository = cartsRepository;
         }
 
         public IViewComponentResult Invoke()
         {
-            var buyerLogin = userManager.GetLoginAuthorizedUser();
-            var infoBuying = buyerManager.FindBuyer(buyerLogin).InfoBuying;
-            return View("InfoBuying", infoBuying);
+            var buyerLogin = usersManager.GetLoginAuthorizedUser();
+            var infoBuying = _cartsRepository.Find(buyerLogin).UserDeleveryInfo;
+
+            return View("InfoBuying", Mapping.ToUserDeleveryInfo_ViewModels(infoBuying));
         }
     }
 }

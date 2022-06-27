@@ -31,12 +31,13 @@ namespace OnlineShopWebApp
             //добавляем контекст DatabaseContext в качестве сервиса в приложение
             services.AddDbContext<DatabaseContext>(options =>
                 options.UseSqlServer(connection));
-            services.AddTransient<IBuyerManager, BuyerManager>();
-            services.AddTransient<IProductManager, ProductDbManager>();
+            services.AddTransient<IProductRepository, ProductDbRepository>();
             services.AddTransient<IFavoriteRepository, FavoriteDbRepository>();
             services.AddTransient<IComparisonRepository, СomparisonDbRepository>();
-            services.AddSingleton<IRoleManager, RoleManager>();
-            services.AddTransient<IUserManager, UserManager>();
+            services.AddTransient<ICartsRepository, CartsDbRepository>();
+            services.AddTransient<IOrdersRepositiry, OrdersDbRepositiry>();
+            services.AddTransient<IRoleManager, RoleManager>();
+            services.AddTransient<IUsersManager, UsersManager>();
             services.AddScoped<CheckingForAuthorization>();
             services.AddControllersWithViews();
             
