@@ -27,11 +27,31 @@ namespace OnlineShop.AutomatedUITests
         public void Create_WhenExecuted_ReturnsCreateView()
         {
             _driver.Navigate() // используем метод Navigate, чтобы указать драйверу, что нужно переместить браузер в другое место
-                .GoToUrl("https://localhost:5001/OnlineShop/Create"); //с помощью метода GoToUrl мы указываем это местоположение
+                .GoToUrl("https://localhost:5001/OnlineShop/Index"); //с помощью метода GoToUrl мы указываем это местоположение
 
             //После перехода браузера к запрошенному URL-адресу будут заполнены свойства Title и PageSource объекта _driver
             Assert.Equal("Create - EmployeesApp", _driver.Title); 
             Assert.Contains("Please provide a new employee data", _driver.PageSource);
+        }
+
+        //второй тест в котором мы проверяем, появляется ли сообщение об ошибке на экране, если мы заполняем некоторые поля ввода, а не все из них, и нажимает кнопку "Create":
+        [Fact]
+        public void Create_WrongModelData_ReturnsErrorMessage()
+        {
+            _driver.Navigate()
+                .GoToUrl("https://localhost:5001/Employees/Create");
+            _driver.FindElement(By.Id("Name"))
+                .SendKeys("Test Employee");
+
+            _driver.FindElement(By.Id("Age"))
+                .SendKeys("34");
+
+            _driver.FindElement(By.Id("Create"))
+                .Click();
+
+            var errorMessage = _driver.FindElement(By.Id("AccountNumber-error")).Text;
+
+            Assert.Equal("Account number is required", errorMessage);
         }
     }
 }
