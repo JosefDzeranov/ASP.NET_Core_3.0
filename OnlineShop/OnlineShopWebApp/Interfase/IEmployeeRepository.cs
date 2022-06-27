@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using OnlineShopWebApp.Models;
 
+//временный интерфейс, для обучения тестированию
 namespace OnlineShopWebApp.Interfase
 {
     public interface IEmployeeRepository
@@ -10,6 +11,5 @@ namespace OnlineShopWebApp.Interfase
         void CreateEmployee(Employee employee);
         Employee Find(Guid Id);
         void Remove(Guid Id);
-        void Exit();
     }
 }

@@ -2,6 +2,7 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
+//временный класс, для обучения тестированию
 namespace OnlineShopWebApp.Models
 {
     [Table("Employee")]

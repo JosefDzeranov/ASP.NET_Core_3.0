@@ -1,5 +1,6 @@
 ﻿using System;
 
+//временная валидация, для обучения тестированию
 namespace OnlineShopWebApp.Validation
 {
     //мы хотим убедиться, что AccountNumber состоит из трех частей разной длины (3, 10 и 2).
@@ -12,6 +13,7 @@ namespace OnlineShopWebApp.Validation
         private const int startingPartLength = 3;
         private const int middlePartLength = 10;
         private const int lastPartLength = 2;
+
         public bool IsValid(string accountNumber)
         {
             var firstDelimiter = accountNumber.IndexOf('-');
@@ -37,3 +39,4 @@ namespace OnlineShopWebApp.Validation
 
         }
     }
+}

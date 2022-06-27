@@ -11,6 +11,7 @@ using OnlineShopWebApp.Models;
 
 namespace OnlineShopWebApp
 {
+    //временный класс для обучения тестированию
     public class EmployeeRepository : IEmployeeRepository
     {
         private IWorkWithData JsonStorage { get; } = new JsonWorkWithData(nameSave);
