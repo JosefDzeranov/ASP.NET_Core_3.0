@@ -2,7 +2,7 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace OnlineShopWebApp
+namespace OnlineShopWebApp.Models
 {
     [Table("Employee")]
     public class Employee
