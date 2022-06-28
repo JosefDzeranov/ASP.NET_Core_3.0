@@ -1,14 +1,10 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-
+ler
 namespace OnlineShopWebApp.Controllers
 {
     public class SceneController : Controller
     {
-        public IActionResult Index()
+        public IActionResult Test()
         {
             return View();
         }
