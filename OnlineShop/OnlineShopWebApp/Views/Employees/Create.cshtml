@@ -1,5 +1,35 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
+﻿@model Employee
 @{
+    ViewData["Title"] = "Создание нового сотрудника";
 }
+
+<form method="post" asp-controller="Employees" asp-action="Create">
+    <div class="container">
+        <div class="was-validated" asp-validation-summary="All"></div>
+        <h3 class="display-5 text-center">Создание сотрудника</h3>
+        <p></p>
+        <div class="form-group col-md-3 mx-auto">
+            <label asp-for="Name" class="text-center">Имя</label>
+            <input type="text" class="form-control" id="Input1" placeholder="Имя" required="" name="Name" asp-for="Name"/>
+            <span asp-validation-for="Name"></span>
+        </div>
+        <p></p>
+        <div class="form-group  col-md-3 mx-auto">
+            <label asp-for="Age" class="text-center">Пароль</label>
+            <input type="text" class="form-control" id="Input2" placeholder="Возраст" name="Age" required="" asp-for="Age"/>
+            <span asp-validation-for="Age"></span>
+
+        </div>
+        <p></p>
+        <div class="form-group  col-md-3 mx-auto">
+            <label asp-for="AccountNumber" class="text-center">Номер счёта</label>
+            <input type="text" class="form-control" id="Input2" placeholder="Номер счёта" name="AccountNumber" required="" asp-for="AccountNumber"/>
+            <span asp-validation-for="AccountNumber"></span>
+
+        </div>
+        
+        <div class="col-md-1 mx-auto">
+            <button type="submit" class="btn btn-outline-dark text-center"  asp-controller="Employees" asp-action="Create" asp-route-userInput="@Model">Создать</button>
+        </div>
+    </div>
+</form>

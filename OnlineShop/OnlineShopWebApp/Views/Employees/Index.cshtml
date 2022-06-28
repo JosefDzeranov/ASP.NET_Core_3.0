@@ -1,5 +1,62 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
+﻿@model List<Employee>
 @{
+    ViewData["Title"] = "Сотрудники";
 }
+
+
+
+<div class="container">
+    <div class="row">
+        <div class="col">
+            <div class="container">
+                <h3 class="display-5 Title_sile text-center">Сотрудники</h3>
+                <div class="table-responsive">
+                    <table class="table table-bordered caption-top">
+                        <thead>
+                        <tr>
+                            <th scope="col" class="align-top small">№</th>
+                            <th scope="col" class="align-top small">Id</th>
+                            <th scope="col" class="align-top small">Имя</th>
+                            <th scope="col" class="align-top small">Возраст</th>
+                            <th scope="col" class="align-top small">Номер счёта</th>
+                            <th scope="col" class="align-top small"> </th>
+                        </tr>
+                        </thead>
+                        @if (Model == null)
+                        {
+                            <td colspan="9">Сотрудники отсутствуют</td>
+                        }
+                        else
+                        {
+                            @if (Model.Count != 0)
+                            {
+                                <tbody>
+                                @for (int i = 0; i < Model.Count; i++)
+                                {
+                                    <tr>
+                                        <th class="small" scope="row">@(i + 1)</th>
+                                        <td class="small">@Model[i].Id</td>
+                                        <td class="small">@Model[i].Name</td>
+                                        <td class="small">@Model[i].Age</td>
+                                        <td class="small">@Model[i].AccountNumber</td>
+                                        <td class="small"></td>
+                                    </tr>
+                                }
+                                </tbody>
+                            }
+                            else
+                            {
+                                <td colspan="9">Сотрудники отсутствуют</td>
+                            }
+                        }
+
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<p></p>
+<div class="col-md-3 mx-auto">
+    <a class="btn btn-light text-center" asp-controller="Employees" asp-action="Create">Регистрация нового работника</a>
+</div>
