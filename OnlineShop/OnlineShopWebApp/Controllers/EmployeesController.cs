@@ -30,7 +30,9 @@ namespace OnlineShopWebApp.Controllers
         }
         public IActionResult Index()
         {
-            return View();
+            //мы получаем всех сотрудников из базы данных и возвращаем представление с этими сотрудниками
+            var employees = _repo.GetAll();
+            return View(employees);
         }
 
         public IActionResult Create([Bind("Name,AccountNumber,Age")] Employee employee)
