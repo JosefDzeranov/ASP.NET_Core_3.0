@@ -29,8 +29,8 @@ namespace OnlineShop.AutomatedUITests
                 .GoToUrl("https://localhost:5001/Employees/Create"); //с помощью метода GoToUrl мы указываем это местоположение
 
             //После перехода браузера к запрошенному URL-адресу будут заполнены свойства Title и PageSource объекта _driver
-            Assert.Equal("Create - EmployeesApp", _driver.Title);
-            Assert.Contains("Please provide a new employee data", _driver.PageSource);
+            Assert.Equal("Сотрудники", _driver.Title);
+            //Assert.Contains("Please provide a new employee data", _driver.PageSource);
         }
 
         //второй тест в котором мы проверяем, появляется ли сообщение об ошибке на экране, если мы заполняем некоторые поля ввода, а не все из них, и нажимает кнопку "Create":
