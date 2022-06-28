@@ -11,22 +11,28 @@
 
 <footer class="border-top footer text-muted">
     <div class="container">
-        &copy; 2022 - OnlineShopWebApp
-        <ul class="navbar-nav flex-grow-1">
-            <li class="nav-item col-4 mb-3">
-                <form asp-action="ChangeLanguage" asp-controller="Home" method="post">
+        <div class="row align-items-center">
+            <div class="col">
+                &copy; 2022 - OnlineShopWebApp
+            </div>
+            <div class="col">
+                <ul class="navbar-nav flex-grow-1">
+                    <li class="nav-item col-5">
+                        <form asp-area="" asp-action="ChangeLanguage" asp-controller="Home" method="post">
 
-                    <input type="hidden" id="returnUrl" name="returnUrl" value="@returnUrl" />
+                            <input type="hidden" id="returnUrl" name="returnUrl" value="@returnUrl" />
 
-                    <select id="culture"
-                            name="culture"
-                            class="form-control form-control-sm"
-                            onchange="this.form.submit();"
-                            asp-items="cultureItems"
-                            asp-for="@requestCulture.RequestCulture.UICulture.Name">
-                    </select>
-                </form>
-            </li>
-        </ul>
+                            <select id="culture"
+                                    name="culture"
+                                    class="form-control form-control-sm"
+                                    onchange="this.form.submit();"
+                                    asp-items="cultureItems"
+                                    asp-for="@requestCulture.RequestCulture.UICulture.Name">
+                            </select>
+                        </form>
+                    </li>
+                </ul>
+            </div>
+        </div>
     </div>
 </footer>

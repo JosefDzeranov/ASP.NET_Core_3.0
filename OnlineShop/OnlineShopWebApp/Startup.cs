@@ -104,9 +104,8 @@ namespace OnlineShopWebApp
             app.UseAuthentication();
             app.UseAuthorization();
 
-            //var localizationOptions = app.ApplicationServices.GetService<IOptions<RequestLocalizationOptions>>().Value;
-            //app.UseRequestLocalization(localizationOptions);
-            app.UseRequestLocalization();
+            var localizationOptions = app.ApplicationServices.GetService<IOptions<RequestLocalizationOptions>>().Value;
+            app.UseRequestLocalization(localizationOptions);
 
             app.UseEndpoints(endpoints =>
             {

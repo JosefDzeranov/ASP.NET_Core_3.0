@@ -12,14 +12,14 @@
             <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
                 <ul class="navbar-nav flex-grow-1">
                     <li class="nav-item">
-                        <a class="nav-link text-dark"
+                        <a class="nav-link"
                            asp-area="" asp-controller="Home" asp-action="Index">@ViewLocalizer["mainmenu.home.text"]</a>
                     </li>
 
                     @if (User.IsInRole(Constants.AdminRoleName))
                     {
                         <li class="nav-item">
-                            <a class="nav-link text-dark"
+                            <a class="nav-link"
                                asp-area="Admin" asp-controller="Order" asp-action="Index">@ViewLocalizer["mainmenu.admin.text"]</a>
                         </li>
                     }
@@ -31,15 +31,17 @@
                     <a class="btn btn-outline-dark btn-sm text-nowrap mr-5" role="button"
                        asp-area="" asp-controller="Favorites" asp-action="Index">@ViewLocalizer["general.button.favorites"]</a>
                 </div>
-                <div class="col-auto">
+                <div class="col-auto align-items-center">
                     @if (User.Identity.IsAuthenticated)
                     {
-                        <ul class="navbar-nav">
-                            <li class="nav-item text-sm-right">
-                                @User.Identity.Name
+                        <ul class="navbar-nav flex-grow-1">
+                            <li class="nav-item">
+                                <div class="nav-link text-dark">
+                                    @User.Identity.Name
+                                </div>
                             </li>
-                            <li class="nav-item text-sm-right">
-                                <a class="nav-link text-dark"
+                            <li class="nav-item">
+                                <a class="nav-link"
                                    asp-area="" asp-controller="Account" asp-action="Signout">@ViewLocalizer["authmenu.signout"]</a>
                             </li>
                         </ul>

@@ -50,7 +50,7 @@ namespace OnlineShopWebApp.Controllers
                 CookieRequestCultureProvider.MakeCookieValue(new RequestCulture(culture)),
                     new CookieOptions
                     {
-                        Expires = DateTimeOffset.UtcNow.AddDays(7)
+                        Expires = DateTimeOffset.UtcNow.AddDays(30)
                     }
             );
 
