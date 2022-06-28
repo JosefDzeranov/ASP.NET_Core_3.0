@@ -26,8 +26,10 @@ namespace OnlineShopWebApp.Controllers
         public EmployeesController(IEmployeeRepository employeeRepository)
         {
             _repo = employeeRepository;
+           
             _validation = new AccountNumberValidation();
         }
+
         public IActionResult Index()
         {
             //мы получаем всех сотрудников из базы данных и возвращаем представление с этими сотрудниками
@@ -35,6 +37,12 @@ namespace OnlineShopWebApp.Controllers
             return View(employees);
         }
 
+        public IActionResult Create()
+        {
+            return View();
+        }
+
+        [HttpPost]
         public IActionResult Create([Bind("Name,AccountNumber,Age")] Employee employee)
         {
             if (!ModelState.IsValid)
