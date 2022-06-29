@@ -1,6 +1,7 @@
 using System;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
+using OpenQA.Selenium.Remote;
 using Xunit;
 
 namespace OnlineShop.AutomatedUITests
@@ -8,8 +9,7 @@ namespace OnlineShop.AutomatedUITests
     public class AutomatedUITests: IDisposable
     {
         //собираемся использовать метод Dispose, чтобы закрыть окно chrome, открытое ChromeDriver, а также удалить его.
-
-        private readonly IWebDriver _driver;
+        private readonly IWebDriver _driver;// = new RemoteWebDriver(new Uri("http://127.0.0.1:5001"), new ChromeOptions());
         public AutomatedUITests()
         {
             _driver = new ChromeDriver();
@@ -18,7 +18,7 @@ namespace OnlineShop.AutomatedUITests
         public void Dispose()
         {
             _driver.Quit();
-            _driver.Dispose();
+           // _driver.Dispose();
         }
 
         //первый тест пользовательского интерфейса
