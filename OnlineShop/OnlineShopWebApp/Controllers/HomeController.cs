@@ -5,6 +5,7 @@ using OnlineShopWebApp.Helpers;
 using System;
 using Microsoft.AspNetCore.Localization;
 using Microsoft.AspNetCore.Http;
+using System.Threading;
 
 namespace OnlineShopWebApp.Controllers
 {
@@ -18,8 +19,9 @@ namespace OnlineShopWebApp.Controllers
 
         public IActionResult Index()
         {
+            var currentCulture = Thread.CurrentThread.CurrentUICulture.Name;
             var products = _productStorage.GetAllAvailable();
-            var productViewModels = products.ToProductViewModels();
+            var productViewModels = products.ToProductViewModels(currentCulture);
             return View(productViewModels);
         }
 
@@ -31,8 +33,9 @@ namespace OnlineShopWebApp.Controllers
                 return RedirectToAction("Index");
             }
 
+            var currentCulture = Thread.CurrentThread.CurrentUICulture.Name;
             var products = _productStorage.SearchByName(name).ToList();
-            var productViewModels = products.ToProductViewModels();
+            var productViewModels = products.ToProductViewModels(currentCulture);
             
             if (!productViewModels.Any())
             {

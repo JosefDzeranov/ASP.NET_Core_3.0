@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using OnlineShop.Db.Models;
 
 namespace OnlineShop.Db.Models
 {
@@ -9,11 +10,11 @@ namespace OnlineShop.Db.Models
 
         public List<Image> Images { get; set; }
 
-        public string Name { get; set; }
+        public List<ProductResource> Names { get; set; }
 
         public decimal Cost { get; set; }
 
-        public string Description { get; set; }
+        public List<ProductResource> Descriptions { get; set; }
 
         public List<BasketItem> BasketItems { get; set; }
 
@@ -23,14 +24,16 @@ namespace OnlineShop.Db.Models
         {
             BasketItems = new List<BasketItem>();
             Images = new List<Image>();
+            Names = new List<ProductResource>();
+            Descriptions = new List<ProductResource>();
         }
 
-        public Product(Guid id, string name, decimal cost, string description)
+        public Product(Guid id, List<ProductResource> names, decimal cost, List<ProductResource> descriptions)
         {
             Id = id;
-            Name = name;
+            Names = names;
             Cost = cost;
-            Description = description;
+            Descriptions = descriptions;
             Available = true;
         }
     }

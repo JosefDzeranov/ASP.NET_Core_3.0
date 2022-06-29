@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using OnlineShop.Db;
 using OnlineShopWebApp.Models;
 using OnlineShopWebApp.Helpers;
+using System.Threading;
 
 namespace OnlineShopWebApp.Controllers
 {
@@ -15,8 +16,9 @@ namespace OnlineShopWebApp.Controllers
         }
         public IActionResult Index(Guid id)
         {
+            var currentCulture = Thread.CurrentThread.CurrentUICulture.Name;
             var product = _productStorage.TryGetProduct(id);
-            var productViewModel = product.ToProductViewModel();
+            var productViewModel = product.ToProductViewModel(currentCulture);
             return View(productViewModel);
         }
     }

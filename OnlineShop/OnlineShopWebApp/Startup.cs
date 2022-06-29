@@ -15,6 +15,7 @@ using OnlineShop.Db.Models;
 using System;
 using Microsoft.AspNetCore.Http;
 using OnlineShopWebApp.Helpers;
+using OnlineShop.Db.Services;
 
 namespace OnlineShopWebApp
 {
@@ -57,6 +58,8 @@ namespace OnlineShopWebApp
             services.AddTransient<ICompareStorage, CompareDbStorage>();
             services.AddTransient<IFavoritesStorage, FavoritesDbStorage>();
             services.AddTransient<IImageProvider, ImageProvider>();
+            services.AddScoped<ILanguageService, LanguageService>();
+            services.AddScoped<ILocalizationService, LocalizationService>();
 
             services.AddLocalization(options =>
             {

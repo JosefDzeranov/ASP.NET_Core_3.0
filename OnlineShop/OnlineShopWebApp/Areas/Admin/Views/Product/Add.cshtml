@@ -16,6 +16,7 @@
             <h2>Add product</h2>
             <form asp-action="Add" asp-controller="Product" asp-area="Admin" enctype="multipart/form-data">
                 <div class="validation" asp-validation-summary="All"></div>
+                <input asp-for="Id" type="hidden" value="@Model.Id">
                 <div class="mb-3">
                     <input class="form-control" type="file" multiple accept="image/*" asp-for="UploadedFiles" placeholder="Upload files" />
                 </div>
@@ -27,17 +28,26 @@
                     <option value="false">Not available</option>
                 </select>
                 <div class="mb-3">
-                    <input class="form-control" asp-for="Name" placeholder="Name" />
-                    <span asp-validation-for="Name"></span>
+                    <input class="form-control" asp-for="NameEN" placeholder="Name in english" />
+                    <span asp-validation-for="NameEN"></span>
+                </div>
+                <div class="mb-3">
+                    <input class="form-control" asp-for="NameRU" placeholder="Название по-русски" />
+                    <span asp-validation-for="NameRU"></span>
+                </div>
+                <div class="mb-3">
+                    <textarea class="form-control" rows="5" asp-for="DescriptionEN" placeholder="Description in english"></textarea>
+                    <span asp-validation-for="DescriptionEN"></span>
+                </div>
+                <div class="mb-3">
+                    <textarea class="form-control" rows="5" asp-for="DescriptionRU" placeholder="Описание по-русски"></textarea>
+                    <span asp-validation-for="DescriptionRU"></span>
                 </div>
                 <div class="mb-3">
                     <input class="form-control" type="number" asp-for="Cost" placeholder="Cost" />
                     <span asp-validation-for="Cost"></span>
                 </div>
-                <div class="mb-3">
-                    <textarea class="form-control" rows="5" asp-for="Description" placeholder="Description"></textarea>
-                    <span asp-validation-for="Description"></span>
-                </div>
+
                 <div class="mb-3">
                     <button type="submit" class="btn btn-outline-dark btn-sm" asp-area="Admin" asp-controller="Product" asp-action="Add">Add</button>
                 </div>

@@ -13,7 +13,7 @@
             <h5>Your order:</h5>
             @foreach (var item in @Model.Basket.Items)
             {
-                <p>@item.Product.Name (@item.Quantity) - $@item.Cost</p>
+                <p>@item.Product.Names[0].Value (@item.Quantity) - $@item.Cost</p>
             }
             <h6>Total: $@Model.Basket.TotalCost</h6>
         </div>

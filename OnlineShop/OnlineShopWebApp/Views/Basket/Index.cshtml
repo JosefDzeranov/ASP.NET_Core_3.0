@@ -24,7 +24,7 @@
                     <tbody class="border-top-0" align="center">
                         <tr>
                             <td>
-                                <a asp-area="" asp-controller="Product" asp-action="Index" asp-route-id="@item.Product.Id">@item.Product.Name</a>
+                                <a asp-area="" asp-controller="Product" asp-action="Index" asp-route-id="@item.Product.Id">@item.Product.Names[0].Value</a>
                             </td>
                             <td>
                                 @item.Quantity
