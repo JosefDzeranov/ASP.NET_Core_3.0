@@ -17,8 +17,8 @@ namespace OnlineShop.AutomatedUITests
 
         public void Dispose()
         {
-            _driver.Quit();
-           // _driver.Dispose();
+            //_driver.Quit();
+            //_driver.Dispose();
         }
 
         //первый тест пользовательского интерфейса
@@ -40,18 +40,20 @@ namespace OnlineShop.AutomatedUITests
         {
             _driver.Navigate()
                 .GoToUrl("https://localhost:5001/Employees/Create");
-            _driver.FindElement(By.Id("Name"))
+            _driver.FindElement(By.Name("Name"))
                 .SendKeys("Test Employee");
 
-            _driver.FindElement(By.Id("Age"))
+            _driver.FindElement(By.Name("Age"))
                 .SendKeys("34");
 
-            _driver.FindElement(By.Id("Create"))
+            _driver.FindElement(By.ClassName("btn-outline-dark"))
                 .Click();
 
-            var errorMessage = _driver.FindElement(By.Id("AccountNumber-error")).Text;
+            var errorMessage = _driver.FindElement(By.ClassName("field-validation-error")).Text;
 
             Assert.Equal("Account number is required", errorMessage);
         }
+
+
     }
 }
