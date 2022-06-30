@@ -6,8 +6,6 @@ namespace OnlineShopWebApp.Areas.Admin.Models
 {
     public class AddProductViewModel
     {
-        public Guid Id { get; set; }
-
         [Required]
         public string NameEN { get; set; }
         

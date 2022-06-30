@@ -4,6 +4,7 @@ namespace OnlineShop.Db.Services
 {
     public interface ILocalizationService
     {
-        ProductResource GetProductResource(string resourceKey, int languageId);
+        ProductNameResource GetProductNames(string resourceKey, int languageId);
+        ProductDescResource GetProductDescriptions(string resourceKey, int languageId);
     }
 }

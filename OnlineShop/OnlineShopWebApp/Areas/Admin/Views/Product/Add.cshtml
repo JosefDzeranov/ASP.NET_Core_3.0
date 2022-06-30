@@ -15,8 +15,7 @@
         <div class="col-10 mx-auto">
             <h2>Add product</h2>
             <form asp-action="Add" asp-controller="Product" asp-area="Admin" enctype="multipart/form-data">
-                <div class="validation" asp-validation-summary="All"></div>
-                <input asp-for="Id" type="hidden" value="@Model.Id">
+                <div class="validation" asp-validation-summary="All"></div>                
                 <div class="mb-3">
                     <input class="form-control" type="file" multiple accept="image/*" asp-for="UploadedFiles" placeholder="Upload files" />
                 </div>

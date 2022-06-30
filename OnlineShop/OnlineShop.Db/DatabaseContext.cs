@@ -17,7 +17,8 @@ namespace OnlineShop.Db
         public DbSet<Address> Addresses { get; set; }
         public DbSet<DeliveryInfo> DeliveryInfo { get; set; }
         public DbSet<Language> Languages { get; set; }
-        public DbSet<ProductResource> ProductResources { get; set; }
+        public DbSet<ProductNameResource> Names { get; set; }
+        public DbSet<ProductDescResource> Descriptions { get; set; }
 
         public DatabaseContext(DbContextOptions<DatabaseContext> options) : base(options)
         {
@@ -77,8 +78,6 @@ namespace OnlineShop.Db
             //    new Product(product3Id, "Landscape", 300, "Photography, 2000 x 3000 px, 3,5 Mb Tiff"),
             //    new Product(product4Id, "Abstraction", 400, "Photography, 2000 x 3000 px, 2,5 Mb Tiff"),
             //});
-
-
         }
     }
 }

@@ -10,11 +10,11 @@ namespace OnlineShop.Db.Models
 
         public List<Image> Images { get; set; }
 
-        public List<ProductResource> Names { get; set; }
+        public List<ProductNameResource> Names { get; set; }
 
         public decimal Cost { get; set; }
 
-        public List<ProductResource> Descriptions { get; set; }
+        public List<ProductDescResource> Descriptions { get; set; }
 
         public List<BasketItem> BasketItems { get; set; }
 
@@ -24,11 +24,11 @@ namespace OnlineShop.Db.Models
         {
             BasketItems = new List<BasketItem>();
             Images = new List<Image>();
-            Names = new List<ProductResource>();
-            Descriptions = new List<ProductResource>();
+            Names = new List<ProductNameResource>();
+            Descriptions = new List<ProductDescResource>();
         }
 
-        public Product(Guid id, List<ProductResource> names, decimal cost, List<ProductResource> descriptions)
+        public Product(Guid id, List<ProductNameResource> names, decimal cost, List<ProductDescResource> descriptions)
         {
             Id = id;
             Names = names;

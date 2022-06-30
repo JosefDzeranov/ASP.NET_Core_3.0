@@ -12,9 +12,14 @@ namespace OnlineShop.Db.Services
             _databaseContext = databaseContext;
         }
 
-        public ProductResource GetProductResource(string resourceKey, int languageId)
+        public ProductNameResource GetProductNames(string resourceKey, int languageId)
         {
-            return _databaseContext.ProductResources.FirstOrDefault(r => r.Name == resourceKey && r.LanguageId == languageId);
+            return _databaseContext.Names.FirstOrDefault(r => r.Name == resourceKey && r.LanguageId == languageId);
+        }
+        
+        public ProductDescResource GetProductDescriptions(string resourceKey, int languageId)
+        {
+            return _databaseContext.Descriptions.FirstOrDefault(r => r.Name == resourceKey && r.LanguageId == languageId);
         }
 
     }

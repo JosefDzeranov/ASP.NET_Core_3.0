@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using OnlineShop.Db;
 
 namespace OnlineShop.Db.Migrations
 {
     [DbContext(typeof(DatabaseContext))]
-    partial class DatabaseContextModelSnapshot : ModelSnapshot
+    [Migration("20220630122944_AddProductLanguageResources")]
+    partial class AddProductLanguageResources
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -367,7 +369,7 @@ namespace OnlineShop.Db.Migrations
 
             modelBuilder.Entity("OnlineShop.Db.Models.ProductDescResource", b =>
                 {
-                    b.HasOne("OnlineShop.Db.Models.Language", "Languages")
+                    b.HasOne("OnlineShop.Db.Models.Language", "Language")
                         .WithMany("Descriptions")
                         .HasForeignKey("LanguageId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -377,14 +379,14 @@ namespace OnlineShop.Db.Migrations
                         .WithMany("Descriptions")
                         .HasForeignKey("ProductId");
 
-                    b.Navigation("Languages");
+                    b.Navigation("Language");
 
                     b.Navigation("Product");
                 });
 
             modelBuilder.Entity("OnlineShop.Db.Models.ProductNameResource", b =>
                 {
-                    b.HasOne("OnlineShop.Db.Models.Language", "Languages")
+                    b.HasOne("OnlineShop.Db.Models.Language", "Language")
                         .WithMany("Names")
                         .HasForeignKey("LanguageId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -394,7 +396,7 @@ namespace OnlineShop.Db.Migrations
                         .WithMany("Names")
                         .HasForeignKey("ProductId");
 
-                    b.Navigation("Languages");
+                    b.Navigation("Language");
 
                     b.Navigation("Product");
                 });
