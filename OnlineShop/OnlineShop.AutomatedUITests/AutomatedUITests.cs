@@ -1,4 +1,5 @@
 using System;
+using OnlineShop.Db.Models;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
 using OpenQA.Selenium.Remote;
@@ -17,8 +18,8 @@ namespace OnlineShop.AutomatedUITests
 
         public void Dispose()
         {
-            //_driver.Quit();
-            //_driver.Dispose();
+            _driver.Quit();
+            _driver.Dispose();
         }
 
         //первый тест пользовательского интерфейса
@@ -29,7 +30,7 @@ namespace OnlineShop.AutomatedUITests
                 .GoToUrl("https://localhost:5001/Employees/Create"); //с помощью метода GoToUrl мы указываем это местоположение
 
             //После перехода браузера к запрошенному URL-адресу будут заполнены свойства Title и PageSource объекта _driver
-            Assert.Equal("Регистрация нового сотрудника - ООО \"Капремонтпроект\"", _driver.Title);
+            Assert.Equal($"Регистрация нового сотрудника - {MyConstant.NameOrganization}", _driver.Title);
             Assert.Contains("Регистрация нового сотрудника", _driver.PageSource);
         }
 
@@ -54,6 +55,27 @@ namespace OnlineShop.AutomatedUITests
             Assert.Equal("Account number is required", errorMessage);
         }
 
+        [Fact]
+        public void Create_WhenSuccessfullyExecuted_ReturnsIndexViewWithNewEmployee()
+        {
+            _driver.Navigate()
+                .GoToUrl("https://localhost:5001/Employees/Create");
+            _driver.FindElement(By.Name("Name"))
+                .SendKeys("Another Test Employee ");
 
+            _driver.FindElement(By.Name("Age"))
+                .SendKeys("34");
+
+            _driver.FindElement(By.Name("AccountNumber"))
+                .SendKeys("123-9384613085-58");
+
+            _driver.FindElement(By.ClassName("btn-outline-dark"))
+                .Click();
+
+            Assert.Equal($"Сотрудники - {MyConstant.NameOrganization}", _driver.Title);
+            Assert.Contains("Сотрудники", _driver.PageSource);
+            Assert.Contains("34", _driver.PageSource);
+            Assert.Contains("123-9384613085-58", _driver.PageSource);
+        }
     }
 }

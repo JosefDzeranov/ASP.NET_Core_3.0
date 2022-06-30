@@ -23,4 +23,9 @@
     </PackageReference>
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\OnlineShop.Db\OnlineShop.Db.csproj" />
+    <ProjectReference Include="..\OnlineShopWebApp\OnlineShopWebApp.csproj" />
+  </ItemGroup>
+
 </Project>
