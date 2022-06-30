@@ -14,13 +14,15 @@ namespace OnlineShopWebApp
     //временный класс для обучения тестированию
     public class EmployeeRepository : IEmployeeRepository
     {
-        private IWorkWithData JsonStorage { get; } = new JsonWorkWithData(nameSave);
+        private IWorkWithData JsonStorage { get; }
         private readonly List<Employee> employes;
 
         private const string nameSave = "employes";
         
         public EmployeeRepository()
         {
+            JsonStorage = new JsonWorkWithData(nameSave);
+            employes = new List<Employee>();
         }
         
 
@@ -37,7 +39,8 @@ namespace OnlineShopWebApp
 
         public void CreateEmployee(Employee employee)
         {
-            
+            Guid idGuid = Guid.NewGuid();
+            employee.Id = idGuid;
             employes.Add(employee);
             Save();
         }

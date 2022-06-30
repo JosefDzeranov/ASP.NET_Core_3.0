@@ -35,7 +35,5 @@ namespace OnlineShopWebApp.Models
 
         public Guid RoleId { get; set; }
 
-
-
     }
 }

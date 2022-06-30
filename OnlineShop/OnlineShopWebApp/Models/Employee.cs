@@ -18,5 +18,6 @@ namespace OnlineShopWebApp.Models
         [Required(ErrorMessage = "Account number is required")]
         public string AccountNumber { get; set; }
 
+
     }
 }
