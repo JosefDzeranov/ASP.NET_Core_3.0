@@ -24,6 +24,11 @@ namespace OnlineShopWebApp.Controllers
             _favoritesStorage = favoritesStorage;
         }
 
+        public IActionResult Index()
+        {
+            return View();
+        }
+
         public IActionResult Signin(string returnUrl)
         {
             return View(new SigninViewModel() { ReturnUrl = returnUrl });

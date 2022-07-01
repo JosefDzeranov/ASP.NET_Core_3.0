@@ -18,7 +18,7 @@
                     {
                         <li class="nav-item">
                             <a class="nav-link text-dark"
-                               asp-area="Admin" asp-controller="Order" asp-action="Index">Admin</a>
+                           asp-area="Admin" asp-controller="Order" asp-action="Index">Admin panel</a>
                         </li>
                     }
                 </ul>
@@ -33,21 +33,23 @@
                     @if (User.Identity.IsAuthenticated)
                     {
                         <ul class="navbar-nav">
-                            <li class="nav-item text-sm-right">
-                                @User.Identity.Name
-                            </li>
-                            <li class="nav-item text-sm-right">
-                                <a class="nav-link text-dark"
-                                   asp-area="" asp-controller="Account" asp-action="Signout">Sign out</a>
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle text-dark" href="" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    @User.Identity.Name
+                                </a>
+                                <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                                    <a class="dropdown-item" asp-route-area="" asp-controller="Account" asp-action="Index">My profile</a>
+                                    <a class="dropdown-item" asp-route-area="" asp-controller="Account" asp-action="Signout">Sign out</a>
+                                </div>
                             </li>
                         </ul>
                     }
                     else
                     {
                         <a class="btn btn-outline-primary btn-sm text-nowrap mr-2" role="button"
-                           asp-area="" asp-controller="Account" asp-action="Signin">Sign in</a>
+                       asp-area="" asp-controller="Account" asp-action="Signin">Sign in</a>
                         <a class="btn btn-outline-success btn-sm text-nowrap" role="button"
-                           asp-area="" asp-controller="Account" asp-action="Signup">Sign up</a>
+                       asp-area="" asp-controller="Account" asp-action="Signup">Sign up</a>
                     }
                 </div>
             </div>
