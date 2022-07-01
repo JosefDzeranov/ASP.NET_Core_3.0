@@ -121,7 +121,7 @@
     <value>Выйти</value>
   </data>
   <data name="general.button.compare" xml:space="preserve">
-    <value>Сравнить</value>
+    <value>К сравнению</value>
   </data>
   <data name="general.button.favorites" xml:space="preserve">
     <value>Избранное</value>
@@ -133,7 +133,7 @@
     <value>Зарегистрироваться</value>
   </data>
   <data name="mainmenu.admin.text" xml:space="preserve">
-    <value>Админ</value>
+    <value>Панель администратора</value>
   </data>
   <data name="mainmenu.home.text" xml:space="preserve">
     <value>Главная</value>
