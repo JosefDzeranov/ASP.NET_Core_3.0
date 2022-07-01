@@ -43,7 +43,7 @@ namespace OnlineShopWebApp
 
         public bool CheckingForAuthorization()
         {
-            if (userAutorized.Login == null) return false;
+            if (userAutorized == null) return false;
             var user = Find(userAutorized.Login);
             if (_cartRepository.Find(user.Login) == null && user.RoleId == MyConstant.RoleDefaultId)
             {
@@ -62,10 +62,6 @@ namespace OnlineShopWebApp
         {
             user.RoleId = roleId;
             user.RoleName = _roleManager.Find(roleId).Name;
-            if (roleId == MyConstant.RoleDefaultId)
-            {
-                _cartRepository.CreateCartBuyer(user.Login);
-            }
         }
 
         public List<User> GetAll()
@@ -85,8 +81,8 @@ namespace OnlineShopWebApp
                 Login = userInput.Login,
                 Password = userInput.Password
             };
-            AssignRole(userInput.Login, MyConstant.RoleDefaultId); //Покупатель
             users.Add(newUser);
+            AssignRole(userInput.Login, MyConstant.RoleDefaultId); //Покупатель
             Save();
         }
         public void Remove(string login)

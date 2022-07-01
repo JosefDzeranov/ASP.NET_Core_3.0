@@ -40,6 +40,7 @@ namespace OnlineShopWebApp.Controllers
         [HttpPost]
         public IActionResult Register(UserRegistration userInput)
         {
+            Exit();
             if (userInput.Login == userInput.Password)
             {
                 ModelState.AddModelError("", "Логин и пароль не должны совпадать!");
