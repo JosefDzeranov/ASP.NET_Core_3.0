@@ -12,7 +12,6 @@ namespace OnlineShopWebApp.Areas.Admin.Models
         [Required]
         public string NameEN { get; set; }
 
-        [Required]
         public string NameRU { get; set; }
 
         [Required]
@@ -21,7 +20,6 @@ namespace OnlineShopWebApp.Areas.Admin.Models
         [Required]
         public string DescriptionEN { get; set; }
         
-        [Required]
         public string DescriptionRU { get; set; }
 
         public bool Available { get; set; }

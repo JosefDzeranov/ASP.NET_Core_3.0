@@ -18,8 +18,9 @@ namespace OnlineShopWebApp
         public List<Product> GetAllByUserId(string userId)
         {
             var favoriteProducts = _databaseContext.FavoriteProducts.Where(fp => fp.UserId == userId)
-                                                                    .Include(fp => fp.Product)
-                                                                    .ThenInclude(p => p.Images)
+                                                                    .Include(fp => fp.Product.Images)
+                                                                    .Include(fp => fp.Product.Names)
+                                                                    .Include(fp => fp.Product.Descriptions)
                                                                     .Select(fp => fp.Product)
                                                                     .ToList();
             return favoriteProducts;

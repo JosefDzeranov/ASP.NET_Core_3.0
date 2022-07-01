@@ -17,8 +17,9 @@ namespace OnlineShop.Db
         public List<Product> GetAllByUserId(string userId)
         {
             var compareProducts = _databaseContext.CompareProducts.Where(cp => cp.UserId == userId)
-                                                                  .Include(cp => cp.Product)
-                                                                  .ThenInclude(p => p.Images)
+                                                                  .Include(cp => cp.Product.Images)
+                                                                  .Include(cp => cp.Product.Names)
+                                                                  .Include(cp => cp.Product.Descriptions)
                                                                   .Select(cp => cp.Product)
                                                                   .ToList();
             return compareProducts;
