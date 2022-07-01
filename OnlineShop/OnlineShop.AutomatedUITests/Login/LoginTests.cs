@@ -8,13 +8,16 @@ using Xunit;
 
 namespace OnlineShop.AutomatedUITests.Login
 {
-    public class LoginTests: IDisposable
+    public class LoginTests: IDisposable, ICollectionFixture<UsersManager>
     {
+
+        private readonly UsersManager _usersManager;
         private readonly IWebDriver _driver;
         private readonly string url = "https://localhost:5001/Login/Register";
 
-        public LoginTests()
+        public LoginTests(UsersManager usersManager)
         {
+            _usersManager = usersManager;
             _driver = new ChromeDriver();
         }
         public void Dispose()
@@ -62,42 +65,42 @@ namespace OnlineShop.AutomatedUITests.Login
 
             Assert.Equal($"Личный кабинет - {MyConstant.NameOrganization}", _driver.Title);
             Assert.Contains(login, _driver.PageSource);
+
+            _usersManager.Remove(login);
         }
 
-        public class FixureLoginTests : IClassFixture<IUsersManager>
-        {
-            private readonly IUsersManager _usersManager;
-            private readonly IWebDriver _driver;
-            private readonly string url = "https://localhost:5001/Login/Register";
+        
+        //public class FixureLoginTests : ICollectionFixture<UsersManager>
+        //{
+        //    private readonly UsersManager _usersManager;
+        //    private readonly IWebDriver _driver;
+        //    private readonly string url = "https://localhost:5001/Login/Register";
+        //    public FixureLoginTests(UsersManager usersManager)
+        //    {
+        //        _usersManager = usersManager;
+        //        _driver = new ChromeDriver();
+        //    }
+        //    [Theory, InlineData("alex2", "12345678", "12345678")]
+        //    public void Create_WrongModelData_ReturnsIndexViewWithNewEmployee(string login, string password, string passwordConfirm)
+        //    {
+        //        _driver.Navigate().GoToUrl(url);
+        //        _driver.FindElement(By.Name("Login")).SendKeys(login);
+        //        _driver.FindElement(By.Name("Password")).SendKeys(password);
+        //        _driver.FindElement(By.Name("PasswordConfirm")).SendKeys(passwordConfirm);
+        //        _driver.FindElement(By.ClassName("btn-outline-dark")).Click();
 
-            public FixureLoginTests(IUsersManager usersManager)
-            {
-                _usersManager = usersManager;
-                _driver = new ChromeDriver();
-            }
+        //        Assert.Equal($"Авторизация - {MyConstant.NameOrganization}", _driver.Title);
+        //        _driver.FindElement(By.Name("Login")).SendKeys(login);
+        //        _driver.FindElement(By.Name("Password")).SendKeys(password);
+        //        _driver.FindElement(By.ClassName("btn-outline-dark")).Click();
 
-            [Theory, InlineData("alex3", "12345678", "12345678")]
-            public void Create_WrongModelData_ReturnsIndexViewWithNewEmployee(string login, string password, string passwordConfirm)
-            {
-                _driver.Navigate().GoToUrl(url);
-                _driver.FindElement(By.Name("Login")).SendKeys(login);
-                _driver.FindElement(By.Name("Password")).SendKeys(password);
-                _driver.FindElement(By.Name("PasswordConfirm")).SendKeys(passwordConfirm);
-                _driver.FindElement(By.ClassName("btn-outline-dark")).Click();
+        //        Assert.Equal($"Личный кабинет - {MyConstant.NameOrganization}", _driver.Title);
+        //        Assert.Contains(login, _driver.PageSource);
 
-                Assert.Equal($"Авторизация - {MyConstant.NameOrganization}", _driver.Title);
-                _driver.FindElement(By.Name("Login")).SendKeys(login);
-                _driver.FindElement(By.Name("Password")).SendKeys(password);
-                _driver.FindElement(By.ClassName("btn-outline-dark")).Click();
+        //        _usersManager.Remove(login);
+        //    }
 
-                Assert.Equal($"Личный кабинет - {MyConstant.NameOrganization}", _driver.Title);
-                Assert.Contains(login, _driver.PageSource);
-                Assert.Contains(password, _driver.PageSource);
-
-                _usersManager.Remove(login);
-
-            }
-        }
+        //}
 
     }
 }
