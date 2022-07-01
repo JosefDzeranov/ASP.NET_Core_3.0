@@ -33,7 +33,7 @@ namespace OnlineShop.Db
 
         public IEnumerable<Product> SearchByName(string name)
         {
-            var products = _databaseContext.Products.Where(p => p.Name.ToLower().Contains(name.ToLower()));
+            var products = _databaseContext.Products.Include(p => p.Images).Where(p => p.Name.ToLower().Contains(name.ToLower()));
             return products;
         }
         public void Add(Product product)

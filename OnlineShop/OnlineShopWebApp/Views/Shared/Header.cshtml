@@ -1,8 +1,10 @@
-﻿<header>
+﻿@inject IViewLocalizer ViewLocalizer
+
+<header>
     <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
         <div class="container">
             <a class="navbar-brand"
-               asp-area="" asp-controller="Home" asp-action="Index">OnlineShopWebApp</a>
+               asp-area="" asp-controller="Home" asp-action="Index">@ViewLocalizer["sitename.text"]</a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                     aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
@@ -10,26 +12,26 @@
             <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
                 <ul class="navbar-nav flex-grow-1">
                     <li class="nav-item">
-                        <a class="nav-link text-dark"
-                           asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+                        <a class="nav-link"
+                           asp-area="" asp-controller="Home" asp-action="Index">@ViewLocalizer["mainmenu.home.text"]</a>
                     </li>
 
                     @if (User.IsInRole(Constants.AdminRoleName))
                     {
                         <li class="nav-item">
-                            <a class="nav-link text-dark"
-                           asp-area="Admin" asp-controller="Order" asp-action="Index">Admin panel</a>
+                            <a class="nav-link"
+                               asp-area="Admin" asp-controller="Order" asp-action="Index">@ViewLocalizer["mainmenu.admin.text"]</a>
                         </li>
                     }
                 </ul>
                 <div class="col-auto">
                     @await Component.InvokeAsync("Basket")
                     <a class="btn btn-outline-dark btn-sm text-nowrap mr-2" role="button"
-                       asp-area="" asp-controller="Compare" asp-action="Index"> Compare list</a>
+                       asp-area="" asp-controller="Compare" asp-action="Index">@ViewLocalizer["general.button.compare"]</a>
                     <a class="btn btn-outline-dark btn-sm text-nowrap mr-5" role="button"
-                       asp-area="" asp-controller="Favorites" asp-action="Index">Favorites</a>
+                       asp-area="" asp-controller="Favorites" asp-action="Index">@ViewLocalizer["general.button.favorites"]</a>
                 </div>
-                <div class="col-auto">
+                <div class="col-auto align-items-center">
                     @if (User.Identity.IsAuthenticated)
                     {
                         <ul class="navbar-nav">
@@ -46,10 +48,10 @@
                     }
                     else
                     {
-                        <a class="btn btn-outline-primary btn-sm text-nowrap mr-2" role="button"
-                       asp-area="" asp-controller="Account" asp-action="Signin">Sign in</a>
-                        <a class="btn btn-outline-success btn-sm text-nowrap" role="button"
-                       asp-area="" asp-controller="Account" asp-action="Signup">Sign up</a>
+                <a class="btn btn-outline-primary btn-sm text-nowrap mr-2" role="button"
+                   asp-area="" asp-controller="Account" asp-action="Signin">@ViewLocalizer["general.button.signin"]</a>
+                <a class="btn btn-outline-success btn-sm text-nowrap" role="button"
+                   asp-area="" asp-controller="Account" asp-action="Signup">@ViewLocalizer["general.button.signup"]</a>
                     }
                 </div>
             </div>
