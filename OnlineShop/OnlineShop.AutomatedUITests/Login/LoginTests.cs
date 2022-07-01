@@ -15,6 +15,8 @@ namespace OnlineShop.AutomatedUITests.Login
         }
         public void Dispose()
         {
+            _driver.Quit();
+            _driver.Dispose();
         }
 
         [Fact]
