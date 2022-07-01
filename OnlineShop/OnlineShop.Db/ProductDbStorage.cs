@@ -17,23 +17,36 @@ namespace OnlineShop.Db
 
         public List<Product> GetAll()
         {
-            return _databaseContext.Products.Include(p => p.Images).ToList();
+            return _databaseContext.Products.Include(p => p.Images)
+                                            .Include(p => p.Names)
+                                            .Include(p => p.Descriptions)
+                                            .ToList();
         }
 
         public List<Product> GetAllAvailable()
         {
-            return _databaseContext.Products.Where(p => p.Available == true).Include(p => p.Images).ToList();
+            return _databaseContext.Products.Where(p => p.Available == true)
+                                            .Include(p => p.Images)
+                                            .Include(p => p.Names)
+                                            .Include(p => p.Descriptions)
+                                            .ToList();
         }
 
         public Product TryGetProduct(Guid id)
         {
-            var product = _databaseContext.Products.Include(p => p.Images).FirstOrDefault(p => p.Id == id);
+            var product = _databaseContext.Products.Include(p => p.Images)
+                                                   .Include(p => p.Names)
+                                                   .Include(p => p.Descriptions)
+                                                   .FirstOrDefault(p => p.Id == id);
             return product;
         }
 
         public IEnumerable<Product> SearchByName(string name)
         {
-            var products = _databaseContext.Products.Include(p => p.Images).Where(p => p.Name.ToLower().Contains(name.ToLower()));
+            var products = _databaseContext.Products.Include(p => p.Images)
+                                                    .Include(p => p.Names)
+                                                    .Include(p => p.Descriptions)
+                                                    .Where(p => p.Names.Any(n => n.Value.ToLower().Contains(name.ToLower())));
             return products;
         }
         public void Add(Product product)
@@ -44,16 +57,19 @@ namespace OnlineShop.Db
 
         public void Edit(Product product)
         {
-            var editProduct = _databaseContext.Products.Include(p => p.Images).FirstOrDefault(p => p.Id == product.Id);
+            var editProduct = _databaseContext.Products.Include(p => p.Images)
+                                                       .Include(p => p.Names)
+                                                       .Include(p => p.Descriptions)
+                                                       .FirstOrDefault(p => p.Id == product.Id);
 
             if (editProduct == null)
             {
                 return;
             }
 
-            editProduct.Name = product.Name;
+            editProduct.Names = product.Names;
             editProduct.Cost = product.Cost;
-            editProduct.Description = product.Description;
+            editProduct.Descriptions = product.Descriptions;
             editProduct.Available = product.Available;
 
 

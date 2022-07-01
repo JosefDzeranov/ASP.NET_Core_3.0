@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using OnlineShop.Db;
 
 namespace OnlineShop.Db.Migrations
 {
     [DbContext(typeof(DatabaseContext))]
-    partial class DatabaseContextModelSnapshot : ModelSnapshot
+    [Migration("20220628183754_AddLanguages")]
+    partial class AddLanguages
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -171,6 +173,32 @@ namespace OnlineShop.Db.Migrations
                     b.HasIndex("ProductId");
 
                     b.ToTable("Images");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = new Guid("7512a027-6c2b-44ec-9dc1-460dc630a1e0"),
+                            ProductId = new Guid("a604ee7e-aa0e-4ffc-b596-816570a9bc79"),
+                            Url = "/img/products/stilllife.jpg"
+                        },
+                        new
+                        {
+                            Id = new Guid("7228b05f-8fb9-4171-a2e9-ab3aaeaf44cd"),
+                            ProductId = new Guid("a604ee7e-aa0e-4ffc-b596-816570a9bc79"),
+                            Url = "/img/products/portret.jpg"
+                        },
+                        new
+                        {
+                            Id = new Guid("7512a027-6c2b-44ec-9dc1-450dc630a1e0"),
+                            ProductId = new Guid("a604ee7e-aa0e-4ffc-b596-816570a9bc79"),
+                            Url = "/img/products/landscape.jpg"
+                        },
+                        new
+                        {
+                            Id = new Guid("a604ee7e-aa0e-4ffc-b596-816570a9bc79"),
+                            ProductId = new Guid("a604ee7e-aa0e-4ffc-b596-816570a9bc79"),
+                            Url = "/img/products/abstraction.jpg"
+                        });
                 });
 
             modelBuilder.Entity("OnlineShop.Db.Models.Language", b =>
@@ -242,12 +270,52 @@ namespace OnlineShop.Db.Migrations
                     b.Property<decimal>("Cost")
                         .HasColumnType("decimal(18,2)");
 
+                    b.Property<string>("Description")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(max)");
+
                     b.HasKey("Id");
 
                     b.ToTable("Products");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = new Guid("a604ee7e-aa0e-4ffc-b596-816570a9bc79"),
+                            Available = true,
+                            Cost = 100m,
+                            Description = "Photography, 2000 x 3000 px, 4,5 Mb Tiff",
+                            Name = "Still Life"
+                        },
+                        new
+                        {
+                            Id = new Guid("7228b05f-8fb9-4171-a2e9-ab3aaeaf44cd"),
+                            Available = true,
+                            Cost = 200m,
+                            Description = "Photography, 2000 x 3000 px, 4,8 Mb Tiff",
+                            Name = "Portret"
+                        },
+                        new
+                        {
+                            Id = new Guid("e66f97c7-6414-423b-9589-8c92a964df62"),
+                            Available = true,
+                            Cost = 300m,
+                            Description = "Photography, 2000 x 3000 px, 3,5 Mb Tiff",
+                            Name = "Landscape"
+                        },
+                        new
+                        {
+                            Id = new Guid("ba082277-4b6f-4e86-a922-07353ce4ad13"),
+                            Available = true,
+                            Cost = 400m,
+                            Description = "Photography, 2000 x 3000 px, 2,5 Mb Tiff",
+                            Name = "Abstraction"
+                        });
                 });
 
-            modelBuilder.Entity("OnlineShop.Db.Models.ProductDescResource", b =>
+            modelBuilder.Entity("OnlineShop.Db.Models.StringResource", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -259,9 +327,6 @@ namespace OnlineShop.Db.Migrations
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<Guid?>("ProductId")
-                        .HasColumnType("uniqueidentifier");
-
                     b.Property<string>("Value")
                         .HasColumnType("nvarchar(max)");
 
@@ -269,36 +334,7 @@ namespace OnlineShop.Db.Migrations
 
                     b.HasIndex("LanguageId");
 
-                    b.HasIndex("ProductId");
-
-                    b.ToTable("Descriptions");
-                });
-
-            modelBuilder.Entity("OnlineShop.Db.Models.ProductNameResource", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<int>("LanguageId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Name")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<Guid?>("ProductId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<string>("Value")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("LanguageId");
-
-                    b.HasIndex("ProductId");
-
-                    b.ToTable("Names");
+                    b.ToTable("StringResources");
                 });
 
             modelBuilder.Entity("OnlineShop.Db.Models.BasketItem", b =>
@@ -365,38 +401,15 @@ namespace OnlineShop.Db.Migrations
                     b.Navigation("DeliveryInfo");
                 });
 
-            modelBuilder.Entity("OnlineShop.Db.Models.ProductDescResource", b =>
+            modelBuilder.Entity("OnlineShop.Db.Models.StringResource", b =>
                 {
                     b.HasOne("OnlineShop.Db.Models.Language", "Language")
-                        .WithMany("Descriptions")
+                        .WithMany("StringResourses")
                         .HasForeignKey("LanguageId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("OnlineShop.Db.Models.Product", "Product")
-                        .WithMany("Descriptions")
-                        .HasForeignKey("ProductId");
-
                     b.Navigation("Language");
-
-                    b.Navigation("Product");
-                });
-
-            modelBuilder.Entity("OnlineShop.Db.Models.ProductNameResource", b =>
-                {
-                    b.HasOne("OnlineShop.Db.Models.Language", "Language")
-                        .WithMany("Names")
-                        .HasForeignKey("LanguageId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("OnlineShop.Db.Models.Product", "Product")
-                        .WithMany("Names")
-                        .HasForeignKey("ProductId");
-
-                    b.Navigation("Language");
-
-                    b.Navigation("Product");
                 });
 
             modelBuilder.Entity("OnlineShop.Db.Models.Basket", b =>
@@ -406,9 +419,7 @@ namespace OnlineShop.Db.Migrations
 
             modelBuilder.Entity("OnlineShop.Db.Models.Language", b =>
                 {
-                    b.Navigation("Descriptions");
-
-                    b.Navigation("Names");
+                    b.Navigation("StringResourses");
                 });
 
             modelBuilder.Entity("OnlineShop.Db.Models.Order", b =>
@@ -420,11 +431,7 @@ namespace OnlineShop.Db.Migrations
                 {
                     b.Navigation("BasketItems");
 
-                    b.Navigation("Descriptions");
-
                     b.Navigation("Images");
-
-                    b.Navigation("Names");
                 });
 #pragma warning restore 612, 618
         }

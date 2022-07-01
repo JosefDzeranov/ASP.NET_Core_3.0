@@ -4,6 +4,7 @@ using OnlineShop.Db;
 using OnlineShopWebApp.Helpers;
 using Microsoft.AspNetCore.Authorization;
 using OnlineShopWebApp.Areas.Admin.Models;
+using System.Threading;
 
 namespace OnlineShopWebApp.Areas.Admin.Controllers
 {
@@ -22,8 +23,9 @@ namespace OnlineShopWebApp.Areas.Admin.Controllers
 
         public IActionResult Index()
         {
+            var currentCulture = Thread.CurrentThread.CurrentUICulture.Name;
             var products = _productStorage.GetAll();
-            var productViewModels = products.ToProductViewModels();
+            var productViewModels = products.ToProductViewModels(currentCulture);
             return View(productViewModels);
         }
 

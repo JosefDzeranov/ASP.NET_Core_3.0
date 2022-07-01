@@ -9,27 +9,27 @@ using System.Linq;
 namespace OnlineShopWebApp.Helpers
 {
     public static class Mapping
-    {      
-        public static ProductViewModel ToProductViewModel(this Product product)
+    {
+        public static ProductViewModel ToProductViewModel(this Product product, string currentCulture)
         {
             var productViewModel = new ProductViewModel
             {
-                Id = product.Id,               
-                Name = product.Name,
+                Id = product.Id,
+                Name = GetProductName(product, currentCulture),
                 Cost = product.Cost,
-                Description = product.Description,
+                Description = GetProductDesc(product, currentCulture),
                 Available = product.Available,
                 ImagePaths = product.Images.ToPaths()
             };
             return productViewModel;
         }
 
-        public static List<ProductViewModel> ToProductViewModels(this List<Product> products)
+        public static List<ProductViewModel> ToProductViewModels(this List<Product> products, string currentCulture)
         {
             var productViewModels = new List<ProductViewModel>();
             foreach (var product in products)
             {
-                var productViewModel = product.ToProductViewModel();
+                var productViewModel = product.ToProductViewModel(currentCulture);
                 productViewModels.Add(productViewModel);
             }
             return productViewModels;
@@ -40,35 +40,26 @@ namespace OnlineShopWebApp.Helpers
             var editProductViewModel = new EditProductViewModel
             {
                 Id = product.Id,
-                Name = product.Name,
+                NameEN = product.Names.FirstOrDefault(n => n.LanguageId == 1).Value,
+                NameRU = product.Names.FirstOrDefault(n => n.LanguageId == 2).Value,
                 Cost = product.Cost,
-                Description = product.Description,
+                DescriptionEN = product.Descriptions.FirstOrDefault(n => n.LanguageId == 1).Value,
+                DescriptionRU = product.Descriptions.FirstOrDefault(n => n.LanguageId == 2).Value,
                 Available = product.Available,
                 ImagePaths = product.Images.ToPaths()
             };
             return editProductViewModel;
         }
 
-        public static Product ToProduct(this ProductViewModel model)
-        {
-            var product = new Product
-            {
-                Id = model.Id,
-                Name = model.Name,
-                Cost = model.Cost,
-                Description = model.Description,
-                Available = model.Available
-            };
-            return product;
-        }
-
         public static Product ToProduct(this AddProductViewModel model, List<string> imagePaths)
         {
+            var id = Guid.NewGuid();
             var product = new Product
             {
-                Name = model.Name,
+                Id = id,
+                Names = ToNames(id, model.NameEN, model.NameRU),
                 Cost = model.Cost,
-                Description = model.Description,
+                Descriptions = ToDescriptions(id, model.DescriptionEN, model.DescriptionRU),
                 Available = model.Available,
                 Images = ToImages(imagePaths)
             };
@@ -80,13 +71,85 @@ namespace OnlineShopWebApp.Helpers
             var product = new Product
             {
                 Id = model.Id,
-                Name = model.Name,
+                Names = ToNames(model.Id, model.NameEN, model.NameRU),
                 Cost = model.Cost,
-                Description = model.Description,
+                Descriptions = ToDescriptions(model.Id, model.DescriptionEN, model.DescriptionRU),
                 Available = model.Available,
                 Images = model.ImagePaths.ToImages()
             };
             return product;
+        }
+
+        public static string GetProductName(Product product, string currentCulture)
+        {
+            string name;
+            if (currentCulture == "en-US")
+            {
+                name = product.Names.FirstOrDefault(n => n.LanguageId == 1).Value;
+            }
+            else
+            {
+                name = product.Names.FirstOrDefault(n => n.LanguageId == 2).Value;
+            }
+            return name;
+        }
+
+        public static string GetProductDesc(Product product, string currentCulture)
+        {
+            string desc;
+            if (currentCulture == "en-US")
+            {
+                desc = product.Descriptions.FirstOrDefault(n => n.LanguageId == 1).Value;
+            }
+            else
+            {
+                desc = product.Descriptions.FirstOrDefault(n => n.LanguageId == 2).Value;
+            }
+            return desc;
+        }
+
+        public static List<ProductNameResource> ToNames(Guid id, string nameEN, string nameRU)
+        {
+            var names = new List<ProductNameResource>()
+            {
+                new ProductNameResource
+                {
+                    Id = Guid.NewGuid(),
+                    LanguageId = 1,
+                    Name = id.ToString() + "." + "name",
+                    Value = nameEN
+                },
+                new ProductNameResource
+                {
+                    Id = Guid.NewGuid(),
+                    LanguageId = 2,
+                    Name = id.ToString() + "." + "name",
+                    Value = nameRU
+                }
+            };
+            return names;
+        }
+
+        public static List<ProductDescResource> ToDescriptions(Guid id, string descriptionEN, string descriptionRU)
+        {
+            var descriptions = new List<ProductDescResource>()
+            {
+                new ProductDescResource
+                {
+                    Id = Guid.NewGuid(),
+                    LanguageId = 1,
+                    Name = id.ToString() + "." + "desc",
+                    Value = descriptionEN
+                },
+                new ProductDescResource
+                {
+                    Id = Guid.NewGuid(),
+                    LanguageId = 2,
+                    Name = id.ToString() + "." + "desc",
+                    Value = descriptionRU
+                }
+            };
+            return descriptions;
         }
 
         public static List<Image> ToImages(this List<string> imagePaths)
@@ -233,7 +296,7 @@ namespace OnlineShopWebApp.Helpers
                 FirstName = user.FirstName,
                 LastName = user.LastName,
                 Phone = user.PhoneNumber,
-                Email = user.Email,             
+                Email = user.Email,
             };
             return userViewModel;
         }
@@ -255,7 +318,7 @@ namespace OnlineShopWebApp.Helpers
         public static List<UserViewModel> ToUserViewModels(this List<User> users)
         {
             var userViewModels = new List<UserViewModel>();
-            foreach(var user in users)
+            foreach (var user in users)
             {
                 var userViewModel = user.ToUserViewModel();
                 userViewModels.Add(userViewModel);
@@ -289,7 +352,7 @@ namespace OnlineShopWebApp.Helpers
         public static List<RoleViewModel> ToRoleViewModels(this List<IdentityRole> roles)
         {
             var roleViewModels = new List<RoleViewModel>();
-            foreach(var role in roles)
+            foreach (var role in roles)
             {
                 var roleViewModel = role.ToRoleViewModel();
                 roleViewModels.Add(roleViewModel);

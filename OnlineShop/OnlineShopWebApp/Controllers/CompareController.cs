@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using OnlineShop.Db;
@@ -21,13 +22,14 @@ namespace OnlineShopWebApp.Controllers
         }
         public IActionResult Index()
         {
+            var currentCulture = Thread.CurrentThread.CurrentUICulture.Name;
             var userId = GetUserId();
             var compareProducts = _compareStorage.GetAllByUserId(userId);
             if (compareProducts == null || compareProducts.Count == 0)
             {
                 return View("Empty");
             }
-            return View(compareProducts.ToProductViewModels());
+            return View(compareProducts.ToProductViewModels(currentCulture));
         }
 
         public IActionResult Add(Guid id)

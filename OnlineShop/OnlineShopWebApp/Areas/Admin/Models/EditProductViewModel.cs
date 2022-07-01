@@ -10,13 +10,17 @@ namespace OnlineShopWebApp.Areas.Admin.Models
         public Guid Id { get; set; }
 
         [Required]
-        public string Name { get; set; }
+        public string NameEN { get; set; }
+
+        public string NameRU { get; set; }
 
         [Required]
         public decimal Cost { get; set; }
 
         [Required]
-        public string Description { get; set; }
+        public string DescriptionEN { get; set; }
+        
+        public string DescriptionRU { get; set; }
 
         public bool Available { get; set; }
 

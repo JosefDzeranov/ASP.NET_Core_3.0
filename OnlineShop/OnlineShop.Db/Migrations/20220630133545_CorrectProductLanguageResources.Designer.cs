@@ -3,21 +3,53 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using OnlineShop.Db;
 
 namespace OnlineShop.Db.Migrations
 {
     [DbContext(typeof(DatabaseContext))]
-    partial class DatabaseContextModelSnapshot : ModelSnapshot
+    [Migration("20220630133545_CorrectProductLanguageResources")]
+    partial class CorrectProductLanguageResources
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("ProductVersion", "5.0.17")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+            modelBuilder.Entity("LanguageProductDescResource", b =>
+                {
+                    b.Property<Guid>("DescriptionsId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<int>("LanguagesId")
+                        .HasColumnType("int");
+
+                    b.HasKey("DescriptionsId", "LanguagesId");
+
+                    b.HasIndex("LanguagesId");
+
+                    b.ToTable("LanguageProductDescResource");
+                });
+
+            modelBuilder.Entity("LanguageProductNameResource", b =>
+                {
+                    b.Property<int>("LanguagesId")
+                        .HasColumnType("int");
+
+                    b.Property<Guid>("NamesId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.HasKey("LanguagesId", "NamesId");
+
+                    b.HasIndex("NamesId");
+
+                    b.ToTable("LanguageProductNameResource");
+                });
 
             modelBuilder.Entity("OnlineShop.Db.Models.Address", b =>
                 {
@@ -267,8 +299,6 @@ namespace OnlineShop.Db.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("LanguageId");
-
                     b.HasIndex("ProductId");
 
                     b.ToTable("Descriptions");
@@ -294,11 +324,39 @@ namespace OnlineShop.Db.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("LanguageId");
-
                     b.HasIndex("ProductId");
 
                     b.ToTable("Names");
+                });
+
+            modelBuilder.Entity("LanguageProductDescResource", b =>
+                {
+                    b.HasOne("OnlineShop.Db.Models.ProductDescResource", null)
+                        .WithMany()
+                        .HasForeignKey("DescriptionsId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("OnlineShop.Db.Models.Language", null)
+                        .WithMany()
+                        .HasForeignKey("LanguagesId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("LanguageProductNameResource", b =>
+                {
+                    b.HasOne("OnlineShop.Db.Models.Language", null)
+                        .WithMany()
+                        .HasForeignKey("LanguagesId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("OnlineShop.Db.Models.ProductNameResource", null)
+                        .WithMany()
+                        .HasForeignKey("NamesId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("OnlineShop.Db.Models.BasketItem", b =>
@@ -367,34 +425,18 @@ namespace OnlineShop.Db.Migrations
 
             modelBuilder.Entity("OnlineShop.Db.Models.ProductDescResource", b =>
                 {
-                    b.HasOne("OnlineShop.Db.Models.Language", "Language")
-                        .WithMany("Descriptions")
-                        .HasForeignKey("LanguageId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.HasOne("OnlineShop.Db.Models.Product", "Product")
                         .WithMany("Descriptions")
                         .HasForeignKey("ProductId");
-
-                    b.Navigation("Language");
 
                     b.Navigation("Product");
                 });
 
             modelBuilder.Entity("OnlineShop.Db.Models.ProductNameResource", b =>
                 {
-                    b.HasOne("OnlineShop.Db.Models.Language", "Language")
-                        .WithMany("Names")
-                        .HasForeignKey("LanguageId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.HasOne("OnlineShop.Db.Models.Product", "Product")
                         .WithMany("Names")
                         .HasForeignKey("ProductId");
-
-                    b.Navigation("Language");
 
                     b.Navigation("Product");
                 });
@@ -402,13 +444,6 @@ namespace OnlineShop.Db.Migrations
             modelBuilder.Entity("OnlineShop.Db.Models.Basket", b =>
                 {
                     b.Navigation("Items");
-                });
-
-            modelBuilder.Entity("OnlineShop.Db.Models.Language", b =>
-                {
-                    b.Navigation("Descriptions");
-
-                    b.Navigation("Names");
                 });
 
             modelBuilder.Entity("OnlineShop.Db.Models.Order", b =>

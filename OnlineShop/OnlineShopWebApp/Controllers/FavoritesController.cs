@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using OnlineShop.Db;
@@ -21,13 +22,14 @@ namespace OnlineShopWebApp.Controllers
         }
         public IActionResult Index()
         {
+            var currentCulture = Thread.CurrentThread.CurrentUICulture.Name;
             var userId = GetUserId();
             var favoriteProducts= _favoritesStorage.GetAllByUserId(userId);
             if (favoriteProducts == null || favoriteProducts.Count == 0)
             {
                 return View("Empty");
             }
-            return View(favoriteProducts.ToProductViewModels());
+            return View(favoriteProducts.ToProductViewModels(currentCulture));
         }
 
         public IActionResult Add(Guid id)
