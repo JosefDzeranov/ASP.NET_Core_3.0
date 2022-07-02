@@ -13,7 +13,6 @@ namespace OnlineShop.AutomatedUITests
     {
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddTransient<ICartsRepository, CartsDbRepository>();
             services.AddTransient<IRoleManager, RoleManager>();
             services.AddTransient<IUsersManager, UsersManager>();
         }

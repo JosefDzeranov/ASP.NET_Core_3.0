@@ -14,7 +14,6 @@ namespace OnlineShopWebApp
     public class UsersManager : IUsersManager
     {
         private readonly IRoleManager _roleManager;
-        private readonly ICartsRepository _cartRepository;
 
         private readonly List<User> users;
 
@@ -24,12 +23,11 @@ namespace OnlineShopWebApp
         private IWorkWithData JsonStorage { get; } = new JsonWorkWithData(nameSave);
         private IWorkWithData AutorizedData { get; } = new JsonWorkWithData("autorization");
         
-        public UsersManager(IRoleManager roleManager, ICartsRepository cartRepository)
+        public UsersManager(IRoleManager roleManager)
         {
             users = JsonStorage.Read<List<User>>();
             userAutorized = AutorizedData.Read<UserAutorized>();
             _roleManager = roleManager;
-            _cartRepository = cartRepository;
         }
         public string GetLoginAuthorizedUser()
         {
@@ -45,9 +43,10 @@ namespace OnlineShopWebApp
         {
             if (userAutorized == null) return false;
             var user = Find(userAutorized.Login);
-            if (_cartRepository.Find(user.Login) == null && user.RoleId == MyConstant.RoleDefaultId)
+            if (user == null)
             {
-                _cartRepository.CreateCartBuyer(user.Login);
+                Exit();
+                return false;
             }
             return true;
         }
