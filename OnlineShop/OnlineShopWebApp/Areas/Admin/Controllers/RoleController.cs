@@ -2,8 +2,8 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using OnlineShop.db.Models;
 using OnlineShopWebApp.Areas.Admin.Models;
-using OnlineShop.Db;
 
 
 namespace OnlineShopWebApp.Areas.Admin.Controllers

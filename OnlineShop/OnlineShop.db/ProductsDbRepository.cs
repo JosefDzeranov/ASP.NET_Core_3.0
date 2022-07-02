@@ -1,10 +1,9 @@
-﻿using OnlineShop.db.Models;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using Microsoft.EntityFrameworkCore;
+using OnlineShop.db.Models;
 
-
-namespace OnlineShop.Db
+namespace OnlineShop.db
 {
     public class ProductsDbRepository : IProductDataSource
     {

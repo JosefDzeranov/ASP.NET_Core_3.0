@@ -27,7 +27,12 @@ namespace OnlineShopWebApp.Models
         public string Phone { get; set; }
         public string AvatarPath { get; set; }
         public IFormFile UploadedImage { get; set; }
+        
+        public string TelegramUserId { get; set; }
 
+        public string Address { get; set; }
+
+        public string UserName { get; set; }
 
     }
 }

@@ -4,7 +4,6 @@ using Serilog;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.AspNetCore.Identity;
 using OnlineShop.db.Models;
-using OnlineShop.Db;
 
 namespace OnlineShopWebApp
 {

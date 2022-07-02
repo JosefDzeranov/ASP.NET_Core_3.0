@@ -91,7 +91,7 @@ namespace OnlineShopWebApp.Helpers
                 Id = order.Id,
                 CreateDateTime = order.CreateDateTime,
                 Status = (OrderStatusViewModel)order.Status,
-                User = ToCustomerViewModel(order.User),
+                User = ToUserViewModel(order.User),
                 CartItems = ToCartItemsViewModels(order.Items).ToList()
             };
         }
@@ -110,13 +110,6 @@ namespace OnlineShopWebApp.Helpers
                 Id = order.Id,
                 CreateDateTime = order.CreateDateTime,
                 Status = (OrderStatus)order.Status,
-
-                User = new Customer()
-                {
-                    Name = order.Name,
-                    Phone = order.Phone,
-                    Adress = order.Address
-                },
             };
 
         }
@@ -209,32 +202,33 @@ namespace OnlineShopWebApp.Helpers
                 LastName = user.LastName,
                 //Password = user.Password,
                 Email = user.Email,
-                Phone = user.Phone,
+                Phone = user.PhoneNumber,
                 AvatarPath = user.AvatarPath,
-
+                UserName = user.UserName,
+                Address = user.Address
             };
         }
 
-        public static User ToUser(this User existingUser, string imagePath)
-        {
-            return new User
-            {
-                FirstName = existingUser.FirstName,
-                LastName = existingUser.LastName,
-                Email = existingUser.Email,
-                AvatarPath = existingUser.AvatarPath,
-                Phone = existingUser.Phone,
+        //public static User ToUser(this UserViewModel existingUser)
+        //{
+        //    return new User
+        //    {
+        //        FirstName = existingUser.FirstName,
+        //        LastName = existingUser.LastName,
+        //        Email = existingUser.Email,
+        //        AvatarPath = existingUser.AvatarPath,
+        //        //Phone = existingUser.Phone,
 
-            };
-        }
-        public static User Update(this User user, UserViewModel userProfile, string imagePath)
+        //    };
+        //}
+        public static User Update(this User user, UserViewModel userProfile, string imagePath = null)
         {
             user.FirstName = userProfile.FirstName;
             user.LastName = userProfile.LastName;
-            user.Email = userProfile.Email;
-            user.AvatarPath = imagePath;
-            user.Phone = userProfile.Phone;
-
+            //user.Email = userProfile.Email;
+            user.AvatarPath = imagePath ?? user.AvatarPath;
+            user.PhoneNumber = userProfile.Phone;
+            user.Address = userProfile.Address;
             return user;
         }
     }

@@ -1,7 +1,6 @@
 ﻿using System.Linq;
 using System.Collections.Generic;
 using OnlineShop.db.Models;
-using OnlineShop.Db;
 using Microsoft.EntityFrameworkCore;
 
 namespace OnlineShop.db

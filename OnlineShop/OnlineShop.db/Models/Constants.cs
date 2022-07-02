@@ -1,4 +1,4 @@
-﻿namespace OnlineShop.Db
+﻿namespace OnlineShop.db.Models
 {
     public static class Constants
     {

@@ -13,16 +13,23 @@ namespace OnlineShopWebApp.Controllers
         private readonly ICartRepository cartRepository;
         private readonly ICustomerProfile customerProfile;
         private readonly IOrdersRepository ordersRepository;
+        private readonly UserDbRepository userDbRepository;
+        
+        // add user repository
 
-        public OrderCompleteController(ICartRepository cartRepository, ICustomerProfile customerProfile, IOrdersRepository ordersRepository)
+        public OrderCompleteController(ICartRepository cartRepository, ICustomerProfile customerProfile, IOrdersRepository ordersRepository, UserDbRepository userDbRepository)
         {
             this.cartRepository = cartRepository;
             this.customerProfile = customerProfile;
             this.ordersRepository = ordersRepository;
+            this.userDbRepository = userDbRepository;
         }
         public IActionResult Index()
         {
-            return View();
+            var currentUser = userDbRepository.TryGetByName(User.Identity.Name);
+            var userViewModel = currentUser.ToUserViewModel();
+            //get current user, convert to UserViewModel and send it to the view
+            return View(userViewModel);
         }
 
         public IActionResult Buy(OrderViewModel orderViewModel)

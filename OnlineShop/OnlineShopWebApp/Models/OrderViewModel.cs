@@ -14,7 +14,7 @@ namespace OnlineShopWebApp.Models
         public string Email { get; set; }
         public string Address { get; set; }
         
-        public CustomerViewModel User { get; set; }
+        public UserViewModel User { get; set; }
 
         public OrderStatusViewModel Status { get; set; }
 

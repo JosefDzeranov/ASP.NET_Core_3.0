@@ -2,7 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using OnlineShop.db.Models;
 
-namespace OnlineShop.Db
+namespace OnlineShop.db
 {
     public class DatabaseContext : DbContext
     {

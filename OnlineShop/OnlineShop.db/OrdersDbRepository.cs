@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
 using OnlineShop.db.Models;
 using System.Linq;
-using OnlineShop.Db;
 using Microsoft.EntityFrameworkCore;
 
 
@@ -28,14 +27,14 @@ namespace OnlineShop.db
                 .Include(x => x.Items).ThenInclude(x => x.Product).ToList();
         }
 
-        public Order TryGetByUserId(int id)
+        public Order TryGetById(int id)
         {
             return databaseContext.Orders.FirstOrDefault(x => x.Id == id);
         }
 
         public List<Order> TryGetByUserId(string userId)
         {
-            throw new System.NotImplementedException();
+            return databaseContext.Orders.Where(x => x.User.Id == userId).ToList();
         }
 
         //public List<Order> TryGetByUserId(string userId)
@@ -43,11 +42,16 @@ namespace OnlineShop.db
         //    return databaseContext.Orders.Where(x => x.UserId == userId).ToList();
         //}
 
-        public void UpdateStatus(int orderId, OrderStatus newStatus)
+        public void UpdateStatus(string orderId, OrderStatus newStatus)
         {
-            var order = databaseContext.Orders.First(x => x.Id == orderId);
+            var order = databaseContext.Orders.First(x => x.Id.ToString() == orderId);
             order.Status = newStatus;
             databaseContext.SaveChanges();
+        }
+
+        public void UpdateStatus(int orderId, OrderStatus newStatus)
+        {
+            throw new System.NotImplementedException();
         }
     }
 }

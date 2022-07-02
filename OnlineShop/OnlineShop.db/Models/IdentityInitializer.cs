@@ -1,7 +1,6 @@
 ﻿using Microsoft.AspNetCore.Identity;
-using OnlineShop.db.Models;
 
-namespace OnlineShop.Db
+namespace OnlineShop.db.Models
 {
     public class IdentityInitializer
     {
@@ -26,7 +25,7 @@ namespace OnlineShop.Db
             }
             if (userManager.FindByNameAsync(adminName).Result == null)
             {
-                var admin = new User { UserName = adminName, AvatarPath = "/images/defaultAvatar.png", Email = adminName, Phone = "123" };
+                var admin = new User { UserName = adminName, AvatarPath = "/images/defaultAvatar.png", Email = adminName };
                 var result = userManager.CreateAsync(admin, password).Result;
                 if (result.Succeeded)
                 {

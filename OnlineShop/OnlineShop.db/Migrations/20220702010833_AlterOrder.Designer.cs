@@ -5,14 +5,15 @@ using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
+using OnlineShop.db;
 
 #nullable disable
 
 namespace OnlineShop.db.Migrations
 {
     [DbContext(typeof(DatabaseContext))]
-    [Migration("20220615182751_AddImages")]
-    partial class AddImages
+    [Migration("20220702010833_AlterOrder")]
+    partial class AlterOrder
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -74,31 +75,6 @@ namespace OnlineShop.db.Migrations
                     b.ToTable("CartItems");
                 });
 
-            modelBuilder.Entity("OnlineShop.db.Models.Customer", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
-
-                    b.Property<string>("Adress")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Phone")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Customer");
-                });
-
             modelBuilder.Entity("OnlineShop.db.Models.FavoriteProduct", b =>
                 {
                     b.Property<int>("Id")
@@ -140,14 +116,14 @@ namespace OnlineShop.db.Migrations
                     b.HasData(
                         new
                         {
-                            Id = -1,
-                            ProductId = -1,
+                            Id = 1,
+                            ProductId = 1,
                             Url = "/images/turkey.jpg"
                         },
                         new
                         {
-                            Id = -2,
-                            ProductId = -2,
+                            Id = 2,
+                            ProductId = 2,
                             Url = "/images/greece.jpg"
                         },
                         new
@@ -226,8 +202,8 @@ namespace OnlineShop.db.Migrations
                     b.Property<int>("Status")
                         .HasColumnType("int");
 
-                    b.Property<int>("UserId")
-                        .HasColumnType("int");
+                    b.Property<string>("UserId")
+                        .HasColumnType("nvarchar(450)");
 
                     b.HasKey("Id");
 
@@ -270,7 +246,7 @@ namespace OnlineShop.db.Migrations
                     b.HasData(
                         new
                         {
-                            Id = -1,
+                            Id = 1,
                             Cost = 50000m,
                             Description = "Тур в Турцию за 50000 рублей",
                             IsActive = true,
@@ -278,7 +254,7 @@ namespace OnlineShop.db.Migrations
                         },
                         new
                         {
-                            Id = -2,
+                            Id = 2,
                             Cost = 60000m,
                             Description = "Тур в Грецию за 60000 рублей",
                             IsActive = true,
@@ -366,6 +342,73 @@ namespace OnlineShop.db.Migrations
                         });
                 });
 
+            modelBuilder.Entity("OnlineShop.db.Models.User", b =>
+                {
+                    b.Property<string>("Id")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<int>("AccessFailedCount")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Address")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("AvatarPath")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ConcurrencyStamp")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Email")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("EmailConfirmed")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("FirstName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("LastName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("LockoutEnabled")
+                        .HasColumnType("bit");
+
+                    b.Property<DateTimeOffset?>("LockoutEnd")
+                        .HasColumnType("datetimeoffset");
+
+                    b.Property<string>("NormalizedEmail")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("NormalizedUserName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("PasswordHash")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("PhoneNumber")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("PhoneNumberConfirmed")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("SecurityStamp")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("TelegramUserId")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("TwoFactorEnabled")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("UserName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("User");
+                });
+
             modelBuilder.Entity("OnlineShop.db.Models.CartItem", b =>
                 {
                     b.HasOne("OnlineShop.db.Models.Cart", "Cart")
@@ -402,11 +445,9 @@ namespace OnlineShop.db.Migrations
 
             modelBuilder.Entity("OnlineShop.db.Models.Order", b =>
                 {
-                    b.HasOne("OnlineShop.db.Models.Customer", "User")
+                    b.HasOne("OnlineShop.db.Models.User", "User")
                         .WithMany()
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("UserId");
 
                     b.Navigation("User");
                 });
