@@ -1,4 +1,5 @@
 using System;
+using AutoFixture;
 using OnlineShop.Db.Models;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
@@ -9,6 +10,7 @@ namespace OnlineShop.AutomatedUITests
     public class LoginTests : IDisposable
     {
         private readonly IWebDriver _driver;
+        private Fixture fixture = new Fixture();
 
         private readonly string url = "https://localhost:5001/Login/Register";
         //private readonly string[] urlX = Environment.GetEnvironmentVariable("ASPNETCORE_URLS").Split(";");
@@ -48,9 +50,12 @@ namespace OnlineShop.AutomatedUITests
             Assert.Equal(textError, errorMassage);
         }
 
-        [Theory, InlineData("alex2", "12345678", "12345678")]
-        public void Create_WrongModelData_ReturnsIndexViewWithNewEmployee(string login, string password, string passwordConfirm)
+        [Theory]
+        [InlineData("12345678", "12345678")]
+        [InlineData("11111111", "11111111")]
+        public void Create_WrongModelData_ReturnsIndexViewWithNewEmployee(string password, string passwordConfirm)
         {
+            var login = fixture.Create("Name");
             _driver.Navigate().GoToUrl(url);
             _driver.FindElement(By.Name("Login")).SendKeys(login);
             _driver.FindElement(By.Name("Password")).SendKeys(password);

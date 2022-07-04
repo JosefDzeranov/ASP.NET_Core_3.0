@@ -50,6 +50,7 @@ namespace OnlineShopWebApp.Controllers
             }
             if (ModelState.IsValid)
             {
+
                 _usersManager.Add(userInput);
                 return RedirectToAction("Index", "User");
             }

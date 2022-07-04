@@ -21,6 +21,5 @@ namespace OnlineShop.Db.Models
 
         public static readonly Guid defaultBuyerId = Guid.Parse("0c4de82b-a3be-4592-84d6-8b0d63a46aa0");
 
-
     }
 }

@@ -79,6 +79,7 @@ namespace OnlineShopWebApp
 
         public void Add(UserRegistration userInput)
         {
+            Exit();
             User newUser = new User()
             {
                 Login = userInput.Login,
