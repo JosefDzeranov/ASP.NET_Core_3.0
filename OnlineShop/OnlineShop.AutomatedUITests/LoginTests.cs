@@ -9,11 +9,14 @@ namespace OnlineShop.AutomatedUITests
     public class LoginTests : IDisposable
     {
         private readonly IWebDriver _driver;
+
         private readonly string url = "https://localhost:5001/Login/Register";
+        private readonly string[] urlX = Environment.GetEnvironmentVariable("ASPNETCORE_URLS").Split(";");
 
         public LoginTests()
         {
             _driver = new ChromeDriver();
+            
         }
         public void Dispose()
         {
@@ -61,8 +64,6 @@ namespace OnlineShop.AutomatedUITests
 
             Assert.Equal($"Личный кабинет - {MyConstant.NameOrganization}", _driver.Title);
             Assert.Contains(login, _driver.PageSource);
-
-            _usersManager.Remove(login);
         }
     }
 }

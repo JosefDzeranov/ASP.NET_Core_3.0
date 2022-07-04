@@ -12,7 +12,6 @@
     <PackageReference Include="Selenium.WebDriver" Version="4.3.0" />
     <PackageReference Include="Selenium.WebDriver.ChromeDriver" Version="103.0.5060.5300" />
     <PackageReference Include="xunit" Version="2.4.1" />
-    <PackageReference Include="Xunit.DependencyInjection" Version="8.5.0" />
     <PackageReference Include="xunit.runner.visualstudio" Version="2.4.5">
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
       <PrivateAssets>all</PrivateAssets>
@@ -24,7 +23,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\OnlineShop.Common\OnlineShop.Common.csproj" />
     <ProjectReference Include="..\OnlineShop.Db\OnlineShop.Db.csproj" />
+    <ProjectReference Include="..\OnlineShopWebApp\OnlineShopWebApp.csproj" />
   </ItemGroup>
 
 </Project>
