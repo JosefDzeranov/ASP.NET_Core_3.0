@@ -13,7 +13,6 @@ namespace OnlineShop.AutomatedUITests
         private Fixture fixture = new Fixture();
 
         private readonly string url = "https://localhost:5001/Login/Register";
-        //private readonly string[] urlX = Environment.GetEnvironmentVariable("ASPNETCORE_URLS").Split(";");
 
         public LoginTests()
         {
