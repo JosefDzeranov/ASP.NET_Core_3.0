@@ -70,5 +70,29 @@
     "Password": "11111111",
     "RoleName": "Покупатель",
     "RoleId": "674b2f41-3173-4a0c-8f7e-4043876b8ee3"
+  },
+  {
+    "Login": "Name7c83a2ce-da1a-4a77-8fdd-a64291553f90",
+    "Firstname": null,
+    "Secondname": null,
+    "Surname": null,
+    "Phone": null,
+    "Age": 0,
+    "Email": null,
+    "Password": "12345678",
+    "RoleName": "Покупатель",
+    "RoleId": "674b2f41-3173-4a0c-8f7e-4043876b8ee3"
+  },
+  {
+    "Login": "Name22a5d3b2-941f-41c1-ad83-7daa60853e1d",
+    "Firstname": null,
+    "Secondname": null,
+    "Surname": null,
+    "Phone": null,
+    "Age": 0,
+    "Email": null,
+    "Password": "11111111",
+    "RoleName": "Покупатель",
+    "RoleId": "674b2f41-3173-4a0c-8f7e-4043876b8ee3"
   }
 ]
