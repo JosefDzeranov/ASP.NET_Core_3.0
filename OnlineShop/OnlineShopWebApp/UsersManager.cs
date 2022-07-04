@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using OnlineShop.Common;
 using OnlineShop.Common.Interface;
-using OnlineShop.Db;
 using OnlineShop.Db.Interfase;
 using OnlineShop.Db.Models;
 using OnlineShopWebApp.Interfase;
@@ -42,7 +41,7 @@ namespace OnlineShopWebApp
 
         public bool CheckingForAuthorization()
         {
-            if (userAutorized.Login == null) return false;
+            if (userAutorized == null) return false;
             var user = Find(userAutorized.Login);
             if (user == null)
             {
@@ -85,8 +84,8 @@ namespace OnlineShopWebApp
                 Login = userInput.Login,
                 Password = userInput.Password
             };
-            AssignRole(userInput.Login, MyConstant.RoleDefaultId); //Покупатель
             users.Add(newUser);
+            AssignRole(userInput.Login, MyConstant.RoleDefaultId); //Покупатель
             Save();
         }
         public void Remove(string login)

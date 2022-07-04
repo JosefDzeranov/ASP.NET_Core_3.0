@@ -11,7 +11,7 @@ namespace OnlineShop.AutomatedUITests
         private readonly IWebDriver _driver;
 
         private readonly string url = "https://localhost:5001/Login/Register";
-        private readonly string[] urlX = Environment.GetEnvironmentVariable("ASPNETCORE_URLS").Split(";");
+        //private readonly string[] urlX = Environment.GetEnvironmentVariable("ASPNETCORE_URLS").Split(";");
 
         public LoginTests()
         {
@@ -36,7 +36,7 @@ namespace OnlineShop.AutomatedUITests
         [InlineData("alex", "12345678", "", "Не указан повторный пароль")]
         [InlineData("alex", "12345678", "1122222", "Проверочный пароль должен совпадать с паролем")]
         [InlineData("", "12345678", "12345678", "Не указан логин")]
-        [InlineData("", "1234", "12345678", "Не указан логин")]
+        [InlineData("", "1234", "12345678", "Длина пароля должна быть от 8")]
         public void Register_WrongModelData_ReturnsErrorMessage(string login, string password, string passwordConfirm, string textError)
         {
             _driver.Navigate().GoToUrl(url);
