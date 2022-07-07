@@ -16,5 +16,7 @@ namespace TelegramTourBot
         void SendResponse(long chatId, string text);
 
         void SendKeyboard(long chatId, string text);
+
+        //event ChatBotAPI.MessageReceivedEventHandler OrderStatusUpdatedEventArgs;
     }
 }

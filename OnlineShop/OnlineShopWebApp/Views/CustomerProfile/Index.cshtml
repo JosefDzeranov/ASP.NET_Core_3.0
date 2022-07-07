@@ -1,4 +1,4 @@
-﻿@model CustomerViewModel
+﻿@model UserViewModel
 
 <h3>Введите необходимую информацию, для успешной доставки</h3>
 
@@ -7,15 +7,15 @@
 
 	<div class="validation" asp-validation-summary="All" ></div>
 	<div>
-		<label asp-for="Name">Имя</label><br />
-		<input asp-for="Name" />
-		<span asp-validation-for="Name"></span>
+		<label asp-for="FirstName">Имя</label><br />
+		<input asp-for="FirstName" />
+		<span asp-validation-for="FirstName"></span>
 	</div>
 
 		<div>
-		<label asp-for="Surname">Фамилия</label><br />
-		<input asp-for="Surname" />
-		<span asp-validation-for="Surname"></span>
+		<label asp-for="LastName">Фамилия</label><br />
+		<input asp-for="LastName" />
+		<span asp-validation-for="LastName"></span>
 	</div>
 
 	<div>
@@ -25,15 +25,9 @@
 	</div>
 
 		<div>
-		<label asp-for="Email">Email</label><br />
-		<input asp-for="Email" />
-		<span asp-validation-for="Email"></span>
-	</div>
-
-		<div>
-		<label asp-for="Adress">Адрес</label><br />
-		<input asp-for="Adress" />
-		<span asp-validation-for="Adress"></span>
+		<label asp-for="Address">Адрес</label><br />
+		<input asp-for="Address" />
+		<span asp-validation-for="Address"></span>
 	</div>
 
 	<input type="submit" value="Отправить" a class ="btn btn-outline-success" role="button">

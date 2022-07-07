@@ -19,10 +19,12 @@ namespace OnlineShop.db.Models
             {
                 roleManager.CreateAsync(new IdentityRole(Constants.AdminRoleName)).Wait();
             }
+
             if (roleManager.FindByNameAsync(Constants.UserRoleName).Result == null)
             {
                 roleManager.CreateAsync(new IdentityRole(Constants.UserRoleName)).Wait();
             }
+
             if (userManager.FindByNameAsync(adminName).Result == null)
             {
                 var admin = new User { UserName = adminName, AvatarPath = "/images/defaultAvatar.png", Email = adminName };
@@ -32,8 +34,6 @@ namespace OnlineShop.db.Models
                     userManager.AddToRoleAsync(admin, Constants.AdminRoleName).Wait();
                 }
             }
-
-            
         }
     }
 }

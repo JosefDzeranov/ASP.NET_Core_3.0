@@ -11,12 +11,13 @@ namespace TelegramTourBot
 
         public int MessageId { get; set; }
 
-        public long? UserId { get; set; }
+        public long UserId { get; set; }
 
         public string Phone { get; set; }
 
         public MessageType MessageType { get; set; }
 
         public long ChatId { get; set; }
+      
     }
 }

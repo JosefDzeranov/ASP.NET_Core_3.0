@@ -24,6 +24,7 @@ namespace OnlineShopWebApp.Controllers
             this.ordersRepository = ordersRepository;
             this.userDbRepository = userDbRepository;
         }
+
         public IActionResult Index()
         {
             var currentUser = userDbRepository.TryGetByName(User.Identity.Name);
@@ -34,8 +35,10 @@ namespace OnlineShopWebApp.Controllers
 
         public IActionResult Buy(OrderViewModel orderViewModel)
         {
+            var currentUser = userDbRepository.TryGetByName(User.Identity.Name);
             var cartItems = cartRepository.TryGetByUserId(User.Identity.Name).Items;
             var order = Mapping.ToOrder(orderViewModel);
+            order.User = currentUser;
             order.Items.AddRange(cartItems);
             ordersRepository.Add(order);
             cartRepository.RemoveAll(User.Identity.Name);

@@ -52,16 +52,6 @@ namespace OnlineShopWebApp.Helpers
                 Product = ToProductViewModel(cartDbItem.Product)
             };
         }
-        public static CustomerViewModel ToCustomerViewModel(Customer customer)
-        {
-            return new CustomerViewModel
-            {
-                Id = customer.Id,
-                Name = customer.Name,
-                Phone = customer.Phone,
-                Adress = customer.Adress
-            };
-        }
 
         public static IEnumerable<CartItemViewModel> ToCartItemsViewModels(IEnumerable<CartItem> cartDbItems)
         {
@@ -182,16 +172,6 @@ namespace OnlineShopWebApp.Helpers
         public static List<string> ToPaths(this List<Image> paths)
         {
             return paths.Select(x => x.Url).ToList();
-        }
-        public static Customer ToCustomer(CustomerViewModel customer)
-        {
-            return new Customer
-            {
-                Id = customer.Id,
-                Name = customer.Name,
-                Phone = customer.Phone,
-                Adress = customer.Adress,
-            };
         }
 
         public static UserViewModel ToUserViewModel(this User user)

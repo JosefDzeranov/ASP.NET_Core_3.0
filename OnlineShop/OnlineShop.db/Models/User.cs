@@ -2,7 +2,7 @@
 
 namespace OnlineShop.db.Models
 {
-    public class User: IdentityUser
+    public class User : IdentityUser
     {
         public string? FirstName { get; set; }
         
@@ -10,7 +10,7 @@ namespace OnlineShop.db.Models
         
         public string? AvatarPath { get; set; }
         
-        public string? TelegramUserId { get; set; }
+        public long? TelegramUserId { get; set; }
 
         public string? Address { get; set; }
     }

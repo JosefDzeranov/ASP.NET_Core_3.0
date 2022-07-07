@@ -13,5 +13,7 @@ namespace OnlineShop.db
         void UpdateStatus(int orderId, OrderStatus newStatus);
 
         List<Order> TryGetByUserId(string userId);
+
+        event OrdersDbRepository.OrderStatusUpdatedEventHandler OrderStatusUpdatedEvent;
     }
 }

@@ -23,7 +23,8 @@ namespace TelegramTourBot
 
         public event MessageReceivedEventHandler MessageReceive;
 
-        private async Task HandleUpdateAsync(
+
+        private async Task HandleUpdateAsync( // функция, которая получает сообщения из ТГ
             ITelegramBotClient botClient, 
             Update update,
             CancellationToken cancellationToken)
@@ -40,7 +41,7 @@ namespace TelegramTourBot
                         {
                             MessageId = message?.MessageId ?? 0,
                             MessageReceive = message?.Text,
-                            UserId = message.From?.Id,
+                            UserId = message.From.Id,
                             Phone = message.Contact?.PhoneNumber,
                             MessageType = message.Type,
                             ChatId = message.Chat.Id
@@ -53,7 +54,7 @@ namespace TelegramTourBot
             }
         }
 
-        public async Task HandleErrorAsync(ITelegramBotClient botClient, Exception exception,
+        public async Task HandleErrorAsync(ITelegramBotClient botClient, Exception exception, //Обработчик ошибок из примера
             CancellationToken cancellationToken)
         {
             // Некоторые действия
@@ -61,7 +62,7 @@ namespace TelegramTourBot
         }
 
 
-        public void Init()
+        public void Init() //инициализация бота
         {
             //Console.WriteLine("Запущен бот " + bot.GetMeAsync().Result.FirstName);
             if (bot == null)
@@ -105,31 +106,31 @@ namespace TelegramTourBot
             var keyboard = new ReplyKeyboardMarkup(new[]
             {
                 new KeyboardButton[] {"Список заказов", "Статус заказа"},
-                new KeyboardButton[] {"Привет", "Пока"}
+                new KeyboardButton[] {"Наши контакты", "Спецпредложения"}
             });
 
             await bot.SendTextMessageAsync(chatId, text, replyMarkup: keyboard);
         }
 
-        public async Task HandleMessage(ITelegramBotClient bot, Message message)
-        {
-            if (message.Text == "/start")
-            {
-                await bot.SendTextMessageAsync(message.Chat.Id, "Выберите меню:/inline| keyboard");
-            }
+        //public async Task HandleMessage(ITelegramBotClient bot, Message message)
+        //{
+        //    if (message.Text == "/start")
+        //    {
+        //        await bot.SendTextMessageAsync(message.Chat.Id, "Выберите меню:/inline| keyboard");
+        //    }
 
-            if (message.Text == "/keyboard")
-            {
-                ReplyKeyboardMarkup keyboard = new ReplyKeyboardMarkup(new[]
-                {
-                    new KeyboardButton[] {"Список заказов", "Статус заказа"},
-                    new KeyboardButton[] {"Привет", "Пока"}
-                });
+        //    if (message.Text == "/keyboard")
+        //    {
+        //        ReplyKeyboardMarkup keyboard = new ReplyKeyboardMarkup(new[]
+        //        {
+        //            new KeyboardButton[] {"Список заказов", "Статус заказа"},
+        //            new KeyboardButton[] {"Наши контакты", "Спецпредложения"}
+        //        });
 
 
-                await bot.SendTextMessageAsync(message.Chat.Id, "Выберите", replyMarkup: keyboard);
+        //        await bot.SendTextMessageAsync(message.Chat.Id, "Выберите", replyMarkup: keyboard);
 
-            }
-        }
+        //    }
+        //}
     }
 }

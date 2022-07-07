@@ -6,14 +6,14 @@ namespace OnlineShop.db
 {
     public class UserDbRepository
     {
-        private readonly IdentityContext identityContext;
+        private readonly DatabaseContext identityContext;
 
-        public UserDbRepository(IdentityContext identityContext)
+        public UserDbRepository(DatabaseContext identityContext)
         {
             this.identityContext= identityContext;
         }
 
-        public User TryGetByTelegramUserId(string telegramUserId)
+        public User TryGetByTelegramUserId(long? telegramUserId)
         {
             return identityContext.Users.FirstOrDefault(x => x.TelegramUserId == telegramUserId);
         }
@@ -23,7 +23,7 @@ namespace OnlineShop.db
             return identityContext.Users.FirstOrDefault(x => x.UserName == name);
         }
 
-        public bool UpdateTelegramUserId(string phone, string userId)
+        public bool UpdateTelegramUserId(string phone, long userId)
         {
             var user = identityContext.Users.FirstOrDefault(x => x.PhoneNumber == phone);
             if (user != null)
@@ -34,6 +34,11 @@ namespace OnlineShop.db
             }
 
             return false;
+        }
+
+        public void UpdateUser()
+        {
+            identityContext.SaveChanges();
         }
     }
 }

@@ -29,14 +29,15 @@ namespace OnlineShopWebApp
         public void ConfigureServices(IServiceCollection services)
         {
             string connection = Configuration.GetConnectionString("online_shop");
+
             services.AddDbContext<DatabaseContext>(options =>
                 options.UseSqlServer(connection), ServiceLifetime.Singleton);
 
-            services.AddDbContext<IdentityContext>(options =>
-                options.UseSqlServer(connection), ServiceLifetime.Singleton);
+            //services.AddDbContext<IdentityContext>(options =>
+            //    options.UseSqlServer(connection), ServiceLifetime.Singleton);
 
             services.AddIdentity<User, IdentityRole>().AddRoles<IdentityRole>().AddRoleManager<RoleManager<IdentityRole>>()
-                .AddEntityFrameworkStores<IdentityContext>();
+                .AddEntityFrameworkStores<DatabaseContext>();
 
             services.Configure<IdentityOptions>(options =>
             {
