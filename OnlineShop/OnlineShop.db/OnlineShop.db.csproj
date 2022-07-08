@@ -17,8 +17,4 @@
     </PackageReference>
   </ItemGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\TelegramTourBot\TelegramTourBot.csproj" />
-  </ItemGroup>
-
 </Project>

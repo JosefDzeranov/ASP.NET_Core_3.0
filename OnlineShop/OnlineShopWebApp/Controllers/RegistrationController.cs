@@ -1,12 +1,8 @@
-﻿using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Identity;
+﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using OnlineShop.db;
 using OnlineShop.db.Models;
-using OnlineShopWebApp.Helpers;
 using OnlineShopWebApp.Models;
 using System;
-using OnlineShopWebApp.Services;
 
 namespace OnlineShopWebApp.Controllers
 {
@@ -14,15 +10,11 @@ namespace OnlineShopWebApp.Controllers
     {
         private readonly UserManager<User> userManager;
         private readonly SignInManager<User> signInManager;
-        private readonly ImagesProvider imagesProvider;
-        private readonly IOrdersRepository ordersRepository;
 
-        public RegistrationController(UserManager<User> userManager, SignInManager<User> signInManager, ImagesProvider imagesProvider, IOrdersRepository ordersRepository)
+        public RegistrationController(UserManager<User> userManager, SignInManager<User> signInManager)
         {
             this.userManager = userManager;
             this.signInManager = signInManager;
-            this.imagesProvider = imagesProvider;
-            this.ordersRepository = ordersRepository;
         }
 
         [HttpPost]

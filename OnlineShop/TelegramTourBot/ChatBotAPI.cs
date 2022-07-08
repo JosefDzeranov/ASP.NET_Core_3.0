@@ -1,16 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using Telegram.Bot;
 using Telegram.Bot.Extensions.Polling;
 using Telegram.Bot.Types;
-using System;
-using System.Runtime.CompilerServices;
-using System.Security.Principal;
 using Telegram.Bot.Types.ReplyMarkups;
-using Microsoft.AspNetCore.Mvc;
 using Telegram.Bot.Types.Enums;
 
 namespace TelegramTourBot
@@ -91,16 +85,6 @@ namespace TelegramTourBot
             await bot.SendTextMessageAsync(chatId, "Please send contact", replyMarkup: keyboard);
         }
 
-        public async void SendWelcomeMessage(long chatId, string firstName)
-        {
-            await bot.SendTextMessageAsync(chatId, $"Добро пожаловать, {firstName}");
-        }
-
-        public async void SendResponse(long chatId, string text)
-        {
-            await bot.SendTextMessageAsync(chatId, text);
-        }
-
         public async void SendKeyboard(long chatId, string text)
         {
             var keyboard = new ReplyKeyboardMarkup(new[]
@@ -111,26 +95,5 @@ namespace TelegramTourBot
 
             await bot.SendTextMessageAsync(chatId, text, replyMarkup: keyboard);
         }
-
-        //public async Task HandleMessage(ITelegramBotClient bot, Message message)
-        //{
-        //    if (message.Text == "/start")
-        //    {
-        //        await bot.SendTextMessageAsync(message.Chat.Id, "Выберите меню:/inline| keyboard");
-        //    }
-
-        //    if (message.Text == "/keyboard")
-        //    {
-        //        ReplyKeyboardMarkup keyboard = new ReplyKeyboardMarkup(new[]
-        //        {
-        //            new KeyboardButton[] {"Список заказов", "Статус заказа"},
-        //            new KeyboardButton[] {"Наши контакты", "Спецпредложения"}
-        //        });
-
-
-        //        await bot.SendTextMessageAsync(message.Chat.Id, "Выберите", replyMarkup: keyboard);
-
-        //    }
-        //}
     }
 }

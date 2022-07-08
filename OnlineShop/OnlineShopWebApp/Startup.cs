@@ -12,8 +12,7 @@ using OnlineShop.db.Models;
 using Microsoft.AspNetCore.Identity;
 using System;
 using Microsoft.AspNetCore.Http;
-using TelegramTourBot;
-
+using Orders;
 
 namespace OnlineShopWebApp
 {
@@ -67,13 +66,12 @@ namespace OnlineShopWebApp
             services.AddSingleton<IOrdersRepository, OrdersDbRepository>();
             services.AddSingleton<IFavoriteRepository, FavoriteDbRepository>();
             services.AddSingleton<ImagesProvider>();
-            services.AddSingleton<IChatBotApi, ChatBotAPI>();
-            services.AddSingleton<UserDbRepository>();
-            services.AddSingleton<TelegramService>();
             
+            services.AddSingleton<UserDbRepository>();
+            services.AddSingleton<OrdersService>();
+
 
             services.AddControllersWithViews();
-
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

@@ -1,11 +1,11 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using OnlineShop.db;
 using OnlineShop.db.Models;
 using OnlineShopWebApp.Helpers;
 using OnlineShopWebApp.Models;
 using OnlineShopWebApp.Services;
+using Orders;
 
 namespace OnlineShopWebApp.Controllers
 {
@@ -14,14 +14,16 @@ namespace OnlineShopWebApp.Controllers
         private readonly UserManager<User> userManager;
         private readonly SignInManager<User> _signInManager;
         private readonly ImagesProvider imagesProvider;
-        private readonly IOrdersRepository ordersRepository;
-
-        public AccountController(UserManager<User> userManager, SignInManager<User> signInManager, ImagesProvider imagesProvider, IOrdersRepository ordersRepository)
+        private readonly OrdersService ordersService;
+        public AccountController(UserManager<User> userManager, 
+            SignInManager<User> signInManager, 
+            ImagesProvider imagesProvider, 
+            OrdersService ordersService)
         {
             this.userManager = userManager;
             _signInManager = signInManager;
             this.imagesProvider = imagesProvider;
-            this.ordersRepository=ordersRepository;
+            this.ordersService = ordersService;
         }
 
         [HttpGet]
@@ -97,7 +99,7 @@ namespace OnlineShopWebApp.Controllers
         public IActionResult UserOrders()
         {
             var userId = userManager.FindByNameAsync(User.Identity.Name).Result.Id;
-            var orders = ordersRepository.TryGetByUserId(userId);
+            var orders = ordersService.TryGetByUserId(userId);
             return View(orders.ToOrderViewModels());
         }
 

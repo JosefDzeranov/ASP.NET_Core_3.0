@@ -44,26 +44,12 @@ namespace OnlineShop.db
                 .Include(x => x.Items).ThenInclude(x => x.Product).Where(x => x.User.Id == userId).ToList();
         }
 
-        //public List<Order> TryGetByUserId(string userId)
-        //{
-        //    return databaseContext.Orders.Where(x => x.UserId == userId).ToList();
-        //}
 
         public void UpdateStatus(int orderId, OrderStatus newStatus)
         {
             var order = databaseContext.Orders.First(x => x.Id == orderId);
             order.Status = newStatus;
             databaseContext.SaveChanges();
-
-            if (order.User.TelegramUserId != null)
-            {
-                OrderStatusUpdatedEvent?.Invoke(
-                    this,
-                    new OrderStatusUpdatedEventArgs()
-                    {
-                        User = order.User
-                    });
-            }
         }
     }
 }

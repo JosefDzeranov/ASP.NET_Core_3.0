@@ -1,5 +1,4 @@
 ﻿using System.Linq;
-using Telegram.Bot.Types;
 using User = OnlineShop.db.Models.User;
 
 namespace OnlineShop.db

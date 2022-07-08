@@ -33,7 +33,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\OnlineShop.db\OnlineShop.db.csproj" />
-    <ProjectReference Include="..\TelegramTourBot\TelegramTourBot.csproj" />
+    <ProjectReference Include="..\Orders\Orders.csproj" />
   </ItemGroup>
 
 </Project>

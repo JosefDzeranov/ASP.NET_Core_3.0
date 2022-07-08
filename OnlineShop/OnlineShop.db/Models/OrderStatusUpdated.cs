@@ -1,14 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Security.Policy;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace OnlineShop.db.Models
+﻿namespace OnlineShop.db.Models
 {
     public class OrderStatusUpdatedEventArgs
     {
-        public User User { get; set; }
+        public Order Order { get; }
+        public OrderStatusUpdatedEventArgs(Order order)
+        {
+            Order = order;
+        }
     }
 }

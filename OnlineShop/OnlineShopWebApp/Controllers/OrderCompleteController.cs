@@ -1,9 +1,9 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using OnlineShopWebApp.Services;
 using OnlineShopWebApp.Models;
 using OnlineShop.db;
 using OnlineShopWebApp.Helpers;
 using Microsoft.AspNetCore.Authorization;
+using Orders;
 
 namespace OnlineShopWebApp.Controllers
 {
@@ -11,18 +11,15 @@ namespace OnlineShopWebApp.Controllers
     public class OrderCompleteController : Controller
     {
         private readonly ICartRepository cartRepository;
-        private readonly ICustomerProfile customerProfile;
-        private readonly IOrdersRepository ordersRepository;
+        private readonly OrdersService ordersService;
         private readonly UserDbRepository userDbRepository;
-        
-        // add user repository
 
-        public OrderCompleteController(ICartRepository cartRepository, ICustomerProfile customerProfile, IOrdersRepository ordersRepository, UserDbRepository userDbRepository)
+
+        public OrderCompleteController(ICartRepository cartRepository, UserDbRepository userDbRepository, OrdersService ordersService)
         {
             this.cartRepository = cartRepository;
-            this.customerProfile = customerProfile;
-            this.ordersRepository = ordersRepository;
             this.userDbRepository = userDbRepository;
+            this.ordersService = ordersService;
         }
 
         public IActionResult Index()
@@ -40,7 +37,7 @@ namespace OnlineShopWebApp.Controllers
             var order = Mapping.ToOrder(orderViewModel);
             order.User = currentUser;
             order.Items.AddRange(cartItems);
-            ordersRepository.Add(order);
+            ordersService.Add(order);
             cartRepository.RemoveAll(User.Identity.Name);
             return View();
         }
