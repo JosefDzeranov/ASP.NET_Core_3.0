@@ -26,6 +26,18 @@ namespace OnlineShop.Db
             return order;
         }
 
+        public List<Order> TryGetAllByUserId(string userId)
+        {
+            var orders = _databaseContext.Orders.Include(order => order.DeliveryInfo)
+                                                .ThenInclude(di => di.Address)
+                                                .Include(order => order.Items)
+                                                .ThenInclude(item => item.Product)
+                                                .Where(order => order.UserId == userId)
+                                                .ToList();
+
+            return orders;
+        }
+
         public List<Order> GetAll()
         {
             var orders = _databaseContext.Orders.Include(order => order.DeliveryInfo)
@@ -52,7 +64,6 @@ namespace OnlineShop.Db
             var order = _databaseContext.Orders.FirstOrDefault(order => order.Id == id);
             order.Status = newStatus;
             _databaseContext.SaveChanges();
-
         }
     }
 }

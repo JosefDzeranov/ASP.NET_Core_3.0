@@ -1,0 +1,47 @@
+﻿@model UserViewModel
+
+@{
+    ViewData["Title"] = "My profile";
+}
+
+<div class="container">
+    <div class="row">
+        <div class="col-2">
+            @await Html.PartialAsync("UserMenuLeft")
+        </div>
+        <div class="col-7">
+            <h2>@Model.FirstName @Model.LastName</h2>
+            <table class="table mt-4">
+                <tbody>
+                    <tr>
+                        <td>Phone number</td>
+                        <td>@Model.Phone</td>
+                    </tr>
+                    <tr>
+                        <td>Email (login)</td>
+                        <td>@Model.Email</td>
+                    </tr>
+                    <tr>
+                        <td>Roles</td>
+                        <td>
+                            @foreach (var role in Model.UserRoles)
+                            {
+                                @role<br />
+                            }
+                        </td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td>
+                            <button class="btn dropdown-toggle btn-sm btn-outline-dark" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Actions</button>
+                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                <a class="dropdown-item" asp-area="" asp-controller="Account" asp-action="ChangePassword" asp-route-id="@Model.Id">Change password</a>
+                                <a class="dropdown-item" asp-area="" asp-controller="Account" asp-action="Edit" asp-route-id="@Model.Id">Edit my data</a>                               
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
