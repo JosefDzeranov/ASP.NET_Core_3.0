@@ -8,10 +8,12 @@ namespace OnlineShop.db
         void Add(Order order);
         
         List<Order> GetAll();
-        Order TryGetByUserId(int id);
+        Order TryGetById(int id);
 
         void UpdateStatus(int orderId, OrderStatus newStatus);
 
         List<Order> TryGetByUserId(string userId);
+
+        event OrdersDbRepository.OrderStatusUpdatedEventHandler OrderStatusUpdatedEvent;
     }
 }

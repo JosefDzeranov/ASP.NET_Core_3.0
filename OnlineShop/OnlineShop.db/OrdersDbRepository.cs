@@ -1,8 +1,8 @@
 ﻿using System.Collections.Generic;
 using OnlineShop.db.Models;
 using System.Linq;
-using OnlineShop.Db;
 using Microsoft.EntityFrameworkCore;
+
 
 
 namespace OnlineShop.db
@@ -10,6 +10,10 @@ namespace OnlineShop.db
     public class OrdersDbRepository : IOrdersRepository
     {
         private readonly DatabaseContext databaseContext;
+
+        public delegate void OrderStatusUpdatedEventHandler(object sender, OrderStatusUpdatedEventArgs e);
+
+        public event OrderStatusUpdatedEventHandler OrderStatusUpdatedEvent;
 
         public OrdersDbRepository(DatabaseContext databaseContext)
         {
@@ -28,20 +32,18 @@ namespace OnlineShop.db
                 .Include(x => x.Items).ThenInclude(x => x.Product).ToList();
         }
 
-        public Order TryGetByUserId(int id)
+        public Order TryGetById(int id)
         {
-            return databaseContext.Orders.FirstOrDefault(x => x.Id == id);
+            return databaseContext.Orders.Include(x => x.User)
+                .Include(x => x.Items).ThenInclude(x => x.Product).FirstOrDefault(x => x.Id == id);
         }
 
         public List<Order> TryGetByUserId(string userId)
         {
-            throw new System.NotImplementedException();
+            return databaseContext.Orders.Include(x => x.User)
+                .Include(x => x.Items).ThenInclude(x => x.Product).Where(x => x.User.Id == userId).ToList();
         }
 
-        //public List<Order> TryGetByUserId(string userId)
-        //{
-        //    return databaseContext.Orders.Where(x => x.UserId == userId).ToList();
-        //}
 
         public void UpdateStatus(int orderId, OrderStatus newStatus)
         {

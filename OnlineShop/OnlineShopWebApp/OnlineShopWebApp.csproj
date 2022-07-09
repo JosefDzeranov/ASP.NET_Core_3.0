@@ -33,6 +33,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\OnlineShop.db\OnlineShop.db.csproj" />
+    <ProjectReference Include="..\Orders\Orders.csproj" />
   </ItemGroup>
 
 </Project>

@@ -52,16 +52,6 @@ namespace OnlineShopWebApp.Helpers
                 Product = ToProductViewModel(cartDbItem.Product)
             };
         }
-        public static CustomerViewModel ToCustomerViewModel(Customer customer)
-        {
-            return new CustomerViewModel
-            {
-                Id = customer.Id,
-                Name = customer.Name,
-                Phone = customer.Phone,
-                Adress = customer.Adress
-            };
-        }
 
         public static IEnumerable<CartItemViewModel> ToCartItemsViewModels(IEnumerable<CartItem> cartDbItems)
         {
@@ -91,7 +81,7 @@ namespace OnlineShopWebApp.Helpers
                 Id = order.Id,
                 CreateDateTime = order.CreateDateTime,
                 Status = (OrderStatusViewModel)order.Status,
-                User = ToCustomerViewModel(order.User),
+                User = ToUserViewModel(order.User),
                 CartItems = ToCartItemsViewModels(order.Items).ToList()
             };
         }
@@ -110,13 +100,6 @@ namespace OnlineShopWebApp.Helpers
                 Id = order.Id,
                 CreateDateTime = order.CreateDateTime,
                 Status = (OrderStatus)order.Status,
-
-                User = new Customer()
-                {
-                    Name = order.Name,
-                    Phone = order.Phone,
-                    Adress = order.Address
-                },
             };
 
         }
@@ -190,16 +173,6 @@ namespace OnlineShopWebApp.Helpers
         {
             return paths.Select(x => x.Url).ToList();
         }
-        public static Customer ToCustomer(CustomerViewModel customer)
-        {
-            return new Customer
-            {
-                Id = customer.Id,
-                Name = customer.Name,
-                Phone = customer.Phone,
-                Adress = customer.Adress,
-            };
-        }
 
         public static UserViewModel ToUserViewModel(this User user)
         {
@@ -209,32 +182,33 @@ namespace OnlineShopWebApp.Helpers
                 LastName = user.LastName,
                 //Password = user.Password,
                 Email = user.Email,
-                Phone = user.Phone,
+                Phone = user.PhoneNumber,
                 AvatarPath = user.AvatarPath,
-
+                UserName = user.UserName,
+                Address = user.Address
             };
         }
 
-        public static User ToUser(this User existingUser, string imagePath)
-        {
-            return new User
-            {
-                FirstName = existingUser.FirstName,
-                LastName = existingUser.LastName,
-                Email = existingUser.Email,
-                AvatarPath = existingUser.AvatarPath,
-                Phone = existingUser.Phone,
+        //public static User ToUser(this UserViewModel existingUser)
+        //{
+        //    return new User
+        //    {
+        //        FirstName = existingUser.FirstName,
+        //        LastName = existingUser.LastName,
+        //        Email = existingUser.Email,
+        //        AvatarPath = existingUser.AvatarPath,
+        //        //Phone = existingUser.Phone,
 
-            };
-        }
-        public static User Update(this User user, UserViewModel userProfile, string imagePath)
+        //    };
+        //}
+        public static User Update(this User user, UserViewModel userProfile, string imagePath = null)
         {
             user.FirstName = userProfile.FirstName;
             user.LastName = userProfile.LastName;
-            user.Email = userProfile.Email;
-            user.AvatarPath = imagePath;
-            user.Phone = userProfile.Phone;
-
+            //user.Email = userProfile.Email;
+            user.AvatarPath = imagePath ?? user.AvatarPath;
+            user.PhoneNumber = userProfile.Phone;
+            user.Address = userProfile.Address;
             return user;
         }
     }

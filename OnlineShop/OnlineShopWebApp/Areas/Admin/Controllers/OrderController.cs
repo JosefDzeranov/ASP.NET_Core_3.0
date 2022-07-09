@@ -1,9 +1,9 @@
 ﻿using System.Linq;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using OnlineShop.db;
-using OnlineShop.Db;
+using OnlineShop.db.Models;
 using OnlineShopWebApp.Helpers;
+using Orders;
 
 namespace OnlineShopWebApp.Areas.Admin.Controllers
 {
@@ -11,28 +11,28 @@ namespace OnlineShopWebApp.Areas.Admin.Controllers
     [Authorize(Roles = Constants.AdminRoleName)]
     public class OrderController : Controller
     {
-        private readonly IOrdersRepository ordersRepository;
+        private readonly OrdersService ordersService;
 
-        public OrderController(IOrdersRepository ordersRepository)
+        public OrderController(OrdersService ordersService)
         {
-            this.ordersRepository = ordersRepository;
+            this.ordersService = ordersService;
         }
 
         public IActionResult Index()
         {
-            var orders = ordersRepository.GetAll();
+            var orders = ordersService.GetAll();
             return View(Mapping.ToOrderViewModels(orders).ToList());
         }
 
         public IActionResult Detail(int orderId)
         {
-            var order = ordersRepository.TryGetByUserId(orderId);
+            var order = ordersService.TryGetById(orderId);
             return View(Mapping.ToOrderViewModel(order));
         }
 
         public IActionResult UpdateOrderStatus(int orderId, OrderStatus status)
         {
-            ordersRepository.UpdateStatus(orderId, status);
+            ordersService.UpdateStatus(orderId, status);
             return RedirectToAction(nameof(Index));
         }
     }

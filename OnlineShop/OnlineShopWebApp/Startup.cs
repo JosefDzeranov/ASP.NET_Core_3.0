@@ -6,14 +6,13 @@ using Microsoft.Extensions.Hosting;
 using OnlineShopWebApp.Services;
 using Serilog;
 using Microsoft.EntityFrameworkCore;
-using OnlineShop.Db;
 using OnlineShop.db;
 using IOrdersRepository = OnlineShop.db.IOrdersRepository;
 using OnlineShop.db.Models;
 using Microsoft.AspNetCore.Identity;
 using System;
 using Microsoft.AspNetCore.Http;
-
+using Orders;
 
 namespace OnlineShopWebApp
 {
@@ -29,14 +28,15 @@ namespace OnlineShopWebApp
         public void ConfigureServices(IServiceCollection services)
         {
             string connection = Configuration.GetConnectionString("online_shop");
+
             services.AddDbContext<DatabaseContext>(options =>
                 options.UseSqlServer(connection), ServiceLifetime.Singleton);
 
-            services.AddDbContext<IdentityContext>(options =>
-                options.UseSqlServer(connection));
+            //services.AddDbContext<IdentityContext>(options =>
+            //    options.UseSqlServer(connection), ServiceLifetime.Singleton);
 
             services.AddIdentity<User, IdentityRole>().AddRoles<IdentityRole>().AddRoleManager<RoleManager<IdentityRole>>()
-                .AddEntityFrameworkStores<IdentityContext>();
+                .AddEntityFrameworkStores<DatabaseContext>();
 
             services.Configure<IdentityOptions>(options =>
             {
@@ -60,15 +60,18 @@ namespace OnlineShopWebApp
                 };
             });
 
-            services.AddTransient<ICartRepository, CartsDbRepository>();
-            services.AddTransient<IProductDataSource, ProductsDbRepository>();
-            services.AddTransient<ICustomerProfile, InMemoryCustomerProfile>();
-            services.AddTransient<IOrdersRepository, OrdersDbRepository>();
-            services.AddTransient<IFavoriteRepository, FavoriteDbRepository>();
-            services.AddTransient<ImagesProvider>();
+            services.AddSingleton<ICartRepository, CartsDbRepository>();
+            services.AddSingleton<IProductDataSource, ProductsDbRepository>();
+            services.AddSingleton<ICustomerProfile, InMemoryCustomerProfile>();
+            services.AddSingleton<IOrdersRepository, OrdersDbRepository>();
+            services.AddSingleton<IFavoriteRepository, FavoriteDbRepository>();
+            services.AddSingleton<ImagesProvider>();
+            
+            services.AddSingleton<UserDbRepository>();
+            services.AddSingleton<OrdersService>();
+
 
             services.AddControllersWithViews();
-
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

@@ -1,4 +1,5 @@
 ﻿@using OnlineShop.db
+@using OnlineShop.db.Models
 @model OrderViewModel
 <form method="post">
 <div class="row">
@@ -10,11 +11,11 @@
 			</tr>
 			<tr>
 				<td>Адрес доставки</td>
-				<td>@Model.User.Adress</td>
+				<td>@Model.User.Address</td>
 			</tr>
 			<tr>
 				<td>Получатель</td>
-				<td>@Model.User.Name</td>
+				<td>@Model.User.FirstName &nbsp; @Model.User.LastName</td>
 			</tr>
 			<tr>
 				<td>Телефон</td>

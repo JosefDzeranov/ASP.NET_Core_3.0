@@ -1,4 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using OnlineShop.db;
+using OnlineShopWebApp.Helpers;
 using OnlineShopWebApp.Models;
 using OnlineShopWebApp.Services;
 
@@ -6,32 +8,34 @@ namespace OnlineShopWebApp.Controllers
 {
     public class CustomerProfileController : Controller
     {
-        private readonly ICustomerProfile customerProfile;
+        private readonly UserDbRepository userDbRepository;
 
-        public CustomerProfileController(ICustomerProfile customerProfile)
+        public CustomerProfileController(UserDbRepository userDbRepository)
         {
-            this.customerProfile = customerProfile;
+            this.userDbRepository = userDbRepository;
         }
         public IActionResult Index()
         {
-            return View();
+            var currentUser = userDbRepository.TryGetByName(User.Identity.Name);
+            var userViewModel = currentUser.ToUserViewModel();
+            //get current user, convert to UserViewModel and send it to the view
+            return View(userViewModel);
         }
 
         [HttpPost]
-        public IActionResult Create(CustomerViewModel customer)
+        public IActionResult Create(UserViewModel customer)
         {
-            if (ModelState.IsValid)
-            {
-                var order = new OrderViewModel();
-                order.Name = customer.Name;
-                order.Phone = customer.Phone;
-                order.Email = customer.Email;
-                order.Address = customer.Adress;
+            var currentUser = userDbRepository.TryGetByName(User.Identity.Name);
+            currentUser.Update(customer);
+            userDbRepository.UpdateUser();
 
-                return RedirectToAction("Buy", "OrderComplete", order);
-            }
+            var order = new OrderViewModel();
+            //order.Name = customer.Name;
+            //order.Phone = customer.Phone;
+            //order.Email = customer.Email;
+            //order.Address = customer.Adress;
 
-            return View(customer);
+            return RedirectToAction("Buy", "OrderComplete", order);
         }
     }
 }
