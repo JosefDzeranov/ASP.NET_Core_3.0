@@ -1,0 +1,43 @@
+06/21/2022 13:22:50 +00:00 Storing keys in a directory '"/root/.aspnet/DataProtection-Keys"' that may not be persisted outside of the container. Protected data will be unavailable when container is destroyed.
+06/21/2022 13:22:50 +00:00 No XML encryptor configured. Key {7d22362a-68bb-4da3-b5ae-62e97c5456b3} may be persisted to storage in unencrypted form.
+06/21/2022 13:28:37 +00:00 No type was specified for the decimal column '"Cost"' on entity type '"Product"'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values using 'HasColumnType()'.
+06/21/2022 13:28:37 +00:00 HTTP "GET" "/" responded 200 in 883.8351 ms
+06/21/2022 13:28:37 +00:00 HTTP "GET" "/lib/jquery-validation/dist/jquery.validate.min.js" responded 200 in 236.9333 ms
+06/21/2022 13:28:37 +00:00 HTTP "GET" "/images/book.png" responded 200 in 235.9470 ms
+06/21/2022 13:28:37 +00:00 HTTP "GET" "/js/site.js" responded 200 in 237.0937 ms
+06/21/2022 13:28:37 +00:00 HTTP "GET" "/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js" responded 200 in 236.5528 ms
+06/21/2022 13:28:37 +00:00 HTTP "GET" "/css/site.css" responded 200 in 286.2537 ms
+06/21/2022 13:28:37 +00:00 HTTP "GET" "/lib/bootstrap/dist/js/bootstrap.bundle.min.js" responded 200 in 285.8739 ms
+06/21/2022 13:28:37 +00:00 HTTP "GET" "/lib/bootstrap-icons/bootstrap-icons.css" responded 200 in 309.9103 ms
+06/21/2022 13:28:37 +00:00 HTTP "GET" "/lib/jquery/dist/jquery.min.js" responded 200 in 309.1472 ms
+06/21/2022 13:28:37 +00:00 HTTP "GET" "/lib/bootstrap/dist/css/bootstrap.min.css" responded 200 in 321.1860 ms
+06/21/2022 13:28:38 +00:00 HTTP "GET" "/lib/bootstrap-icons/fonts/bootstrap-icons.woff2" responded 200 in 38.4607 ms
+06/21/2022 13:28:38 +00:00 HTTP "GET" "/favicon.ico" responded 200 in 10.2990 ms
+06/21/2022 13:28:51 +00:00 HTTP "GET" "/Account/Login" responded 200 in 99.9114 ms
+06/21/2022 13:29:21 +00:00 HTTP "POST" "/Account/Login" responded 302 in 209.5117 ms
+06/21/2022 13:29:21 +00:00 HTTP "GET" "/" responded 200 in 85.4784 ms
+06/21/2022 13:29:21 +00:00 HTTP "GET" "/images/defaultAvatar.png" responded 200 in 11.7725 ms
+06/21/2022 13:29:24 +00:00 HTTP "GET" "/Admin/Order" responded 200 in 102.8795 ms
+06/21/2022 13:29:25 +00:00 HTTP "GET" "/Admin/Product" responded 200 in 87.9854 ms
+06/21/2022 13:29:30 +00:00 HTTP "GET" "/Admin/Product/AddProduct" responded 200 in 94.8121 ms
+06/21/2022 13:29:51 +00:00 HTTP "POST" "/Admin/Product/AddProduct" responded 302 in 59.9803 ms
+06/21/2022 13:29:51 +00:00 HTTP "GET" "/Admin/Product" responded 200 in 81.3440 ms
+06/21/2022 13:34:47 +00:00 Storing keys in a directory '"/root/.aspnet/DataProtection-Keys"' that may not be persisted outside of the container. Protected data will be unavailable when container is destroyed.
+06/21/2022 13:35:17 +00:00 No type was specified for the decimal column '"Cost"' on entity type '"Product"'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values using 'HasColumnType()'.
+06/21/2022 13:35:18 +00:00 HTTP "GET" "/" responded 200 in 698.0806 ms
+06/21/2022 13:48:48 +00:00 Storing keys in a directory '"/root/.aspnet/DataProtection-Keys"' that may not be persisted outside of the container. Protected data will be unavailable when container is destroyed.
+06/21/2022 13:48:48 +00:00 No XML encryptor configured. Key {cc65dd96-3b4e-4f45-85ac-b02b306b550e} may be persisted to storage in unencrypted form.
+06/21/2022 13:48:58 +00:00 HTTP "GET" "/" responded 307 in 9.2539 ms
+06/21/2022 13:48:58 +00:00 No type was specified for the decimal column '"Cost"' on entity type '"Product"'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values using 'HasColumnType()'.
+06/21/2022 13:48:59 +00:00 HTTP "GET" "/" responded 200 in 598.5106 ms
+06/21/2022 13:48:59 +00:00 HTTP "GET" "/js/site.js" responded 200 in 237.4843 ms
+06/21/2022 13:48:59 +00:00 HTTP "GET" "/images/book.png" responded 200 in 194.9156 ms
+06/21/2022 13:48:59 +00:00 HTTP "GET" "/css/site.css" responded 200 in 287.4154 ms
+06/21/2022 13:48:59 +00:00 HTTP "GET" "/lib/jquery-validation/dist/jquery.validate.min.js" responded 200 in 262.0538 ms
+06/21/2022 13:48:59 +00:00 HTTP "GET" "/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js" responded 200 in 221.3247 ms
+06/21/2022 13:48:59 +00:00 HTTP "GET" "/lib/bootstrap/dist/js/bootstrap.bundle.min.js" responded 200 in 288.2344 ms
+06/21/2022 13:48:59 +00:00 HTTP "GET" "/lib/bootstrap-icons/bootstrap-icons.css" responded 200 in 291.2309 ms
+06/21/2022 13:48:59 +00:00 HTTP "GET" "/lib/jquery/dist/jquery.min.js" responded 200 in 292.1113 ms
+06/21/2022 13:48:59 +00:00 HTTP "GET" "/lib/bootstrap/dist/css/bootstrap.min.css" responded 200 in 319.1577 ms
+06/21/2022 13:48:59 +00:00 HTTP "GET" "/lib/bootstrap-icons/fonts/bootstrap-icons.woff2" responded 200 in 41.9201 ms
+06/21/2022 13:48:59 +00:00 HTTP "GET" "/favicon.ico" responded 200 in 8.1287 ms
