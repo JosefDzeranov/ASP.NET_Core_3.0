@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace OnlineShopWebApp.Models
 {
-    public class User
+    public class UserViewModel
     {
         public Guid Id { get; set; } = Guid.NewGuid();
         [Required(ErrorMessage ="не указано имя")]
@@ -24,14 +24,14 @@ namespace OnlineShopWebApp.Models
 
      //   public UserActions Actions { get; set; }
 
-        public User(string login, string password)
+        public UserViewModel(string login, string password)
         {
             Login = login;
             Password = password;
             Id = Guid.NewGuid();
         }
 
-        public User()
+        public UserViewModel()
         {
 
         }

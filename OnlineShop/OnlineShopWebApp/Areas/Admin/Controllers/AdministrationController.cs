@@ -68,7 +68,7 @@ namespace OnlineShopWebApp.Controllers
         }
 
         [HttpPost]
-        public IActionResult SaveNewUser(User user)
+        public IActionResult SaveNewUser(UserViewModel user)
         {
             if (ModelState.IsValid)
             {
@@ -125,7 +125,7 @@ namespace OnlineShopWebApp.Controllers
         }
 
         [HttpPost]
-        public IActionResult SaveEditedUser(User user)
+        public IActionResult SaveEditedUser(UserViewModel user)
         {
             if (ModelState.IsValid)
             {
