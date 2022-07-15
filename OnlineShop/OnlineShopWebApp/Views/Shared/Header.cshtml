@@ -18,9 +18,32 @@
                     <li>
                         <a class="nav-link text-dark" href="/favorites/index/" role="button">Избранное</a>
                     </li>
-                    <li>
-                        <a class="nav-link text-dark" href="/authorization/index/" role="button">Войти</a>
-                    </li>
+                    
+                        @if(User.Identity.IsAuthenticated)
+                        {
+                            <li class="nav-item text-dark">
+                                @User.Identity.Name
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Account" asp-action="Logout" Выход></a>
+                        </li>
+                    }
+                    else
+                    {
+                         <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Account" asp-action="Login" Войти></a>
+                        </li>
+                    }
+
+                    @if (User.IsInRole(Constants.AdminRoleName))
+                    {
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="Admin" asp-controller="Order" asp-action="Index"Администратор></a>
+                        </li>
+                    }
+
+                        @*<a class="nav-link text-dark" href="/authorization/index/" role="button">Войти</a>*@
+                    
                     <li>
                         <a class="nav-link text-dark" href="/admin/administration/index/" role="button">Панель администратора</a>
                     </li>
