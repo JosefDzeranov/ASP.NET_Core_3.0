@@ -25,27 +25,27 @@
                                 @User.Identity.Name
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="Account" asp-action="Logout" Выход></a>
+                                <a class="nav-link text-dark"   asp-controller="Authorization" asp-action="Logout" role="button"> Выход</a>
                         </li>
                     }
                     else
                     {
                          <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="Account" asp-action="Login" Войти></a>
+                                <a class="nav-link text-dark"  asp-controller="Authorization" asp-action="Login"> Войти</a>
                         </li>
                     }
 
                     @if (User.IsInRole(Constants.AdminRoleName))
                     {
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="Admin" asp-controller="Order" asp-action="Index"Администратор></a>
+                            <a class="nav-link text-dark" asp-area="Admin" asp-controller="administration" asp-action="Index"Администратор></a>
                         </li>
                     }
 
                         @*<a class="nav-link text-dark" href="/authorization/index/" role="button">Войти</a>*@
                     
                     <li>
-                        <a class="nav-link text-dark" href="/admin/administration/index/" role="button">Панель администратора</a>
+                        @*<a class="nav-link text-dark" href="/admin/administration/index/" role="button">Панель администратора</a>*@
                     </li>
                 </ul>
             </div>

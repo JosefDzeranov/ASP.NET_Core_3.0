@@ -1,6 +1,8 @@
+using System;
 using System.Globalization;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Localization;
 using Microsoft.EntityFrameworkCore;
@@ -34,6 +36,17 @@ namespace OnlineShopWebApp
 
             services.AddIdentity<User, IdentityRole>().
             AddEntityFrameworkStores<IdentityContext>();
+
+            services.ConfigureApplicationCookie(options =>
+            {
+                options.ExpireTimeSpan = TimeSpan.FromHours(8);
+                options.LoginPath = "/Authorization/Login";
+                options.LogoutPath = "/Authorization/Logout";
+                options.Cookie = new CookieBuilder
+                {
+                    IsEssential = true
+                };
+                });
 
             services.AddTransient<ICartManager, CartManagerDB>();
             services.AddTransient<IProductManager, ProductManagerDB>();
