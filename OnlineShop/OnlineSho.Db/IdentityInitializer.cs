@@ -8,7 +8,7 @@ namespace OnlineShopWebApp
         public static void Initialize(UserManager<User> userManager, RoleManager<IdentityRole> roleManager)
         {
             var adminEmail = "admin@gmail.com";
-            var password = "12345";
+            var password = "Admin123+";
             if (roleManager.FindByNameAsync(Constants.AdminRoleName).Result == null)
             {
                 roleManager.CreateAsync(new IdentityRole(Constants.AdminRoleName)).Wait();
