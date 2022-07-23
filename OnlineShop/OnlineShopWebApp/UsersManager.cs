@@ -11,12 +11,12 @@ namespace OnlineShopWebApp
     {
         string path = @"wwwroot\registredusers.json";
 
-        private List<User> registredUsers = new List<User>();
+        private List<UserViewModel> registredUsers = new List<UserViewModel>();
 
         public void RegisterUser(Registration regInfo)
         {
             registredUsers = GetRegistredUsers();
-            registredUsers.Add(new User(regInfo.Login, regInfo.Password));
+            registredUsers.Add(new UserViewModel(regInfo.Login, regInfo.Password));
 
             var jsonData = JsonConvert.SerializeObject(registredUsers);
 
@@ -27,7 +27,7 @@ namespace OnlineShopWebApp
 
         }
 
-        public void SaveNewUser(User user)
+        public void SaveNewUser(UserViewModel user)
         {
             if (registredUsers != null)
             {
@@ -35,7 +35,7 @@ namespace OnlineShopWebApp
             }
             else
             {
-                registredUsers = new List<User>();
+                registredUsers = new List<UserViewModel>();
             }
 
             registredUsers.Add(user);
@@ -49,7 +49,7 @@ namespace OnlineShopWebApp
 
         }
 
-        public List<User> GetRegistredUsers()
+        public List<UserViewModel> GetRegistredUsers()
         {
             string data = string.Empty;
             if (File.Exists(path))
@@ -58,17 +58,17 @@ namespace OnlineShopWebApp
                 {
                     data = sr.ReadToEnd();
                 }
-                registredUsers = JsonConvert.DeserializeObject<List<User>>(data);
+                registredUsers = JsonConvert.DeserializeObject<List<UserViewModel>>(data);
             }
             else
             {
-                registredUsers = new List<User>();
+                registredUsers = new List<UserViewModel>();
             }
 
             return registredUsers;
         }
 
-        public User GetUserById(Guid id)
+        public UserViewModel GetUserById(Guid id)
         {
             registredUsers = GetRegistredUsers();
             return registredUsers.Find(x => x.Id == id);
@@ -87,7 +87,7 @@ namespace OnlineShopWebApp
             }
         }
 
-        public void EditUser(User editedUser)
+        public void EditUser(UserViewModel editedUser)
         {
             registredUsers = GetRegistredUsers();
 
@@ -111,7 +111,7 @@ namespace OnlineShopWebApp
 
         }
 
-        public void DeleteUser(User deletedUser)
+        public void DeleteUser(UserViewModel deletedUser)
         {
             registredUsers = GetRegistredUsers();
 

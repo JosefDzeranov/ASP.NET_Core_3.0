@@ -3,25 +3,27 @@
     <h5>
         Вход
     </h5>
-   
+    
+    <input type="hidden" name="returnUrl" value="@Model.ReturnUrl"/>
+
     <div>
         <label asp-for="Login"></label><br />
-        <input asp-for="Login"/>
+        <input asp-for="Login" />
         <span asp-validation-for="Login"></span>
     </div>
     <div>
         <label asp-for="Password"></label><br />
-        <input asp-for="Password"/>
+        <input asp-for="Password" />
         <span asp-validation-for="Password"></span>
     </div>
-   
+
     <div>
-        <input type="checkbox" name="isRemembered" typeof="bool" value="true" /> Запомнить меня? <br />
-        <button class="btn btn-dark" type="submit" asp-controller="Authorization" asp-action="Enter">Войти</button> <br />
+        <input type="checkbox" asp-for="RememberMe" typeof="bool" value="true" /> Запомнить меня? <br />
+        <button class="btn btn-dark" type="submit" asp-controller="Authorization" asp-action="Login">Войти</button> <br />
         <a class="text-dark" href="/registration/index" role="button">Регистрация нового пользователя</a> <br />
     </div>
-   
-    
+
+
 
 </form>
 @section Scripts{

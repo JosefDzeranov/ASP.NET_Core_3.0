@@ -1,12 +1,16 @@
+using System;
 using System.Globalization;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Localization;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using OnlineShop.Db;
+using OnlineShop.Db.Models;
 using OnlineShopWebApp.Models;
 using OOnlineShop.Db;
 using Serilog;
@@ -28,7 +32,21 @@ namespace OnlineShopWebApp
             //получаем строку подключения из файла конфигурации
             string connection = Configuration.GetConnectionString("online_shop_bilonenko");
             services.AddDbContext<DataBaseContext>(options => options.UseSqlServer(connection));
-           
+            services.AddDbContext<IdentityContext>(options => options.UseSqlServer(connection));
+
+            services.AddIdentity<User, IdentityRole>().
+            AddEntityFrameworkStores<IdentityContext>();
+
+            services.ConfigureApplicationCookie(options =>
+            {
+                options.ExpireTimeSpan = TimeSpan.FromHours(8);
+                options.LoginPath = "/Authorization/Login";
+                options.LogoutPath = "/Authorization/Logout";
+                options.Cookie = new CookieBuilder
+                {
+                    IsEssential = true
+                };
+                });
 
             services.AddTransient<ICartManager, CartManagerDB>();
             services.AddTransient<IProductManager, ProductManagerDB>();
@@ -72,6 +90,8 @@ namespace OnlineShopWebApp
             app.UseStaticFiles();
 
             app.UseRouting();
+
+            app.UseAuthentication();
 
             app.UseAuthorization();
 

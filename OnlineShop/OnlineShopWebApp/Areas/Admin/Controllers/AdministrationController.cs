@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using OnlineShop.Db;
 using OnlineShop.Db.Models;
@@ -8,7 +9,8 @@ using System.Collections.Generic;
 
 namespace OnlineShopWebApp.Controllers
 {
-    [Area("Admin")]
+    [Area(Constants.AdminRoleName)]
+    [Authorize(Roles = Constants.AdminRoleName)]
     public class AdministrationController : Controller
     {
         private readonly IProductManager productManager;
@@ -68,7 +70,7 @@ namespace OnlineShopWebApp.Controllers
         }
 
         [HttpPost]
-        public IActionResult SaveNewUser(User user)
+        public IActionResult SaveNewUser(UserViewModel user)
         {
             if (ModelState.IsValid)
             {
@@ -125,7 +127,7 @@ namespace OnlineShopWebApp.Controllers
         }
 
         [HttpPost]
-        public IActionResult SaveEditedUser(User user)
+        public IActionResult SaveEditedUser(UserViewModel user)
         {
             if (ModelState.IsValid)
             {

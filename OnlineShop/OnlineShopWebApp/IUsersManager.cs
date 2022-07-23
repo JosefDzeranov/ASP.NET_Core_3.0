@@ -8,14 +8,14 @@ namespace OnlineShopWebApp
     {
         public void RegisterUser(Registration regInfo);
 
-        public void SaveNewUser(User user);
+        public void SaveNewUser(UserViewModel user);
 
-        public List<User> GetRegistredUsers();
+        public List<UserViewModel> GetRegistredUsers();
         public bool Compare(Authorization authorization);
 
-        public User GetUserById(Guid id);
+        public UserViewModel GetUserById(Guid id);
 
-        public void EditUser(User editedUser);
-        void DeleteUser(User deletedUser);
+        public void EditUser(UserViewModel editedUser);
+        void DeleteUser(UserViewModel deletedUser);
     }
 }

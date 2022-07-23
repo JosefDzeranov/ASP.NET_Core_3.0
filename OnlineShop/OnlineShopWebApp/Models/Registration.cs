@@ -5,6 +5,7 @@ namespace OnlineShopWebApp.Models
     public class Registration
     {
         [Required(ErrorMessage ="Не указан логин")]
+        [EmailAddress]
         public string Login { get; set; }
 
         [Required(ErrorMessage = "Не указан пароль")]
