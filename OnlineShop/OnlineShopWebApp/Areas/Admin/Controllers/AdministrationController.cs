@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using OnlineShop.Db;
 using OnlineShop.Db.Models;
@@ -8,7 +9,8 @@ using System.Collections.Generic;
 
 namespace OnlineShopWebApp.Controllers
 {
-    [Area("Admin")]
+    [Area(Constants.AdminRoleName)]
+    [Authorize(Roles = Constants.AdminRoleName)]
     public class AdministrationController : Controller
     {
         private readonly IProductManager productManager;

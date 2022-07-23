@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using OnlineShop.Db;
 using OnlineShop.Db.Models;
@@ -6,6 +7,7 @@ using OnlineShopWebApp.Models;
 
 namespace OnlineShopWebApp.Controllers
 {
+    [Authorize]
     public class OrderController : Controller
     {
         private readonly IOrderManager orderManager;

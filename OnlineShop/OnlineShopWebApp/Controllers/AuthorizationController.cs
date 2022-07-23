@@ -29,7 +29,7 @@ namespace OnlineShopWebApp.Controllers
             var result = _signInManager.PasswordSignInAsync(authorization.Login, authorization.Password, authorization.RememberMe, false).Result;
             if (result.Succeeded)
             {
-                return RedirectToAction("Index", "Home");
+                return Redirect(authorization.ReturnUrl);
             }
             else
             {
