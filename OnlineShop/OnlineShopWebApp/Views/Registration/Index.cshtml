@@ -3,6 +3,10 @@
 <h5>
     Регистрация
 </h5>
+
+@*<input type="hidden" asp-for="ReturnUrl" />*@
+<input type="hidden" name="returnUrl" value="@Model.ReturnUrl"/>
+
  <div>
         <label asp-for="Login"></label><br />
         <input asp-for="Login"/>

@@ -3,8 +3,8 @@
     <h5>
         Вход
     </h5>
-    
-    <input type="hidden" name="returnUrl" value="@Model.ReturnUrl"/>
+
+    <input type="hidden" name="returnUrl" value="@Model.ReturnUrl" />
 
     <div>
         <label asp-for="Login"></label><br />
@@ -20,10 +20,13 @@
     <div>
         <input type="checkbox" asp-for="RememberMe" typeof="bool" value="true" /> Запомнить меня? <br />
         <button class="btn btn-dark" type="submit" asp-controller="Authorization" asp-action="Login">Войти</button> <br />
-        <a class="text-dark" href="/registration/index" role="button">Регистрация нового пользователя</a> <br />
+        <br />
+
+         
     </div>
-
-
+    <div>
+        <a class="form-control"  asp-controller="Registration" asp-action="Register" asp-route-returnUrl="@Model.ReturnUrl">Регистрация нового пользователя </a>
+    </div>
 
 </form>
 @section Scripts{
