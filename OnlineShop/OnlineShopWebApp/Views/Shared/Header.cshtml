@@ -25,7 +25,7 @@
                                 @User.Identity.Name
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link text-dark"   asp-controller="Authorization" asp-action="Logout" role="button"> Выход</a>
+                                <a class="nav-link text-dark" asp-area=""  asp-controller="Authorization" asp-action="Logout" role="button"> Выход</a>
                         </li>
                     }
                     else
@@ -38,7 +38,7 @@
                     @if (User.IsInRole(Constants.AdminRoleName))
                     {
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="Admin" asp-controller="administration" asp-action="Index"Администратор></a>
+                            <a class="nav-link text-dark" asp-area="Admin" asp-controller="Administration" asp-action="Index"> Администратор></a>
                         </li>
                     }
 

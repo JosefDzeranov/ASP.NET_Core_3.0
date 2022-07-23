@@ -20,7 +20,7 @@ namespace OnlineShopWebApp
             if (userManager.FindByNameAsync(adminEmail).Result == null)
             {
                 var admin = new User { Email = adminEmail, UserName = adminEmail };
-                var result = userManager.CreateAsync(admin).Result;
+                var result = userManager.CreateAsync(admin, password).Result;
                 if (result.Succeeded)
                 {
                     userManager.AddToRoleAsync(admin, Constants.AdminRoleName).Wait();

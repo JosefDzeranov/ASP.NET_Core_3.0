@@ -40,6 +40,12 @@ namespace OnlineShopWebApp.Controllers
 
         }
 
+        public IActionResult LogOut()
+        {
+            _signInManager.SignOutAsync().Wait();
+            return RedirectToAction("Index", "Home");
+        }
+
 
 
         //private readonly IUsersManager regAndAuthManager;
