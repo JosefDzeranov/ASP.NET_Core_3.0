@@ -30,7 +30,7 @@ namespace OnlineShopWebApp.Controllers
         {
             if (ModelState.IsValid)
             {
-                var user = new User { UserName = registration.Login, Email = registration.Login };
+                var user = new User { UserName = registration.Login, Email = registration.Login, Id = registration.Id.ToString(), PhoneNumber = registration.Phone };
 
                 var result = userManager.CreateAsync(user, registration.Password).Result;
 
