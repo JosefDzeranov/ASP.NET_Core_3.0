@@ -10,12 +10,12 @@
         </button>
       </div>
       <div class="modal-body">
-        @Model.Login был удален
+        @Model.Name был удален
           
       </div>
       <div class="modal-footer">
          
-          <a class="btn btn-dark" href="/Admin/Administration/DeleteUser/@Model.Id" role="button">Close</a>
+          <a class="btn btn-dark" asp-area="Admin" asp-controller="Administration" asp-action="DeleteUser" asp-route-name="@Model.Name" role="button">Close</a>
 
          
       </div>

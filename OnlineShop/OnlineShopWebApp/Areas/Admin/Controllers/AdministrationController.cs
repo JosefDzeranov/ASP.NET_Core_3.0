@@ -104,16 +104,7 @@ namespace OnlineShopWebApp.Controllers
         {
             var changePassword = new ChangePassWord { UserName = name };
             return View(changePassword);
-            //var user = _userManager.FindByNameAsync(name).Result;
-            //if (user != null)
-            //{
-            //    return View(Mapping.ToUserViewModel(user));
-            //}
-            //else
-            //{
-            //    return RedirectToAction("ShowUser", name);
-            //}
-
+           
         }
 
 
@@ -135,16 +126,16 @@ namespace OnlineShopWebApp.Controllers
             return RedirectToAction("Users");
         }
 
-        public IActionResult EditUser(Guid id)
+        public IActionResult EditUser(string name)
         {
-            var user = _userManager.FindByIdAsync(id.ToString()).Result;
+            var user = Mapping.ToUserViewModel(_userManager.FindByNameAsync(name).Result);
             if (user != null)
             {
                 return View(user);
             }
             else
             {
-                return RedirectToAction("ShowUser", id);
+                return RedirectToAction("ShowUser", name);
             }
 
         }
@@ -160,25 +151,18 @@ namespace OnlineShopWebApp.Controllers
             }
             else
             {
-                return RedirectToAction("ChangePassWord", user.Name);
+                return RedirectToAction("ShowUser", user);
             }
 
         }
 
-        //public IActionResult DeleteUser(Guid id)
-        //{
-        //    var user = usersManager.GetUserById(id);
-        //    if (user != null)
-        //    {
-        //        usersManager.DeleteUser(user);
-        //        return RedirectToAction("Users");
-        //    }
-        //    else
-        //    {
-        //        return RedirectToAction("ShowUser", id);
-        //    }
+        public IActionResult DeleteUser(string name)
+        {
+            var user = _userManager.FindByNameAsync(name).Result;
+            _userManager.DeleteAsync(user).Wait();
+            return RedirectToAction("Users");
 
-        //}
+        }
 
 
         public IActionResult Roles()
