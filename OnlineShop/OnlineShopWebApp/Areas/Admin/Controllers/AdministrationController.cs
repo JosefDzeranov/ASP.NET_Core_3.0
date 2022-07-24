@@ -80,7 +80,7 @@ namespace OnlineShopWebApp.Controllers
             if (ModelState.IsValid)
             {
 
-                var newUser = new User { UserName = user.Login };
+                var newUser = new User { UserName = user.Login, PhoneNumber = user.Phone, Id = user.Id.ToString()};
                 var result = _userManager.CreateAsync(newUser, user.Password).Result;
 
 
@@ -129,6 +129,7 @@ namespace OnlineShopWebApp.Controllers
         public IActionResult EditUser(string name)
         {
             var user = Mapping.ToUserViewModel(_userManager.FindByNameAsync(name).Result);
+            
             if (user != null)
             {
                 return View(user);
@@ -141,18 +142,19 @@ namespace OnlineShopWebApp.Controllers
         }
 
         [HttpPost]
-        public IActionResult SaveEditedUser(UserViewModel user)
+        public IActionResult SaveEditedUser(UserViewModel userView)
         {
-            if (ModelState.IsValid)
-            {
-              //  usersManager.EditUser(user);
+            
+            var user = _userManager.FindByIdAsync(userView.Id.ToString()).Result;
+          
+           user.UserName = userView.Name;// изменится имя и невозможен будет поиск
+            user.PhoneNumber = userView.Phone;
+
+                _userManager.UpdateAsync(user).Wait();
+               
 
                 return RedirectToAction("Users");
-            }
-            else
-            {
-                return RedirectToAction("ShowUser", user);
-            }
+          
 
         }
 

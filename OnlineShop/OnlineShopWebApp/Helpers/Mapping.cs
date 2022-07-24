@@ -202,7 +202,13 @@ namespace OnlineShopWebApp.Helpers
         {
             return new UserViewModel
             {
-                Name = user.UserName
+                Name = user.UserName,
+                Login = user.UserName,
+                Phone = user.PhoneNumber,
+                Password = user.PasswordHash,
+                ConfirmedPassword = user.PasswordHash,
+                Id = Guid.Parse(user.Id)
+                
 
             };
         }

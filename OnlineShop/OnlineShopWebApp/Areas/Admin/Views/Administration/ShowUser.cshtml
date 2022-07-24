@@ -13,8 +13,8 @@
                 <td>@Model.Name </td>
             </tr>
             <tr>
-                <td>Фамилия</td>
-                <td>@Model.LastName </td>
+                <td>Телефон</td>
+                <td>@Model.Phone </td>
             </tr>
             <tr>
                 <td>Логин</td>
@@ -31,7 +31,7 @@
         <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
             <a class="dropdown-item" asp-area="Admin" asp-controller="Administration" asp-action="ChangePassword" asp-route-name="@Model.Name"> Смена пароля</a>
             <a class="dropdown-item" asp-area="Admin" asp-controller="Administration" asp-action="EditUser" asp-route-name="@Model.Name"> Редактирование данных</a>
-            <a class="dropdown-item" asp-area="Admin" asp-controller="Administration" asp-action="EditUserRights" asp-route-id="@Model.Id">Права доступа </a>
+            <a class="dropdown-item" asp-area="Admin" asp-controller="Administration" asp-action="EditUserRights" asp-route-id="@Model.Name">Права доступа </a>
             <a class="dropdown-item" data-toggle="modal" data-target="#deleteUserModal"> Удалить пользователя </a>
         </div>
         @await Html.PartialAsync("DeleteUser", Model)
