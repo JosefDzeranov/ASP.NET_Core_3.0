@@ -8,13 +8,13 @@ namespace OnlineShopWebApp.Controllers
     public class AuthorizationController : Controller
     {
 
-        private readonly IUsersManager usersManager;
+       
         private readonly UserManager<User> _userManager;
         private readonly SignInManager<User> _signInManager;
 
-        public AuthorizationController(IUsersManager usersManager, UserManager<User> userManager, SignInManager<User> signInManager)
+        public AuthorizationController(UserManager<User> userManager, SignInManager<User> signInManager)
         {
-            this.usersManager = usersManager;
+           
             _userManager = userManager;
             _signInManager = signInManager;
         }
