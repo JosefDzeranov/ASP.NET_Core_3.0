@@ -29,7 +29,7 @@
 
         <button class="btn btn-info dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Действия</button>
         <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-            <a class="dropdown-item" asp-area="Admin" asp-controller="Administration" asp-action="ChangePassword" asp-route-id="@Model.Id"> Смена пароля</a>
+            <a class="dropdown-item" asp-area="Admin" asp-controller="Administration" asp-action="ChangePassword" asp-route-name="@Model.Name"> Смена пароля</a>
             <a class="dropdown-item" asp-area="Admin" asp-controller="Administration" asp-action="EditUser" asp-route-id="@Model.Id"> Редактирование данных</a>
             <a class="dropdown-item" asp-area="Admin" asp-controller="Administration" asp-action="EditUserRights" asp-route-id="@Model.Id">Права доступа </a>
             <a class="dropdown-item" data-toggle="modal" data-target="#deleteUserModal"> Удалить пользователя </a>

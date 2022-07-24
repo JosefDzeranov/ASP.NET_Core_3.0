@@ -12,6 +12,7 @@ namespace OnlineShopWebApp.Models
         [Required(ErrorMessage = "не указана фамлия")]
         public string LastName { get; set; }
 
+        [EmailAddress]
         [Required(ErrorMessage = "не указан логин")]
         public string Login { get; set; }
 

@@ -1,5 +1,5 @@
 ﻿@using OnlineShop.Db.Models
-@model List<User>
+@model List<UserViewModel>
 
 <div class="row">
     @await Html.PartialAsync("Menu")
@@ -23,18 +23,19 @@
                 for (int i = 0; i < Model.Count; i++)
                 {
                     <tr>
-                    <td><a class="text" href="/admin/administration/ShowUser/@Model[i].Id" role="button"> @Model[i].UserName</a></td>
-                    <td>@Model[i].NormalizedUserName</td>
-                   @* <td>@Model[i].LastName</td>*@
+                        <td><a class="text" asp-area="Admin" asp-controller="Administration" asp-action="ShowUser" asp-route-name="@Model[i].Name" role="button"> @Model[i].Name</a></td>
+                        
+                        <td>@Model[i].Name</td>
+                        <td>@Model[i].LastName</td>
                     </tr>
                 }
             }
-            <tr> 
-               
-              
-                <td><a class="btn btn-dark" asp-area="admin" asp-controller="administration" asp-action="AddNewUser" role="button" >Добавить нового пользователя </a></td>
+            <tr>
+
+
+                <td><a class="btn btn-dark" asp-area="admin" asp-controller="administration" asp-action="AddNewUser" role="button">Добавить нового пользователя </a></td>
             </tr>
-         
+
         </table>
     </div>
 </div>

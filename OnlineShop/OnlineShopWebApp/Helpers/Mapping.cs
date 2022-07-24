@@ -1,5 +1,6 @@
 ﻿using OnlineShop.Db.Models;
 using OnlineShopWebApp.Models;
+using System;
 using System.Collections.Generic;
 
 namespace OnlineShopWebApp.Helpers
@@ -195,6 +196,25 @@ namespace OnlineShopWebApp.Helpers
                 Email = orderDataView.Email
 
             };
+        }
+
+        public static UserViewModel ToUserViewModel(User user)
+        {
+            return new UserViewModel
+            {
+                Name = user.UserName
+
+            };
+        }
+
+        public static List<UserViewModel> ToUserModelViews(List<User> users)
+        {
+            List<UserViewModel> viewModels = new List<UserViewModel>();
+            foreach (var user in users)
+            {
+                viewModels.Add(ToUserViewModel(user));
+            }
+            return viewModels;
         }
     }
 }

@@ -64,11 +64,8 @@ namespace OnlineShopWebApp.Controllers
 
         public IActionResult Users()
         {
-            var users = _userManager.Users.ToList();
-            
+            var users = Mapping.ToUserModelViews(_userManager.Users.ToList());
 
-
-            //usersManager.GetRegistredUsers();
             return View(users);
         }
         public IActionResult AddNewUser()
@@ -85,7 +82,7 @@ namespace OnlineShopWebApp.Controllers
 
                 var newUser = new User { UserName = user.Login };
                 var result = _userManager.CreateAsync(newUser, user.Password).Result;
-                //  usersManager.SaveNewUser(user);
+
 
                 return View("SaveAddedUser", newUser);
             }
@@ -96,31 +93,46 @@ namespace OnlineShopWebApp.Controllers
 
         }
 
-        public IActionResult ShowUser(Guid id)
+        public IActionResult ShowUser(string name)
         {
-            var user = _userManager.FindByIdAsync(id.ToString()).Result;
-            if (user != null)
-            {
-                return View(user);
-            }
-            else
-            {
-                return RedirectToAction("Users");
-            }
+            var user = _userManager.FindByNameAsync(name).Result;
+            return View(Mapping.ToUserViewModel(user));
+
 
         }
-        public IActionResult ChangePassWord(Guid id)
+        public IActionResult ChangePassWord(string name)
         {
-            var user = _userManager.FindByIdAsync(id.ToString()).Result;
-            if (user != null)
+            var changePassword = new ChangePassWord { UserName = name };
+            return View(changePassword);
+            //var user = _userManager.FindByNameAsync(name).Result;
+            //if (user != null)
+            //{
+            //    return View(Mapping.ToUserViewModel(user));
+            //}
+            //else
+            //{
+            //    return RedirectToAction("ShowUser", name);
+            //}
+
+        }
+
+
+        [HttpPost]
+        public IActionResult ChangePassWord(ChangePassWord changePassWord)
+        {
+            if (changePassWord.UserName == changePassWord.Password)
             {
-                return View(user);
+                ModelState.AddModelError("", "Login and password should not be same");
             }
-            else
+            if (ModelState.IsValid)
             {
-                return RedirectToAction("ShowUser", id);
+                var user = _userManager.FindByNameAsync(changePassWord.UserName).Result;
+                user.PasswordHash = _userManager.PasswordHasher.HashPassword(user, changePassWord.Password);
+                _userManager.UpdateAsync(user).Wait();
+               
             }
 
+            return RedirectToAction("Users");
         }
 
         public IActionResult EditUser(Guid id)
@@ -137,21 +149,21 @@ namespace OnlineShopWebApp.Controllers
 
         }
 
-        //[HttpPost]
-        //public IActionResult SaveEditedUser(UserViewModel user)
-        //{
-        //    if (ModelState.IsValid)
-        //    {
-        //        usersManager.EditUser(user);
+        [HttpPost]
+        public IActionResult SaveEditedUser(UserViewModel user)
+        {
+            if (ModelState.IsValid)
+            {
+              //  usersManager.EditUser(user);
 
-        //        return RedirectToAction("Users");
-        //    }
-        //    else
-        //    {
-        //        return RedirectToAction("ChangePassWord", user.Id);
-        //    }
+                return RedirectToAction("Users");
+            }
+            else
+            {
+                return RedirectToAction("ChangePassWord", user.Name);
+            }
 
-        //}
+        }
 
         //public IActionResult DeleteUser(Guid id)
         //{
