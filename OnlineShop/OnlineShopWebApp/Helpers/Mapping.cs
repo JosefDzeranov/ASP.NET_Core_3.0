@@ -1,4 +1,5 @@
-﻿using OnlineShop.Db.Models;
+﻿using Microsoft.AspNetCore.Identity;
+using OnlineShop.Db.Models;
 using OnlineShopWebApp.Models;
 using System;
 using System.Collections.Generic;
@@ -159,7 +160,7 @@ namespace OnlineShopWebApp.Helpers
             return new OrderDataViewModel
             {
                 Id = orderData.Id,
-              //  Cart = ToCartViewModel(orderData.Cart),
+
                 Adress = orderData.Adress,
                 Name = orderData.Name,
                 Email = orderData.Email
@@ -190,7 +191,7 @@ namespace OnlineShopWebApp.Helpers
             return new OrderData
             {
                 Id = orderDataView.Id,
-              //  Cart = ToCart(orderDataView.Cart),
+               
                 Name = orderDataView.Name,
                 Adress = orderDataView.Adress,
                 Email = orderDataView.Email
@@ -208,7 +209,7 @@ namespace OnlineShopWebApp.Helpers
                 Password = user.PasswordHash,
                 ConfirmedPassword = user.PasswordHash,
                 Id = Guid.Parse(user.Id)
-                
+
 
             };
         }
@@ -219,6 +220,24 @@ namespace OnlineShopWebApp.Helpers
             foreach (var user in users)
             {
                 viewModels.Add(ToUserViewModel(user));
+            }
+            return viewModels;
+        }
+
+        public static RoleViewModel ToRoleViewModel(IdentityRole role)
+        {
+            return new RoleViewModel
+            {
+                Name = role.Name
+            };
+        }
+
+        public static List<RoleViewModel> ToRoleViewModels(List<IdentityRole> roles)
+        {
+            var viewModels = new List<RoleViewModel>();
+            foreach (var role in roles)
+            {
+                viewModels.Add(ToRoleViewModel(role));
             }
             return viewModels;
         }

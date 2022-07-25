@@ -17,17 +17,17 @@ namespace OnlineShopWebApp.Controllers
     {
         private readonly IProductManager productManager;
         private readonly IOrderManager orderManager;
-        private readonly IRolesManager rolesManager;
-        //  private readonly IUsersManager usersManager;
-
+       
         private readonly UserManager<User> _userManager;
+        private readonly RoleManager<IdentityRole> _roleManager;
 
-        public AdministrationController(IProductManager productManager, IOrderManager orderManager, IRolesManager rolesManager, UserManager<User> userManager)
+        public AdministrationController(IProductManager productManager, IOrderManager orderManager, UserManager<User> userManager, RoleManager<IdentityRole> roleManager)
         {
             this.productManager = productManager;
             this.orderManager = orderManager;
-            this.rolesManager = rolesManager;
+
             _userManager = userManager;
+            _roleManager = roleManager;
         }
 
         public IActionResult Index()
@@ -80,8 +80,9 @@ namespace OnlineShopWebApp.Controllers
             if (ModelState.IsValid)
             {
 
-                var newUser = new User { UserName = user.Login, PhoneNumber = user.Phone, Id = user.Id.ToString()};
+                var newUser = new User { UserName = user.Login, PhoneNumber = user.Phone, Id = user.Id.ToString() };
                 var result = _userManager.CreateAsync(newUser, user.Password).Result;
+                TryAssignRole(newUser);
 
 
                 return View("SaveAddedUser", newUser);
@@ -91,6 +92,19 @@ namespace OnlineShopWebApp.Controllers
                 return RedirectToAction("AddNewUser");
             }
 
+        }
+
+        private void TryAssignRole(User user)
+        {
+            try
+            {
+                _userManager.AddToRoleAsync(user, Constants.UserRoleName).Wait();
+            }
+            catch (Exception)
+            {
+
+
+            }
         }
 
         public IActionResult ShowUser(string name)
@@ -104,7 +118,7 @@ namespace OnlineShopWebApp.Controllers
         {
             var changePassword = new ChangePassWord { UserName = name };
             return View(changePassword);
-           
+
         }
 
 
@@ -120,7 +134,7 @@ namespace OnlineShopWebApp.Controllers
                 var user = _userManager.FindByNameAsync(changePassWord.UserName).Result;
                 user.PasswordHash = _userManager.PasswordHasher.HashPassword(user, changePassWord.Password);
                 _userManager.UpdateAsync(user).Wait();
-               
+
             }
 
             return RedirectToAction("Users");
@@ -129,7 +143,7 @@ namespace OnlineShopWebApp.Controllers
         public IActionResult EditUser(string name)
         {
             var user = Mapping.ToUserViewModel(_userManager.FindByNameAsync(name).Result);
-            
+
             if (user != null)
             {
                 return View(user);
@@ -144,18 +158,46 @@ namespace OnlineShopWebApp.Controllers
         [HttpPost]
         public IActionResult SaveEditedUser(UserViewModel userView)
         {
-            
+
             var user = _userManager.FindByIdAsync(userView.Id.ToString()).Result;
-          
-           user.UserName = userView.Name;// изменится имя и невозможен будет поиск
+
+            user.UserName = userView.Name;
             user.PhoneNumber = userView.Phone;
 
-                _userManager.UpdateAsync(user).Wait();
-               
+            _userManager.UpdateAsync(user).Wait();
 
-                return RedirectToAction("Users");
-          
 
+            return RedirectToAction("Users");
+
+
+        }
+
+        public IActionResult EditUserRights(string name)
+        {
+            var user = _userManager.FindByNameAsync(name).Result;
+            var userRoles = _userManager.GetRolesAsync(user).Result;
+            var allRoles = _roleManager.Roles.ToList();
+
+            var editRightsViewModel = new EditRightsViewModel()
+            {
+                UserRoles = userRoles.Select(x => new RoleViewModel { Name = x }).ToList(),
+                UserName = user.UserName,
+                AllRoles = allRoles.Select(x => new RoleViewModel { Name = x.Name}).ToList()
+            };
+            return View(editRightsViewModel);
+        }
+
+        [HttpPost]
+        public IActionResult EditRights(string userName, Dictionary<string, string> userRolesViewModel)
+        {
+            var userSelectedRoles = userRolesViewModel.Select(x => x.Key);
+
+            var user = _userManager.FindByNameAsync(userName).Result;
+            var userRoles = _userManager.GetRolesAsync(user).Result;
+            _userManager.RemoveFromRolesAsync(user, userRoles).Wait();
+            _userManager.AddToRolesAsync(user, userSelectedRoles).Wait();
+
+            return RedirectToAction("EditUserRights", new { name = userName });
         }
 
         public IActionResult DeleteUser(string name)
@@ -169,8 +211,9 @@ namespace OnlineShopWebApp.Controllers
 
         public IActionResult Roles()
         {
-            var roles = rolesManager.Roles;
-            return View(roles);
+
+            List<IdentityRole> roles = _roleManager.Roles.ToList();
+            return View(Mapping.ToRoleViewModels(roles));
         }
 
         public IActionResult AddRole()
@@ -180,32 +223,33 @@ namespace OnlineShopWebApp.Controllers
         }
 
         [HttpPost]
-        public IActionResult AddRole(Role role)
+        public IActionResult AddRole(RoleViewModel roleView)
         {
+            var result = _roleManager.CreateAsync(new IdentityRole(roleView.Name)).Result;
 
-            if (rolesManager.TryFindByName(role.Name) != null)
+            if (result.Succeeded)
             {
-                ModelState.AddModelError("", "такая роль уже есть");
-
-            }
-
-            if (ModelState.IsValid)
-            {
-                rolesManager.AddRole(role);
                 return RedirectToAction("Roles");
+
+            }
+            else
+            {
+                foreach (var error in result.Errors)
+                {
+                    ModelState.AddModelError(string.Empty, error.Description);
+                }
             }
 
-            return View(role);
-
+            return View(roleView);
 
         }
 
 
 
-
         public IActionResult RemoveRole(string name)
         {
-            rolesManager.RemoveRole(name);
+            var role = _roleManager.FindByNameAsync(name).Result;
+            _roleManager.DeleteAsync(role).Wait();
 
             return RedirectToAction("Roles");
         }

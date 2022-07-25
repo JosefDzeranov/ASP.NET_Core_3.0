@@ -53,7 +53,7 @@ namespace OnlineShopWebApp
             services.AddTransient<IOrderManager, OrderManager>();
             services.AddTransient<IComparison, ComparisonManager>();
             services.AddTransient<IFavoritesManager, FavoritesManager>();
-            services.AddSingleton<IRolesManager, RolesManager>();
+        
           
             services.AddControllersWithViews();
 

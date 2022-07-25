@@ -1,5 +1,5 @@
 ﻿@using OnlineShopWebApp
-@model List<Role>
+@model List<RoleViewModel>
 
 <div class="row">
     @await Html.PartialAsync("Menu")
@@ -16,13 +16,13 @@
                 {
                     <tr>
                         <td>@role.Name</td>
-                        <td><a class="btn-outline-dark" href="/administration/removerole/?name=@role.Name" role="button"> Удалить </a></td>
+                        <td><a class="btn-outline-dark" href="/admin/administration/removerole/?name=@role.Name" role="button"> Удалить </a></td>
                     </tr>
                 }
 
             }
         <tr>
-            <td><a class="btn-outline-dark" href="/administration/addrole" role="button"> Добавить </a></td>
+            <td><a class="btn-outline-dark" href="/admin/administration/addrole" role="button"> Добавить </a></td>
         </tr>
         </table>
     </div>
