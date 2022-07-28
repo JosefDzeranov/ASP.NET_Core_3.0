@@ -40,13 +40,15 @@ namespace OnlineShop.Db
             {
                 Name = "Hamburger",
                 Cost = 3,
-                Description = "Just a hamburger"
+                Description = "Just a hamburger",
+                ImagePath ="/images/hamburger.jpg"
             },
            new Product
             {
                 Name = "Bigburger",
                 Cost = 10,
-                Description = "the biggest burger"
+                Description = "the biggest burger",
+                ImagePath = "/images/bigburger.jpg"
             }
         });
         }

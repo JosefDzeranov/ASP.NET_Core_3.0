@@ -17,8 +17,7 @@ namespace OnlineShop.Db
 
         public string UserId { get; set; }
 
-        //public List<ProductViewModel> Products { get; } = new List<ProductViewModel>();
-
+      
         public List<Product> GetProducts(string userId)
         {
             var comparison = TryGetComparisonByUserId(userId);

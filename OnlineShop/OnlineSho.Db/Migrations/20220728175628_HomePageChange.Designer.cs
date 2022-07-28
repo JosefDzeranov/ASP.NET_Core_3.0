@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using OnlineShop.Db;
 
 namespace OnlineShop.Db.Migrations
 {
     [DbContext(typeof(DataBaseContext))]
-    partial class DataBaseContextModelSnapshot : ModelSnapshot
+    [Migration("20220728175628_HomePageChange")]
+    partial class HomePageChange
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -173,7 +175,7 @@ namespace OnlineShop.Db.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("b2043c27-b966-401f-8365-efb126d759e5"),
+                            Id = new Guid("c08bb249-9fd9-4a1f-a91c-0c201511c6bc"),
                             Cost = 5m,
                             Description = "Just a cheeseburger",
                             ImagePath = "/images/burger1.jpg",
@@ -181,7 +183,7 @@ namespace OnlineShop.Db.Migrations
                         },
                         new
                         {
-                            Id = new Guid("9f4a4366-c13b-4d3c-bb8d-b4f46b8d4206"),
+                            Id = new Guid("41f5e894-560c-4262-8fa0-cd08c88c0e00"),
                             Cost = 3m,
                             Description = "Just a hamburger",
                             ImagePath = "/images/hamburger.jpg",
@@ -189,10 +191,10 @@ namespace OnlineShop.Db.Migrations
                         },
                         new
                         {
-                            Id = new Guid("ccb0ae4a-a268-46d0-98a6-191b59dde35a"),
+                            Id = new Guid("e9638e87-f026-48d0-9e3f-364e90a4a09d"),
                             Cost = 10m,
                             Description = "the biggest burger",
-                            ImagePath = "/images/bigburger.jpg",
+                            ImagePath = "/images/burger1.jpg",
                             Name = "Bigburger"
                         });
                 });
