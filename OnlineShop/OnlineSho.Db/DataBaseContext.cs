@@ -34,6 +34,7 @@ namespace OnlineShop.Db
                     Name = "Cheeseburger",
                     Cost = 5,
                     Description = "Just a cheeseburger"
+                    
                 },
             new Product
             {

@@ -14,12 +14,15 @@ namespace OnlineShop.Db.Models
 
         public string Description { get; set; }
 
+        public string ImagePath { get; set; }
+
         public List<CartLine> CartLines { get; set; }
 
         public Product()
         {
             Id = Guid.NewGuid();
             CartLines = new List<CartLine>();
+            ImagePath = "/images/burger1.jpg";
         }
 
 

@@ -13,14 +13,7 @@ namespace OnlineShop.Db
             this.dataBaseContext = dataBaseContext;
         }
 
-        //public List<Product> ProductList { get; set; } = new List<Product>
-        //{
-
-        //       new Product(1, "Cheeseburger", 150, "бургер с говяжьей котлетой и сыром"),
-        //       new Product(2, "Hamburger", 120, "бургер с говяжьей котлетой"),
-        //       new Product(3, "Bigburger", 200, "бургер с двойной говяжьей котлетой")
-
-        //};
+        
         
         public void AddProduct(Product product)
         {

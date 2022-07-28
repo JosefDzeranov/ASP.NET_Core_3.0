@@ -15,6 +15,8 @@ namespace OnlineShopWebApp
 
         [Required(ErrorMessage = "Не указано описание")]
         public string Description { get; set; }
+
+        public string imagePath { get; set; }
         
        
 

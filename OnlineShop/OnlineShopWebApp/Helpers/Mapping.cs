@@ -26,7 +26,8 @@ namespace OnlineShopWebApp.Helpers
                 Id = product.Id,
                 Name = product.Name,
                 Cost = product.Cost,
-                Description = product.Description
+                Description = product.Description,
+                imagePath = product.ImagePath
 
             };
 
@@ -39,7 +40,8 @@ namespace OnlineShopWebApp.Helpers
                 Id = product.Id,
                 Name = product.Name,
                 Cost = product.Cost,
-                Description = product.Description
+                Description = product.Description,
+                ImagePath = product.imagePath
 
             };
 

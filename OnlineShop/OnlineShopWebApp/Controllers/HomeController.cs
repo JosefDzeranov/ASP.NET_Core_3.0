@@ -27,7 +27,7 @@ namespace OnlineShopWebApp.Controllers
         public IActionResult SearchByName(string name)
         {
 
-            // var productByPartName = new List<ProductViewModel>();
+           
             if (name != null)
             {
                 var productByPartName = _productManager.GetAll().FirstOrDefault(x => x.Name.ToLower().Contains(name.ToLower()));
@@ -37,6 +37,7 @@ namespace OnlineShopWebApp.Controllers
                     Name = productByPartName.Name,
                     Cost = productByPartName.Cost,
                     Description = productByPartName.Description,
+                    imagePath = productByPartName.ImagePath
 
                 };
                 return View(productView);
