@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using OnlineShop.Db;
@@ -7,6 +8,7 @@ using OnlineShopWebApp.Helpers;
 using OnlineShopWebApp.Models;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 
 namespace OnlineShopWebApp.Controllers
@@ -17,17 +19,21 @@ namespace OnlineShopWebApp.Controllers
     {
         private readonly IProductManager productManager;
         private readonly IOrderManager orderManager;
-       
+
         private readonly UserManager<User> _userManager;
         private readonly RoleManager<IdentityRole> _roleManager;
 
-        public AdministrationController(IProductManager productManager, IOrderManager orderManager, UserManager<User> userManager, RoleManager<IdentityRole> roleManager)
+        private readonly IWebHostEnvironment appEnvironment;
+
+        public AdministrationController(IProductManager productManager, IOrderManager orderManager, UserManager<User> userManager, RoleManager<IdentityRole> roleManager, IWebHostEnvironment appEnvironment)
         {
             this.productManager = productManager;
             this.orderManager = orderManager;
 
             _userManager = userManager;
             _roleManager = roleManager;
+
+            this.appEnvironment = appEnvironment;
         }
 
         public IActionResult Index()
@@ -182,7 +188,7 @@ namespace OnlineShopWebApp.Controllers
             {
                 UserRoles = userRoles.Select(x => new RoleViewModel { Name = x }).ToList(),
                 UserName = user.UserName,
-                AllRoles = allRoles.Select(x => new RoleViewModel { Name = x.Name}).ToList()
+                AllRoles = allRoles.Select(x => new RoleViewModel { Name = x.Name }).ToList()
             };
             return View(editRightsViewModel);
         }
@@ -282,13 +288,43 @@ namespace OnlineShopWebApp.Controllers
         [HttpPost]
         public IActionResult SaveEditedProduct(ProductViewModel product)
         {
-            var productDb = new Product
+           
+            Product productDb = new Product();
+
+            if (product.UploadedFile != null)
             {
-                Id = product.Id,
-                Name = product.Name,
-                Cost = product.Cost,
-                Description = product.Description,
-            };
+                string productImagesPath = Path.Combine(appEnvironment.WebRootPath + "/images/products/");
+                if (!Directory.Exists(productImagesPath))
+                {
+                    Directory.CreateDirectory(productImagesPath);
+                }
+
+                var fileName = Guid.NewGuid() + "." + product.UploadedFile.FileName.Split('.').Last();
+                using (var fileStream = new FileStream(productImagesPath + fileName, FileMode.Create))
+                {
+                    product.UploadedFile.CopyTo(fileStream);
+                }
+
+                productDb = new Product
+                {
+                    Id = product.Id,
+                    Name = product.Name,
+                    Cost = product.Cost,
+                    Description = product.Description,
+                    ImagePath = "/images/products/" + fileName
+                };
+            }
+            else
+            {
+                productDb = new Product
+                {
+                    Id = product.Id,
+                    Name = product.Name,
+                    Cost = product.Cost,
+                    Description = product.Description,
+
+                };
+            }
 
             if (ModelState.IsValid)
             {
@@ -306,8 +342,8 @@ namespace OnlineShopWebApp.Controllers
         public IActionResult RemoveProduct(Guid id)
         {
             var product = productManager.TryGetById(id);
-            productManager.GetAll().Remove(product);
-            return View(product);
+            productManager.RemoveProduct(product);
+            return View(Mapping.ToProductViewModel(product));
         }
 
         public IActionResult AddNewProduct()
@@ -316,16 +352,46 @@ namespace OnlineShopWebApp.Controllers
             return View();
         }
 
+
         [HttpPost]
         public IActionResult SaveAddedProduct(ProductViewModel product)
         {
-            var productDb = new Product
-            {
-                Name = product.Name,
-                Cost = product.Cost,
-                Description = product.Description
+            Product productDb = new Product();
 
-            };
+            if (product.UploadedFile != null)
+            {
+                string productImagesPath = Path.Combine(appEnvironment.WebRootPath + "/images/products/");
+                if (!Directory.Exists(productImagesPath))
+                {
+                    Directory.CreateDirectory(productImagesPath);
+                }
+
+                var fileName = Guid.NewGuid() + "." + product.UploadedFile.FileName.Split('.').Last();
+                using (var fileStream = new FileStream(productImagesPath + fileName, FileMode.Create))
+                {
+                    product.UploadedFile.CopyTo(fileStream);
+                }
+
+                productDb = new Product
+                {
+                    Id = product.Id,
+                    Name = product.Name,
+                    Cost = product.Cost,
+                    Description = product.Description,
+                    ImagePath = "/images/products/" + fileName
+                };
+            }
+            else
+            {
+                productDb = new Product
+                {
+                    Id = product.Id,
+                    Name = product.Name,
+                    Cost = product.Cost,
+                    Description = product.Description,
+
+                };
+            }
 
 
             if (ModelState.IsValid)

@@ -13,5 +13,7 @@ namespace OnlineShop.Db
 
         public void EditProduct(Product product);
 
+        public void RemoveProduct(Product removedProduct);
+        
     }
 }

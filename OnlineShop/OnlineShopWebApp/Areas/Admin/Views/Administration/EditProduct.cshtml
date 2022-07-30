@@ -1,6 +1,6 @@
 ﻿@using OnlineShopWebApp
 @model ProductViewModel
-<form method="post">
+<form method="post" enctype="multipart/form-data">  
 
 
     <h2>Редактирование продукта</h2>
@@ -23,6 +23,10 @@
         <label asp-for="Description"></label><br />
         <input asp-for="Description" />
         <span asp-validation-for="Description"></span>
+    </div>
+    <div>
+        <p>Загрузите изображение продукта:</p>
+        <input type="file" name="UploadedFile" class="form-control">
     </div>
 
 

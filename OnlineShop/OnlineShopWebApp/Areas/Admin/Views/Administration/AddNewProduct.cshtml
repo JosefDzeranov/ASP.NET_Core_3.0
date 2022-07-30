@@ -1,15 +1,14 @@
 ﻿@using OnlineShopWebApp
 @model ProductViewModel
 
-<form method="post">
+<form method="post" enctype="multipart/form-data">
     <h2>Добавление нового продукта:</h2>
 
 
     <p>Введите наименование продукта:</p>
     <input type="text" name="Name" required />
 
-  @*  <p>Введите Id продукта:</p>
-    <input type="number" name="Id" required  />*@
+
 
     <p>Введите цену товара:</p>
     <input type="number" name="Cost" required/>
@@ -17,6 +16,9 @@
     <p>Введите описание товара:</p>
     <input type="text" name="Description" required/> <br />
     <p></p>
+
+    <p>Загрузите изображение продукта:</p>
+    <input type="file" name="UploadedFile" class="form-control">
 
     <button class="btn btn-dark" type="submit" asp-controller="Administration" asp-action="SaveAddedProduct">Добавить продукт</button>
 

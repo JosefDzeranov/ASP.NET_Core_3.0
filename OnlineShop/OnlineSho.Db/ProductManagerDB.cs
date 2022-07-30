@@ -42,8 +42,15 @@ namespace OnlineShop.Db
                     product.Name = editedProduct.Name;
                     product.Description = editedProduct.Description;
                     product.Cost = editedProduct.Cost;
+                    product.ImagePath = editedProduct.ImagePath;
                 }
             }
+            dataBaseContext.SaveChanges();
+        }
+
+        public void RemoveProduct(Product removedProduct)
+        {
+            dataBaseContext.Products.Remove(removedProduct);
             dataBaseContext.SaveChanges();
         }
 
