@@ -291,7 +291,7 @@ namespace OnlineShopWebApp.Controllers
            
             Product productDb = new Product();
 
-            if (product.UploadedFile != null)
+            if (product.UploadedFiles != null)
             {
                 string productImagesPath = Path.Combine(appEnvironment.WebRootPath + "/images/products/");
                 if (!Directory.Exists(productImagesPath))
@@ -299,6 +299,12 @@ namespace OnlineShopWebApp.Controllers
                     Directory.CreateDirectory(productImagesPath);
                 }
 
+                foreach (var file in product.UploadedFiles)
+                {
+
+
+
+                }
                 var fileName = Guid.NewGuid() + "." + product.UploadedFile.FileName.Split('.').Last();
                 using (var fileStream = new FileStream(productImagesPath + fileName, FileMode.Create))
                 {

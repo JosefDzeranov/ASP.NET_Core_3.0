@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
 using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 namespace OnlineShopWebApp
@@ -19,7 +20,11 @@ namespace OnlineShopWebApp
 
         public string imagePath { get; set; }
 
-        public IFormFile UploadedFile { get; set; }
+     //   public IFormFile UploadedFile { get; set; }
+
+        public List<IFormFile> UploadedFiles { get; set; }
+
+
         
        
 
