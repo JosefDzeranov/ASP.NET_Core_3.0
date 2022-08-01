@@ -26,15 +26,16 @@ namespace OnlineShopWebApp
         public void ConfigureServices(IServiceCollection services)
         {
 
-            string connection = Configuration.GetConnectionString("online_shop");
+            //string connection = Configuration.GetConnectionString("online_shop");
+            string connection = "Data Source=InMemorySample;Mode=Memory;Cache=Shared";
             services.AddDbContext<DatabaseContext>(options =>
             {
-                options.UseSqlServer(connection);
+                options.UseSqlite(connection);
                 options.EnableSensitiveDataLogging(true);
             });
 
             services.AddDbContext<IdentityContext>(options =>
-           options.UseSqlServer(connection));
+           options.UseSqlite(connection));
 
             services.AddIdentity<User, IdentityRole>()
                 .AddEntityFrameworkStores<IdentityContext>();
