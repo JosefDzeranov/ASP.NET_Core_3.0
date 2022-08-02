@@ -8,6 +8,8 @@ namespace OnlineShop.Db
     {
         public DatabaseContext(DbContextOptions<DatabaseContext> options) : base(options)
         {
+            //Database.EnsureDeleted();
+            //Database.EnsureCreated();
             Database.Migrate();
         }
         public DbSet<Product> Products { get; set; }

@@ -27,14 +27,15 @@ namespace OnlineShopWebApp
         {
 
             string connection = Configuration.GetConnectionString("online_shop");
+            //string connection = "Data Source=:memory:";
             services.AddDbContext<DatabaseContext>(options =>
             {
-                options.UseSqlServer(connection);
-                options.EnableSensitiveDataLogging(true);
+                options.UseSqlite(connection);
+                //options.EnableSensitiveDataLogging(true);
             });
 
             services.AddDbContext<IdentityContext>(options =>
-           options.UseSqlServer(connection));
+           options.UseSqlite(connection));
 
             services.AddIdentity<User, IdentityRole>()
                 .AddEntityFrameworkStores<IdentityContext>();
@@ -53,7 +54,6 @@ namespace OnlineShopWebApp
             services.AddTransient<IProductBase, ProductsDBRepository>();
             services.AddTransient<ICartBase,CartsDBRepository>();
             services.AddTransient<IOrderBase, OrdersDBRepository>();
-            //services.AddTransient<UserManager<User>, UsersDBRepository>();
 
 
             services.AddControllersWithViews();
