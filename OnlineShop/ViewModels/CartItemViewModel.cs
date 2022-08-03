@@ -1,7 +1,6 @@
-﻿using OnlineShop.DB.Models;
-using System;
+﻿using System;
 
-namespace OnlineShopWebApp.Models
+namespace ViewModels
 {
     public class CartItemViewModel
     {
@@ -13,7 +12,7 @@ namespace OnlineShopWebApp.Models
 
         public decimal Cost
         {
-            get { return ProductViewModel.Cost*Amount; }
+            get { return ProductViewModel.Cost * Amount; }
         }
     }
 }
