@@ -1,5 +1,5 @@
-﻿using OnlineShop.Db;
-using OnlineShop.DB.Models;
+﻿using Entities;
+using OnlineShop.Db;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -14,20 +14,20 @@ namespace OnlineShop.DB
             _databaseContext = databaseContext;
         }
 
-        public IEnumerable<Product> AllProducts()
+        public IEnumerable<ProductEntity> AllProducts()
         {
             return _databaseContext.Products;
         }
 
-        public Product TryGetById(int productId)
+        public ProductEntity TryGetById(int productId)
         {
             return AllProducts().FirstOrDefault(x => x.Id == productId);
         }
 
-        public void Add(Product product)
+        public void Add(ProductEntity ProductEntity)
         {
-            product.ImgPath = "/img/Silk_green.jpg";
-            _databaseContext.Products.Add(product);
+            ProductEntity.ImgPath = "/img/Silk_green.jpg";
+            _databaseContext.Products.Add(ProductEntity);
             _databaseContext.SaveChanges();
         }
 
@@ -37,12 +37,12 @@ namespace OnlineShop.DB
             _databaseContext.SaveChanges();
         }
 
-        public void Edit(Product Product)
+        public void Edit(ProductEntity ProductEntity)
         {
-            var existingProduct = AllProducts().FirstOrDefault(x => x.Id == Product.Id);
-            existingProduct.Name = Product.Name;
-            existingProduct.Description = Product.Description;
-            existingProduct.Cost = Product.Cost;
+            var existingProduct = AllProducts().FirstOrDefault(x => x.Id == ProductEntity.Id);
+            existingProduct.Name = ProductEntity.Name;
+            existingProduct.Description = ProductEntity.Description;
+            existingProduct.Cost = ProductEntity.Cost;
             existingProduct.ImgPath = "/img/Silk_green.jpg";
             _databaseContext.SaveChanges();
         }

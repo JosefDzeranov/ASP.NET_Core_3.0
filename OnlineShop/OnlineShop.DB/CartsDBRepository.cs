@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿using Entities;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using OnlineShop.Db;
 using OnlineShop.DB.Models;
@@ -19,12 +20,12 @@ namespace OnlineShop.DB
             _userManager = userManager;
         }
 
-        public List<Cart> AllCarts()
+        public List<CartEntity> AllCarts()
         {
             return _databaseContext.Carts.Include(x => x.Items).ThenInclude(x => x.Product).Where(x => x.IsDeleted == false).ToList();
         }
 
-        public Cart TryGetByUserId(string userId)
+        public CartEntity TryGetByUserId(string userId)
         {
             return _databaseContext.Carts
                 .Where(x => x.IsDeleted == false)
@@ -34,7 +35,7 @@ namespace OnlineShop.DB
                 .FirstOrDefault(x => x.UserId == userId);
         }
 
-        public Cart TryGetByUserName(string userName)
+        public CartEntity TryGetByUserName(string userName)
         {
             var user = _userManager.Users.FirstOrDefault(x => x.UserName == userName);
             var carts = _databaseContext.Carts.Where(x => x.IsDeleted == false)
@@ -50,7 +51,7 @@ namespace OnlineShop.DB
 
         }
 
-        public void Add(Product product, string userId)
+        public void Add(ProductEntity product, string userId)
         {
             var existingCart = AllCarts().FirstOrDefault(x => x.UserId == userId);
             if (existingCart != null)
@@ -63,7 +64,7 @@ namespace OnlineShop.DB
                 }
                 else
                 {
-                    existingCart.Items.Add(new CartItem
+                    existingCart.Items.Add(new CartItemEntity
                     {
                         Product = product,
                         Amount = 1,
@@ -73,13 +74,13 @@ namespace OnlineShop.DB
             }
             else
             {
-                var newCart = new Cart
+                var newCart = new CartEntity
                 {
                     Id = Guid.NewGuid(),
                     UserId = userId,
-                    Items = new List<CartItem>
+                    Items = new List<CartItemEntity>
                     {
-                        new CartItem
+                        new CartItemEntity
                         {
                             Id = Guid.NewGuid(),
                             Amount = 1,
