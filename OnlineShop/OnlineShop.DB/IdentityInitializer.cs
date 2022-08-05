@@ -1,5 +1,5 @@
-﻿using Microsoft.AspNetCore.Identity;
-using OnlineShop.DB.Models;
+﻿using Domains;
+using Microsoft.AspNetCore.Identity;
 
 
 namespace OnlineShop.DB
@@ -15,7 +15,7 @@ namespace OnlineShop.DB
             var adminPassword = "Admin1234+";
             if (roleManager.FindByNameAsync(Const.AdminRoleName).Result == null)
             {
-                roleManager.CreateAsync(new IdentityRole("Admin")).Wait();
+                roleManager.CreateAsync(new IdentityRole(Const.AdminRoleName)).Wait();
             }
             if (roleManager.FindByNameAsync(Const.UserRoleName).Result == null)
             {

@@ -7,7 +7,7 @@ using System.Linq;
 
 namespace OnlineShop.BL
 {
-    public class CartServicies : ICartServices
+    public class CartServicies : ICartServicies
     {
         private readonly ICartBase _cartBase;
         private readonly IMapper _mapper;

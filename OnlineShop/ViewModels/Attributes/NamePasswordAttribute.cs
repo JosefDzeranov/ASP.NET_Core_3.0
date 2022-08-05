@@ -1,17 +1,16 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-
-namespace OnlineShopWebApp.Models.Attributes
+namespace ViewModels.Attributes
 {
-    public class RegistrLengthName : ValidationAttribute
+    public class NamePasswordAttribute : ValidationAttribute
     {
         public override bool IsValid(object value)
         {
             Registration data = (Registration)value;
 
-            if (data.Login.Length < 4)
+            if (data.Login == data.Password)
             {
-                ErrorMessage = "Имя должно быть не короче 4-х символов";
+                ErrorMessage = "Пароль и логин не должны совпадать";
                 return false;
             }
             return true;

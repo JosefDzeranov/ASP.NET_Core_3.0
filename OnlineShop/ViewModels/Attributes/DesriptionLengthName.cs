@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace OnlineShopWebApp.Models.Attributes
+namespace ViewModels.Attributes
 {
     public class DesriptionLengthName : ValidationAttribute
     {

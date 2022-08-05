@@ -1,8 +1,8 @@
-﻿using Entities;
+﻿using Domains;
+using Entities;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using OnlineShop.Db;
-using OnlineShop.DB.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -22,28 +22,26 @@ namespace OnlineShop.DB
 
         public List<CartEntity> AllCarts()
         {
-            return _databaseContext.Carts.Include(x => x.Items).ThenInclude(x => x.Product).Where(x => x.IsDeleted == false).ToList();
+            return _databaseContext.Carts.Where(x => x.IsDeleted == false).ToList();
         }
 
         public CartEntity TryGetByUserId(string userId)
         {
-            return _databaseContext.Carts
-                .Where(x => x.IsDeleted == false)
-                .Include(x => x.Items)
-                .ThenInclude(x => x.Product)
-                .AsNoTracking()
-                .FirstOrDefault(x => x.UserId == userId);
+            var carts = _databaseContext.Carts.Where(x => x.IsDeleted == false).AsNoTracking().FirstOrDefault(x => x.UserId == userId);
+            //var carts = _databaseContext.Carts
+            //    .Where(x => x.IsDeleted == false)
+            //    .Include(x => x.Items)
+            //    .ThenInclude(x => x.Product)
+            //    .AsNoTracking()
+            //    .FirstOrDefault(x => x.UserId == userId);
+            return carts;
         }
 
         public CartEntity TryGetByUserName(string userName)
         {
             var user = _userManager.Users.FirstOrDefault(x => x.UserName == userName);
-            var carts = _databaseContext.Carts.Where(x => x.IsDeleted == false)
-                        .Include(x => x.Items)
-                        .ThenInclude(x => x.Product);
-            var necessaryCart = carts
-                                .AsNoTracking()
-                                .FirstOrDefault(x => x.UserId == user.Id);
+            var carts = _databaseContext.Carts.Where(x => x.IsDeleted == false).AsNoTracking();
+            var necessaryCart = carts.FirstOrDefault(x => x.UserId == user.Id);
             return necessaryCart;
 
 

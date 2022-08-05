@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace OnlineShop.BL
 {
-    public interface ICartServices
+    public interface ICartServicies
     {
         void Add(Product product, string userId);
         Cart TryGetByUserId(string userId);

@@ -1,9 +1,8 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using OnlineShopWebApp.Models.Attributes;
+﻿using Domains;
 using System.ComponentModel.DataAnnotations;
+using ViewModels.Attributes;
 
-
-namespace OnlineShopWebApp.Models
+namespace ViewModels
 {
     [NamePassword]
     [RegistrLengthName]
@@ -18,5 +17,10 @@ namespace OnlineShopWebApp.Models
         [Compare("Password", ErrorMessage = "Пароли не совпадают")]
         public string ConfirmPassword { get; set; }
         public string ReturnUrl { get; set; }
+
+        public User ToUser(string login)
+        {
+            return new User(login);
+        }
     }
 }

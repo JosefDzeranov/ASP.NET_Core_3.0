@@ -1,33 +1,36 @@
-﻿using Microsoft.AspNetCore.Authorization;
+﻿using AutoMapper;
+using Domains;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using OnlineShop.DB;
-using OnlineShop.DB.Models;
-using OnlineShopWebApp.Helpers;
+using OnlineShop.BL;
 using System.Linq;
+using ViewModels;
 
 namespace OnlineShopWebApp.Controllers
 {
     [Authorize]
     public class OrderController : Controller
     {
-        private readonly IOrderBase _orderBase;
-        private readonly ICartBase _cartBase;
+        private readonly IOrderServicies _orderServicies;
+        private readonly ICartServicies _cartServicies;
+        private readonly IMapper _mapper;
         private readonly UserManager<User> _userManager;
 
-        public OrderController(IOrderBase orderStorage, ICartBase cartBase, UserManager<User> userManager)
+        public OrderController(IOrderServicies orderServicies, ICartServicies cartServicies, UserManager<User> userManager, IMapper mapper)
         {
-            _orderBase = orderStorage;
-            _cartBase = cartBase;
+            _orderServicies = orderServicies;
+            _cartServicies = cartServicies;
             _userManager = userManager;
+            _mapper = mapper;
         }
 
         private void AddNewOrder(DeliveryInfoModelView deliveryInfo)
         {
             var existingUser = _userManager.FindByNameAsync(User.Identity.Name).Result;
-            var cart = _cartBase.TryGetByUserId(existingUser.Id).ToCartViewModel();
-            var order = new Order(cart.Items.Select(x => x.ToCartItem()).ToList(), deliveryInfo.ToDeliveryInfo());
-            _orderBase.Add(order);
+            var cart = _cartServicies.TryGetByUserId(existingUser.Id);
+            var order = new Order(cart.Items.ToList(), _mapper.Map<DeliveryInfo>(deliveryInfo));
+            _orderServicies.Add(order);
         }
 
         public IActionResult Index()
@@ -42,7 +45,7 @@ namespace OnlineShopWebApp.Controllers
             {
                 AddNewOrder(deliveryInfo);
                 var existingUser = _userManager.FindByNameAsync(User.Identity.Name).Result;
-                _cartBase.Delete(existingUser.Id);
+                _cartServicies.Delete(existingUser.Id);
                 return View();
             }
             else

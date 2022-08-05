@@ -1,26 +1,27 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using OnlineShop.DB;
-using OnlineShopWebApp.Helpers;
-using OnlineShopWebApp.Models;
+﻿using AutoMapper;
+using Microsoft.AspNetCore.Mvc;
+using OnlineShop.BL;
 using System;
-using System.Diagnostics;
 using System.Linq;
+using ViewModels;
 
 namespace OnlineShopWebApp.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly IProductBase _productBase;
+        private readonly IProductServicies _productServicies;
+        private readonly IMapper _mapper;
 
-        public HomeController(IProductBase productBase)
+        public HomeController(IProductServicies productServicies, IMapper mapper)
         {
-            _productBase = productBase;
+            _productServicies = productServicies;
+            _mapper = mapper;
         }
 
         public IActionResult Index()
         {
-            var products = _productBase.AllProducts();
-            return View(products.ToProductViewModels());
+            var products = _productServicies.AllProducts();
+            return View(products.Select(x => _mapper.Map<ProductViewModel>(x)).ToList());
         }
 
         public IActionResult SearchByName(string rawSearchName)
@@ -31,19 +32,13 @@ namespace OnlineShopWebApp.Controllers
             {
                 searchName = rawSearchName.ToLower();
             }
-            var Products = _productBase.AllProducts().Where(x => x.Name.ToLower().Contains(searchName));
-            return View(Products.ToProductViewModels());
+            var products = _productServicies.AllProducts().Select(x => _mapper.Map<ProductViewModel>(x)).Where(x => x.Name.ToLower().Contains(searchName));
+            return View(products);
         }
 
         public IActionResult Privacy()
         {
             return View();
-        }
-
-        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-        public IActionResult Error()
-        {
-            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
     }
 }

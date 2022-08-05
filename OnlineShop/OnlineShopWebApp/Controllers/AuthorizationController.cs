@@ -1,21 +1,20 @@
-﻿using Microsoft.AspNetCore.Authorization;
+﻿using Domains;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using OnlineShop.DB;
-using OnlineShop.DB.Models;
-using OnlineShopWebApp.Models;
-using System.Linq;
+using OnlineShop.BL;
+using ViewModels;
 
 namespace OnlineShopWebApp.Controllers
 {
     public class AuthorizationController : Controller
     {
         
-        private readonly ICartBase _cartBase;
+        private readonly ICartServicies _cartBase;
         private readonly SignInManager<User> _signInManager;
 
 
-        public AuthorizationController(SignInManager<User> signInManager, ICartBase cartBase)
+        public AuthorizationController(SignInManager<User> signInManager, ICartServicies cartBase)
         {
             _signInManager = signInManager;
             _cartBase = cartBase;

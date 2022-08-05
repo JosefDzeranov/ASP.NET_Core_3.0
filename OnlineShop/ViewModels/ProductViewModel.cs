@@ -1,5 +1,5 @@
-﻿using OnlineShopWebApp.Models.Attributes;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
+using ViewModels.Attributes;
 
 namespace ViewModels
 {
