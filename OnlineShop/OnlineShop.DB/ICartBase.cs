@@ -9,7 +9,7 @@ namespace OnlineShop.DB
         CartEntity TryGetByUserId(string userId);
         void DecreaseAmount(int productId, string userId);
         void Delete(string userId);
-        List<CartEntity> AllCarts();
+        IEnumerable<CartEntity> AllCarts();
         CartEntity TryGetByUserName(string userName);
     }
 }

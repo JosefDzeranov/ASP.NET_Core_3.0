@@ -20,9 +20,9 @@ namespace OnlineShop.DB
             _userManager = userManager;
         }
 
-        public List<CartEntity> AllCarts()
+        public IEnumerable<CartEntity> AllCarts()
         {
-            return _databaseContext.Carts.Where(x => x.IsDeleted == false).ToList();
+            return _databaseContext.Carts.Where(x => x.IsDeleted == false);
         }
 
         public CartEntity TryGetByUserId(string userId)
@@ -86,6 +86,7 @@ namespace OnlineShop.DB
                         }
                     }
                 };
+                _databaseContext.Update(product);
                 _databaseContext.Carts.Add(newCart);
             }
             _databaseContext.SaveChanges();
