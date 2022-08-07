@@ -17,7 +17,7 @@ namespace OnlineShop.DB
 
         public IEnumerable<ProductEntity> AllProducts()
         {
-            return _databaseContext.Products;
+            return _databaseContext.Products.AsNoTracking();
         }
 
         public ProductEntity TryGetById(int productId)

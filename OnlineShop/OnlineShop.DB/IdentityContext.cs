@@ -9,8 +9,8 @@ namespace OnlineShop.DB
         public IdentityContext(DbContextOptions<IdentityContext> options) : base(options)
         {
             //Database.OpenConnection(); 
-            //Database.EnsureCreated();
-            Database.Migrate();
+            Database.EnsureCreated();
+            //Database.Migrate();
         }
     }
 }

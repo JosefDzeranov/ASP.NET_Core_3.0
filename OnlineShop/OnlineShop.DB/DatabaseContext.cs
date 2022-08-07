@@ -14,7 +14,7 @@ namespace OnlineShop.Db
         }
         public DbSet<ProductEntity> Products { get; set; }
         public DbSet<CartEntity> Carts { get; set; }
-        public DbSet<OrderEntity> Orders { get; set; }
+        //public DbSet<OrderEntity> Orders { get; set; }
         public DbSet<CartItemEntity> CartItems { get; set; }
         //public DbSet<User> Users { get; set; }
 

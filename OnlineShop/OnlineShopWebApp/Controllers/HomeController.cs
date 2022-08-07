@@ -21,7 +21,7 @@ namespace OnlineShopWebApp.Controllers
         public IActionResult Index()
         {
             var products = _productServicies.AllProducts();
-            return View(products.Select(x => _mapper.Map<ProductViewModel>(x)).ToList());
+            return View(products.Select(x => _mapper.Map<ProductViewModel>(x)));
         }
 
         public IActionResult SearchByName(string rawSearchName)

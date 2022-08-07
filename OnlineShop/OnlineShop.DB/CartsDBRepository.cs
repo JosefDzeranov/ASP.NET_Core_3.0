@@ -22,18 +22,18 @@ namespace OnlineShop.DB
 
         public IEnumerable<CartEntity> AllCarts()
         {
-            return _databaseContext.Carts.Where(x => x.IsDeleted == false);
+            return _databaseContext.Carts.Where(x => x.IsDeleted == false).Include(x => x.Items).ThenInclude(x => x.Product);
         }
 
         public CartEntity TryGetByUserId(string userId)
         {
-            var carts = _databaseContext.Carts.Where(x => x.IsDeleted == false).AsNoTracking().FirstOrDefault(x => x.UserId == userId);
+            var carts = _databaseContext.Carts.Where(x => x.IsDeleted == false).Include(x => x.Items).ThenInclude(x => x.Product).FirstOrDefault(x => x.UserId == userId);
             //var carts = _databaseContext.Carts
             //    .Where(x => x.IsDeleted == false)
             //    .Include(x => x.Items)
             //    .ThenInclude(x => x.Product)
             //    .AsNoTracking()
-            //    .FirstOrDefault(x => x.UserId == userId);
+            //    //.FirstOrDefault(x => x.UserId == userId);
             return carts;
         }
 
@@ -52,6 +52,7 @@ namespace OnlineShop.DB
         public void Add(ProductEntity product, string userId)
         {
             var existingCart = AllCarts().FirstOrDefault(x => x.UserId == userId);
+            //_databaseContext.Entry(product).State. = EntityState.Modified;
             if (existingCart != null)
             {
                 
@@ -86,7 +87,6 @@ namespace OnlineShop.DB
                         }
                     }
                 };
-                _databaseContext.Update(product);
                 _databaseContext.Carts.Add(newCart);
             }
             _databaseContext.SaveChanges();

@@ -30,7 +30,13 @@ namespace OnlineShopWebApp.Controllers
         {
             var existingUser = _userManager.FindByNameAsync(User.Identity.Name).Result;
             var cart = _cartServicies.TryGetByUserId(existingUser.Id);
-            return View(_mapper.Map<CartViewModel>(cart));
+            var cartViewModel = _mapper.Map<CartViewModel>(cart);
+                //.Items
+                //.Select(x => _mapper.Map<CartItemViewModel>(x))
+                //.Select(x => _mapper.Map<ProductViewModel>(x.ProductViewModel));
+                //.Select(x => _mapper.Map<ProductViewModel>(x.ProductViewModel));
+            return View(cartViewModel);
+                
         }
 
 

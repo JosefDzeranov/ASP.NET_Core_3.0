@@ -16,7 +16,7 @@ namespace OnlineShop.DB.Migrations
             modelBuilder
                 .HasAnnotation("ProductVersion", "5.0.17");
 
-            modelBuilder.Entity("OnlineShop.DB.Models.Cart", b =>
+            modelBuilder.Entity("Entities.CartEntity", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -33,7 +33,7 @@ namespace OnlineShop.DB.Migrations
                     b.ToTable("Carts");
                 });
 
-            modelBuilder.Entity("OnlineShop.DB.Models.CartItem", b =>
+            modelBuilder.Entity("Entities.CartItemEntity", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -45,9 +45,6 @@ namespace OnlineShop.DB.Migrations
                     b.Property<Guid?>("CartId")
                         .HasColumnType("TEXT");
 
-                    b.Property<int?>("OrderId")
-                        .HasColumnType("INTEGER");
-
                     b.Property<int?>("ProductId")
                         .HasColumnType("INTEGER");
 
@@ -55,59 +52,12 @@ namespace OnlineShop.DB.Migrations
 
                     b.HasIndex("CartId");
 
-                    b.HasIndex("OrderId");
-
                     b.HasIndex("ProductId");
 
                     b.ToTable("CartItems");
                 });
 
-            modelBuilder.Entity("OnlineShop.DB.Models.DeliveryInfo", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER");
-
-                    b.Property<string>("AdressToDelivery")
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("Email")
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("NameOfClient")
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("Phone")
-                        .HasColumnType("TEXT");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("DeliveryInfo");
-                });
-
-            modelBuilder.Entity("OnlineShop.DB.Models.Order", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER");
-
-                    b.Property<DateTime>("CreatedDate")
-                        .HasColumnType("TEXT");
-
-                    b.Property<int?>("DeliveryInfoId")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<int>("Status")
-                        .HasColumnType("INTEGER");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("DeliveryInfoId");
-
-                    b.ToTable("Orders");
-                });
-
-            modelBuilder.Entity("OnlineShop.DB.Models.Product", b =>
+            modelBuilder.Entity("Entities.ProductEntity", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -164,40 +114,29 @@ namespace OnlineShop.DB.Migrations
                         });
                 });
 
-            modelBuilder.Entity("OnlineShop.DB.Models.CartItem", b =>
+            modelBuilder.Entity("Entities.CartItemEntity", b =>
                 {
-                    b.HasOne("OnlineShop.DB.Models.Cart", null)
+                    b.HasOne("Entities.CartEntity", "Cart")
                         .WithMany("Items")
                         .HasForeignKey("CartId");
 
-                    b.HasOne("OnlineShop.DB.Models.Order", null)
-                        .WithMany("Items")
-                        .HasForeignKey("OrderId");
-
-                    b.HasOne("OnlineShop.DB.Models.Product", "Product")
-                        .WithMany()
+                    b.HasOne("Entities.ProductEntity", "Product")
+                        .WithMany("CartItems")
                         .HasForeignKey("ProductId");
+
+                    b.Navigation("Cart");
 
                     b.Navigation("Product");
                 });
 
-            modelBuilder.Entity("OnlineShop.DB.Models.Order", b =>
-                {
-                    b.HasOne("OnlineShop.DB.Models.DeliveryInfo", "DeliveryInfo")
-                        .WithMany()
-                        .HasForeignKey("DeliveryInfoId");
-
-                    b.Navigation("DeliveryInfo");
-                });
-
-            modelBuilder.Entity("OnlineShop.DB.Models.Cart", b =>
+            modelBuilder.Entity("Entities.CartEntity", b =>
                 {
                     b.Navigation("Items");
                 });
 
-            modelBuilder.Entity("OnlineShop.DB.Models.Order", b =>
+            modelBuilder.Entity("Entities.ProductEntity", b =>
                 {
-                    b.Navigation("Items");
+                    b.Navigation("CartItems");
                 });
 #pragma warning restore 612, 618
         }

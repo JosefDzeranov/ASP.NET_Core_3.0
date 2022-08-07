@@ -23,9 +23,9 @@ namespace OnlineShop.BL
             _cartBase.Add(_mapper.Map<ProductEntity>(product), userId);
         }
 
-        public List<Cart> AllCarts()
+        public IEnumerable<Cart> AllCarts()
         {
-            return _cartBase.AllCarts().Select(x => _mapper.Map<Cart>(x)).ToList();
+            return _cartBase.AllCarts().Select(x => _mapper.Map<Cart>(x));
         }
 
         public void DecreaseAmount(int productId, string userId)

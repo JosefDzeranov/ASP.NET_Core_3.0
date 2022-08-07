@@ -25,13 +25,13 @@
 
             <tbody>
                 <tr>
-                    <td>@p.ProductViewModel.Name</td>
-                    <td>@p.ProductViewModel.Cost руб.</td>
+                    <td>@p.Product.Name</td>
+                    <td>@p.Product.Cost руб.</td>
                     <td>@p.Cost руб.</td>
                     <td>
-                        <a class="btn btn-primary" asp-area="" asp-controller="Cart" asp-action="Add" asp-route-productId="@p.ProductViewModel.Id" role="button">+</a>
+                        <a class="btn btn-primary" asp-area="" asp-controller="Cart" asp-action="Add" asp-route-productId="@p.Product.Id" role="button">+</a>
                         <a class="btn btn-danger" role="button">@p.Amount</a>
-                        <a class="btn btn-primary" asp-area="" asp-controller="Cart" asp-action="DecreaseAmount" asp-route-productId="@p.ProductViewModel.Id" role="button">-</a>
+                        <a class="btn btn-primary" asp-area="" asp-controller="Cart" asp-action="DecreaseAmount" asp-route-productId="@p.Product.Id" role="button">-</a>
                     </td>
                 </tr>
             </tbody>
