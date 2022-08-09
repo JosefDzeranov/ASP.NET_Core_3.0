@@ -9,12 +9,12 @@ namespace OnlineShop.Db
         public DatabaseContext(DbContextOptions<DatabaseContext> options) : base(options)
         {
             //Database.EnsureDeleted();
-            //Database.EnsureCreated();
-            Database.Migrate();
+            Database.EnsureCreated();
+            //Database.Migrate();
         }
         public DbSet<ProductEntity> Products { get; set; }
         public DbSet<CartEntity> Carts { get; set; }
-        //public DbSet<OrderEntity> Orders { get; set; }
+        public DbSet<OrderEntity> Orders { get; set; }
         public DbSet<CartItemEntity> CartItems { get; set; }
         //public DbSet<User> Users { get; set; }
 

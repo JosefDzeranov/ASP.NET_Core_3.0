@@ -1,4 +1,4 @@
-﻿@using OnlineShopWebApp.Models
+﻿@using ViewModels
 @model CartViewModel
 
 
@@ -44,7 +44,8 @@
 
 
     <a class="btn btn-primary" href="/Home/Index" role="button">Продолжить покупки</a>
-    <a class="btn btn-success" href="/order/index" role="button">Оформить заказ</a>
+    <a class="btn btn-success" asp-area="" asp-controller="order" asp-action="index" role="button">Заказать</a>
+    
 }
 else
 {

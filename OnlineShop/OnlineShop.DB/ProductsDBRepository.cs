@@ -22,7 +22,7 @@ namespace OnlineShop.DB
 
         public ProductEntity TryGetById(int productId)
         {
-            return AllProducts().FirstOrDefault(x => x.Id == productId);
+            return _databaseContext.Products.FirstOrDefault(x => x.Id == productId);
         }
 
         public void Add(ProductEntity ProductEntity)

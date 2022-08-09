@@ -13,11 +13,14 @@ namespace OnlineShop.DB
     {
         private readonly DatabaseContext _databaseContext;
         private readonly UserManager<User> _userManager;
+        private readonly IProductBase _productDataBase;
 
-        public CartsDBRepository(DatabaseContext databaseContext, UserManager<User> userManager)
+
+        public CartsDBRepository(DatabaseContext databaseContext, UserManager<User> userManager, IProductBase productDataBase)
         {
             _databaseContext = databaseContext;
             _userManager = userManager;
+            _productDataBase = productDataBase;
         }
 
         public IEnumerable<CartEntity> AllCarts()
@@ -27,7 +30,11 @@ namespace OnlineShop.DB
 
         public CartEntity TryGetByUserId(string userId)
         {
-            var carts = _databaseContext.Carts.Where(x => x.IsDeleted == false).Include(x => x.Items).ThenInclude(x => x.Product).FirstOrDefault(x => x.UserId == userId);
+            var carts = _databaseContext.Carts
+                .Where(x => x.IsDeleted == false)
+                .Include(x => x.Items)
+                .ThenInclude(x => x.Product)
+                .FirstOrDefault(x => x.UserId == userId);
             //var carts = _databaseContext.Carts
             //    .Where(x => x.IsDeleted == false)
             //    .Include(x => x.Items)
@@ -51,12 +58,12 @@ namespace OnlineShop.DB
 
         public void Add(ProductEntity product, string userId)
         {
-            var existingCart = AllCarts().FirstOrDefault(x => x.UserId == userId);
-            //_databaseContext.Entry(product).State. = EntityState.Modified;
+            var existingCart = TryGetByUserId(userId);
+            var existingProduct = _productDataBase.TryGetById(product.Id);
             if (existingCart != null)
             {
-                
-                var existingCartItem = existingCart.Items.FirstOrDefault(x => x.Product.Id == product.Id);
+
+                var existingCartItem = existingCart.Items.FirstOrDefault(x => x.Product.Id == existingProduct.Id);
                 if (existingCartItem != null)
                 {
                     existingCartItem.Amount += 1;
@@ -65,9 +72,8 @@ namespace OnlineShop.DB
                 {
                     existingCart.Items.Add(new CartItemEntity
                     {
-                        Product = product,
+                        Product = existingProduct,
                         Amount = 1,
-                        Id = Guid.NewGuid()
                     });
                 }
             }
@@ -81,9 +87,8 @@ namespace OnlineShop.DB
                     {
                         new CartItemEntity
                         {
-                            Id = Guid.NewGuid(),
                             Amount = 1,
-                            Product = product
+                            Product = existingProduct
                         }
                     }
                 };

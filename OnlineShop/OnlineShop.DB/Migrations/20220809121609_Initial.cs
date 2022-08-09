@@ -21,6 +21,22 @@ namespace OnlineShop.DB.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "DeliveryInfoEntity",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "INTEGER", nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    AdressToDelivery = table.Column<string>(type: "TEXT", nullable: true),
+                    NameOfClient = table.Column<string>(type: "TEXT", nullable: true),
+                    Phone = table.Column<string>(type: "TEXT", nullable: true),
+                    Email = table.Column<string>(type: "TEXT", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_DeliveryInfoEntity", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Products",
                 columns: table => new
                 {
@@ -37,13 +53,35 @@ namespace OnlineShop.DB.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Orders",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "INTEGER", nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    DeliveryInfoId = table.Column<int>(type: "INTEGER", nullable: true),
+                    Status = table.Column<int>(type: "INTEGER", nullable: false),
+                    CreatedDate = table.Column<DateTime>(type: "TEXT", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Orders", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Orders_DeliveryInfoEntity_DeliveryInfoId",
+                        column: x => x.DeliveryInfoId,
+                        principalTable: "DeliveryInfoEntity",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "CartItems",
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "TEXT", nullable: false),
                     ProductId = table.Column<int>(type: "INTEGER", nullable: true),
                     CartId = table.Column<Guid>(type: "TEXT", nullable: true),
-                    Amount = table.Column<int>(type: "INTEGER", nullable: false)
+                    Amount = table.Column<int>(type: "INTEGER", nullable: false),
+                    OrderEntityId = table.Column<int>(type: "INTEGER", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -52,6 +90,12 @@ namespace OnlineShop.DB.Migrations
                         name: "FK_CartItems_Carts_CartId",
                         column: x => x.CartId,
                         principalTable: "Carts",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_CartItems_Orders_OrderEntityId",
+                        column: x => x.OrderEntityId,
+                        principalTable: "Orders",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
@@ -88,9 +132,19 @@ namespace OnlineShop.DB.Migrations
                 column: "CartId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_CartItems_OrderEntityId",
+                table: "CartItems",
+                column: "OrderEntityId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_CartItems_ProductId",
                 table: "CartItems",
                 column: "ProductId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Orders_DeliveryInfoId",
+                table: "Orders",
+                column: "DeliveryInfoId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -102,7 +156,13 @@ namespace OnlineShop.DB.Migrations
                 name: "Carts");
 
             migrationBuilder.DropTable(
+                name: "Orders");
+
+            migrationBuilder.DropTable(
                 name: "Products");
+
+            migrationBuilder.DropTable(
+                name: "DeliveryInfoEntity");
         }
     }
 }

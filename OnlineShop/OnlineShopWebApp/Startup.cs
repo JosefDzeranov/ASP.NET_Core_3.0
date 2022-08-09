@@ -58,8 +58,8 @@ namespace OnlineShopWebApp
 
             services.AddTransient<IProductBase, ProductsDBRepository>();
             services.AddTransient<ICartBase,CartsDBRepository>();
-            //services.AddTransient<IOrderBase, OrdersDBRepository>();
-            //services.AddTransient<IOrderServicies, OrderServicies>();
+            services.AddTransient<IOrderBase, OrdersDBRepository>();
+            services.AddTransient<IOrderServicies, OrderServicies>();
             services.AddTransient<ICartServicies, CartServicies>();
             services.AddTransient<IProductServicies, ProductServicies>();
 

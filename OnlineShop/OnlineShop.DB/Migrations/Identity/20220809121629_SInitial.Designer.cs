@@ -9,7 +9,7 @@ using OnlineShop.DB;
 namespace OnlineShop.DB.Migrations.Identity
 {
     [DbContext(typeof(IdentityContext))]
-    [Migration("20220807072332_SInitial")]
+    [Migration("20220809121629_SInitial")]
     partial class SInitial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

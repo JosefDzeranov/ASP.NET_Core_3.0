@@ -29,7 +29,8 @@ namespace OnlineShopWebApp.Controllers
         {
             var existingUser = _userManager.FindByNameAsync(User.Identity.Name).Result;
             var cart = _cartServicies.TryGetByUserId(existingUser.Id);
-            var order = new Order(cart.Items.ToList(), _mapper.Map<DeliveryInfo>(deliveryInfo));
+            var order = new Order(cart.Items, _mapper.Map<DeliveryInfo>(deliveryInfo));
+
             _orderServicies.Add(order);
         }
 
