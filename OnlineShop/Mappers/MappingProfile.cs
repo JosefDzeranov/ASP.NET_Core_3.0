@@ -10,11 +10,11 @@ namespace Mappers
     {
         public MappingProfile()
         {
-            CreateMap<CartItemViewModel , CartItem> ().ReverseMap().ForMember(x => x.Cost, opt => opt.Ignore());
+            CreateMap<CartItemViewModel , CartItem> ().ReverseMap();
             CreateMap<DeliveryInfo, DeliveryInfoModelView>().ReverseMap();
             CreateMap<Product, ProductViewModel>().ReverseMap();
             CreateMap<Order, OrderViewModel>().ReverseMap();
-            CreateMap<Cart, CartViewModel>().ReverseMap().ForMember(x => x.IsDeleted, opt => opt.Ignore());
+            CreateMap<Cart, CartViewModel>().ReverseMap();
             CreateMap<OrderStatus, OrderStatusViewModel>().ReverseMap();
 
             CreateMap<CartItem, CartItemEntity>().ReverseMap();

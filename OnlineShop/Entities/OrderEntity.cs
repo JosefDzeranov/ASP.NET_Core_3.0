@@ -10,6 +10,7 @@ namespace Entities
         public List<CartItemEntity>? Items { get; set; }
         public OrderStatusEntity Status { get; set; }
         public DateTime CreatedDate { get; set; }
+        public decimal? TotalCostWithDiscount { get; set; }
 
         public OrderEntity(List<CartItemEntity> items, DeliveryInfoEntity deliveryInfo)
         {

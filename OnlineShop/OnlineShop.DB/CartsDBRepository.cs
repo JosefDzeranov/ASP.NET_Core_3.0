@@ -35,12 +35,6 @@ namespace OnlineShop.DB
                 .Include(x => x.Items)
                 .ThenInclude(x => x.Product)
                 .FirstOrDefault(x => x.UserId == userId);
-            //var carts = _databaseContext.Carts
-            //    .Where(x => x.IsDeleted == false)
-            //    .Include(x => x.Items)
-            //    .ThenInclude(x => x.Product)
-            //    .AsNoTracking()
-            //    //.FirstOrDefault(x => x.UserId == userId);
             return carts;
         }
 
@@ -50,10 +44,6 @@ namespace OnlineShop.DB
             var carts = _databaseContext.Carts.Where(x => x.IsDeleted == false).AsNoTracking();
             var necessaryCart = carts.FirstOrDefault(x => x.UserId == user.Id);
             return necessaryCart;
-
-
-
-
         }
 
         public void Add(ProductEntity product, string userId)
@@ -62,7 +52,6 @@ namespace OnlineShop.DB
             var existingProduct = _productDataBase.TryGetById(product.Id);
             if (existingCart != null)
             {
-
                 var existingCartItem = existingCart.Items.FirstOrDefault(x => x.Product.Id == existingProduct.Id);
                 if (existingCartItem != null)
                 {

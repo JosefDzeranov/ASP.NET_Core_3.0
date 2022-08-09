@@ -31,10 +31,6 @@ namespace OnlineShopWebApp.Controllers
             var existingUser = _userManager.FindByNameAsync(User.Identity.Name).Result;
             var cart = _cartServicies.TryGetByUserId(existingUser.Id);
             var cartViewModel = _mapper.Map<CartViewModel>(cart);
-                //.Items
-                //.Select(x => _mapper.Map<CartItemViewModel>(x))
-                //.Select(x => _mapper.Map<ProductViewModel>(x.ProductViewModel));
-                //.Select(x => _mapper.Map<ProductViewModel>(x.ProductViewModel));
             return View(cartViewModel);
                 
         }
@@ -54,5 +50,7 @@ namespace OnlineShopWebApp.Controllers
             _cartServicies.DecreaseAmount(productId, existingUser.Id);
             return RedirectToAction("Index");
         }
+
+
     }
 }

@@ -10,6 +10,7 @@ namespace ViewModels
         public DeliveryInfoModelView DeliveryInfo { get; set; }
         public OrderStatusViewModel Status { get; set; }
         public DateTime CreatedDate { get; set; }
+        public decimal? TotalCostWithDiscount { get; set; }
 
         public OrderViewModel(List<CartItemViewModel> items, DeliveryInfoModelView deliveryInfo)
         {

@@ -10,6 +10,7 @@ namespace Domains
         public List<CartItem> Items { get; set; }
         public OrderStatus Status { get; set; }
         public DateTime CreatedDate { get; set; }
+        public decimal? TotalCostWithDiscount { get; set; }
 
         public Order(List<CartItem> items, DeliveryInfo deliveryInfo)
         {
