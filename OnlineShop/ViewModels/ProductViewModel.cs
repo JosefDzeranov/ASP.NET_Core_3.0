@@ -14,6 +14,7 @@ namespace ViewModels
         [Required(ErrorMessage = "Введите описание продукта")]
         public string? Description { get; set; }
         public string? ImgPath { get; set; }
+        public int AmountInDb { get; set; }
         public ProductViewModel(int id, string name, decimal cost)
         {
             Id = id;

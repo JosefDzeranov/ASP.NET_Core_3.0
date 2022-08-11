@@ -8,6 +8,8 @@
         public string? Description { get; set; }
         public string? ImgPath { get; set; }
         //public List<CartItem> CartItems { get; set; }
+        public int AmountInDb { get; set; }
+
 
         public Product(int id, string name, decimal cost, string description, string imgPath)
         {

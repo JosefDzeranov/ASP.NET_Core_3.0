@@ -25,7 +25,7 @@ namespace OnlineShop.DB
 
         public IEnumerable<CartEntity> AllCarts()
         {
-            return _databaseContext.Carts.Where(x => x.IsDeleted == false).Include(x => x.Items).ThenInclude(x => x.Product);
+            return _databaseContext.Carts.Where(x => x.IsDeleted == false).Include(x => x.Items).ThenInclude(x => x.Product).AsNoTracking();
         }
 
         public CartEntity TryGetByUserId(string userId)
@@ -88,7 +88,7 @@ namespace OnlineShop.DB
 
         public void DecreaseAmount(int productId, string userId)
         {
-            var existingCart = AllCarts().FirstOrDefault(x => x.UserId == userId);
+            var existingCart = TryGetByUserId(userId);
             var existingCartItem = existingCart?.Items?.FirstOrDefault(x => x.Product.Id == productId);
             if (existingCartItem.Amount > 0)
             {
@@ -108,7 +108,7 @@ namespace OnlineShop.DB
 
         public void Delete(string userId)
         {
-            var existingCart = AllCarts().FirstOrDefault(x => x.UserId == userId);
+            var existingCart = TryGetByUserId(userId);
             if (existingCart != null)
             {
                 existingCart.IsDeleted = true;

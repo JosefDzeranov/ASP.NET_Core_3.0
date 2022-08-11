@@ -11,10 +11,13 @@ namespace OnlineShopWebApp
     {
 
         private readonly DatabaseContext _databaseContext;
+        private readonly IProductBase _productBase;
 
-        public OrdersDBRepository(DatabaseContext databaseContext)
+
+        public OrdersDBRepository(DatabaseContext databaseContext, IProductBase productBase)
         {
             _databaseContext = databaseContext;
+            _productBase = productBase;
         }
 
         public int NextOrderId()
@@ -55,7 +58,13 @@ namespace OnlineShopWebApp
         public void Add(OrderEntity order)
         {
             _databaseContext.Entry(order).State = EntityState.Added;
-            //_databaseContext.Entry(order.Items.FirstOrDefault()).State = EntityState.Modified;
+
+            foreach (var item in order.Items)
+            {
+                var productInDB = _productBase.TryGetById(item.Product.Id);
+                productInDB.AmountInDb = productInDB.AmountInDb - item.Amount;
+            }
+
             _databaseContext.Orders.Add(order);
             _databaseContext.SaveChanges();
         }

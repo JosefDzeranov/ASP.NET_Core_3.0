@@ -20,7 +20,7 @@ namespace OnlineShopWebApp.Controllers
 
         public IActionResult Index()
         {
-            var products = _productServicies.AllProducts();
+            var products = _productServicies.AllProducts().Where(x => x.AmountInDb > 0);
             return View(products.Select(x => _mapper.Map<ProductViewModel>(x)));
         }
 
