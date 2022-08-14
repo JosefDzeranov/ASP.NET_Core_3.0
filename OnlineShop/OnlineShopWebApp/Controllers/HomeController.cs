@@ -26,7 +26,7 @@ namespace OnlineShopWebApp.Controllers
         [HttpPost]
         public IActionResult SearchByName(string name)
         {
-
+            List<ProductViewModel> foundProductsVM = new List<ProductViewModel>();
            
             if (name != null)
             {
@@ -40,7 +40,8 @@ namespace OnlineShopWebApp.Controllers
                     imagePath = productByPartName.ImagePath
 
                 };
-                return View(productView);
+                foundProductsVM.Add(productView);
+                return View(foundProductsVM);
 
             }
             else
