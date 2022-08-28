@@ -36,7 +36,6 @@ namespace OnlineShopWebApp
             services.AddDbContext<DatabaseContext>(options =>
             {
                 options.UseSqlite(connection);
-                //options.EnableSensitiveDataLogging(true);
             });
 
             services.AddDbContext<IdentityContext>(options =>

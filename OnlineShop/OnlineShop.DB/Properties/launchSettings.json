@@ -1,0 +1,7 @@
+{
+  "profiles": {
+    "OnlineShop.DB": {
+      "commandName": "Project"
+    }
+  }
+}

@@ -11,15 +11,13 @@ namespace OnlineShop.BL
     public class CartServicies : ICartServicies
     {
         private readonly ICartBase _cartBase;
-        private readonly IProductBase _productBase;
         private readonly IMapper _mapper;
         private readonly DatabaseContext _databaseContext;
 
-        public CartServicies(ICartBase cartBase, IMapper mapper, IProductBase productBase, DatabaseContext databaseContext)
+        public CartServicies(ICartBase cartBase, IMapper mapper, DatabaseContext databaseContext)
         {
             _cartBase = cartBase;
             _mapper = mapper;
-            _productBase = productBase;
             _databaseContext = databaseContext;
         }
 
