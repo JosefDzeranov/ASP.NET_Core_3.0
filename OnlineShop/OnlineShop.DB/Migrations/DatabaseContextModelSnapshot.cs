@@ -2,7 +2,6 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
-using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using OnlineShop.Db;
 
@@ -15,95 +14,94 @@ namespace OnlineShop.DB.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("Relational:MaxIdentifierLength", 128)
-                .HasAnnotation("ProductVersion", "5.0.17")
-                .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                .HasAnnotation("ProductVersion", "5.0.17");
 
-            modelBuilder.Entity("OnlineShop.DB.Models.Cart", b =>
+            modelBuilder.Entity("Entities.CartEntity", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
+                        .HasColumnType("TEXT");
 
                     b.Property<bool>("IsDeleted")
-                        .HasColumnType("bit");
+                        .HasColumnType("INTEGER");
 
                     b.Property<string>("UserId")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("TEXT");
 
                     b.HasKey("Id");
 
                     b.ToTable("Carts");
                 });
 
-            modelBuilder.Entity("OnlineShop.DB.Models.CartItem", b =>
+            modelBuilder.Entity("Entities.CartItemEntity", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
+                        .HasColumnType("TEXT");
 
                     b.Property<int>("Amount")
-                        .HasColumnType("int");
+                        .HasColumnType("INTEGER");
 
                     b.Property<Guid?>("CartId")
-                        .HasColumnType("uniqueidentifier");
+                        .HasColumnType("TEXT");
 
-                    b.Property<int?>("OrderId")
-                        .HasColumnType("int");
+                    b.Property<int?>("OrderEntityId")
+                        .HasColumnType("INTEGER");
 
                     b.Property<int?>("ProductId")
-                        .HasColumnType("int");
+                        .HasColumnType("INTEGER");
 
                     b.HasKey("Id");
 
                     b.HasIndex("CartId");
 
-                    b.HasIndex("OrderId");
+                    b.HasIndex("OrderEntityId");
 
                     b.HasIndex("ProductId");
 
                     b.ToTable("CartItems");
                 });
 
-            modelBuilder.Entity("OnlineShop.DB.Models.DeliveryInfo", b =>
+            modelBuilder.Entity("Entities.DeliveryInfoEntity", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .HasColumnType("INTEGER");
 
                     b.Property<string>("AdressToDelivery")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("TEXT");
 
                     b.Property<string>("Email")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("TEXT");
 
                     b.Property<string>("NameOfClient")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("TEXT");
 
                     b.Property<string>("Phone")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("TEXT");
 
                     b.HasKey("Id");
 
-                    b.ToTable("DeliveryInfo");
+                    b.ToTable("DeliveryInfoEntity");
                 });
 
-            modelBuilder.Entity("OnlineShop.DB.Models.Order", b =>
+            modelBuilder.Entity("Entities.OrderEntity", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .HasColumnType("INTEGER");
 
                     b.Property<DateTime>("CreatedDate")
-                        .HasColumnType("datetime2");
+                        .HasColumnType("TEXT");
 
                     b.Property<int?>("DeliveryInfoId")
-                        .HasColumnType("int");
+                        .HasColumnType("INTEGER");
 
                     b.Property<int>("Status")
-                        .HasColumnType("int");
+                        .HasColumnType("INTEGER");
+
+                    b.Property<decimal?>("TotalCostWithDiscount")
+                        .HasColumnType("TEXT");
 
                     b.HasKey("Id");
 
@@ -112,24 +110,26 @@ namespace OnlineShop.DB.Migrations
                     b.ToTable("Orders");
                 });
 
-            modelBuilder.Entity("OnlineShop.DB.Models.Product", b =>
+            modelBuilder.Entity("Entities.ProductEntity", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("AmountInDb")
+                        .HasColumnType("INTEGER");
 
                     b.Property<decimal>("Cost")
-                        .HasColumnType("decimal(18,2)");
+                        .HasColumnType("TEXT");
 
                     b.Property<string>("Description")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("TEXT");
 
                     b.Property<string>("ImgPath")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("TEXT");
 
                     b.Property<string>("Name")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("TEXT");
 
                     b.HasKey("Id");
 
@@ -139,6 +139,7 @@ namespace OnlineShop.DB.Migrations
                         new
                         {
                             Id = -1,
+                            AmountInDb = 6,
                             Cost = 610m,
                             Description = "Ширина 135 см, Плотность от 239 г/м2, Состав: вискоза - 60%, лён - 30%, хлопок - 10%, Производитель - Китай",
                             ImgPath = "/img/linen_blue.jpg",
@@ -147,6 +148,7 @@ namespace OnlineShop.DB.Migrations
                         new
                         {
                             Id = -2,
+                            AmountInDb = 3,
                             Cost = 4200m,
                             Description = "Ширина 120 см, Состав: эластан, кашемир, Производитель - Италия",
                             ImgPath = "/img/cashemir_vi.jpg",
@@ -155,6 +157,7 @@ namespace OnlineShop.DB.Migrations
                         new
                         {
                             Id = -3,
+                            AmountInDb = 8,
                             Cost = 2700m,
                             Description = "Ширина 135 см, Состав: шёлк - 100%, Производитель - Италия",
                             ImgPath = "/img/Silk_green.jpg",
@@ -163,6 +166,7 @@ namespace OnlineShop.DB.Migrations
                         new
                         {
                             Id = -4,
+                            AmountInDb = 9,
                             Cost = 5700m,
                             Description = "Ширина 120 см, Состав: эластан, кашемир, Производитель - Италия",
                             ImgPath = "/img/cashemir_li.jpg",
@@ -170,40 +174,47 @@ namespace OnlineShop.DB.Migrations
                         });
                 });
 
-            modelBuilder.Entity("OnlineShop.DB.Models.CartItem", b =>
+            modelBuilder.Entity("Entities.CartItemEntity", b =>
                 {
-                    b.HasOne("OnlineShop.DB.Models.Cart", null)
+                    b.HasOne("Entities.CartEntity", "Cart")
                         .WithMany("Items")
                         .HasForeignKey("CartId");
 
-                    b.HasOne("OnlineShop.DB.Models.Order", null)
+                    b.HasOne("Entities.OrderEntity", null)
                         .WithMany("Items")
-                        .HasForeignKey("OrderId");
+                        .HasForeignKey("OrderEntityId");
 
-                    b.HasOne("OnlineShop.DB.Models.Product", "Product")
-                        .WithMany()
+                    b.HasOne("Entities.ProductEntity", "Product")
+                        .WithMany("CartItems")
                         .HasForeignKey("ProductId");
+
+                    b.Navigation("Cart");
 
                     b.Navigation("Product");
                 });
 
-            modelBuilder.Entity("OnlineShop.DB.Models.Order", b =>
+            modelBuilder.Entity("Entities.OrderEntity", b =>
                 {
-                    b.HasOne("OnlineShop.DB.Models.DeliveryInfo", "DeliveryInfo")
+                    b.HasOne("Entities.DeliveryInfoEntity", "DeliveryInfo")
                         .WithMany()
                         .HasForeignKey("DeliveryInfoId");
 
                     b.Navigation("DeliveryInfo");
                 });
 
-            modelBuilder.Entity("OnlineShop.DB.Models.Cart", b =>
+            modelBuilder.Entity("Entities.CartEntity", b =>
                 {
                     b.Navigation("Items");
                 });
 
-            modelBuilder.Entity("OnlineShop.DB.Models.Order", b =>
+            modelBuilder.Entity("Entities.OrderEntity", b =>
                 {
                     b.Navigation("Items");
+                });
+
+            modelBuilder.Entity("Entities.ProductEntity", b =>
+                {
+                    b.Navigation("CartItems");
                 });
 #pragma warning restore 612, 618
         }

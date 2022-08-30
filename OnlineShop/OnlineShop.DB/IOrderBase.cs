@@ -1,12 +1,12 @@
-﻿using OnlineShop.DB.Models;
+﻿using Entities;
 using System.Collections.Generic;
 
 namespace OnlineShop.DB
 {
     public interface IOrderBase
     {
-        void Add(Order order);
-        List<Order> AllOrders();
-        void UpdateOrderStatus(int orderId, OrderStatus status);
+        void Add(OrderEntity order);
+        List<OrderEntity> AllOrders();
+        void UpdateOrderStatus(int orderId, OrderStatusEntity status);
     }
 }

@@ -1,3 +1,4 @@
+using Domains;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -5,11 +6,12 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using OnlineShop.BL;
 using OnlineShop.Db;
 using OnlineShop.DB;
-using OnlineShop.DB.Models;
 using Serilog;
 using System;
+using Mappers;
 
 namespace OnlineShopWebApp
 {
@@ -27,14 +29,17 @@ namespace OnlineShopWebApp
         {
 
             string connection = Configuration.GetConnectionString("online_shop");
+
+            services.AddAutoMapper(typeof(MappingProfile));
+
+
             services.AddDbContext<DatabaseContext>(options =>
             {
-                options.UseSqlServer(connection);
-                options.EnableSensitiveDataLogging(true);
+                options.UseSqlite(connection);
             });
 
             services.AddDbContext<IdentityContext>(options =>
-           options.UseSqlServer(connection));
+           options.UseSqlite(connection));
 
             services.AddIdentity<User, IdentityRole>()
                 .AddEntityFrameworkStores<IdentityContext>();
@@ -53,7 +58,11 @@ namespace OnlineShopWebApp
             services.AddTransient<IProductBase, ProductsDBRepository>();
             services.AddTransient<ICartBase,CartsDBRepository>();
             services.AddTransient<IOrderBase, OrdersDBRepository>();
-            //services.AddTransient<UserManager<User>, UsersDBRepository>();
+            services.AddTransient<IOrderServicies, OrderServicies>();
+            services.AddTransient<ICartServicies, CartServicies>();
+            services.AddTransient<IProductServicies, ProductServicies>();
+
+
 
 
             services.AddControllersWithViews();

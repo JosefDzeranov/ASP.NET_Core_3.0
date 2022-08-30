@@ -1,23 +1,25 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using OnlineShop.DB;
-using OnlineShopWebApp.Helpers;
-using System.Linq;
+﻿using AutoMapper;
+using Microsoft.AspNetCore.Mvc;
+using OnlineShop.BL;
+using ViewModels;
 
 namespace OnlineShopWebApp.Controllers
 {
     public class ProductController : Controller
     {
-        private readonly IProductBase _productBase;
+        private readonly IProductServicies _productServicies;
+        private readonly IMapper _mapper;
 
-        public ProductController(IProductBase productBase)
+        public ProductController(IProductServicies productBase, IMapper mapper)
         {
-            _productBase = productBase;
+            _productServicies = productBase;
+            _mapper = mapper;
         }
 
         public IActionResult Index(int id)
         {
-            var products = _productBase.AllProducts().FirstOrDefault(p => p.Id == id);
-            return View(products.ToProductViewModel());
+            var product = _mapper.Map<ProductViewModel>(_productServicies.TryGetById(id));
+            return View(product);
         }
 
         public IActionResult Privacy()

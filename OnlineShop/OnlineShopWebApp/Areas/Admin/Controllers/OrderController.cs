@@ -1,11 +1,11 @@
-﻿using Microsoft.AspNetCore.Authorization;
+﻿using AutoMapper;
+using Domains;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using OnlineShop.BL;
 using OnlineShop.DB;
-using OnlineShop.DB.Models;
-using OnlineShopWebApp.Helpers;
-using OnlineShopWebApp.Models;
-using System.Collections.Generic;
 using System.Linq;
+using ViewModels;
 
 namespace OnlineShopWebApp.Areas.Admin.Controllers
 {
@@ -13,29 +13,30 @@ namespace OnlineShopWebApp.Areas.Admin.Controllers
     [Authorize(Roles = Const.AdminRoleName)]
     public class OrderController : Controller
     {
-        private readonly IOrderBase _orderBase;
+        private readonly IOrderServicies _orderServicies;
+        private readonly IMapper _mapper;
 
-        public OrderController(IOrderBase orderBase)
+        public OrderController(IOrderServicies orderServicies)
         {
-            _orderBase = orderBase;
+            _orderServicies = orderServicies;
         }
 
         public IActionResult Orders()
         {
-            var orders = _orderBase.AllOrders().Select(x => x.ToOrderViewModel());
+            var orders = _orderServicies.AllOrders().Select(x => _mapper.Map<OrderViewModel>(x));
             return View(orders);
         }
 
         public IActionResult GetOrder(int orderId)
         {
-            var necessaryOrder = _orderBase.AllOrders().FirstOrDefault(x => x.Id == orderId).ToOrderViewModel();
+            var necessaryOrder = _mapper.Map<OrderViewModel>(_orderServicies.AllOrders().FirstOrDefault(x => x.Id == orderId));
             return View(necessaryOrder);
         }
 
         [HttpPost]
-        public IActionResult UpdateStatusOrder(int orderId, OrderStatus status)
+        public IActionResult UpdateStatusOrder(int orderId, OrderStatusViewModel status)
         {
-            _orderBase.UpdateOrderStatus(orderId, status);
+            _orderServicies.UpdateOrderStatus(orderId, _mapper.Map<OrderStatus>(status));
             return RedirectToAction("Orders");
         }
     }

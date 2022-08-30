@@ -1,12 +1,12 @@
-﻿using Microsoft.AspNetCore.Authorization;
+﻿using AutoMapper;
+using Domains;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using OnlineShop.DB;
-using OnlineShop.DB.Models;
 using OnlineShopWebApp.Areas.Admin.Models;
-using OnlineShopWebApp.Helpers;
-using OnlineShopWebApp.Models;
 using System.Linq;
+using ViewModels;
 
 namespace OnlineShopWebApp.Areas.Admin.Controllers
 {
@@ -16,15 +16,17 @@ namespace OnlineShopWebApp.Areas.Admin.Controllers
     {
 
         private readonly UserManager<User> _userManager;
+        private readonly IMapper _mapper;
 
-        public UserController(UserManager<User> userManager)
+        public UserController(UserManager<User> userManager, IMapper mapper)
         {
             _userManager = userManager;
+            _mapper = mapper;
         }
 
         public IActionResult Users()
         {
-            var users = _userManager.Users.Select(x=> x.ToUserViewModel()).ToList();
+            var users = _userManager.Users.Select(x=> _mapper.Map<UserViewModel>(x)).ToList();
             return View(users);
         }
 
@@ -35,7 +37,7 @@ namespace OnlineShopWebApp.Areas.Admin.Controllers
 
         public IActionResult Get(string userId)
         {
-            var necessaryUser = _userManager.Users.FirstOrDefault(x => x.Id == userId).ToUserViewModel();
+            var necessaryUser = _mapper.Map<UserViewModel>(_userManager.Users.FirstOrDefault(x => x.Id == userId));
             return View(necessaryUser);
         }
 
@@ -73,7 +75,7 @@ namespace OnlineShopWebApp.Areas.Admin.Controllers
         public IActionResult Edit(string userId)
         {
             var necessaryUser = GetUserFromDB(userId);
-            return View(necessaryUser.ToUserViewModel());
+            return View(_mapper.Map<UserViewModel>(necessaryUser));
         }
 
         [HttpPost]

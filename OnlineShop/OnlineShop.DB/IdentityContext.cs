@@ -1,6 +1,6 @@
-﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+﻿using Domains;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
-using OnlineShop.DB.Models;
 
 namespace OnlineShop.DB
 {
@@ -8,7 +8,9 @@ namespace OnlineShop.DB
     {
         public IdentityContext(DbContextOptions<IdentityContext> options) : base(options)
         {
-            Database.Migrate();
+            //Database.OpenConnection(); 
+            Database.EnsureCreated();
+            //Database.Migrate();
         }
     }
 }

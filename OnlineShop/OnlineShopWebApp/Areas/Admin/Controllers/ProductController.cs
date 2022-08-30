@@ -1,9 +1,11 @@
-﻿using Microsoft.AspNetCore.Authorization;
+﻿using AutoMapper;
+using Domains;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using OnlineShop.BL;
 using OnlineShop.DB;
-using OnlineShop.DB.Models;
-using OnlineShopWebApp.Helpers;
-using OnlineShopWebApp.Models;
+using System.Linq;
+using ViewModels;
 
 namespace OnlineShopWebApp.Areas.Admin.Controllers
 {
@@ -11,18 +13,19 @@ namespace OnlineShopWebApp.Areas.Admin.Controllers
     [Authorize(Roles = Const.AdminRoleName)]
     public class ProductController : Controller
     {
-        private readonly IProductBase _productBase;
+        private readonly IProductServicies _productServicies;
+        private readonly IMapper _mapper;
 
-
-        public ProductController(IProductBase productBase)
+        public ProductController(IProductServicies productServicies, IMapper mapper)
         {
-            _productBase = productBase;
+            _productServicies = productServicies;
+            _mapper = mapper;
         }
 
         public IActionResult Products()
         {
-            var products = _productBase.AllProducts();
-            return View(products.ToProductViewModels());
+            var products = _productServicies.AllProducts().Select(x => _mapper.Map<ProductViewModel>(x));
+            return View(products);
         }
 
         public IActionResult AddNewProduct()
@@ -35,7 +38,7 @@ namespace OnlineShopWebApp.Areas.Admin.Controllers
         {
             if (ModelState.IsValid)
             {
-                _productBase.Add(product.ToProduct());
+                _productServicies.Add(_mapper.Map<Product>(product));
                 return RedirectToAction("Products", "Product");
             }
             else
@@ -48,7 +51,7 @@ namespace OnlineShopWebApp.Areas.Admin.Controllers
         [HttpGet]
         public IActionResult EditProduct(int productId)
         {
-            var product = _productBase.TryGetById(productId);
+            var product = _productServicies.TryGetById(productId);
             return View(product);
         }
 
@@ -57,7 +60,7 @@ namespace OnlineShopWebApp.Areas.Admin.Controllers
         {
             if (ModelState.IsValid)
             {
-                _productBase.Edit(product);
+                _productServicies.Edit(product);
                 return RedirectToAction("products", "product");
             }
             else
@@ -69,7 +72,7 @@ namespace OnlineShopWebApp.Areas.Admin.Controllers
 
         public IActionResult DeleteProduct(int productId)
         {
-            _productBase.Delete(productId);
+            _productServicies.Delete(productId);
             return RedirectToAction("Products", "Product");
         }
 

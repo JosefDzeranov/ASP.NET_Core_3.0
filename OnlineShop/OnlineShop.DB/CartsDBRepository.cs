@@ -1,7 +1,8 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿using Domains;
+using Entities;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using OnlineShop.Db;
-using OnlineShop.DB.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,78 +13,71 @@ namespace OnlineShop.DB
     {
         private readonly DatabaseContext _databaseContext;
         private readonly UserManager<User> _userManager;
+        private readonly IProductBase _productDataBase;
 
-        public CartsDBRepository(DatabaseContext databaseContext, UserManager<User> userManager)
+
+        public CartsDBRepository(DatabaseContext databaseContext, UserManager<User> userManager, IProductBase productDataBase)
         {
             _databaseContext = databaseContext;
             _userManager = userManager;
+            _productDataBase = productDataBase;
         }
 
-        public List<Cart> AllCarts()
+        public IEnumerable<CartEntity> AllCarts()
         {
-            return _databaseContext.Carts.Include(x => x.Items).ThenInclude(x => x.Product).Where(x => x.IsDeleted == false).ToList();
+            return _databaseContext.Carts.Where(x => x.IsDeleted == false).Include(x => x.Items).ThenInclude(x => x.Product).AsNoTracking();
         }
 
-        public Cart TryGetByUserId(string userId)
+        public CartEntity TryGetByUserId(string userId)
         {
-            return _databaseContext.Carts
+            var carts = _databaseContext.Carts
                 .Where(x => x.IsDeleted == false)
                 .Include(x => x.Items)
                 .ThenInclude(x => x.Product)
-                .AsNoTracking()
                 .FirstOrDefault(x => x.UserId == userId);
+            return carts;
         }
 
-        public Cart TryGetByUserName(string userName)
+        public CartEntity TryGetByUserName(string userName)
         {
             var user = _userManager.Users.FirstOrDefault(x => x.UserName == userName);
-            var carts = _databaseContext.Carts.Where(x => x.IsDeleted == false)
-                        .Include(x => x.Items)
-                        .ThenInclude(x => x.Product);
-            var necessaryCart = carts
-                                .AsNoTracking()
-                                .FirstOrDefault(x => x.UserId == user.Id);
+            var carts = _databaseContext.Carts.Where(x => x.IsDeleted == false).AsNoTracking();
+            var necessaryCart = carts.FirstOrDefault(x => x.UserId == user.Id);
             return necessaryCart;
-
-
-
-
         }
 
-        public void Add(Product product, string userId)
+        public void Add(ProductEntity product, string userId)
         {
-            var existingCart = AllCarts().FirstOrDefault(x => x.UserId == userId);
+            var existingCart = TryGetByUserId(userId);
+            var existingProduct = _productDataBase.TryGetById(product.Id);
             if (existingCart != null)
             {
-                
-                var existingCartItem = existingCart.Items.FirstOrDefault(x => x.Product.Id == product.Id);
+                var existingCartItem = existingCart.Items.FirstOrDefault(x => x.Product.Id == existingProduct.Id);
                 if (existingCartItem != null)
                 {
                     existingCartItem.Amount += 1;
                 }
                 else
                 {
-                    existingCart.Items.Add(new CartItem
+                    existingCart.Items.Add(new CartItemEntity
                     {
-                        Product = product,
+                        Product = existingProduct,
                         Amount = 1,
-                        Id = Guid.NewGuid()
                     });
                 }
             }
             else
             {
-                var newCart = new Cart
+                var newCart = new CartEntity
                 {
                     Id = Guid.NewGuid(),
                     UserId = userId,
-                    Items = new List<CartItem>
+                    Items = new List<CartItemEntity>
                     {
-                        new CartItem
+                        new CartItemEntity
                         {
-                            Id = Guid.NewGuid(),
                             Amount = 1,
-                            Product = product
+                            Product = existingProduct
                         }
                     }
                 };
@@ -94,7 +88,7 @@ namespace OnlineShop.DB
 
         public void DecreaseAmount(int productId, string userId)
         {
-            var existingCart = AllCarts().FirstOrDefault(x => x.UserId == userId);
+            var existingCart = TryGetByUserId(userId);
             var existingCartItem = existingCart?.Items?.FirstOrDefault(x => x.Product.Id == productId);
             if (existingCartItem.Amount > 0)
             {
@@ -114,7 +108,7 @@ namespace OnlineShop.DB
 
         public void Delete(string userId)
         {
-            var existingCart = AllCarts().FirstOrDefault(x => x.UserId == userId);
+            var existingCart = TryGetByUserId(userId);
             if (existingCart != null)
             {
                 existingCart.IsDeleted = true;

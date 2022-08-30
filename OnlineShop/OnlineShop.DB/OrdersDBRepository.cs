@@ -1,7 +1,7 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Entities;
+using Microsoft.EntityFrameworkCore;
 using OnlineShop.Db;
 using OnlineShop.DB;
-using OnlineShop.DB.Models;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -11,10 +11,13 @@ namespace OnlineShopWebApp
     {
 
         private readonly DatabaseContext _databaseContext;
+        private readonly IProductBase _productBase;
 
-        public OrdersDBRepository(DatabaseContext databaseContext)
+
+        public OrdersDBRepository(DatabaseContext databaseContext, IProductBase productBase)
         {
             _databaseContext = databaseContext;
+            _productBase = productBase;
         }
 
         public int NextOrderId()
@@ -31,7 +34,7 @@ namespace OnlineShopWebApp
             }
         }
 
-        public List<Order> AllOrders()
+        public List<OrderEntity> AllOrders()
         {
             var orders = _databaseContext.Orders.Include(x => x.Items).ThenInclude(x => x.Product).Include(x => x.DeliveryInfo).ToList();
             if (orders.Any())
@@ -40,22 +43,28 @@ namespace OnlineShopWebApp
             }
             else
             {
-                var newListOfOrders = new List<Order>();
+                var newListOfOrders = new List<OrderEntity>();
                 return newListOfOrders;
             }
         }
 
-        public void UpdateOrderStatus(int orderId, OrderStatus status)
+        public void UpdateOrderStatus(int orderId, OrderStatusEntity status)
         {
             var necessaryOrder = AllOrders().FirstOrDefault(x => x.Id == orderId);
             necessaryOrder.Status = status;
             _databaseContext.SaveChanges();
         }
 
-        public void Add(Order order)
+        public void Add(OrderEntity order)
         {
-            _databaseContext.Entry(order.Items.FirstOrDefault()).State = EntityState.Detached;
-            _databaseContext.Entry(order.Items.FirstOrDefault()).State = EntityState.Modified;
+            _databaseContext.Entry(order).State = EntityState.Added;
+
+            foreach (var item in order.Items)
+            {
+                var productInDB = _productBase.TryGetById(item.Product.Id);
+                productInDB.AmountInDb = productInDB.AmountInDb - item.Amount;
+            }
+
             _databaseContext.Orders.Add(order);
             _databaseContext.SaveChanges();
         }

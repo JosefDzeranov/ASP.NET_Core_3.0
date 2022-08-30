@@ -1,10 +1,9 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿using Domains;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using OnlineShop.DB;
-using OnlineShop.DB.Models;
-using OnlineShopWebApp.Helpers;
-using OnlineShopWebApp.Models;
 using System.Linq;
+using ViewModels;
 
 namespace OnlineShopWebApp.Controllers
 {
@@ -26,16 +25,16 @@ namespace OnlineShopWebApp.Controllers
 
         private void AddNewUser(Registration registration)
         {
-            var resultForUser = _userManager.CreateAsync(registration.ToUser(), registration.Password).Result;
+            var resultForUser = _userManager.CreateAsync(registration.ToUser(registration.Login), registration.Password).Result;
             if (resultForUser.Succeeded)
             {
-                _userManager.AddToRoleAsync(registration.ToUser(), Const.UserRoleName).Wait();
+                _userManager.AddToRoleAsync(registration.ToUser(registration.Login), Const.UserRoleName).Wait();
             }
         }
 
         private bool CheckName(Registration registration)
         {
-            var user = registration.ToUser();
+            var user = registration.ToUser(registration.Login);
             bool flag = _userManager.Users.Any(x => x.UserName == user.UserName);
             if (flag == true)
             {
