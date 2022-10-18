@@ -1,16 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Security.Cryptography.X509Certificates;
-using OnlineShop.db;
+﻿using OnlineShop.db;
 using OnlineShop.db.Models;
 using TelegramTourBot;
-using Telegram.Bot.Args;
-using Telegram.Bot.Types;
 using Telegram.Bot.Types.Enums;
-using System.Linq;
 using System.Text;
+using Microsoft.CodeAnalysis.CSharp.Syntax;
+using RabbitMQ.Client;
+using RabbitMQ.Client.Events;
 using User = OnlineShop.db.Models.User;
+
 
 namespace OnlineShopWebApp.Services
 {
@@ -19,6 +16,8 @@ namespace OnlineShopWebApp.Services
         private readonly IChatBotApi chatBotApi;
         private readonly UserDbRepository userDbRepository;
         private readonly IOrdersRepository ordersRepository;
+        private IConnection rabbitConnection;
+        private IModel rabbitChannel; 
         
         public TelegramService(IChatBotApi chatBotApi, UserDbRepository userDbRepository, IOrdersRepository ordersRepository)
         {
@@ -32,6 +31,48 @@ namespace OnlineShopWebApp.Services
             this.userDbRepository=userDbRepository;
             this.ordersRepository=ordersRepository;
             
+            InitRabbit();
+        }
+
+        void InitRabbit()
+        {
+            ConnectionFactory factory = new ConnectionFactory();
+
+            // "guest"/"guest" by default, limited to localhost connections
+            factory.UserName = "guest";
+            factory.Password = "guest";
+            factory.VirtualHost = "/";
+            factory.HostName = "localhost";
+
+            // this name will be shared by all connections instantiated by
+            // this factory
+            factory.ClientProvidedName = "app:audit component:event-consumer";
+
+            rabbitConnection = factory.CreateConnection();
+
+            rabbitChannel = rabbitConnection.CreateModel();
+            {
+                rabbitChannel.ExchangeDeclare("dev-ex", ExchangeType.Fanout, true);
+                rabbitChannel.QueueDeclare("dev-queue", true, false, false, null);
+                rabbitChannel.QueueBind("dev-queue", "dev-ex", "15672", null);
+            }
+
+            var consumer = new EventingBasicConsumer(rabbitChannel);
+
+            consumer.Received += Consumer_Received;
+
+            // this consumer tag identifies the subscription
+            // when it has to be cancelled
+            string consumerTag = rabbitChannel.BasicConsume("dev-queue", false, consumer);
+        }
+
+        private void Consumer_Received(object sender, BasicDeliverEventArgs e)
+        {
+            var body = e.Body.ToArray();
+            // copy or deserialise the payload
+            // and process the message
+            // ...
+            rabbitChannel.BasicAck(e.DeliveryTag, false);
         }
 
         private void OrdersRepository_OrderStatusUpdatedEvent(object sender, OrderStatusUpdatedEventArgs e)

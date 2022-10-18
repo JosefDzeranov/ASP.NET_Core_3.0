@@ -11,7 +11,7 @@ namespace TelegramBotExperiments
 {
     class Program
     {
-        static TelegramBotClient Bot;
+       static TelegramBotClient Bot;
         static void Main(string[] args)
         {
             //Bot = new TelegramBotClient("5536396998:AAFidsNkJWyN9oDSMvx1WZsgwYMBZ1i81kw");

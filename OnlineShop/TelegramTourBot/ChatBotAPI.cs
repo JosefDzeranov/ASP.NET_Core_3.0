@@ -7,11 +7,17 @@ using Telegram.Bot;
 using Telegram.Bot.Extensions.Polling;
 using Telegram.Bot.Types;
 using System;
+using System.ComponentModel.Design;
+using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Security.Principal;
 using Telegram.Bot.Types.ReplyMarkups;
 using Microsoft.AspNetCore.Mvc;
+using RabbitMQ.Client;
+using RabbitMQ.Client.Events;
 using Telegram.Bot.Types.Enums;
+
+
 
 namespace TelegramTourBot
 {
@@ -19,10 +25,14 @@ namespace TelegramTourBot
     {
         ITelegramBotClient bot;
 
+        private IConnection rabbitConnection;
+        private IModel rabbitChannel;
+
         public delegate void MessageReceivedEventHandler(object sender, MessageReceivedEventArgs e);
 
         public event MessageReceivedEventHandler MessageReceive;
 
+      
 
         private async Task HandleUpdateAsync( // функция, которая получает сообщения из ТГ
             ITelegramBotClient botClient, 
@@ -81,6 +91,50 @@ namespace TelegramTourBot
                     cancellationToken
                 );
             }
+
+            InitRabbit();
+        }
+
+        void InitRabbit()
+        {
+            ConnectionFactory factory = new ConnectionFactory();
+
+            // "guest"/"guest" by default, limited to localhost connections
+            factory.UserName = "guest";
+            factory.Password = "guest";
+            factory.VirtualHost = "/";
+            factory.HostName = "localhost";
+
+            // this name will be shared by all connections instantiated by
+            // this factory
+            factory.ClientProvidedName = "app:audit component:event-consumer";
+
+            rabbitConnection = factory.CreateConnection();
+
+            rabbitChannel = rabbitConnection.CreateModel();
+            {
+                rabbitChannel.ExchangeDeclare("dev-ex", ExchangeType.Fanout, true);
+                rabbitChannel.QueueDeclare("dev-queue", true, false, false, null);
+                rabbitChannel.QueueBind("dev-queue", "dev-ex", "15672", null);
+            }
+
+            var consumer = new EventingBasicConsumer(rabbitChannel);
+
+            consumer.Received += Consumer_Received;
+
+            // this consumer tag identifies the subscription
+            // when it has to be cancelled
+            string consumerTag = rabbitChannel.BasicConsume("dev-queue", false, consumer);
+        }
+
+        private void Consumer_Received(object sender, BasicDeliverEventArgs e)
+        {
+            var body = e.Body.ToArray();
+            // copy or deserialise the payload
+            // and process the message
+            // ...
+            //var msg = Encoding.UTF8.GetString(body.ToArray());
+            rabbitChannel.BasicAck(e.DeliveryTag, false);
         }
 
         public async void SendContactRequest(long chatId)
