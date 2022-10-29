@@ -167,7 +167,7 @@ namespace TelegramTourBot
 
             SendKeyboard(message.ChatId, message.MessageReceive);
 
-            rabbitChannelPublisher.BasicAck(e.DeliveryTag, false);
+            rabbitChannelConsumer.BasicAck(e.DeliveryTag, false);
         }
 
         public async void SendContactRequest(long chatId)
