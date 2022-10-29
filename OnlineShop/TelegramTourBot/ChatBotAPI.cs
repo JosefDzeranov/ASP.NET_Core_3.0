@@ -11,8 +11,10 @@ using System.ComponentModel.Design;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Security.Principal;
+using System.Text.Unicode;
 using Telegram.Bot.Types.ReplyMarkups;
 using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json;
 using RabbitMQ.Client;
 using RabbitMQ.Client.Events;
 using Telegram.Bot.Types.Enums;
@@ -25,14 +27,15 @@ namespace TelegramTourBot
     {
         ITelegramBotClient bot;
 
-        private IConnection rabbitConnection;
-        private IModel rabbitChannel;
+        private IConnection rabbitConnectionPublisher;
+        private IModel rabbitChannelPublisher;
+
+        private IConnection rabbitConnectionConsumer;
+        private IModel rabbitChannelConsumer;
 
         public delegate void MessageReceivedEventHandler(object sender, MessageReceivedEventArgs e);
 
         public event MessageReceivedEventHandler MessageReceive;
-
-      
 
         private async Task HandleUpdateAsync( // функция, которая получает сообщения из ТГ
             ITelegramBotClient botClient, 
@@ -45,23 +48,44 @@ namespace TelegramTourBot
 
                 if (message.Type == MessageType.Text || message.Type == MessageType.Contact)
                 {
-                    MessageReceive?.Invoke(
-                        this,
-                        new MessageReceivedEventArgs()
-                        {
-                            MessageId = message?.MessageId ?? 0,
-                            MessageReceive = message?.Text,
-                            UserId = message.From.Id,
-                            Phone = message.Contact?.PhoneNumber,
-                            MessageType = message.Type,
-                            ChatId = message.Chat.Id
-                        });
+                    var queueMessageModel = new QueueMessageModel()
+                    {
+                        MessageId = message?.MessageId ?? 0,
+                        MessageReceive = message?.Text,
+                        UserId = message.From.Id,
+                        Phone = message.Contact?.PhoneNumber,
+                        MessageType = message.Type,
+                        ChatId = message.Chat.Id
+                    };
+
+                    QueueRabbitMessage(queueMessageModel);
+
+                    //MessageReceive?.Invoke(
+                    //    this,
+                    //    new MessageReceivedEventArgs()
+                    //    {
+                    //        MessageId = message?.MessageId ?? 0,
+                    //        MessageReceive = message?.Text,
+                    //        UserId = message.From.Id,
+                    //        Phone = message.Contact?.PhoneNumber,
+                    //        MessageType = message.Type,
+                    //        ChatId = message.Chat.Id
+                    //    });
                 }
                 else
                 {
                     await botClient.SendTextMessageAsync(message.Chat.Id, "Пожалуйста, введите команду");
                 }
             }
+        }
+
+        private void QueueRabbitMessage(QueueMessageModel queueMessageModel)
+        {
+            var jsonMessage = JsonConvert.SerializeObject(queueMessageModel);
+
+            var body = Encoding.UTF8.GetBytes(jsonMessage);
+
+            rabbitChannelPublisher.BasicPublish(exchange: "dev-ex-to-web", routingKey: "", basicProperties: null, body: body);
         }
 
         public async Task HandleErrorAsync(ITelegramBotClient botClient, Exception exception, //Обработчик ошибок из примера
@@ -107,34 +131,43 @@ namespace TelegramTourBot
 
             // this name will be shared by all connections instantiated by
             // this factory
-            factory.ClientProvidedName = "app:audit component:event-consumer";
+            factory.ClientProvidedName = "online shop";//"app:audit component:event-consumer";
 
-            rabbitConnection = factory.CreateConnection();
+            rabbitConnectionPublisher = factory.CreateConnection();
+            rabbitConnectionConsumer = factory.CreateConnection();
 
-            rabbitChannel = rabbitConnection.CreateModel();
+            rabbitChannelPublisher = rabbitConnectionPublisher.CreateModel();
             {
-                rabbitChannel.ExchangeDeclare("dev-ex", ExchangeType.Fanout, true);
-                rabbitChannel.QueueDeclare("dev-queue", true, false, false, null);
-                rabbitChannel.QueueBind("dev-queue", "dev-ex", "15672", null);
+                rabbitChannelPublisher.ExchangeDeclare("dev-ex-to-web", ExchangeType.Direct, true);
+                rabbitChannelPublisher.QueueDeclare("dev-queue-to-web", true, false, false, null);
+                rabbitChannelPublisher.QueueBind("dev-queue-to-web", "dev-ex-to-web", "", null);
             }
 
-            var consumer = new EventingBasicConsumer(rabbitChannel);
+            rabbitChannelConsumer = rabbitConnectionConsumer.CreateModel();
+            {
+                rabbitChannelConsumer.ExchangeDeclare("dev-ex-to-telegram", ExchangeType.Direct, true);
+                rabbitChannelConsumer.QueueDeclare("dev-queue-to-telegram", true, false, false, null);
+                rabbitChannelConsumer.QueueBind("dev-queue-to-telegram", "dev-ex-to-telegram", "", null);
+            }
+
+            var consumer = new EventingBasicConsumer(rabbitChannelConsumer);
 
             consumer.Received += Consumer_Received;
 
             // this consumer tag identifies the subscription
             // when it has to be cancelled
-            string consumerTag = rabbitChannel.BasicConsume("dev-queue", false, consumer);
+            string consumerTag = rabbitChannelConsumer.BasicConsume("dev-queue-to-telegram", false, consumer);
         }
 
         private void Consumer_Received(object sender, BasicDeliverEventArgs e)
         {
-            var body = e.Body.ToArray();
-            // copy or deserialise the payload
-            // and process the message
-            // ...
-            //var msg = Encoding.UTF8.GetString(body.ToArray());
-            rabbitChannel.BasicAck(e.DeliveryTag, false);
+            var json = Encoding.UTF8.GetString(e.Body.ToArray());
+
+            var message = JsonConvert.DeserializeObject<QueueMessageModel>(json);
+
+            SendKeyboard(message.ChatId, message.MessageReceive);
+
+            rabbitChannelPublisher.BasicAck(e.DeliveryTag, false);
         }
 
         public async void SendContactRequest(long chatId)

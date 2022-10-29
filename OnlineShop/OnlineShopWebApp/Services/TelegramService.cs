@@ -4,6 +4,7 @@ using TelegramTourBot;
 using Telegram.Bot.Types.Enums;
 using System.Text;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
+using Newtonsoft.Json;
 using RabbitMQ.Client;
 using RabbitMQ.Client.Events;
 using User = OnlineShop.db.Models.User;
@@ -16,16 +17,20 @@ namespace OnlineShopWebApp.Services
         private readonly IChatBotApi chatBotApi;
         private readonly UserDbRepository userDbRepository;
         private readonly IOrdersRepository ordersRepository;
-        private IConnection rabbitConnection;
-        private IModel rabbitChannel; 
-        
+
+        private IConnection rabbitConnectionPublisher;
+        private IModel rabbitChannelPublisher;
+
+        private IConnection rabbitConnectionConsumer;
+        private IModel rabbitChannelConsumer;
+
         public TelegramService(IChatBotApi chatBotApi, UserDbRepository userDbRepository, IOrdersRepository ordersRepository)
         {
             this.chatBotApi = chatBotApi;
 
             chatBotApi.Init();
 
-            chatBotApi.MessageReceive += ChatBotApi_MessageReceive;
+            //chatBotApi.MessageReceive += ChatBotApi_MessageReceive;
             ordersRepository.OrderStatusUpdatedEvent += OrdersRepository_OrderStatusUpdatedEvent;
             
             this.userDbRepository=userDbRepository;
@@ -46,92 +51,109 @@ namespace OnlineShopWebApp.Services
 
             // this name will be shared by all connections instantiated by
             // this factory
-            factory.ClientProvidedName = "app:audit component:event-consumer";
+            factory.ClientProvidedName = "online shop";//"app:audit component:event-consumer";
 
-            rabbitConnection = factory.CreateConnection();
+            rabbitConnectionPublisher = factory.CreateConnection();
+            rabbitConnectionConsumer = factory.CreateConnection();
 
-            rabbitChannel = rabbitConnection.CreateModel();
+            rabbitChannelPublisher = rabbitConnectionPublisher.CreateModel();
             {
-                rabbitChannel.ExchangeDeclare("dev-ex", ExchangeType.Fanout, true);
-                rabbitChannel.QueueDeclare("dev-queue", true, false, false, null);
-                rabbitChannel.QueueBind("dev-queue", "dev-ex", "15672", null);
+                rabbitChannelPublisher.ExchangeDeclare("dev-ex-to-telegram", ExchangeType.Direct, true);
+                rabbitChannelPublisher.QueueDeclare("dev-queue-to-telegram", true, false, false, null);
+                rabbitChannelPublisher.QueueBind("dev-queue-to-telegram", "dev-ex-to-telegram", "", null);
             }
 
-            var consumer = new EventingBasicConsumer(rabbitChannel);
+            rabbitChannelConsumer = rabbitConnectionConsumer.CreateModel();
+            {
+                rabbitChannelConsumer.ExchangeDeclare("dev-ex-to-web", ExchangeType.Direct, true);
+                rabbitChannelConsumer.QueueDeclare("dev-queue-to-web", true, false, false, null);
+                rabbitChannelConsumer.QueueBind("dev-queue-to-web", "dev-ex-to-web", "", null);
+            }
+
+            var consumer = new EventingBasicConsumer(rabbitChannelConsumer);
 
             consumer.Received += Consumer_Received;
 
             // this consumer tag identifies the subscription
             // when it has to be cancelled
-            string consumerTag = rabbitChannel.BasicConsume("dev-queue", false, consumer);
+            string consumerTag = rabbitChannelConsumer.BasicConsume("dev-queue-to-web", false, consumer);
         }
 
         private void Consumer_Received(object sender, BasicDeliverEventArgs e)
         {
-            var body = e.Body.ToArray();
-            // copy or deserialise the payload
-            // and process the message
-            // ...
-            rabbitChannel.BasicAck(e.DeliveryTag, false);
+            var json = Encoding.UTF8.GetString(e.Body.ToArray());
+
+            var message = JsonConvert.DeserializeObject<QueueMessageModel>(json);
+
+            MessageReceived(message);
+
+            rabbitChannelConsumer.BasicAck(e.DeliveryTag, false);
         }
 
         private void OrdersRepository_OrderStatusUpdatedEvent(object sender, OrderStatusUpdatedEventArgs e)
         {
-            chatBotApi.SendKeyboard(e.User.TelegramUserId!.Value, BuildOrderStatusMessage(e.User));
+            var message = new QueueMessageModel()
+            {
+                ChatId = e.User.TelegramUserId!.Value,
+                MessageReceive = BuildOrderStatusMessage(e.User)
+            };
+
+            var jsonMessage = JsonConvert.SerializeObject(message);
+
+            var body = Encoding.UTF8.GetBytes(jsonMessage);
+
+            rabbitChannelPublisher.BasicPublish(exchange: "dev-ex-to-telegram", routingKey: "", basicProperties: null, body: body);
         }
 
-        private void ChatBotApi_MessageReceive(object sender, MessageReceivedEventArgs e)
+        private void MessageReceived(QueueMessageModel message)
         {
-            if (e.MessageType == MessageType.Text)
+            if (message.MessageType == MessageType.Text)
             {
-                var existingUser = userDbRepository.TryGetByTelegramUserId(e.UserId);
+                var existingUser = userDbRepository.TryGetByTelegramUserId(message.UserId);
 
                 if (existingUser != null)
                 {
-                     if (e.MessageReceive == "Список заказов")
+                    if (message.MessageReceive == "Список заказов")
                     {
                         var msg = BuildOrdersMessage(existingUser);
-                        chatBotApi.SendKeyboard(e.ChatId, msg);
+                        chatBotApi.SendKeyboard(message.ChatId, msg);
                     }
-
-                     if (e.MessageReceive == "Статус заказа")
-                     {
-                         var msg = BuildOrderStatusMessage(existingUser);
-                         chatBotApi.SendKeyboard(e.ChatId, msg);
-                     }
-                    if (e.MessageReceive == "Наши контакты")
+                    else if (message.MessageReceive == "Статус заказа")
                     {
-                        chatBotApi.SendKeyboard(e.ChatId, $"Будем рады видеть Вас в нашем офисе. По адресу:г.Москва, ул.Цветной Бульвар 30. Телефон:+7-123-45-67");
+                        var msg = BuildOrderStatusMessage(existingUser);
+                        chatBotApi.SendKeyboard(message.ChatId, msg);
                     }
-                    if (e.MessageReceive == "Спецпредложения")
+                    else if(message.MessageReceive == "Наши контакты")
                     {
-                        chatBotApi.SendKeyboard(e.ChatId, $"Только сегодня!!! При бронировании тура в Турцию скидка 5%. Торопитесь!!!");
+                        chatBotApi.SendKeyboard(message.ChatId, $"Будем рады видеть Вас в нашем офисе. По адресу:г.Москва, ул.Цветной Бульвар 30. Телефон:+7-123-45-67");
                     }
-
+                    else if(message.MessageReceive == "Спецпредложения")
+                    {
+                        chatBotApi.SendKeyboard(message.ChatId, $"Только сегодня!!! При бронировании тура в Турцию скидка 5%. Торопитесь!!!");
+                    }
                     else
                     {
-                        chatBotApi.SendKeyboard(e.ChatId, "Введите команду");
+                        chatBotApi.SendKeyboard(message.ChatId, "Введите команду");
                     }
-
                 }
                 else 
                 {
-                    chatBotApi.SendContactRequest(e.ChatId);
+                    chatBotApi.SendContactRequest(message.ChatId);
                 }
             }
-            else if(e.MessageType==MessageType.Contact)
+            else if(message.MessageType==MessageType.Contact)
             {
-                var result = userDbRepository.UpdateTelegramUserId(e.Phone, e.UserId);
+                var result = userDbRepository.UpdateTelegramUserId(message.Phone, message.UserId);
 
                 if (result)
                 {
-                    var existingUser = userDbRepository.TryGetByTelegramUserId(e.UserId);
-                    //chatBotApi.SendWelcomeMessage(e.ChatId, existingUser.FirstName);
-                    chatBotApi.SendKeyboard(e.ChatId, $"Добро пожаловать, {existingUser.FirstName}");
+                    var existingUser = userDbRepository.TryGetByTelegramUserId(message.UserId);
+
+                    chatBotApi.SendKeyboard(message.ChatId, $"Добро пожаловать, {existingUser.FirstName}");
                 }
                 else
                 {
-                    chatBotApi.SendKeyboard(e.ChatId,$"Пожалуйста, перейдите по ссылке ... , чтобы зарегестрироваться");
+                    chatBotApi.SendKeyboard(message.ChatId,$"Пожалуйста, перейдите по ссылке ... , чтобы зарегестрироваться");
                 }
             }
          
