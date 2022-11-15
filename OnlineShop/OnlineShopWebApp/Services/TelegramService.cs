@@ -1,4 +1,6 @@
-﻿using OnlineShop.db;
+﻿using System.ComponentModel.DataAnnotations;
+using System.Linq;
+using OnlineShop.db;
 using OnlineShop.db.Models;
 using TelegramTourBot;
 using Telegram.Bot.Types.Enums;
@@ -24,18 +26,18 @@ namespace OnlineShopWebApp.Services
         private IConnection rabbitConnectionConsumer;
         private IModel rabbitChannelConsumer;
 
-        public TelegramService(IChatBotApi chatBotApi, UserDbRepository userDbRepository, IOrdersRepository ordersRepository)
+        public TelegramService(IChatBotApi chatBotApi, UserDbRepository userDbRepository,
+            IOrdersRepository ordersRepository)
         {
             this.chatBotApi = chatBotApi;
 
             chatBotApi.Init();
 
-            //chatBotApi.MessageReceive += ChatBotApi_MessageReceive;
             ordersRepository.OrderStatusUpdatedEvent += OrdersRepository_OrderStatusUpdatedEvent;
-            
-            this.userDbRepository=userDbRepository;
-            this.ordersRepository=ordersRepository;
-            
+
+            this.userDbRepository = userDbRepository;
+            this.ordersRepository = ordersRepository;
+
             InitRabbit();
         }
 
@@ -51,7 +53,7 @@ namespace OnlineShopWebApp.Services
 
             // this name will be shared by all connections instantiated by
             // this factory
-            factory.ClientProvidedName = "online shop";//"app:audit component:event-consumer";
+            factory.ClientProvidedName = "online shop"; //"app:audit component:event-consumer";
 
             rabbitConnectionPublisher = factory.CreateConnection();
             rabbitConnectionConsumer = factory.CreateConnection();
@@ -79,6 +81,11 @@ namespace OnlineShopWebApp.Services
             string consumerTag = rabbitChannelConsumer.BasicConsume("dev-queue-to-web", false, consumer);
         }
 
+        /// <summary>
+        /// Получили сообщение из рэбита с дессириализуем
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Consumer_Received(object sender, BasicDeliverEventArgs e)
         {
             var json = Encoding.UTF8.GetString(e.Body.ToArray());
@@ -90,21 +97,31 @@ namespace OnlineShopWebApp.Services
             rabbitChannelConsumer.BasicAck(e.DeliveryTag, false);
         }
 
+        /// <summary>
+        /// Получаем сообщение, что статус заказа поменялся из проекта onlina shopDB
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void OrdersRepository_OrderStatusUpdatedEvent(object sender, OrderStatusUpdatedEventArgs e)
         {
             var message = new QueueMessageModel()
             {
                 ChatId = e.User.TelegramUserId!.Value,
-                MessageReceive = BuildOrderStatusMessage(e.User)
+                MessageReceive = BuildOrderUpdateStatusMessage(e.User, e.OldStatus, e.newStatus, e.Order)
             };
 
             var jsonMessage = JsonConvert.SerializeObject(message);
 
             var body = Encoding.UTF8.GetBytes(jsonMessage);
 
-            rabbitChannelPublisher.BasicPublish(exchange: "dev-ex-to-telegram", routingKey: "", basicProperties: null, body: body);
+            rabbitChannelPublisher.BasicPublish(exchange: "dev-ex-to-telegram", routingKey: "", basicProperties: null,
+                body: body);
         }
 
+        /// <summary>
+        /// Функционал бота
+        /// </summary>
+        /// <param name="message"></param>
         private void MessageReceived(QueueMessageModel message)
         {
             if (message.MessageType == MessageType.Text)
@@ -123,25 +140,27 @@ namespace OnlineShopWebApp.Services
                         var msg = BuildOrderStatusMessage(existingUser);
                         chatBotApi.SendKeyboard(message.ChatId, msg);
                     }
-                    else if(message.MessageReceive == "Наши контакты")
+                    else if (message.MessageReceive == "Наши контакты")
                     {
-                        chatBotApi.SendKeyboard(message.ChatId, $"Будем рады видеть Вас в нашем офисе. По адресу:г.Москва, ул.Цветной Бульвар 30. Телефон:+7-123-45-67");
+                        chatBotApi.SendKeyboard(message.ChatId,
+                            $"Будем рады видеть Вас в нашем офисе. По адресу:г.Москва, ул.Цветной Бульвар 30. Телефон:+7-123-45-67");
                     }
-                    else if(message.MessageReceive == "Спецпредложения")
+                    else if (message.MessageReceive == "Спецпредложения")
                     {
-                        chatBotApi.SendKeyboard(message.ChatId, $"Только сегодня!!! При бронировании тура в Турцию скидка 5%. Торопитесь!!!");
+                        chatBotApi.SendKeyboard(message.ChatId,
+                            $"Только сегодня!!! При бронировании тура в Турцию скидка 5%. Торопитесь!!!");
                     }
                     else
                     {
                         chatBotApi.SendKeyboard(message.ChatId, "Введите команду");
                     }
                 }
-                else 
+                else
                 {
                     chatBotApi.SendContactRequest(message.ChatId);
                 }
             }
-            else if(message.MessageType==MessageType.Contact)
+            else if (message.MessageType == MessageType.Contact)
             {
                 var result = userDbRepository.UpdateTelegramUserId(message.Phone, message.UserId);
 
@@ -153,12 +172,18 @@ namespace OnlineShopWebApp.Services
                 }
                 else
                 {
-                    chatBotApi.SendKeyboard(message.ChatId,$"Пожалуйста, перейдите по ссылке ... , чтобы зарегестрироваться");
+                    chatBotApi.SendKeyboard(message.ChatId,
+                        $"Пожалуйста, перейдите по ссылке ... , чтобы зарегестрироваться");
                 }
             }
-         
+
         }
 
+        /// <summary>
+        /// Отправляет пользователю подробный список заказов
+        /// </summary>
+        /// <param name="user"></param>
+        /// <returns></returns>
         public string BuildOrdersMessage(User user)
         {
             var orders = ordersRepository.TryGetByUserId(user.Id);
@@ -172,6 +197,7 @@ namespace OnlineShopWebApp.Services
                     {
                         sb.AppendLine($"{item.Product.Name} x{item.Amount} {item.Cost}");
                     }
+
                     sb.AppendLine($"Статус {order.Status}");
                 }
 
@@ -183,12 +209,17 @@ namespace OnlineShopWebApp.Services
             }
         }
 
+        /// <summary>
+        /// Отправляет пользователю обновленный статус заказа
+        /// </summary>
+        /// <param name="user"></param>
+        /// <returns></returns>
         public string BuildOrderStatusMessage(User user)
         {
             var orders = ordersRepository.TryGetByUserId(user.Id);
-            if (orders.Count !=0)
+            if (orders.Count != 0)
             {
-                var sb=new StringBuilder();
+                var sb = new StringBuilder();
                 foreach (var order in orders)
                 {
                     sb.AppendLine($"Заказ #{order.Id}");
@@ -201,6 +232,17 @@ namespace OnlineShopWebApp.Services
             {
                 return "У Вас пока нет заказов";
             }
+        }
+
+        public string BuildOrderUpdateStatusMessage(User user, OrderStatus oldStatus, OrderStatus newStatus, Order order)
+        {
+            var sb = new StringBuilder();
+
+            sb.AppendLine($"Статус Вашего заказа N {order.Id}, {order.Items.First().Product.Name} изменился с {oldStatus}");
+            sb.AppendLine($" на {newStatus}");
+
+            return sb.ToString();
+
         }
 
     }

@@ -10,5 +10,8 @@ namespace OnlineShop.db.Models
     public class OrderStatusUpdatedEventArgs
     {
         public User User { get; set; }
+        public OrderStatus OldStatus { get; set; }
+        public OrderStatus newStatus { get; set; }
+        public Order Order { get; set; }
     }
 }

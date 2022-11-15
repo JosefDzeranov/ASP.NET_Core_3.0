@@ -49,9 +49,15 @@ namespace OnlineShop.db
         //    return databaseContext.Orders.Where(x => x.UserId == userId).ToList();
         //}
 
+        /// <summary>
+        /// Обновляем статус
+        /// </summary>
+        /// <param name="orderId"></param>
+        /// <param name="newStatus"></param>
         public void UpdateStatus(int orderId, OrderStatus newStatus)
         {
             var order = databaseContext.Orders.First(x => x.Id == orderId);
+            var oldStatus = order.Status; 
             order.Status = newStatus;
             databaseContext.SaveChanges();
 
@@ -61,7 +67,10 @@ namespace OnlineShop.db
                     this,
                     new OrderStatusUpdatedEventArgs()
                     {
-                        User = order.User
+                        User = order.User,
+                        newStatus = newStatus,
+                        OldStatus = oldStatus,
+                        Order = order
                     });
             }
         }

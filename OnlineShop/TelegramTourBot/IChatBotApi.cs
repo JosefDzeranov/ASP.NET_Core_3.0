@@ -1,18 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using Telegram.Bot.Types;
-
+﻿
 namespace TelegramTourBot
 {
     public interface IChatBotApi
     {
         void Init();
 
-       event ChatBotAPI.MessageReceivedEventHandler MessageReceive;
-      ///  event ChatBotAPI.
-        
-        
         void SendContactRequest(long chatId);
         void SendWelcomeMessage(long chatId, string firstName);
 
@@ -20,6 +12,5 @@ namespace TelegramTourBot
 
         void SendKeyboard(long chatId, string text);
 
-        //event ChatBotAPI.MessageReceivedEventHandler OrderStatusUpdatedEventArgs;
     }
 }

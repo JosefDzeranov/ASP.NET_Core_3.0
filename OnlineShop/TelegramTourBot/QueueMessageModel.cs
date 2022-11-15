@@ -5,7 +5,7 @@ using Telegram.Bot.Types.Enums;
 
 namespace TelegramTourBot
 {
-    public class QueueMessageModel
+    public class QueueMessageModel // объект содержаший инфо о телегр сообщении 
     {
         public string MessageReceive { get; set; }
 
