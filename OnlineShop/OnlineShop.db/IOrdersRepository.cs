@@ -1,4 +1,5 @@
-﻿using OnlineShop.db.Models;
+﻿using System;
+using OnlineShop.db.Models;
 using System.Collections.Generic;
 
 namespace OnlineShop.db
@@ -14,6 +15,6 @@ namespace OnlineShop.db
 
         List<Order> TryGetByUserId(string userId);
 
-        event OrdersDbRepository.OrderStatusUpdatedEventHandler OrderStatusUpdatedEvent;
+        event EventHandler<OrderStatusUpdatedEventArgs> OrderStatusUpdatedEvent;
     }
 }

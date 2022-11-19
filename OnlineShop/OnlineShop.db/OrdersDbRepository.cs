@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using OnlineShop.db.Models;
 using System.Linq;
 using Microsoft.EntityFrameworkCore;
@@ -11,9 +12,7 @@ namespace OnlineShop.db
     {
         private readonly DatabaseContext databaseContext;
 
-        public delegate void OrderStatusUpdatedEventHandler(object sender, OrderStatusUpdatedEventArgs e);
-
-        public event OrderStatusUpdatedEventHandler OrderStatusUpdatedEvent;
+        public event EventHandler<OrderStatusUpdatedEventArgs> OrderStatusUpdatedEvent;
 
         public OrdersDbRepository(DatabaseContext databaseContext)
         {
@@ -68,7 +67,7 @@ namespace OnlineShop.db
                     new OrderStatusUpdatedEventArgs()
                     {
                         User = order.User,
-                        newStatus = newStatus,
+                        NewStatus = newStatus,
                         OldStatus = oldStatus,
                         Order = order
                     });

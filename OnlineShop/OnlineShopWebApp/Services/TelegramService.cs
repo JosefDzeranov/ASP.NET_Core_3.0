@@ -107,7 +107,7 @@ namespace OnlineShopWebApp.Services
             var message = new QueueMessageModel()
             {
                 ChatId = e.User.TelegramUserId!.Value,
-                MessageReceive = BuildOrderUpdateStatusMessage(e.User, e.OldStatus, e.newStatus, e.Order)
+                MessageReceive = BuildOrderUpdateStatusMessage(e)
             };
 
             var jsonMessage = JsonConvert.SerializeObject(message);
@@ -234,12 +234,12 @@ namespace OnlineShopWebApp.Services
             }
         }
 
-        public string BuildOrderUpdateStatusMessage(User user, OrderStatus oldStatus, OrderStatus newStatus, Order order)
+        public string BuildOrderUpdateStatusMessage(OrderStatusUpdatedEventArgs e)
         {
             var sb = new StringBuilder();
 
-            sb.AppendLine($"Статус Вашего заказа N {order.Id}, {order.Items.First().Product.Name} изменился с {oldStatus}");
-            sb.AppendLine($" на {newStatus}");
+            sb.AppendLine($"Статус Вашего заказа N {e.Order.Id}, {e.Order.Items.First().Product.Name} изменился с {e.OldStatus}");
+            sb.AppendLine($" на {e.NewStatus}");
 
             return sb.ToString();
 
