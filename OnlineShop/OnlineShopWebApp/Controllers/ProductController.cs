@@ -1,5 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using OnlineShop.Db;
+using OnlineShop.db;
 using OnlineShopWebApp.Helpers;
 
 namespace OnlineShopWebApp.Controllers

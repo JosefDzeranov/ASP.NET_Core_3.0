@@ -2,11 +2,16 @@
 
 namespace OnlineShop.db.Models
 {
-    public class User: IdentityUser
+    public class User : IdentityUser
     {
         public string? FirstName { get; set; }
+        
         public string? LastName { get; set; }
+        
         public string? AvatarPath { get; set; }
-        public string? Phone { get; set; }
+        
+        public long? TelegramUserId { get; set; }
+
+        public string? Address { get; set; }
     }
 }

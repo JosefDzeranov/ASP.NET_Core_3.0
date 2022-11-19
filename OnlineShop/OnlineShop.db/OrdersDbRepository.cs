@@ -1,8 +1,9 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using OnlineShop.db.Models;
 using System.Linq;
-using OnlineShop.Db;
 using Microsoft.EntityFrameworkCore;
+
 
 
 namespace OnlineShop.db
@@ -10,6 +11,8 @@ namespace OnlineShop.db
     public class OrdersDbRepository : IOrdersRepository
     {
         private readonly DatabaseContext databaseContext;
+
+        public event EventHandler<OrderStatusUpdatedEventArgs> OrderStatusUpdatedEvent;
 
         public OrdersDbRepository(DatabaseContext databaseContext)
         {
@@ -28,14 +31,16 @@ namespace OnlineShop.db
                 .Include(x => x.Items).ThenInclude(x => x.Product).ToList();
         }
 
-        public Order TryGetByUserId(int id)
+        public Order TryGetById(int id)
         {
-            return databaseContext.Orders.FirstOrDefault(x => x.Id == id);
+            return databaseContext.Orders.Include(x => x.User)
+                .Include(x => x.Items).ThenInclude(x => x.Product).FirstOrDefault(x => x.Id == id);
         }
 
         public List<Order> TryGetByUserId(string userId)
         {
-            throw new System.NotImplementedException();
+            return databaseContext.Orders.Include(x => x.User)
+                .Include(x => x.Items).ThenInclude(x => x.Product).Where(x => x.User.Id == userId).ToList();
         }
 
         //public List<Order> TryGetByUserId(string userId)
@@ -43,11 +48,30 @@ namespace OnlineShop.db
         //    return databaseContext.Orders.Where(x => x.UserId == userId).ToList();
         //}
 
+        /// <summary>
+        /// Обновляем статус
+        /// </summary>
+        /// <param name="orderId"></param>
+        /// <param name="newStatus"></param>
         public void UpdateStatus(int orderId, OrderStatus newStatus)
         {
             var order = databaseContext.Orders.First(x => x.Id == orderId);
+            var oldStatus = order.Status; 
             order.Status = newStatus;
             databaseContext.SaveChanges();
+
+            if (order.User.TelegramUserId != null)
+            {
+                OrderStatusUpdatedEvent?.Invoke(
+                    this,
+                    new OrderStatusUpdatedEventArgs()
+                    {
+                        User = order.User,
+                        NewStatus = newStatus,
+                        OldStatus = oldStatus,
+                        Order = order
+                    });
+            }
         }
     }
 }

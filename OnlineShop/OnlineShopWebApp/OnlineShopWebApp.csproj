@@ -17,6 +17,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="Json.Net" Version="1.0.33" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="6.0.5">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
@@ -33,6 +34,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\OnlineShop.db\OnlineShop.db.csproj" />
+    <ProjectReference Include="..\TelegramTourBot\TelegramTourBot.csproj" />
   </ItemGroup>
 
 </Project>

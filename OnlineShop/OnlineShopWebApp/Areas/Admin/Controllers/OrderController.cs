@@ -2,7 +2,7 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using OnlineShop.db;
-using OnlineShop.Db;
+using OnlineShop.db.Models;
 using OnlineShopWebApp.Helpers;
 
 namespace OnlineShopWebApp.Areas.Admin.Controllers
@@ -26,7 +26,7 @@ namespace OnlineShopWebApp.Areas.Admin.Controllers
 
         public IActionResult Detail(int orderId)
         {
-            var order = ordersRepository.TryGetByUserId(orderId);
+            var order = ordersRepository.TryGetById(orderId);
             return View(Mapping.ToOrderViewModel(order));
         }
 

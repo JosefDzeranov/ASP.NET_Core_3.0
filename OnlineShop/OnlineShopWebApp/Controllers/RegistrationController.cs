@@ -6,7 +6,6 @@ using OnlineShop.db.Models;
 using OnlineShopWebApp.Helpers;
 using OnlineShopWebApp.Models;
 using System;
-using OnlineShop.Db;
 using OnlineShopWebApp.Services;
 
 namespace OnlineShopWebApp.Controllers

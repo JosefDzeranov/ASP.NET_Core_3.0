@@ -6,10 +6,9 @@ namespace OnlineShop.db.Models
 {
     public class Order
     {
-        //private static int idSequence = 0;
         public int? Id { get; set; }
         
-        public Customer User { get; set; }
+        public User User { get; set; }
 
         public OrderStatus Status { get; set; }
 
@@ -19,8 +18,6 @@ namespace OnlineShop.db.Models
         
         public Order()
         {
-            //idSequence = idSequence + 1;
-            //Id = idSequence;
             Status = OrderStatus.Created;
             CreateDateTime = DateTime.Now;
             Items = new List<CartItem>();

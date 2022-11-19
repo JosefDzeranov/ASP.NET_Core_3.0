@@ -1,4 +1,5 @@
-﻿using OnlineShop.db.Models;
+﻿using System;
+using OnlineShop.db.Models;
 using System.Collections.Generic;
 
 namespace OnlineShop.db
@@ -8,10 +9,12 @@ namespace OnlineShop.db
         void Add(Order order);
         
         List<Order> GetAll();
-        Order TryGetByUserId(int id);
+        Order TryGetById(int id);
 
         void UpdateStatus(int orderId, OrderStatus newStatus);
 
         List<Order> TryGetByUserId(string userId);
+
+        event EventHandler<OrderStatusUpdatedEventArgs> OrderStatusUpdatedEvent;
     }
 }
