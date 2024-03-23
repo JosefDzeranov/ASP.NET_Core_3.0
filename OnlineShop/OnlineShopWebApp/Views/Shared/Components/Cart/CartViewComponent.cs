@@ -20,8 +20,8 @@ namespace OnlineShopWebApp.Views.Shared.ViewComponents.CartViewComponents
 
         public IViewComponentResult Invoke()
         {
-            var userId = HttpContext.Request.Cookies["tempUserId"];
-            //var userId = User.Identity.IsAuthenticated ? userManager.GetUserId(User as ClaimsPrincipal) : HttpContext.Request.Cookies["tempUserId"];
+            //var userId = HttpContext.Request.Cookies["tempUserId"];
+            var userId = User.Identity.IsAuthenticated ? userManager.GetUserId(User as ClaimsPrincipal) : HttpContext.Request.Cookies["tempUserId"];
             var cart = cartsDbStorage.TryGetByUserId(userId);
             var cartViewModel = cart.ToCartViewModel();
 

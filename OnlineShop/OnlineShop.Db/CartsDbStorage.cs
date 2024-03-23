@@ -3,7 +3,7 @@ using OnlineShop.Db.Models;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace OnlineShop.Db
+namespace OnlineShop.Db 
 {
     public class CartsDbStorage : ICartsStorage
     {
