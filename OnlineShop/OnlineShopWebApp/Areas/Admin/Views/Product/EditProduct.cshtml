@@ -10,11 +10,11 @@
             <h3>Редактировать информацию об услуге</h3>
             <input type="hidden" name="id" value="@Model.Id" />
             <div class="mt-3">
-                <label class="form-label text-muted" asp-for="Available">Available for sale</label>
+                <img src="@Model.ImagePath" width="300" height="400" alt="Услуга" />
             </div>
             <select class="col-2 mb-3 form-control form-control-sm" asp-for="Available">
-                <option value="true">Available</option>
-                <option value="false">Not available</option>
+                <option value="true">Доступна</option>
+                <option value="false">Недоступна</option>
             </select>
             <div class="mb-3">
                 <label class="form-label text-muted" asp-for="ImagePath">Путь для изображения</label>
@@ -32,6 +32,10 @@
             <label asp-for="Description">Описание</label>
             <input asp-for="Description" value="@Model.Description" />
             <span asp-validation-for="Description"></span>
+            <br />
+            <label asp-for="UploadeImage">Изображение</label>
+            <input asp-for="UploadeImage" value="@Model.UploadeImage" />
+            <span asp-validation-for="UploadeImage"></span>
             <br />
             <button class="btn btn-dark" type="submit" asp-area="Admin" asp-controller="Product" asp-action="SaveEditedProduct" asp-route-productId="@Model.Id">Сохранить</button>
         </div>
